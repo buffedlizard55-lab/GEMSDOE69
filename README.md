@@ -4,6 +4,10 @@
 
 ## ⛔ NOT OK TO SUBMIT — negative result (do not spend a weekly slot)
 
+**Lane in one line:** same-dip relay pairs between facing catalogue fault tips (W 0.1–15 km, along-strike separation ≤3.5W) with
+oblique-connector and en échelon candidate traces, plus pull-aparts at strike-slip releasing steps and transfer zones at strike-slip
+terminations, scored by gravity/magnetic edges, magnetic lows, lidar scarps and dilation tendency.
+
 A **byte- and pixel-unique, format-valid** TIF was generated for this lane (rank correlation with every one of 862 prior rasters ≤ 0.28), but (1) it **failed the pre-registered gate** and (2) its final dots are a **duplicate under the protocol’s 70 % / 3-px dot-overlap rule** (they sit inside denser near-catalogue emissions of other lanes more than random dots would). On the gate: the corridor-restricted dots did not beat the same pipeline without corridor priors on the hide-and-recover holdout. Per the protocol it is kept only as the negative-result deliverable (clearly labelled on the site) and is **not** offered as a submission.
 
 | Gate (pre-registered) | Value |
@@ -163,6 +167,7 @@ same prompt.
 | `evidence/` | every measurement: `e0_champion_ladder_measured.json`, `e1_first_test.json`, `e2_gate.json`, `e3_build.json`, `e3_uniqueness.json`, `e3_validation.json`, `e3_corridor_rationale.csv`, `run_card.json`, `irregularities.json` |
 | `registry/` | `preregistration.json`, `template_pin.json`, `registry_index_69.json` (uniqueness corpus), `leaderboard_snapshot_2026-10-12.json` |
 | `docs/` | GitHub Pages subpages and downloads; the landing page is `index.html` at the repository root |
+| `docs/parallel/`, `src/gems/`, `reports/`, `scripts/status.py`, `scripts/audit_workspace.py` | preserved work of the parallel data-less workbench sessions on this repository (PRs #1–#4): their site pages, local DTI metric / validator / gate and tests. Their status statements predate the data-backed run (PR #5) |
 
 ### Reproduce
 

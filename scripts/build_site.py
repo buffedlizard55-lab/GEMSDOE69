@@ -137,7 +137,7 @@ def results_md(card, e2, e3) -> str:
     L += [f"* {d['n']:,} dots, {d['on_catalogue']} on the catalogue, min / median / p95 distance to the catalogue "
           f"{d['min_dist_to_catalogue_px']/10:.2f} / {d['median_dist_to_catalogue_px']/10:.2f} / {d['p95_dist_to_catalogue_px']/10:.2f} km.",
           f"* Corridors that received dots: {e3['corridors_with_dots']:,} — by setting: {e3['corridors_by_setting']}. "
-          f"Per-corridor rationale: [`evidence/e3_corridor_rationale.csv`](../evidence/e3_corridor_rationale.csv).",
+          f"Per-corridor rationale: [`evidence/e3_corridor_rationale.csv`](https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/evidence/e3_corridor_rationale.csv).",
           f"* Live tip graph: {e3['live_geometry']['tip_receipt']['free_tips']:,} free tips; corridor counts {e3['live_geometry']['corridor_counts']['relay_pairs']:,} relays, "
           f"{e3['live_geometry']['corridor_counts']['pullapart_pairs']:,} pull-aparts, {e3['live_geometry']['corridor_counts']['termination_tips']:,} terminations."]
     ch = e3.get("champion_vs_corridors")

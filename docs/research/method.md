@@ -116,7 +116,7 @@ Note on `R_corridor_random`: it was asked for as many dots as `A_corridor` in ev
 ### E3 — live build of the lane artefact
 
 * 33,680 dots, 0 on the catalogue, min / median / p95 distance to the catalogue 0.30 / 0.89 / 2.52 km.
-* Corridors that received dots: 1,948 — by setting: {'relay': {'corridors': 1063, 'dots': 21616}, 'pullapart': {'corridors': 560, 'dots': 9432}, 'transfer': {'corridors': 325, 'dots': 2632}}. Per-corridor rationale: [`evidence/e3_corridor_rationale.csv`](../evidence/e3_corridor_rationale.csv).
+* Corridors that received dots: 1,948 — by setting: {'relay': {'corridors': 1063, 'dots': 21616}, 'pullapart': {'corridors': 560, 'dots': 9432}, 'transfer': {'corridors': 325, 'dots': 2632}}. Per-corridor rationale: [`evidence/e3_corridor_rationale.csv`](https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/evidence/e3_corridor_rationale.csv).
 * Live tip graph: 4,523 free tips; corridor counts 2,473 relays, 732 pull-aparts, 1,115 terminations.
 * The owner-reported 0.2778 champion has 23.3% of its dots inside our corridor band (the band is 18.2% of the allowed area); 29.5% of our dots lie within 3 px of a champion dot.
 

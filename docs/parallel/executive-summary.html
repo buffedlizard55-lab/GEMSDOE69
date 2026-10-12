@@ -1,0 +1,78 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Submission status, exact GeoTIFF rules, and step-by-step GEMS competition upload instructions.">
+  <title>Executive summary · GEMSDOE69</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body><div style='background:#fff6e0;border:1px solid #f0d58c;padding:10px 14px;margin:0;font:14px/1.4 sans-serif'>Preserved page from the parallel data-less workbench sessions on this repository (branches arena/18061ddd and arena/1d9c793b, PRs #1-#4). Its status statements describe that checkout before data were restored. Current status and downloads: <a href='../../index.html'>GEMSDOE69 home</a>.</div>
+  <header class="site-header">
+    <a class="brand" href="index.html">GEMSDOE69 <span>GEMS research</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="index.html">Status</a>
+      <a aria-current="page" href="executive-summary.html">Submission guide</a>
+      <a href="hypotheses.html">Hypotheses</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </header>
+  <main class="container">
+    <p class="eyebrow">EXECUTIVE SUMMARY · SUBMISSION HOW-TO</p>
+    <h1>Submission status and exact upload steps</h1>
+
+    <section class="callout stop" aria-labelledby="download-status">
+      <h2 id="download-status">⛔ No submission file is available. Do not submit this checkout.</h2>
+      <p>There is no candidate TIFF or ZIP to download. The data, shared holdout evaluator, shared writer, validator, and registry raster collection are missing here. The required holdout and uniqueness gates have not been run. This is an intentional negative release decision—not a format-checked candidate.</p>
+      <span class="button button-disabled" aria-disabled="true">Download submission · unavailable</span>
+    </section>
+
+    <section class="panel">
+      <h2>What a valid competition TIFF must contain</h2>
+      <p>The official competition specification requires predictions for the full region, on the organizer's template grid:</p>
+      <ul class="check-list">
+        <li><strong>Single-band GeoTIFF.</strong></li>
+        <li><strong>Float32</strong> pixel values.</li>
+        <li><strong>EPSG:32611</strong> (WGS 84 / UTM zone 11N) and the same resolution, bounds, shape, and geotransform as the sample submission.</li>
+        <li>Predictions in <strong>[0, 1]</strong> inside the evaluation footprint.</li>
+        <li>Outside the footprint, use the null/NaN representation accepted by the official format. Do not fill the outside mask with an undocumented sentinel.</li>
+      </ul>
+      <p>Do not assume the grid dimensions or transform from a prior site's artifact. Read them from the current official sample-submission raster and compare every grid property exactly.</p>
+      <p class="source-note">Source: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData GEMS competition homepage</a> (navigate to Problem Description for metric and format); CRS reference: <a href="https://epsg.io/32611">EPSG:32611</a>.</p>
+    </section>
+
+    <section class="panel">
+      <h2>How to submit after the candidate gate is green</h2>
+      <ol class="steps">
+        <li><strong>Wait for a green release card.</strong> It must report a positive paired corridor-vs-no-corridor spatial holdout result, leakage checks, duplicate checks, file hash, and a passing exact-grid validator. A projection or a result against known catalogue lines alone is not enough to skip the project gate.</li>
+        <li><strong>Download the specifically named TIFF from this site's one-click button.</strong> At present there is no such file. Do not upload an old site artifact, a sample raster, or a zero-filled test file.</li>
+        <li><strong>Open the official GEMS competition on DrivenData and choose “Submit” → “Make new submission”.</strong> The contest form accepts one GeoTIFF or a ZIP containing one GeoTIFF.</li>
+        <li><strong>Choose the downloaded `.tif`</strong> in “File to submit”. Confirm its filename is the candidate named in the release card.</li>
+        <li><strong>Enter the exact unique submission name and short note</strong> shown with the candidate. The note should identify the hypothesis and key test, not imply a result that was not measured.</li>
+        <li><strong>Review and submit.</strong> Save the resulting organizer receipt. Only that receipt can confirm the organizer score for that exact submission.</li>
+      </ol>
+      <p><a class="button" href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Open the official competition</a></p>
+    </section>
+
+    <section class="panel">
+      <h2>About the range error</h2>
+      <p>The reported portal error was: <code>Predicted values must be in range [0, 1]</code>. Its specific cause is <strong>unknown</strong> because neither the rejected file nor its submission receipt is in this checkout. The error cannot be diagnosed by looking at a different TIFF.</p>
+      <p>On the exact failed file, inspect the values after applying the sample-submission footprint mask. Check for raw scores that were not normalized, negative or greater-than-one values, infinities, NaNs inside the footprint, and large negative nodata sentinels that were accidentally copied into prediction cells. Separately check that outside-footprint cells use the documented null/NaN convention. Then reopen the written bytes and rerun the same validator the organizers specify.</p>
+      <p><strong>Do not “fix” it by blindly clipping.</strong> Clipping can hide a nodata/footprint bug and changes the prediction distribution. Establish which pixels are inside the actual footprint, transform the model output deliberately, and record before/after statistics and the exact file hash.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Why the button is disabled</h2>
+      <ul>
+        <li>The competition data tab redirected to a login page; its rasters are not present locally.</li>
+        <li>The user-referenced download and preparation scripts do not exist in this checkout.</li>
+        <li>The cached feature stack, `evaluate_holdout.py`, and `submission_writer.py` requested by the parallel-run protocol are not in this repository or the audited official reference-solution tree.</li>
+        <li>There are no previous GeoTIFFs available here to run the rank-correlation and dot-overlap duplicate checks.</li>
+        <li>No holdout DTI, withheld-positive count, confidence interval, validator output, or candidate SHA-256 can honestly be reported.</li>
+      </ul>
+      <p>See the <a href="../../reports/run-card-2026-10-12.json">run card</a>, <a href="hypotheses.html">hypothesis register</a>, and <a href="sources.html">verified source register</a> for the evidence trail.</p>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container">GEMSDOE69 · Submission instructions are not an assertion of organizer acceptance.</div></footer>
+</body>
+</html>
