@@ -51,8 +51,10 @@ class ProjectContractTests(unittest.TestCase):
         self.assertFalse(report["inputs"]["existing_faults"]["present"])
         self.assertFalse(report["inputs"]["dem_links"]["present"])
         self.assertFalse(report["inputs"]["sample_submission"]["present"])
-        self.assertFalse(report["shared_tools"]["holdout_evaluator"]["present"])
-        self.assertFalse(report["shared_tools"]["submission_writer"]["present"])
+        # Since PR #5 the shared template is vendored byte-for-byte (vendor/gems57); competition inputs
+        # are restored outside git by scripts/restore_data.py, so a fresh checkout still lacks them.
+        self.assertTrue(report["shared_tools"]["holdout_evaluator"]["present"])
+        self.assertTrue(report["shared_tools"]["submission_writer"]["present"])
         self.assertTrue(report["project_tools"]["dti_metric"]["present"])
         self.assertTrue(report["project_tools"]["format_validator"]["present"])
         self.assertTrue(report["project_tools"]["promotion_gate"]["present"])
@@ -68,12 +70,18 @@ class ProjectContractTests(unittest.TestCase):
         self.assertIsNone(card["organizer_confirmed_submission_receipt"])
 
     def test_site_makes_no_download_status_unambiguous(self) -> None:
+        # Since PR #5 the site carries a data-backed NEGATIVE verdict: the lane TIF exists but is archived
+        # as a negative result and must be labelled "do not submit" wherever it is linked.
         index = (ROOT / "index.html").read_text(encoding="utf-8")
-        guide = (ROOT / "executive-summary.html").read_text(encoding="utf-8")
-        self.assertIn("No TIFF available", index)
-        self.assertIn("No submission file is available", guide)
-        self.assertIn("do not submit", guide.lower())
-        self.assertIn("button-disabled", guide)
+        guide = (ROOT / "docs/executive-summary.html").read_text(encoding="utf-8")
+        card = json.loads((ROOT / "evidence/run_card.json").read_text(encoding="utf-8"))
+        if card["verdict"] != "promote":
+            self.assertIn("NOT OK TO SUBMIT", index)
+            self.assertIn("DO NOT SUBMIT", index)
+            self.assertIn("NOT OK TO SUBMIT", guide)
+            self.assertIn("do not submit", index.lower())
+        legacy = (ROOT / "docs/parallel/executive-summary.html").read_text(encoding="utf-8")
+        self.assertIn("No submission file is available", legacy)
 
     def test_all_local_html_links_resolve(self) -> None:
         pages = sorted(ROOT.rglob("*.html"))
@@ -117,8 +125,8 @@ class ProjectContractTests(unittest.TestCase):
 
     def test_geometry_lane_and_external_data_limits_are_explicit(self) -> None:
         readme = (ROOT / "README.md").read_text(encoding="utf-8")
-        hypotheses = (ROOT / "hypotheses.html").read_text(encoding="utf-8")
-        sources = (ROOT / "sources.html").read_text(encoding="utf-8")
+        hypotheses = (ROOT / "docs/parallel/hypotheses.html").read_text(encoding="utf-8")
+        sources = (ROOT / "docs/parallel/sources.html").read_text(encoding="utf-8")
         self.assertIn("0.1–15 km", readme)
         self.assertIn("≤3.5W", readme)
         self.assertIn("same dip direction", hypotheses)
@@ -127,7 +135,7 @@ class ProjectContractTests(unittest.TestCase):
         self.assertIn("not a ready-to-use independent predictor", sources)
 
     def test_exactly_five_ranked_hypotheses_are_present(self) -> None:
-        page = (ROOT / "hypotheses.html").read_text(encoding="utf-8")
+        page = (ROOT / "docs/parallel/hypotheses.html").read_text(encoding="utf-8")
         for marker in (
             "RANK 1 · TOP CANDIDATE",
             "RANK 2",

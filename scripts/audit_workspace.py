@@ -36,13 +36,17 @@ INPUT_CANDIDATES = {
     ),
 }
 HELPER_CANDIDATES = {
+    # vendor/gems57 = byte-identical copy of the shared template 60GEMSDOE/src/gems57
+    # (registry/template_pin.json), added when PR #5 merged the data-backed lane run.
     "holdout_evaluator": (
         "scripts/evaluate_holdout.py",
         "evaluate_holdout.py",
+        "vendor/gems57/evaluate_holdout.py",
     ),
     "submission_writer": (
         "scripts/submission_writer.py",
         "submission_writer.py",
+        "vendor/gems57/submission_writer.py",
     ),
 }
 MODULES = ("numpy", "rasterio", "osgeo", "scipy", "geopandas", "pytest")

@@ -1,0 +1,364 @@
+{
+ "schema": 1,
+ "observed_utc": "2026-10-12T01:30Z",
+ "source": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+ "retrieval": "rendered public leaderboard page fetched in three chunks during this session (no login)",
+ "evidence_class": "OFFICIAL PUBLIC LEADERBOARD (snapshot)",
+ "scope": "Public leaderboard rows only (best public DW-Tversky per participant); no file attribution; not private-test performance.",
+ "notes": [
+  "The value 0.2778 appears under participant 'extradr19' (rank 24, last activity '1w ago'); nothing on the public page links it to the GEMSDOE32 h33-2-b2 file (IR-69-03).",
+  "The owner's brief cites 0.3195 and 0.3774 as the high marks; the live #1 on this date is 0.4275 (IR-69-02)."
+ ],
+ "rows": [
+  {
+   "rank": 1,
+   "participant": "xiaofanhu",
+   "score": 0.4275,
+   "submissions": 17,
+   "last_activity": "1h 1min ago"
+  },
+  {
+   "rank": 2,
+   "participant": "cfld__",
+   "score": 0.3585,
+   "submissions": 6,
+   "last_activity": "13h ago"
+  },
+  {
+   "rank": 3,
+   "participant": "JerryDataWorks",
+   "score": 0.3418,
+   "submissions": 20,
+   "last_activity": "2d 1h ago"
+  },
+  {
+   "rank": 4,
+   "participant": "alexoktaba",
+   "score": 0.3361,
+   "submissions": 27,
+   "last_activity": "2d 15h ago"
+  },
+  {
+   "rank": 5,
+   "participant": "joeyfezster",
+   "score": 0.3333,
+   "submissions": 27,
+   "last_activity": "21h 18min ago"
+  },
+  {
+   "rank": 6,
+   "participant": "Batik Shirt Brothers",
+   "score": 0.33,
+   "submissions": 26,
+   "last_activity": "1d 19h ago"
+  },
+  {
+   "rank": 7,
+   "participant": "nchuzhoy",
+   "score": 0.3262,
+   "submissions": 6,
+   "last_activity": "1w 1d ago"
+  },
+  {
+   "rank": 8,
+   "participant": "kinghorton42",
+   "score": 0.3261,
+   "submissions": 10,
+   "last_activity": "2d 3h ago"
+  },
+  {
+   "rank": 9,
+   "participant": "DARD",
+   "score": 0.3195,
+   "submissions": 18,
+   "last_activity": "1w 3d ago"
+  },
+  {
+   "rank": 10,
+   "participant": "ohyeah",
+   "score": 0.3147,
+   "submissions": 6,
+   "last_activity": "1h 29min ago"
+  },
+  {
+   "rank": 11,
+   "participant": "mzoorob",
+   "score": 0.3129,
+   "submissions": 30,
+   "last_activity": "1d ago"
+  },
+  {
+   "rank": 12,
+   "participant": "ruping",
+   "score": 0.3104,
+   "submissions": 8,
+   "last_activity": "1d 8h ago"
+  },
+  {
+   "rank": 13,
+   "participant": "newway",
+   "score": 0.308,
+   "submissions": 8,
+   "last_activity": "21h 27min ago"
+  },
+  {
+   "rank": 14,
+   "participant": "BrandenKMurray",
+   "score": 0.305,
+   "submissions": 17,
+   "last_activity": "23h 12min ago"
+  },
+  {
+   "rank": 15,
+   "participant": "giles",
+   "score": 0.3025,
+   "submissions": 7,
+   "last_activity": "2d 6h ago"
+  },
+  {
+   "rank": 16,
+   "participant": "notmyfault",
+   "score": 0.2981,
+   "submissions": 21,
+   "last_activity": "22h 25min ago"
+  },
+  {
+   "rank": 17,
+   "participant": "baobao",
+   "score": 0.2974,
+   "submissions": 6,
+   "last_activity": "1d 22h ago"
+  },
+  {
+   "rank": 18,
+   "participant": "GrigorSargsyan",
+   "score": 0.2892,
+   "submissions": 16,
+   "last_activity": "2d ago"
+  },
+  {
+   "rank": 19,
+   "participant": "ndavis7",
+   "score": 0.2888,
+   "submissions": 12,
+   "last_activity": "1w 2d ago"
+  },
+  {
+   "rank": 20,
+   "participant": "HardcoreTechGod",
+   "score": 0.2854,
+   "submissions": 6,
+   "last_activity": "3w 2d ago"
+  },
+  {
+   "rank": 21,
+   "participant": "nsabaj",
+   "score": 0.2843,
+   "submissions": 15,
+   "last_activity": "1d 1h ago"
+  },
+  {
+   "rank": 22,
+   "participant": "jgaines",
+   "score": 0.282,
+   "submissions": 28,
+   "last_activity": "1h 16min ago"
+  },
+  {
+   "rank": 23,
+   "participant": "op01",
+   "score": 0.2797,
+   "submissions": 10,
+   "last_activity": "3d 6h ago"
+  },
+  {
+   "rank": 24,
+   "participant": "extradr19",
+   "score": 0.2778,
+   "submissions": 15,
+   "last_activity": "1w ago"
+  },
+  {
+   "rank": 25,
+   "participant": "arnofault",
+   "score": 0.2764,
+   "submissions": 2,
+   "last_activity": "3d 22h ago"
+  },
+  {
+   "rank": 26,
+   "participant": "faultsofthy",
+   "score": 0.2764,
+   "submissions": 3,
+   "last_activity": "2d 23h ago"
+  },
+  {
+   "rank": 27,
+   "participant": "wonderfulbig12",
+   "score": 0.2761,
+   "submissions": 4,
+   "last_activity": "2d 20h ago"
+  },
+  {
+   "rank": 28,
+   "participant": "No Fault of Our Own",
+   "score": 0.2761,
+   "submissions": 27,
+   "last_activity": "5d 1h ago"
+  },
+  {
+   "rank": 29,
+   "participant": "doublebigmac",
+   "score": 0.2758,
+   "submissions": 6,
+   "last_activity": "1d 5h ago"
+  },
+  {
+   "rank": 30,
+   "participant": "wbg1",
+   "score": 0.275,
+   "submissions": 17,
+   "last_activity": "6d 1h ago"
+  },
+  {
+   "rank": 31,
+   "participant": "raboush2",
+   "score": 0.2747,
+   "submissions": 11,
+   "last_activity": "3d 20h ago"
+  },
+  {
+   "rank": 32,
+   "participant": "Mekhi12",
+   "score": 0.2747,
+   "submissions": 6,
+   "last_activity": "1d 4h ago"
+  },
+  {
+   "rank": 33,
+   "participant": "1stop",
+   "score": 0.2747,
+   "submissions": 4,
+   "last_activity": "1d 4h ago"
+  },
+  {
+   "rank": 34,
+   "participant": "li002666",
+   "score": 0.2726,
+   "submissions": 4,
+   "last_activity": "3d 8h ago"
+  },
+  {
+   "rank": 35,
+   "participant": "smashi34",
+   "score": 0.271,
+   "submissions": 15,
+   "last_activity": "6d 1h ago"
+  },
+  {
+   "rank": 36,
+   "participant": "smrtdoog5",
+   "score": 0.2708,
+   "submissions": 15,
+   "last_activity": "1w ago"
+  },
+  {
+   "rank": 37,
+   "participant": "bot_account",
+   "score": 0.2707,
+   "submissions": 2,
+   "last_activity": "3d 22h ago"
+  },
+  {
+   "rank": 38,
+   "participant": "kpomazi",
+   "score": 0.2706,
+   "submissions": 17,
+   "last_activity": "1d 20h ago"
+  },
+  {
+   "rank": 39,
+   "participant": "NoahNault",
+   "score": 0.2702,
+   "submissions": 12,
+   "last_activity": "2d 17h ago"
+  },
+  {
+   "rank": 40,
+   "participant": "shixing",
+   "score": 0.2664,
+   "submissions": 7,
+   "last_activity": "1d 8h ago"
+  },
+  {
+   "rank": 41,
+   "participant": "roison",
+   "score": 0.2655,
+   "submissions": 6,
+   "last_activity": "21min ago"
+  },
+  {
+   "rank": 42,
+   "participant": "yifanxu",
+   "score": 0.265,
+   "submissions": 4,
+   "last_activity": "3d 2h ago"
+  },
+  {
+   "rank": 43,
+   "participant": "ad3002",
+   "score": 0.2643,
+   "submissions": 26,
+   "last_activity": "3d 12h ago"
+  },
+  {
+   "rank": 44,
+   "participant": "moongrega",
+   "score": 0.264,
+   "submissions": 24,
+   "last_activity": "1d 22h ago"
+  },
+  {
+   "rank": 45,
+   "participant": "regan_towin",
+   "score": 0.2632,
+   "submissions": 1,
+   "last_activity": "3d 22h ago"
+  },
+  {
+   "rank": 46,
+   "participant": "jfper21",
+   "score": 0.2607,
+   "submissions": 16,
+   "last_activity": "1d ago"
+  },
+  {
+   "rank": 47,
+   "participant": "SDCF9",
+   "score": 0.26,
+   "submissions": 16,
+   "last_activity": "1w ago"
+  },
+  {
+   "rank": 48,
+   "participant": "haiderz",
+   "score": 0.2584,
+   "submissions": 1,
+   "last_activity": "3d 23h ago"
+  },
+  {
+   "rank": 49,
+   "participant": "tchu",
+   "score": 0.2511,
+   "submissions": 21,
+   "last_activity": "1w 5d ago"
+  },
+  {
+   "rank": 50,
+   "participant": "MSU-Laskowski-GEMS",
+   "score": 0.2448,
+   "submissions": 13,
+   "last_activity": "2d ago"
+  }
+ ]
+}
