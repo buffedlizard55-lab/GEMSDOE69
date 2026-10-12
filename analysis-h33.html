@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Evidence-based audit of the H33-2-B2 file attribution in the user's score question.">
+  <title>H33 attribution audit · GEMSDOE69</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">GEMSDOE69 <span>GEMS research</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="index.html">Status</a>
+      <a href="executive-summary.html">Submission guide</a>
+      <a href="hypotheses.html">Hypotheses</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </header>
+  <main class="container">
+    <p class="eyebrow">SCORE ATTRIBUTION · EVIDENCE AUDIT</p>
+    <h1>What the H33 evidence does—and does not—show</h1>
+    <p class="lead">The key issue is file attribution. The public value cited in the prompt exists on the participant-level leaderboard, but evidence reviewed here does not connect it to the named H33-2-B2 GeoTIFF.</p>
+
+    <section class="callout stop">
+      <strong>Conclusion: the reason the named H33 file “scored” the cited value cannot be established.</strong>
+      <p>The public leaderboard is participant-level; the GEMSDOE32 owner page labels its H33 file “UNSCORED” and describes its own projected value as a model, not a score. No organizer submission receipt mapping the exact TIFF/hash to a score was found in this checkout or on the reviewed page.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Evidence chain</h2>
+      <ol>
+        <li><strong>User-supplied association:</strong> the prompt pairs a particular H33-2-B2 filename with a public value. That is a claim to audit, not a submission receipt.</li>
+        <li><strong>Owner site:</strong> the <a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html">GEMSDOE32 landing page</a> offers an H33 TIFF but explicitly labels it <code>UNSCORED</code>. It calls its own quoted model value a projection, not a competition score. The page's local metrics are owner-reported, not organizer-confirmed.</li>
+        <li><strong>Owner sidecar:</strong> the <a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-audit.json">audit JSON</a> is owner-generated metadata. A field such as <code>slot_decision</code> can report the owner's local decision; it is not an organizer score receipt. The TIFF bytes were not downloaded or independently re-read in this session.</li>
+        <li><strong>Official leaderboard:</strong> during the requested review, the live page showed the cited public value on a participant-level row. The page did not identify the H33 filename or hash and did not supply a receipt linking that row to the file. The participant row and full table are not reproduced here.</li>
+        <li><strong>Current-leader claim:</strong> the official live page had a leader above the user's stated reference value. That reference is no longer the current top as checked. The leaderboard changes over time; use the live organizer site rather than a stale copied value.</li>
+      </ol>
+      <p><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Open the official competition and navigate to its live leaderboard</a>. This project does not copy or poll the table.</p>
+    </section>
+
+    <section class="panel">
+      <h2>What the competition metric can explain in general</h2>
+      <p>The official metric is a distance-weighted Tversky index. It applies a triangular distance kernel with 300 m support and weights false-positive and false-negative terms with the competition's stated alpha and beta. Predictions close to hidden expert-labeled fault cells receive more true-positive credit than equally confident distant predictions; prediction mass far from hidden faults adds false-positive cost. That describes the metric, not the named file's performance.</p>
+      <p>The GEMS test faults are newly expert-mapped faults omitted from the existing public USGS fault database. A visible-catalogue hide-and-recover holdout can test spatial transfer, but it is not the private ground truth and cannot retrospectively explain a public submission score.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Could this project beat the cited value?</h2>
+      <p>It is scientifically possible for a new method to perform better, but no evidence in this checkout supports a score forecast. The corridor hypothesis is directly motivated by the regional structural literature; it must still pass the paired spatial holdout against the same pipeline without corridor priors, survive feature-by-feature leakage checks, and pass the registry uniqueness and format gates.</p>
+      <p>Because the H33 file-to-score link is not established, “beat the cited value” is not a valid file-level benchmark. The correct benchmark is the current official leaderboard plus the paired local holdout, with the two kept in separate evidence classes. No slot is used and no score projection is reported.</p>
+    </section>
+
+    <section class="panel">
+      <h2>Irregularities and limits for review</h2>
+      <ul>
+        <li><strong>Attribution gap:</strong> no organizer receipt ties the user-named TIFF/hash to the public leaderboard row.</li>
+        <li><strong>Evidence-class gap:</strong> owner-reported local holdout or model projections are not public leaderboard scores and not organizer receipts.</li>
+        <li><strong>File-access gap:</strong> this checkout contains neither the TIFF nor the original failed upload, so hashes, pixels, dots, and prior-raster uniqueness thresholds cannot be checked.</li>
+        <li><strong>Live-data limitation:</strong> the published DrivenData Terms of Use prohibit monitoring/copying without prior written consent; this project links to the official competition homepage and does not mirror the live board.</li>
+      </ul>
+      <p class="source-note">Sources: <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">official competition homepage</a> (navigate to Problem Description, Leaderboard, and Terms of Use); <a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html">non-organizer GEMSDOE32 page</a>.</p>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container">GEMSDOE69 · No file-level score attribution is claimed.</div></footer>
+</body>
+</html>

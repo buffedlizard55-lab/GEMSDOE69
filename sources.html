@@ -1,0 +1,79 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Auditable register of official competition rules, data sources, and primary geological sources used by GEMSDOE69.">
+  <title>Sources and verification · GEMSDOE69</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header class="site-header">
+    <a class="brand" href="index.html">GEMSDOE69 <span>GEMS research</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="index.html">Status</a>
+      <a href="executive-summary.html">Submission guide</a>
+      <a href="hypotheses.html">Hypotheses</a>
+      <a aria-current="page" href="sources.html">Sources</a>
+    </nav>
+  </header>
+  <main class="container">
+    <p class="eyebrow">CLAIM-TO-SOURCE AUDIT</p>
+    <h1>Sources and verification status</h1>
+    <p class="lead">Primary competition requirements are separated from peer-reviewed/conference geology and from owner-maintained sibling-project pages. A link being visible is not the same as its data being downloaded, checked, licensed, or authenticated.</p>
+    <p><a class="button" href="evidence.html">Open claim-by-claim geological evidence matrix</a></p>
+
+    <div class="callout warning"><strong>No local data provenance exists yet.</strong> The competition's protected downloads are not in this checkout. Data described by a third-party site or mirror are not treated as organizer-authenticated input.</div>
+
+    <section class="panel">
+      <h2>Official competition and format sources</h2>
+      <ul class="source-list">
+        <li><strong><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData GEMS Prize home page</a></strong><p>Organizer competition overview, steps to compete, award structure, and high-level disclosure that the test faults are newly identified relative to the public catalogue. Use this page to navigate to the current official leaderboard and submission interface.</p></li>
+        <li><strong><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition homepage → Problem Description</a></strong><p>Navigate from the official home page to the Problem Description section to review the task target (faults, not geothermal vents), training/test distinction, feature names, metric, distance kernel, coefficients, and GeoTIFF format. The page specifies EPSG:32611, 100 m, matching bounds/grid, null/NaN outside, a float32 band, and values in [0, 1].</p></li>
+        <li><strong><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition homepage → About</a></strong><p>Navigate from the official home page to About for background on geothermal structure, GeoDAWN, coordinated lidar, and references. It supports general physical relevance; it does not validate a candidate in this repository.</p></li>
+        <li><strong><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition homepage → Data</a></strong><p>The official Data tab redirected to login during this review. No protected file was downloaded, and no credential was supplied or requested. This is the current blocker for the competition feature/label/template data.</p></li>
+        <li><strong><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition homepage → Rules</a></strong> · <a href="https://www.herox.com/GEMSPrize/resource/2274">official GEMS Prize rules resource</a><p>Navigate from the organizer home page to the Rules section; it points to the official rules resource, which identifies the rules document hosted by the National Lab of the Rockies.</p></li>
+        <li><strong><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition homepage → Leaderboard</a></strong><p>The official live table was reviewed for this request. It reports participant-level results and does not expose a local TIFF-to-score receipt on the public page. This project does not copy or automatically refresh its rows.</p></li>
+        <li><strong><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition homepage → Terms of Use</a></strong><p>Navigate to the site's Terms of Use for the monitoring/copying provisions. The currently published terms prohibit automated monitoring/copying and manual monitoring/copying without prior written consent. A sanctioned API or written permission is needed before building a score feed. This site links to the organizer instead of scraping or republishing the table.</p></li>
+        <li><strong><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Official reference-solution repository</a></strong><p>Its public tree was checked through the GitHub API. It contains project documentation, environment/configuration files, a data placeholder, and the reference notebook; it does not contain `evaluate_holdout.py` or `submission_writer.py`. It is a simple model reference, not the shared holdout/writer template requested by the parallel-run protocol.</p></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Geology and geophysics: primary sources</h2>
+      <ul class="source-list">
+        <li><strong><a href="https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2025/Giddens.pdf">Giddens &amp; Faulds (2025), SGP-TR-229 — Analysis of Step-Overs / Relay Ramps</a></strong><p>Primary workshop proceedings paper from Stanford's geothermal engineering series. Its text supports the documented step-over inventory, typical elongated geometry, measured ramp-width range/mean, breaching-fault styles, higher-temperature hard-link/overlap observations, the Walker Lane domain contrast, the WNW extension orientation rationale, and use of gravity, magnetic, MT, lidar, and mapped fault data. The paper also cautions that high-resolution geological/fault data are needed and that geophysical layers alone are insufficient. These are source observations, not validation results from this model.</p></li>
+        <li><strong><a href="https://www.osti.gov/biblio/1110517">Faulds, Hinz &amp; Coolbaugh (2010), OSTI — Structural investigations of Great Basin geothermal fields</a></strong><p>U.S. Department of Energy Office of Scientific and Technical Information record. It discusses Walker Lane dextral shear transfer, regional WNW extension, N–NNE normal faults, and favorable fault interaction zones. Use as regional context, not as proof for each candidate pixel.</p></li>
+        <li><strong><a href="https://pubs.usgs.gov/publication/70271401">USGS Publications Warehouse record 70271401</a> · <a href="https://www.usgs.gov/publications/influence-pre-existing-structures-geothermal-springs-inferences-potential-field">USGS abstract page</a></strong><p>Both official pages are available. The Publications Warehouse cites Glen &amp; Earney (2025); the USGS abstract page displays a December 1, 2024 page date but its citation block also gives 2025. The reported magnetic high is interpreted as a buried mafic dike, and springs occur at anomaly breaks/bends. This is a strong non-fault alternative for magnetic lineaments and supports recording lithologic/intrusive mimics. Use 2025 per the formal citation; flag the page-date discrepancy.</p></li>
+        <li><strong><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data release page</a></strong> · <a href="https://doi.org/10.5066/P93LGLVQ">DOI 10.5066/P93LGLVQ</a><p>Official USGS page describing the airborne magnetic and radiometric surveys, survey coverage, processing products, and coordinated lidar. It identifies the data release as CC0. This supports source provenance and layer interpretation, not the competition's protected template grid.</p></li>
+        <li><strong><a href="https://gbcge.org/current-projects/ingenious/">Great Basin Center for Geothermal Energy — INGENIOUS project</a></strong><p>University of Nevada, Reno center page listing the project and its associated data/publications, including the cited GDR DOI for the regional compilation. This is a project-source reference, not evidence that a local GDR download succeeded.</p></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Potentially useful external data: checked, not used</h2>
+      <ul class="source-list">
+        <li><strong><a href="https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d">USGS ScienceBase — Quaternary-fault slip and dilation tendency</a> · <a href="https://doi.org/10.5066/P9YL58W6">DOI 10.5066/P9YL58W6</a></strong><p>The official USGS metadata lists downloadable shapefile/KMZ ZIPs for the Great Basin and INGENIOUS area, and says they include fault geometry and the stress data used to calculate tendencies. This is a concrete source to investigate if the competition package lacks stress orientation, but it is not a ready-to-use independent predictor: the features are tied to a Quaternary-fault catalogue and could leak or duplicate catalogue labels. No attachment was downloaded or inspected here; do not use precomputed fault tendencies unless its lineage and fold-local leakage behavior are proven clean.</p></li>
+        <li><strong><a href="https://gdr.openei.org/submissions/1391">User-provided GDR submission link 1391</a></strong><p>Fetched during this review; the endpoint returned “No submission found.” The INGENIOUS center page does cite a corresponding regional-dataset DOI, but the provided URL is not currently a verified usable download in this environment. Do not treat sibling-site file-size claims or mirrors as proof of availability.</p></li>
+        <li><strong><a href="https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e">USGS National Map 3DEP one-meter DEM collection</a></strong> · <a href="https://www.usgs.gov/faqs/what-types-elevation-datasets-are-available-what-formats-do-they-come-and-where-can-i-download">USGS download and format FAQ</a><p>Official USGS metadata confirms a public-domain one-meter bare-earth DEM collection, with CONUS tiles in UTM; the FAQ confirms downloads are free, require no account, and are available as GeoTIFF/IMG through The National Map Downloader. This is a specific, obtainable source for a DEM-derived lidar-scarp layer. Exact tile coverage over the competition AOI, source dates, and compatibility with the official sample grid have not been checked; no tiles are present locally. The competition's own DEM-link CSV remains behind login.</p></li>
+        <li><strong><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN data release</a> · <a href="https://doi.org/10.5066/P93LGLVQ">DOI 10.5066/P93LGLVQ</a></strong><p>The official metadata confirms public GeoDAWN magnetic and radiometric products and notes coordinated 3DEP lidar over a similar extent. The attached-file list reviewed here contains the magnetic/radiometric grids, flight paths, outlines, and reports; it does not establish that the 1 m DEM tiles needed for this model are included in this release.</p></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>Reference surfaces and score-attribution caveat</h2>
+      <ul class="source-list">
+        <li><strong><a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/index.html">GEMSDOE32 owner-maintained project page</a> · <a href="https://buffedlizard55-lab.github.io/GEMSDOE32/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-audit.json">owner audit sidecar</a></strong><p>Non-organizer source. The landing page says the H33-2-B2 artifact is unscored and labels its computed live value as a model projection. The sidecar contains owner-generated values but is not an organizer receipt. It cannot establish why the participant-level public score was obtained or that the file produced it.</p></li>
+        <li><strong><a href="https://github.com/buffedlizard55-lab/GEMSDOE69">This repository</a></strong><p>At the start of the session the tracked tree contained only a minimal README. No prior rasters, local score receipts, cached features, or tests were available for re-reading. Prior websites in the user's prompt are not treated as local artifacts or verified score receipts.</p></li>
+        <li><strong>User-provided Dropbox mirrors</strong><p>The linked PDF/TIFF files are third-party mirrors, not the official organizer package. Their bytes and licensing/provenance were not re-read in this session, and none was used as data or a sample grid.</p></li>
+      </ul>
+    </section>
+
+    <section class="panel">
+      <h2>CRS reference</h2>
+      <p><a href="https://epsg.io/32611">EPSG.io: EPSG:32611, WGS 84 / UTM zone 11N</a> is a convenient CRS reference page. The competition's own problem description—not the third-party EPSG viewer—is the governing source for matching the submission grid.</p>
+    </section>
+  </main>
+  <footer class="site-footer"><div class="container">GEMSDOE69 · Link status checked during this review; remote pages can change. No external binary was silently imported.</div></footer>
+</body>
+</html>

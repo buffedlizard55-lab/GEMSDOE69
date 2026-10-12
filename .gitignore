@@ -1,0 +1,13 @@
+# Private competition data and generated rasters stay out of Git by default.
+/data/raw/
+/data/processed/
+/outputs/
+
+# Python/cache artifacts
+__pycache__/
+*.py[cod]
+.pytest_cache/
+.coverage
+
+# Editor / OS files
+.DS_Store
