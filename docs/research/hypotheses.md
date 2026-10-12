@@ -18,3 +18,15 @@ Every hypothesis stays inside the assigned lane (catalogue-geometry corridors).
 corridor prior) with a positive paired 95 % CI lower bound on both draws and pooled
 (`registry/preregistration.json`). `AP_halo_corridor` is reported but cannot rescue a failed gate
 (no post-hoc switching).
+
+## Outcome (E2, pooled over draws 20 and 21; HOLDOUT-DTI, `gems57-pooled-hide-v2`, 22,893 withheld positive pixels)
+
+| Hypothesis | Arm | HOLDOUT-DTI [95% CI] | Paired Δ vs `B1_halo` [95% CI] | Result |
+|---|---|---|---|---|
+| H69-1 (the lane) | `A_corridor` | 0.0749 [0.0647, 0.0853] | −0.0347 [−0.0410, −0.0278] | **FAIL** (negative on both draws: −0.0323, −0.0370) |
+| H69-2 (boost) | `AP_halo_corridor` | 0.1061 [0.0957, 0.1171] | −0.0035 [−0.0048, −0.0020] | **FAIL** (sensitivity only) |
+| — controls | `C_distance` / `R_corridor_random` / `B0_evidence` | 0.1259 / 0.1106 / 0.0380 | — | distance alone is the strongest arm |
+
+Reading: on this instrument the withheld faults are explained by proximity to the visible catalogue; the corridor geometry
+adds no ranking power beyond proximity, the geophysical evidence bins slightly reduce DTI, and confining dots to corridors
+halves recall (TP_w 5,525 vs 10,204 for `B1_halo`).

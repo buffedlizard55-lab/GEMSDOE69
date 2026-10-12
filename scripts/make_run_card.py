@@ -40,14 +40,32 @@ def main():
         errors = [r for r in rows if "error" in r]
         identical = [r.get("submission") for r in rows if r.get("identical_bytes") or r.get("identical_decoded_predictions")]
         two = e3["uniqueness"][phase].get("two_phase") or {}
+        lit = two.get("literal_reading") or {}
+        lfl = two.get("like_for_like_reading") or {}
+        rho_dup = bool(rho is not None and rho > 0.90)
+        # Decision rule (stated before the corpus run finished, see README): the surface phase is judged by rank
+        # correlation; the dots phase by rank correlation plus 3-px overlap against registry rasters that are dot
+        # fields (support <= 20% of the footprint). Literal overlap against continuous surfaces is reported, not used:
+        # a raster positive on the whole footprint 'overlaps' every possible candidate (template two_phase_summary).
+        ov_dup = bool(phase == "dots" and (lfl.get("worst_forward_overlap_dot_fields") or 0) > 0.70)
         uniq[phase] = dict(rasters_checked=len(rows) - len(errors), rasters_with_errors=len(errors),
                            worst_spearman=rho, worst_spearman_raster=rho_who,
                            worst_forward_overlap_3px=ov, worst_overlap_raster=ov_who,
+                           worst_forward_overlap_dot_fields=lfl.get("worst_forward_overlap_dot_fields"),
+                           worst_forward_overlap_dot_field_raster=lfl.get("worst_forward_overlap_dot_field_submission"),
+                           dot_field_rasters=lfl.get("dot_field_rasters"), continuous_surface_rasters=lfl.get("continuous_surface_rasters"),
+                           literal_overlap_firings=lit.get("forward_overlap_firings"),
+                           literal_firings_all_continuous_surfaces=all(f.get("representation") == "continuous_surface"
+                                                                       for f in two.get("literal_firings", [])),
                            worst_jaccard=jac, worst_jaccard_raster=jac_who,
                            identical_bytes_or_pixels=identical,
-                           like_for_like=two.get("like_for_like_reading"),
-                           duplicate_literal=bool((rho is not None and rho > 0.90) or (ov is not None and ov > 0.70)))
-    dup = uniq["surface"]["duplicate_literal"] or uniq["dots"]["duplicate_literal"]
+                           duplicate_by_rank_correlation=rho_dup, duplicate_by_dot_overlap_like_for_like=ov_dup,
+                           duplicate_literal=bool(rho_dup or (ov is not None and ov > 0.70)),
+                           duplicate=bool(rho_dup or ov_dup))
+    diag = (load("e3_uniqueness.json") or {}).get("dot_overlap_firings_diagnostic") or {}
+    uniq["dots"]["dot_overlap_firings_diagnostic"] = diag
+    uniq["dots"]["discriminating_duplicate"] = bool(uniq["dots"]["duplicate_by_rank_correlation"] or diag.get("n_discriminating_firings", 0) > 0)
+    dup = uniq["surface"]["duplicate"] or uniq["dots"]["duplicate"]
     sub = e3["submission"]
     verdict = "promote" if (gate["passed"] and not dup and val["all_files_passed"]) else "negative"
     card = {
@@ -85,7 +103,16 @@ def main():
             "hardlink_masking_test": e1["hardlink_test"]["summary"],
             "dip_inference": e1["dip_receipt"],
         },
-        "registry_uniqueness": {"index": "registry/registry_index_69.json", **uniq, "duplicate": dup},
+        "registry_uniqueness": {"index": "registry/registry_index_69.json", **uniq, "duplicate": dup,
+                                "discriminating_duplicate": bool(uniq["surface"]["duplicate_by_rank_correlation"] or uniq["dots"]["discriminating_duplicate"]),
+                                "template_gap_reported": ("gems57.uniqueness.representation_class classifies registry rasters by support fraction only; "
+                                                          "a uniform 6-px lattice (r14_union_tips10_lat6, 3.7% support) covers ~76% of the allowed domain "
+                                                          "within 3 px and fires the 70% rule for any candidate. Proposed template fix: also classify by "
+                                                          "3-px halo coverage of the allowed domain and test each firing against random dots placed in the candidate's own "
+                                                          "domain (if random dots also exceed 0.70 the firing is non-discriminating). Not edited locally (no private fork)."),
+                                "decision_rule": ("surface phase: Spearman > 0.90 vs any raster; dots phase: Spearman > 0.90 vs any raster "
+                                                  "or > 70% of dots within 3 px of one dot-field raster's dots (support <= 20% of footprint). "
+                                                  "Literal overlap vs continuous surfaces reported as degenerate diagnostics.")},
         "raster": {"zeros_tif": sub["zeros_tif"], "zeros_sha256": sub["zeros_sha256"], "zeros_bytes": sub["zeros_bytes"],
                     "nan_twin_tif": sub["nan_tif"], "nan_twin_sha256": sub["nan_sha256"], "zip": sub["zip"],
                     "zip_sha256": sub["zip_sha256"], "dots": e3["dots"]},
@@ -97,10 +124,20 @@ def main():
         "submission_note_chars": sub["note_chars"],
         "verdict": verdict,
         "verdict_reason": ("Gate passed, unique and valid." if verdict == "promote" else
-                           "Gate failed: the lane arm did not beat the same pipeline without corridor priors on the pre-registered "
-                           "holdout (see holdout.gate)." if not gate["passed"] else
+                           ("Gate failed: the lane arm did not beat the same pipeline without corridor priors on the pre-registered "
+                            "holdout (see holdout.gate)." + ((f" Independently, the final dots are a DUPLICATE under the 70% / 3-px dot-overlap "
+                            f"rule: {diag.get('n_firings', 0)} firings, {diag.get('n_discriminating_firings', 0)} discriminating "
+                            f"(see registry_uniqueness.dots.dot_overlap_firings_diagnostic).") if dup else "")) if not gate["passed"] else
                            "Uniqueness or validation failed."),
         "slot_policy": "Not a slot pick. Promotion is a separate selector step within the weekly cap.",
+        "budget": {"experiments_used": 3, "experiments": ["E1 first test", "E2 gate", "E3 live build + uniqueness + validation"],
+                   "clock_start_utc": "2026-10-12T01:39:00Z", "e1_finished_utc": e1.get("finished"),
+                   "e2_finished_utc": e2.get("finished"), "limit": "3 experiments or 2 hours"},
+        "reuse": {"template": "vendor/gems57 == 60GEMSDOE/src/gems57 @ 32024716 (registry/template_pin.json), unedited",
+                  "used": ["holdout.buffered_component_draw", "evaluate_holdout.evaluate / pooled_summary", "emit.greedy_allocate",
+                           "submission_writer.write_submission", "validate.validate", "gates.format_report",
+                           "uniqueness.compare_array_to_registry / two_phase_summary"],
+                  "feature_stack": "official training_features.tif (SHA-256 4371c82e...) bands read directly -- the same bytes the template cache is built from"},
     }
     (EVID / "run_card.json").write_text(json.dumps(card, indent=1, default=float))
     print(json.dumps({k: card[k] for k in ("verdict", "verdict_reason", "submission_name", "submission_note")}, indent=1))

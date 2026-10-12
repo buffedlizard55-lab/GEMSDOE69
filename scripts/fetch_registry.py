@@ -73,25 +73,20 @@ def clone(repo: str) -> Path | None:
     return dest
 
 
-def head_tifs(dest: Path) -> list[tuple[str, int, str]]:
-    r = run(["git", "ls-tree", "-r", "-l", "HEAD"], cwd=dest)
-    out = []
+def head_tifs(repo: str) -> tuple[list[tuple[str, int, str]], str]:
+    """HEAD .tif blobs with sizes from ONE REST call (``git/trees?recursive=1``).
+
+    ``git ls-tree -l`` is not used: in a blob-less partial clone it lazily downloads
+    every blob of the tree, one request at a time, just to report sizes.
+    """
+    r = run(["gh", "api", f"repos/{OWNER}/{repo}/git/trees/HEAD?recursive=1"], timeout=300)
     if r.returncode != 0:
-        return out
-    for line in r.stdout.splitlines():
-        meta, path = line.split("\t", 1)
-        parts = meta.split()
-        if len(parts) < 4 or parts[1] != "blob":
-            continue
-        if not path.lower().endswith((".tif", ".tiff")):
-            continue
-        try:
-            size = int(parts[3])
-        except ValueError:
-            continue
-        if MIN_BYTES <= size <= MAX_BYTES:
-            out.append((parts[2], size, path))
-    return out
+        return [], f"trees-api-error: {r.stderr.strip()[:160]}"
+    d = json.loads(r.stdout)
+    out = [(t["sha"], int(t.get("size", 0)), t["path"]) for t in d.get("tree", [])
+           if t.get("type") == "blob" and t["path"].lower().endswith((".tif", ".tiff"))
+           and MIN_BYTES <= int(t.get("size", 0)) <= MAX_BYTES]
+    return out, ("truncated" if d.get("truncated") else "ok")
 
 
 def batch_fetch(dest: Path, blobs: list[str]) -> None:
@@ -153,7 +148,9 @@ def main() -> int:
         for row in by_repo.get(repo, []):
             want.setdefault(row["blob"], []).append(row["path"])
             expected_sha[row["blob"]] = row["sha256"]
-        heads = head_tifs(dest)
+        heads, tree_status = head_tifs(repo)
+        if tree_status != "ok":
+            errors.append(f"{repo}: HEAD tree listing {tree_status}")
         for blob, _size, path in heads:
             want.setdefault(blob, []).append(path)
         batch_fetch(dest, sorted(want))
@@ -187,7 +184,7 @@ def main() -> int:
                               cache_file=str(cache_file), sources=sources, repo_first=repo)
             kept += 1
         receipt.append(dict(repo=repo, status="scanned", base_index_blobs=len(by_repo.get(repo, [])),
-                            head_tif_blobs=len(heads), kept=kept, skipped_not_grid=skipped,
+                            head_tif_blobs=len(heads), head_tree=tree_status, kept=kept, skipped_not_grid=skipped,
                             failed=failed))
         print(f"[{time.time()-t0:7.1f}s] {repo}: kept={kept} skipped={skipped} failed={failed} "
               f"total_unique={len(index)}", flush=True)

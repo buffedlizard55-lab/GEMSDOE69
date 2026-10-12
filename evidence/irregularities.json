@@ -85,6 +85,18 @@
    "severity": "Low",
    "finding": "41% of in-footprint INGENIOUS records carry a usable DIPDIRECT; the rest have 'Unspecified' or blank.",
    "handling": "Dip polarity inferred from hanging-wall topography (lower side) where unrecorded; agreement with recorded dips 90.3% on 1,984 polylines (evidence/e1_first_test.json)."
+  },
+  {
+   "id": "IR-69-15",
+   "severity": "High",
+   "finding": "The protocol's 70% / 3-px dot-overlap rule cannot discriminate against space-filling registry rasters. Example: r14_union_tips10_lat6.tif is a uniform 6-px lattice (3.7% support, so the template classifies it as a dot field) whose 3-px halo covers 76% of all allowed cells; random dots placed in this lane's corridor band score 0.785 against it, exactly the geometric expectation pi/4. Any candidate in that domain 'fails' the rule regardless of method.",
+   "handling": "Logged conservatively as duplicate-by-rule with a per-firing diagnostic (halo coverage, random-dot baseline, excess over random) in evidence/e3_uniqueness.json. Template gap reported in the run card with a proposed fix (classify by halo coverage and test firings against random dots in the candidate's own domain); vendor/gems57 not edited (no private fork)."
+  },
+  {
+   "id": "IR-69-16",
+   "severity": "Low",
+   "finding": "Tooling: in a blob-less partial clone, `git ls-tree -l` lazily downloads every blob to report sizes, which stalled the first registry scan on large repositories.",
+   "handling": "scripts/fetch_registry.py lists HEAD trees with one REST git/trees call per repository instead; full scan of 862 rasters, 0 errors."
   }
  ]
 }

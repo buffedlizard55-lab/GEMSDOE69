@@ -3845,7 +3845,17 @@
     "reject_reason": "rejected_geometry",
     "link_obliquity_deg": 1.135283898623369
    }
-  ]
+  ],
+  "paired_diagnostic": {
+   "note": "post-hoc diagnostic computed from the E1 rows (no new experiment)",
+   "n": 43,
+   "frac_links_recall_gt_null_mean": 0.9767441860465116,
+   "mean_paired_gain": 0.2965375190004951,
+   "wilcoxon_one_sided_p": 8.231759275476166e-09,
+   "frac_null_p95_saturated_at_1": 0.9302325581395349,
+   "link_len_km_median": 0.6607119490464548,
+   "link_obliquity_deg_median": 22.390442615653196
+  }
  },
  "finished": "2026-10-12T01:39:50Z"
 }
