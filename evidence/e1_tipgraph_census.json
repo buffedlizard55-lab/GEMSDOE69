@@ -1209,5 +1209,6 @@
   2.83
  ],
  "generated_utc": "20261012T021133Z",
- "seconds": 103.4
+ "seconds": 103.4,
+ "raw_pair_note": "all geometrically valid pairs before dedup/priority cap; measured this session"
 }

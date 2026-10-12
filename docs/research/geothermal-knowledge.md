@@ -33,8 +33,12 @@ obtainable in-sandbox, with the reason.
   often in pull-aparts and displacement-transfer zones than in normal-fault
   step-overs; N–NE faults are best oriented for dilation under WNW extension.
 * **[MEASURED, this session]** From the pinned catalogue: 3,887 skeleton strands;
-  129k+ raw geometrically-valid step-over tip pairs before dedup/cap
+  212,657 raw geometrically-valid step-over tip pairs before dedup/priority cap
   (`evidence/e1_tipgraph_census.json`): the geometry prior is rich, not sparse.
+* **[MEASURED, this session]** Hard-link validation: masking the linking catalogue
+  mass of 13 disconnected hard-linked ramps and rebuilding the tip graph recovers
+  84.6% of masked linking pixels within 300 m on average (median 1.0; 11/13 ramps
+  ≥70%) — `evidence/e1_hardlinked_recovery.json`.
 
 ## 3. What the family has already learned (score-forming results)
 

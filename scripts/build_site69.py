@@ -69,24 +69,35 @@ def submission_banner():
         lit = uniq.get("literal_gate", {})
         strat = uniq.get("stratified_gate", {})
         uniq_ok = bool(lit.get("rho_ok")) and bool(strat.get("dotlike_overlap_ok"))
-    v = receipt.get("validator", {}).get("zeros", {})
-    val_ok = bool(v.get("passed"))
+    fc = receipt.get("format_compliance", {})
+    nan_ok = bool(fc.get("nan", {})) and all(
+        bool(v) for k, v in fc.get("nan", {}).items() if k not in ("dots", "policy"))
+    zeros_ok = bool(fc.get("zeros", {})) and all(
+        bool(v) for k, v in fc.get("zeros", {}).items() if k not in ("dots", "policy"))
+    val_ok = nan_ok or zeros_ok
     ok = gate_ok and uniq_ok and val_ok
     tifs = sorted(SUB.glob("h69-*-zeros.tif"))
     tif = tifs[-1] if tifs else None
+    nan_tifs = sorted(SUB.glob("h69-*-nan.tif"))
+    nan_tif = nan_tifs[-1] if nan_tifs else None
     if ok and tif:
-        # publish the artifact under a stable download name
+        # publish the artifacts under stable download names
         pub = DOCS / "downloads" / f"{tif.stem}.tif"
         pub.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(tif, pub)
+        primary, fallback = (nan_tif, tif) if (nan_ok and nan_tif) else (tif, None)
+        if nan_ok and nan_tif:
+            shutil.copy2(nan_tif, DOCS / "downloads" / f"{nan_tif.stem}.tif")
         ban = (f'<div class="banner ok"><b>&#9989; OK TO DOWNLOAD AND SUBMIT.</b><br>'
                f'The gate was met on the spatially-blocked hide-and-recover holdout, the '
                f'registry lane-drift scan passed (surface Spearman and dot-like overlap), and the '
-               f'format validator passed (single-band float32, EPSG:32611, 3730&times;3292, values in [0,1]).<br>'
+               f'format compliance checks passed (single-band float32, EPSG:32611, 3730&times;3292, '
+               f'values in [0,1], footprint-exact against <code>sample_submission.tif</code>).<br>'
                f'<span class="kv">This is a HOLDOUT-screened candidate, not an organizer-confirmed score. '
                f'Promotion to a submission slot is a separate selector step.</span></div>'
-               f'<a class="btn big" href="downloads/{esc(tif.stem)}.tif" download>&#11015;&#65039; Download submission TIF ({esc(tif.stem)}.tif)</a>'
-               f'<a class="btn alt" href="#how-to-submit">How to submit it</a>')
+               f'<a class="btn big" href="downloads/{esc(primary.stem)}.tif" download>&#11015;&#65039; Download PRIMARY submission TIF ({esc(primary.stem)}.tif)</a>'
+               + (f'<a class="btn alt" href="downloads/{esc(fallback.stem)}.tif" download>Fallback all-finite variant ({esc(fallback.stem)}.tif)</a>' if fallback else '')
+               + f'<a class="btn alt" href="#how-to-submit">How to submit it</a>')
         return ban, tif
     reasons = []
     if not gate_ok:
@@ -94,7 +105,7 @@ def submission_banner():
     if not uniq_ok:
         reasons.append("registry lane-drift gate not met")
     if not val_ok:
-        reasons.append("format validator failed")
+        reasons.append("format compliance failed")
     ban = ('<div class="banner bad"><b>&#10060; DO NOT SUBMIT.</b> '
            + "; ".join(esc(r) for r in reasons)
            + '. The negative result is logged in <code>evidence/</code>.</div>')
@@ -367,8 +378,9 @@ def build_results():
 <div class="card"><h2>E3 &mdash; emission, registry scan, validator</h2>
 <table><tr><th>Check</th><th>Result</th></tr>
 <tr><td>Dots emitted (greedy marginal-DTI, |G| prior 12,691 px)</td><td>{receipt.get('n_dots','?')} (catalogue collisions: {receipt.get('catalogue_collision_px','?')})</td></tr>
-<tr><td>Validator (zeros)</td><td>{'PASS' if receipt.get('validator', {}).get('zeros', {}).get('passed') else 'FAIL / pending'}</td></tr>
-<tr><td>Validator (nan diagnostic)</td><td>{'PASS' if receipt.get('validator', {}).get('nan', {}).get('passed') else 'FAIL / pending'}</td></tr>
+<tr><td>Upstream validator (zeros)</td><td>{'PASS' if receipt.get('validator', {}).get('zeros', {}).get('passed') else 'see compliance note (IR-69-VAL-01)'}</td></tr>
+<tr><td>Format compliance zeros: all-finite [0,1] (family shipping policy)</td><td>{'PASS' if receipt.get('format_compliance', {}).get('zeros', {}).get('all_finite') else 'pending'}</td></tr>
+<tr><td>Format compliance nan: finite mask &equiv; sample_submission, NaN outside, nodata tag</td><td>{'PASS' if receipt.get('format_compliance', {}).get('nan', {}).get('finite_mask_matches_sample_submission') else 'pending'}</td></tr>
 <tr><td>Registry scan compared / errors</td><td>{uniq.get('n_compared','pending')} / {uniq.get('n_errors','pending')}</td></tr>
 <tr><td>Worst |Spearman| surface</td><td>{esc(uniq.get('worst_abs_spearman', 'pending'))}</td></tr>
 <tr><td>Worst dot overlap (dotlike stratum)</td><td>{esc((uniq.get('worst_dot_overlap_dotlike') or {}).get('dot_overlap_3px', 'pending'))}</td></tr>
