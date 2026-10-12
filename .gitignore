@@ -1,0 +1,10 @@
+# Competition data is NOT redistributable from this repo: never commit it.
+data/*
+!data/README.md
+# Scratch and generated rasters stay out of git unless a gate receipt allows publication.
+submissions/
+*.tif
+!docs/downloads/*.tif
+__pycache__/
+.pytest_cache/
+.venv/
