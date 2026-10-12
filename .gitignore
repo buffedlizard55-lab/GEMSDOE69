@@ -1,13 +1,18 @@
-# Private competition data and generated rasters stay out of Git by default.
-/data/raw/
-/data/processed/
-/outputs/
+# Competition data, mirrors, and generated rasters are not committed by default.
+data/*
+!data/README.md
+outputs/
+submissions/
+*.tif
+# A promoted, validated release may be published here after every gate passes.
+!docs/downloads/*.tif
 
-# Python/cache artifacts
+# Python environments and caches
 __pycache__/
 *.py[cod]
 .pytest_cache/
+.venv/
 .coverage
 
-# Editor / OS files
+# OS/editor files
 .DS_Store

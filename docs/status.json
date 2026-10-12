@@ -1,0 +1,38 @@
+{
+  "generated_utc": "2026-10-12T01:48:52Z",
+  "official_data": {
+    "training_features.tif": {
+      "present": false,
+      "bytes": null,
+      "provenance": "missing"
+    },
+    "labels.tif": {
+      "present": false,
+      "bytes": null,
+      "provenance": "missing"
+    },
+    "existing_faults.tif": {
+      "present": false,
+      "bytes": null,
+      "provenance": "missing"
+    },
+    "sample_submission.tif": {
+      "present": false,
+      "bytes": null,
+      "provenance": "missing"
+    },
+    "1m_DEM_links.csv": {
+      "present": false,
+      "bytes": null,
+      "provenance": "missing"
+    }
+  },
+  "all_official_files_present": false,
+  "gate": {
+    "status": "BLOCKED",
+    "download_enabled": false,
+    "reason": "no holdout receipt: gate not evaluated"
+  },
+  "download_enabled": false,
+  "candidate_submission": null
+}

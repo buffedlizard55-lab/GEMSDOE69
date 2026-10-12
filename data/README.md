@@ -1,7 +1,15 @@
 # Data placement
 
-This directory intentionally contains no raster data yet. The official DrivenData data tab requires an authenticated session and redirected to login during the 2026-10-12 UTC audit. Do not substitute a public mirror without recording its provenance and confirming that its license and rules permit use.
+This directory intentionally contains no competition data yet. The official DrivenData Data tab redirected to login during the 2026-10-12 UTC review. No account session was used and no protected file was downloaded.
 
-When authorized data are available, keep large inputs out of Git and record a manifest with source URL, retrieval time, original filename, SHA-256, license/terms, CRS, dimensions, transform, bands, nodata, and footprint definition. Required competition inputs must be confirmed against the current official data page and template; likely essentials include the feature GeoTIFF, label/catalogue inputs, and `sample_submission.tif`. The exact list has not been verified from an authenticated download in this checkout.
+The current project metadata references these likely official files; confirm exact names, geometry, and schema from the authenticated organizer package before using them:
 
-The 1 m DEM links and any auxiliary official datasets should be listed separately with provenance. A feature channel or a sample file must not be assumed to exist because it is mentioned in a prior project page.
+- `training_features.tif` — multiband feature stack
+- `labels.tif` — training fault labels
+- `existing_faults.tif` — catalogue/known-fault layer
+- `sample_submission.tif` — authoritative submission-grid template
+- `1m_DEM_links.csv` — source list for 1 m DEM tiles
+
+Keep all competition inputs, public mirrors, and large rasters out of Git. The root `.gitignore` excludes them; only this README is tracked. For every authorized input, record source URL, retrieval time, original filename, SHA-256, license/terms, CRS, dimensions, transform, band names, nodata/mask behavior, and footprint definition in a manifest.
+
+The official USGS 3DEP one-meter DEM collection is a free public-domain source with no-account download, but exact tile intersection with the competition footprint and agreement with the competition link list remain unverified. A feature channel or sample file must not be assumed to exist because a prior project page mentions it.

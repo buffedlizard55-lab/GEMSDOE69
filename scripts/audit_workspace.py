@@ -22,6 +22,14 @@ INPUT_CANDIDATES = {
         "data/labels.tif",
         "data/raw/labels.tif",
     ),
+    "existing_faults": (
+        "data/existing_faults.tif",
+        "data/raw/existing_faults.tif",
+    ),
+    "dem_links": (
+        "data/1m_DEM_links.csv",
+        "data/raw/1m_DEM_links.csv",
+    ),
     "sample_submission": (
         "data/sample_submission.tif",
         "data/raw/sample_submission.tif",
@@ -38,6 +46,12 @@ HELPER_CANDIDATES = {
     ),
 }
 MODULES = ("numpy", "rasterio", "osgeo", "scipy", "geopandas", "pytest")
+PROJECT_TOOL_CANDIDATES = {
+    "dti_metric": ("src/gems/metric.py",),
+    "format_validator": ("src/gems/validate_submission.py",),
+    "promotion_gate": ("src/gems/gate.py",),
+    "status_script": ("scripts/status.py",),
+}
 
 
 def first_existing(root: Path, candidates: tuple[str, ...]) -> str | None:
@@ -63,6 +77,14 @@ def build_report(root: Path = ROOT) -> dict[str, Any]:
             "checked_paths": list(candidates),
         }
         for name, candidates in HELPER_CANDIDATES.items()
+    }
+    project_tools = {
+        name: {
+            "present": (found := first_existing(root, candidates)) is not None,
+            "path": found,
+            "checked_paths": list(candidates),
+        }
+        for name, candidates in PROJECT_TOOL_CANDIDATES.items()
     }
 
     feature_caches = [
@@ -99,6 +121,7 @@ def build_report(root: Path = ROOT) -> dict[str, Any]:
         "python": sys.version.split()[0],
         "inputs": inputs,
         "shared_tools": helpers,
+        "project_tools": project_tools,
         "feature_cache_locations": feature_caches,
         "registry_directories": registry_dirs,
         "referenced_data_scripts": downloads,

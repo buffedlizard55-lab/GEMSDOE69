@@ -48,9 +48,14 @@ class ProjectContractTests(unittest.TestCase):
         self.assertTrue(report["missing_prerequisites"])
         self.assertFalse(report["inputs"]["training_features"]["present"])
         self.assertFalse(report["inputs"]["labels"]["present"])
+        self.assertFalse(report["inputs"]["existing_faults"]["present"])
+        self.assertFalse(report["inputs"]["dem_links"]["present"])
         self.assertFalse(report["inputs"]["sample_submission"]["present"])
         self.assertFalse(report["shared_tools"]["holdout_evaluator"]["present"])
         self.assertFalse(report["shared_tools"]["submission_writer"]["present"])
+        self.assertTrue(report["project_tools"]["dti_metric"]["present"])
+        self.assertTrue(report["project_tools"]["format_validator"]["present"])
+        self.assertTrue(report["project_tools"]["promotion_gate"]["present"])
 
     def test_run_card_is_valid_negative_and_has_short_note(self) -> None:
         card_path = ROOT / "reports/run-card-2026-10-12.json"
@@ -71,7 +76,7 @@ class ProjectContractTests(unittest.TestCase):
         self.assertIn("button-disabled", guide)
 
     def test_all_local_html_links_resolve(self) -> None:
-        pages = sorted(ROOT.glob("*.html"))
+        pages = sorted(ROOT.rglob("*.html"))
         self.assertGreaterEqual(len(pages), 5)
         missing: list[str] = []
         for page in pages:
@@ -88,7 +93,7 @@ class ProjectContractTests(unittest.TestCase):
 
     def test_html_tags_are_balanced(self) -> None:
         unbalanced: list[str] = []
-        for page in ROOT.glob("*.html"):
+        for page in ROOT.rglob("*.html"):
             parser = BalancedTags()
             parser.feed(page.read_text(encoding="utf-8"))
             parser.close()

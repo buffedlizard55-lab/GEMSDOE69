@@ -17,14 +17,15 @@ This records three distinct implementation/review passes performed in this sessi
 - Re-verified the USGS Surprise Valley source. Its abstract page displays a 2024 page date while the official bibliographic record cites the paper as 2025; the discrepancy is logged.
 - Replaced deep DrivenData links with the official competition homepage and navigation guidance. The website does not mirror or poll the leaderboard.
 - Implemented the source/evidence pages, H33 attribution audit, executive summary, five-hypothesis register, negative run card, blank per-corridor rationale template, irregularity log, local readiness audit, static hosting files, and contract tests.
+- During PR preparation, fetched the updated `origin/main`: it now contained a DTI metric, format checker, promotion gate, status script, and older `docs/` pages. Integrated that mainline code instead of deleting it; removed the stale copied leaderboard table and replaced outdated duplicate pages with pointers to the current root site.
 
 ## Pass 3 — independent engineering/source consistency review
 
 - Rechecked the user-critical thresholds: alpha 0.2, beta 0.8, 300 m triangular kernel; feature-alone AUC >0.90 leakage alarm; registry rank-correlation ≤0.90; no more than 70% of dots within three pixels of a single raster; geometry width W of 0.1–15 km and along-strike separation ≤3.5W.
+- Reviewed and fixed shared mainline tooling: DTI now rejects infinite/out-of-range predictions; the local format checker requires the official sample-grid reference and an explicit mask/nodata footprint (otherwise it fails closed); the promotion gate requires complete paired holdout CIs, clean canaries, registry limits, exact-match check, sample-grid validation, file/reference hashes, and unique name/note.
 - Verified the one-meter DEM route is a free, public-domain USGS 3DEP source with no account required, while explicitly leaving exact AOI tile coverage and dates unverified. Confirmed no data tiles or competition layers were imported.
-- Ran `git diff --check` successfully.
-- Ran `python -m unittest discover -s tests -v`: **8 tests passed**, including local Markdown/HTML links and balanced HTML tags.
-- Ran `python scripts/audit_workspace.py`: **blocked**, missing three competition inputs and two shared tools.
-- Ran strict audit: **exit code 2**, as expected for missing prerequisites.
-- Checked all local HTML links: **0 missing**. Markdown local targets are also covered by the test suite.
-- No holdout, leakage canary, registry comparison, validator, TIFF/hash, slot, submission, organizer receipt, PR, or merge is claimed by this log.
+- Ran `PYTHONPATH=src .venv/bin/pytest -q`: **44 tests passed** (the suite reports 18 Rasterio `PendingDeprecationWarning`s from its synthetic transform fixtures; no failures).
+- Ran `.venv/bin/python -m unittest discover -s tests -p test_project_contract.py -v`: **8 project-contract tests passed**, including recursive local Markdown/HTML links and balanced HTML tags.
+- Ran `.venv/bin/python scripts/audit_workspace.py`: **blocked**, missing five official inputs (features, labels, existing faults, DEM links, sample template) and two requested shared tools (holdout runner and writer). Strict mode exits **2**, as designed.
+- Ran `.venv/bin/python scripts/status.py`: gate remains **BLOCKED**; no candidate submission is present.
+- `git diff --check` passes. No holdout, leakage canary, registry comparison, data-dependent format validation, TIFF/hash, slot, submission, or organizer receipt is claimed. PR #4 is open; it has not been merged.
