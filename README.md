@@ -1,109 +1,87 @@
-# GEMSDOE69 — GEMS Prize (DOE) fault-prediction project
+# GEMSDOE69 — auditable DOE GEMS fault-discovery workbench
 
-> **Read this section first, every session.** It is the standing brief for this repository.
-> Last updated 2026-10-12. Condensed from the session prompt; the duplicated paste blocks and the pasted
-> leaderboard dump were removed (the leaderboard is in [docs/leaderboard-2026-10-12.md](docs/leaderboard-2026-10-12.md)).
+> **Current release decision: NEGATIVE / NOT READY. There is no submission GeoTIFF in this repository. Do not download or submit a placeholder.** The local DTI metric, format validator, and promotion gate exist, but no competition rasters, cached feature stack, spatial holdout runner, submission writer, or prior-raster registry are available. Therefore no data-dependent holdout, leakage, uniqueness, or exact-template validation can be completed. No competition slot has been used.
+>
+> [Open the project status and download gate](index.html) · [Executive summary and submission instructions](executive-summary.html) · [Ranked hypotheses](hypotheses.html) · [Source register](sources.html) · [Run card](reports/run-card-2026-10-12.json)
 
-## Status at a glance
+## Standing project brief — read this section at the start of every session
 
-| item | state |
-|---|---|
-| Downloadable submission TIF | **Not offered.** Gate BLOCKED (see below). |
-| Official training data in this checkout | **No.** Login-gated at DrivenData (IR-11). |
-| Holdout DTI | **Not measured.** No labels, so no holdout. |
-| DTI metric, validator, gate | Implemented and tested (`pytest`: 25 pass). |
-| Explanation of the 0.2778 figure | Done: [docs/research/0.2778-analysis.md](docs/research/0.2778-analysis.md). The 0.2778 score is **not** the top score, and it cannot be linked to its file (IR-01, IR-03). |
-| Executive summary (how to submit) | [docs/executive-summary.html](docs/executive-summary.html) |
-| GitHub Pages site | [docs/index.html](docs/index.html) — https://buffedlizard55-lab.github.io/GEMSDOE69/ |
-| Run card | [docs/run-card.json](docs/run-card.json) (verdict: no-promote, blocked) |
-| Irregularities for review | [docs/irregularities.md](docs/irregularities.md) |
+Build a scientifically defensible, reproducible, and useful system for discovering **previously unmapped faults** in the DOE GEMS / GeoDAWN footprint and, only after validation, producing a unique competition-format GeoTIFF. The competition target is geological fault presence, not a geothermal vent map. Geothermal structure is the geological rationale for prioritizing possible faults; it is not itself the pixel label.
 
-## The mission
+### The method lane for this project
 
-**Goal.** Place at the top of the DrivenData GEMS Prize leaderboard (competition 306). The organizer's problem is to
-predict **faults** that are indicative of geothermal resources in the GeoDAWN region
-(https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/). The score is a distance-weighted
-Tversky index (α = 0.2, β = 0.8, R = 300 m, triangular kernel). The submission is a single-band float32 GeoTIFF
-in EPSG:32611 at 100 m, values in [0, 1], NaN outside the footprint.
+Stay within the **catalogue-geometry relay-ramp / pull-apart / displacement-transfer corridor** approach. Build a graph from catalogue fault polylines and their tips. Where catalogue attributes support it, test parallel normal-fault pairs with the same dip direction and overlapping **and** underlapping tips. Use corridor width W in the project's 0.1–15 km search interval (the paper's measured sample spans 0.1–14.6 km, mean 2.8 km); constrain along-strike separation to ≤3.5W as a project-generation bound, not a universal geological law. Generate separate oblique-connector and en-échelon strand candidates in each corridor. Also consider dextral releasing steps, pull-aparts, terminations, and displacement-transfer corridors. Rank corridors—not isolated pixels—using multi-scale gravity and magnetic horizontal-gradient and tilt evidence (include signed magnetic lows), the available lidar-scarp channel, and stress-orientation consistency. The geological prior proposes where to inspect; it does not assert that an unobserved fault exists.
 
-**What the project must do.**
-1. Understand the problem, collect the data and keep it in an auditable table with official links.
-2. Build and train a model; generate predictions that match the submission format.
-3. Generate a **unique** submission that is easy to download and submit. It must be obvious on the site whether
-   the file is safe to download and submit. Give it a unique name and a short note (≤140 characters).
-4. Explain how to make a submission on an executive-summary page.
-5. Research the science (geothermal favourability, step-overs and relay ramps, pull-aparts, displacement transfer
-   zones, strain and gravity signatures). Propose and test hypotheses that the catalogue does not already contain,
-   and record the sources for manual review.
-6. Hypothesis discipline: name the layer(s), the physical signature, why the method finds a fault missing from the
-   USGS/INGENIOUS catalogue, and how it differs from work already in the repo. Rank by expected DTI improvement
-   and implementation cost. Validate the top candidate on the spatially blocked holdout **before** touching a
-   submission slot.
-7. Gate: a file is offered for download **only if** the candidate beats (a) the same pipeline without corridor or
-   prior features and (b) the current holdout best. Otherwise log the negative result and do not offer the file.
+The geometric ranges and percentages in the user's research prompt are **hypothesis priors from the cited Giddens & Faulds paper**, not outcomes measured in this checkout. Check source attributes before using dip, slip-sense, or age: do not infer these from a 2-D line when the catalogue does not provide them. If an attribute is missing, record it as unknown and either test both kinematic interpretations or exclude that geometry from the kinematics-specific arm.
 
-**Rules for every number and claim.**
-* Verify line by line against official, trusted sources, and link them for manual review.
-* No hallucinations. Anything not checked is labelled NOT READ, BLOCKED or UNVERIFIED.
-* Label every score as one of: `HOLDOUT-DTI` (evaluator version, number of withheld positives, 95% CI),
-  `ORGANIZER-CONFIRMED` (copied from a submission-page receipt), `OFFICIAL-LEADERBOARD` (public board, team level),
-  `OWNER-REPORT`, `MEASURED`, `DERIVED`, or `OPINION`. A projection is never written as a score.
-* Flag every irregularity. No manual input in the pipeline; the owner runs the scripts, not the agent.
-* Reuse shared tools; if a shared tool is wrong, fix it once and report it. Do not keep private forks.
-* Keep competition data, large datasets and mirrors out of git (`.gitignore`).
+### Non-negotiable experiment and release protocol
 
-**Parallel-run protocol (when several sessions share this prompt).** Stay in your method lane. If a raster's rank
-correlation with any registry raster exceeds 0.90, or more than 70% of its dots fall within 3 px of one registry
-raster's dots, log it as a duplicate and stop. Check on the surface before placement and on the final dots.
-Budget: 3 experiments or 2 hours. Do not pick the weekly submission slot; promotion is a separate selector step.
+1. **Reuse the shared template's cached feature stack, `evaluate_holdout.py`, and `submission_writer.py`; do not maintain a private fork.** If a shared tool is wrong, fix it once in its actual shared template and record the upstream change. First verify that those files exist and identify the template: the requested `evaluate_holdout.py` and `submission_writer.py` do not exist in the current checkout or in the official DrivenData reference-solution tree audited for this session. This repository has a DTI metric, format validator, and fail-closed promotion gate, but these are not substitutes for the missing shared fold runner or writer. The workflow remains blocked rather than silently rebuilding those tools.
+2. Use whole withheld fault segments with a buffer. Derive every catalogue-based feature using only visible faults; mask visible faults pixel-exactly; pool DTI with alpha = 0.2, beta = 0.8, and the 300 m triangular kernel. Record evaluator version, withheld-positive count, and a segment/block-aware 95% confidence interval. A known-fault hide-and-recover result is a proxy, not proof of recovery on the competition's genuinely new faults.
+3. Run a leakage canary for every feature alone on the holdout. Any feature AUC > 0.90 is treated as leakage until the feature derivation and split are demonstrated clean; do not use it in fusion before that review.
+4. Compare the corridor model against the **same pipeline without corridor priors**, at matched prediction mass and using paired spatial folds. Require improvement over both that paired baseline and the current best holdout baseline. No weekly slot is eligible unless the required gate is met. A model projection is never a score.
+5. Before placement and again on final dots, compare against every available prior raster. Record exact hashes/pixel-agreement, rank-correlation, and the fraction of dots within the three-pixel neighborhood. Rank-correlation must not exceed 0.90, and no more than 70% of dots may fall within 3 pixels of any one prior raster. Log the measurements; if either limit is exceeded, label the result duplicate and stop—do not relabel or ship it as unique.
+6. Validate the exact bytes against the official sample grid: one band, float32, CRS/shape/transform match, probabilities in `[0, 1]` inside the footprint, and null/NaN only outside the footprint as required by the competition. Reopen and audit the written file; record SHA-256. Never claim portal acceptance without an organizer receipt.
+7. Publish a per-corridor rationale (geometry, supporting layers/signature, source, confidence, and plausible non-fault mimic) for geologist review.
+8. End each run with a JSON card containing hypothesis, mechanism, non-fault mimic, holdout DTI and CI (or explicit not-run status), registry comparisons, raster hash, validator result, submission name/note, and `promote` or `negative` verdict. Negative results are deliverables.
+9. Respect the three-experiment / two-hour stop budget. A promotion to a competition slot is a separate selector decision; do not spend a slot merely because a raster exists.
 
-**Core values (adopted for this project).**
-* *Maximize P(Win)* — in every decision, weigh trade-offs and risk and choose the path that maximizes the
-  probability that the project succeeds.
-* *Own the Outcome* — own results end to end, act on problems when you can, and treat failure and success as signals.
+### Core values
 
-**Session discipline (three passes).** Pass 1: implement and verify. Pass 2: review for bugs, missing
-requirements and wrong assumptions, and fix them. Pass 3: re-check the whole result against this brief. Before
-finishing, verify that the output meets the brief.
+- **Maximize P(Win)** (“Maximize the Probability of Winning”): choose experiments by expected information and improvement per cost, preserve the submission budget, and reject attractive but unvalidated claims.
+- **Own the Outcome:** report blockers, failed gates, data provenance, and irregularities plainly. Do not turn an owner projection, proxy score, or public leaderboard row into an organizer-confirmed score for a particular TIFF.
 
-## Submission — quick path
+## What is verified in this checkout (2026-10-12 UTC)
 
-1. Register on DrivenData and accept the rules. Put the official files in `data/` (see [data/README.md](data/README.md)).
-2. `python scripts/status.py` — shows whether the gate allows a download.
-3. Produce the raster; validate it:
-   `python -m gems.validate_submission submission.tif --reference data/training_features.tif --json receipt.json`
-4. Upload it on the competition's "New submission" page with a unique name and a note ≤140 characters.
+- This work branch started from a minimal README. The current main branch also supplies a local DTI implementation (`src/gems/metric.py`), format validator (`src/gems/validate_submission.py`), fail-closed promotion gate (`src/gems/gate.py`), status script, and their tests. This change adds the corridor research/site, source audit, workspace readiness audit, rationale template, and additional contract tests. There are still no competition data files, cached stack, requested spatial holdout runner or submission writer, generated TIFF, or prior-raster registry.
+- The user-mentioned `scripts/download_competition_data.sh`, `scripts/prepare_data.py`, `evaluate_holdout.py`, and `submission_writer.py` are absent here. The current repository has `src/gems/metric.py`, `src/gems/validate_submission.py`, `src/gems/gate.py`, and `scripts/status.py`; these do not implement the requested fold-local holdout workflow or submission writer. The public official reference-solution tree contains its README, environment files, data placeholder, lock/config files, and reference notebook; it does **not** contain the named holdout evaluator or submission writer.
+- The DrivenData data tab redirects to its login page in this environment. No DrivenData session or competition data are available here. We do not bypass authentication, ask for credentials, or substitute a mirror as if it were organizer-authenticated.
+- The base sandbox Python initially lacked NumPy, Rasterio/GDAL, SciPy, GeoPandas, and pytest; `nvidia-smi` is unavailable and available memory is about 3.8 GiB. The repository's declared NumPy/Rasterio/pytest requirements were installed into the ignored local `.venv` for synthetic/unit tests. No competition-data raster computation, holdout, or sample-template validation run is claimed.
+- If lidar is absent from the competition stack, USGS 3DEP provides public-domain 1 m bare-earth DEM tiles as GeoTIFF/IMG through a free, no-account downloader. The exact tiles, dates, and intersection with the official template have not been checked. A USGS Quaternary-fault slip/dilation release is also publicly listed for download, but its fault-linked stress/tendency fields are not an independent predictor until their geometry and leakage lineage are audited. See [Sources](sources.html) and [Irregularities](irregularities.md).
+- The site is a static root-level HTML/CSS bundle with `.nojekyll`; it is ready for GitHub Pages if enabled. Pages deployment/settings were not independently verified in this session.
+- The 2025 relay-ramp source supports the structural premises in the research prompt, including ramp aspect ratio, measured width range, breaching geometries, higher-temperature hard-link frequency, and the Walker Lane's different structural setting mix. Details and caveats are in [Sources](sources.html) and [Hypotheses](hypotheses.html).
+- **The user-cited public value is not established as the score of the named H33 TIFF.** The GEMSDOE32 owner page labels that file `UNSCORED` and calls its own projected value a model, not a score. The official public leaderboard shows participant-level values but does not identify that TIFF or supply a file-level receipt. The live leader was above the prompt's stated current-high reference when checked. See [the audit](analysis-h33.html). No score-to-file attribution is asserted.
+- The DrivenData Terms of Use prohibit automated monitoring/copying and manual monitoring/copying without prior written consent. This project therefore links to the official competition site rather than scraping or republishing a leaderboard feed. A sanctioned API or written permission is needed for an automated feed.
 
-Full steps and troubleshooting: [docs/executive-summary.html](docs/executive-summary.html).
+## Local tooling versus the missing shared workflow
 
-## Repository layout
+- `src/gems/metric.py` implements the public distance-weighted Tversky formula and is tested against a brute-force transcription. It computes a metric only; it does **not** split whole fault segments, rebuild fold-local catalogue features, mask labels, or produce a holdout receipt.
+- `src/gems/validate_submission.py` is a local format checker, not an organizer-issued validator. It now requires an explicit single-band official sample-submission reference and an explicit GDAL mask/nodata footprint; absent either, it fails closed. No official sample is present, so it has not validated a candidate.
+- `src/gems/gate.py` is a local fail-closed download gate. It requires a complete HOLDOUT-DTI receipt, paired improvement intervals, clean leakage canaries, registry metrics and hashes, a passing sample-grid check, and a unique name/note. Passing it still does not select or spend a weekly slot.
+- `scripts/status.py` reports authorized official-file presence and gate state; `scripts/audit_workspace.py` separately checks local inputs, project tools, cached-stack hints, and the missing requested shared runner/writer.
+- The required shared `evaluate_holdout.py`, `submission_writer.py`, and cached feature stack remain absent. No local metric unit test is represented as a spatial holdout score.
 
-| path | purpose |
-|---|---|
-| `src/gems/metric.py` | DTI as published (distance-weighted Tversky), plus the exact dot-admission rule |
-| `src/gems/validate_submission.py` | Checks a GeoTIFF against the organizer's format rules |
-| `src/gems/gate.py` | Download gate: BLOCKED / NEGATIVE / OFFER_DOWNLOAD |
-| `scripts/status.py` | Writes `docs/status.json` (official-data presence + gate) |
-| `tests/` | 25 tests: metric vs brute force, admission rule vs recomputation, validator cases, gate |
-| `docs/` | GitHub Pages site, sources, irregularities, research, run card, session log |
-| `data/` | **Not committed.** Official competition files go here. |
-
-## Install and test
+Install the declared dependencies and run both suites with:
 
 ```bash
-python -m venv .venv && . .venv/bin/activate
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 PYTHONPATH=src pytest -q
+python -m unittest discover -s tests -p test_project_contract.py -v
 ```
 
-## Documents
+## Why this checkout does not offer a TIFF
 
-* [docs/index.html](docs/index.html) — site home (status, hypotheses, flags)
-* [docs/executive-summary.html](docs/executive-summary.html) — how to submit
-* [docs/sources.md](docs/sources.md) — every source, with VERIFIED / BLOCKED / FLAG status
-* [docs/irregularities.md](docs/irregularities.md) — flags for review (IR-01 … IR-25)
-* [docs/leaderboard-2026-10-12.md](docs/leaderboard-2026-10-12.md) — official board check
-* [docs/research/0.2778-analysis.md](docs/research/0.2778-analysis.md) — why the sparse-dot file scores as it does, and what can be said
-* [docs/research/hypotheses.md](docs/research/hypotheses.md) — ranked hypotheses, rejections, validation plan
-* [docs/run-card.json](docs/run-card.json) — run card for the current state
-* [docs/session-log.md](docs/session-log.md) — what was done, decisions, next steps, limits
+The release gate is not met: the requested spatial holdout runner/writer, competition inputs, cached feature stack, and registry are absent. A fabricated, zero-filled, or copied prior raster would neither test the corridor hypothesis nor satisfy the uniqueness-and-validation protocol. The site therefore has no active download link and explicitly says **do not submit**. This is the correct negative result until data and the shared evaluation path are available.
+
+The user's reported portal error, `Predicted values must be in range [0, 1]`, cannot be diagnosed from this checkout: the failed file and its receipt are not here. The official format does require in-footprint predictions in `[0, 1]`; common things to audit include a negative nodata sentinel treated as a value, raw/unscaled scores, NaN/Inf inside the footprint, and an incorrect footprint mask. These are diagnostic possibilities, **not a verified root cause**. Do not blindly clip or replace values without checking the source and exact footprint.
+
+## Next steps, in order
+
+1. Obtain the official competition downloads through an authorized DrivenData account and place them locally under `data/` (never commit private or large rasters). Include the exact sample-submission template and the vector/catalogue inputs needed to rebuild the tip graph.
+2. Identify the real shared template that owns the cached feature stack, `evaluate_holdout.py`, and `submission_writer.py`. If it is a different repository, connect this work to that shared code; do not create a parallel evaluator or writer here.
+3. Use the repository's declared test environment, locate the actual shared holdout/writer template, and resolve the user-referenced download/prepare scripts only within that shared workflow. Pin source hashes and document all input provenance.
+4. Register and preregister the five corridor hypotheses, then run the spatially blocked hide-and-recover holdout and the per-feature leakage canaries within the stated budget.
+5. Require a positive paired gate against the same pipeline without corridor priors. Only then build a unique candidate, run the pre-placement and final-dot registry checks, validate the exact TIFF bytes, publish the rationale/run card, and expose a one-click download.
+6. For an up-to-date competition status, use the official live competition page. Do not build an automated or manually mirrored score feed without written permission or a sanctioned interface.
+
+## Project pages
+
+- [Executive summary and submission guide](executive-summary.html)
+- [Five ranked hypotheses and their holdout plans](hypotheses.html)
+- [Official and primary source register](sources.html)
+- [H33 score-attribution audit](analysis-h33.html)
+- [Claim-by-claim geological evidence matrix](evidence.html)
+- [Current negative run card](reports/run-card-2026-10-12.json)
+- [Per-corridor rationale template (blank; no candidates yet)](reports/corridor-rationale-template.md)
+- [Three-pass implementation and review log](reports/review-passes-2026-10-12.md)
+- [Workspace readiness audit tool](scripts/audit_workspace.py)

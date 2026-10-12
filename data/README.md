@@ -1,13 +1,15 @@
-# data/ (not committed)
+# Data placement
 
-Place the official competition files here after logging in at DrivenData and accepting the
-rules (https://www.drivendata.org/competitions/306/competition-doe-gems/data/):
+This directory intentionally contains no competition data yet. The official DrivenData Data tab redirected to login during the 2026-10-12 UTC review. No account session was used and no protected file was downloaded.
 
-- `training_features.tif`   (feature stack, EPSG:32611, 100 m)
-- `labels.tif`              (training fault labels, raster)
-- `existing_faults.tif`
-- `sample_submission.tif`   (format template)
-- `1m_DEM_links.csv`
+The current project metadata references these likely official files; confirm exact names, geometry, and schema from the authenticated organizer package before using them:
 
-Then run `python scripts/status.py`. Files are git-ignored on purpose: the data is licensed to
-registered competitors and must not be redistributed through a public repository.
+- `training_features.tif` — multiband feature stack
+- `labels.tif` — training fault labels
+- `existing_faults.tif` — catalogue/known-fault layer
+- `sample_submission.tif` — authoritative submission-grid template
+- `1m_DEM_links.csv` — source list for 1 m DEM tiles
+
+Keep all competition inputs, public mirrors, and large rasters out of Git. The root `.gitignore` excludes them; only this README is tracked. For every authorized input, record source URL, retrieval time, original filename, SHA-256, license/terms, CRS, dimensions, transform, band names, nodata/mask behavior, and footprint definition in a manifest.
+
+The official USGS 3DEP one-meter DEM collection is a free public-domain source with no-account download, but exact tile intersection with the competition footprint and agreement with the competition link list remain unverified. A feature channel or sample file must not be assumed to exist because a prior project page mentions it.

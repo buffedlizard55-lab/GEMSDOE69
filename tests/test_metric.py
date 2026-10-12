@@ -70,6 +70,15 @@ def test_nan_is_no_prediction():
     assert metric.dti(p, g) == pytest.approx(1.0, abs=1e-6)
 
 
+@pytest.mark.parametrize("invalid", [-0.01, 1.01, np.inf, -np.inf])
+def test_invalid_prediction_values_fail_closed(invalid):
+    g = np.zeros((3, 3), dtype=bool)
+    p = np.zeros((3, 3), dtype=float)
+    p[1, 1] = invalid
+    with pytest.raises(ValueError):
+        metric.components(p, g)
+
+
 @pytest.mark.parametrize("seed", range(5))
 def test_admission_rule_matches_full_recomputation(seed):
     """dot_is_worth_adding must agree in sign with the exact change in DTI for one unit dot."""

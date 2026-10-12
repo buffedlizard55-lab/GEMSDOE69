@@ -1,6 +1,6 @@
 """Distance-weighted Tversky index (DTI) exactly as published by the organizer.
 
-Source (fetched 2026-10-12): https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/
+Source (checked 2026-10-12): DrivenData GEMS competition homepage; navigate to Problem Description for the metric definition.
   TPw = sum_{g in G} max_x p(x) k(d(x,g))
   FPw = sum_{x: p(x)>0} p(x) [1 - max_{g in G} k(d(x,g))]
   FNw = sum_{g in G} [1 - max_{x: d(x,g)<=R} p(x) k(d(x,g))]
@@ -47,10 +47,18 @@ def components(p, g, cell_m: float = 100.0, radius: float = R_METRES):
     NaN in p is treated as 'no prediction' (0). Vectorised over the raster; the
     maximum over neighbours uses every offset with a positive kernel weight.
     """
-    p = np.nan_to_num(np.asarray(p, dtype=float), nan=0.0)
+    p = np.asarray(p, dtype=float)
     G = np.asarray(g) > 0
     if p.shape != G.shape:
         raise ValueError(f"shape mismatch: p {p.shape} vs g {G.shape}")
+    if np.isinf(p).any():
+        raise ValueError("prediction contains infinite values")
+    finite_p = p[np.isfinite(p)]
+    if finite_p.size and (finite_p.min() < 0.0 or finite_p.max() > 1.0):
+        raise ValueError("finite predictions must be in [0, 1]")
+    if not np.isfinite(cell_m) or cell_m <= 0 or not np.isfinite(radius) or radius <= 0:
+        raise ValueError("cell_m and radius must be finite and positive")
+    p = np.nan_to_num(p, nan=0.0, posinf=0.0, neginf=0.0)
     H, W = p.shape
     n, offs = _offsets(cell_m, radius)
     Pp = np.pad(p, n, mode="constant", constant_values=0.0)

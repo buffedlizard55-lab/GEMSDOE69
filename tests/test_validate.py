@@ -19,8 +19,8 @@ def _write(path, arr, crs=CRS, res=100.0, origin=(500000.0, 4200000.0), dtype="f
 @pytest.fixture
 def ref(tmp_path):
     arr = np.full((20, 30), 1.0, dtype=np.float32)
-    arr[:3, :] = -3.4e38          # outside footprint (sentinel)
-    return _write(tmp_path / "ref.tif", arr)
+    arr[:3, :] = -3.4e38          # outside footprint (declared NoData sentinel)
+    return _write(tmp_path / "ref.tif", arr, nodata=-3.4e38)
 
 
 def _good(tmp_path, ref_arr_outside_nan=True):
@@ -77,8 +77,18 @@ def test_wrong_dtype_fails(tmp_path, ref):
     assert rec["checks"]["dtype_float32"]["pass"] is False
 
 
+def test_reference_without_explicit_mask_fails_closed(tmp_path):
+    reference = _write(tmp_path / "unmasked.tif", np.ones((20, 30), dtype=np.float32))
+    submission = _good(tmp_path)
+    rec = vs.validate(submission, reference)
+    assert rec["pass"] is False
+    assert rec["checks"]["reference_footprint_mask_available"]["pass"] is False
+    assert "refusing to infer" in rec["checks"]["reference_footprint_mask_available"]["detail"]
+
+
 def test_no_reference_marks_grid_unchecked(tmp_path):
     a = np.full((20, 30), 0.5, np.float32)
     rec = vs.validate(_write(tmp_path / "noref.tif", a))
-    assert rec["checks"]["grid_matches_reference"]["pass"] is None
-    assert rec["pass"] is True  # hard checks pass; grid not checked
+    assert rec["checks"]["shape_matches_reference"]["pass"] is None
+    assert rec["checks"]["nan_only_outside_footprint"]["pass"] is None
+    assert rec["pass"] is False  # fail closed: exact template grid/footprint are required
