@@ -3074,5 +3074,6 @@
    "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
   }
  ],
- "note": "relay-ramp/pull-apart corridors from tip graph; HG+tilt grav/mag + lidar scarp; greedy marginal-DTI; 200m flank-pruned"
+ "note": "relay-ramp/pull-apart corridors from tip graph; HG+tilt grav/mag + lidar scarp; greedy marginal-DTI; 200m flank-pruned",
+ "corridor_rationales_full": "evidence/e3_corridor_rationales_full.json (all 1200 corridors; deterministic replay, propensity sha8 matches shipped artifact)"
 }
