@@ -84,15 +84,20 @@ def _stats(footprint):
 def cmd_e1() -> int:
     from gems69.holdout69 import (hardlinked_recovery, leakage_canary,
                                   load_template_grid)
+    from gems69.physics import build_z_stack
     from gems69.tips import vectorize
     from gems69.corridors import build_corridors
 
     t0 = time.time()
     g = load_template_grid()
     stats = _stats(g.footprint)
+    zstack = build_z_stack(g.footprint, stats)
+    from gems69.corridors import build_tip_pairs
     strands = vectorize(g.catalogue)
+    all_pairs = build_tip_pairs(strands, g.catalogue)
     corridors, pairs = build_corridors(g.catalogue, strands, g.footprint.shape)
     census = dict(catalogue_px=int(g.catalogue.sum()), n_strands=len(strands),
+                  n_raw_tip_pairs=len(all_pairs),
                   n_tip_pairs=len(pairs), n_corridors=len(corridors),
                   n_pull_apart=sum(c.subtype == "pull-apart" for c in corridors),
                   n_transfer_overlap=sum(c.subtype == "transfer-overlap" for c in corridors),
@@ -116,7 +121,7 @@ def cmd_e1() -> int:
     from gems57 import holdout as thold
     ctx = thold.build_holdout(g, seeds=(20,), modes=("all",))
     t0 = time.time()
-    can = leakage_canary(ctx, stats)
+    can = leakage_canary(ctx, stats, zstack=zstack)
     can["evidence_class"] = "LEAKAGE-CANARY"
     can["rule"] = "single-feature AUC > 0.90 on the holdout = leakage until proven otherwise"
     can["generated_utc"] = utcnow()
@@ -134,11 +139,13 @@ def cmd_e2(seeds=(20, 21), modes=("all",)) -> int:
     from gems69.holdout69 import (load_template_grid, pooled_from_results,
                                   run_holdout_arms)
 
+    from gems69.physics import build_z_stack
     g = load_template_grid()
     stats = _stats(g.footprint)
+    zstack = build_z_stack(g.footprint, stats)
     ctx = thold.build_holdout(g, seeds=seeds, modes=modes)
     t0 = time.time()
-    results = run_holdout_arms(ctx, stats, modes=modes)
+    results = run_holdout_arms(ctx, stats, modes=modes, zstack=zstack)
     cor = pooled_from_results(results, "corridor")
     ctrl = pooled_from_results(results, "control")
     dtis_cor = np.array([results[k]["corridor"]["dti"] for k in sorted(results)])
@@ -179,10 +186,13 @@ def cmd_e3(s0: float | None = None) -> int:
     from scipy import ndimage as ndi
 
     s0 = S0_DEFAULT if s0 is None else s0
+    from gems69.physics import build_z_stack
     g = load_template_grid()
     stats = _stats(g.footprint)
+    zstack = build_z_stack(g.footprint, stats)
     t0 = time.time()
-    pipe = corridor_pipeline(g.catalogue, g.footprint.shape, stats, max_corridors=1200)
+    pipe = corridor_pipeline(g.catalogue, g.footprint.shape, stats, max_corridors=1200,
+                             zstack=zstack)
     p = pipe["propensity"]
     flank = ndi.distance_transform_edt(~g.catalogue) > 2     # 200 m catalogue flank prune
     allowed = g.footprint & flank & (p > 0)

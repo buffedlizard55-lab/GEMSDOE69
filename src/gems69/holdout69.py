@@ -21,8 +21,8 @@ from gems57 import holdout as thold
 from gems57.emit import greedy_allocate
 
 from .corridors import build_corridors
-from .physics import (TRANSFORM_NAMES, build_layer_stats, compute_transform,
-                      corridor_evidence)
+from .physics import (TRANSFORM_NAMES, build_layer_stats, build_z_stack,
+                      compute_transform, corridor_evidence_from_z)
 from .scoring import (GRAV_LAYERS, LIDAR_LAYERS, MAGLOW_LAYERS, MAG_LAYERS,
                       W_GRAV, W_GEOM, W_LIDAR, W_MAG, W_MAGLOW, W_ORIENT,
                       build_propensity, propensity_from_score, score_corridor)
@@ -37,19 +37,28 @@ def load_template_grid():
 
 
 def corridor_pipeline(catalogue: np.ndarray, shape: tuple[int, int], stats: dict,
-                      max_corridors: int = 4000):
+                      max_corridors: int = 1200, zstack: dict | None = None):
     """Vectorize -> tip pairs -> corridors -> scored rationale -> propensity."""
+    if zstack is None:
+        zstack = build_z_stack(_footprint_from_shape(shape), stats)
     strands = vectorize(catalogue)
     corridors, pairs = build_corridors(catalogue, strands, shape,
                                        max_corridors=max_corridors)
     t0 = time.time()
     for c in corridors:
-        ev = corridor_evidence(c, stats, shape=shape)
+        ev = corridor_evidence_from_z(zstack, c)
         score_corridor(c, ev)
     p = build_propensity(corridors, shape)
     return dict(strands=len(strands), pairs=len(pairs), corridors=len(corridors),
                 propensity=p, corridors_obj=corridors,
                 score_seconds=round(time.time() - t0, 1))
+
+
+def _footprint_from_shape(shape):
+    # only used when the caller did not pre-build the z stack; the stack is
+    # footprint-agnostic outside robust stats, so any finite mask works here
+    g = load_template_grid()
+    return g.footprint
 
 
 def emit_dots(p: np.ndarray, allowed: np.ndarray, k_truth: int) -> np.ndarray:
@@ -66,12 +75,14 @@ def cell_allowed(cell, shape) -> np.ndarray:
 
 
 def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
-                     s0: float | None = None):
+                     s0: float | None = None, zstack: dict | None = None):
     """Corridor vs control arm on every cell; returns per-cell results."""
     from .scoring import S0_DEFAULT
     s0 = S0_DEFAULT if s0 is None else s0
     shape = ctx.grid.footprint.shape
     catalogue = ctx.grid.catalogue
+    if zstack is None:
+        zstack = build_z_stack(ctx.grid.footprint, stats)
     d_cat = ndi.distance_transform_edt(~catalogue)
     offcat = d_cat > flank_px
 
@@ -80,11 +91,10 @@ def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
                    "mag_low_tmi", "mag_low_rtp", "lidar_scarp"]
     C = np.zeros(shape, np.float32)
     for name in ctrl_layers:
-        t = compute_transform(name)
-        z = np.clip(stats[name].z(t), -8, 8)
-        z = np.where(np.isfinite(z), z, 0.0).astype(np.float32)
+        z = zstack[name].astype(np.float32)
+        z = np.where(np.isfinite(z), z, 0.0)
         C += z
-        del t, z
+        del z
     C /= len(ctrl_layers)
     p_ctrl = (1.0 / (1.0 + np.exp(-1.5 * (C - s0)))).astype(np.float32)
     p_ctrl[~ctx.grid.footprint] = 0.0
@@ -95,8 +105,7 @@ def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
             continue
         key = cell.key
         visible = ctx.visible(key)
-        vis_safe = visible & (ndi.distance_transform_edt(~ctx.hidden_by_cell[key]) > 0)
-        pipe = corridor_pipeline(vis_safe, shape, stats)
+        pipe = corridor_pipeline(visible, shape, stats, zstack=zstack)
         p_cor = pipe["propensity"]
         allowed = cell_allowed(cell, shape) & offcat
         allowed_ctrl = allowed.copy()
@@ -126,15 +135,18 @@ def pooled_from_results(results: dict, arm: str) -> dict:
                 n_truth=[results[k][arm]["n_truth"] for k in sorted(results)])
 
 
-def leakage_canary(ctx, stats, max_neg: int = 200_000, seed: int = 69) -> dict:
+def leakage_canary(ctx, stats, max_neg: int = 200_000, seed: int = 69,
+                   zstack: dict | None = None) -> dict:
     """Single-feature AUC vs pooled withheld truth (seed 20, mode 'all').
 
     AUC > 0.90 for any feature = leakage until proven otherwise (protocol 4).
     Physics layers are catalogue-independent by construction; the corridor
-    membership surface is the catalogue-derived feature under test.
+    propensity surface is the catalogue-derived feature under test.  AUC is the
+    rank (Mann-Whitney) statistic computed on the precomputed z stack.
     """
-    from .scoring import build_propensity
     shape = ctx.grid.footprint.shape
+    if zstack is None:
+        zstack = build_z_stack(ctx.grid.footprint, stats)
     cells = [c for c in ctx.cells if "draw20" in c.key and c.mode == "all"]
     truth = np.zeros(shape, bool)
     active = np.zeros(shape, bool)
@@ -149,37 +161,43 @@ def leakage_canary(ctx, stats, max_neg: int = 200_000, seed: int = 69) -> dict:
     sel = rng.choice(len(neg_pool[0]), size=n_neg, replace=False)
     ny, nx = neg_pool[0][sel], neg_pool[1][sel]
     ty, tx = np.nonzero(truth)
-    out = {}
-    names = list(TRANSFORM_NAMES) + ["corridor_propensity"]
-    cor_pipe = corridor_pipeline(ctx.grid.catalogue, shape, stats)  # FULL catalogue:
-    # canary runs on the unsplit catalogue to measure the surface itself, not a fold view
+    cor_pipe = corridor_pipeline(ctx.grid.catalogue, shape, stats, zstack=zstack)
     p_cor = cor_pipe["propensity"]
-    for name in names:
-        if name == "corridor_propensity":
-            vals_t = p_cor[ty, tx].astype(np.float64)
-            vals_n = p_cor[ny, nx].astype(np.float64)
-        else:
-            t = compute_transform(name)
-            vals_t = t[ty, tx].astype(np.float64)
-            vals_n = t[ny, nx].astype(np.float64)
-        fin = np.isfinite(vals_t) & np.isfinite(vals_n)
-        a, b = vals_t[fin], vals_n[fin]
+
+    def auc(vals_t: np.ndarray, vals_n: np.ndarray) -> float | None:
+        a = np.asarray(vals_t, np.float64)
+        b = np.asarray(vals_n, np.float64)
+        a, b = a[np.isfinite(a)], b[np.isfinite(b)]
         if a.size < 10 or b.size < 10:
-            out[name] = dict(auc=None, note="degenerate")
-            continue
+            return None
         allv = np.concatenate([a, b])
-        ranks = np.argsort(np.argsort(allv, kind="mergesort"), kind="mergesort") + 1.0
-        # average ranks for ties
         order = np.argsort(allv, kind="mergesort")
         sorted_v = allv[order]
-        _, idx, counts = np.unique(sorted_v, return_index=True, return_counts=True)
-        avg_rank = np.empty_like(ranks)
-        cum = np.cumsum(ranks[order])
-        for i0, cnt in zip(idx, counts):
-            avg_rank[order[i0:i0 + cnt]] = (cum[i0 + cnt - 1] - (cum[i0 - 1] if i0 else 0.0)) / cnt
+        # rank with tie averaging via unique boundaries
+        change = np.flatnonzero(np.diff(sorted_v) != 0) + 1
+        starts = np.concatenate([[0], change])
+        ends = np.concatenate([change, [len(sorted_v)]])
+        ranks = np.arange(1, len(sorted_v) + 1, dtype=np.float64)
+        avg = np.empty_like(ranks)
+        cum = np.cumsum(ranks)
+        sums = cum[ends - 1] - np.where(starts > 0, cum[starts - 1], 0.0)
+        for s0_, e0_, sm in zip(starts, ends, sums):
+            avg[s0_:e0_] = sm / (e0_ - s0_)
+        avg_rank = np.empty_like(avg)
+        avg_rank[order] = avg
         rank_sum_t = avg_rank[: a.size].sum()
-        auc = (rank_sum_t - a.size * (a.size + 1) / 2.0) / (a.size * b.size)
-        out[name] = dict(auc=float(auc), n_pos=int(a.size), n_neg=int(b.size))
+        return float((rank_sum_t - a.size * (a.size + 1) / 2.0) / (a.size * b.size))
+
+    out = {}
+    for name in list(zstack.keys()) + ["corridor_propensity"]:
+        if name == "corridor_propensity":
+            out[name] = dict(auc=auc(p_cor[ty, tx], p_cor[ny, nx]),
+                             n_pos=int(len(ty)), n_neg=int(len(ny)))
+        else:
+            z = zstack[name]
+            out[name] = dict(auc=auc(z[ty, tx].astype(np.float64),
+                                     z[ny, nx].astype(np.float64)),
+                             n_pos=int(len(ty)), n_neg=int(len(ny)))
     out["_truth_px"] = int(truth.sum())
     out["_corridors"] = cor_pipe["corridors"]
     return out
@@ -250,6 +268,7 @@ def hardlinked_recovery(catalogue: np.ndarray, shape: tuple[int, int], stats: di
                                    int(comp[r0, c0]), int(comp[r1, c1]),
                                    overlap_px=float(overlap), separation_px=float(separation)))
     recs = []
+    still_connected = 0
     for cid, vp in enumerate(virtual[:max_ramps]):
         cor = corridor_from_pair(cid, vp, list(smap.values()), shape)
         sa, sb = smap[vp.strand_a], smap[vp.strand_b]
@@ -260,23 +279,49 @@ def hardlinked_recovery(catalogue: np.ndarray, shape: tuple[int, int], stats: di
         if linking.sum() < 5:
             continue
         visible2 = catalogue & ~linking
+        comp2, _ = ndi.label(visible2, structure=np.ones((3, 3), int))
+        ta, tb = vp.tip_a, vp.tip_b
+        if not (visible2[ta] and visible2[tb]):
+            continue
+        if comp2[ta] == comp2[tb]:
+            # the masked pixels were not the only link: flanks stay connected,
+            # so the pair is (correctly) not re-emitted. Not a recovery target.
+            still_connected += 1
+            continue
         strands2 = vectorize(visible2)
-        cors2, _ = build_corridors(visible2, strands2, shape, max_corridors=600, w_max=w_max)
+        pairs2 = build_tip_pairs(strands2, visible2, w_max=w_max)
+        # re-emission test: does the tip graph reform a pair at the same place?
+        near = [p for p in pairs2
+                if (abs(p.tip_a[0] - ta[0]) <= 2 and abs(p.tip_a[1] - ta[1]) <= 2
+                    and abs(p.tip_b[0] - tb[0]) <= 2 and abs(p.tip_b[1] - tb[1]) <= 2)
+                or (abs(p.tip_b[0] - ta[0]) <= 2 and abs(p.tip_b[1] - ta[1]) <= 2
+                    and abs(p.tip_a[0] - tb[0]) <= 2 and abs(p.tip_a[1] - tb[1]) <= 2)]
         rebuilt = np.zeros(shape, bool)
-        for c2 in cors2:
-            rebuilt |= c2.full_mask(shape)
+        for k, np_ in enumerate(near[:4]):
+            rebuilt |= corridor_from_pair(k, np_, strands2, shape).full_mask(shape)
         ly, lx = np.nonzero(linking)
         if len(ly) == 0:
             continue
         d = ndi.distance_transform_edt(~rebuilt)
         within3 = float((d[ly, lx] <= 3.0).mean())
         recs.append(dict(w_px=vp.w_px, linking_px=int(linking.sum()),
-                         within_3px=within3, subtype=cor.subtype))
+                         within_3px=within3, subtype=cor.subtype,
+                         reemitted_pairs=len(near)))
     if not recs:
-        return dict(n_hardlinked_found=0, note="no same-component virtual pairs with linking mass")
+        return dict(n_hardlinked_found=len(virtual), n_disconnected_tested=0,
+                    n_still_connected_after_mask=still_connected,
+                    note="no same-component virtual pair whose mask actually disconnects the flanks")
     within = np.array([r["within_3px"] for r in recs])
     return dict(n_hardlinked_found=len(virtual), n_tested=len(recs),
+                n_disconnected_tested=len(recs),
+                n_still_connected_after_mask=still_connected,
                 mean_recovery_within_300m=float(within.mean()),
                 median_recovery_within_300m=float(np.median(within)),
                 n_ramps_above_70pct=int((within >= 0.7).sum()),
+                definition=("virtual pair = geometrically valid tip pair in ONE 8-connected component; "
+                            "linking mass = corridor-masked catalogue pixels belonging to neither flank "
+                            "strand; ramps are scored only when masking DISCONNECTS the flanks (the link "
+                            "was the only connection = hard-linked ramp); recovery = fraction of masked "
+                            "linking pixels within 3 px (300 m) of the corridor rebuilt from the remaining "
+                            "visible catalogue"),
                 ramps=recs)

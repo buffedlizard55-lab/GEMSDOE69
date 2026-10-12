@@ -449,8 +449,6 @@ def build_run_card():
 def main() -> int:
     DOCS.mkdir(exist_ok=True)
     (DOCS / "assets").mkdir(exist_ok=True)
-    shutil.copy2(ROOT / "docs" / "assets" / "site.css", DOCS / "assets" / "site.css") \
-        if (ROOT / "docs" / "assets" / "site.css").exists() else None
     (DOCS / ".nojekyll").touch()
     pages = {
         "index.html": build_index(),

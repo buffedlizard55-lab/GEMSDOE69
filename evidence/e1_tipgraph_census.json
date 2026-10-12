@@ -1,6 +1,7 @@
 {
  "catalogue_px": 60988,
  "n_strands": 3887,
+ "n_raw_tip_pairs": 212657,
  "n_tip_pairs": 1200,
  "n_corridors": 1200,
  "n_pull_apart": 1200,
@@ -1207,6 +1208,6 @@
   2.77,
   2.83
  ],
- "generated_utc": "20261012T013853Z",
- "seconds": 26.6
+ "generated_utc": "20261012T021133Z",
+ "seconds": 103.4
 }

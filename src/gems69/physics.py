@@ -174,6 +174,45 @@ def build_layer_stats(footprint: np.ndarray, seed: int = 69) -> dict[str, LayerS
     return stats
 
 
+def build_z_stack(footprint: np.ndarray, stats: dict[str, LayerStats],
+                  names: list[str] | None = None, use_cache: bool = True) -> dict:
+    """Precompute robust-z layers for the full grid once (float16, NaN where nodata).
+
+    Corridor scoring then becomes a pure lookup, which is what keeps the lane
+    inside the 2-core / 3 GB budget.  Cached under .cache/gems_data/z_stack.npz.
+    """
+    names = names or TRANSFORM_NAMES
+    cache = STATS_CACHE.parent / "z_stack.npz"
+    if use_cache and cache.exists():
+        with np.load(cache) as z:
+            if all(n in z.files for n in names):
+                return {n: z[n] for n in names}
+    out = {}
+    for n in names:
+        t = compute_transform(n)
+        zz = stats[n].z(t)
+        zz = np.where(np.isfinite(zz), zz, np.nan).astype(np.float16)
+        out[n] = zz
+        del t, zz
+    if use_cache:
+        np.savez_compressed(cache, **out)
+    return out
+
+
+def corridor_evidence_from_z(zstack: dict, corridor) -> dict[str, float]:
+    """Robust-z mean of every precomputed layer inside the corridor (lookup)."""
+    if corridor.npix == 0:
+        return {n: 0.0 for n in zstack}
+    br0, br1, bc0, bc1 = corridor.bbox
+    m = corridor.local_mask
+    out = {}
+    for n, z in zstack.items():
+        v = z[br0:br1, bc0:bc1][m]
+        v = v[np.isfinite(v)]
+        out[n] = float(v.mean()) if v.size else 0.0
+    return out
+
+
 def corridor_evidence(corridor, stats: dict[str, LayerStats], pad: int = 4,
                       shape: tuple[int, int] | None = None) -> dict[str, float]:
     """Robust-z mean of every transform inside a Corridor (windowed reads)."""
