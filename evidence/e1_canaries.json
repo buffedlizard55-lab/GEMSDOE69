@@ -1,0 +1,97 @@
+{
+ "grav_hg_s1": {
+  "auc": 0.5305418979556492,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "mag_hg_s1": {
+  "auc": 0.5376840831238601,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "grav_hg_s2": {
+  "auc": 0.5305355347954177,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "mag_hg_s2": {
+  "auc": 0.5389047017061042,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "grav_hg_s4": {
+  "auc": 0.529309748848189,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "mag_hg_s4": {
+  "auc": 0.5378066802300789,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "grav_tilt_s2": {
+  "auc": 0.5062428593765597,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "mag_tilt_s2": {
+  "auc": 0.5148141127382865,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "grav_hg_prov": {
+  "auc": 0.49734889203039406,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "grav_vg_prov": {
+  "auc": 0.5224056920392296,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "geod_2ndinv": {
+  "auc": 0.5530383954762326,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "mag_hg_prov": {
+  "auc": 0.5364947113005831,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "mag_vg_prov": {
+  "auc": 0.48237893134829474,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "tc_prov": {
+  "auc": 0.43950500574306417,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "mag_low_tmi": {
+  "auc": 0.4963676795811981,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "mag_low_rtp": {
+  "auc": 0.48283129749072273,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "lidar_scarp": {
+  "auc": 0.572205257428365,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "corridor_propensity": {
+  "auc": 0.6908643307121399,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "_truth_px": 11318,
+ "_corridors": 1200,
+ "evidence_class": "LEAKAGE-CANARY",
+ "rule": "single-feature AUC > 0.90 on the holdout = leakage until proven otherwise",
+ "generated_utc": "20261012T021906Z"
+}

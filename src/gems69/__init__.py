@@ -1,16 +1,13 @@
 """GEMSDOE69 lane: relay-ramp and pull-apart corridor generator.
 
-Proposes candidate fault traces from the *geometry of the mapped catalogue*
-(INGENIOUS Quaternary-fault polylines): relay ramps between same-dip fault
-tips, pull-aparts at releasing steps of strike-slip faults and transfer zones
-at strike-slip terminations.  Corridors are scored with geophysical evidence
-(multi-scale gravity / magnetic edges, magnetic lows, lidar scarps) and the
-dilation tendency of the corridor under WNW extension, then dots are placed by
-the shared template's calibrated greedy marginal-DTI allocator.
+Proposes hidden faults from *catalogue geometry* (tip graph of mapped fault
+polylines) rather than pixel statistics.  Shared-template scoring machinery is
+reused byte-pinned from ``vendor/template66`` (GEMSDOE66 ``src/gems57`` +
+``src/gems``); nothing here re-implements the official DTI arithmetic.
 
-Shared, pinned tools (evaluator, writer, validator, uniqueness, allocator) are
-imported from ``vendor/gems57`` -- a byte-for-byte copy of
-``buffedlizard55-lab/60GEMSDOE/src/gems57`` (see ``registry/template_pin.json``).
+Lane provenance: GEMSDOE69 parallel-run lane, prompt method paragraph
+(relay-ramp / pull-apart corridor generator, Giddens & Faulds 2025 SGP-TR-229
+step-over inventory as cited in the standing prompt).
 """
 
-__all__ = ["data", "evidence", "traces", "corridors", "calibrate"]
+__version__ = "0.1.0"

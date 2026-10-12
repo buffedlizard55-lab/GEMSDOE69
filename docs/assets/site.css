@@ -1,0 +1,39 @@
+:root { --ink:#1a2233; --mut:#5a6578; --line:#dde3ec; --ok:#0a7a3d; --bad:#b42318; --warn:#b54708; --bg:#f7f9fc; --card:#ffffff; --acc:#1d4ed8; }
+* { box-sizing: border-box; }
+body { margin:0; font: 16px/1.55 -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif; color:var(--ink); background:var(--bg); }
+header { background:#0f172a; color:#e5eaf3; padding:26px 20px 18px; }
+header .wrap, main.wrap { max-width: 1000px; margin: 0 auto; }
+header h1 { margin:0 0 4px; font-size:1.45rem; }
+header .sub { color:#9fb0cc; font-size:.95rem; }
+nav { background:#111c33; }
+nav .wrap { max-width:1000px; margin:0 auto; display:flex; flex-wrap:wrap; gap:2px; padding:0 12px; }
+nav a { color:#c7d2e6; text-decoration:none; padding:9px 12px; font-size:.92rem; border-bottom:3px solid transparent; }
+nav a:hover { color:#fff; }
+nav a.active { color:#fff; border-bottom-color:#5b8cff; }
+main { padding: 26px 20px 70px; }
+.card { background:var(--card); border:1px solid var(--line); border-radius:10px; padding:20px 22px; margin: 0 0 18px; }
+.banner { border-radius:10px; padding:18px 20px; margin:0 0 18px; font-size:1.05rem; border:1px solid; }
+.banner.ok { background:#ecfdf3; border-color:#12b76a; color:var(--ok); }
+.banner.bad { background:#fef3f2; border-color:#f04438; color:var(--bad); }
+.banner.warn { background:#fffaeb; border-color:#f79009; color:var(--warn); }
+.banner b { font-size:1.15rem; }
+.btn { display:inline-block; background:var(--acc); color:#fff; text-decoration:none; padding:11px 18px; border-radius:8px; font-weight:600; margin: 6px 8px 0 0; }
+.btn.alt { background:#475467; }
+.btn.big { font-size:1.1rem; padding:14px 22px; }
+h2 { font-size:1.25rem; margin: 26px 0 10px; }
+h3 { font-size:1.05rem; margin: 18px 0 6px; }
+table { border-collapse: collapse; width:100%; font-size:.92rem; margin: 8px 0; }
+th, td { border:1px solid var(--line); padding:6px 9px; text-align:left; vertical-align: top; }
+th { background:#eef2f8; }
+code, pre { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; font-size:.88em; }
+pre { background:#0f172a; color:#dbe4f3; padding:12px 14px; border-radius:8px; overflow-x:auto; }
+.kv { color:var(--mut); font-size:.9rem; }
+.pill { display:inline-block; padding:2px 10px; border-radius:99px; font-size:.8rem; font-weight:600; }
+.pill.ok { background:#ecfdf3; color:var(--ok); border:1px solid #a6f4c5; }
+.pill.bad { background:#fef3f2; color:var(--bad); border:1px solid #fecdca; }
+.pill.warn { background:#fffaeb; color:var(--warn); border:1px solid #fedf89; }
+.pill.info { background:#eff8ff; color:#175cd3; border:1px solid #b2ddff; }
+footer { color:var(--mut); font-size:.85rem; padding: 0 0 40px; text-align:center; }
+.small { font-size:.85rem; color:var(--mut); }
+a { color:var(--acc); }
+.banner.review { background:#fffaeb; border-color:#f79009; color:#7a4d05; }

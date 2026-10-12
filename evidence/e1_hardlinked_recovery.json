@@ -1,0 +1,105 @@
+{
+ "n_hardlinked_found": 1896,
+ "n_tested": 13,
+ "n_disconnected_tested": 13,
+ "n_still_connected_after_mask": 6,
+ "mean_recovery_within_300m": 0.8461538461538461,
+ "median_recovery_within_300m": 1.0,
+ "n_ramps_above_70pct": 11,
+ "definition": "virtual pair = geometrically valid tip pair in ONE 8-connected component; linking mass = corridor-masked catalogue pixels belonging to neither flank strand; ramps are scored only when masking DISCONNECTS the flanks (the link was the only connection = hard-linked ramp); recovery = fraction of masked linking pixels within 3 px (300 m) of the corridor rebuilt from the remaining visible catalogue",
+ "ramps": [
+  {
+   "w_px": 1.559841174476409,
+   "linking_px": 28,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 1.8190674449245252,
+   "linking_px": 6,
+   "within_3px": 0.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 0
+  },
+  {
+   "w_px": 32.77867631362021,
+   "linking_px": 89,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 28.80612022856995,
+   "linking_px": 76,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 30.850019999882203,
+   "linking_px": 67,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 8.000898514027856,
+   "linking_px": 97,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 21.92387606479047,
+   "linking_px": 97,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 9.284238189812974,
+   "linking_px": 6,
+   "within_3px": 0.0,
+   "subtype": "transfer-overlap",
+   "reemitted_pairs": 0
+  },
+  {
+   "w_px": 3.5260677431071867,
+   "linking_px": 27,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 1.2703807941992054,
+   "linking_px": 58,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 3.1304951684997118,
+   "linking_px": 60,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 3.13049516849971,
+   "linking_px": 45,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 1.4237870652783036,
+   "linking_px": 28,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  }
+ ],
+ "evidence_class": "HOLDOUT-GEOMETRY",
+ "generated_utc": "20261012T021952Z"
+}

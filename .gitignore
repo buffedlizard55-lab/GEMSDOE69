@@ -1,19 +1,6 @@
+.cache/
 __pycache__/
 *.pyc
 .venv/
-data/
-*.npy
-.pytest_cache/
-# Competition data, mirrors, and generated rasters are not committed by default.
-data/*
-!data/README.md
-outputs/
-submissions/
-*.tif
-# A promoted, validated release may be published here after every gate passes.
-!docs/downloads/*.tif
-# Python environments and caches
-*.py[cod]
-.coverage
-# OS/editor files
-.DS_Store
+registry/rasters/
+data/raw/

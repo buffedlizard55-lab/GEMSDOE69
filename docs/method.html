@@ -1,336 +1,59 @@
-<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Method &amp; results · GEMSDOE69</title><style>
-:root{--ink:#1d2433;--muted:#5b6577;--line:#e3e7ee;--bg:#f7f8fb;--ok:#0f7b3f;--okbg:#e8f6ee;--bad:#b42318;--badbg:#fdecea;--warn:#8a5a00;--warnbg:#fff6e0;--acc:#1f5fbf}
-*{box-sizing:border-box}body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
-header{background:#fff;border-bottom:1px solid var(--line)}.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
-header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
-header b{font-size:17px}nav a{color:var(--muted);text-decoration:none;margin-left:14px;font-size:14px}nav a:hover{color:var(--acc)}
-main .wrap{padding-top:22px;padding-bottom:40px}h1{font-size:26px;margin:.2em 0 .4em}h2{font-size:20px;margin:1.6em 0 .5em}h3{font-size:17px}
-.banner{border-radius:12px;padding:18px 20px;margin:0 0 18px;border:1px solid}.banner h2{margin:0 0 6px;font-size:21px}
-.ok{background:var(--okbg);border-color:#b7e2c8;color:var(--ok)}.bad{background:var(--badbg);border-color:#f5c2bd;color:var(--bad)}.warn{background:var(--warnbg);border-color:#f0d58c;color:var(--warn)}
-.banner p{color:var(--ink);margin:.35em 0}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
-.btn{display:inline-block;padding:10px 16px;border-radius:9px;text-decoration:none;font-weight:600;margin:6px 8px 6px 0;border:1px solid var(--line);color:var(--ink);background:#fff}
-.btn.primary{background:var(--ok);border-color:var(--ok);color:#fff}.btn.danger{background:#fff;border-color:var(--bad);color:var(--bad)}
-table{border-collapse:collapse;width:100%;background:#fff;font-size:14px}th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:#f1f3f8}
-code{background:#eef1f6;padding:1px 5px;border-radius:5px;font-size:13px;word-break:break-all}pre{background:#0f1729;color:#e6edf7;padding:12px;border-radius:9px;overflow:auto;font-size:13px}
-pre code{background:none;color:inherit}.muted{color:var(--muted);font-size:14px}.kv td:first-child{width:34%;color:var(--muted)}footer{color:var(--muted);font-size:13px;padding:24px 0}
-.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 7px;border-radius:6px;background:#eef1f6;color:var(--muted);margin-right:6px}
-</style></head><body><header><div class=wrap><b>GEMSDOE69 · relay-ramp &amp; pull-apart corridor lane</b><nav><a href="../index.html">Home</a><a href="../docs/executive-summary.html">How to submit</a><a href="../docs/method.html">Method &amp; results</a><a href="../docs/why-0278.html">Why 0.2778</a><a href="../docs/hypotheses.html">Hypotheses</a><a href="../docs/sources.html">Sources</a><a href="../docs/irregularities.html">Irregularities</a><a href="../docs/run-card.json">Run card</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE69">Repo</a></nav></div></header><main><div class=wrap><h1>Method — relay-ramp and pull-apart corridor generator</h1>
-<h2>1. Catalogue polylines and the tip graph</h2>
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Method · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css"></head>
+<body>
+<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="active">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<main class="wrap">
+
+<div class="card">
+<h2>Method</h2>
+<h3>Tip graph</h3>
+<p>The pinned catalogue mirror (labels &equiv; existing_faults, IR-69-DATA-01) is skeletonized
+(scikit-image), traced into 3,887 strands between endpoints/branch points, and every strand carries its
+two tips with terminal strikes (PCA of the tip-adjacent 12-px tail).</p>
+<h3>Pair acceptance (all lengths in 100 m px)</h3>
 <ul>
-<li><strong>Polylines.</strong> The INGENIOUS Quaternary-fault export (<code>trace_segments_utm11.csv</code>, 84,331 straight
-  segments) is grouped by <code>record_id</code> and split into continuous parts (13,953 parts from 1,126
-  records). The join to <code>qfault_attributes.csv</code> (row index = <code>record_id</code>) was verified on slip rate
-  and slip sense for 1,126 / 1,126 records, and the rasterised traces coincide with the competition
-  catalogue raster (99.98 % of catalogue pixels within 100 m of a trace).</li>
-<li><strong>Dip polarity.</strong> Recorded <code>DIPDIRECT</code> where usable (projection on the local trace normal ≥ 0.3);
-  otherwise the hanging wall is taken as the topographically lower side (mean DEM at 600 m and
-  1.2 km either side). The inference agrees with the recorded dip on <strong>90.3 %</strong> of 1,984 comparable
-  polylines.</li>
-<li><strong>Free tips.</strong> Polyline ends with no other trace within 250 m, at least 300 m inside the
-  footprint, on polylines ≥ 300 m long; outward direction from the last 1 km of trace. In holdout
-  runs, tips created by cutting a trace at the withheld/collar mask are excluded (IR-69-08).</li>
+<li>tips from different 8-connected components (same-component pairs are reserved for the hard-link test);</li>
+<li>terminal strikes sub-parallel, axial &Delta;&theta; &le; 30&deg; &mdash; the raster carries no dip polarity, so
+&ldquo;same dip&rdquo; is proxied by sub-parallel strike (disclosed limitation IR-69-DIP-01);</li>
+<li>cross-strike spacing W &isin; [1, 150] px (0.1&ndash;15 km);</li>
+<li>along-strike separation &le; 3.5W and overlap &le; 1.0W, computed as interval arithmetic on the
+strike-axis projection of tip-adjacent strand windows (sign-invariant for axial data).</li>
 </ul>
-<h2>2. Corridors (candidate fault traces)</h2>
-<table>
-<thead>
-<tr>
-<th>Setting</th>
-<th>Pairing rule</th>
-<th>Traces emitted</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Relay ramp (normal / unknown sense)</td>
-<td>facing tips (outward directions antiparallel within 35°), <strong>same dip polarity</strong>, W 0.1–15 km, |L| ≤ 3.5 W; each tip keeps only its nearest valid partner</td>
-<td>oblique tip-to-tip connector; breaching links from each tip to the partner trace; 1–3 en échelon strands across the ramp</td>
-</tr>
-<tr>
-<td>Pull-apart (RL–RL or LL–LL)</td>
-<td>facing tips, <strong>releasing</strong> step (RL right-stepping, LL left-stepping), same W and 3.5 W limits</td>
-<td>two basin-bounding links, tip-to-tip chord, up to three strands striking 22.5° (perpendicular to WNW extension)</td>
-</tr>
-<tr>
-<td>Transfer zone (RL / LL tip)</td>
-<td>every free strike-slip tip</td>
-<td>two horsetail splays rotated 20° and 40° into the extensional quadrant (right of the outward direction for RL, left for LL); links to the nearest two normal-fault traces within 6 km ahead / on the extensional side</td>
-</tr>
-</tbody>
-</table>
-<p>On the full catalogue the generator finds 2,473 relay pairs (<strong>mean width 2.83 km</strong>, median
-1.92 km; 54.8 % overlapping), 732 releasing-step pull-aparts and 1,115 strike-slip terminations.
-The published population (Giddens &amp; Faulds 2025) has mean width 2.8 km and ~50 % overlapping
-(55.3 % in the western Great Basin) — a consistency check on the geometry, not a validation.</p>
-<h2>3. Scoring and placement</h2>
-<ul>
-<li><strong>Evidence (none catalogue-derived):</strong> multi-scale gravity and magnetic edges (isostatic gravity
-  anomaly and RTP upward-continued to 200 m / 600 m / 1.8 km; rank(THDR) × (1 − |tilt|/90°), max over
-  scales), local magnetic lows (−(RTP − 3 km Gaussian)), lidar scarp channel (0.45 ex_max + 0.35
-  step_max + 0.20 downface_max, by band name).</li>
-<li><strong>Orientation:</strong> dilation tendency cos²β of each trace under WNW (292.5°) extension (maximal for
-  NNE strikes).</li>
-<li><strong>Corridor score:</strong> equal-weight mean of the five terms (pre-registered, no fitting).</li>
-<li><strong>Calibration:</strong> leave-one-quadrant-out binned rates P(withheld truth | score decile × distance to
-  trace) with shrinkage; quantile edges from training quadrants only.</li>
-<li><strong>Placement:</strong> the shared template's <code>emit.greedy_allocate</code> (exact marginal-DTI acceptance under a
-  clipped-convolution surrogate) inside the corridor band only; no dot on or within 200 m of the
-  catalogue.</li>
-</ul>
-<h2>4. Instruments</h2>
-<ul>
-<li><strong>Hide-and-recover holdout</strong> (template <code>holdout.buffered_component_draw</code>, two draws): whole
-  8-connected catalogue components withheld (20 % of each quadrant's catalogue pixels), a 3 px
-  collar removed from every catalogue-derived feature, visible faults masked pixel-exactly, pooled
-  DTI by the template evaluator <code>gems57-pooled-hide-v2</code> with paired 20 km spatial-block bootstrap.</li>
-<li><strong>Leakage canary:</strong> each feature alone, AUC of withheld-truth vs non-truth pixels.</li>
-<li><strong>Hard-link masking test:</strong> catalogue links joining two traces are masked; the generator must
-  recover them within 300 m; compared with random-azimuth traces from the same tips.</li>
-</ul>
-<h2>5. Results (generated from <code>evidence/*.json</code>)</h2>
-<h3>E1 — leakage canary (draw seed 20, pooled over quadrants)</h3>
-<table>
-<thead>
-<tr>
-<th>Feature</th>
-<th>AUC (withheld truth vs other pixels)</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>grav_edge</code></td>
-<td>0.526</td>
-</tr>
-<tr>
-<td><code>mag_edge</code></td>
-<td>0.542</td>
-</tr>
-<tr>
-<td><code>mag_low</code></td>
-<td>0.491</td>
-</tr>
-<tr>
-<td><code>scarp</code></td>
-<td>0.585</td>
-</tr>
-<tr>
-<td><code>e_pix</code></td>
-<td>0.579</td>
-</tr>
-<tr>
-<td><code>neg_dist_visible_catalogue</code></td>
-<td>0.756</td>
-</tr>
-<tr>
-<td><code>corridor_score_band</code></td>
-<td>0.604</td>
-</tr>
-<tr>
-<td><code>neg_dist_corridor_trace</code></td>
-<td>0.724</td>
-</tr>
-<tr>
-<td><code>neg_dist_visible_tip</code></td>
-<td>0.739</td>
-</tr>
-</tbody>
-</table>
-<p>Leakage flags (AUC &gt; 0.90): <strong>none</strong>.</p>
-<h3>E1 — hard-linked-ramp masking test</h3>
-<p>349 catalogue links joining two traces were found; 43 satisfy the relay rules after masking. Mean recovery within 300 m: <strong>0.993</strong> (kernel-weighted 0.841) versus <strong>0.697</strong> for random-azimuth traces from the same tips (links beating the null's 95th percentile: 4.7%). Rejections: {'rejected_mixed_sense': 4, 'rejected_dip': 4, 'rejected_geometry': 240, 'rejected_facing': 54, 'rejected_step_sense': 4}.</p>
-<p>Post-hoc paired view of the same rows (no new experiment): corridor traces beat the null mean on 97.7% of the 43 admissible links (mean gain +0.297, one-sided Wilcoxon p = 8.2e-09); the 95th-percentile criterion is saturated (93% of null p95 values equal 1.0). Admissible links are short (median 0.66 km), so this geometric agreement is real but small in metric terms.</p>
-<h3>E2 — gate (HOLDOUT-DTI, pooled over two draws)</h3>
-<p>Evaluator <code>gems57-pooled-hide-v2</code>; withheld positive pixels pooled: 22,893.</p>
-<table>
-<thead>
-<tr>
-<th>Arm</th>
-<th>HOLDOUT-DTI</th>
-<th>95% CI</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td><code>A_corridor</code></td>
-<td>0.0749</td>
-<td>[0.0647, 0.0853]</td>
-</tr>
-<tr>
-<td><code>AP_halo_corridor</code></td>
-<td>0.1061</td>
-<td>[0.0957, 0.1171]</td>
-</tr>
-<tr>
-<td><code>B1_halo</code></td>
-<td>0.1096</td>
-<td>[0.0986, 0.1206]</td>
-</tr>
-<tr>
-<td><code>B0_evidence</code></td>
-<td>0.0380</td>
-<td>[0.0308, 0.0451]</td>
-</tr>
-<tr>
-<td><code>C_distance</code></td>
-<td>0.1259</td>
-<td>[0.1134, 0.1380]</td>
-</tr>
-<tr>
-<td><code>R_corridor_random</code></td>
-<td>0.1106</td>
-<td>[0.0976, 0.1230]</td>
-</tr>
-</tbody>
-</table>
-<p><strong>Gate (A_corridor − B1_halo): Δ = -0.0347, 95% CI [-0.0410, -0.0278] → FAIL.</strong></p>
-<p>Sensitivity (corridor prior as a boost, AP − B1): Δ = -0.0035, 95% CI [-0.0048, -0.0020].</p>
-<h4>Per draw and quadrant (HOLDOUT-DTI / dots)</h4>
-<table>
-<thead>
-<tr>
-<th>Draw</th>
-<th>Arm</th>
-<th>NW</th>
-<th>NE</th>
-<th>SW</th>
-<th>SE</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>seed20</td>
-<td><code>A_corridor</code></td>
-<td>0.0554 / 27,027</td>
-<td>0.0535 / 29,727</td>
-<td>0.1005 / 47,279</td>
-<td>0.0922 / 33,730</td>
-</tr>
-<tr>
-<td>seed20</td>
-<td><code>AP_halo_corridor</code></td>
-<td>0.0989 / 36,526</td>
-<td>0.0931 / 40,343</td>
-<td>0.1140 / 68,345</td>
-<td>0.1202 / 49,736</td>
-</tr>
-<tr>
-<td>seed20</td>
-<td><code>B1_halo</code></td>
-<td>0.1072 / 34,027</td>
-<td>0.0949 / 39,749</td>
-<td>0.1145 / 67,940</td>
-<td>0.1263 / 46,603</td>
-</tr>
-<tr>
-<td>seed20</td>
-<td><code>B0_evidence</code></td>
-<td>0.0399 / 95,933</td>
-<td>0.0142 / 67,139</td>
-<td>0.0343 / 51,901</td>
-<td>0.0430 / 51,027</td>
-</tr>
-<tr>
-<td>seed20</td>
-<td><code>C_distance</code></td>
-<td>0.1210 / 24,756</td>
-<td>0.1153 / 29,626</td>
-<td>0.1382 / 50,434</td>
-<td>0.1361 / 37,295</td>
-</tr>
-<tr>
-<td>seed20</td>
-<td><code>R_corridor_random</code></td>
-<td>0.0909 / 15,055</td>
-<td>0.0866 / 15,873</td>
-<td>0.1342 / 27,417</td>
-<td>0.1288 / 18,195</td>
-</tr>
-<tr>
-<td>seed21</td>
-<td><code>A_corridor</code></td>
-<td>0.0584 / 26,893</td>
-<td>0.0498 / 29,583</td>
-<td>0.0830 / 48,742</td>
-<td>0.0778 / 34,572</td>
-</tr>
-<tr>
-<td>seed21</td>
-<td><code>AP_halo_corridor</code></td>
-<td>0.1091 / 35,729</td>
-<td>0.0802 / 39,346</td>
-<td>0.1033 / 67,508</td>
-<td>0.1187 / 48,531</td>
-</tr>
-<tr>
-<td>seed21</td>
-<td><code>B1_halo</code></td>
-<td>0.1108 / 36,278</td>
-<td>0.0848 / 33,676</td>
-<td>0.1049 / 70,156</td>
-<td>0.1238 / 44,694</td>
-</tr>
-<tr>
-<td>seed21</td>
-<td><code>B0_evidence</code></td>
-<td>0.0416 / 83,981</td>
-<td>0.0425 / 87,596</td>
-<td>0.0312 / 50,692</td>
-<td>0.0580 / 48,052</td>
-</tr>
-<tr>
-<td>seed21</td>
-<td><code>C_distance</code></td>
-<td>0.1272 / 24,041</td>
-<td>0.0876 / 28,656</td>
-<td>0.1360 / 47,533</td>
-<td>0.1270 / 34,221</td>
-</tr>
-<tr>
-<td>seed21</td>
-<td><code>R_corridor_random</code></td>
-<td>0.0961 / 13,922</td>
-<td>0.0768 / 15,832</td>
-<td>0.1240 / 26,211</td>
-<td>0.1132 / 18,165</td>
-</tr>
-</tbody>
-</table>
-<p>Note on <code>R_corridor_random</code>: it was asked for as many dots as <code>A_corridor</code> in every quadrant, but 2-px Poisson-disk spacing fits only 150,670 of 277,553 (54%) inside the corridor band, so it is a density-limited random control, not a count-matched one. Its higher DTI with fewer dots is itself the evidence that the greedy over-emits inside corridors.</p>
-<h3>E3 — live build of the lane artefact</h3>
-<ul>
-<li>33,680 dots, 0 on the catalogue, min / median / p95 distance to the catalogue 0.30 / 0.89 / 2.52 km.</li>
-<li>Corridors that received dots: 1,948 — by setting: {'relay': {'corridors': 1063, 'dots': 21616}, 'pullapart': {'corridors': 560, 'dots': 9432}, 'transfer': {'corridors': 325, 'dots': 2632}}. Per-corridor rationale: <a href="https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/evidence/e3_corridor_rationale.csv"><code>evidence/e3_corridor_rationale.csv</code></a>.</li>
-<li>Live tip graph: 4,523 free tips; corridor counts 2,473 relays, 732 pull-aparts, 1,115 terminations.</li>
-<li>The owner-reported 0.2778 champion has 23.3% of its dots inside our corridor band (the band is 18.2% of the allowed area); 29.5% of our dots lie within 3 px of a champion dot.</li>
-</ul>
-<h3>Uniqueness (862-raster corpus, <code>registry/registry_index_69.json</code>)</h3>
-<table>
-<thead>
-<tr>
-<th>Phase</th>
-<th>Worst Spearman (limit 0.90)</th>
-<th>Literal 3-px overlap</th>
-<th>Overlap vs dot fields (template like-for-like)</th>
-<th>Discriminating firings</th>
-<th>Decision</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>surface</td>
-<td>0.284 (7GEMSDOE:downloads/gems7-halo15-gbt-v1-90fb7dc0fc1f.tif)</td>
-<td>1.000 (74 firings)</td>
-<td>1.000 (13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif)</td>
-<td>n/a</td>
-<td>unique</td>
-</tr>
-<tr>
-<td>dots</td>
-<td>0.076 (5GEMSDOE:data/derived/context_detector_prob_topo_rad.tif)</td>
-<td>1.000 (96 firings)</td>
-<td>1.000 (13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif)</td>
-<td>22</td>
-<td>DUPLICATE</td>
-</tr>
-</tbody>
-</table>
-<p>Decision rule: surface phase: Spearman &gt; 0.90 vs any raster; dots phase: Spearman &gt; 0.90 vs any raster or &gt; 70% of dots within 3 px of one dot-field raster's dots (support &lt;= 20% of footprint). Literal overlap vs continuous surfaces reported as degenerate diagnostics.</p></div></main><footer><div class=wrap>DOE GEMS Prize (DrivenData competition 306). Every number on this site is labelled HOLDOUT-DTI (this repository's hide-and-recover instrument), OFFICIAL (public competition page) or OWNER-REPORTED. Nothing here is an organizer-confirmed score of this repository's file. Source: <a href='https://github.com/buffedlizard55-lab/GEMSDOE69'>https://github.com/buffedlizard55-lab/GEMSDOE69</a></div></footer></body></html>
+<h3>Corridor emission</h3>
+<ul><li><b>Oblique connector</b>: tip-to-tip line, extended 0.35W along the local strikes, half-width
+clamp(W/6, 1, 6) px;</li>
+<li><b>En &eacute;chelon strands</b> (dilatational pairs): 2&ndash;8 strands of length clamp(1.5W, 4, 30) px at
+&plusmn;25&deg; to the connector, staggered along it;</li>
+<li><b>Pull-apart rhomb</b> (dilatational pairs): rotated ellipse, semi-axes 0.8/0.45 of the tip diagonal;
+Walker-Lane dextral prior applied through the dilation diagnostic (overlap &le; 0.5W &rArr; dilatational),
+because slip sense is unobservable from the raster (recorded per corridor);</li>
+<li>strongly overlapping steps emit the narrower <b>transfer-overlap</b> corridor.</li></ul>
+<h3>Corridor scoring</h3>
+<p>S = 0.20&middot;E<sub>grav</sub> + 0.20&middot;E<sub>mag</sub> + 0.18&middot;E<sub>maglow</sub> + 0.15&middot;E<sub>lidar</sub>
++ 0.10&middot;W<sub>orient</sub> + 0.17&middot;W<sub>geom</sub> &mdash; weights pre-registered before any holdout look.
+E-terms are maxima of robust-z means (footprint median/MAD) over multi-scale horizontal gradients
+(&sigma; = 1, 2, 4 px), tilt-edge |sin(arctan2(VD, HG))| with VD the &sigma;/2&sigma; upward-continuation difference,
+the provided HG/VG/tilt products, and &minus;tmi/&minus;rtp magnetic lows; E<sub>lidar</sub> is the
+max(ex_max, step_max, downface_max) scarp channel; W<sub>orient</sub> scores the corridor axis against the
+N&ndash;NE axial family best oriented for dilation under WNW extension; W<sub>geom</sub> is the subtype prior
+(pull-apart 1.0, relay 0.9, transfer-overlap 0.6). Every corridor carries a rationale record
+(layers with z-values, signature, source) in <code>evidence/e3_receipt.json</code>.</p>
+<h3>Emission &amp; gate</h3>
+<p>Propensity P(x) = logistic(1.5(S &minus; S<sub>0</sub>)) &times; corridor membership weight; dots placed by the
+shared template's exact greedy marginal-DTI allocator with truth-size prior |G| = 12,691 px
+(GEMSDOE32 receipt-derived estimate, cited), restricted &ge;2 px from the mapped catalogue. Gate: the
+corridor arm must beat the identical pipeline with the corridor prior removed (per-pixel physics
+composite, same layer set, same allocator) on the shared template's spatially-blocked hide-and-recover
+holdout (seeds 20/21 &times; four quadrants), paired with 95% CIs. Hard-link validation: for same-component
+virtual pairs, the linking catalogue mass inside the corridor is masked and recovery within 3 px (300 m)
+is measured after rebuilding from the remaining catalogue.</p>
+</div>
+
+</main>
+<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+</body></html>
