@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>GEMSDOE69 — GEMS Prize fault-prediction submission</title>
+<link rel="stylesheet" href="assets-site.css">
+</head>
+<body>
+<header>
+  <h1>GEMSDOE69 · GEMS Prize (DOE) fault-prediction submission</h1>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="executive-summary.html">Executive summary: how to submit</a>
+    <a href="https://github.com/buffedlizard55-lab/GEMSDOE69">Repo</a>
+  </nav>
+</header>
+<main>
+
+<h2>Submission file</h2>
+<div class="banner" id="status-banner">
+  <strong>NOT READY — no submission file is offered.</strong>
+  <p>The download is switched off because the gate has not been met. Three things are missing:</p>
+  <ol>
+    <li><b>Official competition data is not in this checkout.</b> The training features and labels are behind a DrivenData login (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data page</a>). This sandbox cannot download them.</li>
+    <li><b>No holdout result exists.</b> Without labels there is no holdout DTI, so the gate (beat the no-prior baseline and the current best) cannot be evaluated.</li>
+    <li><b>No candidate raster has been produced</b>, and none will be offered without passing the gate.</li>
+  </ol>
+  <p class="muted">Machine-readable state: <a href="status.json">status.json</a> · Run card: <a href="run-card.json">run-card.json</a></p>
+</div>
+<p>
+  <span class="btn btn-off" title="Enabled only when docs/status.json reports download_enabled = true">⬇ Download submission .tif — disabled (gate not met)</span>
+</p>
+<p class="muted">When the gate passes, this page will show the file, its sha256, its size and the validator receipt here, and the button will link to the file.</p>
+
+<h2>How to submit (summary)</h2>
+<p>Full steps are on the <a href="executive-summary.html">executive summary</a>. In short: a single-band <b>float32</b> GeoTIFF on the official grid (<b>EPSG:32611, 100 m</b>, same bounds as the training file), values in <b>[0, 1]</b>, NaN only outside the footprint, a unique name, and a note of 140 characters or fewer. The organizer's format rules are in the official competition page (S01).</p>
+
+<h2>What we checked about the 0.2778 claim</h2>
+<div class="card">
+  <p><b>0.2778 is not the top score.</b> On the official public board (read 2026-10-12), #1 is 0.4275 and 0.2778 is rank #24. The board shows usernames, not files, so the 0.2778 figure cannot be linked to the GEMSDOE32 file <code>h33-h33-2-b2…-zeros</code>. That repository calls the same file <b>UNSCORED</b>.</p>
+  <p>Read the full analysis: <a href="https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/docs/research/0.2778-analysis.md">0.2778-analysis.md</a> · <a href="https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/docs/leaderboard-2026-10-12.md">leaderboard check</a></p>
+</div>
+<div class="card">
+  <p><b>Why a sparse file can score well — from the metric alone.</b> Because TPw + FNw equals the number of truth pixels |G| (a fixed number), the metric is <code>DTI = T / (0.2·T + 0.2·FP + 0.8·|G|)</code>. A dot should be added only if <code>Δt·(D − 0.2·T) &gt; 0.2·T·(1 − m)</code>. At DTI 0.2778, a dot must add about 6% of its false-positive cost in expected truth coverage. The rule is implemented and tested (<code>src/gems/metric.py</code>).</p>
+</div>
+
+<h2>Hypotheses (ranked; none measured)</h2>
+<p class="muted">Rejected after checking the sibling repo: magnetic-low demagnetization (H32-5, holdout 0.1383 vs 0.26, owner-reported) and dilatation-gated strain (duplicates H32-B).</p>
+<table>
+<tr><th>Rank</th><th>ID</th><th>Idea</th><th>Overlap with sibling work</th></tr>
+<tr><td>1</td><td>H-P</td><td>Pull-apart basin-closure corridors at dextral releasing steps (closed gravity low + basement deepening)</td><td>Medium in target (sibling H32-B tests releasing steps via strain); low in signal</td></tr>
+<tr><td>2</td><td>H-B</td><td>Basement-step lineaments gated by surface quiescence (sibling H61-1: registered, never run)</td><td>Medium: related to H32-C (tested)</td></tr>
+<tr><td>3</td><td>H-M</td><td>Exact marginal-DTI dot admission (method, not geology)</td><td>Low–medium: sibling H60-3 uses an approximate rule</td></tr>
+<tr><td>4</td><td>H-R</td><td>Relay-ramp corridors with hard-linked masked recovery (the brief's lane)</td><td><b>High</b>: sibling H33-5 falsified</td></tr>
+</table>
+<p class="muted">Full table, rejection list and validation plan: <a href="https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/docs/research/hypotheses.md">hypotheses.md</a>.</p>
+
+<h2>Sources and irregularities</h2>
+<ul>
+<li><a href="https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/docs/sources.md">Sources (IDs S01–S17, verified status for each)</a></li>
+<li><a href="https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/docs/irregularities.md">Irregularities for manual review (IR-01 … IR-25)</a></li>
+<li><a href="https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/docs/session-log.md">Session log: what was run, decisions, next steps</a></li>
+</ul>
+<p class="card"><b>Most important flags:</b> IR-09 (owner GitHub mirrors of competition data: not used here, licensing review needed) · IR-03 (0.2778 unattributable) · IR-13 (the "[0,1]" submission error has no failing file to inspect) · IR-14 (the relay-ramp lane is already crowded).</p>
+
+<h2>Next steps</h2>
+<ol>
+<li>Place the official files in <code>data/</code> (see <code>data/README.md</code>), then run <code>python scripts/status.py</code>.</li>
+<li>Send the file that failed with "Predicted values must be in range [0, 1]" so the validator can be run on it (IR-13).</li>
+<li>Implement H-P, run experiments E1–E3 within the 3-experiment / 2-hour budget, and write a receipt to <code>docs/receipts/</code>.</li>
+<li>Owner: get the DrivenData receipt for the 0.2778 file (IR-03).</li>
+</ol>
+
+</main>
+<footer>
+  Sources are official links (DrivenData, NLR/DOE rules, USGS ScienceBase, Stanford/GBCGE proceedings) listed in the repo. Every number on this page is labelled in the linked documents as OFFICIAL-LEADERBOARD, OWNER-REPORT, MEASURED, DERIVED or OPINION. None is a holdout score for this project.
+</footer>
+</body>
+</html>

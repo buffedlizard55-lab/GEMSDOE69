@@ -1,0 +1,44 @@
+{
+  "run_card_version": 1,
+  "date_utc": "2026-10-12",
+  "project": "GEMSDOE69 (branch arena/18061ddd-gemsdoe69)",
+  "hypothesis": "H-P: pull-apart basin-closure corridors at dextral releasing steps mark unmapped boundary faults (see docs/research/hypotheses.md).",
+  "mechanism": "A closed isostatic-gravity low with basement deepening, bounded by two strike-slip strands with a releasing step, indicates an unmapped boundary fault that a gradient-only method misses.",
+  "non_fault_process_that_could_mimic_it": "Ordinary sediment-filled basins bounded by normal (range-front) faults, and lacustrine sediment thickness (late Pleistocene lakes obscure faults, S10), produce the same gravity low and basement deepening without any strike-slip step.",
+  "holdout_dti": {
+    "label": "NOT MEASURED",
+    "value": null,
+    "ci95": null,
+    "evaluator_version": "gems-dti-local-v1 (metric implemented and unit-tested; no holdout run)",
+    "withheld_positives": null,
+    "reason": "Official training data not present in this checkout (IR-11). No holdout, no candidate raster."
+  },
+  "correlation_and_overlap_vs_registry": {
+    "label": "NOT RUN",
+    "rank_correlation": null,
+    "dot_overlap_within_3px": null,
+    "reason": "No candidate raster exists. Overlap with sibling work is textual only (docs/research/hypotheses.md)."
+  },
+  "raster": {
+    "path": null,
+    "sha256": null,
+    "reason": "No candidate raster was produced; no file is offered for download."
+  },
+  "validator_output": {
+    "label": "NOT RUN ON CANDIDATE",
+    "checks": "src/gems/validate_submission.py implements: single band, float32, EPSG:32611, 100 m, reference grid match, values in [0,1], NaN only outside footprint.",
+    "external_file_check": "Sibling file (analysis only, not used): all hard checks PASS without reference grid (see docs/research/0.2778-analysis.md §1)."
+  },
+  "submission": {
+    "name": null,
+    "note": null,
+    "note_limit_chars": 140,
+    "note_text_if_later": "H-P pull-apart closure corridors; holdout-gated; NOT ORGANIZER-SCORED"
+  },
+  "generative_ai_disclosure": "Built with an AI coding agent (Arena.ai Agent Mode). The user must review and complete the narrative disclosure required by the official rules, section 3.2 (IR-16).",
+  "verdict": "no-promote (blocked: not evaluated). This is not a negative result: the gate could not be run because the official data is missing.",
+  "gate_status": "BLOCKED",
+  "download_enabled": false,
+  "budget": {"experiments_used": 0, "experiments_allowed": 3, "hours_limit": 2},
+  "sources": "docs/sources.md (S01, S02, S03, S04, S06, S07, S09, S10, S12, S16)"
+}

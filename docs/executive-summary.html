@@ -1,0 +1,76 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Executive summary — how to make a GEMS submission · GEMSDOE69</title>
+<link rel="stylesheet" href="assets-site.css">
+</head>
+<body>
+<header>
+  <h1>Executive summary · how to make a GEMS Prize submission</h1>
+  <nav><a href="index.html">← Home</a> <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official problem page</a></nav>
+</header>
+<main>
+
+<div class="banner">
+  <strong>Current state: NOT READY.</strong>
+  <p>No file is offered for download. The gate needs the official training data (DrivenData login) and a holdout result. Neither exists in this checkout. Read <a href="index.html">the status</a> first.</p>
+</div>
+
+<h2>1 · What the organizer requires (verified)</h2>
+<p>Source: the official problem page, <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page 967, “Submission format”</a>, and the rules, <a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">NLR PDF §3.2–3.4</a>.</p>
+<table>
+<tr><th>Requirement</th><th>Value</th></tr>
+<tr><td>File</td><td>one GeoTIFF with <b>one</b> raster layer (the upload form also accepts a .zip holding a single GeoTIFF)</td></tr>
+<tr><td>Datatype</td><td><b>float32</b></td></tr>
+<tr><td>CRS</td><td><b>EPSG:32611</b> (UTM zone 11N)</td></tr>
+<tr><td>Resolution</td><td><b>100 m</b></td></tr>
+<tr><td>Extent</td><td>same bounds as the training data (shape and geotransform must match)</td></tr>
+<tr><td>Values</td><td>finite values between <b>0 and 1</b> (probability or confidence of a fault)</td></tr>
+<tr><td>Outside the bounds</td><td><b>null or NaN</b></td></tr>
+<tr><td>Submissions</td><td>three per week; one final submission per entity, chosen before the deadline</td></tr>
+<tr><td>Narrative</td><td>must disclose any generative-AI use (rules §3.2)</td></tr>
+</table>
+
+<h2>2 · Steps to submit (once a gate-approved file exists)</h2>
+<ol>
+<li><b>Register</b> on DrivenData and accept the rules (S02, §3.1). Download the official training files from the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">data page</a> into <code>data/</code> (see <code>data/README.md</code>).</li>
+<li><b>Check the gate.</b> Run <code>python scripts/status.py</code>. Do not upload unless it reports <code>download_enabled: true</code> and a receipt in <code>docs/receipts/</code>.</li>
+<li><b>Validate the file</b> against the official grid:
+<pre>python -m gems.validate_submission submission.tif --reference data/training_features.tif --json receipt.json</pre>
+All checks must pass. Exit code 0 means pass. The validator checks: single band, float32, EPSG:32611, 100 m, same shape and transform as the reference, finite values in [0, 1], and NaN only outside the footprint.</li>
+<li><b>Name it uniquely</b>, for example <code>gems69-&lt;method&gt;-&lt;YYYYMMDD&gt;-&lt;hash8&gt;</code>. The name must not match any earlier submission.</li>
+<li><b>Write a note of 140 characters or fewer</b> (the project limit; the form's own limit is not in the official pages we could read, so check it on the form). The form field is labelled “Note (optional) — a short comment to help you or your team tell submissions apart later”.</li>
+<li><b>Upload</b> on the “New submission” page: choose the file under “File to submit”, add the note, submit. Check that the score appears on the page.</li>
+<li><b>Record it:</b> add the receipt, the sha256 and the score (labelled ORGANIZER-CONFIRMED only when it comes from the submission page) to <code>docs/receipts/</code>.</li>
+</ol>
+
+<h2>3 · If you see “Predicted values must be in range [0, 1]”</h2>
+<p>The cause has not been found, because the failing file is not in this repository (IR-13). These are the causes the validator tests for:</p>
+<ul>
+<li>a value above 1 or below 0 anywhere in the file;</li>
+<li>a NoData sentinel (for example −3.4e38) written as a value, or NaN written inside the footprint;</li>
+<li>a float64 file, or a file written with the wrong dtype;</li>
+<li>a file on a different grid, so the footprint is misplaced.</li>
+</ul>
+<p>To diagnose it, run the validator on the file that failed and send the receipt.</p>
+
+<h2>4 · What this project will not do</h2>
+<ul>
+<li>It will not offer a file that fails the gate.</li>
+<li>It will not use owner-supplied GitHub mirrors of the competition data (IR-09).</li>
+<li>It will not state a holdout score that has not been measured. Every number is labelled.</li>
+</ul>
+
+<h2>5 · Sources</h2>
+<ul>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem, metric and submission format (organizer)</a></li>
+<li><a href="https://docs.nlr.gov/docs/fy26osti/96647.pdf">Official Rules, NLR PDF</a></li>
+<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Public leaderboard</a></li>
+<li><a href="https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/docs/sources.md">All sources with verification status</a></li>
+</ul>
+</main>
+<footer>Not legal advice. The official rules and the DrivenData platform terms control. Verify the form's limits on the live form.</footer>
+</body>
+</html>
