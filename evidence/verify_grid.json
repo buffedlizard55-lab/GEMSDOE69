@@ -1,0 +1,20 @@
+{
+ "crs": "EPSG:32611",
+ "height": 3730,
+ "width": 3292,
+ "transform": [
+  100.0,
+  0.0,
+  243350.0,
+  0.0,
+  -100.0,
+  4508550.0
+ ],
+ "footprint_px": 5167373,
+ "catalogue_px": 60988,
+ "sha256_labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+ "sha256_sample_submission": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+ "sha256_existing_faults": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+ "irregularity": "existing_faults.tif is byte-identical to labels.tif in every family mirror (IR-69-DATA-01); the public labels raster IS the mapped catalogue; scored truth is unpublished (see gems57/grid.py docstring)",
+ "generated_utc": "20261012T013547Z"
+}
