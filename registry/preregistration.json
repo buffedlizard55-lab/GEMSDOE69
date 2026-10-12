@@ -1,0 +1,31 @@
+{
+ "schema": 1,
+ "repository": "buffedlizard55-lab/GEMSDOE69",
+ "lane": "Relay-ramp and pull-apart corridor generator",
+ "frozen_utc": "2026-10-12T01:41:00Z",
+ "frozen_note": "Arms, calibration recipe, gate rule and seeds are frozen in scripts/run_lane.py and src/gems69/pipeline.py as committed at the E2 launch (01:41 UTC). This file was written at 01:48 UTC while E2 was running and before any comparator (B1/B0/C/R) result existed; it transcribes, it does not amend.",
+ "budget": {"experiments": 3, "wall_clock_hours": 2, "experiment_clock_start_utc": "2026-10-12T01:39:00Z"},
+ "experiments": {
+  "E1": "first test: single-feature leakage canary (AUC > 0.90 = leakage) on draw seed 20 + hard-linked-ramp masking test (recovery of masked linking faults within 300 m vs a random-azimuth null from the same tips)",
+  "E2": "gate: pooled HOLDOUT-DTI of six arms on two independent hide-and-recover draws (seeds 20, 21), template evaluator gems57-pooled-hide-v2, paired 20 km spatial-block bootstrap (1000 draws, seed 520810)",
+  "E3": "live build of the lane artefact (A_corridor recipe, frozen holdout calibration) + uniqueness (surface and dots) + validation; verdict taken from E2 only"
+ },
+ "holdout": {
+  "draw": "gems57.holdout.buffered_component_draw(grid, seed, hide_frac=0.20, buffer_px=3): whole 8-connected catalogue components withheld inside label-blind eroded quadrants; 3 px collar removed from every catalogue feature; visible faults masked pixel-exactly from scoring",
+  "catalogue_features_from_visible_only": "INGENIOUS polylines are cut wherever a sample falls on a withheld pixel or the 3 px collar; tips created by such cuts are flagged and EXCLUDED from corridor generation (conservative, live-faithful: the live catalogue has no cut tips)",
+  "calibration": "leave-one-quadrant-out binned rates with 200-pixel shrinkage to the training base rate; quantile edges fitted on training quadrants only",
+  "k_truth": "label-blind estimate 0.25 x visible catalogue pixels in the test quadrant (withheld/visible = 0.20/0.80)",
+  "flank_rule": "no dot within 2 px of the visible catalogue (all arms)"
+ },
+ "arms": {
+  "A_corridor": "THE LANE: candidates restricted to the corridor band (<= 2 px from a generated trace); bins = corridor score decile x distance to trace {0,1,2} px; template greedy_allocate",
+  "AP_halo_corridor": "sensitivity: B1 bins x corridor class {none, low score, high score} (corridor prior as a boost)",
+  "B1_halo": "GATE COMPARATOR (same pipeline without corridor priors): evidence decile x distance-to-visible-catalogue bin",
+  "B0_evidence": "evidence ventiles only",
+  "C_distance": "distance-to-visible-catalogue bin only",
+  "R_corridor_random": "as many dots as A_corridor per quadrant, random 2-px Poisson-disk inside the same corridor-band candidate set"
+ },
+ "gate_rule": "PASS iff pooled HOLDOUT-DTI(A_corridor) - HOLDOUT-DTI(B1_halo) > 0 with the paired spatial-block 95% CI lower bound > 0, on every draw and pooled over draws. Otherwise NEGATIVE: the artefact is generated (uniqueness and validity still checked) but is NOT offered as a submission.",
+ "uniqueness_rule": "duplicate (stop) if Spearman with any registry raster > 0.90 or > 70% of dots within 3 px of one registry raster's dots; checked on the pre-placement surface and on the final dots against registry/registry_index_69.json",
+ "evidence_scoring_weights": "equal weights over grav_edge, mag_edge, mag_low, scarp and dilation tendency (no fitting)"
+}

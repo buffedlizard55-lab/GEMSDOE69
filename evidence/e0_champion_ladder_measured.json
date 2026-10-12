@@ -1,0 +1,98 @@
+[
+ {
+  "rung": "h19-5 solid",
+  "file": "19GEMSDOE__h19-5-powerlaw-budget-multiline.tif",
+  "sha256": "ef2ae808eb717986",
+  "owner_reported_score": 0.1922,
+  "positive_px": 121131,
+  "distinct_values": 1,
+  "on_catalogue": 0,
+  "min_d": 1.0,
+  "median_d_km": 1.456,
+  "p95_d_km": 7.908,
+  "within_300m": 0.1995
+ },
+ {
+  "rung": "d1.5",
+  "file": "GEMSDOE24__h25-1-dotted-h19-5-d1-5.tif",
+  "sha256": "3e0730e8d4f7db09",
+  "owner_reported_score": 0.2477,
+  "positive_px": 60069,
+  "distinct_values": 1,
+  "on_catalogue": 0,
+  "min_d": 1.0,
+  "median_d_km": 1.487,
+  "p95_d_km": 7.889,
+  "within_300m": 0.1987,
+  "subset_of_previous": true,
+  "removed": 61062,
+  "removed_dist_values": [
+   1.0,
+   1.41,
+   2.0,
+   2.24,
+   2.83,
+   3.0
+  ]
+ },
+ {
+  "rung": "d2.8",
+  "file": "GEMSDOE25__dotted-h19-5-d2-8.tif",
+  "sha256": "3e78737f0da8dd2c",
+  "owner_reported_score": 0.26,
+  "positive_px": 44090,
+  "distinct_values": 1,
+  "on_catalogue": 0,
+  "min_d": 1.0,
+  "median_d_km": 1.5,
+  "p95_d_km": 7.892,
+  "within_300m": 0.1952,
+  "subset_of_previous": false,
+  "removed": 30220,
+  "removed_dist_values": [
+   1.0,
+   1.41,
+   2.0,
+   2.24,
+   2.83,
+   3.0
+  ]
+ },
+ {
+  "rung": "h27-4-r1-solo",
+  "file": "GEMSDOE28__h27-4-r1-solo-d2-8.tif",
+  "sha256": "2fc94a38d77f74d4",
+  "owner_reported_score": 0.2708,
+  "positive_px": 40199,
+  "distinct_values": 1,
+  "on_catalogue": 0,
+  "min_d": 1.4142135623730951,
+  "median_d_km": 1.769,
+  "p95_d_km": 8.063,
+  "within_300m": 0.1173,
+  "subset_of_previous": true,
+  "removed": 3891,
+  "removed_dist_values": [
+   1.0
+  ]
+ },
+ {
+  "rung": "h33-2-b2",
+  "file": "GEMSDOE32__h33-2-b2-zeros.tif",
+  "sha256": "c55bafc470054e82",
+  "owner_reported_score": 0.2778,
+  "positive_px": 37654,
+  "distinct_values": 1,
+  "on_catalogue": 0,
+  "min_d": 2.23606797749979,
+  "median_d_km": 1.965,
+  "p95_d_km": 8.188,
+  "within_300m": 0.0577,
+  "subset_of_previous": true,
+  "removed": 2545,
+  "removed_dist_values": [
+   1.41,
+   2.0
+  ]
+ }
+]

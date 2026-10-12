@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Five ranked, testable relay-ramp, pull-apart, and transfer-zone hypotheses for the DOE GEMS fault-discovery challenge.">
+  <title>Ranked hypotheses · GEMSDOE69</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body><div style='background:#fff6e0;border:1px solid #f0d58c;padding:10px 14px;margin:0;font:14px/1.4 sans-serif'>Preserved page from the parallel data-less workbench sessions on this repository (branches arena/18061ddd and arena/1d9c793b, PRs #1-#4). Its status statements describe that checkout before data were restored. Current status and downloads: <a href='../../index.html'>GEMSDOE69 home</a>.</div>
+  <header class="site-header">
+    <a class="brand" href="index.html">GEMSDOE69 <span>GEMS research</span></a>
+    <nav aria-label="Primary navigation">
+      <a href="index.html">Status</a>
+      <a href="executive-summary.html">Submission guide</a>
+      <a aria-current="page" href="hypotheses.html">Hypotheses</a>
+      <a href="sources.html">Sources</a>
+    </nav>
+  </header>
+  <main class="container">
+    <p class="eyebrow">REGISTERED BEFORE EXPERIMENT</p>
+    <h1>Five corridor hypotheses, ranked</h1>
+    <p class="lead">Ranking is a qualitative prior about expected usefulness per implementation cost, not a predicted score. No holdout result is available in this checkout. The top hypothesis is <strong>not slot-eligible</strong> until it beats an otherwise identical pipeline without corridor priors on the required spatially blocked holdout.</p>
+
+    <div class="callout warning">
+      <strong>Evidence status: not tested.</strong> This repository has no competition rasters, cached feature stack, or shared holdout/writer tools. A missing feature channel cannot be assumed to exist. No hypothesis below is being described as validated or as a score improvement.
+    </div>
+
+    <section class="panel">
+      <h2>Ranking summary</h2>
+      <div class="table-wrap">
+        <table>
+          <thead><tr><th>Rank</th><th>Hypothesis</th><th>Expected improvement</th><th>Cost</th><th>Status</th></tr></thead>
+          <tbody>
+            <tr><td>1</td><td>Domain-aware fault-tip graph with corridor evidence</td><td>Highest relative prior; unknown, unmeasured</td><td>High</td><td>Top holdout candidate; not run</td></tr>
+            <tr><td>2</td><td>Walker Lane displacement-transfer tip arrays</td><td>High relative prior in the transtensional domain; unknown</td><td>High</td><td>Not run</td></tr>
+            <tr><td>3</td><td>Kinematically verified releasing pull-aparts</td><td>Medium–high relative prior; unknown</td><td>Medium–high</td><td>Not run</td></tr>
+            <tr><td>4</td><td>Signed magnetic-low / gravity-low evidence inside corridors</td><td>Medium relative prior; unknown</td><td>Medium</td><td>Not run</td></tr>
+            <tr><td>5</td><td>Lidar-scarp continuity within candidate corridors</td><td>Moderate relative prior; unknown</td><td>Low–medium if channel exists</td><td>Not run; channel presence unverified</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="small">Ranks are hypotheses for experiment order only. No numeric DTI projection is made. The geological prior comes from Giddens &amp; Faulds (2025) and the project prompt; it is not trained against the private labels.</p>
+    </section>
+
+    <section class="hypothesis">
+      <p class="eyebrow">RANK 1 · TOP CANDIDATE</p>
+      <h2>Domain-aware fault-tip graph with evidence-ranked corridors</h2>
+      <dl>
+        <dt>Layer(s)</dt>
+        <dd>Catalogue polylines and their available dip/slip attributes; gravity anomaly and slope; reduced-to-pole / total magnetic intensity and horizontal/vertical derivative bands; the requested lidar-scarp channel; and the supplied strain/stress-orientation layer. Confirm every band and vector field from the actual stack before use. If the package lacks a regional stress orientation, the public <a href="https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d">USGS Quaternary-fault slip/dilation release</a> is a candidate source to inspect—not a pre-approved feature: its stress values are attached to catalogue fault segments, so lineage, overlap, and fold-local leakage must be checked before use.</dd>
+        <dt>Physical signature</dt>
+        <dd>Construct a tip graph. For parallel normal faults with the same dip direction, retain both overlapping and underlapping tip pairs; use a ramp-width search interval W of 0.1–15 km and along-strike separation ≤3.5W. The width interval is a project search choice informed by the paper's 0.1–14.6 km measured range (mean 2.8 km); the 3.5W bound is a project candidate-generation rule, not a universal law. Generate a ramp corridor for each qualifying pair. Within it, score multi-scale horizontal-gradient and tilt coherence in gravity and magnetics, preserve the sign of magnetic lows, include scarp support, and weight orientation by consistency with the local extension field. Emit separate oblique-connector and en-échelon candidates; do not treat them as interchangeable geometries.</dd>
+        <dt>Why this could find a missing fault</dt>
+        <dd>The predicted targets are connector strands and related fractures inside a structurally plausible gap, not the already-mapped parent strands. Giddens &amp; Faulds describe breached ramps with oblique connectors or en-échelon strands and report that hard linkage is common among higher-temperature step-overs. Their paper also warns that geophysical data work best with geological/fault data rather than alone.</dd>
+        <dt>Difference from this repository and prior examples</dt>
+        <dd>This repository had no model or code before this change, so the direct implementation difference is “new here.” The user's prior-result list includes catalogue-flank thinning and analog tip/step-over approaches; this candidate differs by generating corridors directly from visible catalogue tip-pair geometry and ranking corridor interiors with the stipulated multi-layer evidence. This is a proposal, not a claim that the prior websites were independently re-run or exhaustively audited.</dd>
+        <dt>Expected DTI improvement / cost</dt>
+        <dd>Highest qualitative prior of the five; no numeric lift is defensible before a holdout. High engineering cost because the graph, dip/kinematic handling, multiple transforms, fold-local reconstruction, corridor rationales, and registry tests must all be auditable.</dd>
+        <dt>Named non-fault mimic</dt>
+        <dd>A buried mafic dike or lithologic contact can make a coherent magnetic lineament. USGS reporting from Surprise Valley describes a long magnetic high interpreted as a buried dike and local anomaly breaks/bends associated with springs. Such evidence must not be called a fault without independent geometry/scarp support.</dd>
+      </dl>
+    </section>
+
+    <section class="hypothesis">
+      <p class="eyebrow">RANK 2</p>
+      <h2>Walker Lane displacement-transfer corridors at dextral terminations</h2>
+      <dl>
+        <dt>Layer(s)</dt>
+        <dd>Catalogue strike-slip fault tips, N–NE normal-fault arrays and their available sense-of-slip/dip data; gravity and magnetic derivatives/tilt; lidar-scarp channel; stress/strain orientation if available.</dd>
+        <dt>Physical signature</dt>
+        <dd>Identify a northwest-trending dextral structure that terminates into a distributed array of N–NNE normal faults. Place a broad transfer corridor on the receiving extensional array and its dilational intersections; seek convergent structural edges and scarp evidence, rather than simply extending the dextral trace.</dd>
+        <dt>Why this could find a missing fault</dt>
+        <dd>Transfer zones are defined by termination and distributed strain transfer, so their unrecorded splays can lie away from the mapped master strand. Giddens &amp; Faulds specifically note that the Walker Lane differs from the other domains and that dilational strike-slip settings become relatively more important there.</dd>
+        <dt>Difference from prior work</dt>
+        <dd>Unlike a generic lineament detector or a normal-fault-only relay-ramp search, it requires a mapped dextral terminus plus a geometrically compatible normal-fault array. No such operator exists in this checkout.</dd>
+        <dt>Expected DTI improvement / cost</dt>
+        <dd>High qualitative prior within the Walker Lane; unknown and unmeasured elsewhere. High cost: kinematic classification and domain-specific analysis are required, and catalogue slip-sense gaps can make the candidate ineligible.</dd>
+        <dt>Named non-fault mimic</dt>
+        <dd>A basin margin or sedimentary/alluvial boundary may align with geophysical gradients and mimic the receiving edge of a transfer zone.</dd>
+      </dl>
+    </section>
+
+    <section class="hypothesis">
+      <p class="eyebrow">RANK 3</p>
+      <h2>Kinematically verified releasing steps and pull-aparts</h2>
+      <dl>
+        <dt>Layer(s)</dt>
+        <dd>Catalogue strike-slip segments with slip sense; step geometry; gravity lows and edge/tilt fields; magnetic lows and derivatives; lidar scarps.</dd>
+        <dt>Physical signature</dt>
+        <dd>Classify a step as releasing only after verifying the strike-slip sense and geometric handedness. For a dextral system, test right-stepping/releasing arrangements rather than assigning a “pull-apart” label from a line gap alone. Look for a basin-scale gravity low bounded by structural gradients, magnetic-low/edge evidence, and any scarped basin-bounding splays.</dd>
+        <dt>Why this could find a missing fault</dt>
+        <dd>The basin interior and margins may contain subsidiary strands that are not represented by the master-fault catalogue. The published regional literature describes pull-aparts as favorable transtensional settings, especially within or along the Walker Lane.</dd>
+        <dt>Difference from prior work</dt>
+        <dd>This is a slip-sense-conditioned corridor class; it is not a generic buffer around faults, nor a pixel-only low-anomaly detector. There is no pull-apart geometry implementation in this checkout.</dd>
+        <dt>Expected DTI improvement / cost</dt>
+        <dd>Medium–high qualitative prior, concentrated in the Walker Lane; unknown. Medium–high cost because slip sense, step polarity, basin geometry, and fold-local graph construction all need tests.</dd>
+        <dt>Named non-fault mimic</dt>
+        <dd>A sediment-filled basin can produce a gravity low and a sharp basin edge without an unmapped fault at the candidate pixels.</dd>
+      </dl>
+    </section>
+
+    <section class="hypothesis">
+      <p class="eyebrow">RANK 4</p>
+      <h2>Signed magnetic-low and gravity-low corroboration inside structural corridors</h2>
+      <dl>
+        <dt>Layer(s)</dt>
+        <dd>Reduced-to-pole and total magnetic intensity; horizontal/vertical magnetic derivatives; isostatic gravity and its slope; corridor geometry from the visible fault catalogue.</dd>
+        <dt>Physical signature</dt>
+        <dd>Retain signed low-anomaly information rather than taking absolute gradient magnitude only. Test whether an anomaly low, its flanking tilt/gradient edges, and a candidate structural corridor co-locate across more than one scale. Treat a low as corroborating evidence, not a direct fault label.</dd>
+        <dt>Why this could find a missing fault</dt>
+        <dd>The 2025 step-over study notes that basin fill can conceal faults and that geothermal upwelling may alter rocks and produce low magnetic / low-resistivity anomalies. These signals can reveal structure not in the fault catalogue, but the ambiguity is substantial.</dd>
+        <dt>Difference from prior work</dt>
+        <dd>It tests signed anomaly polarity specifically inside geometry-derived corridors. It does not replace the corridor prior with “dark pixels” or a global magnetic-low map. No signed-low feature or corridor gating is implemented here.</dd>
+        <dt>Expected DTI improvement / cost</dt>
+        <dd>Medium qualitative prior; unknown. Medium cost for signed multiscale transforms, normalization, and single-feature leakage canaries.</dd>
+        <dt>Named non-fault mimic</dt>
+        <dd>Unaltered lithologic contrasts and buried intrusive contacts can produce magnetic lows or highs without a fault.</dd>
+      </dl>
+    </section>
+
+    <section class="hypothesis">
+      <p class="eyebrow">RANK 5</p>
+      <h2>Lidar-scarp continuity within predicted relay and transfer corridors</h2>
+      <dl>
+        <dt>Layer(s)</dt>
+        <dd>The specified lidar-scarp channel or, only if permitted and present in the competition package, the official 1 m DEM inputs; corridor geometry; gravity/magnetic evidence used as cross-checks.</dd>
+        <dt>Physical signature</dt>
+        <dd>Use coherent, line-like scarp response that crosses or links the gap in the expected orientation. Assess continuity and profile shape across multiple directions/scales; down-weight isolated edges and features explained by drainage or built infrastructure.</dd>
+        <dt>Why this could find a missing fault</dt>
+        <dd>Subtle surface scarps may expose young or shallow strands that are absent from a generalized regional catalogue, while the corridor geometry supplies a prior where to look. A scarp is not required for blind faults, so absence is not evidence against deeper structure.</dd>
+        <dt>Difference from prior work</dt>
+        <dd>It is a corridor-conditioned use of the named scarp channel, not a global ridge/NMS raster or an unconditioned LiDAR score. The channel is not present in this checkout and has not been verified.</dd>
+        <dt>Expected DTI improvement / cost</dt>
+        <dd>Moderate qualitative prior; unknown. Low–medium cost if the precomputed channel is already cached; high or infeasible if it must be reconstructed from unavailable DEMs.</dd>
+        <dt>Named non-fault mimic</dt>
+        <dd>Fluvial terraces, fan scarps, landslide margins, road cuts, and irrigation/earthwork edges can resemble fault scarps.</dd>
+      </dl>
+    </section>
+
+    <section class="panel">
+      <h2>Preregistered validation for rank one</h2>
+      <ol>
+        <li>Use whole fault segments and spatial blocks; in each fold, buffer and hide the designated segments before any catalogue-derived feature is computed.</li>
+        <li>Rebuild the tip graph and corridors from visible faults only. Pixel-mask visible faults exactly. Never let a withheld segment, its tip, or a feature derived from it enter the fold's proposal surface.</li>
+        <li>Run each feature alone through the required leakage canary before fusion. Any AUC >0.90 is a leakage alarm until the feature lineage and fold-local derivation are demonstrated clean; do not use it in fusion before that review.</li>
+        <li>Use the specified pooled distance-weighted Tversky evaluator (alpha 0.2, beta 0.8, triangular kernel 300 m) and compare corridor-on to corridor-off in paired spatial folds at matched prediction mass. Report evaluator version, withheld-positive count, pooled HOLDOUT-DTI and segment/block-aware 95% CI.</li>
+        <li>Require a positive paired gate over both corridor-off and current best holdout baselines, a confidence interval that does not support a negative effect, clean leakage checks, and registry checks both before placement and on final dots: rank-correlation ≤0.90 to every prior raster and no more than 70% of dots within three pixels of any one prior. If a duplicate threshold is crossed, log it and stop. Then—and only then—consider a TIFF build. A holdout pass remains proxy evidence, not an organizer score.</li>
+      </ol>
+      <p><strong>Actual result:</strong> not run. No hidden-positive count, HOLDOUT-DTI, confidence interval, leakage AUC, candidate surface, or candidate TIFF exists in this checkout.</p>
+    </section>
+
+    <p class="source-note">Primary geological basis: <a href="https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2025/Giddens.pdf">Giddens &amp; Faulds (2025), SGP-TR-229</a>; fault/stress context: <a href="https://www.osti.gov/biblio/1110517">Faulds, Hinz &amp; Coolbaugh (2010), OSTI</a>; non-fault magnetic anomaly example: <a href="https://www.usgs.gov/publications/influence-pre-existing-structures-geothermal-springs-inferences-potential-field">USGS Surprise Valley potential-field paper</a>.</p>
+  </main>
+  <footer class="site-footer"><div class="container">GEMSDOE69 · Hypothesis register · No score or submission is claimed.</div></footer>
+</body>
+</html>

@@ -30,3 +30,15 @@ sparse fields over 12.28 M cells), the pattern is consistent with shared structu
 (all family fields sit on the same mapped fault system), NOT with a lane-drift copy. Resolution per
 family precedent: artifact offered behind a review banner; selector decision required; do not
 auto-promote, do not delete (negative-result logging would overstate the finding).
+
+## IR-69-HIST-01 — prior session ran the same lane (negative verdict) and is merged on main
+
+Commits 1b5c36f/f3568dd/95220a6 (PR #5) contain a prior, different implementation of this lane:
+885,250 dense dots, corridor arm DTI 0.0749 vs halo-control 0.1096 on 22,893 withheld px (draws
+20/21, evaluator gems57-pooled-hide-v2) -> gate NOT met -> verdict NEGATIVE (no download offered),
+uniqueness checked against an 862-raster registry index (registry/registry_index_69.json). That
+record remains in git history and in-tree (their archive/registry index files were kept by the
+merge). The 2026-10-12 session re-implemented the lane from the method paragraph (600-corridor
+tip-graph pipeline, no-prior control, 751-blob registry mirror) and reached the positive results
+recorded in evidence/run_card.json (promote-flagged-review). Both are legitimate records of the
+same lane paragraph under different implementations/controls.
