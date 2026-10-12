@@ -1,0 +1,457 @@
+{
+ "experiment": "E3 live build",
+ "started_finished": [
+  "2026-10-12T01:58:56Z"
+ ],
+ "seconds": 71.55284976959229,
+ "arm": "A_corridor",
+ "k_truth_live": 12226,
+ "k_truth_class": "[model] owner live-anchor inversion (GEMSDOE32)",
+ "calibration": {
+  "base_rate": 0.00526893633347768,
+  "draws": [
+   {
+    "seed": 20,
+    "train_pixels": 812267,
+    "train_truth": 4377,
+    "tip_receipt": {
+     "free_tips": 3756,
+     "junction_ends": 10819,
+     "edge_ends": 6019,
+     "short_polyline_ends": 5396,
+     "cut_tips": 254,
+     "polylines": 12995,
+     "junction_px": 2.5,
+     "min_len_px": 3.0
+    },
+    "corridor_counts": {
+     "relay_pairs": 1886,
+     "pullapart_pairs": 549,
+     "termination_tips": 870,
+     "transfer_links": 359,
+     "rejected_dip": 7955,
+     "rejected_facing": 73168,
+     "rejected_geometry": 11183,
+     "rejected_step_sense": 2746,
+     "rejected_same_polyline": 1056,
+     "rejected_mixed_sense": 31094,
+     "valid_pairs_before_partner_selection": 14216
+    }
+   },
+   {
+    "seed": 21,
+    "train_pixels": 788056,
+    "train_truth": 4055,
+    "tip_receipt": {
+     "free_tips": 3758,
+     "junction_ends": 10871,
+     "edge_ends": 6019,
+     "short_polyline_ends": 5442,
+     "cut_tips": 211,
+     "polylines": 13045,
+     "junction_px": 2.5,
+     "min_len_px": 3.0
+    },
+    "corridor_counts": {
+     "relay_pairs": 1902,
+     "pullapart_pairs": 554,
+     "termination_tips": 879,
+     "transfer_links": 322,
+     "rejected_dip": 8449,
+     "rejected_facing": 75376,
+     "rejected_geometry": 12130,
+     "rejected_step_sense": 2755,
+     "rejected_same_polyline": 1074,
+     "rejected_mixed_sense": 31667,
+     "valid_pairs_before_partner_selection": 14845
+    }
+   }
+  ],
+  "table": [
+   {
+    "code": 0,
+    "score_bin": 0,
+    "dist_to_trace_px": 0,
+    "n": 58982,
+    "truth": 233,
+    "rate": 0.003954813815653324
+   },
+   {
+    "code": 1,
+    "score_bin": 0,
+    "dist_to_trace_px": 1,
+    "n": 84281,
+    "truth": 297,
+    "rate": 0.0035280571319162846
+   },
+   {
+    "code": 2,
+    "score_bin": 0,
+    "dist_to_trace_px": 2,
+    "n": 22520,
+    "truth": 67,
+    "rate": 0.0029953252524137497
+   },
+   {
+    "code": 3,
+    "score_bin": 1,
+    "dist_to_trace_px": 0,
+    "n": 57432,
+    "truth": 320,
+    "rate": 0.005570755805820227
+   },
+   {
+    "code": 4,
+    "score_bin": 1,
+    "dist_to_trace_px": 1,
+    "n": 80056,
+    "truth": 356,
+    "rate": 0.004448935855180025
+   },
+   {
+    "code": 5,
+    "score_bin": 1,
+    "dist_to_trace_px": 2,
+    "n": 23412,
+    "truth": 94,
+    "rate": 0.004025655798614025
+   },
+   {
+    "code": 6,
+    "score_bin": 2,
+    "dist_to_trace_px": 0,
+    "n": 53969,
+    "truth": 238,
+    "rate": 0.0044131106697022915
+   },
+   {
+    "code": 7,
+    "score_bin": 2,
+    "dist_to_trace_px": 1,
+    "n": 77199,
+    "truth": 348,
+    "rate": 0.004509797319769859
+   },
+   {
+    "code": 8,
+    "score_bin": 2,
+    "dist_to_trace_px": 2,
+    "n": 22190,
+    "truth": 96,
+    "rate": 0.004334693308919668
+   },
+   {
+    "code": 9,
+    "score_bin": 3,
+    "dist_to_trace_px": 0,
+    "n": 58901,
+    "truth": 369,
+    "rate": 0.006261379458010197
+   },
+   {
+    "code": 10,
+    "score_bin": 3,
+    "dist_to_trace_px": 1,
+    "n": 80419,
+    "truth": 503,
+    "rate": 0.006252295337617397
+   },
+   {
+    "code": 11,
+    "score_bin": 3,
+    "dist_to_trace_px": 2,
+    "n": 22179,
+    "truth": 125,
+    "rate": 0.005632681772112846
+   },
+   {
+    "code": 12,
+    "score_bin": 4,
+    "dist_to_trace_px": 0,
+    "n": 57998,
+    "truth": 333,
+    "rate": 0.005739952903240919
+   },
+   {
+    "code": 13,
+    "score_bin": 4,
+    "dist_to_trace_px": 1,
+    "n": 78806,
+    "truth": 353,
+    "rate": 0.004481353331357241
+   },
+   {
+    "code": 14,
+    "score_bin": 4,
+    "dist_to_trace_px": 2,
+    "n": 23373,
+    "truth": 131,
+    "rate": 0.005601908545941114
+   },
+   {
+    "code": 15,
+    "score_bin": 5,
+    "dist_to_trace_px": 0,
+    "n": 59044,
+    "truth": 303,
+    "rate": 0.005132229067385197
+   },
+   {
+    "code": 16,
+    "score_bin": 5,
+    "dist_to_trace_px": 1,
+    "n": 80788,
+    "truth": 340,
+    "rate": 0.00421116454526782
+   },
+   {
+    "code": 17,
+    "score_bin": 5,
+    "dist_to_trace_px": 2,
+    "n": 22992,
+    "truth": 103,
+    "rate": 0.004486624151468277
+   },
+   {
+    "code": 18,
+    "score_bin": 6,
+    "dist_to_trace_px": 0,
+    "n": 58573,
+    "truth": 300,
+    "rate": 0.005122314672917128
+   },
+   {
+    "code": 19,
+    "score_bin": 6,
+    "dist_to_trace_px": 1,
+    "n": 78308,
+    "truth": 359,
+    "rate": 0.004586204886436462
+   },
+   {
+    "code": 20,
+    "score_bin": 6,
+    "dist_to_trace_px": 2,
+    "n": 23300,
+    "truth": 103,
+    "rate": 0.004427820909768343
+   },
+   {
+    "code": 21,
+    "score_bin": 7,
+    "dist_to_trace_px": 0,
+    "n": 59154,
+    "truth": 373,
+    "rate": 0.0063020819798111916
+   },
+   {
+    "code": 22,
+    "score_bin": 7,
+    "dist_to_trace_px": 1,
+    "n": 78131,
+    "truth": 413,
+    "rate": 0.005285950377583504
+   },
+   {
+    "code": 23,
+    "score_bin": 7,
+    "dist_to_trace_px": 2,
+    "n": 22771,
+    "truth": 141,
+    "rate": 0.00618404895067215
+   },
+   {
+    "code": 24,
+    "score_bin": 8,
+    "dist_to_trace_px": 0,
+    "n": 60875,
+    "truth": 361,
+    "rate": 0.005928019527345896
+   },
+   {
+    "code": 25,
+    "score_bin": 8,
+    "dist_to_trace_px": 1,
+    "n": 77290,
+    "truth": 459,
+    "rate": 0.005936943925917149
+   },
+   {
+    "code": 26,
+    "score_bin": 8,
+    "dist_to_trace_px": 2,
+    "n": 23176,
+    "truth": 160,
+    "rate": 0.006889706943184137
+   },
+   {
+    "code": 27,
+    "score_bin": 9,
+    "dist_to_trace_px": 0,
+    "n": 57431,
+    "truth": 502,
+    "rate": 0.0087288748472929
+   },
+   {
+    "code": 28,
+    "score_bin": 9,
+    "dist_to_trace_px": 1,
+    "n": 74225,
+    "truth": 501,
+    "rate": 0.006745768245309591
+   },
+   {
+    "code": 29,
+    "score_bin": 9,
+    "dist_to_trace_px": 2,
+    "n": 22548,
+    "truth": 151,
+    "rate": 0.006684270687401295
+   }
+  ],
+  "edges": [
+   0.4116175174713135,
+   0.4623962938785553,
+   0.5030249953269958,
+   0.5359434485435486,
+   0.565893828868866,
+   0.5965080261230469,
+   0.627668023109436,
+   0.6601851582527161,
+   0.7055335640907288
+  ]
+ },
+ "allocation": {
+  "n_dots": 33680,
+  "surrogate_dti": 0.031921850160923325,
+  "rounds": 8,
+  "note": "surrogate DTI under the frozen holdout calibration; NOT a score"
+ },
+ "live_geometry": {
+  "tip_receipt": {
+   "free_tips": 4523,
+   "junction_ends": 11868,
+   "edge_ends": 6019,
+   "short_polyline_ends": 5496,
+   "cut_tips": 0,
+   "polylines": 13953,
+   "junction_px": 2.5,
+   "min_len_px": 3.0
+  },
+  "corridor_counts": {
+   "relay_pairs": 2473,
+   "pullapart_pairs": 732,
+   "termination_tips": 1115,
+   "transfer_links": 509,
+   "rejected_dip": 13858,
+   "rejected_facing": 123695,
+   "rejected_geometry": 19088,
+   "rejected_step_sense": 4311,
+   "rejected_same_polyline": 1404,
+   "rejected_mixed_sense": 54446,
+   "valid_pairs_before_partner_selection": 24066
+  },
+  "corridor_band_pixels": 1056910,
+  "candidate_pixels": 885250
+ },
+ "dots": {
+  "n": 33680,
+  "on_catalogue": 0,
+  "min_dist_to_catalogue_px": 3.0,
+  "median_dist_to_catalogue_px": 8.9442720413208,
+  "p95_dist_to_catalogue_px": 25.238859176635742
+ },
+ "corridors_with_dots": 1948,
+ "corridors_by_setting": {
+  "relay": {
+   "corridors": 1063,
+   "dots": 21616
+  },
+  "pullapart": {
+   "corridors": 560,
+   "dots": 9432
+  },
+  "transfer": {
+   "corridors": 325,
+   "dots": 2632
+  }
+ },
+ "champion_vs_corridors": {
+  "file": "GEMSDOE32 h33-2-b2 (sha256 c55bafc4...)",
+  "champion_dots": 37654,
+  "in_corridor_band": 8785,
+  "in_corridor_band_frac": 0.2333085462367876,
+  "corridor_band_frac_of_allowed": 0.18204438777870888,
+  "our_dots_within_3px_of_champion": 0.29483372921615203
+ },
+ "uniqueness": "pending: run scripts/check_uniqueness.py",
+ "submission": {
+  "name": "gems69-relay-pullapart-corridors-33680-20261012T015854Z",
+  "note": "GEMSDOE69 relay-ramp/pull-apart corridor dots (33680); tip-graph corridors, gravity/mag/scarp scored; see repo run card",
+  "note_chars": 119,
+  "zeros_tif": "docs/downloads/gems69-relay-pullapart-corridors-33680-20261012T015854Z-zeros.tif",
+  "zeros_sha256": "5ef7f9bdce16586544f819194bc3650156a78b66d36e03e6477e905a6b59a4df",
+  "zeros_bytes": 92433,
+  "zip": "docs/downloads/gems69-relay-pullapart-corridors-33680-20261012T015854Z-zeros.zip",
+  "zip_sha256": "e24b8233a7877f3f5fa84e80140f792683cdd0d0a3a88c0a5b558b372305a7c8",
+  "nan_tif": "docs/downloads/gems69-relay-pullapart-corridors-33680-20261012T015854Z-nan.tif",
+  "nan_sha256": "4686ea569850ad0d9b4938d38e164ba1b714f60fb2d7b9d8e5e390eecc7dc11f",
+  "nan_bytes": 273241,
+  "validator": {
+   "file": "/home/user/GEMSDOE69/docs/downloads/gems69-relay-pullapart-corridors-33680-20261012T015854Z-zeros.tif",
+   "bytes": 92433,
+   "sha256": "5ef7f9bdce16586544f819194bc3650156a78b66d36e03e6477e905a6b59a4df",
+   "meta": {
+    "crs": "EPSG:32611",
+    "shape": [
+     3730,
+     3292
+    ],
+    "dtype": "float32",
+    "count": 1,
+    "nodata": null,
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "profile_compress": "deflate"
+   },
+   "band_description": [
+    null
+   ],
+   "n_finite": 12279160,
+   "n_nan": 0,
+   "n_infinite": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "mean": 0.0027428586035966873,
+   "emitted_positive_pixels": 33680,
+   "checks": {
+    "single_band": true,
+    "dtype_float32": true,
+    "dimensions_3730x3292": true,
+    "crs_epsg_32611": true,
+    "transform_matches_sample_submission": true,
+    "no_nan_anywhere": true,
+    "no_inf_anywhere": true,
+    "no_sentinel_values": true,
+    "range_0_1_guaranteed": true,
+    "min_ge_0": true,
+    "max_le_1": true,
+    "in_footprint_all_finite": true,
+    "in_footprint_range_0_1": true,
+    "outside_footprint_zero": true,
+    "zero_dots_on_mapped_catalogue": true
+   },
+   "all_checks_passed": true,
+   "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+   "on_catalogue_positive_pixels": 0,
+   "in_footprint_positive_pixels": 33680,
+   "footprint_fraction": 0.006517818628537169
+  }
+ }
+}
