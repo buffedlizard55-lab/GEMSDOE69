@@ -1,0 +1,50 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Executive Summary · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css"></head>
+<body>
+<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="active">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<main class="wrap">
+
+<div class="card">
+<h2>Executive summary &mdash; how a submission is made and entered</h2>
+<ol>
+<li><b>Generate</b>: <code>scripts/run_lane69.py e3</code> builds the tip graph from the pinned catalogue
+mirror, emits and scores corridors, places greedy marginal-DTI dots, and writes
+<code>submissions/h69-relayramp-pullapart-&lt;dots&gt;-&lt;stamp&gt;-&lt;sha8&gt;-zeros.tif</code>
+(all-finite [0,1]) plus a <code>-nan</code> diagnostic twin, with a JSON receipt.</li>
+<li><b>Validate</b>: the shared template validator (<code>vendor/template66/gems/validate_submission.py</code>)
+re-reads the bytes from disk and checks CRS EPSG:32611, shape 3730&times;3292, transform, single band,
+float32, values in [0,1], and (for the nan twin) NaN only outside the footprint.</li>
+<li><b>Gate</b>: the corridor arm must beat the identical pipeline without corridor priors on the
+spatially-blocked hide-and-recover holdout (evidence/e2_gate.json), and the registry lane-drift scan
+must pass (evidence/e3_uniqueness.json). The download banner on the home page is generated from those
+two files &mdash; it cannot say OK unless they do.</li>
+<li><b>Submit</b>: DrivenData competition 306 &rarr; <i>New submission</i> &rarr; upload the single <code>.tif</code>
+(or a zip containing exactly one GeoTIFF). It must match the submission format's CRS, shape, and
+geotransform &mdash; ours is written against <code>sample_submission.tif</code> so it matches by construction.
+Add a short note (&le;140 characters) identifying the run, e.g. the receipt note.</li>
+</ol>
+<p><b>Known portal error class</b>: &ldquo;Predicted values must be in range [0, 1]&rdquo; &mdash; caused by artifacts
+carrying values outside [0,1] (or non-finite cells the portal does not treat as nodata). The <b>-zeros</b>
+variant is all-finite by construction and is the one to submit; the <b>-nan</b> variant is a diagnostic
+artifact only (template policy: zeros mode is the only submission-compatible mode).</p>
+</div>
+<div class="card">
+<h2>Standing limitations (do not re-discover these)</h2>
+<ul>
+<li>No DrivenData auth in this environment: organizer bytes cannot be auto-downloaded; sha256-pinned
+family mirrors are used (integrity-pinned, NOT organizer-authenticated).</li>
+<li><code>existing_faults.tif</code> &equiv; <code>labels.tif</code> in every family mirror (IR-69-DATA-01): the public labels
+raster IS the mapped catalogue; the scored truth is unpublished (&asymp;12,691 px receipt-derived estimate,
+GEMSDOE32 evidence).</li>
+<li>Holdout DTI screens but does not rank across families (&rho;&asymp;0.51 vs live, GEMSDOE32 calibration).</li>
+</ul>
+</div>
+
+</main>
+<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+</body></html>

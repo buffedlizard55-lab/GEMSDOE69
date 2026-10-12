@@ -1,0 +1,36 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Hypotheses · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css"></head>
+<body>
+<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="active">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<main class="wrap">
+
+<div class="card">
+<h2>Five candidate hypotheses for future sessions (ranked)</h2>
+<p>The corridor lane (H69-A) itself is the top candidate and is implemented here. The rest are queued,
+each naming layers, signature, why it catches a fault missing from the catalogue, and how it differs from
+everything already shipped in the family.</p>
+<table>
+<tr><th>#</th><th>Hypothesis</th><th>Layers</th><th>Signature (transform)</th><th>Why it catches catalogue-missing faults</th><th>Novelty vs family</th><th>Cost / data</th></tr>
+<tr><td>1 (this lane)</td><td><b>H69-A relay-ramp / pull-apart corridors</b></td><td>catalogue tip graph + iso_grav_anom, tmi (+ HG/tilt), lidar scarp composite</td><td>step-over geometry &rarr; corridor masks; multi-scale HG + tilt robust-z + magnetic-low + scarp evidence; greedy marginal-DTI</td><td>Hidden breaching/relay faults live <i>between</i> mapped tips by definition; geometry proposes them where pixel statistics are weakest (no signal yet)</td><td>First lane proposing faults from pairwise tip geometry with en &eacute;chelon + rhomb emission; GEMSDOE33 was single-tip analogs</td><td>Implemented; no new data</td></tr>
+<tr><td>2</td><td><b>H69-D radiometric K/Th depletion halos inside corridors</b></td><td>geodawn_rad_u8 (K, Th, TC)</td><td>robust-low z of K and Th within corridor masks (hydrothermal leaching/deposition contrast)</td><td>Alteration halos mark permeable damage zones even where no scarp or edge survives; radiometrics see chemistry, not geometry</td><td>Family used radiometrics only in scarp-fusion blends (GEMSDOE46); never as a corridor-interior primary channel</td><td>Data already hash-pinned here; cheap</td></tr>
+<tr><td>3</td><td><b>H69-B knickpoint-&chi; chains at step-over mouths</b></td><td>det_elev, det_elev_slope</td><td>&chi;-integral anomalies of bedrock streams crossing corridor axes; collinearity vote of knickpoints</td><td>Blind faults with no surface scarp still knick stream profiles; a chain of collinear knickpoints across drainages is structure a scarp map cannot see</td><td>All family DEM channels are local (curvature/ridge); nothing integrates along-stream profiles</td><td>CPU-only; no new data</td></tr>
+<tr><td>4</td><td><b>H69-C straight conductivity/basement steps under cover</b></td><td>cond_surf, depth_to_base_surf</td><td>gradient magnitude &times; 3&times;3 directional coherence of gradient orientation (straight boundary test)</td><td>MT conductivity and basement depth image the subsurface: a straight conductivity step locates a fault under alluvium where surface mapping has nothing to record</td><td>These bands enter family stacks only as scalars/plain gradients</td><td>CPU-only; no new data</td></tr>
+<tr><td>5</td><td><b>H69-E instrumental seismicity lineaments + nodal planes</b></td><td>would replace ieq/deq bands with the raw event catalogue</td><td>epicentre lineament density + focal-mechanism nodal-plane strikes</td><td>Active blind, low-slip faults light up seismically while leaving no scarp</td><td>Family uses pre-binned density bands only</td><td><b>DATA-BLOCKED in-sandbox</b>: needs USGS ComCat/ANSS catalogue (free, official; not reachable from this sandbox)</td></tr>
+</table>
+</div>
+<div class="card">
+<h2>Leakage canaries (this session)</h2>
+<p class="small">Protocol rule 4: any single-feature AUC &gt; 0.90 on the holdout is leakage until proven
+otherwise. Physics layers are catalogue-independent by construction; the corridor-propensity surface is
+the catalogue-derived feature under test.</p>
+<table><tr><th>Feature</th><th>AUC (withheld truth vs active negatives)</th></tr><tr><td>grav_hg_s1</td><td>0.5305418979556492</td></tr><tr><td>mag_hg_s1</td><td>0.5376840831238601</td></tr><tr><td>grav_hg_s2</td><td>0.5305355347954177</td></tr><tr><td>mag_hg_s2</td><td>0.5389047017061042</td></tr><tr><td>grav_hg_s4</td><td>0.529309748848189</td></tr><tr><td>mag_hg_s4</td><td>0.5378066802300789</td></tr><tr><td>grav_tilt_s2</td><td>0.5062428593765597</td></tr><tr><td>mag_tilt_s2</td><td>0.5148141127382865</td></tr><tr><td>grav_hg_prov</td><td>0.49734889203039406</td></tr><tr><td>grav_vg_prov</td><td>0.5224056920392296</td></tr><tr><td>geod_2ndinv</td><td>0.5530383954762326</td></tr><tr><td>mag_hg_prov</td><td>0.5364947113005831</td></tr><tr><td>mag_vg_prov</td><td>0.48237893134829474</td></tr><tr><td>tc_prov</td><td>0.43950500574306417</td></tr><tr><td>mag_low_tmi</td><td>0.4963676795811981</td></tr><tr><td>mag_low_rtp</td><td>0.48283129749072273</td></tr><tr><td>lidar_scarp</td><td>0.572205257428365</td></tr><tr><td>corridor_propensity</td><td>0.6908643307121399</td></tr></table>
+</div>
+
+</main>
+<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+</body></html>

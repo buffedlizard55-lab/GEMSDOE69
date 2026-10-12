@@ -1,0 +1,23 @@
+[unique] 100/751 elapsed 110s
+[unique] 200/751 elapsed 231s
+[unique] 300/751 elapsed 355s
+[unique] 400/751 elapsed 479s
+[unique] 500/751 elapsed 609s
+[unique] 600/751 elapsed 746s
+[unique] 700/751 elapsed 890s
+{
+ "worst_abs_spearman": 0.2574,
+ "worst_dot_overlap_dotlike": {
+  "blob": "23ff31cf7832f25616bc47d435eaec9fe796d3bb",
+  "stratum": "dotlike",
+  "their_dots": 95927,
+  "rho": 0.0404,
+  "dot_overlap_3px": 0.9108,
+  "pixel_agreement": 0.9897
+ },
+ "literal_gate": {
+  "rho_ok": true,
+  "overlap_ok": false
+ },
+ "n_errors": 1
+}

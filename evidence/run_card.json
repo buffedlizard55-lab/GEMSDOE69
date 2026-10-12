@@ -1,0 +1,45 @@
+{
+ "generated_utc": "20261012T031031Z",
+ "lane": "GEMSDOE69 relay-ramp & pull-apart corridor generator",
+ "hypothesis": "Hidden faults occupy relay-ramp / pull-apart corridors between step-over tips of mapped faults; multi-physics edge evidence inside those corridors localizes them better than pixel statistics alone.",
+ "mechanism": "Tip-graph step-over pairing (W 0.1-15 km, along <= 3.5W, sub-parallel strikes) -> oblique connector + en echelon strands + pull-apart rhomb -> multi-scale HG/tilt grav+mag (incl. magnetic lows) + lidar scarp + WNW-extension orientation score -> greedy marginal-DTI dot placement >= 200 m off catalogue.",
+ "non_fault_mimic": "Linear geophysical edges that are NOT faults: lithologic/dike contacts, buried channel margins and terrace edges in detrended elevation, and survey-line artifacts in the airborne grids can all produce corridor-consistent HG/tilt responses.",
+ "holdout": {
+  "instrument": "vendor/template66 gems57 pooled hide-and-recover (alpha 0.2, beta 0.8, 300 m triangular kernel); seeds/modes/cells as recorded",
+  "corridor_mean_dti": 0.005975197860273526,
+  "corridor_ci95_half": 0.0014413577610952733,
+  "control_mean_dti": 0.0021479253641536293,
+  "paired_delta": 0.003827272496119896,
+  "withheld_positive_px_total": 22641,
+  "n_cells": 8,
+  "gate_passed": true,
+  "evidence_class": "HOLDOUT-DTI",
+  "hardlinked_recovery_within_300m_mean": 0.8461538461538461,
+  "hardlinked_n_tested": 13
+ },
+ "correlation_overlap_vs_registry": {
+  "worst_abs_spearman": 0.2574,
+  "worst_dot_overlap_dotlike": 0.9215,
+  "literal_gate": {
+   "rho_ok": true,
+   "overlap_ok": false
+  },
+  "stratified_gate_ok": false,
+  "n_compared": 750
+ },
+ "raster": {
+  "zeros_sha256": "55f6215c72990ec6a4184985d401c8adffa57673d678ebbc052045ceede3cce6",
+  "zeros_path": "/home/user/GEMSDOE69/submissions/h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-zeros.tif",
+  "nan_sha256": "9c0bc4a5d095b00ba3485dab22f67dfb255065f4c6e93a70cc02dc1744ab0f23",
+  "nan_path": "/home/user/GEMSDOE69/submissions/h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-nan.tif",
+  "n_dots": 35787,
+  "format_compliance_nan_ok": true,
+  "format_compliance_zeros_ok": true,
+  "validator_output": "no NaN inside the footprint (nan variant finite mask == sample_submission), values in [0,1], CRS EPSG:32611, shape 3730x3292, transform exact (see evidence/e3_receipt.json format_compliance)"
+ },
+ "submission_name": "h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-zeros",
+ "submission_note": "relay-ramp/pull-apart corridors from tip graph; HG+tilt grav/mag + lidar scarp; greedy marginal-DTI; 200m flank-pruned",
+ "verdict": "promote-flagged-review",
+ "banner": "review",
+ "note": "verdict 'promote-candidate' means the holdout gate + registry scan + validator all passed; 'promote-flagged-review' means every gate passed except the literal 70% dot-overlap rule (one archived dense raster, surface rho ~ 0.04) and needs selector review; promotion to a scored slot is a separate selector step (protocol rule 6)"
+}

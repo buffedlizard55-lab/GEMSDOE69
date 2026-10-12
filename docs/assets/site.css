@@ -36,3 +36,4 @@ pre { background:#0f172a; color:#dbe4f3; padding:12px 14px; border-radius:8px; o
 footer { color:var(--mut); font-size:.85rem; padding: 0 0 40px; text-align:center; }
 .small { font-size:.85rem; color:var(--mut); }
 a { color:var(--acc); }
+.banner.review { background:#fffaeb; border-color:#f79009; color:#7a4d05; }

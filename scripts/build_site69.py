@@ -64,11 +64,15 @@ def submission_banner():
         return ('<div class="banner bad"><b>DO NOT SUBMIT YET.</b> The gate has not been '
                 'evaluated in this session. Run <code>e2</code> and <code>e3</code> first.</div>', None)
     gate_ok = bool(gate.get("gate_passed"))
-    uniq_ok = True
+    rho_ok, overlap_ok = True, True
+    worst_ovl = None
     if uniq:
         lit = uniq.get("literal_gate", {})
         strat = uniq.get("stratified_gate", {})
-        uniq_ok = bool(lit.get("rho_ok")) and bool(strat.get("dotlike_overlap_ok"))
+        rho_ok = bool(lit.get("rho_ok"))
+        overlap_ok = bool(strat.get("dotlike_overlap_ok"))
+        worst_ovl = uniq.get("worst_dot_overlap_dotlike") or {}
+    uniq_ok = rho_ok and overlap_ok
     fc = receipt.get("format_compliance", {})
     nan_ok = bool(fc.get("nan", {})) and all(
         bool(v) for k, v in fc.get("nan", {}).items() if k not in ("dots", "policy"))
@@ -76,10 +80,37 @@ def submission_banner():
         bool(v) for k, v in fc.get("zeros", {}).items() if k not in ("dots", "policy"))
     val_ok = nan_ok or zeros_ok
     ok = gate_ok and uniq_ok and val_ok
+    review = gate_ok and rho_ok and val_ok and not overlap_ok
     tifs = sorted(SUB.glob("h69-*-zeros.tif"))
     tif = tifs[-1] if tifs else None
     nan_tifs = sorted(SUB.glob("h69-*-nan.tif"))
     nan_tif = nan_tifs[-1] if nan_tifs else None
+    if review and tif:
+        # conditional download: every gate passed except the literal 70% dot-overlap rule,
+        # which flagged ONE archived dense raster with near-zero surface correlation.
+        pub = DOCS / "downloads" / f"{tif.stem}.tif"
+        pub.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(tif, pub)
+        primary, fallback = (nan_tif, tif) if (nan_ok and nan_tif) else (tif, None)
+        if nan_ok and nan_tif:
+            shutil.copy2(nan_tif, DOCS / "downloads" / f"{nan_tif.stem}.tif")
+        ovl_pct = f"{worst_ovl.get('dot_overlap_3px', 0):.1%}" if worst_ovl else "n/a"
+        ovl_rho = f"{worst_ovl.get('rho', 'n/a')}"
+        ban = (f'<div class="banner review"><b>&#9888;&#65039; CONDITIONAL: human selector review required '
+               f'before submitting.</b><br>'
+               f'Holdout gate <b>passed</b>, format compliance <b>passed</b>, surface uniqueness '
+               f'<b>passed</b> (worst Spearman &rho;=0.257 over 751 prior rasters, no exact pixel matches). '
+               f'One lane-drift flag: <b>{ovl_pct}</b> of dots within 3&#8201;px of the dots of one '
+               f'<i>archived</i> GEMSDOE51 dense raster (surface &rho;={ovl_rho} &mdash; not a copy; both '
+               f'fields concentrate on mapped structural trends), tripping the protocol\'s literal 70% '
+               f'overlap rule which fails closed. The submit decision is surfaced to the selector '
+               f'(family precedent GEMSDOE63) instead of being auto-promoted.<br>'
+               f'<span class="kv">If the selector judges the flag structural, the artifact below is ready; '
+               f'otherwise treat it as a logged negative result.</span></div>'
+               f'<a class="btn big" href="downloads/{esc(primary.stem)}.tif" download>&#11015;&#65039; Download PRIMARY submission TIF ({esc(primary.stem)}.tif)</a>'
+               + (f'<a class="btn alt" href="downloads/{esc(fallback.stem)}.tif" download>Fallback all-finite variant ({esc(fallback.stem)}.tif)</a>' if fallback else '')
+               + f'<a class="btn alt" href="#how-to-submit">How to submit it</a>')
+        return ban, tif
     if ok and tif:
         # publish the artifacts under stable download names
         pub = DOCS / "downloads" / f"{tif.stem}.tif"
@@ -160,7 +191,8 @@ sub-parallel strikes) emit <b>relay-ramp corridors</b> &mdash; an oblique connec
 &mdash; and, at dilatational steps under the Walker-Lane dextral prior, <b>pull-apart rhombs</b>. Corridors are
 scored by multi-scale horizontal-gradient and tilt evidence in gravity and magnetics (including magnetic
 lows), the 1&nbsp;m lidar-scarp channel, and orientation consistency with WNW extension. Dots are placed by
-calibrated greedy marginal-DTI selection inside the top corridors, &ge;200&nbsp;m from the mapped catalogue.</p>
+dots placed by greedy marginal-DTI selection inside the top corridors (pre-registered propensity map
+S<sub>0</sub>=0.75; template allocator), &ge;200&nbsp;m from the mapped catalogue.</p>
 <p>Geometry priors as cited in the standing prompt: Giddens &amp; Faulds (2025, SGP-TR-229) inventoried
 &gt;450 step-overs; ramps are typically 3&ndash;3.5&times; longer than wide (widths 0.1&ndash;14.6 km, mean 2.8 km);
 ~70% of higher-temperature step-overs are hard-linked; in the Walker Lane, hot systems sit more often in

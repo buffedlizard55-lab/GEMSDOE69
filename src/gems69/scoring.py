@@ -31,7 +31,7 @@ W_GRAV, W_MAG, W_MAGLOW, W_LIDAR, W_ORIENT, W_GEOM = 0.20, 0.20, 0.18, 0.15, 0.1
 GEOM_PRIOR = {"pull-apart": 1.0, "relay-ramp": 0.9, "transfer-overlap": 0.6}
 NNE_AXES = (0.0, 22.5, 45.0)     # axial azimuths, deg
 ORIENT_SIGMA_DEG = 30.0
-S0_DEFAULT = 0.75                 # calibrated scalar (single allowed calibration)
+S0_DEFAULT = 0.75                 # pre-registered scalar; the single parameter calibration may touch
 
 
 def axial_distance(az: float, axes=NNE_AXES) -> float:

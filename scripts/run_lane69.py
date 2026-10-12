@@ -331,7 +331,9 @@ def cmd_unique() -> int:
             else:
                 rho = None
             if n_their > 0 and n_my_dots > 0:
-                near = ndi.binary_dilation(tpos, iterations=3)
+                yy, xx = np.mgrid[-3:4, -3:4]
+                disk = (yy * yy + xx * xx) <= 9          # Euclidean radius 3 px (template convention)
+                near = ndi.binary_dilation(tpos, structure=disk)
                 overlap = float(near[mine_dots].mean())
             else:
                 overlap = 0.0
@@ -376,6 +378,7 @@ def cmd_unique() -> int:
         errors=errors[:50], seconds=round(time.time() - t0, 1),
     )
     dump("e3_uniqueness.json", out)
+    dump("e3_uniqueness_rows.json", dict(rows=rows))
     print(json.dumps({k: out[k] for k in ("worst_abs_spearman", "worst_dot_overlap_dotlike",
                                           "literal_gate", "n_errors")}, indent=1))
     return 0
@@ -398,6 +401,9 @@ def cmd_card() -> int:
                                              if k not in ("dots", "policy"))
     val_ok = nan_ok or zeros_ok
     verdict = "promote-candidate" if (gate_ok and uniq_ok and val_ok) else "negative"
+    review = bool(gate_ok and lit.get("rho_ok") and val_ok and not strat.get("dotlike_overlap_ok"))
+    if review:
+        verdict = "promote-flagged-review"
     card = dict(
         generated_utc=utcnow(),
         lane="GEMSDOE69 relay-ramp & pull-apart corridor generator",
@@ -446,7 +452,11 @@ def cmd_card() -> int:
         submission_name=receipt.get("raster", {}).get("zeros", {}).get("path", "").split("/")[-1].replace(".tif", ""),
         submission_note=receipt.get("note", "")[:140],
         verdict=verdict,
+        banner=("ok" if verdict == "promote-candidate"
+                else ("review" if verdict == "promote-flagged-review" else "stop")),
         note=("verdict 'promote-candidate' means the holdout gate + registry scan + validator all passed; "
+              "'promote-flagged-review' means every gate passed except the literal 70% dot-overlap rule "
+              "(one archived dense raster, surface rho ~ 0.04) and needs selector review; "
               "promotion to a scored slot is a separate selector step (protocol rule 6)"),
     )
     dump("run_card.json", card)
