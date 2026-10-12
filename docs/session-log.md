@@ -46,7 +46,7 @@ Bugs found and fixed in this pass:
 | Hash / pixel-agreement check against prior rasters | **Not run.** No candidate raster. |
 | Irregularity log with links | Done (`docs/irregularities.md`, IR-01 … IR-25). |
 | Every number labelled | Done. No number is a holdout score. |
-| Pull request, then merge to main | Planned in the same session (see the PR section below). |
+| Pull request, then merge to main | Done. PR #1 merged (merge commit `e704246`). Pages: the API returned 403, so the source could not be set to `/docs`; PR #2 (`1609381`) adds a root redirect to `docs/index.html` so the Pages URL works. The Pages build for `main` completed. |
 
 ## Commands run and their results
 * `PYTHONPATH=src pytest -q` (venv: Python 3.11.x, numpy 2.4.6, rasterio 1.4.4, pytest) — **25 passed**.
@@ -68,6 +68,7 @@ Bugs found and fixed in this pass:
    closest variant (IR-14). The top hypothesis is a different lane (H-P).
 
 ## Next steps (ordered)
+0. **Owner action:** set Pages source to `main` / `/docs` (the token cannot). The root redirect works until then.
 1. **Owner action:** log in at DrivenData, accept the rules, and place the official files in `data/`
    (`data/README.md`). Record their names and sha256 (IR-04).
 2. **Owner action:** send the file that failed "Predicted values must be in range [0, 1]" (IR-13).
