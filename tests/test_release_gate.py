@@ -33,7 +33,7 @@ def cleared(tmp_path):
     put(tmp_path, 'e3_uniqueness.json', dict(literal_gate=dict(rho_ok=True, overlap_ok=True),
         n_registry_blobs=1, n_compared=1, n_errors=0, my_sha256=sha,
         worst_abs_spearman=.20, worst_dot_overlap_all={'dot_overlap_3px': .40}))
-    put(tmp_path, 'e3_receipt.json', dict(submission_name='synthetic-unit-fixture',
+    put(tmp_path, 'e3_receipt.json', dict(evidence_class='SUBMISSION-RECEIPT', submission_name='synthetic-unit-fixture',
         submission_note='Unit fixture, not a real submission', raster=dict(zeros=dict(path='candidate.tif', sha256=sha)),
         validator=dict(reports=[dict(sha256=sha, all_checks_passed=True, checks=checks)])))
     for phase in ('surface', 'dots'):
@@ -44,6 +44,23 @@ def cleared(tmp_path):
             }, 'completed_before_placement': True})
     code = tmp_path / 'model.py'
     code.write_text('# reproducible fixture')
+    holdout = tmp_path / 'holdout.py'
+    holdout.write_text('# synthetic whole-segment buffered evaluator unit fixture')
+    gate = policy.read(tmp_path, 'e2_gate.json')
+    evaluator = gate['release_statistics']['evaluator_version']
+    gate.update(evidence_class='HOLDOUT-DTI', evaluator=evaluator,
+        withheld_positive_px_total=100, n_cells=8,
+        paired_cell_bootstrap=dict(
+            candidate_minus_control=dict(mean=.11, ci95=[.06, .15]),
+            candidate_minus_current_best=dict(mean=.03, ci95=[.01, .05])))
+    put(tmp_path, 'e2_gate.json', gate)
+    put(tmp_path, 'e2_holdout_protocol_audit.json', dict(
+        evidence_class='HOLDOUT-PROTOCOL-AUDIT', artifact_sha256=sha, evaluator=evaluator,
+        compliant=True, whole_fault_segments_withheld=True, segment_chunking=False,
+        withheld_context_buffer_px=3, catalogue_features_from_visible_faults_only=True,
+        visible_fault_mask_pixel_exact=True, pooled_dti=True, alpha=.2, beta=.8,
+        kernel='triangular', radius_m=300,
+        source_sha256={'holdout.py': hashlib.sha256(holdout.read_bytes()).hexdigest()}))
     put(tmp_path, 'e3_method_manifest.json', dict(artifact_sha256=sha, feature_names=['hg'],
         source_sha256={'model.py': hashlib.sha256(code.read_bytes()).hexdigest()},
         catalogue_features_visible_only=True, geological_requirements=dict(
@@ -53,7 +70,11 @@ def cleared(tmp_path):
 
 
 def test_complete_hash_bound_receipts_pass(cleared):
-    assert policy.evaluate(cleared)['download_enabled']
+    decision = policy.evaluate(cleared)
+    assert decision['download_enabled']
+    assert decision['selector_authorization_required'] is True
+    assert decision['holdout_protocol_compliant'] is True
+    assert decision['paired_ci_control_passed'] and decision['paired_ci_current_best_passed']
 
 
 def test_missing_evidence_fails_closed(tmp_path):
@@ -330,3 +351,93 @@ def test_phase_counts_are_integers_not_boolean_passes(cleared, field):
     document['phases']['surface']['summary'][field] = True if field != 'missing_or_invalid' else False
     put(cleared, 'e3_uniqueness_surface.json', document)
     assert not policy.evaluate(cleared)['download_enabled']
+
+
+@pytest.mark.parametrize('comparison', ['candidate_minus_control', 'candidate_minus_current_best'])
+def test_each_paired_holdout_ci_is_required_to_be_positive(cleared, comparison):
+    gate = policy.read(cleared, 'e2_gate.json')
+    gate['paired_cell_bootstrap'][comparison]['ci95'] = [0.0, 0.02]
+    put(cleared, 'e2_gate.json', gate)
+    result = policy.evaluate(cleared)
+    assert result['verdict'] == 'negative'
+    assert result['download_enabled'] is False
+    if comparison == 'candidate_minus_control':
+        assert result['paired_ci_control_passed'] is False
+        assert any('no-prior control' in reason for reason in result['reasons'])
+    else:
+        assert result['paired_ci_current_best_passed'] is False
+        assert any('current lane-best' in reason for reason in result['reasons'])
+
+
+@pytest.mark.parametrize(('field', 'value'), [
+    ('whole_fault_segments_withheld', False),
+    ('segment_chunking', True),
+    ('withheld_context_buffer_px', 2),
+    ('catalogue_features_from_visible_faults_only', False),
+    ('visible_fault_mask_pixel_exact', False),
+    ('alpha', 0.25),
+    ('beta', 0.75),
+    ('radius_m', 500),
+])
+def test_holdout_protocol_audit_must_match_the_required_protocol(cleared, field, value):
+    audit = policy.read(cleared, 'e2_holdout_protocol_audit.json')
+    audit[field] = value
+    put(cleared, 'e2_holdout_protocol_audit.json', audit)
+    result = policy.evaluate(cleared)
+    assert result['verdict'] == 'negative'
+    assert result['holdout_protocol_compliant'] is False
+    assert any('whole-segment holdout protocol audit' in reason for reason in result['reasons'])
+
+
+def test_holdout_protocol_source_hash_must_match(cleared):
+    (cleared / 'holdout.py').write_text('# mutated evaluator')
+    result = policy.evaluate(cleared)
+    assert result['holdout_protocol_compliant'] is False
+    assert not result['download_enabled']
+
+
+def test_receipt_evidence_class_is_required(cleared):
+    receipt = policy.read(cleared, 'e3_receipt.json')
+    receipt['evidence_class'] = 'ORGANIZER-CONFIRMED'
+    put(cleared, 'e3_receipt.json', receipt)
+    result = policy.evaluate(cleared)
+    assert not result['download_enabled']
+    assert any('correctly classified submission artifact receipt' in reason for reason in result['reasons'])
+
+
+def test_archived_transfer_runner_refuses_legacy_holdout_and_emission():
+    from scripts import run_exp2b_transfer
+
+    with pytest.raises(SystemExit, match='legacy chunked, unbuffered'):
+        run_exp2b_transfer.cmd_gate()
+    with pytest.raises(SystemExit, match='no protocol-qualified'):
+        run_exp2b_transfer.cmd_emit()
+
+
+def test_current_repo_fails_closed_on_literal_overlap():
+    # A parallel branch rebound H69-J's holdout/source evidence, but its
+    # literal all-registry overlap remains 1.0. A passing dotlike diagnostic
+    # cannot turn that written duplicate-stop result into a promotion.
+    result = policy.evaluate()
+    assert result['verdict'] == 'negative'
+    assert result['download_enabled'] is False
+    assert any('Literal registry dot-overlap gate' in reason for reason in result['reasons'])
+
+
+def test_write_card_refuses_to_overwrite_an_unbound_candidate(cleared):
+    gate = policy.read(cleared, 'e2_gate.json')
+    gate['artifact_sha256'] = 'another-candidate'
+    put(cleared, 'e2_gate.json', gate)
+    with pytest.raises(ValueError, match='holdout is not bound'):
+        policy.write_card(cleared)
+    assert not (cleared / 'evidence' / 'run_card.json').exists()
+
+
+def test_write_card_refuses_cross_candidate_replacement_without_opt_in(cleared):
+    put(cleared, 'run_card.json', {'raster': {'zeros': {'sha256': 'other-artifact'}}})
+    with pytest.raises(ValueError, match='existing run card identifies a different artifact'):
+        policy.write_card(cleared)
+    card = policy.read(cleared, 'run_card.json')
+    assert card['raster']['zeros']['sha256'] == 'other-artifact'
+    replaced = policy.write_card(cleared, replace=True)
+    assert replaced['raster']['zeros']['sha256'] != 'other-artifact'

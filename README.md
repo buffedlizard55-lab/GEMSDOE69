@@ -26,11 +26,12 @@ The H33 reported result **0.2778 is USER-REPORTED-NOT-ORGANIZER-CONFIRMED for it
 
 ### Current release blockers
 
+- No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.
+- No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.
 - Pooled HOLDOUT-DTI, spatial-block confidence intervals, or a positive current-best contrast are unverified.
-- Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.
+- Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.
 - Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.
-- Holdout comparison is missing or not bound to the current artifact hash.
-- Reproducible method source manifest is missing, stale, or not artifact-bound.
+- A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed.
 - Visible-only catalogue derivation is not certified; full-catalogue holdout flank masks are not allowed.
 - Source polylines, same-dip pairing, and releasing slip sense are not verified for this artifact.
 - Computed, artifact-bound feature-alone leakage canaries are missing, unverified, or flagged.

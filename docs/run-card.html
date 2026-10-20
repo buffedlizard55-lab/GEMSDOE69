@@ -8,7 +8,7 @@
 <p class="sub">Catalogue-geometry fault discovery · reproducible checks · no unsupported score promises</p></div></header>
 <nav aria-label="Main"><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="why-h33-scored.html">H33 analysis</a><a href="hypotheses.html">Research queue</a><a href="method.html">Method audit</a><a href="results.html">Evidence</a><a href="family-audit.html">Family results</a><a href="sources.html">Verified sources</a><a href="irregularities.html">Blockers</a><a href="run-card.html" aria-current="page" class="active">Run card</a></div></nav>
 <main class="wrap" id="content"><section class="card"><h2>One authoritative run card</h2><p>Negative result, no new candidate or slot. Null certified holdout fields mean not measured/certified, not zero performance.</p><a href="run-card.json">Download JSON</a><pre>{
-  &quot;generated_utc&quot;: &quot;2026-10-20T22:09:02.833878+00:00&quot;,
+  &quot;generated_utc&quot;: &quot;2026-10-20T22:21:15.659988+00:00&quot;,
   &quot;lane&quot;: &quot;GEMSDOE69 relay-ramp and pull-apart corridors&quot;,
   &quot;hypothesis&quot;: &quot;H69-joint-convergent-joint&quot;,
   &quot;mechanism&quot;: &quot;Archived H69-J uses min of independent corridor-mean gravity and magnetic evidence maxima, magnetic lows, scarp magnitude, orientation and geometry priors. It does not test paired transverse tilt-zero crossings.&quot;,
@@ -153,15 +153,16 @@
   &quot;scientific_experiments_this_review&quot;: 0,
   &quot;note&quot;: &quot;Negative audit delivery. No new TIFF, no portal upload, no score projection. Literal duplicate-and-stop is binding.&quot;,
   &quot;release_policy&quot;: {
-    &quot;policy_version&quot;: &quot;gems69-literal-release-v3&quot;,
+    &quot;policy_version&quot;: &quot;gems69-literal-release-v4&quot;,
     &quot;verdict&quot;: &quot;negative&quot;,
     &quot;download_enabled&quot;: false,
     &quot;reasons&quot;: [
+      &quot;No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.&quot;,
+      &quot;No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.&quot;,
       &quot;Pooled HOLDOUT-DTI, spatial-block confidence intervals, or a positive current-best contrast are unverified.&quot;,
-      &quot;Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.&quot;,
+      &quot;Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.&quot;,
       &quot;Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.&quot;,
-      &quot;Holdout comparison is missing or not bound to the current artifact hash.&quot;,
-      &quot;Reproducible method source manifest is missing, stale, or not artifact-bound.&quot;,
+      &quot;A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed.&quot;,
       &quot;Visible-only catalogue derivation is not certified; full-catalogue holdout flank masks are not allowed.&quot;,
       &quot;Source polylines, same-dip pairing, and releasing slip sense are not verified for this artifact.&quot;,
       &quot;Computed, artifact-bound feature-alone leakage canaries are missing, unverified, or flagged.&quot;,
@@ -250,7 +251,12 @@
         &quot;problems&quot;: []
       },
       &quot;all_checks_passed&quot;: true
-    }
+    },
+    &quot;paired_ci_control_passed&quot;: false,
+    &quot;paired_ci_current_best_passed&quot;: false,
+    &quot;holdout_protocol_compliant&quot;: false,
+    &quot;receipt_evidence_class&quot;: &quot;SUBMISSION-RECEIPT&quot;,
+    &quot;selector_authorization_required&quot;: true
   }
 }</pre></section></main>
 <footer><div class="wrap">Maximize P(Win): protect scarce submission slots. Own the Outcome: publish negative results.<br>

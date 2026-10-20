@@ -493,9 +493,13 @@ def cmd_unique() -> int:
 
 
 def cmd_card() -> int:
-    """Apply the single strict publication policy; never weaken the literal gate."""
+    """Apply policy; replace another artifact's card only with explicit flag."""
     from release_gate import write_card
-    card = write_card()
+    try:
+        card = write_card(replace="--replace-artifact-bound-card" in sys.argv)
+    except ValueError as exc:
+        print(f"Run card unchanged: {exc}", file=sys.stderr)
+        return 2
     print(json.dumps(card["release_policy"], indent=2))
     return 0
 

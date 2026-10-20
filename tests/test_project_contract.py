@@ -77,7 +77,9 @@ class ProjectContractTests(unittest.TestCase):
         index = (ROOT / "index.html").read_text(encoding="utf-8")
         guide = (ROOT / "docs/executive-summary.html").read_text(encoding="utf-8")
         card = json.loads((ROOT / "evidence/run_card.json").read_text(encoding="utf-8"))
-        ok_verdicts = {"promote", "promote-candidate"}
+        # A promote run-card verdict only marks an eligible candidate;
+        # it never makes the promotion/slot decision itself.
+        ok_verdicts = {"eligible_for_selector", "promote"}
         if card["verdict"] not in ok_verdicts:
             self.assertIn("NOT OK TO SUBMIT", index)
             self.assertIn("DO NOT SUBMIT", index)
@@ -89,6 +91,16 @@ class ProjectContractTests(unittest.TestCase):
             self.assertIn("OK TO DOWNLOAD", guide)
         legacy = (ROOT / "docs/parallel/executive-summary.html").read_text(encoding="utf-8")
         self.assertIn("No submission file is available", legacy)
+
+    def test_publication_page_cannot_present_archived_tiff_as_a_download(self) -> None:
+        # The release policy is literal; a dense-support diagnostic cannot leave
+        # a stale download link or an H33 score attribution on the public page.
+        index = (ROOT / "docs" / "index.html").read_text(encoding="utf-8")
+        why_h33 = (ROOT / "docs" / "why-h33-scored.html").read_text(encoding="utf-8")
+        self.assertIn("No TIFF or ZIP is published for submission", index)
+        self.assertNotIn('href="downloads/', index)
+        self.assertIn("UNSCORED", why_h33)
+        self.assertIn("USER-REPORTED-NOT-ORGANIZER-CONFIRMED", why_h33)
 
     def test_all_local_html_links_resolve(self) -> None:
         pages = [p for p in sorted(ROOT.rglob("*.html"))

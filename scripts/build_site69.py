@@ -82,7 +82,7 @@ def submission_banner():
         reasons = ''.join(f'<li>{esc(reason)}</li>' for reason in decision['reasons'])
         return (f'''<section class="banner bad" aria-label="Submission status"><div class="status-label">SUBMISSION STATUS · NEGATIVE</div>
 <h2>NOT OK TO SUBMIT — DO NOT SUBMIT</h2>
-<p>No submission download is offered. The literal registry gate fails and the current candidate's scientific evidence is not certified.
+<p>No TIFF or ZIP is published for submission. No submission download is offered. The literal registry gate fails and the current candidate's scientific evidence is not certified.
 No new TIFF or competition upload was made in this review.</p>
 <div class="actions"><span class="blocked">Download blocked by evidence gates</span><a href="executive-summary.html">What must pass?</a></div>
 <details><summary>View all release blockers</summary><ul>{reasons}</ul></details></section>''', None)
@@ -182,6 +182,7 @@ def build_why_h33():
 <p>Fresh RASTER-MEASUREMENTS from pinned mirror bytes: {anatomy.get('dots', 0):,} unit dots; zero on-catalogue pixels; nearest catalogue distance {anatomy.get('nearest_catalogue_m', 0):.1f} m; median {anatomy.get('median_catalogue_distance_m', 0):.1f} m.
 The SHA-256 is <code>{esc(anatomy.get('sha256', 'not measured'))}</code>. {source_link('problem', 'Official metric and sample format')}.</p>
 <p><b>Official masking caveat:</b> known USGS/INGENIOUS fault pixels are excluded from initial and final scoring. Zero on-catalogue dots is a layout measurement, not by itself a score advantage. The marginal-DTI argument below concerns scored pixels only. {source_link('masking_clarification', 'DrivenData Staff clarification')}.</p>
+<p>The owner source labels the exact H33 variant <b>UNSCORED</b> and provides no artifact-bound organizer receipt. A projection elsewhere is not a measured hidden-truth score.</p>
 <h3>Metric mechanism</h3>
 <p>Let T be weighted true-positive coverage, S total predicted mass, M the prediction-weighted nearest-truth kernel credit, and N the number of true pixels. With α=0.2 and β=0.8,</p>
 <pre>DTI = T / [0.2(T + S − M) + 0.8N + ε].
@@ -225,6 +226,7 @@ def build_method():
 <tr><td>W 0.1–15 km; separation ≤3.5W</td><td>Repaired interval origin and search radius are covered by unit tests. Those source repairs make older manifests stale.</td><td>Geometry tests are not a rerun certificate</td></tr>
 <tr><td>Multi-scale HG/tilt evidence</td><td>HG of Gaussian-smoothed fields; an unsigned Gaussian-difference/gradient proxy; scalar corridor means and group maxima/minima. Not signed tilt-zero profile coincidence or physical upward continuation.</td><td>Description corrected; science not re-fit after stop</td></tr>
 <tr><td>Visible-only hide-and-recover</td><td>Corridor geometry is rebuilt from visible faults, but an allowed-pixel flank mask still uses the full catalogue. The older canary propensity also uses the full catalogue.</td><td>Blocking label-dependent input</td></tr>
+<tr><td>Whole-segment withholding with a buffer</td><td>The archived shared build_holdout caller chunks branches at MAX_SEG_PX=12 and leaves visible context unbuffered. Quadrant-boundary erosion is not a withheld-segment buffer.</td><td>Missing compliant, hash-bound protocol audit; legacy transfer functions also stop when imported</td></tr>
 <tr><td>Pooled HOLDOUT-DTI; spatial-block CI</td><td>Some archives contain mean-of-cell results; others pool counts but bootstrap repeated cells as independent. Repeated seeds share blocks.</td><td>Not a release certificate</td></tr>
 <tr><td>Surface uniqueness before placement</td><td>Some archived comparisons were made only after emission; some phase summaries contradict their literal readings.</td><td>Blocking; no post-hoc clearance</td></tr>
 <tr><td>Source/layer rationale</td><td>Archived rationale tables exist, but entries lack authenticated dip/slip provenance and are not proof of a geological link.</td><td>Geologist review still required</td></tr>

@@ -12,6 +12,7 @@
 <p>Fresh RASTER-MEASUREMENTS from pinned mirror bytes: 37,654 unit dots; zero on-catalogue pixels; nearest catalogue distance 223.6 m; median 1964.7 m.
 The SHA-256 is <code>c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9</code>. <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Official metric and sample format</a>.</p>
 <p><b>Official masking caveat:</b> known USGS/INGENIOUS fault pixels are excluded from initial and final scoring. Zero on-catalogue dots is a layout measurement, not by itself a score advantage. The marginal-DTI argument below concerns scored pixels only. <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/2">DrivenData Staff clarification</a>.</p>
+<p>The owner source labels the exact H33 variant <b>UNSCORED</b> and provides no artifact-bound organizer receipt. A projection elsewhere is not a measured hidden-truth score.</p>
 <h3>Metric mechanism</h3>
 <p>Let T be weighted true-positive coverage, S total predicted mass, M the prediction-weighted nearest-truth kernel credit, and N the number of true pixels. With α=0.2 and β=0.8,</p>
 <pre>DTI = T / [0.2(T + S − M) + 0.8N + ε].

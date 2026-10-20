@@ -2,11 +2,27 @@
   "evidence_class": "REGISTRY-MEASUREMENT",
   "candidate_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
   "scope": "All other local archived TIFFs, excluding this emission and its NaN twin. No other file was generated.",
-  "n_files_compared": 12,
+  "n_files_compared": 14,
   "max_dot_overlap_3px": 0.8023481341643177,
   "literal_overlap_failure": true,
   "conclusion": "Independent sparse local-prior failures also block the archived candidate; excluding the universal-support prior would not clear it.",
   "rows": [
+    {
+      "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T215915Z-74c22ad2-nan.tif",
+      "sha256": "e59602fa48fe15db6ab3627922810258bcbfe3ae776b82af7fe93a3c75b93bbd",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9947584585049308,
+      "dots_within_3px": 0.718766970958649
+    },
+    {
+      "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T215915Z-74c22ad2-zeros.tif",
+      "sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9947584585049308,
+      "dots_within_3px": 0.718766970958649
+    },
     {
       "path": "submissions/h69-relayfix-v1-35235-20261020T202813Z-a2917d46-nan.tif",
       "sha256": "8bbf3fea17a370b85de1f9a737e4f6d48d4da184d779f2ca1610d2bb49008837",

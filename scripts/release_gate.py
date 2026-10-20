@@ -66,6 +66,45 @@ def object_dict(value):
     return value if isinstance(value, dict) else {}
 
 
+
+def _positive_ci(value):
+    if not isinstance(value, dict):
+        return False
+    ci, mean = value.get('ci95'), value.get('mean')
+    return (interval(ci, positive=True) and finite_number(mean)
+            and ci[0] <= mean <= ci[1])
+
+
+def _holdout_protocol_ok(root, audit, gate, artifact_sha):
+    """Retain main's whole-segment audit, with safe local-file resolution."""
+    if not isinstance(audit, dict) or not isinstance(artifact_sha, str) or len(artifact_sha) != 64:
+        return False
+    if (audit.get('evidence_class') != 'HOLDOUT-PROTOCOL-AUDIT'
+            or audit.get('artifact_sha256') != artifact_sha
+            or audit.get('evaluator') != gate.get('evaluator')
+            or audit.get('compliant') is not True
+            or audit.get('whole_fault_segments_withheld') is not True
+            or audit.get('segment_chunking') is not False
+            or audit.get('catalogue_features_from_visible_faults_only') is not True
+            or audit.get('visible_fault_mask_pixel_exact') is not True
+            or audit.get('pooled_dti') is not True
+            or not finite_number(audit.get('alpha')) or audit.get('alpha') != .2
+            or not finite_number(audit.get('beta')) or audit.get('beta') != .8
+            or audit.get('kernel') != 'triangular' or audit.get('radius_m') != 300):
+        return False
+    buffer_px = audit.get('withheld_context_buffer_px')
+    if type(buffer_px) is not int or buffer_px < 3:
+        return False
+    hashes = audit.get('source_sha256')
+    if not isinstance(hashes, dict) or not hashes:
+        return False
+    for rel, digest in hashes.items():
+        path = local_file(root, rel)
+        if path is None or not isinstance(digest, str) or sha256_file(path) != digest:
+            return False
+    return True
+
+
 def evaluate(root=ROOT):
     root = Path(root).resolve()
     gate = read(root, 'e2_gate.json')
@@ -76,6 +115,18 @@ def evaluate(root=ROOT):
         reasons.append('Holdout improvement gate failed or is missing.')
     if gate.get('current_best_beaten') is not True:
         reasons.append('No explicit same-evaluator evidence of beating the current holdout best.')
+
+    if gate.get('evidence_class') != 'HOLDOUT-DTI' or not isinstance(gate.get('evaluator'), str) or not gate.get('evaluator', '').strip():
+        reasons.append('A versioned HOLDOUT-DTI evaluator record is missing.')
+    if not positive_count(gate.get('withheld_positive_px_total')) or not positive_count(gate.get('n_cells')):
+        reasons.append('The HOLDOUT-DTI withheld-positive/spatial-cell counts are missing or invalid.')
+    paired = object_dict(gate.get('paired_cell_bootstrap'))
+    control_ci_ok = _positive_ci(paired.get('candidate_minus_control') or paired.get('transfer_minus_control'))
+    best_ci_ok = _positive_ci(paired.get('candidate_minus_current_best') or paired.get('transfer_minus_current_best'))
+    if not control_ci_ok:
+        reasons.append('No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.')
+    if not best_ci_ok:
+        reasons.append('No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.')
 
     # Do not accept a pass flag in contradiction to its numeric evidence.
     statistics = gate.get('release_statistics', {})
@@ -99,8 +150,10 @@ def evaluate(root=ROOT):
         reasons.append('Pooled HOLDOUT-DTI, spatial-block confidence intervals, or a positive current-best contrast are unverified.')
 
     literal = object_dict(uniq.get('literal_gate'))
-    if not isinstance(literal, dict) or literal.get('rho_ok') is not True or literal.get('overlap_ok') is not True:
-        reasons.append('Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.')
+    if literal.get('rho_ok') is not True:
+        reasons.append('Registry rank-correlation gate failed; duplicate-and-stop applies.')
+    if literal.get('overlap_ok') is not True:
+        reasons.append('Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.')
     rho = uniq.get('worst_abs_spearman')
     overlap = uniq.get('worst_dot_overlap_all', {})
     overlap = overlap.get('dot_overlap_3px') if isinstance(overlap, dict) else None
@@ -114,6 +167,8 @@ def evaluate(root=ROOT):
     if object_dict(uniq.get('local_prior_overlap')).get('ok') is False:
         reasons.append('A local prior emission triggers duplicate-and-stop.')
 
+    if receipt.get('evidence_class') != 'SUBMISSION-RECEIPT':
+        reasons.append('A correctly classified submission artifact receipt is missing.')
     raster = object_dict(object_dict(receipt.get('raster')).get('zeros'))
     path = local_file(root, raster.get('path'))
     sha = sha256_file(path) if path else None
@@ -123,6 +178,10 @@ def evaluate(root=ROOT):
         reasons.append('Registry result is not bound to the current artifact hash.')
     if sha is None or gate.get('artifact_sha256') != sha:
         reasons.append('Holdout comparison is missing or not bound to the current artifact hash.')
+
+    protocol_ok = _holdout_protocol_ok(root, read(root, 'e2_holdout_protocol_audit.json'), gate, sha)
+    if not protocol_ok:
+        reasons.append('A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed.')
 
     manifest = read(root, 'e3_method_manifest.json')
     hashes = manifest.get('source_sha256', {})
@@ -215,8 +274,11 @@ def evaluate(root=ROOT):
     if review.get('status') == 'quarantined' and isinstance(reviewed_hashes, list) and sha in reviewed_hashes:
         reasons.append('Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.')
 
-    return dict(policy_version='gems69-literal-release-v3', verdict='negative' if reasons else 'promote',
-                download_enabled=not reasons, reasons=reasons, artifact_sha256=sha, validator_report=report)
+    return dict(policy_version='gems69-literal-release-v4', verdict='negative' if reasons else 'promote',
+                download_enabled=not reasons, reasons=reasons, artifact_sha256=sha, validator_report=report,
+                paired_ci_control_passed=control_ci_ok, paired_ci_current_best_passed=best_ci_ok,
+                holdout_protocol_compliant=protocol_ok, receipt_evidence_class=receipt.get('evidence_class'),
+                selector_authorization_required=True)
 
 
 def write_card(root=ROOT, *, replace=False):

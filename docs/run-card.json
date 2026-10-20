@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T22:09:02.833878+00:00",
+  "generated_utc": "2026-10-20T22:21:15.659988+00:00",
   "lane": "GEMSDOE69 relay-ramp and pull-apart corridors",
   "hypothesis": "H69-joint-convergent-joint",
   "mechanism": "Archived H69-J uses min of independent corridor-mean gravity and magnetic evidence maxima, magnetic lows, scarp magnitude, orientation and geometry priors. It does not test paired transverse tilt-zero crossings.",
@@ -144,15 +144,16 @@
   "scientific_experiments_this_review": 0,
   "note": "Negative audit delivery. No new TIFF, no portal upload, no score projection. Literal duplicate-and-stop is binding.",
   "release_policy": {
-    "policy_version": "gems69-literal-release-v3",
+    "policy_version": "gems69-literal-release-v4",
     "verdict": "negative",
     "download_enabled": false,
     "reasons": [
+      "No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.",
+      "No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.",
       "Pooled HOLDOUT-DTI, spatial-block confidence intervals, or a positive current-best contrast are unverified.",
-      "Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.",
+      "Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.",
       "Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.",
-      "Holdout comparison is missing or not bound to the current artifact hash.",
-      "Reproducible method source manifest is missing, stale, or not artifact-bound.",
+      "A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed.",
       "Visible-only catalogue derivation is not certified; full-catalogue holdout flank masks are not allowed.",
       "Source polylines, same-dip pairing, and releasing slip sense are not verified for this artifact.",
       "Computed, artifact-bound feature-alone leakage canaries are missing, unverified, or flagged.",
@@ -241,6 +242,11 @@
         "problems": []
       },
       "all_checks_passed": true
-    }
+    },
+    "paired_ci_control_passed": false,
+    "paired_ci_current_best_passed": false,
+    "holdout_protocol_compliant": false,
+    "receipt_evidence_class": "SUBMISSION-RECEIPT",
+    "selector_authorization_required": true
   }
 }

@@ -31,7 +31,9 @@
   `registry/prior_rasters.json` (751 unique git blobs, family census
   2026-10-11); every blob verified content-addressed (git blob sha1).
 
-## Reproduce
+## Historical reproduction commands — blocked under current review
+
+Use only the safe audit sequence in HANDOFF.md for now. The model commands below are retained historical context, not permission to bypass preflight.
 
     python3 scripts/fetch_data.py
     python3 scripts/fetch_registry.py
@@ -59,3 +61,20 @@ not reproducible from the checked-in implementation and phase receipts are stale
 - Official public source pages were reachable via the research fetch tool, despite shell-host limits. Use the claim-level verified source registry; do not repeat blanket claims that public pages cannot be read. Authenticated data/submissions still redirect to login.
 - Attribute mirrors contain DIPDIRECT/SLIPSENSE; production integration/authentication is the gap. Same strike is not same dip, and unsigned overlap is not releasing slip sense.
 - A fresh universal-support counterexample proves the literal nonempty-field gate cannot pass under the current registry/support definition. Preserve that stop; do not silently reinterpret it or waste a slot.
+
+
+## Holdout and selector gates (2026-10-20 continuation)
+
+A release-eligible artifact requires a versioned HOLDOUT-DTI evaluator, a positive
+paired 95% bootstrap CI against both the no-prior control and current lane-best,
+and a SHA-bound protocol audit proving whole-segment withholding, no chunking,
+≥3 px withheld-context buffer, visible-only catalogue features, pixel-exact
+visible-fault masking, and pooled DTI (α=0.2, β=0.8, 300 m triangular kernel).
+The artifact receipt must be classified `SUBMISSION-RECEIPT` and bind the exact
+TIFF bytes. Passing these gates only makes a candidate eligible for the separate
+selector; it does not select a submission or spend a slot.
+
+The historical `scripts/run_exp2b_transfer.py` gate and emitter are deliberately
+blocked: they use chunked, unbuffered `build_holdout()` and cannot qualify or
+emit a new TIFF. Keep the guard until a newly authorized runner uses the shared
+buffered evaluator and both literal uniqueness phases pass.

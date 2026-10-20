@@ -1,0 +1,65 @@
+{
+  "review_date_utc": "2026-10-20",
+  "generated_utc": "2026-10-20T22:24:26.032665+00:00",
+  "evidence_class": "SOFTWARE-AND-INTEGRITY-REVIEW; NOT a model experiment or organizer score",
+  "policy_version": "gems69-literal-release-v4",
+  "baseline_tests_passed": 100,
+  "post_integration_tests": {
+    "passed": 201,
+    "warnings": 24,
+    "warning_class": "rasterio PendingDeprecationWarning"
+  },
+  "static_site": {
+    "pages_checked": 18,
+    "passed": true
+  },
+  "browser": {
+    "chromium_version": "153.0.8010.0",
+    "active_page_viewport_visits": 20,
+    "viewports": [
+      [
+        1440,
+        1000
+      ],
+      [
+        390,
+        844
+      ]
+    ],
+    "errors": [],
+    "root_redirect_passed": true,
+    "scope": "Active pages only; all 18 HTML pages additionally statically checked; screenshots/tools ignored"
+  },
+  "current_candidate_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+  "validator": {
+    "variants_checked": 2,
+    "passed": 2,
+    "scope": "Local format/range/mask only; not portal acceptance"
+  },
+  "registry": {
+    "fresh_external_rasters_checked": 1,
+    "index_entries": 862,
+    "exhaustive": false,
+    "literal_overlap": 1.0,
+    "local_prior_files_checked": 14,
+    "max_local_overlap": 0.8023481341643177
+  },
+  "family_sources": {
+    "read": 72,
+    "requested": 72,
+    "errors": 0,
+    "user_reported_claims": 91,
+    "organizer_submission_receipts": 0
+  },
+  "official_shell_health": {
+    "checked": 14,
+    "errors": 14,
+    "limitation": "Arena shell TLS/host restrictions; research-tool parsed-page reads separately registered"
+  },
+  "scientific_experiments_this_review": 0,
+  "competition_slots_used": 0,
+  "new_tiff_emissions_this_review": 0,
+  "shared_scientific_template_changes": [],
+  "integrated_main": "5c68edc",
+  "github_outcomes": "Preparation checkpoint; verify final delivery PR and Actions links. No merge/deployment asserted here."
+}

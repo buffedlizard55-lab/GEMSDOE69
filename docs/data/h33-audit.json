@@ -1,6 +1,6 @@
 {
   "evidence_class": "RASTER-MEASUREMENT",
-  "checked_utc": "2026-10-20T22:02:00.416240+00:00",
+  "checked_utc": "2026-10-20T22:21:07.243504+00:00",
   "source": "https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif",
   "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
   "dots": 37654,

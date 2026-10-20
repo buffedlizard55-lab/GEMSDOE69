@@ -64,6 +64,13 @@
       "finding": "The rejected user file and portal internals are unavailable. Out-of-range values and sentinels are local failure conditions; attributing the actual rejection to NaN or promising that zeros prevents rejection is unsupported.",
       "source": "User prompt; scripts/validate_submission.py; official problem page 967",
       "disposition": "Format checks labelled local/mirror-based, never organizer acceptance."
+    },
+    {
+      "id": "IR-69-HOLD-03",
+      "severity": "blocking",
+      "finding": "The archived run_lane69/relayfix/transfer callers use shared build_holdout, which chunks branches at MAX_SEG_PX=12 and withholds without a feature-context collar. Quadrant-boundary erosion does not implement whole-fault-segment hiding with a buffer.",
+      "source": "vendor/template66/gems57/holdout.py::MAX_SEG_PX/build_holdout; scripts/run_lane69.py:122,146; scripts/run_relayfix_20261020.py:126; inherited evidence/relayfix_holdout_protocol_audit.json",
+      "disposition": "Retain main's hash-bound whole-segment protocol gate and imported transfer-runner guards. No private evaluator fork; a future authorized runner must use the existing shared buffered instrument. No rerun after the stop."
     }
   ],
   "submission_slots_used": 0,
