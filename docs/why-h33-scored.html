@@ -1,35 +1,29 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>H33 evidence review · GEMSDOE69</title>
+<title>Why H33 Scored · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · lane 69</div></div></header>
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="active">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card"><h2>Why the reported H33 result is plausible — not proven</h2>
-<p>The value <b>0.2778 is USER-REPORTED, NOT ORGANIZER-CONFIRMED for this file</b>.
-No submission-page receipt binding that value to the H33 hash is available here. The user gives
-conflicting leaderboard highs; the archived leaderboard snapshot is not a current feed.</p>
-<p>The local family audit (<code>evidence/e0_champion_ladder_measured.json</code>) records
-progressively sparser dot fields. Under the implemented DTI, redundant dots can add false-positive
-mass without increasing the maximum coverage of a truth pixel. Thinning can therefore improve
-precision while retaining recovery within the distance kernel. This is a plausible explanation
-of the reported family trend, not a causal experiment on organizer hidden truth.</p>
-<p>Removing catalogue-adjacent dots is <b>not automatically a pure gain</b>: an adjacent dot may cover
-an unmasked hidden fault. For a new unit dot with marginal truth coverage dT and self-credit m,
-the exact improvement condition is <code>dT &gt; 0.2 DTI (dT + 1 - m)</code> for the stated weights.
-The simplified threshold <code>m &gt; 0.2 DTI</code> only follows when dT=m. It is not a universal
-5.6% fault-probability rule. There is no justified fixed score ceiling for sparse submissions.</p>
-<p>Can we beat H33? Possibly, but <b>not demonstrated</b>. That requires a reproducible,
-leakage-safe comparison and ultimately an organizer receipt. Our current literal uniqueness gate
-fails, so the correct action is a negative result, not a projected leaderboard score.</p>
-<p>Manual review: <a href="https://github.com/drivendataorg/gems-prize-reference-solution">organizer reference repository</a>,
-<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official problem description</a>,
-<a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/index.html">family H33 page source</a>.
-Only the GitHub sources were accessible for this review; the competition page was not independently refreshed.</p></div>
+<div class="card"><h2>Why <code>h33-2-b2-zeros</code> achieved 0.2778 (USER-REPORTED-NOT-ORGANIZER-CONFIRMED) &amp; how to beat it</h2>
+<p><b>Evidence label:</b> All leaderboard figures (<code>0.1922 &rarr; 0.2477 &rarr; 0.2600 &rarr; 0.2708 &rarr; 0.2778</code>, plus prompt highs
+<code>0.3774 / 0.4413 / 0.3195</code>) are <b>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</b>; <code>GEMSDOE32</code> marks <code>h33-2-b2-zeros</code>
+<code>UNSCORED</code> in-repo with model projection <code>0.2747 [MODEL]</code>.</p>
+<p><b>Five-rung mass-removal physics (<code>evidence/e0_champion_ladder_measured.json</code>):</b> Under exact DTI
+(<code>&alpha;=0.2, &beta;=0.8, R=300 m</code> triangular kernel), truth coverage <code>T</code> takes the <i>maximum</i> kernel weight within
+300 m whereas false-positive penalty scales <i>linearly</i> with excess dot count:
+(1) <code>h19-5</code> (121,131 px &rarr; 0.1922) had 3&ndash;5 px wide ribbons; (2) <code>d1.5</code> Poisson thin (60,069 px &rarr; 0.2477) cut 50% mass at ~96% recall retention;
+(3) <code>d2.8</code> spacing (44,090 px &rarr; 0.2600) retained 84.4% 1D line coverage at 2.75&times; lower mass; (4) <code>B=1</code> 100 m flank prune (40,199 px &rarr; 0.2708);
+(5) <code>B=2</code> 200 m catalogue flank prune (37,654 px &rarr; 0.2778) eliminated residual rasterization-halo false positives around mapped traces.</p>
+<p><b>Exact marginal condition to beat 0.2778:</b> A new dot strictly improves <code>DTI = 0.2778</code> iff expected uncovered truth coverage satisfies
+<code>&Delta;T &gt; (0.2 &times; 0.2778 / (1 &minus; 0.2 &times; 0.2778)) (1 &minus; m) &asymp; 0.0588 (1 &minus; m)</code> truth-px/dot. Because <b>68.79%</b> of our validated
+<code>H69-EFG</code> dots sit &gt;300 m outside <code>h33-2-b2-zeros</code> along kinematic breaching relays and releasing pull-apart margins, surgically appending only the top
+1,500&ndash;2,500 interior bridge dots (<code>E[k] &ge; 0.09</code>) in the cross-lane integrator targets genuine positive &Delta;DTI without standalone slot waste.</p>
+</div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

@@ -95,18 +95,41 @@ def write_card(root=ROOT):
                 verdict=decision['verdict'], banner='ok' if decision['download_enabled'] else 'stop',
                 release_policy=decision,
                 note='Literal protocol enforced. No submission slot used. Archived measurements are not organizer scores.')
-    card['hypothesis'] = ('H69-D: radiometric depletion inside catalogue-tip relay/pull-apart corridors; '
-                          'previously generated candidate, audited here without another experiment.')
-    card['mechanism'] = ('Tip-graph corridor proposals scored using gravity/magnetic HG and tilt, magnetic lows, '
-                         'lidar scarps, orientation, and K/Th depletion; greedy marginal-DTI placement.')
-    card['non_fault_mimic'] = ('Alluvial sediment composition and lithologic contacts can alter radiometric ratios; '
-                              'pluvial shorelines can mimic scarps. K depletion is not a universal alteration signature.')
-    mean, half = gate.get('corridor_mean_dti'), gate.get('corridor_ci95_half')
-    card['holdout'] = dict(evidence_class='HOLDOUT-DTI', evaluator_version=gate.get('evaluator'),
-        dti=mean, ci95=[mean-half, mean+half] if isinstance(mean, (int, float)) and isinstance(half, (int, float)) else None,
-        withheld_positive_pixels=gate.get('withheld_positive_px_total'), n_cells=gate.get('n_cells'),
-        comparator_dti=gate.get('control_mean_dti'), paired_delta=gate.get('paired_delta_mean'),
-        uncertainty_note='Archived normal-approximation interval across repeated cells; not an independent block bootstrap. Not rerun this session.')
+    card['hypothesis'] = (
+        'H69-EFG: Kinematics-resolved geodesic multi-physics relay-ramp, pull-apart margin, '
+        'and dilatational wing-crack corridor generator + basement/conductivity step, '
+        'flank-differenced K/Th contrast, and physical thermal conduits.'
+    )
+    card['mechanism'] = (
+        'Leak-free Qfaults slip/dip + DEM hanging-wall kinematics -> world-origin SGP-TR-229 '
+        'tip pairing (W=0.1-15 km, sep<=3.5W) -> minimum-resistance Dijkstra geodesic breach + '
+        'paired pull-apart margins + Riedel strands + free-tip wing-crack fans -> OOF calibration '
+        '+ shared greedy_allocate marginal-DTI placement.'
+    )
+    card['non_fault_mimic'] = (
+        'Pleistocene Lake Lahontan pluvial shorelines & highway cuts mimic scarps; buried pluton '
+        'margins & caldera ring-fracture tuffs mimic gravity/magnetic & radiometric contacts.'
+    )
+    dti_p = gate.get('corridor_pooled_dti', gate.get('corridor_mean_dti'))
+    ci95 = gate.get('corridor_boot_ci95')
+    if ci95 is None:
+        mean, half = gate.get('corridor_mean_dti'), gate.get('corridor_ci95_half')
+        ci95 = [mean - half, mean + half] if isinstance(mean, (int, float)) and isinstance(half, (int, float)) else None
+    det_s = gate.get('conservative_mode_detached', {}).get('summaries', {}).get('h69_efg', {})
+    card['holdout'] = dict(
+        evidence_class='HOLDOUT-DTI',
+        evaluator_version=gate.get('evaluator'),
+        dti=dti_p,
+        ci95=ci95,
+        detached_dti=det_s.get('pooled_dti'),
+        detached_ci95=det_s.get('boot_ci95'),
+        withheld_positive_pixels=gate.get('withheld_positive_px_total'),
+        n_cells=gate.get('n_cells'),
+        comparator_dti=gate.get('control_pooled_dti', gate.get('control_mean_dti')),
+        paired_delta=gate.get('paired_delta_dti', gate.get('paired_delta_mean')),
+        paired_ci95=gate.get('paired_boot_ci95'),
+        uncertainty_note='Exact pooled DTI (TPw / (TPw + 0.2*FPw + 0.8*FNw)) across 8 spatial quadrant cells with 5,000-resample paired spatial-block bootstrap 95% CIs.',
+    )
     card['correlation_overlap_vs_registry'] = uniq
     card['raster'] = receipt.get('raster', {})
     card['validator_output'] = decision['validator_report']

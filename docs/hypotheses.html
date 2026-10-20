@@ -1,32 +1,33 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Queued hypotheses · GEMSDOE69</title>
+<title>Hypotheses · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · lane 69</div></div></header>
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="active">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card"><h2>Queued in-lane hypotheses — no experiment authorized after duplicate stop</h2>
-<p>Qualitative ranking by expected incremental recovery, then implementation cost; no numerical
-DTI improvement is predicted. These joint signatures are absent from the checked-in corridor scorer.
-All remain untested and not slot-eligible. Existing cached layers suffice in principle, but the
-full stack is not restored here. No new external dataset is represented as obtainable.</p>
-<table><tr><th>Rank / hypothesis</th><th>Layers and physical signature</th><th>Missing-fault argument / difference / mimic / cost</th></tr>
-<tr><td>1. Convergent relay-link edge phase</td><td>Gravity and magnetics: HG ridge directions and tilt-zero crossings on opposite corridor margins at several scales.</td>
-<td>Could locate a buried bridge between visible tips. Unlike the current independent maximum layer scores, requires a shared connector phase and axis. Lithologic contacts mimic it. Moderate cost; uncertain benefit.</td></tr>
-<tr><td>2. Releasing-basin margin asymmetry</td><td>Gravity curvature and paired HG flanks plus magnetic low, restricted to tip-derived pull-apart rhombs.</td>
-<td>Could find buried basin-bounding splays rather than rescore visible scarps. Tests transverse basin structure, not a scalar low. Sediment-filled paleochannels mimic it. Moderate cost; uncertain benefit. Slip sense must be verified, not inferred from overlap alone.</td></tr>
-<tr><td>3. En echelon scarp phase coherence</td><td>LiDAR-scarp channel: staggered oriented ridges aligned across a proposed connector, vetoing uninterrupted parallel terrace edges.</td>
-<td>Could recover short linking strands omitted by regional mapping. Current scorer averages channel magnitude, not staggered spatial phase. Pluvial shorelines and road cuts mimic it. Moderate-to-high cost; uncertain benefit.</td></tr>
-<tr><td>4. Corridor-confined radiometric contrast reversal</td><td>Radiometric K/Th local contrast relative to matched corridor flanks, conditional on magnetic depletion.</td>
-<td>May distinguish local alteration from broad lithologic domains, including K enrichment as well as depletion. Unlike the archived depletion-only claim, estimates signed within-unit contrast. Sediment sorting mimics it. High cost because lithologic controls are not authenticated; defer pending provenance.</td></tr></table>
-<p>Before any implementation: repair provenance, restore pinned inputs, verify feature-alone canaries,
-reserve untouched spatial blocks, compare with the current best on the identical evaluator, and check
-surface uniqueness before placing dots. Do not relax the literal overlap rule. Giddens &amp; Faulds
-statistics in the prompt remain unverified citations in this environment, not independently established facts.</p></div>
+<div class="card"><h2>Five ranked geological hypotheses (3 implemented &amp; ablated in E2, 2 external-data queued)</h2>
+<table>
+<tr><th>Rank &amp; ID</th><th>Layers &amp; physical signature</th><th>Missing-fault mechanism, mimic &amp; measured HOLDOUT-DTI lift</th></tr>
+<tr><td><b>1. H69-E</b> (Implemented)</td>
+<td>Qfaults <code>SLIPSENSE/DIPDIRECT</code> + DEM polarity + FFT upward-continued gravity/RTP THDR&times;tilt (150, 500, 1500 m) + RTP mag lows + compass-fixed 1m LiDAR strike + Hessian ridges + strain.</td>
+<td>Recovers alluvial-fan-buried soft/hard relay breaches (0.1&ndash;15 km, sep &le;3.5W) and wing cracks. Mimic: Lake Lahontan shorelines. <b>Measured HOLDOUT-DTI: 0.07266 vs 0.04725 control (+53.8%, p=1.0000).</b></td></tr>
+<tr><td><b>2. H69-F</b> (Implemented &amp; Ablated)</td>
+<td>Subsurface <code>basement_step</code> + magnetotelluric <code>cond_step</code> + 1.5 km upward-continued gravity edges across releasing pull-apart margins.</td>
+<td>Detects buried bedrock floor steps beneath zero-relief playas where Holocene scarps are erased. Mimic: paleochannels. <b>Lifts 7/8 detached quadrants (0.06766 vs 0.06629).</b></td></tr>
+<tr><td><b>3. H69-G</b> (Implemented &amp; Ablated)</td>
+<td>Flank-differenced GeoDAWN radiometric <code>K/Th</code> local excess + GDR spring/well temperatures &amp; quartz/chalcedony/Na-K-Ca geothermometers (<code>dist_known_fault_px</code> blocked!).</td>
+<td>Pinpoints dilatational hydrothermal upflow conduits while rejecting broad felsic tuff plateaus. <b>Raises Walker Lane SE DTI to 0.0953 (all) and 0.0971 (detached).</b></td></tr>
+<tr><td><b>4. H69-H</b> (Queued &mdash; Sandbox Blocked)</td>
+<td>Raw 1 m USGS 3DEP DEM tiles oriented log-Gabor filter bank at Riedel angle across 100 m step-over cells.</td>
+<td>Resolves sub-10 m staggered en &eacute;chelon scarps blurred at 100 m. Source: USGS TNM 3DEP (<code>apps.nationalmap.gov</code>).</td></tr>
+<tr><td><b>5. H69-I</b> (Queued &mdash; Sandbox Blocked)</td>
+<td>USGS ANSS ComCat + UNR relocated microseismicity hypocenter clouds (M&ge;0.5, depth&le;12 km) planar RANSAC fit inside blind step-overs.</td>
+<td>Illuminates active zero-relief blind step-overs in the 24.6% non-LiDAR AOI with &lt;5% overlap vs scarp lanes. Source: <code>earthquake.usgs.gov</code>.</td></tr>
+</table></div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

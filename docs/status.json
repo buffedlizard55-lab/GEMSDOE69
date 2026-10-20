@@ -2,21 +2,15 @@
   "verdict": "negative",
   "download_enabled": false,
   "reasons": [
-    "No explicit same-evaluator evidence of beating the current holdout best.",
     "Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.",
-    "Registry scan is incomplete or contains errors.",
-    "Reproducible method source manifest is missing, stale, or not artifact-bound.",
-    "Artifact-bound feature-alone leakage canaries are missing or flagged.",
-    "surface uniqueness phase is missing or not bound to the current artifact.",
     "surface uniqueness phase failed or is incomplete.",
-    "dots uniqueness phase is missing or not bound to the current artifact.",
     "dots uniqueness phase failed or is incomplete."
   ],
-  "artifact_sha256": "be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7",
+  "artifact_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
   "validator_report": {
-    "file": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif",
-    "bytes": 228607,
-    "sha256": "be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7",
+    "file": "/home/user/GEMSDOE69/submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
+    "bytes": 196948,
+    "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
     "meta": {
       "count": 1,
       "dtype": "float32",
@@ -45,7 +39,7 @@
     "n_nan_inside_footprint": 0,
     "min": 0.0,
     "max": 1.0,
-    "positive_pixels": 31994,
+    "positive_pixels": 29027,
     "distinct_positive_values": [
       1.0
     ],

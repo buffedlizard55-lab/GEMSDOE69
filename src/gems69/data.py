@@ -20,8 +20,15 @@ VENDOR = ROOT / "vendor"
 if str(VENDOR) not in sys.path:
     sys.path.insert(0, str(VENDOR))
 
-DATA = Path(os.environ.get("GEMS_DATA", "/tmp/gems_data"))
-CACHE = Path(os.environ.get("GEMS_CACHE", "/tmp/gems_cache"))
+def _default_data_dir() -> Path:
+    if "GEMS_DATA" in os.environ:
+        return Path(os.environ["GEMS_DATA"])
+    cand = ROOT / ".cache" / "gems_data"
+    return cand if cand.exists() else Path("/tmp/gems_data")
+
+
+DATA = _default_data_dir()
+CACHE = Path(os.environ.get("GEMS_CACHE", str(ROOT / ".cache" / "gems_data" / "derived69")))
 FEATURES = DATA / "training_features.tif"
 SENTINEL_LIMIT = -1e30          # the stack's nodata is -3.4028234663852886e+38
 

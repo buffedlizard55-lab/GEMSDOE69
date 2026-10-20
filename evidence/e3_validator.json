@@ -1,181 +1,139 @@
 {
- "zeros": {
-  "file": "/home/user/GEMSDOE69/submissions/h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-zeros.tif",
-  "sha256": "55f6215c72990ec6a4184985d401c8adffa57673d678ebbc052045ceede3cce6",
-  "passed": false,
-  "has_failures": true,
-  "checks": [
-   {
-    "check": "single band",
-    "status": "PASS",
-    "detail": "count=1"
-   },
-   {
-    "check": "dtype float32",
-    "status": "PASS",
-    "detail": "dtype=float32"
-   },
-   {
-    "check": "CRS EPSG:32611",
-    "status": "PASS",
-    "detail": "crs=EPSG:32611"
-   },
-   {
-    "check": "shape matches",
-    "status": "PASS",
-    "detail": "file=(3730, 3292) expected=(3730, 3292)"
-   },
-   {
-    "check": "resolution 100 m",
-    "status": "PASS",
-    "detail": "res=(100.0, 100.0)"
-   },
-   {
-    "check": "transform matches reference",
-    "status": "PASS",
-    "detail": "file=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0) ref=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)"
-   },
-   {
-    "check": "CRS matches reference",
-    "status": "PASS",
-    "detail": "file=EPSG:32611 ref=EPSG:32611"
-   },
-   {
-    "check": "nodata tag is none or NaN",
-    "status": "PASS",
-    "detail": "nodata=None (finite nodata tags are rejected conservatively)"
-   },
-   {
-    "check": "no infinities",
-    "status": "PASS",
-    "detail": "inf_count=0"
-   },
-   {
-    "check": "values within [0, 1]",
-    "status": "PASS",
-    "detail": "min=0.0 max=1.0 finite_cells=12279160"
-   },
-   {
-    "check": "features grid shape matches",
-    "status": "PASS",
-    "detail": "features=(3730, 3292) reference=(3730, 3292)"
-   },
-   {
-    "check": "features transform matches reference grid",
-    "status": "PASS",
-    "detail": "features=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0) reference=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)"
-   },
-   {
-    "check": "features CRS matches reference grid",
-    "status": "PASS",
-    "detail": "features=EPSG:32611 reference=EPSG:32611"
-   },
-   {
-    "check": "no NaN inside footprint",
-    "status": "PASS",
-    "detail": "nan_inside=0 footprint_cells=5165852"
-   },
-   {
-    "check": "NaN-only outside footprint",
-    "status": "FAIL",
-    "detail": "finite_outside=7113308; only NaN is allowed outside"
-   },
-   {
-    "check": "info: emitted cells (value > 0)",
-    "status": "INFO",
-    "detail": "emitted=35787"
-   }
-  ],
-  "skipped_checks_mean_unverified": false
- },
- "nan": {
-  "file": "/home/user/GEMSDOE69/submissions/h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-nan.tif",
-  "sha256": "9c0bc4a5d095b00ba3485dab22f67dfb255065f4c6e93a70cc02dc1744ab0f23",
-  "passed": false,
-  "has_failures": true,
-  "checks": [
-   {
-    "check": "single band",
-    "status": "PASS",
-    "detail": "count=1"
-   },
-   {
-    "check": "dtype float32",
-    "status": "PASS",
-    "detail": "dtype=float32"
-   },
-   {
-    "check": "CRS EPSG:32611",
-    "status": "PASS",
-    "detail": "crs=EPSG:32611"
-   },
-   {
-    "check": "shape matches",
-    "status": "PASS",
-    "detail": "file=(3730, 3292) expected=(3730, 3292)"
-   },
-   {
-    "check": "resolution 100 m",
-    "status": "PASS",
-    "detail": "res=(100.0, 100.0)"
-   },
-   {
-    "check": "transform matches reference",
-    "status": "PASS",
-    "detail": "file=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0) ref=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)"
-   },
-   {
-    "check": "CRS matches reference",
-    "status": "PASS",
-    "detail": "file=EPSG:32611 ref=EPSG:32611"
-   },
-   {
-    "check": "nodata tag is none or NaN",
-    "status": "PASS",
-    "detail": "nodata=nan (finite nodata tags are rejected conservatively)"
-   },
-   {
-    "check": "no infinities",
-    "status": "PASS",
-    "detail": "inf_count=0"
-   },
-   {
-    "check": "values within [0, 1]",
-    "status": "PASS",
-    "detail": "min=0.0 max=1.0 finite_cells=5167373"
-   },
-   {
-    "check": "features grid shape matches",
-    "status": "PASS",
-    "detail": "features=(3730, 3292) reference=(3730, 3292)"
-   },
-   {
-    "check": "features transform matches reference grid",
-    "status": "PASS",
-    "detail": "features=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0) reference=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)"
-   },
-   {
-    "check": "features CRS matches reference grid",
-    "status": "PASS",
-    "detail": "features=EPSG:32611 reference=EPSG:32611"
-   },
-   {
-    "check": "no NaN inside footprint",
-    "status": "FAIL",
-    "detail": "nan_inside=1540 footprint_cells=5165852"
-   },
-   {
-    "check": "NaN-only outside footprint",
-    "status": "FAIL",
-    "detail": "finite_outside=3061; only NaN is allowed outside"
-   },
-   {
-    "check": "info: emitted cells (value > 0)",
-    "status": "INFO",
-    "detail": "emitted=35787"
-   }
-  ],
-  "skipped_checks_mean_unverified": false
- },
- "generated_utc": "20261012T023411Z"
+  "validator": "scripts/validate_submission.py",
+  "all_files_passed": true,
+  "reports": [
+    {
+      "file": "/home/user/GEMSDOE69/submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
+      "bytes": 196948,
+      "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+      "meta": {
+        "count": 1,
+        "dtype": "float32",
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": null,
+        "bounds": [
+          243350.0,
+          4135550.0,
+          572550.0,
+          4508550.0
+        ]
+      },
+      "n_nan": 0,
+      "n_nan_inside_footprint": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "positive_pixels": 29027,
+      "distinct_positive_values": [
+        1.0
+      ],
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "crs_epsg_32611": true,
+        "shape_3730x3292": true,
+        "transform_and_bounds_match_sample_submission": true,
+        "footprint_all_finite": true,
+        "footprint_values_in_0_1": true,
+        "no_infinite_values": true,
+        "nan_only_outside_footprint": true,
+        "no_sentinel_values": true,
+        "all_finite_values_in_0_1": true,
+        "no_positive_outside_footprint": true,
+        "zero_positive_on_mapped_catalogue": true,
+        "template_validator_passed": true
+      },
+      "template_validator": {
+        "all_checks_passed": true,
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "dimensions_3730x3292": true,
+          "crs_epsg_32611": true,
+          "transform_matches_sample_submission": true,
+          "no_nan_anywhere": true,
+          "no_inf_anywhere": true,
+          "no_sentinel_values": true,
+          "range_0_1_guaranteed": true,
+          "min_ge_0": true,
+          "max_le_1": true,
+          "in_footprint_all_finite": true,
+          "in_footprint_range_0_1": true,
+          "outside_footprint_zero": true,
+          "zero_dots_on_mapped_catalogue": true
+        }
+      },
+      "template_format_report": {
+        "ok": true,
+        "problems": []
+      },
+      "all_checks_passed": true
+    },
+    {
+      "file": "/home/user/GEMSDOE69/submissions/h69-efg-kinematic-geodesic-29027-nan.tif",
+      "bytes": 243565,
+      "sha256": "6ddf37fc9dbe5f66c8000857ee54825f3269cc7d1b37318862a0960fd3e4dd93",
+      "meta": {
+        "count": 1,
+        "dtype": "float32",
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "nodata": "nan",
+        "bounds": [
+          243350.0,
+          4135550.0,
+          572550.0,
+          4508550.0
+        ]
+      },
+      "n_nan": 7111787,
+      "n_nan_inside_footprint": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "positive_pixels": 29027,
+      "distinct_positive_values": [
+        1.0
+      ],
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "crs_epsg_32611": true,
+        "shape_3730x3292": true,
+        "transform_and_bounds_match_sample_submission": true,
+        "footprint_all_finite": true,
+        "footprint_values_in_0_1": true,
+        "no_infinite_values": true,
+        "nan_only_outside_footprint": true,
+        "no_sentinel_values": true,
+        "all_finite_values_in_0_1": true,
+        "no_positive_outside_footprint": true,
+        "zero_positive_on_mapped_catalogue": true,
+        "nan_mask_equals_sample_submission_nan_mask": true
+      },
+      "template_validator": "skipped: file carries outside-footprint NaN (spec-literal twin); the template enforces an all-finite policy",
+      "all_checks_passed": true
+    }
+  ]
 }

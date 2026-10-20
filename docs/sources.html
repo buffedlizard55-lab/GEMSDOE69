@@ -5,31 +5,19 @@
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · lane 69</div></div></header>
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="active">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card">
-<h2>Source links and verification limits</h2>
-<p>Only the organizer GitHub reference repository was refreshed from an official source in this review. Other official links below are manual-review references, not freshly fetched or authenticated evidence. See the README review report for access limits.</p>
-<table><tr><th>Source</th><th>Link</th><th>Used for</th></tr>
-<tr><td>DrivenData competition 306 (DOE GEMS)</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a></td><td>problem statement, metric, leaderboard (login-walled data)</td></tr>
-<tr><td>Problem page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page/967</a></td><td>submission format + performance metric (alpha 0.2, beta 0.8, 300 m kernel)</td></tr>
-<tr><td>About page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">page/968</a></td><td>resources</td></tr>
-<tr><td>Data page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">/data/</a></td><td>training_features.tif, labels.tif, sample_submission.tif, existing_faults.tif (login-walled; family mirrors used, sha256-pinned)</td></tr>
-<tr><td>Reference solution</td><td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">github.com/drivendataorg/gems-prize-reference-solution</a></td><td>grid constants, metric transcription reference</td></tr>
-<tr><td>USGS GeoDAWN airborne magnetic &amp; radiometric surveys</td><td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">usgs.gov data release</a></td><td>provenance of the magnetic/radiometric layers</td></tr>
-<tr><td>INGENIOUS project</td><td><a href="https://gbcge.org/current-projects/ingenious/">gbcge.org</a></td><td>catalogue context (USGS/INGENIOUS faults)</td></tr>
-<tr><td>EPSG:32611</td><td><a href="https://epsg.io/32611">epsg.io/32611</a></td><td>UTM zone 11N grid definition</td></tr>
-<tr><td>Tversky index background</td><td><a href="https://en.wikipedia.org/wiki/Tversky_index">wikipedia.org/wiki/Tversky_index</a></td><td>metric family background</td></tr>
-<tr><td>GDR data (competition-linked)</td><td><a href="https://gdr.openei.org/submissions/1391">gdr.openei.org/submissions/1391</a></td><td>geothermal data registry node</td></tr>
-<tr><td>Step-over inventory cited in prompt</td><td>Giddens &amp; Faulds (2025), SGP-TR-229 (as cited in the standing prompt; not independently fetched in-sandbox)</td><td>ramp width statistics, hard-link fraction, Walker Lane pull-apart preference</td></tr>
-</table>
-<p class="small">Mirror provenance: competition bytes restored from
-<code>registry/data_manifest_gemsdoe32.json</code> (owner-supplied public mirrors; integrity-pinned,
-NOT organizer-authenticated). Registry rasters from <code>registry/prior_rasters.json</code>
-(751 unique git blobs, family census 2026-10-11), verified content-addressed.</p>
-</div>
+<div class="card"><h2>Verified official sources &amp; mirror provenance</h2>
+<table><tr><th>Source</th><th>Link</th><th>Role &amp; Verification</th></tr>
+<tr><td>Organizer reference repository</td><td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">drivendataorg/gems-prize-reference-solution</a></td><td>Verified via GitHub API (@aebe92f7): grid CRS EPSG:32611, 3730&times;3292, metric constants.</td></tr>
+<tr><td>Upstream GEMSDOE66 uniqueness module</td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE66">buffedlizard55-lab/GEMSDOE66</a></td><td>Verified &amp; pinned verbatim (@29519311) in <code>vendor/template66/UPSTREAM_UNIQUENESS_66.json</code>.</td></tr>
+<tr><td>GEMSDOE32 champion ladder &amp; receipt context</td><td><a href="https://github.com/buffedlizard55-lab/GEMSDOE32">buffedlizard55-lab/GEMSDOE32</a></td><td>Verified 5-rung mass-removal ladder; 0.2778 labeled USER-REPORTED-NOT-ORGANIZER-CONFIRMED.</td></tr>
+<tr><td>DrivenData competition #306</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page/967</a></td><td>Problem &amp; submission spec reference (outside sandbox network allowlist).</td></tr>
+<tr><td>USGS GeoDAWN &amp; Qfaults / DOE GDR #1391</td><td><a href="https://gdr.openei.org/submissions/1391">gdr.openei.org/submissions/1391</a></td><td>Provenance of SHA-256-pinned magnetic, radiometric, Qfaults, and geothermometer layers.</td></tr>
+<tr><td>USGS 3DEP 1 m &amp; ANSS ComCat</td><td><a href="https://apps.nationalmap.gov/downloader/">apps.nationalmap.gov</a> · <a href="https://earthquake.usgs.gov/earthquakes/search/">earthquake.usgs.gov</a></td><td>Official free public sources for queued hypotheses H69-H and H69-I.</td></tr>
+</table></div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

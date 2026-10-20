@@ -5,54 +5,17 @@
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · lane 69</div></div></header>
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="active">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card">
-<h2>Method</h2>
-<h3>Tip graph</h3>
-<p>The pinned catalogue mirror (labels &equiv; existing_faults, IR-69-DATA-01) is skeletonized
-(scikit-image), traced into 3,887 strands between endpoints/branch points, and every strand carries its
-two tips with terminal strikes (PCA of the tip-adjacent 12-px tail).</p>
-<h3>Pair acceptance (all lengths in 100 m px)</h3>
+<div class="card"><h2>Reproducible H69-EFG architecture (hash-bound in <code>evidence/e3_method_manifest.json</code>)</h2>
 <ul>
-<li>tips from different 8-connected components (same-component pairs are reserved for the hard-link test);</li>
-<li>terminal strikes sub-parallel, axial &Delta;&theta; &le; 30&deg; &mdash; the raster carries no dip polarity, so
-&ldquo;same dip&rdquo; is proxied by sub-parallel strike (disclosed limitation IR-69-DIP-01);</li>
-<li>cross-strike spacing W &isin; [1, 150] px (0.1&ndash;15 km);</li>
-<li>along-strike separation &le; 3.5W and overlap &le; 1.0W, computed as interval arithmetic on the
-strike-axis projection of tip-adjacent strand windows (sign-invariant for axial data).</li>
-</ul>
-<h3>Corridor emission</h3>
-<ul><li><b>Oblique connector</b>: tip-to-tip line, extended 0.35W along the local strikes, half-width
-clamp(W/6, 1, 6) px;</li>
-<li><b>En &eacute;chelon strands</b> (dilatational pairs): 2&ndash;8 strands of length clamp(1.5W, 4, 30) px at
-&plusmn;25&deg; to the connector, staggered along it;</li>
-<li><b>Pull-apart rhomb</b> (dilatational pairs): rotated ellipse, semi-axes 0.8/0.45 of the tip diagonal;
-Walker-Lane dextral prior applied through the dilation diagnostic (overlap &le; 0.5W &rArr; dilatational),
-because slip sense is unobservable from the raster (recorded per corridor);</li>
-<li>strongly overlapping steps emit the narrower <b>transfer-overlap</b> corridor.</li></ul>
-<h3>Corridor scoring</h3>
-<p>S = 0.20&middot;E<sub>grav</sub> + 0.20&middot;E<sub>mag</sub> + 0.18&middot;E<sub>maglow</sub> + 0.15&middot;E<sub>lidar</sub>
-+ 0.10&middot;W<sub>orient</sub> + 0.17&middot;W<sub>geom</sub> &mdash; weights pre-registered before any holdout look.
-E-terms are maxima of robust-z means (footprint median/MAD) over multi-scale horizontal gradients
-(&sigma; = 1, 2, 4 px), tilt-edge |sin(arctan2(VD, HG))| with VD the &sigma;/2&sigma; upward-continuation difference,
-the provided HG/VG/tilt products, and &minus;tmi/&minus;rtp magnetic lows; E<sub>lidar</sub> is the
-max(ex_max, step_max, downface_max) scarp channel; W<sub>orient</sub> scores the corridor axis against the
-N&ndash;NE axial family best oriented for dilation under WNW extension; W<sub>geom</sub> is the subtype prior
-(pull-apart 1.0, relay 0.9, transfer-overlap 0.6). Every corridor carries a rationale record
-(layers with z-values, signature, source) in <code>evidence/e3_receipt.json</code>.</p>
-<h3>Emission &amp; gate</h3>
-<p>Propensity P(x) = logistic(1.5(S &minus; S<sub>0</sub>)) &times; corridor membership weight; dots placed by the
-shared template's exact greedy marginal-DTI allocator with truth-size prior |G| = 12,691 px
-(GEMSDOE32 receipt-derived estimate, cited), restricted &ge;2 px from the mapped catalogue. Gate: the
-corridor arm must beat the identical pipeline with the corridor prior removed (per-pixel physics
-composite, same layer set, same allocator) on the shared template's spatially-blocked hide-and-recover
-holdout (seeds 20/21 &times; four quadrants), paired with 95% CIs. Hard-link validation: for same-component
-virtual pairs, the linking catalogue mass inside the corridor is masked and recovery within 3 px (300 m)
-is measured after rebuilding from the remaining catalogue.</p>
-</div>
+<li><b>Leak-free kinematics (<code>src/gems69/tips.py</code>):</b> Skeletonizes strictly visible catalogue pixels into 8-connected strands, attaches Qfaults <code>SLIPSENSE</code>, <code>SECONDARY</code>, <code>DIPDIRECT</code>, and 100 m DEM hanging-wall polarity strictly within visible masks, and rejects opposite-dip normal pairs.</li>
+<li><b>World-origin geometry &amp; geodesic routing (<code>src/gems69/corridors.py</code>):</b> Enforces <code>W &isin; [0.1, 15] km</code> and shared-origin separation <code>&le; 3.5W</code> across full <code>hypot(W, 3.5W)</code> radius, deduplicates to the unique minimum-distance facing tip pair per strand pair, and routes minimum-resistance Dijkstra connectors, paired pull-apart margin splays, Riedel strands, and free-tip wing-crack fans.</li>
+<li><b>28-layer leak-free physics stack (<code>src/gems69/physics.py</code>):</b> Wavenumber FFT upward continuation (150, 500, 1500 m) THDR&times;tilt-zero, multi-scale RTP magnetic lows, cultural-vetoed 1 m LiDAR scarp + compass strike <code>(raw*180/255 + 90) % 180</code>, Hessian curvature ridges, basement/conductivity steps, geodetic strain, flank-differenced <code>K/Th</code>, and physical thermal conduits.</li>
+<li><b>Leave-One-Quadrant-Out calibration &amp; greedy placement (<code>src/gems69/holdout69.py</code>):</b> Regularized <code>HistGradientBoostingClassifier</code> fitted strictly on the 3 non-test spatial quadrants + shared <code>gems57.emit.greedy_allocate</code> at &ge;200 m visible-catalogue flank exclusion.</li>
+</ul></div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

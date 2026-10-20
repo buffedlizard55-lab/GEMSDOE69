@@ -5,43 +5,29 @@
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · lane 69</div></div></header>
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="active">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card"><h2>E1 &mdash; census, hard-link recovery, canaries</h2>
-<table>
-<tr><th>Measurement</th><th>Value</th></tr>
-<tr><td>Strands vectorized from the pinned catalogue</td><td>3887</td></tr>
-<tr><td>Corridors emitted (cap 1200)</td><td>1200 (1200 pull-apart / 0 transfer-overlap)</td></tr>
-<tr><td>Hard-linked ramps found / tested</td><td>1896 / 22</td></tr>
-<tr><td>Mean recovery of masked linking faults within 300 m</td><td>0.864 (median 1.000)</td></tr>
-<tr><td>Ramps recovered &ge;70%</td><td>19</td></tr>
-</table>
-<table><tr><th>W (px)</th><th>linking px</th><th>recovery within 3 px</th><th>subtype</th></tr><tr><td>2</td><td>28</td><td>1.000</td><td>pull-apart</td></tr><tr><td>2</td><td>6</td><td>0.000</td><td>pull-apart</td></tr><tr><td>33</td><td>89</td><td>1.000</td><td>pull-apart</td></tr><tr><td>29</td><td>76</td><td>1.000</td><td>pull-apart</td></tr><tr><td>31</td><td>67</td><td>1.000</td><td>pull-apart</td></tr><tr><td>8</td><td>97</td><td>1.000</td><td>pull-apart</td></tr><tr><td>22</td><td>97</td><td>1.000</td><td>pull-apart</td></tr><tr><td>9</td><td>6</td><td>0.000</td><td>transfer-overlap</td></tr><tr><td>4</td><td>27</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>58</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>60</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>45</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>28</td><td>1.000</td><td>pull-apart</td></tr><tr><td>4</td><td>8</td><td>0.000</td><td>pull-apart</td></tr><tr><td>3</td><td>30</td><td>1.000</td><td>pull-apart</td></tr><tr><td>4</td><td>55</td><td>1.000</td><td>pull-apart</td></tr><tr><td>5</td><td>48</td><td>1.000</td><td>pull-apart</td></tr><tr><td>2</td><td>48</td><td>1.000</td><td>pull-apart</td></tr><tr><td>6</td><td>45</td><td>1.000</td><td>pull-apart</td></tr><tr><td>6</td><td>34</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>33</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>16</td><td>1.000</td><td>pull-apart</td></tr></table>
+<div class="card"><h2>E1 &mdash; Leakage canaries &amp; hard-linked ramp recovery</h2>
+<p>Canary summary: max single-feature AUC = <b>0.59082</b>
+(<code>corridor_multiplicity</code>, pass = <b>True</b>).
+Hard-linked ramps found = <b>781</b>, disconnected bridges tested = <b>80</b>,
+mean 300 m recovery = <b>0.9944</b> (80/80 &ge; 70%).</p>
+<table><tr><th>W (px)</th><th>Linking px</th><th>Recovery &le;300 m</th><th>Subtype</th></tr><tr><td>30.85</td><td>97</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>21.92</td><td>84</td><td>0.9881</td><td>relay-ramp</td></tr><tr><td>4.20</td><td>24</td><td>1.0000</td><td>transfer-overlap</td></tr><tr><td>3.71</td><td>13</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>10.50</td><td>47</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>6.85</td><td>19</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>2.98</td><td>17</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>2.53</td><td>35</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>3.47</td><td>15</td><td>1.0000</td><td>transfer-overlap</td></tr><tr><td>14.15</td><td>40</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>4.16</td><td>24</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>24.01</td><td>64</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>18.97</td><td>27</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>16.68</td><td>51</td><td>1.0000</td><td>transfer-overlap</td></tr><tr><td>16.87</td><td>50</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>24.04</td><td>109</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>1.59</td><td>22</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>12.55</td><td>32</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>6.20</td><td>34</td><td>1.0000</td><td>transfer-overlap</td></tr><tr><td>2.78</td><td>22</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>3.70</td><td>30</td><td>1.0000</td><td>pull-apart</td></tr><tr><td>16.09</td><td>35</td><td>1.0000</td><td>relay-ramp</td></tr><tr><td>3.65</td><td>29</td><td>1.0000</td><td>pull-apart</td></tr><tr><td>2.24</td><td>26</td><td>1.0000</td><td>pull-apart</td></tr><tr><td>25.08</td><td>72</td><td>1.0000</td><td>relay-ramp</td></tr></table>
 </div>
-<div class="card"><h2>E2 &mdash; holdout gate (corridor vs no-prior control)</h2>
-<table><tr><th>Arm</th><th>Pooled DTI</th><th>95% CI half</th><th>Cells</th></tr>
-<tr><td>Corridor prior</td><td>0.0060</td><td>0.0014</td><td rowspan=2>8 (22641 withheld positives)</td></tr>
-<tr><td>No-prior control</td><td>0.0021</td><td>0.0006</td></tr>
-<tr><td><b>Paired &Delta;</b></td><td><b>+0.0038</b></td><td>0.0015</td><td>gate_passed = True</td></tr>
-</table>
-<table><tr><th>Cell</th><th>Corridor DTI</th><th>Control DTI</th></tr><tr><td>draw20_foldNE_all</td><td>0.0060</td><td>0.0008</td></tr><tr><td>draw20_foldNW_all</td><td>0.0047</td><td>0.0028</td></tr><tr><td>draw20_foldSE_all</td><td>0.0073</td><td>0.0035</td></tr><tr><td>draw20_foldSW_all</td><td>0.0067</td><td>0.0028</td></tr><tr><td>draw21_foldNE_all</td><td>0.0041</td><td>0.0017</td></tr><tr><td>draw21_foldNW_all</td><td>0.0040</td><td>0.0018</td></tr><tr><td>draw21_foldSE_all</td><td>0.0049</td><td>0.0020</td></tr><tr><td>draw21_foldSW_all</td><td>0.0102</td><td>0.0017</td></tr></table>
-<p class="small">Evaluator: vendor/template66 gems57 pooled hide-and-recover (&alpha;=0.2, &beta;=0.8,
-300 m triangular kernel). Evidence class HOLDOUT-DTI.</p>
+<div class="card"><h2>E2 &mdash; Paired spatial-quadrant holdout benchmark (<code>mode = all</code>, 22,641 truth px)</h2>
+<table><tr><th>Cell</th><th>H69-EFG DTI</th><th>H69-E DTI</th><th>No-Prior Control DTI</th><th>&Delta; (EFG &minus; Ctrl)</th></tr><tr><td>draw20_foldNE_all</td><td><b>0.041194</b></td><td>0.043275</td><td>0.043647</td><td>-0.002453</td></tr><tr><td>draw20_foldNW_all</td><td><b>0.053787</b></td><td>0.054290</td><td>0.043361</td><td>+0.010426</td></tr><tr><td>draw20_foldSE_all</td><td><b>0.095267</b></td><td>0.090491</td><td>0.056957</td><td>+0.038310</td></tr><tr><td>draw20_foldSW_all</td><td><b>0.089791</b></td><td>0.086722</td><td>0.046284</td><td>+0.043507</td></tr><tr><td>draw21_foldNE_all</td><td><b>0.047362</b></td><td>0.051054</td><td>0.040695</td><td>+0.006667</td></tr><tr><td>draw21_foldNW_all</td><td><b>0.049736</b></td><td>0.053087</td><td>0.036868</td><td>+0.012868</td></tr><tr><td>draw21_foldSE_all</td><td><b>0.085693</b></td><td>0.084969</td><td>0.054423</td><td>+0.031270</td></tr><tr><td>draw21_foldSW_all</td><td><b>0.090806</b></td><td>0.087869</td><td>0.046905</td><td>+0.043901</td></tr></table>
 </div>
-<div class="card"><h2>E3 &mdash; emission, registry scan, validator</h2>
-<table><tr><th>Check</th><th>Result</th></tr>
-<tr><td>Dots emitted (greedy marginal-DTI, |G| prior 12,691 px)</td><td>31994 (catalogue collisions: 0)</td></tr>
-<tr><td>Upstream validator (zeros)</td><td>see compliance note (IR-69-VAL-01)</td></tr>
-<tr><td>Format compliance zeros: all-finite [0,1] (family shipping policy)</td><td>pending</td></tr>
-<tr><td>Format compliance nan: finite mask &equiv; sample_submission, NaN outside, nodata tag</td><td>pending</td></tr>
-<tr><td>Registry scan compared / errors</td><td>750 / 1</td></tr>
-<tr><td>Worst |Spearman| surface</td><td>0.15442722757041327</td></tr>
-<tr><td>Worst dot overlap (dotlike stratum)</td><td>0.6194286428705382</td></tr>
-<tr><td>Exact pixel-agreement &ge;99.99% vs any prior raster</td><td>0</td></tr>
-</table>
+<div class="card"><h2>E2 &mdash; Conservative detached benchmark (<code>mode = detached &ge; 400 m</code>, 22,619 truth px, 8/8 wins)</h2>
+<table><tr><th>Cell</th><th>H69-EFG DTI</th><th>No-Prior Control DTI</th><th>&Delta; (EFG &minus; Ctrl)</th></tr><tr><td>draw20_foldNE_detached</td><td><b>0.039342</b></td><td>0.039165</td><td>+0.000177</td></tr><tr><td>draw20_foldNW_detached</td><td><b>0.051959</b></td><td>0.042911</td><td>+0.009048</td></tr><tr><td>draw20_foldSE_detached</td><td><b>0.097083</b></td><td>0.065706</td><td>+0.031377</td></tr><tr><td>draw20_foldSW_detached</td><td><b>0.072312</b></td><td>0.046210</td><td>+0.026102</td></tr><tr><td>draw21_foldNE_detached</td><td><b>0.045028</b></td><td>0.039539</td><td>+0.005489</td></tr><tr><td>draw21_foldNW_detached</td><td><b>0.049729</b></td><td>0.038856</td><td>+0.010873</td></tr><tr><td>draw21_foldSE_detached</td><td><b>0.091594</b></td><td>0.065467</td><td>+0.026127</td></tr><tr><td>draw21_foldSW_detached</td><td><b>0.081532</b></td><td>0.051260</td><td>+0.030272</td></tr></table>
 </div>
+<div class="card"><h2>E3 &mdash; Live artifact validation &amp; 751-blob registry scan</h2>
+<ul>
+<li>Candidate: <code>h69-efg-kinematic-geodesic-29027-zeros.tif</code> (29027 dots across 3900 corridors; SHA-256 <code>25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f</code>)</li>
+<li>Format checks: <b>PASS</b> on both <code>-zeros.tif</code> and <code>-nan.tif</code> (0 NaN in footprint, values in [0,1], EPSG:32611, 3730&times;3292, R14 lattice = False)</li>
+<li>Registry scan: <b>751/751</b> compared, <b>0</b> errors; dots max |Spearman| = <b>0.144801</b>; <code>h33-2-b2-zeros</code> 3-px overlap = <b>0.312123</b>; literal max overlap = <b>1.000</b> &rArr; <b>STOP / DO NOT SUBMIT</b>.</li>
+</ul></div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
