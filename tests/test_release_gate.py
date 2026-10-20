@@ -54,12 +54,17 @@ def test_stale_phase_blocks(cleared, phase):
     assert not policy.evaluate(cleared)['download_enabled']
 
 
-def test_stratified_gate_cannot_override_literal_failure(cleared):
+@pytest.mark.parametrize('dot_overlap', [None, 0.0, 0.61, 0.70])
+def test_stratified_gate_cannot_override_literal_failure(cleared, dot_overlap):
     u = policy.read(cleared, 'e3_uniqueness.json')
     u['literal_gate']['overlap_ok'] = False
     u['stratified_gate'] = {'dotlike_overlap_ok': True}
+    if dot_overlap is not None:
+        u['worst_dot_overlap_dotlike'] = {'dot_overlap_3px': dot_overlap}
     put(cleared, 'e3_uniqueness.json', u)
-    assert policy.evaluate(cleared)['verdict'] == 'negative'
+    result = policy.evaluate(cleared)
+    assert result['verdict'] == 'negative'
+    assert any('Literal registry dot-overlap gate' in reason for reason in result['reasons'])
 
 
 @pytest.mark.parametrize('change', ['missing', 'modified', 'validator', 'registry_error', 'holdout'])

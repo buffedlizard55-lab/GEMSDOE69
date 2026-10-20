@@ -92,6 +92,12 @@ def build_index():
 <tr><td>Paired &Delta; (corridor &minus; control)</td><td>{gate.get('paired_delta_mean', float('nan')):+.4f} &plusmn; {gate.get('paired_delta_ci95_half', float('nan')):.4f}</td><td>HOLDOUT-DTI</td></tr>"""
     body = f"""
 {ban}
+<div class="card"><h2>Latest publication audit</h2>
+<p>No new experiment or TIFF is authorized after the recorded duplicate stop.
+The literal all-registry overlap is 1.0, exceeding 0.70; a dotlike-only diagnostic
+cannot waive it. The archived TIFF was independently format-validated in this audit,
+but format validity does not establish uniqueness or scientific merit.</p>
+<p><a href="../reports/publication-audit-2026-10-20.md">Audit, limitations, sources and next steps</a>.</p></div>
 <div class="card" id="how-to-submit">
 <h2>How to submit the TIF (3 steps)</h2>
 <ol>
@@ -99,23 +105,23 @@ def build_index():
 &ldquo;Predicted values must be in range [0, 1]&rdquo; portal error class seen with NaN-containing artifacts).</li>
 <li>Go to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition 306 &rarr; New submission</a>,
 choose <i>File to submit</i> = the downloaded <code>.tif</code> (a <code>.zip</code> with a single GeoTIFF is also accepted).</li>
-<li>Paste this note (&le;140 chars):<br><code>{esc(receipt.get('note', 'relay-ramp corridors'))}</code></li>
+<li>Paste this note (&le;140 chars):<br><code>{esc(receipt.get('submission_note', 'relay-ramp corridors'))}</code></li>
 </ol>
 <p class="small">Format contract: single-band GeoTIFF, float32, EPSG:32611, 3730&times;3292, transform
 (100, 0, 243350, 0, &minus;100, 4508550), values in [0,1]. Verified against
 <code>sample_submission.tif</code> (sha256 <code>2176d08e&hellip;</code>) by the shared template validator.</p>
 </div>
 <div class="card">
-<h2>Evidence at a glance — fresh 2026-10-20 relay-fix session (Exp1 + Exp2b)</h2>
+<h2>Archived evidence — not current release clearance</h2>
 <table>
 <tr><th>Measurement</th><th>Value</th><th>Evidence class</th></tr>
 {rows}
-<tr><td>Registry scan: worst surface |Spearman| / dot-like dot overlap</td>
+<tr><td>Registry diagnostic: archived |Spearman| / dotlike overlap (not literal clearance)</td>
 <td>{abs(uniq.get('worst_abs_spearman', 0) or 0):.3f} / {(uniq.get('worst_dot_overlap_dotlike') or {}).get('dot_overlap_3px', 'n/a')}</td>
 <td>REGISTRY-MEASUREMENT (limits 0.90 / 0.70)</td></tr>
 <tr><td>Family best download (h33-2-b2)</td><td>0.2778</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (no organizer receipt binds score to bytes; anatomy re-measured this session: 37,654 dots, sha256 c55bafc4&hellip;)</td></tr>
-<tr><td>Public leaderboard #1 (fetched 2026-10-20)</td><td>0.4413 (xiaofanhu)</td><td>ORGANIZER-LEADERBOARD (public page fetched this session; not our receipt)</td></tr>
-<tr><td>This candidate (transfer-only)</td><td>no organizer score &mdash; no slot spent</td><td>HOLDOUT-DTI pooled 0.00847 vs control 0.00215 (screen only; see Experiments)</td></tr>
+<tr><td>Public leaderboard #1 (prior-session snapshot, not re-fetched in this audit)</td><td>0.4413 (xiaofanhu)</td><td>ARCHIVED PUBLIC-LEADERBOARD CLAIM (prior session; not independently authenticated in this audit)</td></tr>
+<tr><td>Current archived artifact (H69-J)</td><td>No organizer score; DO NOT SUBMIT</td><td>Source and holdout bindings stale; literal registry overlap fails.</td></tr>
 </table>
 <p class="small">A holdout DTI is a <b>screen</b>, never a leaderboard projection: the family's own
 instrument calibration (GEMSDOE32) measured cross-family Spearman &rho;&asymp;0.51 (p&asymp;0.09) against live scores.</p>

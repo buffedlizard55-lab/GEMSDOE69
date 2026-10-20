@@ -1,87 +1,152 @@
 {
-  "generated_utc": "2026-10-20T21:10:54.604517+00:00",
+  "generated_utc": "2026-10-20T21:07:49.083335+00:00",
   "lane": "GEMSDOE69 relay-ramp & pull-apart corridor generator",
-  "hypothesis": "H69-J: convergent multi-scale HG+tilt edge phase across relay connectors (H1)",
-  "mechanism": "Tip-graph corridor proposals scored by joint grav+mag HG and tilt coincidence (AND logic, min(E_grav,E_mag) 0.35), mag low gated by joint, lidar scarp, N-NE orientation, pull-apart prior; greedy marginal-DTI placement. Targets buried relay linkage between step-over tips separating basement blocks.",
-  "non_fault_mimic": "Lithologic intrusive contacts and basin edges produce single-physics HG without paired opposite-polarity tilt; alluvial composition alters radiometrics but not joint grav+mag edge coincidence. Pluvial shorelines mimic scarps but lack paired HG ridges.",
+  "hypothesis": "H69-H2 transfer-only: oblique-connector corridors at overlapping (transfer) step-overs from the repaired catalogue tip graph (R1 interval offset, R2 546 px search) rank hidden breaching faults; tested 2026-10-20 under preregistered Exp1+Exp2b.",
+  "mechanism": "Repaired tip-graph pairs (W 0.1-15 km, separation <=3.5W) restricted to non-dilatational transfer-overlap pairs; corridors scored v1 by gravity/magnetic HG+tilt, magnetic lows, lidar scarp and N-NE orientation; greedy marginal-DTI dots >=200 m off catalogue.",
+  "non_fault_mimic": "Restraining-overlap pressure ridges and pluvial shoreline scarps mimic breaching-fault lineaments; lithologic contacts mimic subsurface steps. Slip sense/dip remain strike proxies.",
   "holdout": {
     "evidence_class": "HOLDOUT-DTI",
-    "evaluator_version": "vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20,21] modes=[all])",
-    "dti": 0.00591266418023039,
+    "evaluator_version": "vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=['all']; POOLED from summed TP/FP/FN)",
+    "dti": 0.007737531380405138,
     "ci95": [
-      0.0046666938594055515,
-      0.007158634501055229
+      0.0057316537303127996,
+      0.009743409030497476
     ],
     "withheld_positive_pixels": 22641,
     "n_cells": 8,
     "comparator_dti": 0.0021479253641536293,
-    "paired_delta": 0.0037647388160767605,
-    "uncertainty_note": "Archived normal-approximation interval across repeated cells; not an independent block bootstrap. Not rerun this session."
+    "paired_delta": 0.006315458104571136,
+    "uncertainty_note": "Fresh 2026-10-20 run: pooled DTI primary (evidence/e2_gate.json pooled_dti + paired cell-bootstrap); mean+-half retained for site compatibility. Holdout is a screen, never a leaderboard projection."
   },
   "correlation_overlap_vs_registry": {
     "evidence_class": "REGISTRY-MEASUREMENT",
-    "generated_utc": "20261020T201600Z",
-    "my_file": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
-    "my_dots": 38669,
-    "my_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
-    "registry_scope": "registry/prior_rasters.json (751 unique blobs, 2026-10-11 family census)",
+    "generated_utc": null,
+    "my_file": "/home/user/GEMSDOE69/submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif",
+    "my_dots": 36325,
+    "my_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+    "registry_scope": "registry/registry_index_69.json (862 hash-verified grid rasters, family census + HEAD scan 2026-10-12; fetched and sha256-verified 2026-10-20)",
     "rho_limit": 0.9,
     "overlap_limit": 0.7,
-    "n_registry_blobs": 751,
-    "n_compared": 751,
+    "n_registry_blobs": 862,
+    "n_compared": 862,
     "n_errors": 0,
-    "worst_abs_spearman": 0.162,
+    "worst_abs_spearman": 0.11031126875912463,
     "worst_rho_entry": {
-      "blob": "157813953405ef61d7f8e98cadd48bf3df2c5900",
-      "stratum": "dotlike",
-      "their_dots": 37654,
-      "rho": 0.162,
-      "dot_overlap_3px": 0.21,
-      "pixel_agreement": 0.995
+      "submission": "7GEMSDOE:downloads/gems7-halo15-gbt-v1-90fb7dc0fc1f.tif",
+      "rho": 0.11031126875912463
     },
     "worst_dot_overlap_all": {
-      "blob": "e6433f57238b38a142192af9a531a8c7934ed111",
-      "stratum": "universal",
-      "their_dots": 5167373,
-      "rho": 0.045,
-      "dot_overlap_3px": 1.0,
-      "pixel_agreement": 0.58
+      "submission": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+      "dot_overlap_3px": 1.0
     },
-    "worst_dot_overlap_dotlike": {
-      "blob": "dd5dffe559c70eca07cd8498cd6c237691af83b3",
-      "stratum": "dotlike",
-      "their_dots": 103347,
-      "rho": 0.013,
-      "dot_overlap_3px": 0.61,
-      "pixel_agreement": 0.989
-    },
-    "n_exact_pixel_agreement_9999": 0,
     "literal_gate": {
       "rho_ok": true,
       "overlap_ok": false
     },
-    "stratified_gate": {
-      "dotlike_overlap_ok": true,
-      "note": "universal soft surfaces and dense rasters overlap ANY sparse dot field by construction; family precedent GEMSDOE63/64 treats them as registry-structure condition, reported separately from dotlike lane-drift gate"
+    "surface_phase": {
+      "my_file": null,
+      "evidence_class": "REGISTRY-MEASUREMENT",
+      "my_dots": 176559,
+      "candidate_decoded_sha256": "4cc7028e01f65695f255e4d5b1463a33159d2440aaeb729189c8a96811384083",
+      "candidate_file_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+      "rho_limit": 0.9,
+      "overlap_limit": 0.7,
+      "jaccard_limit": 0.5,
+      "registry_rasters_expected": 862,
+      "registry_rasters_checked": 862,
+      "complete_accessible_scan": true,
+      "missing_or_invalid": 0,
+      "source_errors": [],
+      "worst_spearman_full_footprint": 0.27078153458507015,
+      "worst_rho_submission": "7GEMSDOE:downloads/gems7-halo15-gbt-v1-90fb7dc0fc1f.tif",
+      "worst_dot_overlap": 1.0,
+      "worst_overlap_submission": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+      "worst_jaccard_dot_sets": 0.1349149716644954,
+      "worst_jaccard_submission": "11GEMSDOE:docs/downloads/gems-structural-area06-v1.tif",
+      "byte_unique_among_checked": true,
+      "pixel_unique_among_checked": true,
+      "duplicate_count": 91,
+      "unique": false,
+      "jaccard_diagnostic_only": true,
+      "verdict": "negative",
+      "stop_required": true,
+      "candidate_rank_variation": true,
+      "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only.",
+      "phase": "surface"
     },
-    "errors": [],
-    "seconds": 420,
-    "diagnostic_note": "Literal overlap 1.0 is from universal surface (support_fraction >0.20, e.g., 17GEMSDOE E-proba-multiscale with 5,167,373 footprint cells positive). Like-for-like dot-field worst is 0.61 <0.70, rho 0.162 <0.90, so lane-drift gate passes on discriminating comparison. See gems57.uniqueness DENSE_SUPPORT_FRACTION=0.20 and saturation_certificate logic. This is reported as literal failure with stratified pass per family precedent, not as silent override."
+    "dots_phase": {
+      "my_file": null,
+      "evidence_class": "REGISTRY-MEASUREMENT",
+      "my_dots": 36325,
+      "candidate_decoded_sha256": "a114b6c47c6f3db1869610b4dba9dd5e335224ef70d0e13092d69d64a3ad05d7",
+      "candidate_file_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+      "rho_limit": 0.9,
+      "overlap_limit": 0.7,
+      "jaccard_limit": 0.5,
+      "registry_rasters_expected": 862,
+      "registry_rasters_checked": 862,
+      "complete_accessible_scan": true,
+      "missing_or_invalid": 0,
+      "source_errors": [],
+      "worst_spearman_full_footprint": 0.11031126875912463,
+      "worst_rho_submission": "7GEMSDOE:downloads/gems7-halo15-gbt-v1-90fb7dc0fc1f.tif",
+      "worst_dot_overlap": 1.0,
+      "worst_overlap_submission": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+      "worst_jaccard_dot_sets": 0.055485803966329,
+      "worst_jaccard_submission": "GEMSDOE37:docs/downloads/gemsdoe37-rankmix-strain-topo-20261005T030338376116Z-52bf89742e.tif",
+      "byte_unique_among_checked": true,
+      "pixel_unique_among_checked": true,
+      "duplicate_count": 107,
+      "unique": false,
+      "jaccard_diagnostic_only": true,
+      "verdict": "negative",
+      "stop_required": true,
+      "candidate_rank_variation": true,
+      "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only.",
+      "phase": "dots"
+    },
+    "local_lane_priors": {
+      "H69 Oct12": {
+        "overlap3": 0.2627116311080523,
+        "jaccard": 0.1363736644709887,
+        "rho_subsample": 0.2227279790880983,
+        "their_dots": 35787
+      },
+      "H69-D rad": {
+        "overlap3": 0.2749070887818307,
+        "jaccard": 0.07898227992040179,
+        "rho_subsample": 0.12207928755111447,
+        "their_dots": 31994
+      },
+      "Exp1 v1": {
+        "overlap3": 0.2775223675154852,
+        "jaccard": 0.1433866999009363,
+        "rho_subsample": 0.23522631669420313,
+        "their_dots": 35235
+      },
+      "champion": {
+        "overlap3": 0.2563523743977977,
+        "jaccard": 0.006900587979094076,
+        "rho_subsample": 0.005397786849619866,
+        "their_dots": 37654
+      }
+    },
+    "errors": []
   },
   "raster": {
     "zeros": {
-      "path": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
-      "sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
-      "bytes": 780354
+      "path": "/home/user/GEMSDOE69/submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif",
+      "sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+      "bytes": 796082
     },
     "nan": {
-      "path": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-nan.tif",
-      "sha256": "9d4774ff6158ea92edd67bb173426f8d6531babe5d3153c1fe1dab4cded480b6",
-      "bytes": 1541786
+      "path": "/home/user/GEMSDOE69/submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-nan.tif",
+      "sha256": "9b15eef3bb3eb844527f784e201b900578fe4575fddf7c163512ee499d93b967",
+      "bytes": 1558566
     }
   },
-  "submission_name": "h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros",
-  "submission_note": "H69 joint convergent grav+mag joint; HG+tilt + maglow + lidar; 38669 dots",
+  "submission_name": "h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros",
+  "submission_note": "H69 transfer-only relay corridors; repaired tip graph; 36325 dots",
   "verdict": "negative",
   "banner": "stop",
   "note": "Literal protocol enforced. No submission slot used. Archived measurements are not organizer scores.",
@@ -89,14 +154,15 @@
     "verdict": "negative",
     "download_enabled": false,
     "reasons": [
-      "Holdout comparison is missing or not bound to the current artifact hash.",
-      "Reproducible method source manifest is missing, stale, or not artifact-bound."
+      "Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.",
+      "surface uniqueness phase failed or is incomplete.",
+      "dots uniqueness phase failed or is incomplete."
     ],
-    "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+    "artifact_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
     "validator_report": {
-      "file": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
-      "bytes": 780354,
-      "sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+      "file": "submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif",
+      "bytes": 796082,
+      "sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
       "meta": {
         "count": 1,
         "dtype": "float32",
@@ -125,7 +191,7 @@
       "n_nan_inside_footprint": 0,
       "min": 0.0,
       "max": 1.0,
-      "positive_pixels": 38669,
+      "positive_pixels": 36325,
       "distinct_positive_values": [
         1.0
       ],
@@ -173,9 +239,9 @@
     }
   },
   "validator_output": {
-    "file": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
-    "bytes": 780354,
-    "sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+    "file": "submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif",
+    "bytes": 796082,
+    "sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
     "meta": {
       "count": 1,
       "dtype": "float32",
@@ -204,7 +270,7 @@
     "n_nan_inside_footprint": 0,
     "min": 0.0,
     "max": 1.0,
-    "positive_pixels": 38669,
+    "positive_pixels": 36325,
     "distinct_positive_values": [
       1.0
     ],

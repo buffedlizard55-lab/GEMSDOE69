@@ -1,18 +1,23 @@
 # GEMSDOE69 — relay-ramp and pull-apart corridor generator
 
-## OK TO DOWNLOAD — HOLDOUT-SCREENED CANDIDATE (selector authorization still required)
+## NOT OK TO SUBMIT — DO NOT SUBMIT
 
-**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json).
+**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [Parallel review](reports/review-session-2026-10-20.md).
 
 Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
 
-The current TIFF `h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif` is **PUBLISHED** in `docs/downloads/` for selector review (HOLDOUT-SCREENED, not organizer-scored). A valid file is not proof of geothermal discovery; the organizer leaderboard is the only score.
+The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
+A format-valid file is not necessarily unique or scientifically validated.
+- Literal registry dot-overlap gate failed (1.0 > 0.70); duplicate-and-stop applies.
+- The generic release CLI's legacy evidence inputs are not bound to the H69-H2 candidate; it remains fail-closed. See the run card and review report.
 
-**Download:** `docs/downloads/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif` (981beb5707bb9933… verified) — also in `submissions/`
+## Latest reviewed candidate — 2026-10-20 transfer-only
 
-## Latest — 2026-10-20 joint-corridor candidate
+**NEGATIVE: duplicate-and-stop.** Current archived candidate H69-H2 transfer-only is not cleared to submit. Registry scan of 862 hash-verified accessible rasters found literal 3-pixel dot overlap 1.0 (limit 0.70); the surface phase also fails. A lower Spearman value does not override the literal overlap rule. See [latest audit](reports/review-2026-10-20-agent-review.md) and [run card](evidence/run_card.json).
 
-Hypothesis H69-J (H1): convergent multi-scale HG+tilt edge phase across relay connectors — joint grav+mag HG/tilt coincidence (min(E_grav,E_mag) 0.35 weight) targets buried relay linkage separating basement blocks. Corridor arm 0.0059±0.0012 vs control 0.0021±0.0006 (paired Δ+0.0038±0.0015, 8 folds 22641 withheld px, gate PASSED). Registry worst |rho| 0.162 <0.90, dot-field overlap 0.61 <0.70 (literal 1.0 from universal continuous_surface is non-discriminating per DENSE_SUPPORT_FRACTION=0.20; see evidence/e3_uniqueness.json diagnostic). Leakage canary worst AUC 0.69 <0.90. Validator PASS for both variants (float32 EPSG:32611 3730×3292 [0,1]). Promotion to selector step required; no organizer score claimed.
+HOLDOUT-DTI, vendor/template66/gems57 pooled hide-and-recover (alpha=0.2, beta=0.8, 300 m triangular kernel): H69-H2 pooled DTI 0.007738, 95% CI [0.005732, 0.009743], 22,641 withheld positive pixels across 8 cells; no-prior comparator 0.002148. The paired gate passed. These are local holdout measurements, not an organizer score or leaderboard projection. The TIFF format passes while the artifact remains ineligible.
+
+No competition slot was used and no organizer-confirmed score is claimed. A higher competition score than the user-reported 0.2778 has **not been demonstrated**. See [H33 analysis](docs/why-h33-scored.html).
 
 ## Reproduce the publication audit (no data downloads needed)
 
@@ -27,11 +32,11 @@ For pixel validation and tests:
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
+GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif
 .venv/bin/pytest -q
 ```
 
-Full feature stack restored via `scripts/fetch_data.py` (pinned mirrors); registry 751 blobs via `scripts/fetch_registry.py`. GPU not needed; format validator cannot prove geothermal discovery.
+To restore the absent full feature stack, use `scripts/fetch_data.py` (pinned mirrors); restore registry bytes via `scripts/fetch_registry.py`. Archived registry censuses differ (751 vs 862); reconcile before reuse. GPU not needed; format validator cannot prove geothermal discovery.
 
 ## Standing project brief — read at the beginning of every session
 
