@@ -34,3 +34,15 @@
 > Pass protocol: Pass 1 implement and verify; Pass 2 review for bugs/missing requirements/edge cases, fix; Pass 3 re-check against this file, improve, fix. Finish with a pull request merged to main, plus suggestions and limitations for the next session.
 >
 > Core values (Arena): Maximize P(Win) — weigh tradeoffs, assess risk, choose the path that maximizes the probability of winning. Own the Outcome — own results end to end, treat failure as a signal, stay accountable to the final outcome.
+
+## Active request refresh — 2026-10-20 follow-up
+
+Read the full standing brief above on every session. Continue the handoff before
+starting new experiments. The user again requests an autonomous three-pass
+review, a unique gated TIFF, an obvious download/submission status, ranked
+in-lane hypotheses, source-linked scientific reasoning, and a PR merged to main.
+The additional user-reported leaderboard high of 0.4413 is not organizer-confirmed;
+it conflicts with other highs in the prompt and must not be called current fact.
+Core values remain Maximize P(Win) and Own the Outcome. No leaderboard improvement,
+source verification, data access, or completed submission may be invented.
+The duplicate-and-stop rule remains binding even when it prevents a new TIFF.

@@ -150,10 +150,11 @@ mirror, emits and scores corridors, places greedy marginal-DTI dots, and writes
 <li><b>Validate</b>: the shared template validator (<code>vendor/template66/gems/validate_submission.py</code>)
 re-reads the bytes from disk and checks CRS EPSG:32611, shape 3730&times;3292, transform, single band,
 float32, values in [0,1], and (for the nan twin) NaN only outside the footprint.</li>
-<li><b>Gate</b>: the corridor arm must beat the identical pipeline without corridor priors on the
-spatially-blocked hide-and-recover holdout (evidence/e2_gate.json), and the registry lane-drift scan
-must pass (evidence/e3_uniqueness.json). The download banner on the home page is generated from those
-two files &mdash; it cannot say OK unless they do.</li>
+<li><b>Gate</b>: the corridor arm must beat the identical pipeline without corridor priors and the
+current best on the same spatially-blocked hide-and-recover evaluator. Both uniqueness phases must
+pass the literal registry rules. <code>scripts/release_gate.py</code> additionally requires artifact-bound
+holdout, validator, source-manifest and feature-alone canary evidence. Pass flags from another TIFF
+cannot authorize this file. No download is published while any required evidence is missing.</li>
 <li><b>Submit</b>: DrivenData competition 306 &rarr; <i>New submission</i> &rarr; upload the single <code>.tif</code>
 (or a zip containing exactly one GeoTIFF). It must match the submission format's CRS, shape, and
 geotransform &mdash; ours is written against <code>sample_submission.tif</code> so it matches by construction.
@@ -161,18 +162,19 @@ Add a short note (&le;140 characters) identifying the run, e.g. the receipt note
 </ol>
 <p><b>Known portal error class</b>: &ldquo;Predicted values must be in range [0, 1]&rdquo; &mdash; caused by artifacts
 carrying values outside [0,1] (or non-finite cells the portal does not treat as nodata). The <b>-zeros</b>
-variant is all-finite by construction and is the one to submit; the <b>-nan</b> variant is a diagnostic
-artifact only (template policy: zeros mode is the only submission-compatible mode).</p>
+variant avoids non-finite values, but is <b>not authorized for submission unless every gate passes</b>.
+The <b>-nan</b> variant is diagnostic under our local template policy. Actual portal acceptance
+requires an organizer receipt; we have not independently reproduced the reported upload error.</p>
 </div>
 <div class="card">
 <h2>Standing limitations (do not re-discover these)</h2>
 <ul>
 <li>No DrivenData auth in this environment: organizer bytes cannot be auto-downloaded; sha256-pinned
 family mirrors are used (integrity-pinned, NOT organizer-authenticated).</li>
-<li><code>existing_faults.tif</code> &equiv; <code>labels.tif</code> in every family mirror (IR-69-DATA-01): the public labels
-raster IS the mapped catalogue; the scored truth is unpublished (&asymp;12,691 px receipt-derived estimate,
-GEMSDOE32 evidence).</li>
-<li>Holdout DTI screens but does not rank across families (&rho;&asymp;0.51 vs live, GEMSDOE32 calibration).</li>
+<li>The local bridge treats <code>existing_faults.tif</code> and <code>labels.tif</code> as catalogue inputs.
+This is not independent authentication of organizer labels or hidden truth. Archived family estimates
+of hidden-truth size must not be treated as confirmed label counts.</li>
+<li>Local HOLDOUT-DTI is a screening metric, not a leaderboard score or a guarantee of cross-family ranking.</li>
 </ul>
 </div>
 """
