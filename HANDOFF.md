@@ -44,3 +44,12 @@ it. Do not fabricate fields to make it pass.
 Tests: 1 strict expected failure documents the known interval-gap bug; it is not
 proof of complete geological compliance. The shared template was not changed.
 No DrivenData slot is authorized. Negative results are deliverables.
+
+## Follow-up hardening — same date
+
+Read `reports/followup-2026-10-20.md` too. The release gate now requires
+`e2_gate.json.artifact_sha256` to match the actual artifact; stale pass flags
+cannot authorize a different TIFF. Fresh local validator reports are in
+`evidence/followup_validator_2026-10-20.json`. Latest tests: 92 passed, one strict
+expected failure. Scientific stop conditions are unchanged. No new experiment
+or TIFF was made and no competition slot was used.

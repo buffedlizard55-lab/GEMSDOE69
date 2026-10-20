@@ -5,6 +5,7 @@
     "No explicit same-evaluator evidence of beating the current holdout best.",
     "Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.",
     "Registry scan is incomplete or contains errors.",
+    "Holdout comparison is missing or not bound to the current artifact hash.",
     "Reproducible method source manifest is missing, stale, or not artifact-bound.",
     "Artifact-bound feature-alone leakage canaries are missing or flagged.",
     "surface uniqueness phase is missing or not bound to the current artifact.",

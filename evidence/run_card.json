@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T19:36:32.262054+00:00",
+  "generated_utc": "2026-10-20T19:37:29.916779+00:00",
   "lane": "GEMSDOE69 relay-ramp & pull-apart corridor generator",
   "hypothesis": "H69-D: radiometric depletion inside catalogue-tip relay/pull-apart corridors; previously generated candidate, audited here without another experiment.",
   "mechanism": "Tip-graph corridor proposals scored using gravity/magnetic HG and tilt, magnetic lows, lidar scarps, orientation, and K/Th depletion; greedy marginal-DTI placement.",
@@ -97,6 +97,7 @@
       "No explicit same-evaluator evidence of beating the current holdout best.",
       "Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.",
       "Registry scan is incomplete or contains errors.",
+      "Holdout comparison is missing or not bound to the current artifact hash.",
       "Reproducible method source manifest is missing, stale, or not artifact-bound.",
       "Artifact-bound feature-alone leakage canaries are missing or flagged.",
       "surface uniqueness phase is missing or not bound to the current artifact.",
