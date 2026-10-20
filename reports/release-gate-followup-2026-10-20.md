@@ -33,7 +33,7 @@ This continuation was made on the session's fixed branch after bringing it forwa
 - Site/README/status were regenerated from the strict gate (9 pages). The red `NOT OK TO SUBMIT — DO NOT SUBMIT` banner remains prominent. Independent file inventory found no TIFF or ZIP in `docs/downloads/` (a historical JSON metadata file is not a submission artifact).
 - Local format validation passed for archived H69-H2 (SHA-256 prefix `b44d16ce3f9a456c`), H69-J 38,669-dot (prefix `981beb5707bb9933`), and H69-J 39,958-dot (prefix `287372cb3fc6d7b8`); these format passes do not clear science, protocol, or uniqueness gates.
 - The compatibility `scripts/build_site.py` entrypoint successfully delegates to the strict site builder. `scripts/status.py` writes the same release-policy result. The builder removed the stale H69-J TIFF from `docs/downloads/`; no TIFF/ZIP remains there. `git diff --check` passed.
-- Pull-request actions are recorded below after repository operations.
+- GitHub cleanup: closed obsolete PR #16 because its claimed overlap pass was limited to a comparable-budget subset and conflicted with the literal any-raster stop. Opened corrective PR #27 from this fixed branch. No competition slot was used.
 
 ## Remaining limitations / next safe work
 
