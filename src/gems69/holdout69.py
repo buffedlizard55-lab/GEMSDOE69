@@ -24,9 +24,8 @@ from .corridors import build_corridors
 from .physics import (TRANSFORM_NAMES, build_layer_stats, build_z_stack,
                       compute_transform, corridor_evidence_from_z)
 from .scoring import (GRAV_LAYERS, LIDAR_LAYERS, MAGLOW_LAYERS, MAG_LAYERS,
-                      RAD_LAYERS, SCORE_FLOOR_QUANTILE, STRAIGHT_LAYERS,
-                      W_GRAV, W_LIDAR, W_MAG, W_MAGLOW, W_RAD, W_STRAIGHT,
-                      build_propensity, score_corridor)
+                      W_GRAV, W_GEOM, W_LIDAR, W_MAG, W_MAGLOW, W_ORIENT,
+                      build_propensity, propensity_from_score, score_corridor)
 from .tips import vectorize
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -38,29 +37,48 @@ def load_template_grid():
 
 
 def corridor_pipeline(catalogue: np.ndarray, shape: tuple[int, int], stats: dict,
-                      max_corridors: int = 1200, zstack: dict | None = None):
+                      max_corridors: int = 1200, zstack: dict | None = None,
+                      scoring_mode: str = "base",
+                      zstack_rad: dict | None = None,
+                      rad_stats: dict | None = None):
     """Vectorize -> tip pairs -> corridors -> scored rationale -> propensity."""
     if zstack is None:
         zstack = build_z_stack(_footprint_from_shape(shape), stats)
+    if scoring_mode in ("rad", "joint_rad") and zstack_rad is None:
+        from .radiometric import build_stats as build_rad_stats, build_z_stack as build_rad_z
+        # stats will be loaded inside build_rad_z via cache
+        g = load_template_grid()
+        rs = build_rad_stats(g.footprint)
+        zstack_rad = build_rad_z(g.footprint, rs)
     strands = vectorize(catalogue)
     corridors, pairs = build_corridors(catalogue, strands, shape,
-                                       max_corridors=max_corridors,
-                                       selection="stratified")
+                                       max_corridors=max_corridors)
     t0 = time.time()
     for c in corridors:
         ev = corridor_evidence_from_z(zstack, c)
-        score_corridor(c, ev)
-    if corridors:
-        scores = np.array([c.rationale.get("score_S", 0.0) for c in corridors])
-        thr = float(np.quantile(scores, SCORE_FLOOR_QUANTILE))
-        kept = [c for c in corridors if c.rationale.get("score_S", 0.0) >= thr]
+        if zstack_rad is not None:
+            ev2 = corridor_evidence_from_z(zstack_rad, c)
+            ev.update(ev2)
+        if scoring_mode == "joint":
+            from .scoring_joint import score_corridor_joint, build_propensity_joint
+            score_corridor_joint(c, ev)
+        elif scoring_mode in ("rad", "joint_rad"):
+            from .scoring_rad import score_corridor_rad, build_propensity_rad
+            score_corridor_rad(c, ev)
+        else:
+            score_corridor(c, ev)
+    if scoring_mode == "joint":
+        from .scoring_joint import build_propensity_joint
+        p = build_propensity_joint(corridors, shape)
+    elif scoring_mode in ("rad", "joint_rad"):
+        from .scoring_rad import build_propensity_rad
+        p = build_propensity_rad(corridors, shape)
     else:
-        thr, kept = 0.0, corridors
-    p = build_propensity(kept, shape)
+        p = build_propensity(corridors, shape)
     return dict(strands=len(strands), pairs=len(pairs), corridors=len(corridors),
-                corridors_kept=len(kept), score_floor=thr,
-                propensity=p, corridors_obj=kept,
-                score_seconds=round(time.time() - t0, 1))
+                propensity=p, corridors_obj=corridors,
+                score_seconds=round(time.time() - t0, 1),
+                scoring_mode=scoring_mode)
 
 
 def _footprint_from_shape(shape):
@@ -84,39 +102,44 @@ def cell_allowed(cell, shape) -> np.ndarray:
 
 
 def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
-                     s0: float | None = None, zstack: dict | None = None):
+                     s0: float | None = None, zstack: dict | None = None,
+                     scoring_mode: str = "base",
+                     zstack_rad: dict | None = None):
     """Corridor vs control arm on every cell; returns per-cell results."""
-    from .scoring import S0_DEFAULT
-    s0 = S0_DEFAULT if s0 is None else s0
+    if scoring_mode == "joint":
+        from .scoring_joint import S0_DEFAULT as S0J
+        s0 = S0J if s0 is None else s0
+    elif scoring_mode in ("rad", "joint_rad"):
+        from .scoring_rad import S0_DEFAULT as S0J
+        s0 = S0J if s0 is None else s0
+    else:
+        from .scoring import S0_DEFAULT
+        s0 = S0_DEFAULT if s0 is None else s0
     shape = ctx.grid.footprint.shape
     catalogue = ctx.grid.catalogue
     if zstack is None:
         zstack = build_z_stack(ctx.grid.footprint, stats)
+    if scoring_mode in ("rad", "joint_rad") and zstack_rad is None:
+        from .radiometric import build_stats as build_rad_stats, build_z_stack as build_rad_z
+        from .data import load_grid as _lg
+        _g = _lg()
+        _rs = build_rad_stats(_g.footprint)
+        zstack_rad = build_rad_z(_g.footprint, _rs)
     d_cat = ndi.distance_transform_edt(~catalogue)
     offcat = d_cat > flank_px
 
-    # ---- control propensity: same evidence groups, NO corridor prior --------
-    # Orientation and geometry priors are corridor-only; they are omitted here
-    # and the evidence weights are renormalized so the control is not weaker
-    # just because it lacks a constant subtype bonus.
-    def _posmax(names):
-        m = None
-        for name in names:
-            if name not in zstack:
-                continue
-            z = np.nan_to_num(zstack[name].astype(np.float32), nan=0.0)
-            z = np.maximum(z, 0.0)
-            m = z if m is None else np.maximum(m, z)
-        return m if m is not None else np.zeros(shape, np.float32)
-
-    ev_w = W_GRAV + W_MAG + W_MAGLOW + W_LIDAR + W_STRAIGHT + W_RAD
-    C = (W_GRAV * _posmax(GRAV_LAYERS) + W_MAG * _posmax(MAG_LAYERS)
-         + W_MAGLOW * _posmax(MAGLOW_LAYERS) + W_LIDAR * _posmax(LIDAR_LAYERS)
-         + W_STRAIGHT * _posmax(STRAIGHT_LAYERS) + W_RAD * _posmax(RAD_LAYERS))
-    C = (C / ev_w).astype(np.float32)
+    # ---- control propensity: same layers, no corridor prior (full grid) -----
+    ctrl_layers = ["grav_hg_s2", "grav_tilt_s2", "mag_hg_s2", "mag_tilt_s2",
+                   "mag_low_tmi", "mag_low_rtp", "lidar_scarp"]
+    C = np.zeros(shape, np.float32)
+    for name in ctrl_layers:
+        z = zstack[name].astype(np.float32)
+        z = np.where(np.isfinite(z), z, 0.0)
+        C += z
+        del z
+    C /= len(ctrl_layers)
     p_ctrl = (1.0 / (1.0 + np.exp(-1.5 * (C - s0)))).astype(np.float32)
     p_ctrl[~ctx.grid.footprint] = 0.0
-    del C
 
     results = {}
     for cell in ctx.cells:
@@ -124,7 +147,7 @@ def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
             continue
         key = cell.key
         visible = ctx.visible(key)
-        pipe = corridor_pipeline(visible, shape, stats, zstack=zstack)
+        pipe = corridor_pipeline(visible, shape, stats, zstack=zstack, scoring_mode=scoring_mode, zstack_rad=zstack_rad)
         p_cor = pipe["propensity"]
         allowed = cell_allowed(cell, shape) & offcat
         allowed_ctrl = allowed.copy()

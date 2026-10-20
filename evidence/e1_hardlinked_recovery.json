@@ -1,11 +1,11 @@
 {
  "n_hardlinked_found": 1896,
- "n_tested": 23,
- "n_disconnected_tested": 23,
+ "n_tested": 22,
+ "n_disconnected_tested": 22,
  "n_still_connected_after_mask": 10,
- "mean_recovery_within_300m": 0.8695652173913043,
+ "mean_recovery_within_300m": 0.8636363636363636,
  "median_recovery_within_300m": 1.0,
- "n_ramps_above_70pct": 20,
+ "n_ramps_above_70pct": 19,
  "definition": "virtual pair = geometrically valid tip pair in ONE 8-connected component; linking mass = corridor-masked catalogue pixels belonging to neither flank strand; ramps are scored only when masking DISCONNECTS the flanks (the link was the only connection = hard-linked ramp); recovery = fraction of masked linking pixels within 3 px (300 m) of the corridor rebuilt from the remaining visible catalogue",
  "ramps": [
   {
@@ -17,10 +17,10 @@
   },
   {
    "w_px": 1.8190674449245252,
-   "linking_px": 9,
-   "within_3px": 1.0,
+   "linking_px": 6,
+   "within_3px": 0.0,
    "subtype": "pull-apart",
-   "reemitted_pairs": 1
+   "reemitted_pairs": 0
   },
   {
    "w_px": 32.77867631362021,
@@ -142,13 +142,6 @@
    "reemitted_pairs": 1
   },
   {
-   "w_px": 6.206455622957794,
-   "linking_px": 6,
-   "within_3px": 0.0,
-   "subtype": "transfer-overlap",
-   "reemitted_pairs": 0
-  },
-  {
    "w_px": 5.589197948192421,
    "linking_px": 34,
    "within_3px": 1.0,
@@ -171,6 +164,6 @@
   }
  ],
  "evidence_class": "HOLDOUT-GEOMETRY",
- "generated_utc": "20261020T192211Z",
- "seconds": 206.1
+ "generated_utc": "20261020T194235Z",
+ "seconds": 160.3
 }

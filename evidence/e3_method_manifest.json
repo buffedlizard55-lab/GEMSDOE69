@@ -1,0 +1,33 @@
+{
+  "generated_utc": "20261020T201504Z",
+  "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+  "artifact_path": "/home/user/GEMSDOE69/submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
+  "scoring_mode": "joint",
+  "source_sha256": {
+    "src/gems69/scoring_joint.py": "be876fc49abfd9dde82f434f70dc9d4a5877e3784d7e1d054a99e4a28f47b8dc",
+    "src/gems69/scoring.py": "47976561bee65b931571f23a0638faaa1091cc35f70fb01f91656f336ffe1ba9",
+    "src/gems69/corridors.py": "3c7d1d844c6c414218b2c520fd5ce03d870133bb6803a4457d29458cd5560dbb",
+    "src/gems69/physics.py": "70ec0c2aaa7692f5422284932e01df8286e8c266cd4ce693e2989a809e8e2774",
+    "src/gems69/holdout69.py": "effddba656037cfc04801e278ea934ba9c27980e902a080740fd8c2d59b35a85"
+  },
+  "feature_names": [
+    "grav_hg_s1",
+    "mag_hg_s1",
+    "grav_hg_s2",
+    "mag_hg_s2",
+    "grav_hg_s4",
+    "mag_hg_s4",
+    "grav_tilt_s2",
+    "mag_tilt_s2",
+    "grav_hg_prov",
+    "grav_vg_prov",
+    "geod_2ndinv",
+    "mag_hg_prov",
+    "mag_vg_prov",
+    "tc_prov",
+    "mag_low_tmi",
+    "mag_low_rtp",
+    "lidar_scarp",
+    "corridor_propensity"
+  ]
+}

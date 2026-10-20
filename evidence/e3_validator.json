@@ -1,7 +1,7 @@
 {
  "zeros": {
-  "file": "/home/user/GEMSDOE69/submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-zeros.tif",
-  "sha256": "ad03bd333dacc28ebaf474599f3fc7aabf65d181373a2afd52f5adf8fdc15045",
+  "file": "/home/user/GEMSDOE69/submissions/h69-relayramp-pullapart-35787-20261020T201246Z-0e22fe3c-zeros.tif",
+  "sha256": "55f6215c72990ec6a4184985d401c8adffa57673d678ebbc052045ceede3cce6",
   "passed": false,
   "has_failures": true,
   "checks": [
@@ -83,14 +83,14 @@
    {
     "check": "info: emitted cells (value > 0)",
     "status": "INFO",
-    "detail": "emitted=33199"
+    "detail": "emitted=35787"
    }
   ],
   "skipped_checks_mean_unverified": false
  },
  "nan": {
-  "file": "/home/user/GEMSDOE69/submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-nan.tif",
-  "sha256": "db7915f3304edaefe3b74f925bd4c0dca57d2b93d656f46a5de5df7b13d528ab",
+  "file": "/home/user/GEMSDOE69/submissions/h69-relayramp-pullapart-35787-20261020T201246Z-0e22fe3c-nan.tif",
+  "sha256": "9c0bc4a5d095b00ba3485dab22f67dfb255065f4c6e93a70cc02dc1744ab0f23",
   "passed": false,
   "has_failures": true,
   "checks": [
@@ -172,10 +172,10 @@
    {
     "check": "info: emitted cells (value > 0)",
     "status": "INFO",
-    "detail": "emitted=33199"
+    "detail": "emitted=35787"
    }
   ],
   "skipped_checks_mean_unverified": false
  },
- "generated_utc": "20261020T193531Z"
+ "generated_utc": "20261020T201246Z"
 }
