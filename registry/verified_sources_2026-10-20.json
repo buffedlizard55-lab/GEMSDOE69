@@ -1,0 +1,221 @@
+{
+  "schema": 1,
+  "review_date_utc": "2026-10-20",
+  "verification_method": "Read with the research fetch_page tool during this review; GitHub sources also read with gh. This is a parsed-content observation, not an authenticated organizer input download or a raw-page content hash.",
+  "organizer_confirmed_submission_receipts": [],
+  "sources": [
+    {
+      "id": "problem",
+      "authority": "DrivenData organizer",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "status": "read",
+      "sections_read": [
+        "Problem description",
+        "Datasets",
+        "Performance metric",
+        "Submission format"
+      ],
+      "claims": [
+        "The challenge predicts geological faults indicative of geothermal resources; it does not directly label geothermal vents.",
+        "New expert-labeled faults absent from the current public database form the initial test set. The final round expands labels by expert review.",
+        "The distance-weighted Tversky index uses alpha=0.2, beta=0.8 and a triangular distance kernel with support R=300 m.",
+        "Predictions are pixel-wise confidence/probability values in [0,1], single-layer float32 GeoTIFF, EPSG:32611, 100 m, matching training bounds; outside-bounds data is null or NaN.",
+        "The sample submission is a template. Labels are offered in both vector and raster form.",
+        "External data requires a license permitting competition use and sharing with the sponsor."
+      ],
+      "limits": "Does not authenticate this repository's mirrored sample, define our local literal registry policy, reveal test labels, or diagnose a rejected user upload."
+    },
+    {
+      "id": "leaderboard",
+      "authority": "DrivenData organizer",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "status": "read",
+      "evidence_class": "OFFICIAL-PUBLIC-LEADERBOARD-SNAPSHOT, NOT ORGANIZER-CONFIRMED submission-page receipt",
+      "snapshot": [
+        {
+          "rank": 1,
+          "participant": "xiaofanhu",
+          "public_dw_tversky": 0.4413
+        },
+        {
+          "rank": 2,
+          "participant": "Batik Shirt Brothers",
+          "public_dw_tversky": 0.3811
+        },
+        {
+          "rank": 3,
+          "participant": "cfld__",
+          "public_dw_tversky": 0.3788
+        }
+      ],
+      "limits": "This is a dated public-page observation. It does not bind H33 or any GEMSDOE69 TIFF to a score, and is not a current authenticated submission receipt.",
+      "snapshot_observation_date_utc": "2026-10-20",
+      "later_read_limit": "A later research-tool request during this review returned only Loading... rather than a table; the dated earlier snapshot is retained, not represented as a new/live scoreboard read."
+    },
+    {
+      "id": "rules",
+      "authority": "DOE/NLR official rules, September 2026",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "status": "read",
+      "sections_read": [
+        "Preface",
+        "3.3 Algorithm and Testing",
+        "3.4 Feedback",
+        "3.5 What To Submit",
+        "3.6 How We Determine and Award Winners"
+      ],
+      "claims": [
+        "Section 3.4 describes up to three automated-scoring submissions per week, as specified on the competition website.",
+        "Only one finalized submission is selected for both rounds; multiple finalized submissions are not allowed.",
+        "Finalists need complete code assets and documentation sufficient to reproduce results and generate predictions on new samples."
+      ],
+      "limits": "The authenticated portal's current cap and remaining allowance were not accessible; no slot was selected or used. This review has not read every eligibility clause."
+    },
+    {
+      "id": "giddens2025",
+      "authority": "Stanford Geothermal Workshop; Giddens and Faulds (2025), SGP-TR-229",
+      "url": "https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2025/Giddens.pdf",
+      "status": "read",
+      "sections_read": [
+        "Abstract",
+        "1 Introduction",
+        "3 Overview of step-overs",
+        "6.1 Entire INGENIOUS study area",
+        "6.2 Regional characteristics",
+        "6.3 Implications",
+        "6.4 Limitations"
+      ],
+      "claims": [
+        "More than 450 step-overs were identified; reported relay widths are 0.1-14.6 km, mean 2.8 km.",
+        "Section 3 defines a normal-fault step-over as transfer to an adjacent parallel fault with the same direction of dip; relay structures are typically 3-3.5 times longer than wide.",
+        "About 70% of higher-temperature (>120 C) step-overs are hard-linked; the abstract reports about 74% between north to north-northeast strands.",
+        "Breaching structures range from oblique-slip connectors to en echelon strands parallel to major faults.",
+        "North-to-northeast faults are favorably oriented relative to WNW extension, but regional strain and fault attributes vary.",
+        "Range-front mapping bias, uncertain tectonic-domain boundaries, limited detailed mapping and incomplete lidar coverage are explicit limitations."
+      ],
+      "limits": "These population associations are not probabilities calibrated to the competition's hidden faults. Same strike does not establish same dip. The 3.5W acceptance cutoff is the user's modeling rule, not an empirically validated classifier boundary."
+    },
+    {
+      "id": "faulds2026",
+      "authority": "Stanford Geothermal Workshop; Faulds and colleagues (2026)",
+      "url": "https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2026/Faulds.pdf",
+      "status": "read",
+      "sections_read": [
+        "Abstract",
+        "Introduction"
+      ],
+      "claims": [
+        "Fault terminations, intersections, relay ramps, accommodation zones, pull-aparts and displacement-transfer zones are favorable structural settings.",
+        "Pull-aparts and displacement-transfer zones are more prominent within and near the transtensional Walker Lane.",
+        "Minor faults with little recent rupture can be obscured by lake sediments and shoreline features; gravity data helps delineate basin structures."
+      ],
+      "limits": "No spatial overlap or geothermal target in our candidate was newly verified from this paper. The paper's polygons must not be used as holdout labels or features without ancestry/leakage checks."
+    },
+    {
+      "id": "geodawn",
+      "authority": "USGS data release; Glen and Earney (2024)",
+      "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "doi": "10.5066/P93LGLVQ",
+      "status": "read",
+      "license_observed": "CC0 1.0 Universal",
+      "claims": [
+        "Airborne magnetics and radiometrics support subsurface structure/geology and surface geology/soil composition, respectively; coordinated 3DEP lidar provides surface topography.",
+        "Area 1 flight lines are 200 m apart; Area 2 lines are 400 m apart, with terrain clearance affecting interpretation.",
+        "Radiometric data include altitude and background corrections; processed grids and line data are provided."
+      ],
+      "limits": "A 100 m resampled grid is not 100 m independent survey resolution. Radiometrics cannot be assumed to image alteration below thick alluvium. Official raw payloads were not downloaded in this review."
+    },
+    {
+      "id": "ingenious",
+      "authority": "Great Basin Center for Geothermal Energy, University of Nevada, Reno",
+      "url": "https://gbcge.org/current-projects/ingenious/",
+      "status": "read",
+      "claims": [
+        "INGENIOUS aims to accelerate discovery of hidden geothermal systems and reduce exploration risk using integrated geological/geophysical workflows.",
+        "The project links regional gravity/magnetics, conductance, heat flow and slip/dilation datasets."
+      ],
+      "limits": "Project goals are not independent validation of a candidate fault or geothermal reservoir."
+    },
+    {
+      "id": "gdr1391",
+      "authority": "DOE Geothermal Data Repository; Ayling and colleagues (2022)",
+      "url": "https://gdr.openei.org/submissions/1391",
+      "doi": "10.15121/1881483",
+      "status": "read",
+      "license_observed": "CC BY 4.0; redistribution with attribution",
+      "claims": [
+        "Quaternary Faults v2 includes updated traces and a field-definitions document, superseding v1.",
+        "The catalogue provides downloadable geological/geophysical datasets and links to slip/dilation tendency and USGS products."
+      ],
+      "resource_observed": "https://gdr.openei.org/files/1391/qfaults_ingenious_nad83conus117_2023-06-27.zip",
+      "limits": "Resource link and public access metadata verified. Official ZIP bytes, attribute join, footprint intersection and competition-input identity not authenticated here; the shell only permits allowlisted download hosts."
+    },
+    {
+      "id": "slip_dilation",
+      "authority": "USGS data release; Siler (2022)",
+      "url": "https://www.usgs.gov/data/shapefile-slip-tendency-and-dilation-tendency-calculated-quaternary-faults-great-basin",
+      "doi": "10.5066/P9YL58W6",
+      "status": "read",
+      "license_observed": "CC0 1.0 Universal",
+      "claims": [
+        "The data describes slip/dilation tendency of Quaternary fault segments under ambient stress."
+      ],
+      "limits": "Tendencies are modeled, not measurements proving permeability or slip sense for every tip pair."
+    },
+    {
+      "id": "slip_dilation_files",
+      "authority": "USGS ScienceBase",
+      "url": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
+      "status": "read",
+      "claims": [
+        "The official release lists full-study and INGENIOUS-area shapefile and KMZ archives and says fault geometry and stress inputs are included."
+      ],
+      "limits": "Archive listing is verified; the ZIP bytes, field-level provenance and joins were not tested. Do not claim the layer is ready for a leakage-safe holdout."
+    },
+    {
+      "id": "reference",
+      "authority": "DrivenData organizer GitHub repository",
+      "url": "https://github.com/drivendataorg/gems-prize-reference-solution",
+      "status": "read_with_gh",
+      "observed_main_commit": "aebe92f7c8a990f0e3443451b7a825d9afd6336b",
+      "claims": [
+        "The repository contains a reference-solution notebook, README and CPU/GPU environment files."
+      ],
+      "limits": "Existence of CPU and GPU environments is not a requirement for this CPU geometry lane or authentication of our mirrors."
+    },
+    {
+      "id": "portal_data",
+      "authority": "DrivenData organizer",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+      "status": "login_redirect",
+      "limits": "No organizer-authenticated files obtained."
+    },
+    {
+      "id": "portal_submissions",
+      "authority": "DrivenData organizer",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/",
+      "status": "login_redirect",
+      "limits": "No submission receipt, weekly allowance, or private score accessed."
+    },
+    {
+      "id": "masking_clarification",
+      "authority": "DrivenData Staff reply (chrisk-dd), 2026-09-16",
+      "url": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/2",
+      "status": "read",
+      "claims": [
+        "Known USGS/INGENIOUS fault pixels are masked/excluded from evaluation and re-evaluation; they do not count toward penalty terms."
+      ],
+      "limits": "This is pixel-exact known-fault masking, not permission to use hidden holdout targets in a 200 m exclusion buffer. It is not a submitted-file score receipt."
+    },
+    {
+      "id": "pooled_aggregation_clarification",
+      "authority": "DrivenData Staff reply (chrisk-dd), 2026-10-01",
+      "url": "https://community.drivendata.org/t/leaderboard-aggregation-pooled-over-public-test-pixels-or-mean-of-per-chunk-scores/11550/2",
+      "status": "read",
+      "claims": [
+        "Public leaderboard pools all pixels in the public subset into a single Tversky index; private leaderboard uses the same aggregation. Final re-evaluation covers the entire GeoDAWN area."
+      ],
+      "limits": "Subsets/chunking are undisclosed. This confirms pooled metric aggregation, not any archived mean-of-cell estimate or spatial-CI procedure."
+    }
+  ]
+}

@@ -7,6 +7,10 @@ Emission (--emit) writes the TIF from the precheck-frozen full-catalogue
 surface/dots in /tmp/gems69_relayfix (surface_transfer.npy/dots_transfer.npy).
 """
 from __future__ import annotations
+
+if __name__ == "__main__":
+    from lane_preflight import require_open_lane
+    require_open_lane()
 import datetime as dt, hashlib, json, sys, time
 from pathlib import Path
 import numpy as np

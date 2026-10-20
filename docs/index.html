@@ -1,61 +1,41 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css"></head>
-<body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
-<main class="wrap">
-
-<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. The archived candidate is a negative result under the literal protocol. No competition slot was used.</p><ul><li>Holdout comparison is missing or not bound to the current artifact hash.</li><li>Reproducible method source manifest is missing, stale, or not artifact-bound.</li></ul></div>
-<div class="card" id="how-to-submit">
-<h2>How to submit the TIF (3 steps)</h2>
-<ol>
-<li>Only after the banner explicitly permits a download, download the <b>-zeros</b> variant (all cells finite in [0,1] &mdash; this avoids the
-&ldquo;Predicted values must be in range [0, 1]&rdquo; portal error class seen with NaN-containing artifacts).</li>
-<li>Go to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition 306 &rarr; New submission</a>,
-choose <i>File to submit</i> = the downloaded <code>.tif</code> (a <code>.zip</code> with a single GeoTIFF is also accepted).</li>
-<li>Paste this note (&le;140 chars):<br><code>H69 joint convergent grav+mag joint; pull-apart transfer; greedy marginal-DTI 200m prune 38669 dots</code></li>
-</ol>
-<p class="small">Format contract: single-band GeoTIFF, float32, EPSG:32611, 3730&times;3292, transform
-(100, 0, 243350, 0, &minus;100, 4508550), values in [0,1]. Verified against
-<code>sample_submission.tif</code> (sha256 <code>2176d08e&hellip;</code>) by the shared template validator.</p>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light"><title>Submission status · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css"></head><body>
+<a class="skip" href="#content">Skip to content</a>
+<div class="global-status bad" role="status"><div class="wrap"><strong>DO NOT SUBMIT · No eligible submission download</strong> · <a href="executive-summary.html">Read submission instructions</a></div></div>
+<header><div class="wrap"><p class="eyebrow">GEMS PRIZE · RESEARCH LANE 69</p><h1>Relay ramps. Pull-aparts. Evidence first.</h1>
+<p class="sub">Catalogue-geometry fault discovery · reproducible checks · no unsupported score promises</p></div></header>
+<nav aria-label="Main"><div class="wrap"><a href="index.html" aria-current="page" class="active">Overview</a><a href="executive-summary.html">Submission guide</a><a href="why-h33-scored.html">H33 analysis</a><a href="hypotheses.html">Research queue</a><a href="method.html">Method audit</a><a href="results.html">Evidence</a><a href="family-audit.html">Family results</a><a href="sources.html">Verified sources</a><a href="irregularities.html">Blockers</a><a href="run-card.html">Run card</a></div></nav>
+<main class="wrap" id="content"><section class="banner bad" aria-label="Submission status"><div class="status-label">SUBMISSION STATUS · NEGATIVE</div>
+<h2>NOT OK TO SUBMIT — DO NOT SUBMIT</h2>
+<p>No submission download is offered. The literal registry gate fails and the current candidate's scientific evidence is not certified.
+No new TIFF or competition upload was made in this review.</p>
+<div class="actions"><span class="blocked">Download blocked by evidence gates</span><a href="executive-summary.html">What must pass?</a></div>
+<details><summary>View all release blockers</summary><ul><li>Pooled HOLDOUT-DTI, spatial-block confidence intervals, or a positive current-best contrast are unverified.</li><li>Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.</li><li>Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.</li><li>Holdout comparison is missing or not bound to the current artifact hash.</li><li>Reproducible method source manifest is missing, stale, or not artifact-bound.</li><li>Visible-only catalogue derivation is not certified; full-catalogue holdout flank masks are not allowed.</li><li>Source polylines, same-dip pairing, and releasing slip sense are not verified for this artifact.</li><li>Computed, artifact-bound feature-alone leakage canaries are missing, unverified, or flagged.</li><li>surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>The surface uniqueness check is not evidenced as completed before placement.</li><li>Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.</li><li>Fresh local-prior comparisons independently fail the literal overlap or identity rule, including sparse fields.</li><li>Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.</li></ul></details></section>
+<div class="grid stats">
+<section class="card"><p class="eyebrow">FRESH REGISTRY COUNTEREXAMPLE</p><p class="stat">1.0</p>
+<p>Dot overlap within the 3-pixel radius. The literal limit is 0.70. Different bytes do not mean protocol-unique.</p><a href="results.html">Inspect the measured stop →</a></section>
+<section class="card"><p class="eyebrow">LOCAL GEOTIFF FORMAT CHECK</p><p class="stat">PASS</p>
+<p>The archived variants satisfy the local range/grid tests. Format validity is not scientific or submission clearance.</p><a href="executive-summary.html">Understand the format →</a></section>
+<section class="card"><p class="eyebrow">FAMILY SOURCE REVIEW</p><p class="stat">72/72</p>
+<p>User-listed page sources read through GitHub. Owner claims are never treated as organizer receipts.</p><a href="family-audit.html">Explore the full source table →</a></section>
 </div>
-<div class="card">
-<h2>Evidence at a glance — fresh 2026-10-20 relay-fix session (Exp1 + Exp2b)</h2>
-<table>
-<tr><th>Measurement</th><th>Value</th><th>Evidence class</th></tr>
-<tr><td>Corridor arm archived mean DTI</td><td>0.0059 &plusmn; 0.0012</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, 8 cells, 22641 withheld positives)</td></tr>
-<tr><td>No-prior control arm</td><td>0.0021 &plusmn; 0.0006</td><td>HOLDOUT-DTI, same folds</td></tr>
-<tr><td>Paired &Delta; (corridor &minus; control)</td><td>+0.0038 &plusmn; 0.0015</td><td>HOLDOUT-DTI</td></tr>
-<tr><td>Registry scan: worst surface |Spearman| / dot-like dot overlap</td>
-<td>0.162 / 0.61</td>
-<td>REGISTRY-MEASUREMENT (limits 0.90 / 0.70)</td></tr>
-<tr><td>Family best download (h33-2-b2)</td><td>0.2778</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (no organizer receipt binds score to bytes; anatomy re-measured this session: 37,654 dots, sha256 c55bafc4&hellip;)</td></tr>
-<tr><td>Public leaderboard #1 (fetched 2026-10-20)</td><td>0.4413 (xiaofanhu)</td><td>ORGANIZER-LEADERBOARD (public page fetched this session; not our receipt)</td></tr>
-<tr><td>This candidate (transfer-only)</td><td>no organizer score &mdash; no slot spent</td><td>HOLDOUT-DTI pooled 0.00847 vs control 0.00215 (screen only; see Experiments)</td></tr>
-</table>
-<p class="small">A holdout DTI is a <b>screen</b>, never a leaderboard projection: the family's own
-instrument calibration (GEMSDOE32) measured cross-family Spearman &rho;&asymp;0.51 (p&asymp;0.09) against live scores.</p>
-</div>
-<div class="card">
-<h2>What this lane is</h2>
-<p>Hidden faults are proposed from <b>catalogue geometry</b>, not pixel statistics: the tips of mapped
-fault strands form a graph; step-over tip pairs (spacing 0.1&ndash;15 km, along-strike separation &le; 3.5W,
-sub-parallel strikes) emit <b>relay-ramp corridors</b> &mdash; an oblique connector plus en&nbsp;&eacute;chelon strands
-&mdash; and, at dilatational steps under the Walker-Lane dextral prior, <b>pull-apart rhombs</b>. Corridors are
-scored by multi-scale horizontal-gradient and tilt evidence in gravity and magnetics (including magnetic
-lows), the 1&nbsp;m lidar-scarp channel, and orientation consistency with WNW extension. Dots are placed by
-dots placed by greedy marginal-DTI selection inside the top corridors (pre-registered propensity map
-S<sub>0</sub>=0.75; template allocator), &ge;200&nbsp;m from the mapped catalogue.</p>
-<p>Geometry priors as cited in the standing prompt: Giddens &amp; Faulds (2025, SGP-TR-229) inventoried
-&gt;450 step-overs; ramps are typically 3&ndash;3.5&times; longer than wide (widths 0.1&ndash;14.6 km, mean 2.8 km);
-~70% of higher-temperature step-overs are hard-linked; in the Walker Lane, hot systems sit more often in
-pull-aparts and displacement-transfer zones; N&ndash;NE faults are best oriented for dilation under WNW extension.</p>
-</div>
-
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<section class="card"><h2>What was actually achieved</h2>
+<ul><li>Independently measured forward overlap 0.8023481341643177 against a sparse local archived field, above the 0.70 limit. Resolving the universal-support conflict alone would not clear this candidate.</li><li>Reproduced a decisive literal duplicate failure from hash-verified registry bytes using the pinned shared comparator. No new model experiment was justified after that stop.</li>
+<li>Removed a release-policy density exemption and retired a legacy generator that could fill in missing validation evidence.</li>
+<li>Re-read official competition, rules, USGS and geothermal literature sources; saved claim-level evidence and four ranked, untested in-lane hypotheses.</li>
+<li>Revalidated the archived TIFFs and measured H33's raster anatomy: 37,654 unit dots, with no on-catalogue prediction pixels in the pinned mirror.</li></ul>
+<p><b>Not achieved:</b> a new unique, gate-qualified submission or a demonstrated leaderboard improvement. Negative results are deliverables; a changed filename is not a new scientific result.</p></section>
+<section class="card"><h2>Why H33's reported advantage is plausible</h2>
+<p>The reported <b>0.2778 is USER-REPORTED-NOT-ORGANIZER-CONFIRMED for H33's exact file</b>. A sparse layout can remove redundant false-positive mass while retaining distance-tolerant coverage.
+That explains a plausible metric mechanism, not the hidden-label outcome. No file-bound organizer receipt is available.</p>
+<a href="why-h33-scored.html">Read the metric and geological analysis →</a></section>
+<section class="card"><h2>Start here when a new candidate is possible</h2>
+<p>The lane is a tip graph from catalogue polylines: same dip direction, W 0.1–15 km, along-strike separation ≤3.5W; oblique connectors, en échelon strands, and kinematically verified releasing/transfer zones.
+Gravity/magnetics and lidar score those corridors; they do not generate unrelated pixel candidates.</p>
+<p>After the literal stop and provenance blockers are resolved, test the top hypothesis on repaired, untouched spatial blocks before placement or any weekly slot.
+The <a href="executive-summary.html">submission guide</a> explains generation, gates, format, name, short note and eventual upload. This is a static evidence site, not browser-based training.</p></section></main>
+<footer><div class="wrap">Maximize P(Win): protect scarce submission slots. Own the Outcome: publish negative results.<br>
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE69">Repository</a> · <a href="status.json">Release status JSON</a> · <a href="run-card.json">Run card JSON</a></div></footer>
 </body></html>

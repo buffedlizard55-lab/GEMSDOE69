@@ -1,39 +1,21 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Irregularities · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css"></head>
-<body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="active">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
-<main class="wrap">
-
-<div class="card">
-<h2>Irregularities flagged for review</h2>
-<table><tr><th>ID</th><th>Finding</th><th>Disposition</th></tr>
-<tr><td>IR-69-DATA-01</td><td><code>existing_faults.tif</code> is byte-identical to <code>labels.tif</code>
-(sha256 7ba308cc&hellip;) in every family mirror; the true organizer existing-faults raster is not
-available in this environment. Consequence: the public labels raster doubles as the mapped catalogue;
-the scored hidden truth is unpublished.</td><td>Mirror equality is not organizer authentication; holdout validity and catalogue provenance remain limitations.</td></tr>
-<tr><td>IR-69-DATA-02</td><td>No DrivenData auth: organizer bytes cannot be re-downloaded; all data are
-sha256-pinned family mirrors (NOT organizer-authenticated).</td><td>Fail-closed fetch scripts verify every byte
-on arrival; a mismatch aborts the run.</td></tr>
-<tr><td>IR-69-TPL-01</td><td>GEMSDOE63's vendored <code>gems57/grid.py</code> drifted from its sha256 pin (an
-unrepinned REPO_ROOT fix). Upstream <code>gems/submission_writer.py</code> and <code>validate_submission.py</code>
-are strictly stronger than GEMSDOE63's vendored copies.</td><td>gems57 restored to the pinned bytes (data_dir passed
-explicitly); gems/ taken from upstream GEMSDOE66 (the template owner) and the drift documented here.</td></tr>
-<tr><td>IR-69-DIP-01</td><td>The raster catalogue carries no dip polarity, so the prompt's &ldquo;same-dip&rdquo; pairing
-condition is proxied by sub-parallel terminal strikes (&le;30&deg;).</td><td>Disclosed in the method; sensitivity
-check queued for a future session.</td></tr>
-<tr><td>IR-69-REG-01</td><td>The literal protocol overlap gate fails closed against ANY sparse dot field because the
-registry contains 27 universal soft surfaces and 134 high-density rasters (family precedent GEMSDOE63/64).
-The stratified diagnostic does not override the literal protocol. A literal failure means duplicate-and-stop; no download is offered.</td><td>Reported literally in evidence/e3_uniqueness.json.</td></tr>
-<tr><td>IR-69-SCORE-01</td><td>All leaderboard values in the standing prompt (0.2778, 0.3774, 0.3195, &hellip;) are
-USER-REPORTED-NOT-ORGANIZER-CONFIRMED; no organizer receipt exists in this repo.</td><td>Labels applied everywhere.</td></tr>
-</table>
-</div>
-
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light"><title>Blockers and limitations · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css"></head><body>
+<a class="skip" href="#content">Skip to content</a>
+<div class="global-status bad" role="status"><div class="wrap"><strong>DO NOT SUBMIT · No eligible submission download</strong> · <a href="executive-summary.html">Read submission instructions</a></div></div>
+<header><div class="wrap"><p class="eyebrow">GEMS PRIZE · RESEARCH LANE 69</p><h1>Relay ramps. Pull-aparts. Evidence first.</h1>
+<p class="sub">Catalogue-geometry fault discovery · reproducible checks · no unsupported score promises</p></div></header>
+<nav aria-label="Main"><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="why-h33-scored.html">H33 analysis</a><a href="hypotheses.html">Research queue</a><a href="method.html">Method audit</a><a href="results.html">Evidence</a><a href="family-audit.html">Family results</a><a href="sources.html">Verified sources</a><a href="irregularities.html" aria-current="page" class="active">Blockers</a><a href="run-card.html">Run card</a></div></nav>
+<main class="wrap" id="content"><section class="card"><h2>Blocking irregularities — no silent exceptions</h2><p>The current candidate and its receipts are quarantined. Archived evidence was not edited to manufacture a pass. This review fixes publication/orchestration, not the scientific evaluator or a new model run.</p>
+<div class="table-scroll"><table><thead><tr><th>ID</th><th>Finding and source</th><th>Disposition</th></tr></thead><tbody><tr><td>IR-69-INT-01<br>blocking</td><td>The legacy generator synthesized missing single-feature AUCs, reused an earlier holdout, and hard-coded validator success after subprocess failures. The current archived numbers are not thereby proven fabricated, but their measured provenance cannot be certified.<br><code>scripts/generate_unique_submission.py at base commit 04b46c116677fc76965b06c32acb148cc9078a1a, lines 93-150 and 175-190</code></td><td>Unsafe generator retired; original bytes/evidence preserved for forensic audit. No fabricated replacement measurements.</td></tr><tr><td>IR-69-INT-02<br>blocking</td><td>Archived surface and dot summaries both use the TIFF file SHA as the decoded-array SHA, assert unique=true, but their literal_reading duplicate flag is true with overlap 1.0. Summary pass flags are not valid literal clearance.<br><code>evidence/e3_uniqueness_surface.json and evidence/e3_uniqueness_dots.json</code></td><td>Release gate checks literal numeric evidence and contradictory phase flags; negative.</td></tr><tr><td>IR-69-INT-03<br>blocking</td><td>The previous release policy allowed a dotlike stratum pass to override failed literal overlap. Existing regression omitted the numeric dotlike row and therefore missed the bypass.<br><code>scripts/release_gate.py at base commit 04b46c1, lines 35-52; tests/test_release_gate.py</code></td><td>Removed bypass; added realistic regression and numeric cross-checks.</td></tr><tr><td>IR-69-HOLD-01<br>blocking</td><td>The archived joint arm mean is below the earlier corridor mean; current_best_beaten treats overlapping uncertainty as a win. This is not positive evidence of improvement over the current best. Mean-of-cells is also not pooled TP/FP/FN.<br><code>evidence/e2_gate.json, current_best_note; evidence/e2_gate_archived_20261012.json</code></td><td>Require measured pooled statistics and positive spatial-block paired confidence intervals, not pass flags.</td></tr><tr><td>IR-69-HOLD-02<br>blocking</td><td>Lane holdout call sites derive a &gt;2px flank exclusion from the full catalogue, including hidden targets, instead of the visible catalogue. This violates the requested visible-only derivation even if it conservatively depresses recovery. In addition, the older leakage_canary computes corridor propensity from ctx.grid.catalogue (the full catalogue), not each cell&#x27;s visible subset; an AUC below 0.90 does not exonerate that direct violation.<br><code>src/gems69/holdout69.py; scripts/run_relayfix_20261020.py; scripts/run_exp2b_transfer.py</code></td><td>No current holdout certified. No silent post-stop scientific fix or rerun; visible-only mask repair must precede a new preregistered experiment.</td></tr><tr><td>IR-69-GEO-02<br>blocking</td><td>Production H69-J uses raster-skeleton tips and subparallel strike/overlap proxies, not same-dip, measured-slip source-polyline pairs. Downloadable mirror qfault_attributes.csv does contain DIPDIRECT and SLIPSENSE: the problem is unintegrated/authentication-limited attributes, not that no attributes exist anywhere.<br><code>src/gems69/tips.py, src/gems69/corridors.py; mirror qfault_attributes.csv sha256 3b8745f0086a57b8255f6679afa1bf1168c10b5573491666c75cf53217029507</code></td><td>Record official GDR v2 and USGS Siler metadata; require provenance-preserving visible-segment attribute joins.</td></tr><tr><td>IR-69-PHYS-01<br>review</td><td>The implementation uses a Gaussian difference divided by a horizontal gradient and takes abs(sin(tilt)). Gaussian smoothing is not upward continuation, and this unsigned proxy does not test signed tilt-zero crossings or opposing transverse edge phase. Lithologic contacts can produce both gravity and magnetic gradients.<br><code>src/gems69/physics.py:tilt_edge; src/gems69/scoring_joint.py</code></td><td>Correct active site descriptions; retain model source unchanged after the duplicate stop.</td></tr><tr><td>IR-69-PORTAL-01<br>review</td><td>The rejected user file and portal internals are unavailable. Out-of-range values and sentinels are local failure conditions; attributing the actual rejection to NaN or promising that zeros prevents rejection is unsupported.<br><code>User prompt; scripts/validate_submission.py; official problem page 967</code></td><td>Format checks labelled local/mirror-based, never organizer acceptance.</td></tr></tbody></table></div></section>
+<section class="card"><h2>Additional limits and next-session order</h2>
+<ol><li>Resolve the universal-positive registry conflict at the protocol/selector level. Keep the literal stop until then; do not rename, jitter or reweight an old submission to force uniqueness.</li>
+<li>Authenticate source polylines, record IDs, dip/slip metadata and the sample grid. Pinned owner mirrors prove integrity, not organizer origin. Known labels equal existing_faults in this mirror; equality itself is not proof of a data defect.</li>
+<li>Repair hidden-target use in the lane caller's flank mask and canary; use the one pinned shared evaluator/writer. Re-derive all catalogue features from visible faults only, then reserve untouched blocks.</li>
+<li>Preregister one ranked hypothesis, compute feature-alone canaries and pooled HOLDOUT-DTI with block CIs against both comparators. Full source/input/measurement provenance is required; do not rebind old claims.</li>
+<li>Run the complete two-phase registry/local-prior scan in the correct order. Re-open exact output bytes, validate, and offer a download only after every policy condition passes.</li></ol>
+<p>The full feature cache is not restored in this fresh checkout. CPU suffices for this lane; a GPU is not the blocking resource. The old download_competition_data.sh/prepare_data.py instructions in the user brief do not correspond to files in this checkout.</p></section></main>
+<footer><div class="wrap">Maximize P(Win): protect scarce submission slots. Own the Outcome: publish negative results.<br>
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE69">Repository</a> · <a href="status.json">Release status JSON</a> · <a href="run-card.json">Run card JSON</a></div></footer>
 </body></html>

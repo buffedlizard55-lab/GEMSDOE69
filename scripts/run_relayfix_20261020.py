@@ -13,6 +13,10 @@ nothing here re-implements the metric.  Every score written is HOLDOUT-DTI.
 """
 from __future__ import annotations
 
+if __name__ == "__main__":
+    from lane_preflight import require_open_lane
+    require_open_lane()
+
 import datetime as dt
 import hashlib
 import json

@@ -1,5 +1,7 @@
 # Lane 69 agent protocol (parallel-run protocol, verbatim intent)
 
+**Start every session:** read README.md, PROJECT_REQUEST.md and HANDOFF.md. Current evidence is quarantined. The legacy unique generator is retired; all model work is preflight-blocked after the recorded literal stop. Source research, validators, tests and negative-result publication remain available.
+
 1. LANE. Relay-ramp and pull-apart corridor generator: faults proposed from
    catalogue geometry (tip graph), not pixel statistics. Stay inside it.
    Duplicate check vs registry: Spearman rho > 0.90 or > 70 % of dots within
@@ -47,3 +49,13 @@ stratification is diagnostic only. `scripts/release_gate.py` is the single
 publication policy. Read `reports/review-2026-10-20.md` and the updated handoff.
 Do not reuse the previous radiometric promotion verdict: the scoring source is
 not reproducible from the checked-in implementation and phase receipts are stale.
+
+
+## Latest integrity correction — 2026-10-20
+
+- `scripts/release_gate.py` is the sole publication policy; dotlike stratification cannot override literal measurements. Numeric evidence and phase contradictions are checked, not just pass flags.
+- `generate_unique_submission.py` formerly could synthesize missing canaries, borrow a holdout, and hard-code validator success. It is retired; never restore that behavior or rebind its archived claims.
+- Full-catalogue flank masks and the older full-catalogue canary violate visible-only holdout derivation. No current HOLDOUT-DTI is certified.
+- Official public source pages were reachable via the research fetch tool, despite shell-host limits. Use the claim-level verified source registry; do not repeat blanket claims that public pages cannot be read. Authenticated data/submissions still redirect to login.
+- Attribute mirrors contain DIPDIRECT/SLIPSENSE; production integration/authentication is the gap. Same strike is not same dip, and unsigned overlap is not releasing slip sense.
+- A fresh universal-support counterexample proves the literal nonempty-field gate cannot pass under the current registry/support definition. Preserve that stop; do not silently reinterpret it or waste a slot.

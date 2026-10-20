@@ -1,0 +1,104 @@
+{
+  "generated_utc": "2026-10-20T22:05:22.427651+00:00",
+  "scope": "Unauthenticated official-source health checks; no successful fetch authenticates model inputs or promotes an artifact.",
+  "rows": [
+    {
+      "id": "problem",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/",
+      "checked_utc": "2026-10-20T22:05:21.978062+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "leaderboard",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/",
+      "checked_utc": "2026-10-20T22:05:21.978811+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "rules",
+      "url": "https://docs.nlr.gov/docs/fy26osti/96647.pdf",
+      "checked_utc": "2026-10-20T22:05:21.979143+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "giddens2025",
+      "url": "https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2025/Giddens.pdf",
+      "checked_utc": "2026-10-20T22:05:21.979386+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "faulds2026",
+      "url": "https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2026/Faulds.pdf",
+      "checked_utc": "2026-10-20T22:05:22.075286+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "geodawn",
+      "url": "https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and",
+      "checked_utc": "2026-10-20T22:05:22.115947+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "ingenious",
+      "url": "https://gbcge.org/current-projects/ingenious/",
+      "checked_utc": "2026-10-20T22:05:22.125340+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "gdr1391",
+      "url": "https://gdr.openei.org/submissions/1391",
+      "checked_utc": "2026-10-20T22:05:22.133518+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "slip_dilation",
+      "url": "https://www.usgs.gov/data/shapefile-slip-tendency-and-dilation-tendency-calculated-quaternary-faults-great-basin",
+      "checked_utc": "2026-10-20T22:05:22.161886+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "slip_dilation_files",
+      "url": "https://www.sciencebase.gov/catalog/item/6296974dd34ec53d276bb33d",
+      "checked_utc": "2026-10-20T22:05:22.187746+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "portal_data",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/data/",
+      "checked_utc": "2026-10-20T22:05:22.220579+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "portal_submissions",
+      "url": "https://www.drivendata.org/competitions/306/competition-doe-gems/submissions/",
+      "checked_utc": "2026-10-20T22:05:22.227480+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "masking_clarification",
+      "url": "https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516/2",
+      "checked_utc": "2026-10-20T22:05:22.255490+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    },
+    {
+      "id": "pooled_aggregation_clarification",
+      "url": "https://community.drivendata.org/t/leaderboard-aggregation-pooled-over-public-test-pixels-or-mean-of-per-chunk-scores/11550/2",
+      "checked_utc": "2026-10-20T22:05:22.288620+00:00",
+      "status": "error",
+      "error": "<urlopen error TLS/SSL connection has been closed (EOF) (_ssl.c:992)>"
+    }
+  ]
+}
