@@ -16,6 +16,8 @@ jobs:
   build:
     runs-on: ubuntu-latest
     timeout-minutes: 20
+    outputs:
+      pages_source: ${{ steps.pages_mode.outputs.source }}
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -56,26 +58,50 @@ jobs:
           cp -r docs/. .cache/pages/docs/
           mkdir -p .cache/source-baseline
           cp docs/data/family-feed.json docs/data/source-health.json .cache/source-baseline/
-      - name: Select workflow-based Pages publication
-        env:
-          GH_TOKEN: ${{ github.token }}
+      - name: Retain the audited daily snapshot even when Pages is unavailable
+        uses: actions/upload-artifact@v4
+        with:
+          name: audited-evidence-site-${{ github.run_id }}
+          path: .cache/pages
+          include-hidden-files: true
+          retention-days: 30
+      - name: Summarize actual source observations
         run: |
-          source=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type)
-          if [ "$source" != "workflow" ]; then
-            gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f build_type=workflow
-          fi
-      - uses: actions/configure-pages@v5
+          python - <<'PYCODE'
+          import json
+          from pathlib import Path
+          family = json.loads(Path('docs/data/family-feed.json').read_text())
+          health = json.loads(Path('docs/data/source-health.json').read_text())
+          errors = sum(row.get('status') == 'error' for row in health.get('rows', []))
+          print(f"::notice title=Public source audit::Family {family['read_sites']}/{family['requested_sites']} read; family errors={family['errors']}; official health errors={errors}/{len(health.get('rows', []))}. No science or submission authorization inferred.")
+          PYCODE
       - uses: actions/upload-pages-artifact@v3
         with:
           path: .cache/pages
+      - name: Read Pages publication mode without changing repository settings
+        id: pages_mode
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          if source=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type); then
+            echo "source=$source" >> "$GITHUB_OUTPUT"
+          else
+            source=unknown
+            echo 'source=unknown' >> "$GITHUB_OUTPUT"
+          fi
+          if [ "$source" != "workflow" ]; then
+            echo '::warning::Daily evidence artifacts are retained, but automatic Pages deployment is skipped. Repository owner must select Settings > Pages > Source > GitHub Actions. No permission bypass or settings write is attempted.'
+          fi
   deploy:
     needs: build
+    if: needs.build.outputs.pages_source == 'workflow'
     runs-on: ubuntu-latest
     timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
     steps:
+      - uses: actions/configure-pages@v5
       - name: Deploy policy-generated static evidence site
         id: deployment
         uses: actions/deploy-pages@v4

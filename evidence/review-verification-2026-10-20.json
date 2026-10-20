@@ -61,6 +61,19 @@
   "new_tiff_emissions_this_review": 0,
   "shared_scientific_template_changes": [],
   "integrated_main": "5c68edc",
-  "github_outcomes": "Initial two verify jobs succeeded at 0ecde41; follow latest-head checks, actual merge and Pages deployment in PR/Actions. Settings API source change was denied to Arena app; workflow Pages token outcome not asserted by this preparation checkpoint.",
+  "github_outcomes": {
+    "pr29_state": "MERGED",
+    "pr29_merged_utc": "2026-10-20T22:30:36Z",
+    "merge_commit": "308f4115fc5743b247ca5c4aa6844b6a4316958e",
+    "main_ci": "https://github.com/buffedlizard55-lab/GEMSDOE69/actions/runs/39508632824",
+    "main_ci_conclusion": "success",
+    "public_site_negative_banner_independently_fetched": true,
+    "pages_source_observed": "legacy",
+    "first_source_feed_workflow": "https://github.com/buffedlizard55-lab/GEMSDOE69/actions/runs/39508632917",
+    "first_workflow_conclusion": "failure at Pages configuration; build/test succeeded and partial source failures were explicitly logged",
+    "direct_actions_deployment": "not performed",
+    "required_owner_setting": "Settings > Pages > Source > GitHub Actions",
+    "followup": "Retain audited artifacts and explicitly skip deployment for legacy/unknown source; never bypass permissions."
+  },
   "delivery_pr": "https://github.com/buffedlizard55-lab/GEMSDOE69/pull/29"
 }
