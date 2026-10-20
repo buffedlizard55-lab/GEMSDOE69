@@ -47,7 +47,7 @@
   },
   "post_execution_union_ports": {
     "date": "2026-10-20",
-    "note": "src/gems69/physics.py and src/gems69/scoring.py gained H69-E union-port symbols (straight_step/local_depletion, W_STRAIGHT/W_RAD constants) when merging a parallel main session; these are not read by the executed relayfix v1/v2/v3 arms (SCORING_WEIGHTS by version). Hashes refreshed to keep the manifest truthful; executed code paths unchanged.",
+    "note": "Merge of parallel main session (H69-E) added disjoint code: corridors.select_stratified (auto-merged), physics straight_step/local_depletion, scoring W_STRAIGHT/W_RAD constants. None are read by the executed relayfix v1/v2/v3 arms; executed functions unchanged (100 tests pass). Hashes refreshed to keep the manifest truthful.",
     "files": [
       "src/gems69/corridors.py",
       "src/gems69/physics.py",
