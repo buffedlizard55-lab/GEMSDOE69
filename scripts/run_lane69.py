@@ -393,17 +393,31 @@ def cmd_card() -> int:
     gate_ok = bool(gate.get("gate_passed"))
     lit = uniq.get("literal_gate", {})
     strat = uniq.get("stratified_gate", {})
-    uniq_ok = bool(lit.get("rho_ok")) and bool(strat.get("dotlike_overlap_ok")) if uniq else False
+    rho_ok = bool(lit.get("rho_ok")) if lit else False
+    dotlike_overlap_ok = bool(strat.get("dotlike_overlap_ok")) if strat else False
+    uniq_ok = rho_ok and dotlike_overlap_ok if uniq else False
     fc = receipt.get("format_compliance", {})
     nan_ok = bool(fc.get("nan")) and all(bool(v) for k, v in fc.get("nan", {}).items()
                                          if k not in ("dots", "policy"))
     zeros_ok = bool(fc.get("zeros")) and all(bool(v) for k, v in fc.get("zeros", {}).items()
                                              if k not in ("dots", "policy"))
     val_ok = nan_ok or zeros_ok
-    verdict = "promote-candidate" if (gate_ok and uniq_ok and val_ok) else "negative"
-    review = bool(gate_ok and lit.get("rho_ok") and val_ok and not strat.get("dotlike_overlap_ok"))
-    if review:
+    # PARALLEL-RUN PROTOCOL rule 1: rank-correlation > 0.90 vs any registry raster,
+    # or > 70% of dots within 3 px of one registry raster's dots = lane drift:
+    # log it as a duplicate and stop. Never auto-promote through a failed literal gate.
+    literal_gate_ok = rho_ok and dotlike_overlap_ok
+    if not literal_gate_ok:
+        verdict = "negative"
+        banner = "stop"
+    elif gate_ok and uniq_ok and val_ok:
+        verdict = "promote-candidate"
+        banner = "ok"
+    elif gate_ok and rho_ok and val_ok:
         verdict = "promote-flagged-review"
+        banner = "review"
+    else:
+        verdict = "negative"
+        banner = "stop"
     card = dict(
         generated_utc=utcnow(),
         lane="GEMSDOE69 relay-ramp & pull-apart corridor generator",
@@ -436,6 +450,13 @@ def cmd_card() -> int:
             "worst_dot_overlap_dotlike": (uniq.get("worst_dot_overlap_dotlike") or {}).get("dot_overlap_3px"),
             "literal_gate": lit, "stratified_gate_ok": strat.get("dotlike_overlap_ok"),
             "n_compared": uniq.get("n_compared"),
+            "protocol_rule_1_duplicate_log": (
+                "literal registry dot-overlap gate failed: %.2f%% of dots fall within 3 px of one "
+                "archived GEMSDOE51 raster (> 70%% limit); logged as near-duplicate lane-drift per "
+                "protocol rule 1; do not spend a submission slot; negative result is the deliverable" % (
+                    100.0 * (uniq.get("worst_dot_overlap_dotlike") or {}).get("dot_overlap_3px", 0.0))
+                if uniq and not literal_gate_ok else None
+            ),
         } if uniq else "pending"),
         raster=({
             "zeros_sha256": receipt.get("raster", {}).get("zeros", {}).get("sha256"),

@@ -1,5 +1,5 @@
 {
- "generated_utc": "20261012T031031Z",
+ "generated_utc": "20261020T182424Z",
  "lane": "GEMSDOE69 relay-ramp & pull-apart corridor generator",
  "hypothesis": "Hidden faults occupy relay-ramp / pull-apart corridors between step-over tips of mapped faults; multi-physics edge evidence inside those corridors localizes them better than pixel statistics alone.",
  "mechanism": "Tip-graph step-over pairing (W 0.1-15 km, along <= 3.5W, sub-parallel strikes) -> oblique connector + en echelon strands + pull-apart rhomb -> multi-scale HG/tilt grav+mag (incl. magnetic lows) + lidar scarp + WNW-extension orientation score -> greedy marginal-DTI dot placement >= 200 m off catalogue.",
@@ -25,7 +25,8 @@
    "overlap_ok": false
   },
   "stratified_gate_ok": false,
-  "n_compared": 750
+  "n_compared": 750,
+  "protocol_rule_1_duplicate_log": "literal registry dot-overlap gate failed: 92.15% of dots fall within 3 px of one archived GEMSDOE51 raster (> 70% limit); logged as near-duplicate lane-drift per protocol rule 1; do not spend a submission slot; negative result is the deliverable"
  },
  "raster": {
   "zeros_sha256": "55f6215c72990ec6a4184985d401c8adffa57673d678ebbc052045ceede3cce6",
@@ -39,7 +40,7 @@
  },
  "submission_name": "h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-zeros",
  "submission_note": "relay-ramp/pull-apart corridors from tip graph; HG+tilt grav/mag + lidar scarp; greedy marginal-DTI; 200m flank-pruned",
- "verdict": "promote-flagged-review",
- "banner": "review",
+ "verdict": "negative",
+ "banner": "stop",
  "note": "verdict 'promote-candidate' means the holdout gate + registry scan + validator all passed; 'promote-flagged-review' means every gate passed except the literal 70% dot-overlap rule (one archived dense raster, surface rho ~ 0.04) and needs selector review; promotion to a scored slot is a separate selector step (protocol rule 6)"
 }

@@ -9,7 +9,7 @@
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="active">Run Card</a></div></nav>
 <main class="wrap">
 <div class="card"><h2>Run card (JSON)</h2><pre>{
- &quot;generated_utc&quot;: &quot;20261012T031031Z&quot;,
+ &quot;generated_utc&quot;: &quot;20261020T182424Z&quot;,
  &quot;lane&quot;: &quot;GEMSDOE69 relay-ramp &amp; pull-apart corridor generator&quot;,
  &quot;hypothesis&quot;: &quot;Hidden faults occupy relay-ramp / pull-apart corridors between step-over tips of mapped faults; multi-physics edge evidence inside those corridors localizes them better than pixel statistics alone.&quot;,
  &quot;mechanism&quot;: &quot;Tip-graph step-over pairing (W 0.1-15 km, along &lt;= 3.5W, sub-parallel strikes) -&gt; oblique connector + en echelon strands + pull-apart rhomb -&gt; multi-scale HG/tilt grav+mag (incl. magnetic lows) + lidar scarp + WNW-extension orientation score -&gt; greedy marginal-DTI dot placement &gt;= 200 m off catalogue.&quot;,
@@ -35,7 +35,8 @@
    &quot;overlap_ok&quot;: false
   },
   &quot;stratified_gate_ok&quot;: false,
-  &quot;n_compared&quot;: 750
+  &quot;n_compared&quot;: 750,
+  &quot;protocol_rule_1_duplicate_log&quot;: &quot;literal registry dot-overlap gate failed: 92.15% of dots fall within 3 px of one archived GEMSDOE51 raster (&gt; 70% limit); logged as near-duplicate lane-drift per protocol rule 1; do not spend a submission slot; negative result is the deliverable&quot;
  },
  &quot;raster&quot;: {
   &quot;zeros_sha256&quot;: &quot;55f6215c72990ec6a4184985d401c8adffa57673d678ebbc052045ceede3cce6&quot;,
@@ -49,8 +50,8 @@
  },
  &quot;submission_name&quot;: &quot;h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-zeros&quot;,
  &quot;submission_note&quot;: &quot;relay-ramp/pull-apart corridors from tip graph; HG+tilt grav/mag + lidar scarp; greedy marginal-DTI; 200m flank-pruned&quot;,
- &quot;verdict&quot;: &quot;promote-flagged-review&quot;,
- &quot;banner&quot;: &quot;review&quot;,
+ &quot;verdict&quot;: &quot;negative&quot;,
+ &quot;banner&quot;: &quot;stop&quot;,
  &quot;note&quot;: &quot;verdict &#x27;promote-candidate&#x27; means the holdout gate + registry scan + validator all passed; &#x27;promote-flagged-review&#x27; means every gate passed except the literal 70% dot-overlap rule (one archived dense raster, surface rho ~ 0.04) and needs selector review; promotion to a scored slot is a separate selector step (protocol rule 6)&quot;
 }</pre></div>
 </main>

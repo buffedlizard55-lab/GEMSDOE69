@@ -56,7 +56,12 @@ def page(title: str, active: str, body: str) -> str:
 
 
 def submission_banner():
-    """The OK / DO-NOT-SUBMIT banner, derived strictly from evidence files."""
+    """The OK / DO-NOT-SUBMIT banner, derived strictly from evidence files.
+
+    The banner never auto-promotes: the literal registry dot-overlap gate
+    (protocol rule 1) failing closed yields DO-NOT-SUBMIT with the negative
+    result logged. The TIF remains downloadable for inspection only.
+    """
     gate = load("e2_gate.json")
     uniq = load("e3_uniqueness.json")
     receipt = load("e3_receipt.json")
@@ -79,21 +84,49 @@ def submission_banner():
     zeros_ok = bool(fc.get("zeros", {})) and all(
         bool(v) for k, v in fc.get("zeros", {}).items() if k not in ("dots", "policy"))
     val_ok = nan_ok or zeros_ok
-    ok = gate_ok and uniq_ok and val_ok
-    review = gate_ok and rho_ok and val_ok and not overlap_ok
+
     tifs = sorted(SUB.glob("h69-*-zeros.tif"))
     tif = tifs[-1] if tifs else None
     nan_tifs = sorted(SUB.glob("h69-*-nan.tif"))
     nan_tif = nan_tifs[-1] if nan_tifs else None
-    if review and tif:
-        # conditional download: every gate passed except the literal 70% dot-overlap rule,
-        # which flagged ONE archived dense raster with near-zero surface correlation.
+
+    # Publish artifacts under stable download names whenever a TIF exists.
+    if tif:
         pub = DOCS / "downloads" / f"{tif.stem}.tif"
         pub.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(tif, pub)
-        primary, fallback = (nan_tif, tif) if (nan_ok and nan_tif) else (tif, None)
-        if nan_ok and nan_tif:
+        if nan_tif and nan_ok:
             shutil.copy2(nan_tif, DOCS / "downloads" / f"{nan_tif.stem}.tif")
+    primary, fallback = (nan_tif, tif) if (nan_ok and nan_tif) else (tif, None)
+    links = ('<a class="btn big" href="downloads/%s.tif" download>&#11015;&#65039; Download '
+             'PRIMARY submission TIF (%s.tif)</a>' % (esc(primary.stem), esc(primary.stem))
+             if primary else "")
+    if fallback and fallback is not primary:
+        links += '<a class="btn alt" href="downloads/%s.tif" download>Fallback all-finite variant (%s.tif)</a>' % (
+            esc(fallback.stem), esc(fallback.stem))
+    links += '<a class="btn alt" href="#how-to-submit">How to submit it</a>'
+
+    if not gate_ok or not uniq_ok or not val_ok:
+        reasons = []
+        if not gate_ok:
+            reasons.append("holdout gate not met (corridor arm did not beat the no-prior control)")
+        if not uniq_ok:
+            reasons.append("registry literal dot-overlap gate not met: %.1f%% of dots within 3 px of "
+                           "one archived GEMSDOE51 raster (protocol limit 70%%) &mdash; logged as "
+                           "near-duplicate lane-drift per protocol rule 1" %
+                           (100.0 * worst_ovl.get("dot_overlap_3px", 0.0)))
+        if not val_ok:
+            reasons.append("format compliance failed")
+        ban = ('<div class="banner bad"><b>&#10060; DO NOT SUBMIT TO A SCORED SLOT.</b> '
+               'The generated TIF is a unique artifact (sha256 recorded in evidence/) and is offered '
+               'for download and inspection only. Negative result logged: ' + "; ".join(reasons)
+               + '. Per the parallel-run protocol the lane stops here; no submission slot is spent. '
+               'Promotion to a scored slot is a separate selector decision requiring a gate pass.</div>')
+        return ban + links, None
+
+    if review and tif:
+        # Conditional download: every gate passed except the literal 70% dot-overlap rule,
+        # which flagged ONE archived dense raster with near-zero surface correlation.
         ovl_pct = f"{worst_ovl.get('dot_overlap_3px', 0):.1%}" if worst_ovl else "n/a"
         ovl_rho = f"{worst_ovl.get('rho', 'n/a')}"
         ban = (f'<div class="banner review"><b>&#9888;&#65039; CONDITIONAL: human selector review required '
@@ -106,41 +139,19 @@ def submission_banner():
                f'overlap rule which fails closed. The submit decision is surfaced to the selector '
                f'(family precedent GEMSDOE63) instead of being auto-promoted.<br>'
                f'<span class="kv">If the selector judges the flag structural, the artifact below is ready; '
-               f'otherwise treat it as a logged negative result.</span></div>'
-               f'<a class="btn big" href="downloads/{esc(primary.stem)}.tif" download>&#11015;&#65039; Download PRIMARY submission TIF ({esc(primary.stem)}.tif)</a>'
-               + (f'<a class="btn alt" href="downloads/{esc(fallback.stem)}.tif" download>Fallback all-finite variant ({esc(fallback.stem)}.tif)</a>' if fallback else '')
-               + f'<a class="btn alt" href="#how-to-submit">How to submit it</a>')
-        return ban, tif
+               f'otherwise treat it as a logged negative result.</span></div>')
+        return ban + links, tif
     if ok and tif:
-        # publish the artifacts under stable download names
-        pub = DOCS / "downloads" / f"{tif.stem}.tif"
-        pub.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(tif, pub)
-        primary, fallback = (nan_tif, tif) if (nan_ok and nan_tif) else (tif, None)
-        if nan_ok and nan_tif:
-            shutil.copy2(nan_tif, DOCS / "downloads" / f"{nan_tif.stem}.tif")
         ban = (f'<div class="banner ok"><b>&#9989; OK TO DOWNLOAD AND SUBMIT.</b><br>'
                f'The gate was met on the spatially-blocked hide-and-recover holdout, the '
                f'registry lane-drift scan passed (surface Spearman and dot-like overlap), and the '
                f'format compliance checks passed (single-band float32, EPSG:32611, 3730&times;3292, '
                f'values in [0,1], footprint-exact against <code>sample_submission.tif</code>).<br>'
                f'<span class="kv">This is a HOLDOUT-screened candidate, not an organizer-confirmed score. '
-               f'Promotion to a submission slot is a separate selector step.</span></div>'
-               f'<a class="btn big" href="downloads/{esc(primary.stem)}.tif" download>&#11015;&#65039; Download PRIMARY submission TIF ({esc(primary.stem)}.tif)</a>'
-               + (f'<a class="btn alt" href="downloads/{esc(fallback.stem)}.tif" download>Fallback all-finite variant ({esc(fallback.stem)}.tif)</a>' if fallback else '')
-               + f'<a class="btn alt" href="#how-to-submit">How to submit it</a>')
-        return ban, tif
-    reasons = []
-    if not gate_ok:
-        reasons.append("holdout gate not met (corridor arm did not beat the no-prior control)")
-    if not uniq_ok:
-        reasons.append("registry lane-drift gate not met")
-    if not val_ok:
-        reasons.append("format compliance failed")
-    ban = ('<div class="banner bad"><b>&#10060; DO NOT SUBMIT.</b> '
-           + "; ".join(esc(r) for r in reasons)
-           + '. The negative result is logged in <code>evidence/</code>.</div>')
-    return ban, tif
+               f'Promotion to a submission slot is a separate selector step.</span></div>')
+        return ban + links, tif
+    return ('<div class="banner bad"><b>&#10060; DO NOT SUBMIT.</b> The gate was not met; '
+            'the negative result is logged in <code>evidence/</code>.</div>', None)
 
 
 def build_index():
@@ -149,6 +160,11 @@ def build_index():
     uniq = load("e3_uniqueness.json") or {}
     receipt = load("e3_receipt.json") or {}
     card = load("run_card.json") or {}
+    verdict = str(card.get("verdict", "?"))
+    note = str(card.get("note", ""))
+    pstatus = ('<div class="card"><p class="small"><b>Submission status for this build:</b> '
+               f"{esc(verdict)} &mdash; {esc(note[:160])}</p></div>"
+               if verdict != "promote-candidate" else "")
     rows = ""
     if gate:
         rows += f"""<tr><td>Corridor arm pooled DTI</td><td>{gate.get('corridor_mean_dti', float('nan')):.4f} &plusmn; {gate.get('corridor_ci95_half', float('nan')):.4f}</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, {gate.get('n_cells','?')} cells, {gate.get('withheld_positive_px_total','?')} withheld positives)</td></tr>
@@ -156,11 +172,11 @@ def build_index():
 <tr><td>Paired &Delta; (corridor &minus; control)</td><td>{gate.get('paired_delta_mean', float('nan')):+.4f} &plusmn; {gate.get('paired_delta_ci95_half', float('nan')):.4f}</td><td>HOLDOUT-DTI</td></tr>"""
     body = f"""
 {ban}
+{pstatus}
 <div class="card" id="how-to-submit">
 <h2>How to submit the TIF (3 steps)</h2>
 <ol>
-<li>Download the <b>-zeros</b> variant above (all cells finite in [0,1] &mdash; this avoids the
-&ldquo;Predicted values must be in range [0, 1]&rdquo; portal error class seen with NaN-containing artifacts).</li>
+<li>Download the variant shown above: <b>PRIMARY = -nan</b> (prompt layout: NaN only outside the footprint, [0,1] inside &mdash; passed the shared template validator against sample_submission.tif) or the <b>fallback -zeros</b> (all cells finite in [0,1] &mdash; safest against the &ldquo;Predicted values must be in range [0, 1]&rdquo; portal error class).</li>
 <li>Go to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition 306 &rarr; New submission</a>,
 choose <i>File to submit</i> = the downloaded <code>.tif</code> (a <code>.zip</code> with a single GeoTIFF is also accepted).</li>
 <li>Paste this note (&le;140 chars):<br><code>{esc(receipt.get('note', 'relay-ramp corridors'))}</code></li>
@@ -203,7 +219,16 @@ pull-aparts and displacement-transfer zones; N&ndash;NE faults are best oriented
 
 
 def build_executive_summary():
-    body = """
+    card = load("run_card.json") or {}
+    verdict = str(card.get("verdict", "?"))
+    not_ok = ('<div class="banner bad"><b>&#10060; NOT OK TO SUBMIT &mdash; negative result logged.</b> '
+              'This build&rsquo;s verdict is <b>' + esc(verdict) + '</b>: the corridor arm beat the '
+              'no-prior control on the holdout (HOLDOUT-DTI 0.0060 &plusmn; 0.0014 vs 0.0021 &plusmn; 0.0006), '
+              'but the registry literal dot-overlap gate failed (92.2% of dots within 3 px of one archived '
+              'GEMSDOE51 raster; protocol limit 70%), so per protocol rule 1 the lane stops here and '
+              '<b>no submission slot is spent</b>. The TIF remains downloadable for inspection only; '
+              'promotion to a scored slot is a separate selector decision requiring a gate pass.</div>')
+    body = not_ok + """
 <div class="card">
 <h2>Executive summary &mdash; how a submission is made and entered</h2>
 <ol>
@@ -315,6 +340,24 @@ the catalogue-derived feature under test.</p>
 <table><tr><th>Feature</th><th>AUC (withheld truth vs active negatives)</th></tr>{canary_rows}</table>
 </div>
 """
+    new_card = """
+<div class="card">
+<h2>New candidates (not yet implemented in this repo)</h2>
+<p>Ranked by expected HOLDOUT-DTI improvement over the no-prior control, then cost. Full detail:
+<a href="research/new_hypotheses.md">docs/research/new_hypotheses.md</a>.</p>
+<table>
+<tr><th>Rank</th><th>Hypothesis</th><th>Layers</th><th>Signature</th><th>Why it catches catalogue-missing faults</th><th>Gain / cost</th><th>Status</th></tr>
+<tr><td>F1</td><td>Radiometric K/Th depletion/enrichment halos inside corridor interiors</td><td>GeoDAWN radiometrics K, Th, TC (hash-pinned)</td><td>robust-z LOW of K/Th within corridor masks, 1/2/4 px</td><td>alteration halos mark damage zones with no surviving scarp; chemistry, not geometry</td><td>medium / low-medium</td><td>QUEUED — needs fetch_data.py + holdout run</td></tr>
+<tr><td>F2</td><td>Stream-profile knickpoint &amp; chi-lineament chains at step-over mouths</td><td>det_elev, det_elev_slope (pinned)</td><td>along-stream chi anomalies; collinear knickpoint vote</td><td>blind faults knick bedrock streams; invisible to scarp maps</td><td>low-medium / low</td><td>QUEUED — pinned data, CPU-only</td></tr>
+<tr><td>F3</td><td>Straight conductivity / basement-depth steps under cover</td><td>cond_surf, basement_depth (pinned)</td><td>gradient magnitude x 3x3 directional coherence</td><td>images subsurface faults under alluvium where mapping records nothing</td><td>medium / low-medium</td><td>QUEUED — pinned data</td></tr>
+<tr><td>F4</td><td>Instrumental seismicity lineaments + nodal planes</td><td>USGS ComCat/ANSS (NOT reachable here)</td><td>epicentre lineament density; nodal-plane strike clustering</td><td>active blind low-slip faults, no scarp</td><td>unknown / medium</td><td>DATA-BLOCKED in sandbox</td></tr>
+</table>
+<p class="small">Protocol rule 5: validate the top candidate (F1) on the spatially-blocked holdout
+before any submission slot; rule 6 budget: 3 experiments / 2 hours. No projection is ever written as
+a score.</p>
+</div>
+"""
+    body += new_card
     return page("Hypotheses", "hypotheses.html", body)
 
 

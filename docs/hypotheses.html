@@ -31,6 +31,22 @@ the catalogue-derived feature under test.</p>
 <table><tr><th>Feature</th><th>AUC (withheld truth vs active negatives)</th></tr><tr><td>grav_hg_s1</td><td>0.5305418979556492</td></tr><tr><td>mag_hg_s1</td><td>0.5376840831238601</td></tr><tr><td>grav_hg_s2</td><td>0.5305355347954177</td></tr><tr><td>mag_hg_s2</td><td>0.5389047017061042</td></tr><tr><td>grav_hg_s4</td><td>0.529309748848189</td></tr><tr><td>mag_hg_s4</td><td>0.5378066802300789</td></tr><tr><td>grav_tilt_s2</td><td>0.5062428593765597</td></tr><tr><td>mag_tilt_s2</td><td>0.5148141127382865</td></tr><tr><td>grav_hg_prov</td><td>0.49734889203039406</td></tr><tr><td>grav_vg_prov</td><td>0.5224056920392296</td></tr><tr><td>geod_2ndinv</td><td>0.5530383954762326</td></tr><tr><td>mag_hg_prov</td><td>0.5364947113005831</td></tr><tr><td>mag_vg_prov</td><td>0.48237893134829474</td></tr><tr><td>tc_prov</td><td>0.43950500574306417</td></tr><tr><td>mag_low_tmi</td><td>0.4963676795811981</td></tr><tr><td>mag_low_rtp</td><td>0.48283129749072273</td></tr><tr><td>lidar_scarp</td><td>0.572205257428365</td></tr><tr><td>corridor_propensity</td><td>0.6908643307121399</td></tr></table>
 </div>
 
+<div class="card">
+<h2>New candidates (not yet implemented in this repo)</h2>
+<p>Ranked by expected HOLDOUT-DTI improvement over the no-prior control, then cost. Full detail:
+<a href="research/new_hypotheses.md">docs/research/new_hypotheses.md</a>.</p>
+<table>
+<tr><th>Rank</th><th>Hypothesis</th><th>Layers</th><th>Signature</th><th>Why it catches catalogue-missing faults</th><th>Gain / cost</th><th>Status</th></tr>
+<tr><td>F1</td><td>Radiometric K/Th depletion/enrichment halos inside corridor interiors</td><td>GeoDAWN radiometrics K, Th, TC (hash-pinned)</td><td>robust-z LOW of K/Th within corridor masks, 1/2/4 px</td><td>alteration halos mark damage zones with no surviving scarp; chemistry, not geometry</td><td>medium / low-medium</td><td>QUEUED — needs fetch_data.py + holdout run</td></tr>
+<tr><td>F2</td><td>Stream-profile knickpoint &amp; chi-lineament chains at step-over mouths</td><td>det_elev, det_elev_slope (pinned)</td><td>along-stream chi anomalies; collinear knickpoint vote</td><td>blind faults knick bedrock streams; invisible to scarp maps</td><td>low-medium / low</td><td>QUEUED — pinned data, CPU-only</td></tr>
+<tr><td>F3</td><td>Straight conductivity / basement-depth steps under cover</td><td>cond_surf, basement_depth (pinned)</td><td>gradient magnitude x 3x3 directional coherence</td><td>images subsurface faults under alluvium where mapping records nothing</td><td>medium / low-medium</td><td>QUEUED — pinned data</td></tr>
+<tr><td>F4</td><td>Instrumental seismicity lineaments + nodal planes</td><td>USGS ComCat/ANSS (NOT reachable here)</td><td>epicentre lineament density; nodal-plane strike clustering</td><td>active blind low-slip faults, no scarp</td><td>unknown / medium</td><td>DATA-BLOCKED in sandbox</td></tr>
+</table>
+<p class="small">Protocol rule 5: validate the top candidate (F1) on the spatially-blocked holdout
+before any submission slot; rule 6 budget: 3 experiments / 2 hours. No projection is ever written as
+a score.</p>
+</div>
+
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
 </body></html>
