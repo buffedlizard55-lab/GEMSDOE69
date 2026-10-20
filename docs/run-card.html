@@ -1,279 +1,264 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Run Card · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css"></head>
-<body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="active">Run Card</a></div></nav>
-<main class="wrap">
-<div class="card"><h2>Run card (JSON)</h2><pre>{
- &quot;generated_utc&quot;: &quot;2026-10-20T22:38:22.710526+00:00&quot;,
- &quot;lane&quot;: &quot;GEMSDOE69 relay-ramp &amp; pull-apart corridor generator&quot;,
- &quot;hypothesis&quot;: &quot;H69-J: convergent multi-scale HG+tilt edge phase across relay connectors (H1)&quot;,
- &quot;mechanism&quot;: &quot;Tip-graph corridor proposals scored by joint grav+mag HG and tilt coincidence (AND logic, min(E_grav,E_mag) 0.35), mag low gated by joint, lidar scarp, N-NE orientation, pull-apart prior; greedy marginal-DTI placement. Targets buried relay linkage between step-over tips separating basement blocks.&quot;,
- &quot;non_fault_mimic&quot;: &quot;Lithologic intrusive contacts and basin edges produce single-physics HG without paired opposite-polarity tilt; alluvial composition alters radiometrics but not joint grav+mag edge coincidence. Pluvial shorelines mimic scarps but lack paired HG ridges.&quot;,
- &quot;holdout&quot;: {
-  &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
-  &quot;evaluator_version&quot;: &quot;vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20, 21] modes=[&#x27;all&#x27;])&quot;,
-  &quot;dti&quot;: 0.006216010186707036,
-  &quot;ci95&quot;: [
-   0.004918846125946026,
-   0.007513174247468046
-  ],
-  &quot;withheld_positive_pixels&quot;: 22641,
-  &quot;n_cells&quot;: 8,
-  &quot;comparator_dti&quot;: 0.0021479253641536293,
-  &quot;paired_delta&quot;: 0.004068084822553408,
-  &quot;uncertainty_note&quot;: &quot;Archived normal-approximation interval across repeated cells; not an independent block bootstrap. Not rerun this session.&quot;
- },
- &quot;correlation_overlap_vs_registry&quot;: {
-  &quot;evidence_class&quot;: &quot;REGISTRY-MEASUREMENT&quot;,
-  &quot;generated_utc&quot;: &quot;20261020T223407Z&quot;,
-  &quot;my_file&quot;: &quot;/home/user/GEMSDOE69/submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif&quot;,
-  &quot;my_dots&quot;: 39958,
-  &quot;my_sha256&quot;: &quot;287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4&quot;,
-  &quot;registry_scope&quot;: &quot;registry/prior_rasters.json (751 unique blobs, 2026-10-11 family census)&quot;,
-  &quot;rho_limit&quot;: 0.9,
-  &quot;overlap_limit&quot;: 0.7,
-  &quot;n_registry_blobs&quot;: 751,
-  &quot;n_compared&quot;: 750,
-  &quot;n_errors&quot;: 1,
-  &quot;worst_abs_spearman&quot;: 0.3128,
-  &quot;worst_rho_entry&quot;: {
-   &quot;blob&quot;: &quot;157813953405ef61d7f8e98cadd48bf3df2c5900&quot;,
-   &quot;stratum&quot;: &quot;dotlike&quot;,
-   &quot;their_dots&quot;: 37654,
-   &quot;rho&quot;: 0.3128,
-   &quot;dot_overlap_3px&quot;: 0.4396,
-   &quot;pixel_agreement&quot;: 0.99567
-  },
-  &quot;worst_dot_overlap_all&quot;: {
-   &quot;blob&quot;: &quot;e6433f57238b38a142192af9a531a8c7934ed111&quot;,
-   &quot;stratum&quot;: &quot;universal&quot;,
-   &quot;their_dots&quot;: 5167373,
-   &quot;rho&quot;: 0.0785,
-   &quot;dot_overlap_3px&quot;: 1.0,
-   &quot;pixel_agreement&quot;: 0.57928
-  },
-  &quot;worst_dot_overlap_dotlike&quot;: {
-   &quot;blob&quot;: &quot;23ff31cf7832f25616bc47d435eaec9fe796d3bb&quot;,
-   &quot;stratum&quot;: &quot;dotlike&quot;,
-   &quot;their_dots&quot;: 95927,
-   &quot;rho&quot;: 0.0364,
-   &quot;dot_overlap_3px&quot;: 0.8285,
-   &quot;pixel_agreement&quot;: 0.98935
-  },
-  &quot;n_exact_pixel_agreement_9999&quot;: 0,
-  &quot;literal_gate&quot;: {
-   &quot;rho_ok&quot;: true,
-   &quot;overlap_ok&quot;: false
-  },
-  &quot;stratified_gate&quot;: {
-   &quot;dotlike_overlap_ok&quot;: false,
-   &quot;note&quot;: &quot;universal soft surfaces and dense rasters overlap ANY sparse dot field by construction; family precedent GEMSDOE63/64 treats them as a registry-structure condition, reported separately from the dotlike lane-drift gate&quot;
-  },
-  &quot;local_prior_overlap&quot;: {
-   &quot;n_scanned&quot;: 0,
-   &quot;worst&quot;: null,
-   &quot;ok&quot;: true,
-   &quot;note&quot;: &quot;overlap of this emission&#x27;s dots with earlier GEMSDOE69 submissions (not in the 2026-10-11 registry)&quot;
-  },
-  &quot;errors&quot;: [
-   {
-    &quot;blob&quot;: &quot;a97c7b2a513225c9f9f2b35736afe5abf4d2a491&quot;,
-    &quot;err&quot;: &quot;shape 32x48&quot;
-   }
-  ],
-  &quot;seconds&quot;: 1078.9
- },
- &quot;raster&quot;: {
-  &quot;zeros&quot;: {
-   &quot;path&quot;: &quot;submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif&quot;,
-   &quot;sha256&quot;: &quot;287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4&quot;,
-   &quot;bytes&quot;: 782296
-  },
-  &quot;nan&quot;: {
-   &quot;path&quot;: &quot;submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-nan.tif&quot;,
-   &quot;sha256&quot;: &quot;e59602fa48fe15db6ab3627922810258bcbfe3ae776b82af7fe93a3c75b93bbd&quot;,
-   &quot;bytes&quot;: 1543672
-  }
- },
- &quot;submission_name&quot;: &quot;h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros&quot;,
- &quot;submission_note&quot;: &quot;H69 joint convergent grav+mag; HG+tilt + maglow + lidar; pull-apart+transfer; 39958 dots&quot;,
- &quot;verdict&quot;: &quot;negative&quot;,
- &quot;banner&quot;: &quot;stop&quot;,
- &quot;note&quot;: &quot;Literal protocol enforced. No submission slot used. Archived measurements are not organizer scores.&quot;,
- &quot;release_policy&quot;: {
-  &quot;verdict&quot;: &quot;negative&quot;,
-  &quot;download_enabled&quot;: false,
-  &quot;reasons&quot;: [
-   &quot;Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.&quot;,
-   &quot;Registry scan is incomplete or contains errors.&quot;,
-   &quot;surface uniqueness phase is missing or not bound to the current artifact.&quot;,
-   &quot;surface uniqueness phase failed or is incomplete.&quot;,
-   &quot;dots uniqueness phase failed or is incomplete.&quot;
-  ],
-  &quot;artifact_sha256&quot;: &quot;287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4&quot;,
-  &quot;validator_report&quot;: {
-   &quot;file&quot;: &quot;submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif&quot;,
-   &quot;bytes&quot;: 782296,
-   &quot;sha256&quot;: &quot;287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4&quot;,
-   &quot;meta&quot;: {
-    &quot;count&quot;: 1,
-    &quot;dtype&quot;: &quot;float32&quot;,
-    &quot;crs&quot;: &quot;EPSG:32611&quot;,
-    &quot;shape&quot;: [
-     3730,
-     3292
-    ],
-    &quot;transform&quot;: [
-     100.0,
-     0.0,
-     243350.0,
-     0.0,
-     -100.0,
-     4508550.0
-    ],
-    &quot;nodata&quot;: null,
-    &quot;bounds&quot;: [
-     243350.0,
-     4135550.0,
-     572550.0,
-     4508550.0
-    ]
-   },
-   &quot;n_nan&quot;: 0,
-   &quot;n_nan_inside_footprint&quot;: 0,
-   &quot;min&quot;: 0.0,
-   &quot;max&quot;: 1.0,
-   &quot;positive_pixels&quot;: 39958,
-   &quot;distinct_positive_values&quot;: [
-    1.0
-   ],
-   &quot;checks&quot;: {
-    &quot;single_band&quot;: true,
-    &quot;dtype_float32&quot;: true,
-    &quot;crs_epsg_32611&quot;: true,
-    &quot;shape_3730x3292&quot;: true,
-    &quot;transform_and_bounds_match_sample_submission&quot;: true,
-    &quot;footprint_all_finite&quot;: true,
-    &quot;footprint_values_in_0_1&quot;: true,
-    &quot;no_infinite_values&quot;: true,
-    &quot;nan_only_outside_footprint&quot;: true,
-    &quot;no_sentinel_values&quot;: true,
-    &quot;all_finite_values_in_0_1&quot;: true,
-    &quot;no_positive_outside_footprint&quot;: true,
-    &quot;zero_positive_on_mapped_catalogue&quot;: true,
-    &quot;template_validator_passed&quot;: true
-   },
-   &quot;template_validator&quot;: {
-    &quot;all_checks_passed&quot;: true,
-    &quot;checks&quot;: {
-     &quot;single_band&quot;: true,
-     &quot;dtype_float32&quot;: true,
-     &quot;dimensions_3730x3292&quot;: true,
-     &quot;crs_epsg_32611&quot;: true,
-     &quot;transform_matches_sample_submission&quot;: true,
-     &quot;no_nan_anywhere&quot;: true,
-     &quot;no_inf_anywhere&quot;: true,
-     &quot;no_sentinel_values&quot;: true,
-     &quot;range_0_1_guaranteed&quot;: true,
-     &quot;min_ge_0&quot;: true,
-     &quot;max_le_1&quot;: true,
-     &quot;in_footprint_all_finite&quot;: true,
-     &quot;in_footprint_range_0_1&quot;: true,
-     &quot;outside_footprint_zero&quot;: true,
-     &quot;zero_dots_on_mapped_catalogue&quot;: true
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light"><title>Run card · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css"></head><body>
+<a class="skip" href="#content">Skip to content</a>
+<div class="global-status bad" role="status"><div class="wrap"><strong>DO NOT SUBMIT · No eligible submission download</strong> · <a href="executive-summary.html">Read submission instructions</a></div></div>
+<header><div class="wrap"><p class="eyebrow">GEMS PRIZE · RESEARCH LANE 69</p><h1>Relay ramps. Pull-aparts. Evidence first.</h1>
+<p class="sub">Catalogue-geometry fault discovery · reproducible checks · no unsupported score promises</p></div></header>
+<nav aria-label="Main"><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="why-h33-scored.html">H33 analysis</a><a href="hypotheses.html">Research queue</a><a href="method.html">Method audit</a><a href="results.html">Evidence</a><a href="family-audit.html">Family results</a><a href="sources.html">Verified sources</a><a href="irregularities.html">Blockers</a><a href="run-card.html" aria-current="page" class="active">Run card</a></div></nav>
+<main class="wrap" id="content"><section class="card"><h2>One authoritative run card</h2><p>Negative result, no new candidate or slot. Null certified holdout fields mean not measured/certified, not zero performance.</p><a href="run-card.json">Download JSON</a><pre>{
+  &quot;generated_utc&quot;: &quot;2026-10-20T22:49:09.476801+00:00&quot;,
+  &quot;lane&quot;: &quot;GEMSDOE69 relay-ramp and pull-apart corridors&quot;,
+  &quot;hypothesis&quot;: &quot;H69-joint-convergent-joint&quot;,
+  &quot;mechanism&quot;: &quot;Archived H69-J uses min of independent corridor-mean gravity and magnetic evidence maxima, magnetic lows, scarp magnitude, orientation and geometry priors. It does not test paired transverse tilt-zero crossings.&quot;,
+  &quot;non_fault_mimic&quot;: &quot;Intrusive lithologic contacts and sedimentary basin margins can produce coincident gravity and magnetic edges; pluvial shorelines can mimic lidar scarps.&quot;,
+  &quot;holdout&quot;: {
+    &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+    &quot;dti&quot;: null,
+    &quot;ci95&quot;: null,
+    &quot;evaluator_version&quot;: &quot;vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20, 21] modes=[&#x27;all&#x27;])&quot;,
+    &quot;withheld_positive_pixel_evaluations&quot;: 22641,
+    &quot;unique_withheld_positive_pixels&quot;: null,
+    &quot;status&quot;: &quot;NOT CERTIFIED: archived measurements were not rerun; current-best and provenance claims are not sufficient&quot;,
+    &quot;archived_claim&quot;: {
+      &quot;mean_of_cells_dti&quot;: 0.006216010186707036,
+      &quot;ci95&quot;: [
+        0.004918846125946026,
+        0.007513174247468046
+      ],
+      &quot;control_mean_dti&quot;: 0.0021479253641536293,
+      &quot;uncertainty&quot;: &quot;Normal approximation across repeated cells, not independent spatial-block uncertainty; not a pooled statistic&quot;
     }
-   },
-   &quot;template_format_report&quot;: {
-    &quot;ok&quot;: true,
-    &quot;problems&quot;: []
-   },
-   &quot;all_checks_passed&quot;: true
+  },
+  &quot;correlation_overlap_vs_registry&quot;: {
+    &quot;evidence_class&quot;: &quot;REGISTRY-MEASUREMENT&quot;,
+    &quot;scope&quot;: &quot;registry/prior_rasters.json (751 unique blobs, 2026-10-11 family census)&quot;,
+    &quot;worst_abs_spearman&quot;: 0.3128,
+    &quot;worst_literal_overlap&quot;: 1.0,
+    &quot;literal_gate&quot;: {
+      &quot;rho_ok&quot;: true,
+      &quot;overlap_ok&quot;: false
+    },
+    &quot;archived_scope_warning&quot;: &quot;The summary statistics above are archival and not certified; use the fresh partial measurements below.&quot;,
+    &quot;fresh_counterexample&quot;: {
+      &quot;report&quot;: &quot;registry-blocker.json&quot;,
+      &quot;compared&quot;: 1,
+      &quot;registry_index_entries&quot;: 862,
+      &quot;exhaustive_scan&quot;: false,
+      &quot;spearman&quot;: 0.10344425936824049,
+      &quot;forward_overlap_3px&quot;: 1.0
+    },
+    &quot;local_prior_forward_overlap_max&quot;: 0.8023481341643177,
+    &quot;warning&quot;: &quot;Archived phase summaries contradict their own literal readings. No all-prior uniqueness clearance is claimed.&quot;
+  },
+  &quot;raster&quot;: {
+    &quot;zeros&quot;: {
+      &quot;path&quot;: &quot;submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif&quot;,
+      &quot;sha256&quot;: &quot;287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4&quot;,
+      &quot;bytes&quot;: 782296
+    },
+    &quot;nan&quot;: {
+      &quot;path&quot;: &quot;submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-nan.tif&quot;,
+      &quot;sha256&quot;: &quot;e59602fa48fe15db6ab3627922810258bcbfe3ae776b82af7fe93a3c75b93bbd&quot;,
+      &quot;bytes&quot;: 1543672
+    }
+  },
+  &quot;raster_sha256&quot;: &quot;287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4&quot;,
+  &quot;validator_output&quot;: {
+    &quot;file&quot;: &quot;submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif&quot;,
+    &quot;bytes&quot;: 782296,
+    &quot;sha256&quot;: &quot;287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4&quot;,
+    &quot;meta&quot;: {
+      &quot;count&quot;: 1,
+      &quot;dtype&quot;: &quot;float32&quot;,
+      &quot;crs&quot;: &quot;EPSG:32611&quot;,
+      &quot;shape&quot;: [
+        3730,
+        3292
+      ],
+      &quot;transform&quot;: [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      &quot;nodata&quot;: null,
+      &quot;bounds&quot;: [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ]
+    },
+    &quot;n_nan&quot;: 0,
+    &quot;n_nan_inside_footprint&quot;: 0,
+    &quot;min&quot;: 0.0,
+    &quot;max&quot;: 1.0,
+    &quot;positive_pixels&quot;: 39958,
+    &quot;distinct_positive_values&quot;: [
+      1.0
+    ],
+    &quot;checks&quot;: {
+      &quot;single_band&quot;: true,
+      &quot;dtype_float32&quot;: true,
+      &quot;crs_epsg_32611&quot;: true,
+      &quot;shape_3730x3292&quot;: true,
+      &quot;transform_and_bounds_match_sample_submission&quot;: true,
+      &quot;footprint_all_finite&quot;: true,
+      &quot;footprint_values_in_0_1&quot;: true,
+      &quot;no_infinite_values&quot;: true,
+      &quot;nan_only_outside_footprint&quot;: true,
+      &quot;no_sentinel_values&quot;: true,
+      &quot;all_finite_values_in_0_1&quot;: true,
+      &quot;no_positive_outside_footprint&quot;: true,
+      &quot;zero_positive_on_mapped_catalogue&quot;: true,
+      &quot;template_validator_passed&quot;: true
+    },
+    &quot;template_validator&quot;: {
+      &quot;all_checks_passed&quot;: true,
+      &quot;checks&quot;: {
+        &quot;single_band&quot;: true,
+        &quot;dtype_float32&quot;: true,
+        &quot;dimensions_3730x3292&quot;: true,
+        &quot;crs_epsg_32611&quot;: true,
+        &quot;transform_matches_sample_submission&quot;: true,
+        &quot;no_nan_anywhere&quot;: true,
+        &quot;no_inf_anywhere&quot;: true,
+        &quot;no_sentinel_values&quot;: true,
+        &quot;range_0_1_guaranteed&quot;: true,
+        &quot;min_ge_0&quot;: true,
+        &quot;max_le_1&quot;: true,
+        &quot;in_footprint_all_finite&quot;: true,
+        &quot;in_footprint_range_0_1&quot;: true,
+        &quot;outside_footprint_zero&quot;: true,
+        &quot;zero_dots_on_mapped_catalogue&quot;: true
+      }
+    },
+    &quot;template_format_report&quot;: {
+      &quot;ok&quot;: true,
+      &quot;problems&quot;: []
+    },
+    &quot;all_checks_passed&quot;: true
+  },
+  &quot;validator_output_source&quot;: &quot;evidence/e3_receipt.json&quot;,
+  &quot;submission_name&quot;: &quot;h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros&quot;,
+  &quot;submission_note&quot;: &quot;H69 joint convergent grav+mag; HG+tilt + maglow + lidar; pull-apart+transfer; 39958 dots&quot;,
+  &quot;verdict&quot;: &quot;negative&quot;,
+  &quot;banner&quot;: &quot;stop&quot;,
+  &quot;submission_slots_used&quot;: 0,
+  &quot;scientific_experiments_this_review&quot;: 0,
+  &quot;note&quot;: &quot;Negative audit delivery. No new TIFF, no portal upload, no score projection. Literal duplicate-and-stop is binding.&quot;,
+  &quot;release_policy&quot;: {
+    &quot;policy_version&quot;: &quot;gems69-literal-release-v4&quot;,
+    &quot;verdict&quot;: &quot;negative&quot;,
+    &quot;download_enabled&quot;: false,
+    &quot;reasons&quot;: [
+      &quot;No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.&quot;,
+      &quot;No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.&quot;,
+      &quot;Pooled HOLDOUT-DTI, spatial-block confidence intervals, or a positive current-best contrast are unverified.&quot;,
+      &quot;Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.&quot;,
+      &quot;Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.&quot;,
+      &quot;Registry scan is incomplete or contains errors.&quot;,
+      &quot;A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed.&quot;,
+      &quot;Visible-only catalogue derivation is not certified; full-catalogue holdout flank masks are not allowed.&quot;,
+      &quot;Source polylines, same-dip pairing, and releasing slip sense are not verified for this artifact.&quot;,
+      &quot;Computed, artifact-bound feature-alone leakage canaries are missing, unverified, or flagged.&quot;,
+      &quot;surface uniqueness phase is missing or not bound to the current artifact.&quot;,
+      &quot;surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.&quot;,
+      &quot;dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.&quot;,
+      &quot;The surface uniqueness check is not evidenced as completed before placement.&quot;,
+      &quot;Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.&quot;,
+      &quot;Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.&quot;
+    ],
+    &quot;artifact_sha256&quot;: &quot;287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4&quot;,
+    &quot;validator_report&quot;: {
+      &quot;file&quot;: &quot;submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif&quot;,
+      &quot;bytes&quot;: 782296,
+      &quot;sha256&quot;: &quot;287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4&quot;,
+      &quot;meta&quot;: {
+        &quot;count&quot;: 1,
+        &quot;dtype&quot;: &quot;float32&quot;,
+        &quot;crs&quot;: &quot;EPSG:32611&quot;,
+        &quot;shape&quot;: [
+          3730,
+          3292
+        ],
+        &quot;transform&quot;: [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        &quot;nodata&quot;: null,
+        &quot;bounds&quot;: [
+          243350.0,
+          4135550.0,
+          572550.0,
+          4508550.0
+        ]
+      },
+      &quot;n_nan&quot;: 0,
+      &quot;n_nan_inside_footprint&quot;: 0,
+      &quot;min&quot;: 0.0,
+      &quot;max&quot;: 1.0,
+      &quot;positive_pixels&quot;: 39958,
+      &quot;distinct_positive_values&quot;: [
+        1.0
+      ],
+      &quot;checks&quot;: {
+        &quot;single_band&quot;: true,
+        &quot;dtype_float32&quot;: true,
+        &quot;crs_epsg_32611&quot;: true,
+        &quot;shape_3730x3292&quot;: true,
+        &quot;transform_and_bounds_match_sample_submission&quot;: true,
+        &quot;footprint_all_finite&quot;: true,
+        &quot;footprint_values_in_0_1&quot;: true,
+        &quot;no_infinite_values&quot;: true,
+        &quot;nan_only_outside_footprint&quot;: true,
+        &quot;no_sentinel_values&quot;: true,
+        &quot;all_finite_values_in_0_1&quot;: true,
+        &quot;no_positive_outside_footprint&quot;: true,
+        &quot;zero_positive_on_mapped_catalogue&quot;: true,
+        &quot;template_validator_passed&quot;: true
+      },
+      &quot;template_validator&quot;: {
+        &quot;all_checks_passed&quot;: true,
+        &quot;checks&quot;: {
+          &quot;single_band&quot;: true,
+          &quot;dtype_float32&quot;: true,
+          &quot;dimensions_3730x3292&quot;: true,
+          &quot;crs_epsg_32611&quot;: true,
+          &quot;transform_matches_sample_submission&quot;: true,
+          &quot;no_nan_anywhere&quot;: true,
+          &quot;no_inf_anywhere&quot;: true,
+          &quot;no_sentinel_values&quot;: true,
+          &quot;range_0_1_guaranteed&quot;: true,
+          &quot;min_ge_0&quot;: true,
+          &quot;max_le_1&quot;: true,
+          &quot;in_footprint_all_finite&quot;: true,
+          &quot;in_footprint_range_0_1&quot;: true,
+          &quot;outside_footprint_zero&quot;: true,
+          &quot;zero_dots_on_mapped_catalogue&quot;: true
+        }
+      },
+      &quot;template_format_report&quot;: {
+        &quot;ok&quot;: true,
+        &quot;problems&quot;: []
+      },
+      &quot;all_checks_passed&quot;: true
+    },
+    &quot;paired_ci_control_passed&quot;: false,
+    &quot;paired_ci_current_best_passed&quot;: false,
+    &quot;holdout_protocol_compliant&quot;: false,
+    &quot;receipt_evidence_class&quot;: &quot;SUBMISSION-RECEIPT&quot;,
+    &quot;selector_authorization_required&quot;: true
   }
- },
- &quot;validator_output&quot;: {
-  &quot;file&quot;: &quot;submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif&quot;,
-  &quot;bytes&quot;: 782296,
-  &quot;sha256&quot;: &quot;287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4&quot;,
-  &quot;meta&quot;: {
-   &quot;count&quot;: 1,
-   &quot;dtype&quot;: &quot;float32&quot;,
-   &quot;crs&quot;: &quot;EPSG:32611&quot;,
-   &quot;shape&quot;: [
-    3730,
-    3292
-   ],
-   &quot;transform&quot;: [
-    100.0,
-    0.0,
-    243350.0,
-    0.0,
-    -100.0,
-    4508550.0
-   ],
-   &quot;nodata&quot;: null,
-   &quot;bounds&quot;: [
-    243350.0,
-    4135550.0,
-    572550.0,
-    4508550.0
-   ]
-  },
-  &quot;n_nan&quot;: 0,
-  &quot;n_nan_inside_footprint&quot;: 0,
-  &quot;min&quot;: 0.0,
-  &quot;max&quot;: 1.0,
-  &quot;positive_pixels&quot;: 39958,
-  &quot;distinct_positive_values&quot;: [
-   1.0
-  ],
-  &quot;checks&quot;: {
-   &quot;single_band&quot;: true,
-   &quot;dtype_float32&quot;: true,
-   &quot;crs_epsg_32611&quot;: true,
-   &quot;shape_3730x3292&quot;: true,
-   &quot;transform_and_bounds_match_sample_submission&quot;: true,
-   &quot;footprint_all_finite&quot;: true,
-   &quot;footprint_values_in_0_1&quot;: true,
-   &quot;no_infinite_values&quot;: true,
-   &quot;nan_only_outside_footprint&quot;: true,
-   &quot;no_sentinel_values&quot;: true,
-   &quot;all_finite_values_in_0_1&quot;: true,
-   &quot;no_positive_outside_footprint&quot;: true,
-   &quot;zero_positive_on_mapped_catalogue&quot;: true,
-   &quot;template_validator_passed&quot;: true
-  },
-  &quot;template_validator&quot;: {
-   &quot;all_checks_passed&quot;: true,
-   &quot;checks&quot;: {
-    &quot;single_band&quot;: true,
-    &quot;dtype_float32&quot;: true,
-    &quot;dimensions_3730x3292&quot;: true,
-    &quot;crs_epsg_32611&quot;: true,
-    &quot;transform_matches_sample_submission&quot;: true,
-    &quot;no_nan_anywhere&quot;: true,
-    &quot;no_inf_anywhere&quot;: true,
-    &quot;no_sentinel_values&quot;: true,
-    &quot;range_0_1_guaranteed&quot;: true,
-    &quot;min_ge_0&quot;: true,
-    &quot;max_le_1&quot;: true,
-    &quot;in_footprint_all_finite&quot;: true,
-    &quot;in_footprint_range_0_1&quot;: true,
-    &quot;outside_footprint_zero&quot;: true,
-    &quot;zero_dots_on_mapped_catalogue&quot;: true
-   }
-  },
-  &quot;template_format_report&quot;: {
-   &quot;ok&quot;: true,
-   &quot;problems&quot;: []
-  },
-  &quot;all_checks_passed&quot;: true
- }
-}</pre></div>
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+}</pre></section></main>
+<footer><div class="wrap">Maximize P(Win): protect scarce submission slots. Own the Outcome: publish negative results.<br>
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE69">Repository</a> · <a href="status.json">Release status JSON</a> · <a href="run-card.json">Run card JSON</a></div></footer>
 </body></html>

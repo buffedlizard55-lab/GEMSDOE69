@@ -1,82 +1,47 @@
 {
-  "generated_utc": "2026-10-20T22:38:22.710526+00:00",
-  "lane": "GEMSDOE69 relay-ramp & pull-apart corridor generator",
-  "hypothesis": "H69-J: convergent multi-scale HG+tilt edge phase across relay connectors (H1)",
-  "mechanism": "Tip-graph corridor proposals scored by joint grav+mag HG and tilt coincidence (AND logic, min(E_grav,E_mag) 0.35), mag low gated by joint, lidar scarp, N-NE orientation, pull-apart prior; greedy marginal-DTI placement. Targets buried relay linkage between step-over tips separating basement blocks.",
-  "non_fault_mimic": "Lithologic intrusive contacts and basin edges produce single-physics HG without paired opposite-polarity tilt; alluvial composition alters radiometrics but not joint grav+mag edge coincidence. Pluvial shorelines mimic scarps but lack paired HG ridges.",
+  "generated_utc": "2026-10-20T22:49:09.476801+00:00",
+  "lane": "GEMSDOE69 relay-ramp and pull-apart corridors",
+  "hypothesis": "H69-joint-convergent-joint",
+  "mechanism": "Archived H69-J uses min of independent corridor-mean gravity and magnetic evidence maxima, magnetic lows, scarp magnitude, orientation and geometry priors. It does not test paired transverse tilt-zero crossings.",
+  "non_fault_mimic": "Intrusive lithologic contacts and sedimentary basin margins can produce coincident gravity and magnetic edges; pluvial shorelines can mimic lidar scarps.",
   "holdout": {
     "evidence_class": "HOLDOUT-DTI",
+    "dti": null,
+    "ci95": null,
     "evaluator_version": "vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20, 21] modes=['all'])",
-    "dti": 0.006216010186707036,
-    "ci95": [
-      0.004918846125946026,
-      0.007513174247468046
-    ],
-    "withheld_positive_pixels": 22641,
-    "n_cells": 8,
-    "comparator_dti": 0.0021479253641536293,
-    "paired_delta": 0.004068084822553408,
-    "uncertainty_note": "Archived normal-approximation interval across repeated cells; not an independent block bootstrap. Not rerun this session."
+    "withheld_positive_pixel_evaluations": 22641,
+    "unique_withheld_positive_pixels": null,
+    "status": "NOT CERTIFIED: archived measurements were not rerun; current-best and provenance claims are not sufficient",
+    "archived_claim": {
+      "mean_of_cells_dti": 0.006216010186707036,
+      "ci95": [
+        0.004918846125946026,
+        0.007513174247468046
+      ],
+      "control_mean_dti": 0.0021479253641536293,
+      "uncertainty": "Normal approximation across repeated cells, not independent spatial-block uncertainty; not a pooled statistic"
+    }
   },
   "correlation_overlap_vs_registry": {
     "evidence_class": "REGISTRY-MEASUREMENT",
-    "generated_utc": "20261020T223407Z",
-    "my_file": "/home/user/GEMSDOE69/submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
-    "my_dots": 39958,
-    "my_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
-    "registry_scope": "registry/prior_rasters.json (751 unique blobs, 2026-10-11 family census)",
-    "rho_limit": 0.9,
-    "overlap_limit": 0.7,
-    "n_registry_blobs": 751,
-    "n_compared": 750,
-    "n_errors": 1,
+    "scope": "registry/prior_rasters.json (751 unique blobs, 2026-10-11 family census)",
     "worst_abs_spearman": 0.3128,
-    "worst_rho_entry": {
-      "blob": "157813953405ef61d7f8e98cadd48bf3df2c5900",
-      "stratum": "dotlike",
-      "their_dots": 37654,
-      "rho": 0.3128,
-      "dot_overlap_3px": 0.4396,
-      "pixel_agreement": 0.99567
-    },
-    "worst_dot_overlap_all": {
-      "blob": "e6433f57238b38a142192af9a531a8c7934ed111",
-      "stratum": "universal",
-      "their_dots": 5167373,
-      "rho": 0.0785,
-      "dot_overlap_3px": 1.0,
-      "pixel_agreement": 0.57928
-    },
-    "worst_dot_overlap_dotlike": {
-      "blob": "23ff31cf7832f25616bc47d435eaec9fe796d3bb",
-      "stratum": "dotlike",
-      "their_dots": 95927,
-      "rho": 0.0364,
-      "dot_overlap_3px": 0.8285,
-      "pixel_agreement": 0.98935
-    },
-    "n_exact_pixel_agreement_9999": 0,
+    "worst_literal_overlap": 1.0,
     "literal_gate": {
       "rho_ok": true,
       "overlap_ok": false
     },
-    "stratified_gate": {
-      "dotlike_overlap_ok": false,
-      "note": "universal soft surfaces and dense rasters overlap ANY sparse dot field by construction; family precedent GEMSDOE63/64 treats them as a registry-structure condition, reported separately from the dotlike lane-drift gate"
+    "archived_scope_warning": "The summary statistics above are archival and not certified; use the fresh partial measurements below.",
+    "fresh_counterexample": {
+      "report": "registry-blocker.json",
+      "compared": 1,
+      "registry_index_entries": 862,
+      "exhaustive_scan": false,
+      "spearman": 0.10344425936824049,
+      "forward_overlap_3px": 1.0
     },
-    "local_prior_overlap": {
-      "n_scanned": 0,
-      "worst": null,
-      "ok": true,
-      "note": "overlap of this emission's dots with earlier GEMSDOE69 submissions (not in the 2026-10-11 registry)"
-    },
-    "errors": [
-      {
-        "blob": "a97c7b2a513225c9f9f2b35736afe5abf4d2a491",
-        "err": "shape 32x48"
-      }
-    ],
-    "seconds": 1078.9
+    "local_prior_forward_overlap_max": 0.8023481341643177,
+    "warning": "Archived phase summaries contradict their own literal readings. No all-prior uniqueness clearance is claimed."
   },
   "raster": {
     "zeros": {
@@ -90,20 +55,114 @@
       "bytes": 1543672
     }
   },
+  "raster_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+  "validator_output": {
+    "file": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
+    "bytes": 782296,
+    "sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+    "meta": {
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ]
+    },
+    "n_nan": 0,
+    "n_nan_inside_footprint": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "positive_pixels": 39958,
+    "distinct_positive_values": [
+      1.0
+    ],
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "crs_epsg_32611": true,
+      "shape_3730x3292": true,
+      "transform_and_bounds_match_sample_submission": true,
+      "footprint_all_finite": true,
+      "footprint_values_in_0_1": true,
+      "no_infinite_values": true,
+      "nan_only_outside_footprint": true,
+      "no_sentinel_values": true,
+      "all_finite_values_in_0_1": true,
+      "no_positive_outside_footprint": true,
+      "zero_positive_on_mapped_catalogue": true,
+      "template_validator_passed": true
+    },
+    "template_validator": {
+      "all_checks_passed": true,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "dimensions_3730x3292": true,
+        "crs_epsg_32611": true,
+        "transform_matches_sample_submission": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "no_sentinel_values": true,
+        "range_0_1_guaranteed": true,
+        "min_ge_0": true,
+        "max_le_1": true,
+        "in_footprint_all_finite": true,
+        "in_footprint_range_0_1": true,
+        "outside_footprint_zero": true,
+        "zero_dots_on_mapped_catalogue": true
+      }
+    },
+    "template_format_report": {
+      "ok": true,
+      "problems": []
+    },
+    "all_checks_passed": true
+  },
+  "validator_output_source": "evidence/e3_receipt.json",
   "submission_name": "h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros",
   "submission_note": "H69 joint convergent grav+mag; HG+tilt + maglow + lidar; pull-apart+transfer; 39958 dots",
   "verdict": "negative",
   "banner": "stop",
-  "note": "Literal protocol enforced. No submission slot used. Archived measurements are not organizer scores.",
+  "submission_slots_used": 0,
+  "scientific_experiments_this_review": 0,
+  "note": "Negative audit delivery. No new TIFF, no portal upload, no score projection. Literal duplicate-and-stop is binding.",
   "release_policy": {
+    "policy_version": "gems69-literal-release-v4",
     "verdict": "negative",
     "download_enabled": false,
     "reasons": [
-      "Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.",
+      "No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.",
+      "No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.",
+      "Pooled HOLDOUT-DTI, spatial-block confidence intervals, or a positive current-best contrast are unverified.",
+      "Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.",
+      "Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.",
       "Registry scan is incomplete or contains errors.",
+      "A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed.",
+      "Visible-only catalogue derivation is not certified; full-catalogue holdout flank masks are not allowed.",
+      "Source polylines, same-dip pairing, and releasing slip sense are not verified for this artifact.",
+      "Computed, artifact-bound feature-alone leakage canaries are missing, unverified, or flagged.",
       "surface uniqueness phase is missing or not bound to the current artifact.",
-      "surface uniqueness phase failed or is incomplete.",
-      "dots uniqueness phase failed or is incomplete."
+      "surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.",
+      "dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.",
+      "The surface uniqueness check is not evidenced as completed before placement.",
+      "Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.",
+      "Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it."
     ],
     "artifact_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
     "validator_report": {
@@ -183,84 +242,11 @@
         "problems": []
       },
       "all_checks_passed": true
-    }
-  },
-  "validator_output": {
-    "file": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
-    "bytes": 782296,
-    "sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
-    "meta": {
-      "count": 1,
-      "dtype": "float32",
-      "crs": "EPSG:32611",
-      "shape": [
-        3730,
-        3292
-      ],
-      "transform": [
-        100.0,
-        0.0,
-        243350.0,
-        0.0,
-        -100.0,
-        4508550.0
-      ],
-      "nodata": null,
-      "bounds": [
-        243350.0,
-        4135550.0,
-        572550.0,
-        4508550.0
-      ]
     },
-    "n_nan": 0,
-    "n_nan_inside_footprint": 0,
-    "min": 0.0,
-    "max": 1.0,
-    "positive_pixels": 39958,
-    "distinct_positive_values": [
-      1.0
-    ],
-    "checks": {
-      "single_band": true,
-      "dtype_float32": true,
-      "crs_epsg_32611": true,
-      "shape_3730x3292": true,
-      "transform_and_bounds_match_sample_submission": true,
-      "footprint_all_finite": true,
-      "footprint_values_in_0_1": true,
-      "no_infinite_values": true,
-      "nan_only_outside_footprint": true,
-      "no_sentinel_values": true,
-      "all_finite_values_in_0_1": true,
-      "no_positive_outside_footprint": true,
-      "zero_positive_on_mapped_catalogue": true,
-      "template_validator_passed": true
-    },
-    "template_validator": {
-      "all_checks_passed": true,
-      "checks": {
-        "single_band": true,
-        "dtype_float32": true,
-        "dimensions_3730x3292": true,
-        "crs_epsg_32611": true,
-        "transform_matches_sample_submission": true,
-        "no_nan_anywhere": true,
-        "no_inf_anywhere": true,
-        "no_sentinel_values": true,
-        "range_0_1_guaranteed": true,
-        "min_ge_0": true,
-        "max_le_1": true,
-        "in_footprint_all_finite": true,
-        "in_footprint_range_0_1": true,
-        "outside_footprint_zero": true,
-        "zero_dots_on_mapped_catalogue": true
-      }
-    },
-    "template_format_report": {
-      "ok": true,
-      "problems": []
-    },
-    "all_checks_passed": true
+    "paired_ci_control_passed": false,
+    "paired_ci_current_best_passed": false,
+    "holdout_protocol_compliant": false,
+    "receipt_evidence_class": "SUBMISSION-RECEIPT",
+    "selector_authorization_required": true
   }
 }

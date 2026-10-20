@@ -1,60 +1,4 @@
 <!doctype html>
-<<<<<<< HEAD
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Executive Summary · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css"></head>
-<body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="active">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
-<main class="wrap">
-<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. The archived candidate is a negative result under the literal protocol. No competition slot was used.</p><ul><li>Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.</li><li>Registry scan is incomplete or contains errors.</li><li>surface uniqueness phase is missing or not bound to the current artifact.</li><li>surface uniqueness phase failed or is incomplete.</li><li>dots uniqueness phase failed or is incomplete.</li></ul></div>
-<div class="card">
-<h2>Executive summary &mdash; how a submission is made and entered</h2>
-<ol>
-<li><b>Generate</b> (2026-10-20 relay-fix session): restore pinned mirrors
-(<code>scripts/restore_data.py</code>), run the preregistered gate
-(<code>scripts/run_relayfix_20261020.py gate</code>), then the Exp2b transfer arm
-(<code>scripts/run_exp2b_transfer.py gate</code> + <code>emit</code>), which writes
-<code>submissions/h69-transferonly-&lt;dots&gt;-&lt;stamp&gt;-&lt;sha8&gt;-zeros.tif</code>
-(all-finite [0,1]) plus a <code>-nan</code> diagnostic twin, with JSON receipts in <code>evidence/</code>.</li>
-<li><b>Validate</b>: the shared template validator (<code>vendor/template66/gems/validate_submission.py</code>)
-re-reads the bytes from disk and checks CRS EPSG:32611, shape 3730&times;3292, transform, single band,
-float32, values in [0,1], and (for the nan twin) NaN only outside the footprint.</li>
-<li><b>Gate</b>: the corridor arm must beat the identical pipeline without corridor priors on the
-spatially-blocked hide-and-recover holdout (evidence/e2_gate.json), and the registry lane-drift scan
-must pass (evidence/e3_uniqueness.json). The download banner on the home page is generated from those
-two files &mdash; it cannot say OK unless they do.</li>
-<li><b>Submit</b>: DrivenData competition 306 &rarr; <i>New submission</i> &rarr; upload the single <code>.tif</code>
-(or a zip containing exactly one GeoTIFF). It must match the submission format's CRS, shape, and
-geotransform &mdash; ours is written against <code>sample_submission.tif</code> so it matches by construction.
-Add a short note (&le;140 characters) identifying the run, e.g. the receipt note.</li>
-</ol>
-<p><b>Portal error &ldquo;Predicted values must be in range [0, 1]&rdquo; &mdash; byte-verified causes (2026-10-20)</b>:
-uploading any of these files by mistake triggers exactly this class: (1) <code>labels.tif</code>/<code>existing_faults.tif</code>
-contain the value <b>&minus;1 in all 7,111,787 outside-footprint cells</b> (int8 nodata); (2) a <code>-nan</code> twin carries
-7,111,787 NaN cells, which fail a naive 0&nbsp;&le;&nbsp;v&nbsp;&le;&nbsp;1 check; (3) <code>training_features.tif</code> carries the
-&minus;3.4&times;10<sup>38</sup> sentinel. The fix is procedural: upload <b>only</b> the <code>-zeros.tif</code> named on this page
-(verified all-finite, min 0.0, max 1.0, nodata unset) and re-run
-<code>scripts/validate_submission.py &lt;file&gt;</code> on the exact bytes before uploading. Portal internals are not
-observable here, so this identifies the verified byte-level causes consistent with the error, not portal source code.</p>
-</div>
-<div class="card">
-<h2>Standing limitations (do not re-discover these)</h2>
-<ul>
-<li>No DrivenData auth in this environment: organizer bytes cannot be auto-downloaded; sha256-pinned
-family mirrors are used (integrity-pinned, NOT organizer-authenticated).</li>
-<li><code>existing_faults.tif</code> &equiv; <code>labels.tif</code> in every family mirror (IR-69-DATA-01): the public labels
-raster IS the mapped catalogue; the scored truth is unpublished (&asymp;12,691 px receipt-derived estimate,
-GEMSDOE32 evidence).</li>
-<li>Holdout DTI screens but does not rank across families (&rho;&asymp;0.51 vs live, GEMSDOE32 calibration).</li>
-</ul>
-</div>
-
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
-=======
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="color-scheme" content="light"><title>Submission guide · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head><body>
@@ -68,10 +12,10 @@ GEMSDOE32 evidence).</li>
 <p>No TIFF or ZIP is published for submission. No submission download is offered. The literal registry gate fails and the current candidate's scientific evidence is not certified.
 No new TIFF or competition upload was made in this review.</p>
 <div class="actions"><span class="blocked">Download blocked by evidence gates</span><a href="executive-summary.html">What must pass?</a></div>
-<details><summary>View all release blockers</summary><ul><li>No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.</li><li>No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.</li><li>Pooled HOLDOUT-DTI, spatial-block confidence intervals, or a positive current-best contrast are unverified.</li><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.</li><li>Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.</li><li>A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed.</li><li>Visible-only catalogue derivation is not certified; full-catalogue holdout flank masks are not allowed.</li><li>Source polylines, same-dip pairing, and releasing slip sense are not verified for this artifact.</li><li>Computed, artifact-bound feature-alone leakage canaries are missing, unverified, or flagged.</li><li>surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>The surface uniqueness check is not evidenced as completed before placement.</li><li>Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.</li><li>Fresh local-prior comparisons independently fail the literal overlap or identity rule, including sparse fields.</li><li>Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.</li></ul></details></section>
+<details><summary>View all release blockers</summary><ul><li>No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.</li><li>No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.</li><li>Pooled HOLDOUT-DTI, spatial-block confidence intervals, or a positive current-best contrast are unverified.</li><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.</li><li>Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.</li><li>Registry scan is incomplete or contains errors.</li><li>A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed.</li><li>Visible-only catalogue derivation is not certified; full-catalogue holdout flank masks are not allowed.</li><li>Source polylines, same-dip pairing, and releasing slip sense are not verified for this artifact.</li><li>Computed, artifact-bound feature-alone leakage canaries are missing, unverified, or flagged.</li><li>surface uniqueness phase is missing or not bound to the current artifact.</li><li>surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>The surface uniqueness check is not evidenced as completed before placement.</li><li>Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.</li><li>Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.</li></ul></details></section>
 <section class="card"><h2>Executive summary: exactly how to make a submission</h2>
 <p><b>Today: stop. Do not upload an archived file.</b> The file name and note below identify an audit artifact only, not a recommended submission.</p>
-<dl><dt>Archived name</dt><dd><code>h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros</code></dd><dt>Archived note (73 characters; project limit ≤140)</dt><dd><code>H69 joint convergent grav+mag joint; HG+tilt + maglow + lidar; 38669 dots</code></dd></dl>
+<dl><dt>Archived name</dt><dd><code>h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros</code></dd><dt>Archived note (88 characters; project limit ≤140)</dt><dd><code>H69 joint convergent grav+mag; HG+tilt + maglow + lidar; pull-apart+transfer; 39958 dots</code></dd></dl>
 <h3>1 · Prepare a scientifically admissible experiment</h3>
 <p>Resolve the literal registry conflict without a private exemption. Restore pinned caches outside Git, authenticate available source polylines/attributes, and remove withheld segments plus buffers before all catalogue-derived features, canaries and masks.
 The current mirror table contains dip/slip attributes, but the production candidate did not use a verified record-level join. No GPU is needed for this geometry lane.</p>
@@ -101,5 +45,4 @@ An outside-footprint NaN is allowed by the stated layout; do not assert that NaN
 <p>Re-open and test the actual candidate bytes, not a screenshot, feature stack, labels file or old report. Both current archived variants pass local checks; neither is cleared to submit.</p></section></main>
 <footer><div class="wrap">Maximize P(Win): protect scarce submission slots. Own the Outcome: publish negative results.<br>
 <a href="https://github.com/buffedlizard55-lab/GEMSDOE69">Repository</a> · <a href="status.json">Release status JSON</a> · <a href="run-card.json">Run card JSON</a></div></footer>
->>>>>>> origin/main
 </body></html>
