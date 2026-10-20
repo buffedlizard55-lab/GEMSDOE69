@@ -1,0 +1,23 @@
+{
+ "evidence_class": "MEASURED-HERE",
+ "measured": "2026-10-20 from fetched registry bytes",
+ "file": "GEMSDOE32 h33-2-b2 zeros via registry_index_69 blob 17a76895",
+ "sha256": "c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9",
+ "n_dots": 37654,
+ "values": [
+  0.0,
+  1.0
+ ],
+ "dots_on_catalogue": 0,
+ "dots_outside_footprint": 0,
+ "dist_px": {
+  "min": 2.23606797749979,
+  "p5": 3.0,
+  "median": 19.6468827043885,
+  "p95": 81.88406438373708,
+  "max": 219.27152117865194
+ },
+ "frac_within_3px": 0.057656557072289796,
+ "frac_within_2px": 0.0,
+ "frac_le_2p24px": 0.024990704838795348
+}

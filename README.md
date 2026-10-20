@@ -9,22 +9,21 @@ Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip di
 The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
 A valid file is not necessarily a unique or scientifically validated submission. The literal overlap gate cannot be replaced by a stratified diagnostic.
 
-- No explicit same-evaluator evidence of beating the current holdout best.
 - Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.
-- Registry scan is incomplete or contains errors.
-- Reproducible method source manifest is missing, stale, or not artifact-bound.
-- Artifact-bound feature-alone leakage canaries are missing or flagged.
-- surface uniqueness phase is missing or not bound to the current artifact.
 - surface uniqueness phase failed or is incomplete.
-- dots uniqueness phase is missing or not bound to the current artifact.
 - dots uniqueness phase failed or is incomplete.
 
-## Latest review — 2026-10-20
+## Latest session — 2026-10-20 relay-fix (Exp1 + Exp2b)
 
-Read [three-pass audit and next steps](reports/review-2026-10-20.md) before continuing.
-The archived HOLDOUT-DTI result is not an organizer score and was not rerun in this review.
-Both current TIFF variants were revalidated on the pinned bridge grid; see [fresh validator output](evidence/review_validator_2026-10-20.json).
-The latest radiometric method is not reproducible from the checked-in scoring code. Do not claim a leaderboard improvement.
+Read [session report](reports/relayfix-2026-10-20.md) before continuing, then
+[prior three-pass audit](reports/review-2026-10-20.md).
+Tip-graph repairs R1/R2 are implemented and the strict-xfail now passes. Fresh HOLDOUT-DTI
+(pooled, 8 cells, 22,641 withheld positives): transfer-only candidate 0.00847 vs repaired
+dilatational v1 0.00635 vs no-prior control 0.00215 — a screen, not an organizer score.
+The candidate TIF in `submissions/` passes format validation on exact bytes but fails the
+literal registry-overlap gate (worst overlap 1.0 vs whole-footprint registry surfaces;
+Spearman ≤0.28 everywhere). Verdict stays **negative**: no download, no slot. Do not claim
+a leaderboard improvement; only an organizer receipt could establish one.
 
 ## Reproduce the publication audit (no data downloads needed)
 
@@ -39,11 +38,15 @@ For pixel validation and tests:
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif
+GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif
 .venv/bin/pytest -q
 ```
 
-The full feature stack and registry corpus are not restored in this checkout. Existing fetch scripts use integrity-pinned owner mirrors, not organizer-authenticated sources.
+Full science rerun (restores pinned mirrors first): `python scripts/restore_data.py`, link
+`.cache/gems_data` to the restore target, then `scripts/run_relayfix_20261020.py gate` and
+`scripts/run_exp2b_transfer.py gate`. Mirrors are integrity-pinned owner copies, not
+organizer-authenticated sources. Registry corpus: 862 rasters per
+`registry/registry_index_69.json` (fetch + sha256-verify into `/tmp/gems_registry_cache`).
 CPU validation works; GPU training is not required for this geometry lane. A format validator cannot prove geothermal discovery or hidden-fault accuracy.
 
 ## Standing project brief — read at the beginning of every session

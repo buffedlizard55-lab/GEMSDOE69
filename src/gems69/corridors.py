@@ -125,8 +125,19 @@ def _tip_window_interval(strand: Strand, end: int, u_e: float, u_n: float,
     return float(axis.min()), float(axis.max())
 
 
+def search_radius_px(w_max: float) -> float:
+    """Largest legal tip-to-tip distance: hypot(W, 3.5W) at W = w_max.
+
+    Repair R2 (2026-10-20 review): the candidate search previously used
+    ``r = w_max`` (150 px), which cannot reach legal large-W underlaps whose
+    tip-to-tip distance reaches ``hypot(150, 525) ~= 546`` px.
+    """
+    return float(np.hypot(w_max, ALONG_MAX_RATIO * w_max))
+
+
 def build_tip_pairs(strands: list[Strand], catalogue: np.ndarray,
-                    w_min: float = W_MIN_PX, w_max: float = W_MAX_PX) -> list[TipPair]:
+                    w_min: float = W_MIN_PX, w_max: float = W_MAX_PX,
+                    same_component: bool = False) -> list[TipPair]:
     """Emit every geometrically valid step-over tip pair from the tip graph.
 
     Along-strike separation and overlap are computed as interval arithmetic on
@@ -134,6 +145,17 @@ def build_tip_pairs(strands: list[Strand], catalogue: np.ndarray,
     ``max(4W, 40 px)``), which is invariant to the sign ambiguity of axial
     directions.  Acceptance: W in [w_min, w_max]; separation <= 3.5 W;
     overlap <= 1.0 W.
+
+    Repair R1 (2026-10-20 review): ``_tip_window_interval`` returns
+    coordinates relative to *its own tip*, so strand B's interval must be
+    offset by the tip-to-tip along-strike projection before the two intervals
+    are compared.  Without the offset both intervals contain 0, separation is
+    ~0 by construction, and the 3.5W rule never rejects anything (a 40 px gap
+    at W = 5 px was admitted; see tests/test_corridors.py).
+
+    ``same_component=False`` (production) keeps only pairs in different
+    8-connected components; ``True`` keeps only same-component "virtual"
+    pairs (hard-linked-ramp recovery test), through this same code path.
     """
     strands = [s for s in strands if s.length_px >= MIN_STRAND_PX]
     if len(strands) < 2:
@@ -146,17 +168,19 @@ def build_tip_pairs(strands: list[Strand], catalogue: np.ndarray,
         tips.append((s.tip1[0], s.tip1[1], s.sid, 1))
     pts = np.array([(t[0], t[1]) for t in tips], float)
     tree = cKDTree(pts)
+    radius = search_radius_px(w_max)
     pairs: list[TipPair] = []
     for i, (r0, c0, sid_a, end_a) in enumerate(tips):
-        for j in tree.query_ball_point((r0, c0), r=w_max):
+        for j in tree.query_ball_point((r0, c0), r=radius):
             if j <= i:
                 continue
             r1, c1, sid_b, end_b = tips[j]
             if sid_a == sid_b:
                 continue
             sa, sb = smap[sid_a], smap[sid_b]
-            if comp[r0, c0] == comp[r1, c1] and comp[r0, c0] > 0:
-                continue  # already linked within one connected component
+            same_comp = comp[r0, c0] == comp[r1, c1] and comp[r0, c0] > 0
+            if same_comp != same_component:
+                continue  # production: skip already-linked; virtual: keep only linked
             # terminal strikes at these tips
             az_a = sa.az0 if end_a == 0 else sa.az1
             az_b = sb.az0 if end_b == 0 else sb.az1
@@ -171,17 +195,24 @@ def build_tip_pairs(strands: list[Strand], catalogue: np.ndarray,
             cross = abs(de * u_n - dn * u_e)
             if not (w_min <= cross <= w_max):
                 continue
+            # signed along-strike projection of (B tip - A tip); also the
+            # offset that puts B's tip-local interval into A's coordinates.
+            along_signed = de * u_e + dn * u_n
             window = max(4.0 * cross, 40.0)
+            # Cheap guaranteed-reject prefilter (keeps the 546 px search
+            # tractable): each interval is at most ``window`` long, so the
+            # global separation is >= |along| - 2*window.
+            if abs(along_signed) - 2.0 * window > ALONG_MAX_RATIO * cross:
+                continue
             ia = _tip_window_interval(sa, end_a, u_e, u_n, window)
-            ib = _tip_window_interval(sb, end_b, u_e, u_n, window)
+            ib_local = _tip_window_interval(sb, end_b, u_e, u_n, window)
+            ib = (ib_local[0] + along_signed, ib_local[1] + along_signed)
             overlap = max(0.0, min(ia[1], ib[1]) - max(ia[0], ib[0]))
             separation = max(0.0, max(ia[0], ib[0]) - min(ia[1], ib[1]))
             if separation > ALONG_MAX_RATIO * cross:
                 continue
             if overlap > -OVERLAP_RATIO * cross:   # OVERLAP_RATIO = -1.0
                 continue
-            # signed along kept for the record (projection of B tip - A tip)
-            along_signed = de * u_e + dn * u_n
             pairs.append(TipPair(sid_a, sid_b, (int(r0), int(c0)), (int(r1), int(c1)),
                                  float(cross), float(along_signed), float(dth), float(m_az),
                                  diag, overlap <= DILATATION_MAX_ALONG * cross,

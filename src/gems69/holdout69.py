@@ -37,7 +37,8 @@ def load_template_grid():
 
 
 def corridor_pipeline(catalogue: np.ndarray, shape: tuple[int, int], stats: dict,
-                      max_corridors: int = 1200, zstack: dict | None = None):
+                      max_corridors: int = 1200, zstack: dict | None = None,
+                      version: str = "v1"):
     """Vectorize -> tip pairs -> corridors -> scored rationale -> propensity."""
     if zstack is None:
         zstack = build_z_stack(_footprint_from_shape(shape), stats)
@@ -47,10 +48,10 @@ def corridor_pipeline(catalogue: np.ndarray, shape: tuple[int, int], stats: dict
     t0 = time.time()
     for c in corridors:
         ev = corridor_evidence_from_z(zstack, c)
-        score_corridor(c, ev)
+        score_corridor(c, ev, version=version)
     p = build_propensity(corridors, shape)
     return dict(strands=len(strands), pairs=len(pairs), corridors=len(corridors),
-                propensity=p, corridors_obj=corridors,
+                propensity=p, corridors_obj=corridors, version=version,
                 score_seconds=round(time.time() - t0, 1))
 
 
@@ -218,55 +219,10 @@ def hardlinked_recovery(catalogue: np.ndarray, shape: tuple[int, int], stats: di
     """
     from .corridors import build_tip_pairs, corridor_from_pair
     strands = vectorize(catalogue)
-    pairs = build_tip_pairs(strands, catalogue, w_max=w_max)
-    same = [p for p in pairs if p.comp_a == p.comp_b and p.comp_a > 0]
-    # build_tip_pairs currently skips same-component pairs; regenerate without the filter
-    # by calling the geometry directly on the tip list:
-    from .corridors import (_component_ids, _tip_window_interval, TipPair,
-                            ALONG_MAX_RATIO, DILATATION_MAX_ALONG, MAX_DTHETA,
-                            OVERLAP_RATIO)
-    from .tips import axial_diff, axial_mean
-    from scipy.spatial import cKDTree
+    # Same repaired code path as production pairing (repairs R1/R2); the former
+    # private copy of the geometry here duplicated both bugs. Never fork it.
+    virtual = build_tip_pairs(strands, catalogue, w_max=w_max, same_component=True)
     smap = {s.sid: s for s in strands if s.length_px >= 4.0}
-    tips = []
-    for s in smap.values():
-        tips.append((s.tip0[0], s.tip0[1], s.sid, 0))
-        tips.append((s.tip1[0], s.tip1[1], s.sid, 1))
-    comp = _component_ids(catalogue)
-    pts = np.array([(t[0], t[1]) for t in tips], float)
-    tree = cKDTree(pts)
-    virtual = []
-    for i, (r0, c0, sid_a, end_a) in enumerate(tips):
-        for j in tree.query_ball_point((r0, c0), r=w_max):
-            if j <= i:
-                continue
-            r1, c1, sid_b, end_b = tips[j]
-            if sid_a == sid_b or comp[r0, c0] != comp[r1, c1] or comp[r0, c0] == 0:
-                continue
-            sa, sb = smap[sid_a], smap[sid_b]
-            az_a = sa.az0 if end_a == 0 else sa.az1
-            az_b = sb.az0 if end_b == 0 else sb.az1
-            dth = axial_diff(az_a, az_b)
-            if dth > MAX_DTHETA:
-                continue
-            m_az = axial_mean([az_a, az_b])
-            u_e, u_n = np.sin(np.radians(m_az)), np.cos(np.radians(m_az))
-            de, dn = float(c1 - c0), float(-(r1 - r0))
-            cross = abs(de * u_n - dn * u_e)
-            if not (1.0 <= cross <= w_max):
-                continue
-            window = max(4.0 * cross, 40.0)
-            ia = _tip_window_interval(sa, end_a, u_e, u_n, window)
-            ib = _tip_window_interval(sb, end_b, u_e, u_n, window)
-            overlap = max(0.0, min(ia[1], ib[1]) - max(ia[0], ib[0]))
-            separation = max(0.0, max(ia[0], ib[0]) - min(ia[1], ib[1]))
-            if separation > ALONG_MAX_RATIO * cross or overlap > -OVERLAP_RATIO * cross:
-                continue
-            virtual.append(TipPair(sid_a, sid_b, (int(r0), int(c0)), (int(r1), int(c1)),
-                                   float(cross), de * u_e + dn * u_n, float(dth), float(m_az),
-                                   float(np.hypot(de, dn)), overlap <= DILATATION_MAX_ALONG * cross,
-                                   int(comp[r0, c0]), int(comp[r1, c1]),
-                                   overlap_px=float(overlap), separation_px=float(separation)))
     recs = []
     still_connected = 0
     for cid, vp in enumerate(virtual[:max_ramps]):

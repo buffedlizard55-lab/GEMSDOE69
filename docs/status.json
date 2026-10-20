@@ -2,21 +2,15 @@
   "verdict": "negative",
   "download_enabled": false,
   "reasons": [
-    "No explicit same-evaluator evidence of beating the current holdout best.",
     "Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.",
-    "Registry scan is incomplete or contains errors.",
-    "Reproducible method source manifest is missing, stale, or not artifact-bound.",
-    "Artifact-bound feature-alone leakage canaries are missing or flagged.",
-    "surface uniqueness phase is missing or not bound to the current artifact.",
     "surface uniqueness phase failed or is incomplete.",
-    "dots uniqueness phase is missing or not bound to the current artifact.",
     "dots uniqueness phase failed or is incomplete."
   ],
-  "artifact_sha256": "be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7",
+  "artifact_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
   "validator_report": {
-    "file": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif",
-    "bytes": 228607,
-    "sha256": "be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7",
+    "file": "submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif",
+    "bytes": 796082,
+    "sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
     "meta": {
       "count": 1,
       "dtype": "float32",
@@ -45,7 +39,7 @@
     "n_nan_inside_footprint": 0,
     "min": 0.0,
     "max": 1.0,
-    "positive_pixels": 31994,
+    "positive_pixels": 36325,
     "distinct_positive_values": [
       1.0
     ],

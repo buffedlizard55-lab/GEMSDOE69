@@ -34,6 +34,7 @@ from scipy import ndimage as ndi
 ROOT = Path(__file__).resolve().parents[2]
 FEATURES_PATH = ROOT / ".cache" / "gems_data" / "training_features.tif"
 LIDAR_PATH = ROOT / ".cache" / "gems_data" / "external" / "lidar_scarp_features_u8.tif"
+RAD_PATH = ROOT / ".cache" / "gems_data" / "external" / "geodawn_rad_u8.tif"
 STATS_CACHE = ROOT / ".cache" / "gems_data" / "layer_stats.json"
 
 # band index (1-based) read from file descriptions on 2026-10-12
@@ -72,6 +73,31 @@ def _band_window(path: Path, band: int, bbox: tuple[int, int, int, int] | None):
             a = src.read(band, window=w, boundless=False).astype(np.float32)
     a[a < -1e38] = np.nan
     return a
+
+
+def _rad_depletion_window(bbox: tuple[int, int, int, int] | None):
+    """Radiometric depletion raw field: -(K + Th)/2 from geodawn_rad_u8.tif.
+
+    Bands read by name-verified index (1=K, 2=Th, 3=U, 4=TC; uint8,
+    nodata 0 — verified 2026-10-20: outside-footprint cells are all 0,
+    inside-footprint zeros are a 0.025% survey-hole mask shared by all
+    bands, so 0 is nodata, not a depletion extreme).  Source pin:
+    registry/data_manifest_gemsdoe32.json ``ext_geodawn_rad_u8``
+    (sha256 c22420f7…; USGS GeoDAWN DOI 10.5066/P93LGLVQ per manifest).
+    Robust-z standardization is applied by the caller like every layer.
+    """
+    with rasterio.open(RAD_PATH) as src:
+        if bbox is None:
+            k = src.read(1).astype(np.float32)
+            th = src.read(2).astype(np.float32)
+        else:
+            r0, r1, c0, c1 = bbox
+            w = rasterio.windows.Window(c0, r0, c1 - c0, r1 - r0)
+            k = src.read(1, window=w).astype(np.float32)
+            th = src.read(2, window=w).astype(np.float32)
+    out = -(k + th) / 2.0
+    out[(k == 0) | (th == 0)] = np.nan
+    return out
 
 
 def _lidar_scarp_window(bbox: tuple[int, int, int, int] | None):
@@ -126,6 +152,15 @@ TRANSFORM_SPECS += [
     ("mag_low_tmi", "negraw", "tmi", 0.0),
     ("mag_low_rtp", "negraw", "rtp", 0.0),
     ("lidar_scarp", "lidar", None, 0.0),
+    # H69-F (preregistered 2026-10-20): subsurface straight-step evidence.
+    # Same HG/tilt operators as gravity/magnetics, applied to the
+    # conductivity surface (band 17) and basement depth (band 15).
+    ("cond_hg_s2", "hg", "cond_surf", 2.0),
+    ("cond_tilt_s2", "tilt", "cond_surf", 2.0),
+    ("base_hg_s2", "hg", "basement_depth", 2.0),
+    ("base_tilt_s2", "tilt", "basement_depth", 2.0),
+    # H69-G sensitivity (preregistered 2026-10-20): radiometric depletion.
+    ("rad_depl", "rad", None, 0.0),
 ]
 TRANSFORM_NAMES = [t[0] for t in TRANSFORM_SPECS]
 
@@ -136,6 +171,8 @@ def compute_transform(name: str, bbox=None) -> np.ndarray:
     sigma = dict((t[0], t[3]) for t in TRANSFORM_SPECS)[name]
     if kind == "lidar":
         return _lidar_scarp_window(bbox)
+    if kind == "rad":
+        return _rad_depletion_window(bbox)
     f = _band_window(FEATURES_PATH, BAND[src], bbox)
     if kind == "hg":
         return hg(f, sigma)

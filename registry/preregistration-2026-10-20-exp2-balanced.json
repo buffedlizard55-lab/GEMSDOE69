@@ -1,0 +1,25 @@
+{
+  "schema": 1,
+  "repository": "buffedlizard55-lab/GEMSDOE69",
+  "lane": "Relay-ramp and pull-apart corridor generator",
+  "frozen_utc": "2026-10-20T20:40:00Z",
+  "status": "Experiment 2 of 3 (budget). Frozen BEFORE the Exp2 holdout look. Exp1 (relayfix gate) is complete and unchanged.",
+  "why_exp2_exists": {
+    "exp1_emission_duplicate": "The preregistered Exp1 audit emission (corridor_v1 repaired, h69-relayfix-v1-35235-20261020T202813Z-a2917d46-zeros.tif, sha256 13b3fe7bdda7690bd1b4306a6a068748b4ec78e44378aa3903a899956d94a9ce) measures 0.8911 of dots within 3 px of the archived 2026-10-12 H69 lane raster (jaccard 0.7410) and 0.8880 vs H69-D. Per protocol rule 1 (>70% = duplicate) it is logged DUPLICATE-AND-STOP as a candidate; bytes retained for audit only.",
+    "selector_defect": "The capped corridor selector sorts dilatational pairs first, so 1200/1200 production corridors are pull-apart and 0 are transfer-overlap in both the archived census and the repaired census (evidence/relayfix_census.json). The lane prompt explicitly requires transfer-zone corridors, and overlapping hard-linked relays are a major hot geometry in the cited inventory. The transfer population exists in the 383,827 repaired pairs but is never emitted."
+  },
+  "hypothesis": {
+    "id": "H69-H-balanced-subtype",
+    "statement": "Reserving half the 1200-corridor cap for transfer-overlap corridors (overlap > 0.5W pairs, oblique-connector geometry) alongside dilatational pull-apart/relay corridors ranks withheld faults at least as well as the dilatational-only selector, because overlapping relays host the breaching faults of hard-linked ramps; the resulting dot field is also spatially distinct from prior lane emissions.",
+    "non_fault_mimic": "Contractional overlap zones can host pressure ridges / restraining-bend uplift lineaments and shoreline scarps that mimic breaching faults without through-going permeable structure.",
+    "selector": "From repaired build_tip_pairs: dedup by (strand pair, W, along) after _priority sort within each subtype (dilatational flag from TipPair), take up to 600 dilatational + up to 600 non-dilatational (transfer-overlap); if one group is short, backfill from the other to 1200. Scoring v1 (archived weights), S0=0.75, identical evidence/allocator/flank/active rules as Exp1."
+  },
+  "holdout": "Identical instrument to Exp1 (vendor/template66 gems57 build_holdout seeds 20/21 modes all, score_cell pooled TP/FP/FN, corridors rebuilt per cell from visible catalogue with the balanced selector). Comparators taken from Exp1 per-cell receipts (same cells, same evaluator): control_noprior pooled 0.0021543723944745835, corridor_v1 pooled 0.006354865025014204 (HOLDOUT-DTI, evidence/relayfix_gate.json). Paired cell-bootstrap 2000 seed 20261021.",
+  "gates": {
+    "distinctness_precheck": "Before the holdout, full-catalogue balanced dots must measure <0.70 dot-overlap (3 px) against BOTH archived H69 lane rasters and rho <0.90 (subsample diagnostic; exact vendor scan follows on final bytes). If the precheck fails, Exp2 aborts and the session deliverable is the Exp1 negative/duplicate log.",
+    "prompt_gate": "balanced pooled DTI > control pooled DTI with paired-bootstrap 95% CI lower bound > 0 (beat the same pipeline without corridor priors).",
+    "promotion_gate": "balanced pooled DTI > corridor_v1 pooled DTI with CI lower bound > 0 AND complete literal two-phase uniqueness AND format/canary/manifest gates (scripts/release_gate.py). Anything else = negative verdict, no public download, no slot.",
+    "emission": "The balanced arm is the session's unique audit TIF (Exp3 emission step). v2/v3 from Exp1 remain non-selectable sensitivities."
+  },
+  "budget": {"experiments_used_after_this": 2, "submission_slots_authorized": 0}
+}

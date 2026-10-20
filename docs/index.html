@@ -9,7 +9,7 @@
 <nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. The archived candidate is a negative result under the literal protocol. No competition slot was used.</p><ul><li>No explicit same-evaluator evidence of beating the current holdout best.</li><li>Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.</li><li>Registry scan is incomplete or contains errors.</li><li>Reproducible method source manifest is missing, stale, or not artifact-bound.</li><li>Artifact-bound feature-alone leakage canaries are missing or flagged.</li><li>surface uniqueness phase is missing or not bound to the current artifact.</li><li>surface uniqueness phase failed or is incomplete.</li><li>dots uniqueness phase is missing or not bound to the current artifact.</li><li>dots uniqueness phase failed or is incomplete.</li></ul></div>
+<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. The archived candidate is a negative result under the literal protocol. No competition slot was used.</p><ul><li>Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.</li><li>surface uniqueness phase failed or is incomplete.</li><li>dots uniqueness phase failed or is incomplete.</li></ul></div>
 <div class="card" id="how-to-submit">
 <h2>How to submit the TIF (3 steps)</h2>
 <ol>
@@ -17,24 +17,25 @@
 &ldquo;Predicted values must be in range [0, 1]&rdquo; portal error class seen with NaN-containing artifacts).</li>
 <li>Go to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition 306 &rarr; New submission</a>,
 choose <i>File to submit</i> = the downloaded <code>.tif</code> (a <code>.zip</code> with a single GeoTIFF is also accepted).</li>
-<li>Paste this note (&le;140 chars):<br><code>H69-D radiometric K/Th depletion halos inside pull-apart corridors; HG+tilt grav/mag + lidar scarp; 31994 dots</code></li>
+<li>Paste this note (&le;140 chars):<br><code>H69 transfer-only relay corridors; repaired tip graph; 36325 dots</code></li>
 </ol>
 <p class="small">Format contract: single-band GeoTIFF, float32, EPSG:32611, 3730&times;3292, transform
 (100, 0, 243350, 0, &minus;100, 4508550), values in [0,1]. Verified against
 <code>sample_submission.tif</code> (sha256 <code>2176d08e&hellip;</code>) by the shared template validator.</p>
 </div>
 <div class="card">
-<h2>Archived evidence at a glance — not independently reproduced</h2>
+<h2>Evidence at a glance — fresh 2026-10-20 relay-fix session (Exp1 + Exp2b)</h2>
 <table>
 <tr><th>Measurement</th><th>Value</th><th>Evidence class</th></tr>
-<tr><td>Corridor arm archived mean DTI</td><td>0.0060 &plusmn; 0.0014</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, 8 cells, 22641 withheld positives)</td></tr>
+<tr><td>Corridor arm archived mean DTI</td><td>0.0077 &plusmn; 0.0020</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, 8 cells, 22641 withheld positives)</td></tr>
 <tr><td>No-prior control arm</td><td>0.0021 &plusmn; 0.0006</td><td>HOLDOUT-DTI, same folds</td></tr>
-<tr><td>Paired &Delta; (corridor &minus; control)</td><td>+0.0038 &plusmn; 0.0015</td><td>HOLDOUT-DTI</td></tr>
+<tr><td>Paired &Delta; (corridor &minus; control)</td><td>+0.0063 &plusmn; 0.0017</td><td>HOLDOUT-DTI</td></tr>
 <tr><td>Registry scan: worst surface |Spearman| / dot-like dot overlap</td>
-<td>0.154 / 0.6194286428705382</td>
+<td>0.110 / n/a</td>
 <td>REGISTRY-MEASUREMENT (limits 0.90 / 0.70)</td></tr>
-<tr><td>Family best download (h33-2-b2)</td><td>0.2778</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (receipt quoted on GEMSDOE32 site)</td></tr>
-<tr><td>Leaderboard high score cited in prompt</td><td>0.3774 / 0.3195</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</td></tr>
+<tr><td>Family best download (h33-2-b2)</td><td>0.2778</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (no organizer receipt binds score to bytes; anatomy re-measured this session: 37,654 dots, sha256 c55bafc4&hellip;)</td></tr>
+<tr><td>Public leaderboard #1 (fetched 2026-10-20)</td><td>0.4413 (xiaofanhu)</td><td>ORGANIZER-LEADERBOARD (public page fetched this session; not our receipt)</td></tr>
+<tr><td>This candidate (transfer-only)</td><td>no organizer score &mdash; no slot spent</td><td>HOLDOUT-DTI pooled 0.00847 vs control 0.00215 (screen only; see Experiments)</td></tr>
 </table>
 <p class="small">A holdout DTI is a <b>screen</b>, never a leaderboard projection: the family's own
 instrument calibration (GEMSDOE32) measured cross-family Spearman &rho;&asymp;0.51 (p&asymp;0.09) against live scores.</p>

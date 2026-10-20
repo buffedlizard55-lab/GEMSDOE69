@@ -95,18 +95,20 @@ def write_card(root=ROOT):
                 verdict=decision['verdict'], banner='ok' if decision['download_enabled'] else 'stop',
                 release_policy=decision,
                 note='Literal protocol enforced. No submission slot used. Archived measurements are not organizer scores.')
-    card['hypothesis'] = ('H69-D: radiometric depletion inside catalogue-tip relay/pull-apart corridors; '
-                          'previously generated candidate, audited here without another experiment.')
-    card['mechanism'] = ('Tip-graph corridor proposals scored using gravity/magnetic HG and tilt, magnetic lows, '
-                         'lidar scarps, orientation, and K/Th depletion; greedy marginal-DTI placement.')
-    card['non_fault_mimic'] = ('Alluvial sediment composition and lithologic contacts can alter radiometric ratios; '
-                              'pluvial shorelines can mimic scarps. K depletion is not a universal alteration signature.')
+    card['hypothesis'] = ('H69-H2 transfer-only: oblique-connector corridors at overlapping (transfer) '
+                          'step-overs from the repaired catalogue tip graph (R1 interval offset, R2 546 px search) '
+                          'rank hidden breaching faults; tested 2026-10-20 under preregistered Exp1+Exp2b.')
+    card['mechanism'] = ('Repaired tip-graph pairs (W 0.1-15 km, separation <=3.5W) restricted to '
+                         'non-dilatational transfer-overlap pairs; corridors scored v1 by gravity/magnetic HG+tilt, '
+                         'magnetic lows, lidar scarp and N-NE orientation; greedy marginal-DTI dots >=200 m off catalogue.')
+    card['non_fault_mimic'] = ('Restraining-overlap pressure ridges and pluvial shoreline scarps mimic breaching-fault '
+                              'lineaments; lithologic contacts mimic subsurface steps. Slip sense/dip remain strike proxies.')
     mean, half = gate.get('corridor_mean_dti'), gate.get('corridor_ci95_half')
     card['holdout'] = dict(evidence_class='HOLDOUT-DTI', evaluator_version=gate.get('evaluator'),
         dti=mean, ci95=[mean-half, mean+half] if isinstance(mean, (int, float)) and isinstance(half, (int, float)) else None,
         withheld_positive_pixels=gate.get('withheld_positive_px_total'), n_cells=gate.get('n_cells'),
         comparator_dti=gate.get('control_mean_dti'), paired_delta=gate.get('paired_delta_mean'),
-        uncertainty_note='Archived normal-approximation interval across repeated cells; not an independent block bootstrap. Not rerun this session.')
+        uncertainty_note='Fresh 2026-10-20 run: pooled DTI primary (evidence/e2_gate.json pooled_dti + paired cell-bootstrap); mean+-half retained for site compatibility. Holdout is a screen, never a leaderboard projection.')
     card['correlation_overlap_vs_registry'] = uniq
     card['raster'] = receipt.get('raster', {})
     card['validator_output'] = decision['validator_report']

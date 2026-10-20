@@ -1,0 +1,48 @@
+{
+ "artifact_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+ "source_sha256": {
+  "src/gems69/corridors.py": "bef7ba0d643b4f8d356a4a6eea5ca2e5a562052a91b13313428b88e35f027909",
+  "src/gems69/tips.py": "9121c614aa37ed62c24c692676ea9aabdb466619b3a9a42ec43159de5fbcb21f",
+  "src/gems69/physics.py": "6396b13fdb7ba337e447bd210d4014e6bbf0f6eeed34d1bb9451ab31514520e2",
+  "src/gems69/scoring.py": "92768befb3f4ae4dd5476e14a33362bed9ab5d8a186e37c3a882d43f8468ea7c",
+  "src/gems69/holdout69.py": "7f03316a156d3c74284d99da2973c688d83e25e71d91299eb20e84cd6e58c8d8",
+  "scripts/run_relayfix_20261020.py": "27612d8e360a767c04b14dcd65c73786ac5a8c3d7d31376ef3b77c35cf2bc524",
+  "scripts/run_exp2b_transfer.py": "a5b3d29864d94f9f28d60a63a5c589ed5aaa2cc53c7719de122263490626e516",
+  "scripts/validate_submission.py": "680e81d0c61198ec9c033f33449f36c2790f7e4629b908fdade8e4eeac72511d",
+  "registry/preregistration-2026-10-20-relayfix.json": "b7b5e46d0124b94327fdd7bd5190aa4b8091573a77cf9fa5b31cf20bf7444b2c",
+  "registry/preregistration-2026-10-20-exp2b-transfer.json": "ae30a1279ebdb20b9f081358a21b90dd60f4b92325a6738c13ba5dbb8184831c"
+ },
+ "feature_names": [
+  "grav_hg_s1",
+  "mag_hg_s1",
+  "grav_hg_s2",
+  "mag_hg_s2",
+  "grav_hg_s4",
+  "mag_hg_s4",
+  "grav_tilt_s2",
+  "mag_tilt_s2",
+  "grav_hg_prov",
+  "grav_vg_prov",
+  "geod_2ndinv",
+  "mag_hg_prov",
+  "mag_vg_prov",
+  "tc_prov",
+  "mag_low_tmi",
+  "mag_low_rtp",
+  "lidar_scarp",
+  "cond_hg_s2",
+  "cond_tilt_s2",
+  "base_hg_s2",
+  "base_tilt_s2",
+  "rad_depl",
+  "propensity_corridor_transfer"
+ ],
+ "template_pins": "vendor/template66/TEMPLATE_SHA256.txt verified unchanged this session",
+ "inputs": {
+  "training_features_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+  "labels_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
+  "sample_submission_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+  "geodawn_rad_u8_sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
+  "provenance": "sha256-pinned family mirrors, NOT organizer-authenticated"
+ }
+}

@@ -1,56 +1,50 @@
 {
  "evidence_class": "HOLDOUT-DTI",
- "evaluator": "vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20, 21] modes=['all'])",
+ "evaluator": "vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=['all']; POOLED from summed TP/FP/FN)",
  "n_cells": 8,
- "corridor_mean_dti": 0.005975197860273526,
- "corridor_ci95_half": 0.0014413577610952733,
+ "withheld_positive_px_total": 22641,
+ "corridor_mean_dti": 0.007737531380405138,
+ "corridor_ci95_half": 0.0020058776500923386,
  "control_mean_dti": 0.0021479253641536293,
  "control_ci95_half": 0.0005776711996184226,
- "paired_delta_mean": 0.003827272496119896,
- "paired_delta_ci95_half": 0.0015001391776340205,
+ "paired_delta_mean": 0.006315458104571136,
+ "paired_delta_ci95_half": 0.0017183360696589353,
  "gate_passed": true,
- "withheld_positive_px_total": 22641,
- "corridor": {
-  "mean_dti": 0.005975197860273526,
-  "std_dti": 0.0020799874428292396,
-  "ci95_half": 0.0014413577610952733,
-  "n_cells": 8,
-  "per_cell": {
-   "draw20_foldNE_all": 0.005977084081316553,
-   "draw20_foldNW_all": 0.004697028315028838,
-   "draw20_foldSE_all": 0.007250154623105283,
-   "draw20_foldSW_all": 0.006729379286247911,
-   "draw21_foldNE_all": 0.0041144898541310366,
-   "draw21_foldNW_all": 0.00396821061742391,
-   "draw21_foldSE_all": 0.004876016686576572,
-   "draw21_foldSW_all": 0.0101892194183581
+ "current_best_beaten": true,
+ "pooled_dti": {
+  "transfer": 0.008469830499045719,
+  "corridor_v1": 0.006354865025014204,
+  "control_noprior": 0.0021543723944745835
+ },
+ "paired_cell_bootstrap": {
+  "transfer_minus_control": {
+   "mean": 0.006235073945143612,
+   "ci95": [
+    0.0044373728488070535,
+    0.007874044988124924
+   ]
   },
-  "dots": [
-   37491,
-   39124,
-   39545,
-   39977,
-   39788,
-   37840,
-   39343,
-   39712
-  ],
-  "n_truth": [
-   2360,
-   1925,
-   3253,
-   3780,
-   2365,
-   1919,
-   3253,
-   3786
-  ]
+  "transfer_minus_v1": {
+   "mean": 0.0020419548295652025,
+   "ci95": [
+    0.0008402106830173246,
+    0.003013982730174917
+   ]
+  }
+ },
+ "corridor": {
+  "per_cell": {
+   "draw20_foldNE_all": 0.00587784731063,
+   "draw20_foldNW_all": 0.0055608188362341335,
+   "draw20_foldSE_all": 0.01051644831603549,
+   "draw20_foldSW_all": 0.008740153886740085,
+   "draw21_foldNE_all": 0.002988666532088509,
+   "draw21_foldNW_all": 0.007415125662570768,
+   "draw21_foldSE_all": 0.008837162021039416,
+   "draw21_foldSW_all": 0.011964028477902698
+  }
  },
  "control": {
-  "mean_dti": 0.0021479253641536293,
-  "std_dti": 0.0008336229031558253,
-  "ci95_half": 0.0005776711996184226,
-  "n_cells": 8,
   "per_cell": {
    "draw20_foldNE_all": 0.0008460821063652749,
    "draw20_foldNW_all": 0.002839389945325117,
@@ -60,29 +54,14 @@
    "draw21_foldNW_all": 0.0018278190837102218,
    "draw21_foldSE_all": 0.0019874447687677995,
    "draw21_foldSW_all": 0.0017281729281913346
-  },
-  "dots": [
-   30736,
-   29208,
-   29317,
-   29219,
-   30736,
-   29208,
-   29317,
-   29219
-  ],
-  "n_truth": [
-   2360,
-   1925,
-   3253,
-   3780,
-   2365,
-   1919,
-   3253,
-   3786
-  ]
+  }
  },
- "seconds": 562.9,
- "generated_utc": "20261012T022905Z",
- "note": "gate: corridor arm must beat the same pipeline without corridor priors (paired over folds); holdout DTI is a SCREEN, not a leaderboard projection (GEMSDOE32 instrument-calibration evidence: cross-family Spearman rho=0.51, p~0.09)"
+ "exp1_pooled_dti": {
+  "control_noprior": 0.0021543723944745835,
+  "corridor_v1": 0.006354865025014204,
+  "corridor_v2": 0.00690647440703662,
+  "corridor_v3": 0.006710646269799994
+ },
+ "generated_utc": "20261020T204429Z",
+ "note": "Candidate arm = H69-H2 transfer-only. Primary statistic is POOLED DTI; mean fields retained for site compatibility."
 }

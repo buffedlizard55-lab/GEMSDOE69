@@ -106,15 +106,16 @@ choose <i>File to submit</i> = the downloaded <code>.tif</code> (a <code>.zip</c
 <code>sample_submission.tif</code> (sha256 <code>2176d08e&hellip;</code>) by the shared template validator.</p>
 </div>
 <div class="card">
-<h2>Archived evidence at a glance — not independently reproduced</h2>
+<h2>Evidence at a glance — fresh 2026-10-20 relay-fix session (Exp1 + Exp2b)</h2>
 <table>
 <tr><th>Measurement</th><th>Value</th><th>Evidence class</th></tr>
 {rows}
 <tr><td>Registry scan: worst surface |Spearman| / dot-like dot overlap</td>
 <td>{abs(uniq.get('worst_abs_spearman', 0) or 0):.3f} / {(uniq.get('worst_dot_overlap_dotlike') or {}).get('dot_overlap_3px', 'n/a')}</td>
 <td>REGISTRY-MEASUREMENT (limits 0.90 / 0.70)</td></tr>
-<tr><td>Family best download (h33-2-b2)</td><td>0.2778</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (receipt quoted on GEMSDOE32 site)</td></tr>
-<tr><td>Leaderboard high score cited in prompt</td><td>0.3774 / 0.3195</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</td></tr>
+<tr><td>Family best download (h33-2-b2)</td><td>0.2778</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (no organizer receipt binds score to bytes; anatomy re-measured this session: 37,654 dots, sha256 c55bafc4&hellip;)</td></tr>
+<tr><td>Public leaderboard #1 (fetched 2026-10-20)</td><td>0.4413 (xiaofanhu)</td><td>ORGANIZER-LEADERBOARD (public page fetched this session; not our receipt)</td></tr>
+<tr><td>This candidate (transfer-only)</td><td>no organizer score &mdash; no slot spent</td><td>HOLDOUT-DTI pooled 0.00847 vs control 0.00215 (screen only; see Experiments)</td></tr>
 </table>
 <p class="small">A holdout DTI is a <b>screen</b>, never a leaderboard projection: the family's own
 instrument calibration (GEMSDOE32) measured cross-family Spearman &rho;&asymp;0.51 (p&asymp;0.09) against live scores.</p>
@@ -143,10 +144,12 @@ def build_executive_summary():
 <div class="card">
 <h2>Executive summary &mdash; how a submission is made and entered</h2>
 <ol>
-<li><b>Generate</b>: <code>scripts/run_lane69.py e3</code> builds the tip graph from the pinned catalogue
-mirror, emits and scores corridors, places greedy marginal-DTI dots, and writes
-<code>submissions/h69-relayramp-pullapart-&lt;dots&gt;-&lt;stamp&gt;-&lt;sha8&gt;-zeros.tif</code>
-(all-finite [0,1]) plus a <code>-nan</code> diagnostic twin, with a JSON receipt.</li>
+<li><b>Generate</b> (2026-10-20 relay-fix session): restore pinned mirrors
+(<code>scripts/restore_data.py</code>), run the preregistered gate
+(<code>scripts/run_relayfix_20261020.py gate</code>), then the Exp2b transfer arm
+(<code>scripts/run_exp2b_transfer.py gate</code> + <code>emit</code>), which writes
+<code>submissions/h69-transferonly-&lt;dots&gt;-&lt;stamp&gt;-&lt;sha8&gt;-zeros.tif</code>
+(all-finite [0,1]) plus a <code>-nan</code> diagnostic twin, with JSON receipts in <code>evidence/</code>.</li>
 <li><b>Validate</b>: the shared template validator (<code>vendor/template66/gems/validate_submission.py</code>)
 re-reads the bytes from disk and checks CRS EPSG:32611, shape 3730&times;3292, transform, single band,
 float32, values in [0,1], and (for the nan twin) NaN only outside the footprint.</li>
@@ -159,10 +162,14 @@ two files &mdash; it cannot say OK unless they do.</li>
 geotransform &mdash; ours is written against <code>sample_submission.tif</code> so it matches by construction.
 Add a short note (&le;140 characters) identifying the run, e.g. the receipt note.</li>
 </ol>
-<p><b>Known portal error class</b>: &ldquo;Predicted values must be in range [0, 1]&rdquo; &mdash; caused by artifacts
-carrying values outside [0,1] (or non-finite cells the portal does not treat as nodata). The <b>-zeros</b>
-variant is all-finite by construction and is the one to submit; the <b>-nan</b> variant is a diagnostic
-artifact only (template policy: zeros mode is the only submission-compatible mode).</p>
+<p><b>Portal error &ldquo;Predicted values must be in range [0, 1]&rdquo; &mdash; byte-verified causes (2026-10-20)</b>:
+uploading any of these files by mistake triggers exactly this class: (1) <code>labels.tif</code>/<code>existing_faults.tif</code>
+contain the value <b>&minus;1 in all 7,111,787 outside-footprint cells</b> (int8 nodata); (2) a <code>-nan</code> twin carries
+7,111,787 NaN cells, which fail a naive 0&nbsp;&le;&nbsp;v&nbsp;&le;&nbsp;1 check; (3) <code>training_features.tif</code> carries the
+&minus;3.4&times;10<sup>38</sup> sentinel. The fix is procedural: upload <b>only</b> the <code>-zeros.tif</code> named on this page
+(verified all-finite, min 0.0, max 1.0, nodata unset) and re-run
+<code>scripts/validate_submission.py &lt;file&gt;</code> on the exact bytes before uploading. Portal internals are not
+observable here, so this identifies the verified byte-level causes consistent with the error, not portal source code.</p>
 </div>
 <div class="card">
 <h2>Standing limitations (do not re-discover these)</h2>
@@ -195,24 +202,37 @@ an unmasked hidden fault. For a new unit dot with marginal truth coverage dT and
 the exact improvement condition is <code>dT &gt; 0.2 DTI (dT + 1 - m)</code> for the stated weights.
 The simplified threshold <code>m &gt; 0.2 DTI</code> only follows when dT=m. It is not a universal
 5.6% fault-probability rule. There is no justified fixed score ceiling for sparse submissions.</p>
-<p>Can we beat H33? Possibly, but <b>not demonstrated</b>. That requires a reproducible,
-leakage-safe comparison and ultimately an organizer receipt. Our current literal uniqueness gate
-fails, so the correct action is a negative result, not a projected leaderboard score.</p>
+<p><b>Re-measured here (2026-10-20, from fetched registry bytes, evidence/relayfix_champion_anatomy.json)</b>:
+the H33 zeros file (sha256 c55bafc4&hellip;) holds 37,654 unit dots, none on the catalogue, nearest 2.24 px
+from it, median 1.96 km away, only 5.8% within 300 m of a mapped fault. At DTI 0.2778 a new dot pays only
+if its marginal kernel credit clears the metric bar (exact condition above; the 300 m kernel and
+&alpha;=0.2/&beta;=0.8 were re-verified on the official problem page fetched this session). The reported ladder is
+therefore consistent with near-minimal mass on a wide, reasonably ranked field &mdash; dotted emission plus
+removal of below-bar catalogue-flank dots &mdash; not proof of uniquely correct geology.</p>
+<p>Can a unique lane submission beat 0.2778? <b>Not demonstrated.</b> The public leaderboard fetched
+2026-10-20 is led at 0.4413, so much better-ranked fields exist, but beating H33 by reusing its dots would
+fail this protocol's uniqueness rule, and our holdout is a screen (&rho;&asymp;0.51 cross-family), never a projection.
+This session's transfer-only candidate beat its same-evaluator holdout comparators; only an organizer
+receipt could convert that into a leaderboard claim, and no slot was spent.</p>
 <p>Manual review: <a href="https://github.com/drivendataorg/gems-prize-reference-solution">organizer reference repository</a>,
-<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official problem description</a>,
-<a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/index.html">family H33 page source</a>.
-Only the GitHub sources were accessible for this review; the competition page was not independently refreshed.</p></div>
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official problem description (fetched 2026-10-20)</a>,
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">public leaderboard (fetched 2026-10-20)</a>,
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/index.html">family H33 page source</a>.</p></div>
 """
     return page("H33 evidence review", "why-h33-scored.html", body)
 
 
 def build_hypotheses():
     body = """
-<div class="card"><h2>Queued in-lane hypotheses — no experiment authorized after duplicate stop</h2>
-<p>Qualitative ranking by expected incremental recovery, then implementation cost; no numerical
-DTI improvement is predicted. These joint signatures are absent from the checked-in corridor scorer.
-All remain untested and not slot-eligible. Existing cached layers suffice in principle, but the
-full stack is not restored here. No new external dataset is represented as obtainable.</p>
+<div class="card"><h2>Hypotheses tested 2026-10-20 + queued (full register: docs/research/hypotheses-2026-10-20.md)</h2>
+<p><b>Tested this session (HOLDOUT-DTI, pooled, 8 cells, 22,641 withheld positives):</b>
+H69-F subsurface HG/tilt corridors (v2) pooled 0.00691 vs repaired v1 0.00635 &mdash; difference
++0.00055, 95% CI includes 0, <b>not established</b>; H69-G radiometric sensitivity (v3) likewise not established.
+H69-H2 <b>transfer-only corridors</b> pooled 0.00847, beating control (+0.00624, CI &gt; 0) and v1
+(+0.00204, CI &gt; 0) on this instrument &mdash; the session candidate. Exp1's v1 audit emission was logged
+<b>duplicate-and-stop</b> (89% dot overlap vs the archived lane raster). The full feature stack and
+GeoDAWN radiometrics (K/Th/U/TC, sha256-pinned mirror) were restored and hash-verified this session.
+Queued below remain untested and not slot-eligible.</p>
 <table><tr><th>Rank / hypothesis</th><th>Layers and physical signature</th><th>Missing-fault argument / difference / mimic / cost</th></tr>
 <tr><td>1. Convergent relay-link edge phase</td><td>Gravity and magnetics: HG ridge directions and tilt-zero crossings on opposite corridor margins at several scales.</td>
 <td>Could locate a buried bridge between visible tips. Unlike the current independent maximum layer scores, requires a shared connector phase and axis. Lithologic contacts mimic it. Moderate cost; uncertain benefit.</td></tr>
@@ -322,9 +342,9 @@ def build_results():
 <div class="card"><h2>E3 &mdash; emission, registry scan, validator</h2>
 <table><tr><th>Check</th><th>Result</th></tr>
 <tr><td>Dots emitted (greedy marginal-DTI, |G| prior 12,691 px)</td><td>{receipt.get('n_dots','?')} (catalogue collisions: {receipt.get('catalogue_collision_px','?')})</td></tr>
-<tr><td>Upstream validator (zeros)</td><td>{'PASS' if receipt.get('validator', {}).get('zeros', {}).get('passed') else 'see compliance note (IR-69-VAL-01)'}</td></tr>
-<tr><td>Format compliance zeros: all-finite [0,1] (family shipping policy)</td><td>{'PASS' if receipt.get('format_compliance', {}).get('zeros', {}).get('all_finite') else 'pending'}</td></tr>
-<tr><td>Format compliance nan: finite mask &equiv; sample_submission, NaN outside, nodata tag</td><td>{'PASS' if receipt.get('format_compliance', {}).get('nan', {}).get('finite_mask_matches_sample_submission') else 'pending'}</td></tr>
+<tr><td>Validator on exact bytes (scripts/validate_submission.py, both variants)</td><td>{'PASS' if receipt.get('validator', {}).get('all_files_passed') else 'FAIL/pending — see evidence/relayfix_transfer_validator.json'}</td></tr>
+<tr><td>Portal file (-zeros): all-finite float32 in [0,1], EPSG:32611, 3730&times;3292</td><td>{'PASS' if receipt.get('validator', {}).get('all_files_passed') else 'pending'}</td></tr>
+<tr><td>Diagnostic twin (-nan): NaN only outside footprint &mdash; DO NOT UPLOAD</td><td>archived for audit</td></tr>
 <tr><td>Registry scan compared / errors</td><td>{uniq.get('n_compared','pending')} / {uniq.get('n_errors','pending')}</td></tr>
 <tr><td>Worst |Spearman| surface</td><td>{esc(uniq.get('worst_abs_spearman', 'pending'))}</td></tr>
 <tr><td>Worst dot overlap (dotlike stratum)</td><td>{esc((uniq.get('worst_dot_overlap_dotlike') or {}).get('dot_overlap_3px', 'pending'))}</td></tr>
