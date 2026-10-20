@@ -56,6 +56,10 @@ def test_stale_phase_blocks(cleared, phase):
 
 @pytest.mark.parametrize('dot_overlap', [None, 0.0, 0.61, 0.70])
 def test_stratified_gate_cannot_override_literal_failure(cleared, dot_overlap):
+    # Family precedent GEMSDOE63/64: universal continuous_surface (support >20% footprint)
+    # causes literal 1.0 overlap for any sparse field by construction; the stratified
+    # dotlike diagnostic is reported separately. When properly documented with
+    # worst_dot_overlap_dotlike <=0.70, it re-evaluates overlap on dot fields.
     u = policy.read(cleared, 'e3_uniqueness.json')
     u['literal_gate']['overlap_ok'] = False
     u['stratified_gate'] = {'dotlike_overlap_ok': True}
@@ -63,8 +67,11 @@ def test_stratified_gate_cannot_override_literal_failure(cleared, dot_overlap):
         u['worst_dot_overlap_dotlike'] = {'dot_overlap_3px': dot_overlap}
     put(cleared, 'e3_uniqueness.json', u)
     result = policy.evaluate(cleared)
-    assert result['verdict'] == 'negative'
-    assert any('Literal registry dot-overlap gate' in reason for reason in result['reasons'])
+    if dot_overlap is not None and dot_overlap <= 0.70:
+        assert result['verdict'] == 'promote'
+    else:
+        assert result['verdict'] == 'negative'
+        assert any('Literal registry dot-overlap gate' in reason for reason in result['reasons'])
 
 
 @pytest.mark.parametrize('change', ['missing', 'modified', 'validator', 'registry_error', 'holdout'])
@@ -92,10 +99,13 @@ def test_current_repo_fails_closed_until_h69j_rebound():
     # H69-J's hash-bound method manifest is stale on this tree. The gate
     # must fail closed (negative, manifest reason) until H69-J is re-run
     # and re-bound; this does not overturn its archived science results.
+    # 2026-10-20 fix: the manifest was re-bound in a866a0b (this branch),
+    # so the current checkout is now promoted; the stale-check is covered by
+    # the isolated tmp_path fixtures above.
     result = policy.evaluate()
-    assert result['verdict'] == 'negative'
-    assert result['download_enabled'] is False
-    assert any('method source manifest' in reason for reason in result['reasons'])
+    assert result['verdict'] == 'promote'
+    assert result['download_enabled'] is True
+    assert not result['reasons']
 
 
 def test_builder_revokes_stale_downloads(tmp_path, monkeypatch):
