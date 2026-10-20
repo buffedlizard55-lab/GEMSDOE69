@@ -6,45 +6,32 @@
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
 <div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">H33 Source Audit</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="banner ok"><b>OK TO DOWNLOAD — HOLDOUT-SCREENED CANDIDATE.</b><p>All literal gates passed. A separate selector must authorize a real competition slot.</p></div><a class="btn big" href="downloads/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif" download>Download submission TIFF</a>
-<div class="card"><h2>Latest publication audit</h2>
-<p>No new experiment or TIFF is authorized after the recorded duplicate stop.
-The literal all-registry overlap is 1.0, exceeding 0.70; a dotlike-only diagnostic
-cannot waive it. The archived TIFF was independently format-validated in this audit,
-but format validity does not establish uniqueness or scientific merit.</p>
-<p><a href="../reports/publication-audit-2026-10-20.md">Audit, limitations, sources and next steps</a>.</p></div>
+<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p><b>No TIFF or ZIP is published for submission.</b> Do not upload an audit artifact from <code>submissions/</code>. The literal duplicate-and-stop policy is controlling, and no competition slot was used.</p><ul><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified/dotlike diagnostics cannot override the literal protocol.</li></ul></div>
+
 <div class="card" id="how-to-submit">
-<h2>How to submit the TIF (3 steps)</h2>
-<ol>
-<li>Only after the banner explicitly permits a download, download the <b>-zeros</b> variant (all cells finite in [0,1] &mdash; this avoids the
-&ldquo;Predicted values must be in range [0, 1]&rdquo; portal error class seen with NaN-containing artifacts).</li>
-<li>Go to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition 306 &rarr; New submission</a>,
-choose <i>File to submit</i> = the downloaded <code>.tif</code> (a <code>.zip</code> with a single GeoTIFF is also accepted).</li>
-<li>Paste this note (&le;140 chars):<br><code>H69 joint convergent grav+mag joint; HG+tilt + maglow + lidar; 38669 dots</code></li>
-</ol>
-<p class="small">Format contract: single-band GeoTIFF, float32, EPSG:32611, 3730&times;3292, transform
-(100, 0, 243350, 0, &minus;100, 4508550), values in [0,1]. Verified against
-<code>sample_submission.tif</code> (sha256 <code>2176d08e&hellip;</code>) by the shared template validator.</p>
+<h2>Submission workflow is locked</h2>
+<p><b>There is no file to download or submit from this page.</b> The prominent red banner is the release decision. Do not substitute any file from <code>submissions/</code>, rename an archived TIFF, or upload a diagnostic twin.</p>
+<p>When and only when a future banner says <b>OK TO DOWNLOAD</b>, it will publish the exact hash-bound artifact and its note. The [Executive Summary](executive-summary.html) explains the required checks and the portal workflow without authorizing the current artifacts.</p>
 </div>
+
 <div class="card">
-<h2>Archived evidence — not current release clearance</h2>
+<h2>Evidence at a glance — archived measurements, not release clearance</h2>
 <table>
 <tr><th>Measurement</th><th>Value</th><th>Evidence class</th></tr>
-<tr><td>Corridor arm archived mean DTI</td><td>0.0059 &plusmn; 0.0012</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, 8 cells, 22641 withheld positives)</td></tr>
-<tr><td>No-prior control arm</td><td>0.0021 &plusmn; 0.0006</td><td>HOLDOUT-DTI, same folds</td></tr>
-<tr><td>Paired &Delta; (corridor &minus; control)</td><td>+0.0038 &plusmn; 0.0015</td><td>HOLDOUT-DTI</td></tr>
-<tr><td>Registry diagnostic: archived |Spearman| / dotlike overlap (not literal clearance)</td>
-<td>0.162 / 0.61</td>
-<td>REGISTRY-MEASUREMENT (limits 0.90 / 0.70)</td></tr>
-<tr><td>Family best download (h33-2-b2)</td><td>0.2778</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (no organizer receipt binds score to bytes; anatomy re-measured this session: 37,654 dots, sha256 c55bafc4&hellip;)</td></tr>
-<tr><td>Public leaderboard #1 (prior-session snapshot, not re-fetched in this audit)</td><td>0.4413 (xiaofanhu)</td><td>ARCHIVED PUBLIC-LEADERBOARD CLAIM (prior session; not independently authenticated in this audit)</td></tr>
-<tr><td>Current archived artifact (H69-J)</td><td>No organizer score; DO NOT SUBMIT</td><td>Source and holdout bindings stale; literal registry overlap fails.</td></tr>
+<tr><td>Current archived H69-H2 transfer-only DTI</td><td>0.0077 (95% CI 0.0057 to 0.0097)</td><td>HOLDOUT-DTI (vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=[&#x27;all&#x27;]; POOLED from summed TP/FP/FN); 8 cells, 22641 withheld positives). A local screen, not an organizer score.</td></tr>
+<tr><td>Current archived no-prior comparator</td><td>0.0021</td><td>HOLDOUT-DTI, same recorded H69-H2 evaluation</td></tr>
+<tr><td>Current archived paired &Delta;</td><td>+0.0063</td><td>HOLDOUT-DTI; never a release override</td></tr><tr><td>Separate H69-J corridor mean DTI</td><td>0.0059 &plusmn; 0.0012</td><td>HOLDOUT-DTI for distinct H69-J bytes; local evidence binding does not override its literal 1.0 overlap failure</td></tr>
+<tr><td>Current H69-H2 registry scan: worst |Spearman| / literal dot overlap</td>
+<td>0.11031126875912463 / 1.0</td>
+<td>REGISTRY-MEASUREMENT; the literal all-registry overlap check is false and controls publication</td></tr>
+<tr><td>H33-2-B2 owner audit</td><td>UNSCORED; owner projection 0.2747</td><td>OWNER-REPORTED, NOT ORGANIZER-CONFIRMED; current owner audit contains no organizer receipt for these bytes. The user-supplied 0.2778 is not attributed to this file here.</td></tr>
+<tr><td>User-cited leaderboard figures</td><td>not refreshed in this review</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED unless copied from an organizer receipt</td></tr>
+<tr><td>H69-H2 transfer-only candidate</td><td>no organizer score &mdash; no slot spent</td><td>Recorded HOLDOUT-DTI screen exists, but literal registry gate failed, so it is not downloadable</td></tr>
 </table>
-<p class="small">A holdout DTI is a <b>screen</b>, never a leaderboard projection: the family's own
-instrument calibration (GEMSDOE32) measured cross-family Spearman &rho;&asymp;0.51 (p&asymp;0.09) against live scores.</p>
+<p class="small">A holdout DTI is a <b>screen</b>, never a leaderboard projection. Read the H33 source audit before treating owner-reported values as competition results.</p>
 </div>
 <div class="card">
 <h2>What this lane is</h2>
@@ -54,7 +41,7 @@ sub-parallel strikes) emit <b>relay-ramp corridors</b> &mdash; an oblique connec
 &mdash; and, at dilatational steps under the Walker-Lane dextral prior, <b>pull-apart rhombs</b>. Corridors are
 scored by multi-scale horizontal-gradient and tilt evidence in gravity and magnetics (including magnetic
 lows), the 1&nbsp;m lidar-scarp channel, and orientation consistency with WNW extension. Dots are placed by
-dots placed by greedy marginal-DTI selection inside the top corridors (pre-registered propensity map
+greedy marginal-DTI selection inside the top corridors (pre-registered propensity map
 S<sub>0</sub>=0.75; template allocator), &ge;200&nbsp;m from the mapped catalogue.</p>
 <p>Geometry priors as cited in the standing prompt: Giddens &amp; Faulds (2025, SGP-TR-229) inventoried
 &gt;450 step-overs; ramps are typically 3&ndash;3.5&times; longer than wide (widths 0.1&ndash;14.6 km, mean 2.8 km);

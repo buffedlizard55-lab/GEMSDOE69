@@ -1,5 +1,11 @@
 # Publication audit — 2026-10-20
 
+> **Historical-state note:** this audit correctly recorded the state at its run
+> time. A later parallel merge rebound H69-J's local aggregate receipts, but
+> that did not change the controlling literal overlap of 1.0. Read
+> [`final-audit-2026-10-20.md`](final-audit-2026-10-20.md) for the reconciled
+> current state; H69-J remains **NOT OK TO SUBMIT**.
+
 ## Decision: NEGATIVE — DO NOT SUBMIT
 
 No new experiment, TIFF, or competition slot was used in this audit. The existing

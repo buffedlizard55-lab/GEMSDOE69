@@ -6,31 +6,21 @@
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
 <div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="active">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">H33 Source Audit</a><a href="hypotheses.html" class="active">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card"><h2>Hypotheses tested 2026-10-20 + queued (full register: docs/research/hypotheses-2026-10-20.md)</h2>
-<p><b>Tested this session (HOLDOUT-DTI, pooled, 8 cells, 22,641 withheld positives):</b>
-H69-F subsurface HG/tilt corridors (v2) pooled 0.00691 vs repaired v1 0.00635 &mdash; difference
-+0.00055, 95% CI includes 0, <b>not established</b>; H69-G radiometric sensitivity (v3) likewise not established.
-H69-H2 <b>transfer-only corridors</b> pooled 0.00847, beating control (+0.00624, CI &gt; 0) and v1
-(+0.00204, CI &gt; 0) on this instrument &mdash; the session candidate. Exp1's v1 audit emission was logged
-<b>duplicate-and-stop</b> (89% dot overlap vs the archived lane raster). The full feature stack and
-GeoDAWN radiometrics (K/Th/U/TC, sha256-pinned mirror) were restored and hash-verified this session.
-Queued below remain untested and not slot-eligible.</p>
-<table><tr><th>Rank / hypothesis</th><th>Layers and physical signature</th><th>Missing-fault argument / difference / mimic / cost</th></tr>
-<tr><td>1. Convergent relay-link edge phase</td><td>Gravity and magnetics: HG ridge directions and tilt-zero crossings on opposite corridor margins at several scales.</td>
-<td>Could locate a buried bridge between visible tips. Unlike the current independent maximum layer scores, requires a shared connector phase and axis. Lithologic contacts mimic it. Moderate cost; uncertain benefit.</td></tr>
-<tr><td>2. Releasing-basin margin asymmetry</td><td>Gravity curvature and paired HG flanks plus magnetic low, restricted to tip-derived pull-apart rhombs.</td>
-<td>Could find buried basin-bounding splays rather than rescore visible scarps. Tests transverse basin structure, not a scalar low. Sediment-filled paleochannels mimic it. Moderate cost; uncertain benefit. Slip sense must be verified, not inferred from overlap alone.</td></tr>
-<tr><td>3. En echelon scarp phase coherence</td><td>LiDAR-scarp channel: staggered oriented ridges aligned across a proposed connector, vetoing uninterrupted parallel terrace edges.</td>
-<td>Could recover short linking strands omitted by regional mapping. Current scorer averages channel magnitude, not staggered spatial phase. Pluvial shorelines and road cuts mimic it. Moderate-to-high cost; uncertain benefit.</td></tr>
-<tr><td>4. Corridor-confined radiometric contrast reversal</td><td>Radiometric K/Th local contrast relative to matched corridor flanks, conditional on magnetic depletion.</td>
-<td>May distinguish local alteration from broad lithologic domains, including K enrichment as well as depletion. Unlike the archived depletion-only claim, estimates signed within-unit contrast. Sediment sorting mimics it. High cost because lithologic controls are not authenticated; defer pending provenance.</td></tr></table>
-<p>Before any implementation: repair provenance, restore pinned inputs, verify feature-alone canaries,
-reserve untouched spatial blocks, compare with the current best on the identical evaluator, and check
-surface uniqueness before placing dots. Do not relax the literal overlap rule. Giddens &amp; Faulds
-statistics in the prompt remain unverified citations in this environment, not independently established facts.</p></div>
+<div class="card"><h2>Ranked in-lane hypotheses &mdash; queued, not slot-eligible</h2>
+<p>The four candidates below were registered before any future implementation. They remain <b>untested in this review</b> because the literal duplicate-and-stop condition already fired. Historical experiments are documented in the relay-fix report, but no historical holdout is treated as a current promotion. For every future experiment, report HOLDOUT-DTI with evaluator version, withheld-positive count, and 95% CI; do not project a leaderboard score.</p>
+<table><tr><th>Rank / hypothesis</th><th>Layers and physical signature</th><th>Missing-fault rationale, novelty, mimic, cost, and viability</th></tr>
+<tr><td>1. Opposing-margin relay-link profile phase</td><td>Cached gravity and magnetic horizontal-gradient vectors plus tilt zero-crossings, sampled at several stations on opposing margins of a tip-graph connector.</td>
+<td>A buried connector can produce paired, phase-consistent edges between mapped tips without having a mapped surface trace. Unlike H69-J&apos;s corridor-wide maxima and min(E<sub>grav</sub>,E<sub>mag</sub>), require stationwise co-location on a common connector axis and opposite margins. <b>Mimic:</b> lithologic contact. <b>Expected HOLDOUT-DTI effect:</b> medium (qualitative). <b>Cost:</b> moderate. Uses existing layers only, but blocked until the cached stack is restored and every source hash is checked.</td></tr>
+<tr><td>2. Releasing-basin margin asymmetry</td><td>Gravity curvature, paired horizontal-gradient flanks, and a magnetic low inside a tip-derived pull-apart rhomb.</td>
+<td>Buried basin-bounding splays can be absent from a surface catalogue; paired margin geometry is more specific than a scalar gravity or magnetic low. <b>Mimic:</b> sediment-filled paleochannel. <b>Expected HOLDOUT-DTI effect:</b> medium-low (qualitative). <b>Cost:</b> moderate. Requires auditable slip-sense attributes; do not infer dextral release from overlap alone.</td></tr>
+<tr><td>3. En-echelon scarp phase coherence</td><td>LiDAR-scarp orientation, stagger, and phase continuity across a proposed relay connector; veto uninterrupted terrace-parallel edges.</td>
+<td>A set of short aligned scarps may identify a linking strand individually below regional mapping threshold. This differs from average scarp magnitude by testing arrangement. <b>Mimics:</b> pluvial shorelines, roads, terrace edges. <b>Expected HOLDOUT-DTI effect:</b> low-medium (qualitative). <b>Cost:</b> moderate-high. Existing LiDAR channel is sufficient once the full stack is restored.</td></tr>
+<tr><td>4. Matched-flank radiometric contrast reversal</td><td>GeoDAWN K/Th/total-count contrast inside versus matched corridor flanks, conditioned on magnetic response.</td>
+<td>Could distinguish local alteration or structural contrast under cover from broad background domains, unlike H69-G&apos;s simple depletion score. <b>Mimic:</b> sediment sorting or lithologic variation. <b>Expected HOLDOUT-DTI effect:</b> uncertain (qualitative). <b>Cost:</b> high. It is <b>not viable yet</b>: the candidate would need a checked lithologic control such as the official USGS National Geologic Map Database State Geologic Map Compilation; its exact AOI coverage/obtainability was not verified in this sandbox, so it will not be implemented or promoted as an external-data hypothesis.</td></tr></table>
+<p>Before any implementation: restore the pinned feature stack, verify each feature-alone leakage canary, reserve untouched spatial blocks, compare against the current best with the identical evaluator, and run a literal surface registry scan before placing dots and a literal dot scan after. Do not relax the literal overlap rule. Giddens &amp; Faulds statistics in the prompt remain cited, not independently verified in this environment.</p></div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

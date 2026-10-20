@@ -88,6 +88,16 @@ class ProjectContractTests(unittest.TestCase):
         legacy = (ROOT / "docs/parallel/executive-summary.html").read_text(encoding="utf-8")
         self.assertIn("No submission file is available", legacy)
 
+    def test_publication_page_cannot_present_archived_tiff_as_a_download(self) -> None:
+        # The release policy is literal; a dense-support diagnostic cannot leave
+        # a stale download link or an H33 score attribution on the public page.
+        index = (ROOT / "docs" / "index.html").read_text(encoding="utf-8")
+        why_h33 = (ROOT / "docs" / "why-h33-scored.html").read_text(encoding="utf-8")
+        self.assertIn("No TIFF or ZIP is published for submission", index)
+        self.assertNotIn('href="downloads/', index)
+        self.assertIn("UNSCORED", why_h33)
+        self.assertIn("USER-REPORTED-NOT-ORGANIZER-CONFIRMED", why_h33)
+
     def test_all_local_html_links_resolve(self) -> None:
         pages = sorted(ROOT.rglob("*.html"))
         self.assertGreaterEqual(len(pages), 5)

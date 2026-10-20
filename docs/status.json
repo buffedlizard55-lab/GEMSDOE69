@@ -1,7 +1,9 @@
 {
-  "verdict": "promote",
-  "download_enabled": true,
-  "reasons": [],
+  "verdict": "negative",
+  "download_enabled": false,
+  "reasons": [
+    "Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified/dotlike diagnostics cannot override the literal protocol."
+  ],
   "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
   "validator_report": {
     "file": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",

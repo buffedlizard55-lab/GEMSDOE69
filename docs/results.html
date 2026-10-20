@@ -6,9 +6,14 @@
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
 <div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="active">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">H33 Source Audit</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="active">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
+<div class="card"><h2>Current archived candidate &mdash; H69-H2 transfer-only</h2>
+<p><b>Negative: duplicate-and-stop.</b> The run card records HOLDOUT-DTI
+0.0077, 95% CI 0.0057 to 0.0097,
+against comparator 0.0021; 22641 withheld positives and 8 cells. These are local HOLDOUT-DTI measurements, not an organizer score. Its literal all-registry overlap is 1.0 (limit 0.70), so no TIFF is downloadable.</p>
+</div>
 <div class="card"><h2>E1 &mdash; census, hard-link recovery, canaries</h2>
 <table>
 <tr><th>Measurement</th><th>Value</th></tr>
@@ -20,7 +25,7 @@
 </table>
 <table><tr><th>W (px)</th><th>linking px</th><th>recovery within 3 px</th><th>subtype</th></tr><tr><td>2</td><td>28</td><td>1.000</td><td>pull-apart</td></tr><tr><td>2</td><td>6</td><td>0.000</td><td>pull-apart</td></tr><tr><td>33</td><td>89</td><td>1.000</td><td>pull-apart</td></tr><tr><td>29</td><td>76</td><td>1.000</td><td>pull-apart</td></tr><tr><td>31</td><td>67</td><td>1.000</td><td>pull-apart</td></tr><tr><td>8</td><td>97</td><td>1.000</td><td>pull-apart</td></tr><tr><td>22</td><td>97</td><td>1.000</td><td>pull-apart</td></tr><tr><td>9</td><td>6</td><td>0.000</td><td>transfer-overlap</td></tr><tr><td>4</td><td>27</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>58</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>60</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>45</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>28</td><td>1.000</td><td>pull-apart</td></tr><tr><td>4</td><td>8</td><td>0.000</td><td>pull-apart</td></tr><tr><td>3</td><td>30</td><td>1.000</td><td>pull-apart</td></tr><tr><td>4</td><td>55</td><td>1.000</td><td>pull-apart</td></tr><tr><td>5</td><td>48</td><td>1.000</td><td>pull-apart</td></tr><tr><td>2</td><td>48</td><td>1.000</td><td>pull-apart</td></tr><tr><td>6</td><td>45</td><td>1.000</td><td>pull-apart</td></tr><tr><td>6</td><td>34</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>33</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>16</td><td>1.000</td><td>pull-apart</td></tr></table>
 </div>
-<div class="card"><h2>E2 &mdash; holdout gate (corridor vs no-prior control)</h2>
+<div class="card"><h2>Separate H69-J E2 &mdash; local holdout screen (literal duplicate-stop still blocks publication)</h2>
 <table><tr><th>Arm</th><th>Pooled DTI</th><th>95% CI half</th><th>Cells</th></tr>
 <tr><td>Corridor prior</td><td>0.0059</td><td>0.0012</td><td rowspan=2>8 (22641 withheld positives)</td></tr>
 <tr><td>No-prior control</td><td>0.0021</td><td>0.0006</td></tr>
@@ -30,7 +35,7 @@
 <p class="small">Evaluator: vendor/template66 gems57 pooled hide-and-recover (&alpha;=0.2, &beta;=0.8,
 300 m triangular kernel). Evidence class HOLDOUT-DTI.</p>
 </div>
-<div class="card"><h2>E3 &mdash; emission, registry scan, validator</h2>
+<div class="card"><h2>E3 &mdash; archived emission, registry scan, and validator</h2>
 <table><tr><th>Check</th><th>Result</th></tr>
 <tr><td>Dots emitted (greedy marginal-DTI, |G| prior 12,691 px)</td><td>38669 (catalogue collisions: 0)</td></tr>
 <tr><td>Validator on exact bytes (scripts/validate_submission.py, both variants)</td><td>FAIL/pending — see evidence/relayfix_transfer_validator.json</td></tr>
@@ -38,7 +43,8 @@
 <tr><td>Diagnostic twin (-nan): NaN only outside footprint &mdash; DO NOT UPLOAD</td><td>archived for audit</td></tr>
 <tr><td>Registry scan compared / errors</td><td>751 / 0</td></tr>
 <tr><td>Worst |Spearman| surface</td><td>0.162</td></tr>
-<tr><td>Worst dot overlap (dotlike stratum)</td><td>0.61</td></tr>
+<tr><td>Worst dot overlap (dotlike stratum; diagnostic only)</td><td>0.61</td></tr>
+<tr><td>Literal registry overlap gate (publication controlling)</td><td>False &mdash; false means duplicate-and-stop</td></tr>
 <tr><td>Exact pixel-agreement &ge;99.99% vs any prior raster</td><td>0</td></tr>
 </table>
 </div>
