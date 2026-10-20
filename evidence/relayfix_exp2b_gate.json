@@ -1,0 +1,121 @@
+{
+ "evidence_class": "HOLDOUT-DTI",
+ "hypothesis": "H69-H2-transfer-only",
+ "preregistration": "registry/preregistration-2026-10-20-exp2b-transfer.json",
+ "evaluator": "vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=['all']; POOLED from summed TP/FP/FN)",
+ "n_cells": 8,
+ "withheld_positive_px_total": 22641,
+ "pooled_dti": {
+  "transfer": 0.008469830499045719,
+  "corridor_v1": 0.006354865025014204,
+  "control_noprior": 0.0021543723944745835
+ },
+ "mean_of_cells_dti": 0.007737531380405138,
+ "paired_cell_bootstrap": {
+  "transfer_minus_control": {
+   "mean": 0.006235073945143612,
+   "ci95": [
+    0.0044373728488070535,
+    0.007874044988124924
+   ]
+  },
+  "transfer_minus_v1": {
+   "mean": 0.0020419548295652025,
+   "ci95": [
+    0.0008402106830173246,
+    0.003013982730174917
+   ]
+  }
+ },
+ "per_cell": {
+  "draw20_foldNW_all": {
+   "dti": 0.0055608188362341335,
+   "tp": 18.974330304124926,
+   "fp": 9341.759765625,
+   "fn": 1906.025669695875,
+   "n_truth": 1925,
+   "n_dots": 9368,
+   "n_corridors": 1200
+  },
+  "draw20_foldNE_all": {
+   "dti": 0.00587784731063,
+   "tp": 25.67814563137301,
+   "fp": 12377.4765625,
+   "fn": 2334.321854368627,
+   "n_truth": 2360,
+   "n_dots": 12417,
+   "n_corridors": 1200
+  },
+  "draw20_foldSW_all": {
+   "dti": 0.008740153886740085,
+   "tp": 69.74912364114712,
+   "fp": 24711.79296875,
+   "fn": 3710.250876358853,
+   "n_truth": 3780,
+   "n_dots": 24805,
+   "n_corridors": 1200
+  },
+  "draw20_foldSE_all": {
+   "dti": 0.01051644831603549,
+   "tp": 78.55814320833628,
+   "fp": 24259.572265625,
+   "fn": 3174.4418567916637,
+   "n_truth": 3253,
+   "n_dots": 24371,
+   "n_corridors": 1200
+  },
+  "draw21_foldNW_all": {
+   "dti": 0.007415125662570768,
+   "tp": 23.054065034887333,
+   "fp": 7846.2421875,
+   "fn": 1895.9459349651127,
+   "n_truth": 1919,
+   "n_dots": 7879,
+   "n_corridors": 1200
+  },
+  "draw21_foldNE_all": {
+   "dti": 0.002988666532088509,
+   "tp": 11.158006593107725,
+   "fp": 9196.041015625,
+   "fn": 2353.8419934068925,
+   "n_truth": 2365,
+   "n_dots": 9215,
+   "n_corridors": 1200
+  },
+  "draw21_foldSW_all": {
+   "dti": 0.011964028477902698,
+   "tp": 86.35401735628645,
+   "fp": 20858.66796875,
+   "fn": 3699.6459826437135,
+   "n_truth": 3786,
+   "n_dots": 20978,
+   "n_corridors": 1200
+  },
+  "draw21_foldSE_all": {
+   "dti": 0.008837162021039416,
+   "tp": 55.961605840792444,
+   "fp": 18594.6953125,
+   "fn": 3197.0383941592077,
+   "n_truth": 3253,
+   "n_dots": 18669,
+   "n_corridors": 1200
+  }
+ },
+ "canary_propensity_transfer": {
+  "per_cell_auc": [
+   0.519868051948052,
+   0.5197792627118644,
+   0.5379182248677249,
+   0.5502350999077774,
+   0.5207794111516415,
+   0.5054119154334038,
+   0.5501704226096144,
+   0.541016427912696
+  ],
+  "auc_max": 0.5502350999077774
+ },
+ "prompt_gate_passed": true,
+ "beats_current_best": true,
+ "generated_utc": "20261020T204429Z",
+ "seconds": 440.8
+}

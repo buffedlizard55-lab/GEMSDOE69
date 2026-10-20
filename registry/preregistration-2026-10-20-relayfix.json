@@ -1,0 +1,46 @@
+{
+  "schema": 1,
+  "repository": "buffedlizard55-lab/GEMSDOE69",
+  "lane": "Relay-ramp and pull-apart corridor generator (catalogue-geometry tip graph)",
+  "frozen_utc": "2026-10-20T19:50:00Z",
+  "frozen_note": "Written BEFORE any new holdout look in this session. Repairs two documented geometry bugs, then tests one primary new-evidence arm. No arm, weight, seed or gate below may be changed after the holdout is seen; any change is a new preregistration.",
+  "budget": {"experiments_max": 3, "wall_clock_hours_max": 2, "submission_slots_authorized": 0},
+  "repairs": [
+    "R1 interval origin: tip-window intervals must be offset by the tip-to-tip along-strike projection before overlap/separation arithmetic (previously both intervals shared origin 0, so separation was ~0 and a 40 px gap at W=5 px was admitted; strict-xfail test in tests/test_corridors.py).",
+    "R2 search radius: tip candidate search radius must reach hypot(Wmax, 3.5*Wmax)=546 px (previously 150 px, missing legal large-W underlaps). Acceptance limits unchanged: W in [1,150] px, separation <= 3.5W, overlap <= 1.0W, dtheta <= 30 deg, different 8-connected components (hard-link test uses same-component virtual pairs via the same helper)."
+  ],
+  "hypothesis_primary": {
+    "id": "H69-F-subsurface-step",
+    "statement": "Inside repaired relay/pull-apart corridors, multi-scale horizontal-gradient and tilt evidence on subsurface layers (cond_surf band 17, depth_to_base_surf band 15 of training_features.tif) ranks withheld faults better than the same corridors scored without those layers, because blind breaching faults under alluvium offset basement depth and conductivity even where no scarp survives.",
+    "non_fault_mimic": "Lithologic contacts, basin-margin facies changes and pluvial shoreline conductivity contrasts can produce straight subsurface steps without a fault.",
+    "new_transforms": ["cond_hg_s2", "cond_tilt_s2", "base_hg_s2", "base_tilt_s2"],
+    "scoring_weights_v2": {"grav": 0.18, "mag": 0.18, "maglow": 0.15, "lidar": 0.13, "subsurface": 0.12, "orient": 0.09, "geom": 0.15}
+  },
+  "hypothesis_sensitivity": {
+    "id": "H69-G-radiometric-depletion",
+    "statement": "Adding a radiometric depletion feature rad_depl = robust-z of -(K+Th)/2 from geodawn_rad_u8.tif (sha256 c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682, bands K/Th/U/TC verified this session) further ranks corridors. Sensitivity only: it cannot rescue a failed primary gate and cannot select the emission arm.",
+    "scoring_weights_v3": {"grav": 0.17, "mag": 0.17, "maglow": 0.14, "lidar": 0.12, "subsurface": 0.11, "radiometric": 0.06, "orient": 0.09, "geom": 0.14},
+    "non_fault_mimic": "Alluvial sediment composition and host lithology change K/Th without faulting; K depletion is not a universal alteration signature."
+  },
+  "arms": {
+    "control_noprior": "Same physics composite as archived holdout69 control (grav_hg_s2, grav_tilt_s2, mag_hg_s2, mag_tilt_s2, mag_low_tmi, mag_low_rtp, lidar_scarp), no corridor prior, identical allocator/flank/active mask.",
+    "corridor_v1_repaired": "Repaired tip graph + archived scoring weights (0.20/0.20/0.18/0.15/0.10/0.17), S0=0.75.",
+    "corridor_v2_subsurface": "PRIMARY. Same repaired corridors/evidence plus subsurface group, weights above, S0=0.75.",
+    "corridor_v3_subsurf_rad": "SENSITIVITY ONLY. v2 plus radiometric group, weights above, S0=0.75."
+  },
+  "holdout": {
+    "instrument": "vendor/template66 gems57.holdout.build_holdout (quadrant folds, whole <=12px segments withheld, DOMAIN_ERODE=12) + gems57.holdout.score_cell (alpha=0.2, beta=0.8, 300 m triangular kernel), seeds=(20,21), modes=('all',), 8 cells. Catalogue-derived corridors rebuilt per cell from ctx.visible(key) only. Visible faults masked pixel-exactly by score_cell active mask; emission additionally requires distance-to-full-catalogue > 2 px exactly as archived (conservative flank rule, disclosed).",
+    "primary_statistic": "POOLED DTI from summed TP/FP/FN over the 8 cells per arm (protocol rule 2). Mean-of-cells also reported only for comparability with archived e2_gate.json (corridor mean 0.005975, control mean 0.002148, HOLDOUT-DTI archived).",
+    "uncertainty": "Paired cell-bootstrap (2000 resamples of the 8 cells, seed 20261020) recomputing pooled DTI differences; 95% percentile CI. 8 cells is small; CI is a screen, not proof.",
+    "leakage_canary": "Every z-stack feature alone + each arm propensity (built from visible catalogue of the same cell) vs that cell withheld truth: per-cell AUC, report max/median. Any AUC > 0.90 = leakage until proven otherwise; that arm is disqualified."
+  },
+  "gate_rule": {
+    "science_gate": "corridor_v2 pooled DTI > control pooled DTI AND > corridor_v1 pooled DTI, with paired-bootstrap 95% CI lower bound > 0 for both differences, and no canary AUC > 0.90.",
+    "current_best": "Same-evaluator current holdout best for release_gate 'current_best_beaten' = corridor_v1_repaired pooled DTI measured in this same pass (archived mean-based number is not pooled and used buggy geometry, so it cannot be the pooled comparator; both numbers reported).",
+    "emission_arm": "corridor_v2 if science gate passes, else corridor_v1_repaired for the audit emission. v3 never selects emission.",
+    "uniqueness_gate_literal": "Surface (propensity, before placement) and dots (final binary field) each compared to every accessible registry raster (registry/registry_index_69.json, 862 entries): Spearman rho > 0.90 OR >70% of candidate dots within 3 px of one registry raster's positive pixels = duplicate-and-stop (verdict negative, no public download). Stratified dotlike diagnostics reported but never override the literal gate.",
+    "format_gate": "scripts/validate_submission.py PASS on exact emitted bytes (zeros primary: all-finite float32 in [0,1]; nan twin diagnostic only).",
+    "download_rule": "Public download + verdict promote ONLY if science + literal uniqueness (both phases, complete scan, hash-bound) + format + canary + method-manifest conditions in scripts/release_gate.py all pass. Otherwise verdict negative, TIF archived in submissions/ only, banner DO NOT SUBMIT. No DrivenData slot is spent by this session in any case."
+  },
+  "emission": {"k_truth_prior": 12691, "k_truth_source": "Archived receipt chain (GEMSDOE32 emission_models_mc.json via GEMSDOE25 H28 owner-report-derived prior) as recorded in evidence/e3_receipt.json; treated as a prior, not a measurement.", "allocator": "vendor/template66 gems57.emit.greedy_allocate (floor=0.05, max_dots=250000, candidate_cap=300000), allowed = footprint & (dist to catalogue > 2 px) & (propensity > 0). Binary dots value 1.0."}
+}

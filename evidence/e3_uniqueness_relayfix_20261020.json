@@ -1,0 +1,115 @@
+{
+ "evidence_class": "REGISTRY-MEASUREMENT",
+ "generated_utc": null,
+ "my_file": "/home/user/GEMSDOE69/submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif",
+ "my_dots": 36325,
+ "my_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+ "registry_scope": "registry/registry_index_69.json (862 hash-verified grid rasters, family census + HEAD scan 2026-10-12; fetched and sha256-verified 2026-10-20)",
+ "rho_limit": 0.9,
+ "overlap_limit": 0.7,
+ "n_registry_blobs": 862,
+ "n_compared": 862,
+ "n_errors": 0,
+ "worst_abs_spearman": 0.11031126875912463,
+ "worst_rho_entry": {
+  "submission": "7GEMSDOE:downloads/gems7-halo15-gbt-v1-90fb7dc0fc1f.tif",
+  "rho": 0.11031126875912463
+ },
+ "worst_dot_overlap_all": {
+  "submission": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+  "dot_overlap_3px": 1.0
+ },
+ "literal_gate": {
+  "rho_ok": true,
+  "overlap_ok": false
+ },
+ "surface_phase": {
+  "my_file": null,
+  "evidence_class": "REGISTRY-MEASUREMENT",
+  "my_dots": 176559,
+  "candidate_decoded_sha256": "4cc7028e01f65695f255e4d5b1463a33159d2440aaeb729189c8a96811384083",
+  "candidate_file_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+  "rho_limit": 0.9,
+  "overlap_limit": 0.7,
+  "jaccard_limit": 0.5,
+  "registry_rasters_expected": 862,
+  "registry_rasters_checked": 862,
+  "complete_accessible_scan": true,
+  "missing_or_invalid": 0,
+  "source_errors": [],
+  "worst_spearman_full_footprint": 0.27078153458507015,
+  "worst_rho_submission": "7GEMSDOE:downloads/gems7-halo15-gbt-v1-90fb7dc0fc1f.tif",
+  "worst_dot_overlap": 1.0,
+  "worst_overlap_submission": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+  "worst_jaccard_dot_sets": 0.1349149716644954,
+  "worst_jaccard_submission": "11GEMSDOE:docs/downloads/gems-structural-area06-v1.tif",
+  "byte_unique_among_checked": true,
+  "pixel_unique_among_checked": true,
+  "duplicate_count": 91,
+  "unique": false,
+  "jaccard_diagnostic_only": true,
+  "verdict": "negative",
+  "stop_required": true,
+  "candidate_rank_variation": true,
+  "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only.",
+  "phase": "surface"
+ },
+ "dots_phase": {
+  "my_file": null,
+  "evidence_class": "REGISTRY-MEASUREMENT",
+  "my_dots": 36325,
+  "candidate_decoded_sha256": "a114b6c47c6f3db1869610b4dba9dd5e335224ef70d0e13092d69d64a3ad05d7",
+  "candidate_file_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+  "rho_limit": 0.9,
+  "overlap_limit": 0.7,
+  "jaccard_limit": 0.5,
+  "registry_rasters_expected": 862,
+  "registry_rasters_checked": 862,
+  "complete_accessible_scan": true,
+  "missing_or_invalid": 0,
+  "source_errors": [],
+  "worst_spearman_full_footprint": 0.11031126875912463,
+  "worst_rho_submission": "7GEMSDOE:downloads/gems7-halo15-gbt-v1-90fb7dc0fc1f.tif",
+  "worst_dot_overlap": 1.0,
+  "worst_overlap_submission": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+  "worst_jaccard_dot_sets": 0.055485803966329,
+  "worst_jaccard_submission": "GEMSDOE37:docs/downloads/gemsdoe37-rankmix-strain-topo-20261005T030338376116Z-52bf89742e.tif",
+  "byte_unique_among_checked": true,
+  "pixel_unique_among_checked": true,
+  "duplicate_count": 107,
+  "unique": false,
+  "jaccard_diagnostic_only": true,
+  "verdict": "negative",
+  "stop_required": true,
+  "candidate_rank_variation": true,
+  "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only.",
+  "phase": "dots"
+ },
+ "local_lane_priors": {
+  "H69 Oct12": {
+   "overlap3": 0.2627116311080523,
+   "jaccard": 0.1363736644709887,
+   "rho_subsample": 0.2227279790880983,
+   "their_dots": 35787
+  },
+  "H69-D rad": {
+   "overlap3": 0.2749070887818307,
+   "jaccard": 0.07898227992040179,
+   "rho_subsample": 0.12207928755111447,
+   "their_dots": 31994
+  },
+  "Exp1 v1": {
+   "overlap3": 0.2775223675154852,
+   "jaccard": 0.1433866999009363,
+   "rho_subsample": 0.23522631669420313,
+   "their_dots": 35235
+  },
+  "champion": {
+   "overlap3": 0.2563523743977977,
+   "jaccard": 0.006900587979094076,
+   "rho_subsample": 0.005397786849619866,
+   "their_dots": 37654
+  }
+ },
+ "errors": []
+}

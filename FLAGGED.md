@@ -80,3 +80,16 @@ merge). The 2026-10-12 session re-implemented the lane from the method paragraph
 tip-graph pipeline, no-prior control, 751-blob registry mirror) and reached the positive results
 recorded in evidence/run_card.json (promote-flagged-review). Both are legitimate records of the
 same lane paragraph under different implementations/controls.
+
+## 2026-10-20 relay-fix session additions
+
+| ID | Finding | Severity | Disposition |
+| --- | --- | --- | --- |
+| IR-69-GEOM-01 | R1/R2 repaired: tip-window intervals now offset by tip-to-tip projection; search radius 546 px. Repaired census 383,827 pairs (was 212,657). Archived corridor numbers used buggy geometry and must not be pooled-compared to repaired runs. | info | fixed + tests; archived receipts retained with labels |
+| IR-69-DUP-02 | Exp1 repaired-v1 emission is a near-duplicate of the archived Oct-12 lane raster (3 px overlap 0.8911, jaccard 0.7410). | medium | logged duplicate-and-stop; audit bytes only (evidence/relayfix_receipt.json) |
+| IR-69-SEL-01 | Production corridor cap emitted 1200/1200 pull-apart, 0 transfer corridors; transfer-only selector (Exp2b) is the first lane emission using the transfer population. Outer-tip combinations can duplicate one step-over under different tip pairs; overlap cap 1.0W vs cited 3-3.5x ramp aspect unresolved. | medium | transfer candidate preregistered separately; selector semantics flagged for next preregistration, not silently changed |
+| IR-69-REG-03 | Transfer candidate literal uniqueness: rho passes (dots 0.1103, surface 0.2708; 862/862, 0 errors) but overlap fails at 1.0 vs universal surfaces and 0.8497 worst dotlike (GEMSDOE53 80k-dot raster; 20 dotlike >0.70). Science/format/canary/manifest gates all pass; publication blocked solely by literal overlap definition. | medium | verdict negative; upstream selector must resolve registry support definition; no local override |
+| IR-69-SAMPLE-01 | Mirrored sample_submission.tif positives equal the catalogue exactly (60,988 px), while the official page (fetched 2026-10-20) describes the sample as total fault absence. Footprint (finite mask) is unaffected, but mirror content cannot be organizer-authenticated here. | low | disclosed; grid contract derived from finite mask + CRS/shape/transform only |
+
+| IR-69-MERGE-04 | Merging parallel main (H69-E session) required union ports into physics.py/scoring.py and a stricter holdout-hash binding in release_gate.py; method-manifest hashes refreshed with post_execution_union_ports disclosure. Executed relayfix code paths unchanged; H69-E e* evidence preserved as *_archived_h69e.json. | low | disclosed in evidence/e3_method_manifest.json; 100 tests pass |
+| IR-69-MERGE-05 | Parallel-session collision on merge: main promoted H69-J (38669 dots, stratified dotlike overlap 0.61 policy in its release_gate variant) while this session landed R1/R2 generator repairs. H69-J's hash-bound method manifest and holdout binding are stale on the merged tree, so the gate fails closed (negative; download revoked) until H69-J is re-run/re-bound under repaired geometry. Its archived science is not overturned. Policy divergence (stratified-overlap promote vs literal-overlap negative for the transfer candidate) needs one upstream selector ruling. | high | fail-closed on merged tree; H69-J bytes retained in submissions/; rebind instructions in HANDOFF.md |

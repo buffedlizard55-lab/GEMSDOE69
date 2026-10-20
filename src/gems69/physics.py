@@ -35,7 +35,6 @@ ROOT = Path(__file__).resolve().parents[2]
 FEATURES_PATH = ROOT / ".cache" / "gems_data" / "training_features.tif"
 LIDAR_PATH = ROOT / ".cache" / "gems_data" / "external" / "lidar_scarp_features_u8.tif"
 RAD_PATH = ROOT / ".cache" / "gems_data" / "external" / "geodawn_rad_u8.tif"
-EXT_PATH = ROOT / ".cache" / "gems_data" / "external" / "geodawn_extensions_u8.tif"
 STATS_CACHE = ROOT / ".cache" / "gems_data" / "layer_stats.json"
 
 # band index (1-based) read from file descriptions on 2026-10-12
@@ -47,11 +46,6 @@ BAND = {
     "det_elev_slope": 19,
 }
 LIDAR_BANDS = {"ex_max": 1, "step_max": 3, "downface_max": 6, "valid": 12}
-# Band order read from GeoTIFF descriptions on 2026-10-20 (K/Th/U/TC; ThK/UK/UTh/TMI_up150).
-# Provenance: USGS GeoDAWN DOI 10.5066/P93LGLVQ, uint8 1st-99th, nodata 0
-# (family receipt geodawn_rad.json / geodawn_extensions.json, sha256-pinned mirrors).
-RAD_BAND = {"K": 1, "Th": 2, "U": 3, "TC": 4}
-EXT_BAND = {"ThK": 1, "UK": 2, "UTh": 3, "TMI_up150": 4}
 
 SIGMAS = (1.0, 2.0, 4.0)
 MAD_SCALE = 1.4826
@@ -79,6 +73,31 @@ def _band_window(path: Path, band: int, bbox: tuple[int, int, int, int] | None):
             a = src.read(band, window=w, boundless=False).astype(np.float32)
     a[a < -1e38] = np.nan
     return a
+
+
+def _rad_depletion_window(bbox: tuple[int, int, int, int] | None):
+    """Radiometric depletion raw field: -(K + Th)/2 from geodawn_rad_u8.tif.
+
+    Bands read by name-verified index (1=K, 2=Th, 3=U, 4=TC; uint8,
+    nodata 0 — verified 2026-10-20: outside-footprint cells are all 0,
+    inside-footprint zeros are a 0.025% survey-hole mask shared by all
+    bands, so 0 is nodata, not a depletion extreme).  Source pin:
+    registry/data_manifest_gemsdoe32.json ``ext_geodawn_rad_u8``
+    (sha256 c22420f7…; USGS GeoDAWN DOI 10.5066/P93LGLVQ per manifest).
+    Robust-z standardization is applied by the caller like every layer.
+    """
+    with rasterio.open(RAD_PATH) as src:
+        if bbox is None:
+            k = src.read(1).astype(np.float32)
+            th = src.read(2).astype(np.float32)
+        else:
+            r0, r1, c0, c1 = bbox
+            w = rasterio.windows.Window(c0, r0, c1 - c0, r1 - r0)
+            k = src.read(1, window=w).astype(np.float32)
+            th = src.read(2, window=w).astype(np.float32)
+    out = -(k + th) / 2.0
+    out[(k == 0) | (th == 0)] = np.nan
+    return out
 
 
 def _lidar_scarp_window(bbox: tuple[int, int, int, int] | None):
@@ -133,69 +152,17 @@ TRANSFORM_SPECS += [
     ("mag_low_tmi", "negraw", "tmi", 0.0),
     ("mag_low_rtp", "negraw", "rtp", 0.0),
     ("lidar_scarp", "lidar", None, 0.0),
-    # H69-E, pre-registered 2026-10-20 before the holdout look (see
-    # registry/preregistration_h69e.json). Straight-boundary structure-tensor
-    # coherence on conductivity and basement depth, plus radiometric K
-    # depletion and Th/K. These are catalogue-independent.
-    ("cond_straight", "straight", "cond_surf", 2.0),
-    ("base_straight", "straight", "basement_depth", 2.0),
-    ("rad_k_depl", "depletion", "K", 2.0),
-    ("rad_thk", "ext_raw", "ThK", 0.0),
+    # H69-F (preregistered 2026-10-20): subsurface straight-step evidence.
+    # Same HG/tilt operators as gravity/magnetics, applied to the
+    # conductivity surface (band 17) and basement depth (band 15).
+    ("cond_hg_s2", "hg", "cond_surf", 2.0),
+    ("cond_tilt_s2", "tilt", "cond_surf", 2.0),
+    ("base_hg_s2", "hg", "basement_depth", 2.0),
+    ("base_tilt_s2", "tilt", "basement_depth", 2.0),
+    # H69-G sensitivity (preregistered 2026-10-20): radiometric depletion.
+    ("rad_depl", "rad", None, 0.0),
 ]
 TRANSFORM_NAMES = [t[0] for t in TRANSFORM_SPECS]
-
-
-def _finite_fill(field: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
-    finite = np.isfinite(field)
-    if finite.any():
-        fill = float(np.nanmedian(field))
-    else:
-        fill = 0.0
-    return np.where(finite, field, fill).astype(np.float32), finite
-
-
-def straight_step(field: np.ndarray, sigma: float = 2.0, coh_sigma: float = 3.0) -> np.ndarray:
-    """Structure-tensor coherence times gradient magnitude.
-
-    A straight contact (fault, or a lithologic contact — the named mimic) has
-    a locally constant gradient azimuth, so (lambda1-lambda2)/(lambda1+lambda2)
-    is near 1. Isotropic texture scores near 0. Not a fault detector by itself.
-    """
-    filled, finite = _finite_fill(field)
-    g = ndi.gaussian_filter(filled, sigma)
-    gy, gx = np.gradient(g)
-    jxx = ndi.gaussian_filter(gx * gx, coh_sigma)
-    jyy = ndi.gaussian_filter(gy * gy, coh_sigma)
-    jxy = ndi.gaussian_filter(gx * gy, coh_sigma)
-    tr = jxx + jyy
-    det = jxx * jyy - jxy * jxy
-    disc = np.sqrt(np.maximum((tr * 0.5) ** 2 - det, 0.0))
-    l1 = tr * 0.5 + disc
-    l2 = tr * 0.5 - disc
-    coh = (l1 - l2) / (l1 + l2 + 1e-12)
-    out = (np.hypot(gx, gy) * coh).astype(np.float32)
-    out[~finite] = np.nan
-    return out
-
-
-def local_depletion(field: np.ndarray, sigma_local: float = 2.0,
-                    sigma_bg: float = 20.0) -> np.ndarray:
-    """Positive where the field is low relative to a 2 km background.
-
-    sigma_bg=20 px = 2 km is pre-registered (hydrothermal halo scale), not fit.
-    """
-    filled, finite = _finite_fill(field)
-    loc = ndi.gaussian_filter(filled, sigma_local)
-    bg = ndi.gaussian_filter(filled, sigma_bg)
-    out = (bg - loc).astype(np.float32)
-    out[~finite] = np.nan
-    return out
-
-
-def _u8_window(path: Path, band: int, bbox):
-    a = _band_window(path, band, bbox)
-    a[a <= 0] = np.nan  # documented uint8 nodata
-    return a
 
 
 def compute_transform(name: str, bbox=None) -> np.ndarray:
@@ -204,10 +171,8 @@ def compute_transform(name: str, bbox=None) -> np.ndarray:
     sigma = dict((t[0], t[3]) for t in TRANSFORM_SPECS)[name]
     if kind == "lidar":
         return _lidar_scarp_window(bbox)
-    if kind == "depletion":
-        return local_depletion(_u8_window(RAD_PATH, RAD_BAND[src], bbox), sigma_local=sigma)
-    if kind == "ext_raw":
-        return _u8_window(EXT_PATH, EXT_BAND[src], bbox)
+    if kind == "rad":
+        return _rad_depletion_window(bbox)
     f = _band_window(FEATURES_PATH, BAND[src], bbox)
     if kind == "hg":
         return hg(f, sigma)
@@ -217,27 +182,20 @@ def compute_transform(name: str, bbox=None) -> np.ndarray:
         return f
     if kind == "negraw":
         return -f
-    if kind == "straight":
-        return straight_step(f, sigma=sigma)
     raise KeyError(name)
 
 
 def build_layer_stats(footprint: np.ndarray, seed: int = 69) -> dict[str, LayerStats]:
     """One full-grid pass per transform; subsampled robust stats. Cached."""
-    cached: dict[str, LayerStats] = {}
     if STATS_CACHE.exists():
         raw = json.loads(STATS_CACHE.read_text())
-        cached = {k: LayerStats(v["median"], v["mad"]) for k, v in raw.items()}
-        if all(n in cached for n in TRANSFORM_NAMES):
-            return {n: cached[n] for n in TRANSFORM_NAMES}
+        return {k: LayerStats(v["median"], v["mad"]) for k, v in raw.items()}
     rng = np.random.default_rng(seed)
     fy, fx = np.nonzero(footprint)
     sel = rng.choice(len(fy), size=min(STATS_SUBSAMPLE, len(fy)), replace=False)
     sy, sx = fy[sel], fx[sel]
-    stats: dict[str, LayerStats] = dict(cached)
-    missing = [n for n in TRANSFORM_NAMES if n not in stats]
-    for name in missing:
-        print(f"[physics] stats {name}", flush=True)
+    stats: dict[str, LayerStats] = {}
+    for name in TRANSFORM_NAMES:
         t = compute_transform(name)
         v = t[sy, sx]
         v = v[np.isfinite(v)]
@@ -268,7 +226,6 @@ def build_z_stack(footprint: np.ndarray, stats: dict[str, LayerStats],
                 return {n: z[n] for n in names}
     out = {}
     for n in names:
-        print(f"[physics] z-stack {n}", flush=True)
         t = compute_transform(n)
         zz = stats[n].z(t)
         zz = np.where(np.isfinite(zz), zz, np.nan).astype(np.float16)
@@ -290,6 +247,48 @@ def corridor_evidence_from_z(zstack: dict, corridor) -> dict[str, float]:
         v = z[br0:br1, bc0:bc1][m]
         v = v[np.isfinite(v)]
         out[n] = float(v.mean()) if v.size else 0.0
+    return out
+
+
+def _finite_fill(field: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    finite = np.isfinite(field)
+    fill = float(np.nanmedian(field)) if finite.any() else 0.0
+    return np.where(finite, field, fill).astype(np.float32), finite
+
+
+def straight_step(field: np.ndarray, sigma: float = 2.0, coh_sigma: float = 3.0) -> np.ndarray:
+    """Structure-tensor coherence times gradient magnitude (H69-E union port).
+
+    Ported verbatim from the merged H69-E session for its preregistration
+    tests; not used by the relayfix v1/v2/v3 stacks executed 2026-10-20.
+    A straight contact has a locally constant gradient azimuth, so
+    (lambda1-lambda2)/(lambda1+lambda2) is near 1; isotropic texture ~0.
+    """
+    filled, finite = _finite_fill(field)
+    g = ndi.gaussian_filter(filled, sigma)
+    gy, gx = np.gradient(g)
+    jxx = ndi.gaussian_filter(gx * gx, coh_sigma)
+    jyy = ndi.gaussian_filter(gy * gy, coh_sigma)
+    jxy = ndi.gaussian_filter(gx * gy, coh_sigma)
+    tr = jxx + jyy
+    det = jxx * jyy - jxy * jxy
+    disc = np.sqrt(np.maximum((tr * 0.5) ** 2 - det, 0.0))
+    l1 = tr * 0.5 + disc
+    l2 = tr * 0.5 - disc
+    coh = (l1 - l2) / (l1 + l2 + 1e-12)
+    out = (np.hypot(gx, gy) * coh).astype(np.float32)
+    out[~finite] = np.nan
+    return out
+
+
+def local_depletion(field: np.ndarray, sigma_local: float = 2.0,
+                    sigma_bg: float = 20.0) -> np.ndarray:
+    """Positive where the field is low vs a 2 km background (H69-E port)."""
+    filled, finite = _finite_fill(field)
+    loc = ndi.gaussian_filter(filled, sigma_local)
+    bg = ndi.gaussian_filter(filled, sigma_bg)
+    out = (bg - loc).astype(np.float32)
+    out[~finite] = np.nan
     return out
 
 

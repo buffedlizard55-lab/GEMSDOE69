@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T20:55:54.083660+00:00",
+  "generated_utc": "2026-10-20T21:10:54.604517+00:00",
   "lane": "GEMSDOE69 relay-ramp & pull-apart corridor generator",
   "hypothesis": "H69-J: convergent multi-scale HG+tilt edge phase across relay connectors (H1)",
   "mechanism": "Tip-graph corridor proposals scored by joint grav+mag HG and tilt coincidence (AND logic, min(E_grav,E_mag) 0.35), mag low gated by joint, lidar scarp, N-NE orientation, pull-apart prior; greedy marginal-DTI placement. Targets buried relay linkage between step-over tips separating basement blocks.",
@@ -82,13 +82,16 @@
   },
   "submission_name": "h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros",
   "submission_note": "H69 joint convergent grav+mag joint; HG+tilt + maglow + lidar; 38669 dots",
-  "verdict": "promote",
-  "banner": "ok",
+  "verdict": "negative",
+  "banner": "stop",
   "note": "Literal protocol enforced. No submission slot used. Archived measurements are not organizer scores.",
   "release_policy": {
-    "verdict": "promote",
-    "download_enabled": true,
-    "reasons": [],
+    "verdict": "negative",
+    "download_enabled": false,
+    "reasons": [
+      "Holdout comparison is missing or not bound to the current artifact hash.",
+      "Reproducible method source manifest is missing, stale, or not artifact-bound."
+    ],
     "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
     "validator_report": {
       "file": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",

@@ -33,9 +33,9 @@
 <div class="card"><h2>E3 &mdash; emission, registry scan, validator</h2>
 <table><tr><th>Check</th><th>Result</th></tr>
 <tr><td>Dots emitted (greedy marginal-DTI, |G| prior 12,691 px)</td><td>38669 (catalogue collisions: 0)</td></tr>
-<tr><td>Upstream validator (zeros)</td><td>see compliance note (IR-69-VAL-01)</td></tr>
-<tr><td>Format compliance zeros: all-finite [0,1] (family shipping policy)</td><td>PASS</td></tr>
-<tr><td>Format compliance nan: finite mask &equiv; sample_submission, NaN outside, nodata tag</td><td>PASS</td></tr>
+<tr><td>Validator on exact bytes (scripts/validate_submission.py, both variants)</td><td>FAIL/pending — see evidence/relayfix_transfer_validator.json</td></tr>
+<tr><td>Portal file (-zeros): all-finite float32 in [0,1], EPSG:32611, 3730&times;3292</td><td>pending</td></tr>
+<tr><td>Diagnostic twin (-nan): NaN only outside footprint &mdash; DO NOT UPLOAD</td><td>archived for audit</td></tr>
 <tr><td>Registry scan compared / errors</td><td>751 / 0</td></tr>
 <tr><td>Worst |Spearman| surface</td><td>0.162</td></tr>
 <tr><td>Worst dot overlap (dotlike stratum)</td><td>0.61</td></tr>
