@@ -1,0 +1,36 @@
+{
+  "run_date_utc": "2026-10-12",
+  "hypothesis": "Domain-aware fault-tip graph proposing relay-ramp, releasing pull-apart, and displacement-transfer corridors, ranked by multi-scale gravity/magnetic gradient and tilt, signed magnetic-low evidence, lidar scarps, and stress orientation.",
+  "mechanism": "Fault interactions and dilational corridors may host unmapped connecting strands and damage-zone fractures. Corridor evidence is a search prior only; every candidate requires holdout support and geologist-reviewable rationale.",
+  "named_non_fault_process_that_could_mimic_it": "A buried mafic dike or lithologic contact can generate a magnetic lineament; a sediment-filled basin can generate a gravity low without an unmapped fault at the scored pixels.",
+  "holdout_DTI": {
+    "evidence_class": "HOLDOUT-DTI: NOT MEASURED",
+    "status": "NOT RUN — competition rasters, cached stack, and shared holdout evaluator are absent.",
+    "evaluator_version": null,
+    "withheld_positive_count": null,
+    "pooled_estimate": null,
+    "confidence_interval_95": null
+  },
+  "leakage_canary": {
+    "status": "NOT RUN — no feature stack or spatial folds are available.",
+    "per_feature_auc": null
+  },
+  "registry_correlation_and_overlap": {
+    "status": "NOT RUN — no candidate surface/dots or local registry rasters are available.",
+    "rank_correlation": null,
+    "fraction_of_candidate_dots_within_3px_of_registry_dots": null
+  },
+  "raster_sha256": null,
+  "validator_output": {
+    "status": "NOT RUN — no candidate GeoTIFF or official sample-submission raster is present.",
+    "no_nan_inside_footprint": null,
+    "in_footprint_values_in_0_1": null,
+    "crs_shape_transform_match": null
+  },
+  "submission": {
+    "name": null,
+    "note": "Not generated; missing competition data and shared holdout/writer tools."
+  },
+  "organizer_confirmed_submission_receipt": null,
+  "verdict": "negative"
+}

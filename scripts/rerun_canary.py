@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """Re-run the leakage canary after the finite-mask fix (z stack cached)."""
+
+if __name__ == "__main__":
+    from lane_preflight import require_open_lane
+    require_open_lane()
 import datetime as dt
 import json
 import sys

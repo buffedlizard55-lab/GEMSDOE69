@@ -5,6 +5,10 @@ no scientific recomputation).  Prior e* files are archived, never deleted.
 Candidate = H69-H2 transfer-only TIF (evidence/relayfix_transfer_receipt.json).
 """
 from __future__ import annotations
+
+if __name__ == "__main__":
+    from lane_preflight import require_open_lane
+    require_open_lane()
 import hashlib, json, shutil, sys
 from pathlib import Path
 import numpy as np

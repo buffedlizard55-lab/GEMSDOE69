@@ -13,6 +13,10 @@ leaderboard score.  Outputs go to ``evidence/``.
 """
 from __future__ import annotations
 
+if __name__ == "__main__":
+    from lane_preflight import require_open_lane
+    require_open_lane()
+
 import argparse
 import json
 import sys

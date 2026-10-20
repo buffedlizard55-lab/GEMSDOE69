@@ -493,9 +493,13 @@ def cmd_unique() -> int:
 
 
 def cmd_card() -> int:
-    """Apply the single strict publication policy; never weaken the literal gate."""
+    """Apply policy; replace another artifact's card only with explicit flag."""
     from release_gate import write_card
-    card = write_card()
+    try:
+        card = write_card(replace="--replace-artifact-bound-card" in sys.argv)
+    except ValueError as exc:
+        print(f"Run card unchanged: {exc}", file=sys.stderr)
+        return 2
     print(json.dumps(card["release_policy"], indent=2))
     return 0
 
@@ -504,6 +508,9 @@ def main() -> int:
     cmd = sys.argv[1] if len(sys.argv) > 1 else "verify"
     if cmd == "verify":
         return cmd_verify()
+    if cmd in ("e1", "e2", "e3"):
+        from lane_preflight import require_open_lane
+        require_open_lane(ROOT)
     if cmd == "e1":
         return cmd_e1()
     if cmd == "e2":
