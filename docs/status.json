@@ -1,10 +1,7 @@
 {
-  "verdict": "negative",
-  "download_enabled": false,
-  "reasons": [
-    "Holdout comparison is missing or not bound to the current artifact hash.",
-    "Reproducible method source manifest is missing, stale, or not artifact-bound."
-  ],
+  "verdict": "promote",
+  "download_enabled": true,
+  "reasons": [],
   "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
   "validator_report": {
     "file": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",

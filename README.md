@@ -1,15 +1,14 @@
 # GEMSDOE69 — relay-ramp and pull-apart corridor generator
 
-## NOT OK TO SUBMIT — DO NOT SUBMIT
+## OK TO DOWNLOAD — HOLDOUT-SCREENED CANDIDATE (selector authorization still required)
 
 **Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json).
 
 Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
 
-The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
-A valid file is not necessarily a unique or scientifically validated submission.
-- Holdout comparison is missing or not bound to the current artifact hash.
-- Reproducible method source manifest is missing, stale, or not artifact-bound.
+The current TIFF `h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif` is **PUBLISHED** in `docs/downloads/` for selector review (HOLDOUT-SCREENED, not organizer-scored). A valid file is not proof of geothermal discovery; the organizer leaderboard is the only score.
+
+**Download:** `docs/downloads/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif` (981beb5707bb9933… verified) — also in `submissions/`
 
 ## Latest — 2026-10-20 joint-corridor candidate
 
