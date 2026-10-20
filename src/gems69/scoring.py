@@ -31,7 +31,16 @@ LIDAR_LAYERS = ["lidar_scarp"]
 SUBSURF_LAYERS = ["cond_hg_s2", "cond_tilt_s2", "base_hg_s2", "base_tilt_s2"]
 RAD_LAYERS = ["rad_depl"]
 
-W_GRAV, W_MAG, W_MAGLOW, W_LIDAR, W_ORIENT, W_GEOM = 0.20, 0.20, 0.18, 0.15, 0.10, 0.17
+# H69-E preregistered weights (union port from merged parallel session;
+# registry/preregistration_h69e.json). The relayfix arms executed 2026-10-20
+# use SCORING_WEIGHTS below by version; these constants are not read by them.
+W_GRAV, W_MAG, W_MAGLOW, W_LIDAR = 0.14, 0.14, 0.12, 0.10
+W_STRAIGHT, W_RAD = 0.16, 0.12
+W_ORIENT, W_GEOM = 0.10, 0.12
+STRAIGHT_LAYERS = ["cond_straight", "base_straight"]
+RAD_LAYERS = ["rad_k_depl", "rad_thk"]
+GEOM_PRIOR = {"pull-apart": 1.0, "relay-ramp": 0.9, "transfer-overlap": 0.7}
+SCORE_FLOOR_QUANTILE = 0.25
 # version -> (grav, mag, maglow, lidar, subsurface, radiometric, orient, geom); each sums to 1.0
 SCORING_WEIGHTS = {
     "v1": (0.20, 0.20, 0.18, 0.15, 0.00, 0.00, 0.10, 0.17),

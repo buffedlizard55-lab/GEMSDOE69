@@ -20,7 +20,23 @@ VENDOR = ROOT / "vendor"
 if str(VENDOR) not in sys.path:
     sys.path.insert(0, str(VENDOR))
 
-DATA = Path(os.environ.get("GEMS_DATA", "/tmp/gems_data"))
+def _default_data() -> Path:
+    """Prefer an explicit GEMS_DATA, else the repo's pinned bridge grid.
+
+    The historical default ``/tmp/gems_data`` is kept as the last fallback so
+    older session notes still resolve, but a fresh checkout of this repo has
+    the grid in ``data/bridge`` and must not fail closed on a missing /tmp path.
+    """
+    env = os.environ.get("GEMS_DATA")
+    if env:
+        return Path(env)
+    bridge = ROOT / "data" / "bridge"
+    if (bridge / "sample_submission.tif").is_file() and (bridge / "labels.tif").is_file():
+        return bridge
+    return Path("/tmp/gems_data")
+
+
+DATA = _default_data()
 CACHE = Path(os.environ.get("GEMS_CACHE", "/tmp/gems_cache"))
 FEATURES = DATA / "training_features.tif"
 SENTINEL_LIMIT = -1e30          # the stack's nodata is -3.4028234663852886e+38

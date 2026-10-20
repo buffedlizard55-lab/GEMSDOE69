@@ -53,8 +53,15 @@ CPU validation works; GPU training is not required for this geometry lane. A for
 
 The following is the retained project brief, not a verbatim transcript of every user message. The active request additionally requires strict duplicate-and-stop enforcement, three review passes, and a PR merged to main. Never infer authorization to submit to DrivenData.
 
-# Standing project brief (retained summary from 2026-10-12) — read at the start of every session
+# Standing prompt — read at the start of every session
 
+Session of 2026-10-20 addendum (user instruction, not a score): the user cites **0.3195** as the current competition high and asks for a unique submission that could beat it. That figure is USER-REPORTED-NOT-ORGANIZER-CONFIRMED. The in-repo official public-leaderboard snapshot (`registry/leaderboard_snapshot_2026-10-12.json`, retrieved 2026-10-12 from the public leaderboard page) shows rank 1 at 0.4275 and 0.3195 at rank 9. drivendata.org is not reachable from this sandbox, so the live board was not re-fetched. Do not write either number as a projection of this lane.
+
+Core values to apply on every decision: Maximize P(Win); Own the Outcome.
+
+The lane paragraph below is unchanged and is the only method this session may implement.
+
+# Standing prompt (verbatim, session of 2026-10-12, still in force)
 > Review the repo.
 >
 > THE FOLLOWING IS THE HIGHEST URGENCY AND MUST BE FOLLOWED!
@@ -89,3 +96,15 @@ The following is the retained project brief, not a verbatim transcript of every 
 > Pass protocol: Pass 1 implement and verify; Pass 2 review for bugs/missing requirements/edge cases, fix; Pass 3 re-check against this file, improve, fix. Finish with a pull request merged to main, plus suggestions and limitations for the next session.
 >
 > Core values (Arena): Maximize P(Win) — weigh tradeoffs, assess risk, choose the path that maximizes the probability of winning. Own the Outcome — own results end to end, treat failure as a signal, stay accountable to the final outcome.
+
+## Active request refresh — 2026-10-20 follow-up
+
+Read the full standing brief above on every session. Continue the handoff before
+starting new experiments. The user again requests an autonomous three-pass
+review, a unique gated TIFF, an obvious download/submission status, ranked
+in-lane hypotheses, source-linked scientific reasoning, and a PR merged to main.
+The additional user-reported leaderboard high of 0.4413 is not organizer-confirmed;
+it conflicts with other highs in the prompt and must not be called current fact.
+Core values remain Maximize P(Win) and Own the Outcome. No leaderboard improvement,
+source verification, data access, or completed submission may be invented.
+The duplicate-and-stop rule remains binding even when it prevents a new TIFF.

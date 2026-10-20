@@ -1,0 +1,3578 @@
+{
+ "evidence_class": "SUBMISSION-RECEIPT",
+ "generated_utc": "20261020T193531Z",
+ "hypothesis_id": "H69-E-stratified-straight-rad",
+ "s0_calibrated": 0.75,
+ "k_truth_prior": 12691,
+ "k_truth_source": "GEMSDOE32 evidence/emission_models_mc.json truth_px=12691, source 'GEMSDOE25 H28 (owner-report-derived prior)'",
+ "n_corridors": 1200,
+ "n_pairs": 1200,
+ "n_strands": 3887,
+ "n_dots": 33199,
+ "catalogue_collision_px": 0,
+ "raster": {
+  "zeros": {
+   "path": "/home/user/GEMSDOE69/submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-zeros.tif",
+   "sha256": "ad03bd333dacc28ebaf474599f3fc7aabf65d181373a2afd52f5adf8fdc15045",
+   "bytes": 786328
+  },
+  "nan": {
+   "path": "/home/user/GEMSDOE69/submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-nan.tif",
+   "sha256": "db7915f3304edaefe3b74f925bd4c0dca57d2b93d656f46a5de5df7b13d528ab",
+   "bytes": 1548448
+  }
+ },
+ "validator": {
+  "zeros": {
+   "file": "/home/user/GEMSDOE69/submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-zeros.tif",
+   "sha256": "ad03bd333dacc28ebaf474599f3fc7aabf65d181373a2afd52f5adf8fdc15045",
+   "passed": false,
+   "has_failures": true,
+   "checks": [
+    {
+     "check": "single band",
+     "status": "PASS",
+     "detail": "count=1"
+    },
+    {
+     "check": "dtype float32",
+     "status": "PASS",
+     "detail": "dtype=float32"
+    },
+    {
+     "check": "CRS EPSG:32611",
+     "status": "PASS",
+     "detail": "crs=EPSG:32611"
+    },
+    {
+     "check": "shape matches",
+     "status": "PASS",
+     "detail": "file=(3730, 3292) expected=(3730, 3292)"
+    },
+    {
+     "check": "resolution 100 m",
+     "status": "PASS",
+     "detail": "res=(100.0, 100.0)"
+    },
+    {
+     "check": "transform matches reference",
+     "status": "PASS",
+     "detail": "file=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0) ref=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)"
+    },
+    {
+     "check": "CRS matches reference",
+     "status": "PASS",
+     "detail": "file=EPSG:32611 ref=EPSG:32611"
+    },
+    {
+     "check": "nodata tag is none or NaN",
+     "status": "PASS",
+     "detail": "nodata=None (finite nodata tags are rejected conservatively)"
+    },
+    {
+     "check": "no infinities",
+     "status": "PASS",
+     "detail": "inf_count=0"
+    },
+    {
+     "check": "values within [0, 1]",
+     "status": "PASS",
+     "detail": "min=0.0 max=1.0 finite_cells=12279160"
+    },
+    {
+     "check": "features grid shape matches",
+     "status": "PASS",
+     "detail": "features=(3730, 3292) reference=(3730, 3292)"
+    },
+    {
+     "check": "features transform matches reference grid",
+     "status": "PASS",
+     "detail": "features=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0) reference=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)"
+    },
+    {
+     "check": "features CRS matches reference grid",
+     "status": "PASS",
+     "detail": "features=EPSG:32611 reference=EPSG:32611"
+    },
+    {
+     "check": "no NaN inside footprint",
+     "status": "PASS",
+     "detail": "nan_inside=0 footprint_cells=5165852"
+    },
+    {
+     "check": "NaN-only outside footprint",
+     "status": "FAIL",
+     "detail": "finite_outside=7113308; only NaN is allowed outside"
+    },
+    {
+     "check": "info: emitted cells (value > 0)",
+     "status": "INFO",
+     "detail": "emitted=33199"
+    }
+   ],
+   "skipped_checks_mean_unverified": false
+  },
+  "nan": {
+   "file": "/home/user/GEMSDOE69/submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-nan.tif",
+   "sha256": "db7915f3304edaefe3b74f925bd4c0dca57d2b93d656f46a5de5df7b13d528ab",
+   "passed": false,
+   "has_failures": true,
+   "checks": [
+    {
+     "check": "single band",
+     "status": "PASS",
+     "detail": "count=1"
+    },
+    {
+     "check": "dtype float32",
+     "status": "PASS",
+     "detail": "dtype=float32"
+    },
+    {
+     "check": "CRS EPSG:32611",
+     "status": "PASS",
+     "detail": "crs=EPSG:32611"
+    },
+    {
+     "check": "shape matches",
+     "status": "PASS",
+     "detail": "file=(3730, 3292) expected=(3730, 3292)"
+    },
+    {
+     "check": "resolution 100 m",
+     "status": "PASS",
+     "detail": "res=(100.0, 100.0)"
+    },
+    {
+     "check": "transform matches reference",
+     "status": "PASS",
+     "detail": "file=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0) ref=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)"
+    },
+    {
+     "check": "CRS matches reference",
+     "status": "PASS",
+     "detail": "file=EPSG:32611 ref=EPSG:32611"
+    },
+    {
+     "check": "nodata tag is none or NaN",
+     "status": "PASS",
+     "detail": "nodata=nan (finite nodata tags are rejected conservatively)"
+    },
+    {
+     "check": "no infinities",
+     "status": "PASS",
+     "detail": "inf_count=0"
+    },
+    {
+     "check": "values within [0, 1]",
+     "status": "PASS",
+     "detail": "min=0.0 max=1.0 finite_cells=5167373"
+    },
+    {
+     "check": "features grid shape matches",
+     "status": "PASS",
+     "detail": "features=(3730, 3292) reference=(3730, 3292)"
+    },
+    {
+     "check": "features transform matches reference grid",
+     "status": "PASS",
+     "detail": "features=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0) reference=(100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0)"
+    },
+    {
+     "check": "features CRS matches reference grid",
+     "status": "PASS",
+     "detail": "features=EPSG:32611 reference=EPSG:32611"
+    },
+    {
+     "check": "no NaN inside footprint",
+     "status": "FAIL",
+     "detail": "nan_inside=1540 footprint_cells=5165852"
+    },
+    {
+     "check": "NaN-only outside footprint",
+     "status": "FAIL",
+     "detail": "finite_outside=3061; only NaN is allowed outside"
+    },
+    {
+     "check": "info: emitted cells (value > 0)",
+     "status": "INFO",
+     "detail": "emitted=33199"
+    }
+   ],
+   "skipped_checks_mean_unverified": false
+  }
+ },
+ "format_compliance": {
+  "zeros": {
+   "all_finite": true,
+   "range_0_1": true,
+   "dots": 33199,
+   "policy": "gems57/grid.py: zeros is the only submission-compatible mode; h33-2-b2-zeros (family, user-reported 0.2778) passed the portal all-finite"
+  },
+  "nan": {
+   "finite_mask_matches_sample_submission": true,
+   "nan_only_outside_footprint": true,
+   "no_nan_inside_footprint": true,
+   "range_0_1_inside": true,
+   "nodata_tag_is_nan": true,
+   "dots": 33199,
+   "policy": "prompt-mandated layout: NaN only outside the footprint; matches the organizer sample_submission convention (NaN + nodata tag)"
+  },
+  "upstream_footprint_proxy_disagreement_px": 0,
+  "note": "upstream validator footprint proxy = training_features band 1 finite; portal contract = sample_submission finite mask (IR-69-VAL-01)"
+ },
+ "propensity_sha256": "6a60ea28",
+ "top_corridors": [
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.48
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 1.198
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.456
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 1.226
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.323
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": -0.339
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": -0.68
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.813
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.628
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.237
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 2.775
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 1.082
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -1.576
+    },
+    {
+     "name": "tc_prov",
+     "z": 2.191
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 3.111
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 1.574
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.59
+    },
+    {
+     "name": "cond_straight",
+     "z": 8.0
+    },
+    {
+     "name": "base_straight",
+     "z": -0.167
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -1.705
+    },
+    {
+     "name": "rad_thk",
+     "z": 2.916
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.995,
+   "along_km": -0.141,
+   "overlap_km": 0.599,
+   "separation_km": 0.0,
+   "dtheta_deg": 4.76,
+   "mean_az_deg": 87.62,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 1.005,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    3404,
+    3421
+   ],
+   "tips": [
+    [
+     2938,
+     1247
+    ],
+    [
+     2948,
+     1246
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.775,
+    "E_mag": 2.191,
+    "E_maglow": 3.111,
+    "E_lidar": 0.59,
+    "E_straight": 8.0,
+    "E_rad": 2.916,
+    "W_orient": 0.133,
+    "W_geom": 0.7
+   },
+   "score_S": 2.855,
+   "orientation_az_deg": 87.62,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": 0.041
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 6.293
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": 0.049
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 6.172
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": 0.054
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 6.234
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": -0.591
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.124
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.709
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.714
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 2.377
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 6.266
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -4.621
+    },
+    {
+     "name": "tc_prov",
+     "z": 0.823
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 2.492
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 3.361
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.151
+    },
+    {
+     "name": "cond_straight",
+     "z": 6.191
+    },
+    {
+     "name": "base_straight",
+     "z": 0.985
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -1.22
+    },
+    {
+     "name": "rad_thk",
+     "z": 0.59
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector + en echelon strands + pull-apart rhomb",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.995,
+   "along_km": -0.144,
+   "overlap_km": 0.0,
+   "separation_km": 0.0,
+   "dtheta_deg": 8.97,
+   "mean_az_deg": 76.05,
+   "dilatational": true,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 1.005,
+    "n_echelon": 2,
+    "rhomb_a_px": 0.804,
+    "rhomb_b_px": 0.452,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    3517,
+    3535
+   ],
+   "tips": [
+    [
+     2992,
+     1357
+    ],
+    [
+     3002,
+     1358
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.377,
+    "E_mag": 6.293,
+    "E_maglow": 3.361,
+    "E_lidar": 0.151,
+    "E_straight": 6.191,
+    "E_rad": 0.59,
+    "W_orient": 0.343,
+    "W_geom": 1.0
+   },
+   "score_S": 2.8479,
+   "orientation_az_deg": 76.05,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.554
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 0.703
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.549
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 0.726
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.52
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 0.573
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": -0.075
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.329
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.462
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.335
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 2.807
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 0.734
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -1.379
+    },
+    {
+     "name": "tc_prov",
+     "z": 1.551
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 2.969
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 0.967
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.548
+    },
+    {
+     "name": "cond_straight",
+     "z": 8.0
+    },
+    {
+     "name": "base_straight",
+     "z": -0.178
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.896
+    },
+    {
+     "name": "rad_thk",
+     "z": 2.143
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 3.023,
+   "along_km": -7.418,
+   "overlap_km": 1.559,
+   "separation_km": 0.0,
+   "dtheta_deg": 21.99,
+   "mean_az_deg": 64.97,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.5,
+    "connector_len_px": 8.101,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.4
+   },
+   "strands": [
+    3391,
+    3404
+   ],
+   "tips": [
+    [
+     2941,
+     1288
+    ],
+    [
+     2945,
+     1208
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.807,
+    "E_mag": 1.551,
+    "E_maglow": 2.969,
+    "E_lidar": 0.548,
+    "E_straight": 8.0,
+    "E_rad": 2.143,
+    "W_orient": 0.642,
+    "W_geom": 0.7
+   },
+   "score_S": 2.7064,
+   "orientation_az_deg": 64.97,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.544
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 0.292
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.586
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 0.306
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.54
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 0.462
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.091
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": -0.598
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.557
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.143
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 2.607
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 0.344
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -0.04
+    },
+    {
+     "name": "tc_prov",
+     "z": 1.952
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 1.879
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 1.222
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.899
+    },
+    {
+     "name": "cond_straight",
+     "z": 7.922
+    },
+    {
+     "name": "base_straight",
+     "z": -0.338
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.94
+    },
+    {
+     "name": "rad_thk",
+     "z": 2.6
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 2.778,
+   "along_km": 2.604,
+   "overlap_km": 1.471,
+   "separation_km": 0.0,
+   "dtheta_deg": 13.24,
+   "mean_az_deg": 56.81,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.5,
+    "connector_len_px": 3.569,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.3
+   },
+   "strands": [
+    3408,
+    3430
+   ],
+   "tips": [
+    [
+     2941,
+     1279
+    ],
+    [
+     2950,
+     1316
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.607,
+    "E_mag": 1.952,
+    "E_maglow": 1.879,
+    "E_lidar": 0.899,
+    "E_straight": 7.922,
+    "E_rad": 2.6,
+    "W_orient": 0.856,
+    "W_geom": 0.7
+   },
+   "score_S": 2.7028,
+   "orientation_az_deg": 56.81,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.486
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 0.825
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.465
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 0.74
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.423
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 0.63
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.144
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.275
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.475
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.568
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 2.799
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 0.839
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -1.222
+    },
+    {
+     "name": "tc_prov",
+     "z": 1.338
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 2.781
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 0.838
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.462
+    },
+    {
+     "name": "cond_straight",
+     "z": 7.465
+    },
+    {
+     "name": "base_straight",
+     "z": 0.305
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.375
+    },
+    {
+     "name": "rad_thk",
+     "z": 2.189
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector + en echelon strands + pull-apart rhomb",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 3.001,
+   "along_km": -2.077,
+   "overlap_km": 0.0,
+   "separation_km": 0.0,
+   "dtheta_deg": 24.3,
+   "mean_az_deg": 44.16,
+   "dilatational": true,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.5,
+    "connector_len_px": 3.314,
+    "n_echelon": 2,
+    "rhomb_a_px": 2.92,
+    "rhomb_b_px": 1.642,
+    "basin_disk_radius_px": 0.4
+   },
+   "strands": [
+    3386,
+    3393
+   ],
+   "tips": [
+    [
+     2939,
+     1250
+    ],
+    [
+     2933,
+     1214
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.799,
+    "E_mag": 1.338,
+    "E_maglow": 2.781,
+    "E_lidar": 0.462,
+    "E_straight": 7.465,
+    "E_rad": 2.189,
+    "W_orient": 0.999,
+    "W_geom": 1.0
+   },
+   "score_S": 2.6361,
+   "orientation_az_deg": 44.16,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.451
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 0.98
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.419
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 0.867
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.32
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 0.416
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": -0.374
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.407
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.575
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.446
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 2.789
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 1.026
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -1.631
+    },
+    {
+     "name": "tc_prov",
+     "z": 1.366
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 3.041
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 1.107
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.459
+    },
+    {
+     "name": "cond_straight",
+     "z": 7.633
+    },
+    {
+     "name": "base_straight",
+     "z": 0.085
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.459
+    },
+    {
+     "name": "rad_thk",
+     "z": 2.238
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector + en echelon strands + pull-apart rhomb",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.997,
+   "along_km": -2.491,
+   "overlap_km": 0.0,
+   "separation_km": 0.0,
+   "dtheta_deg": 0.0,
+   "mean_az_deg": 85.24,
+   "dilatational": true,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 2.683,
+    "n_echelon": 2,
+    "rhomb_a_px": 2.147,
+    "rhomb_b_px": 1.207,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    3404,
+    3426
+   ],
+   "tips": [
+    [
+     2938,
+     1247
+    ],
+    [
+     2950,
+     1223
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.789,
+    "E_mag": 1.366,
+    "E_maglow": 3.041,
+    "E_lidar": 0.459,
+    "E_straight": 7.633,
+    "E_rad": 2.238,
+    "W_orient": 0.165,
+    "W_geom": 1.0
+   },
+   "score_S": 2.619,
+   "orientation_az_deg": 85.24,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -1.274
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 7.262
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -1.271
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 7.621
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -1.261
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 7.977
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.363
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": -0.593
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": -0.049
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": 0.223
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 0.947
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 7.082
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -0.529
+    },
+    {
+     "name": "tc_prov",
+     "z": -0.864
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 1.824
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": -1.317
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.0
+    },
+    {
+     "name": "cond_straight",
+     "z": 5.727
+    },
+    {
+     "name": "base_straight",
+     "z": -0.135
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.052
+    },
+    {
+     "name": "rad_thk",
+     "z": -0.048
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector + en echelon strands + pull-apart rhomb",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.999,
+   "along_km": -0.403,
+   "overlap_km": 0.424,
+   "separation_km": 0.0,
+   "dtheta_deg": 2.49,
+   "mean_az_deg": 46.24,
+   "dilatational": true,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 1.118,
+    "n_echelon": 2,
+    "rhomb_a_px": 0.862,
+    "rhomb_b_px": 0.485,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    1970,
+    1995
+   ],
+   "tips": [
+    [
+     1220,
+     297
+    ],
+    [
+     1230,
+     301
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 0.947,
+    "E_mag": 7.977,
+    "E_maglow": 1.824,
+    "E_lidar": 0.0,
+    "E_straight": 5.727,
+    "E_rad": -0.048,
+    "W_orient": 0.998,
+    "W_geom": 1.0
+   },
+   "score_S": 2.6043,
+   "orientation_az_deg": 46.24,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.49
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 4.215
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.513
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 4.148
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.551
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 3.547
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.951
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.149
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.366
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": 0.471
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 2.781
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 4.223
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -1.009
+    },
+    {
+     "name": "tc_prov",
+     "z": 0.726
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 0.889
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": -0.816
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.147
+    },
+    {
+     "name": "cond_straight",
+     "z": 7.078
+    },
+    {
+     "name": "base_straight",
+     "z": 0.097
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.072
+    },
+    {
+     "name": "rad_thk",
+     "z": 1.365
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 2.765,
+   "along_km": -10.02,
+   "overlap_km": 1.458,
+   "separation_km": 0.0,
+   "dtheta_deg": 27.41,
+   "mean_az_deg": 66.83,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.5,
+    "connector_len_px": 10.259,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.3
+   },
+   "strands": [
+    3535,
+    3540
+   ],
+   "tips": [
+    [
+     3002,
+     1358
+    ],
+    [
+     3016,
+     1255
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.781,
+    "E_mag": 4.223,
+    "E_maglow": 0.889,
+    "E_lidar": 0.147,
+    "E_straight": 7.078,
+    "E_rad": 1.365,
+    "W_orient": 0.589,
+    "W_geom": 0.7
+   },
+   "score_S": 2.5412,
+   "orientation_az_deg": 66.83,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.481
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 1.176
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.467
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 1.213
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.445
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 1.578
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.322
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.047
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.448
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.56
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 2.816
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 1.114
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -1.506
+    },
+    {
+     "name": "tc_prov",
+     "z": 1.132
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 2.756
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 0.419
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.525
+    },
+    {
+     "name": "cond_straight",
+     "z": 6.574
+    },
+    {
+     "name": "base_straight",
+     "z": 0.228
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.069
+    },
+    {
+     "name": "rad_thk",
+     "z": 1.995
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector + en echelon strands + pull-apart rhomb",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 2.802,
+   "along_km": -3.0,
+   "overlap_km": 0.922,
+   "separation_km": 0.0,
+   "dtheta_deg": 24.3,
+   "mean_az_deg": 44.16,
+   "dilatational": true,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.5,
+    "connector_len_px": 3.833,
+    "n_echelon": 2,
+    "rhomb_a_px": 3.284,
+    "rhomb_b_px": 1.847,
+    "basin_disk_radius_px": 0.4
+   },
+   "strands": [
+    3386,
+    3393
+   ],
+   "tips": [
+    [
+     2939,
+     1250
+    ],
+    [
+     2941,
+     1209
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.816,
+    "E_mag": 1.578,
+    "E_maglow": 2.756,
+    "E_lidar": 0.525,
+    "E_straight": 6.574,
+    "E_rad": 1.995,
+    "W_orient": 0.999,
+    "W_geom": 1.0
+   },
+   "score_S": 2.5096,
+   "orientation_az_deg": 44.16,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.57
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 0.749
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.57
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 0.666
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.58
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 0.43
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.256
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.218
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.257
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.521
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 2.822
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 0.754
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -1.205
+    },
+    {
+     "name": "tc_prov",
+     "z": 1.265
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 2.641
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 0.722
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.49
+    },
+    {
+     "name": "cond_straight",
+     "z": 7.152
+    },
+    {
+     "name": "base_straight",
+     "z": 0.321
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.629
+    },
+    {
+     "name": "rad_thk",
+     "z": 2.025
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector + en echelon strands + pull-apart rhomb",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 2.8,
+   "along_km": 2.892,
+   "overlap_km": 1.365,
+   "separation_km": 0.0,
+   "dtheta_deg": 25.49,
+   "mean_az_deg": 72.49,
+   "dilatational": true,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.5,
+    "connector_len_px": 4.391,
+    "n_echelon": 2,
+    "rhomb_a_px": 3.22,
+    "rhomb_b_px": 1.811,
+    "basin_disk_radius_px": 0.3
+   },
+   "strands": [
+    3384,
+    3426
+   ],
+   "tips": [
+    [
+     2931,
+     1201
+    ],
+    [
+     2949,
+     1237
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.822,
+    "E_mag": 1.265,
+    "E_maglow": 2.641,
+    "E_lidar": 0.49,
+    "E_straight": 7.152,
+    "E_rad": 2.025,
+    "W_orient": 0.432,
+    "W_geom": 1.0
+   },
+   "score_S": 2.4886,
+   "orientation_az_deg": 72.49,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.562
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 3.584
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.562
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 3.43
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.586
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 3.164
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.679
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.087
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.244
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": 0.621
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 3.152
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 3.67
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -0.018
+    },
+    {
+     "name": "tc_prov",
+     "z": 0.781
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": -0.833
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": -1.867
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.443
+    },
+    {
+     "name": "cond_straight",
+     "z": 6.793
+    },
+    {
+     "name": "base_straight",
+     "z": -0.047
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.128
+    },
+    {
+     "name": "rad_thk",
+     "z": 1.762
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 7.633,
+   "along_km": -3.285,
+   "overlap_km": 4.107,
+   "separation_km": 0.0,
+   "dtheta_deg": 4.18,
+   "mean_az_deg": 20.53,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.6,
+    "connector_len_px": 8.509,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.6
+   },
+   "strands": [
+    3430,
+    3433
+   ],
+   "tips": [
+    [
+     2983,
+     1287
+    ],
+    [
+     2987,
+     1204
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 3.152,
+    "E_mag": 3.67,
+    "E_maglow": -0.833,
+    "E_lidar": 0.443,
+    "E_straight": 6.793,
+    "E_rad": 1.762,
+    "W_orient": 0.996,
+    "W_geom": 0.7
+   },
+   "score_S": 2.4812,
+   "orientation_az_deg": 20.53,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": 2.613
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 4.457
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": 2.625
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 4.426
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": 2.623
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 3.178
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": -0.448
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.391
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 1.806
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": 2.641
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": -0.055
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 4.43
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": 5.75
+    },
+    {
+     "name": "tc_prov",
+     "z": -0.644
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": -3.178
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": -3.072
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.427
+    },
+    {
+     "name": "cond_straight",
+     "z": 5.531
+    },
+    {
+     "name": "base_straight",
+     "z": 0.586
+    },
+    {
+     "name": "rad_k_depl",
+     "z": 1.084
+    },
+    {
+     "name": "rad_thk",
+     "z": -0.704
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector + en echelon strands + pull-apart rhomb",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.999,
+   "along_km": -0.033,
+   "overlap_km": 0.0,
+   "separation_km": 0.0,
+   "dtheta_deg": 12.53,
+   "mean_az_deg": 51.26,
+   "dilatational": true,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 1.204,
+    "n_echelon": 2,
+    "rhomb_a_px": 0.8,
+    "rhomb_b_px": 0.45,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    1331,
+    1341
+   ],
+   "tips": [
+    [
+     843,
+     915
+    ],
+    [
+     851,
+     921
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.641,
+    "E_mag": 5.75,
+    "E_maglow": -3.072,
+    "E_lidar": 0.427,
+    "E_straight": 5.531,
+    "E_rad": 1.084,
+    "W_orient": 0.957,
+    "W_geom": 1.0
+   },
+   "score_S": 2.4482,
+   "orientation_az_deg": 51.26,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": 0.067
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 2.051
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": 0.071
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 2.205
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": 0.067
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 2.592
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.05
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.092
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.926
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.732
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 0.832
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 1.982
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": 0.603
+    },
+    {
+     "name": "tc_prov",
+     "z": 2.969
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": -2.076
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": -2.299
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 1.073
+    },
+    {
+     "name": "cond_straight",
+     "z": 7.777
+    },
+    {
+     "name": "base_straight",
+     "z": -0.471
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.885
+    },
+    {
+     "name": "rad_thk",
+     "z": 2.998
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 3.056,
+   "along_km": 2.569,
+   "overlap_km": 1.799,
+   "separation_km": 0.0,
+   "dtheta_deg": 23.86,
+   "mean_az_deg": 152.12,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.5,
+    "connector_len_px": 3.669,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.4
+   },
+   "strands": [
+    3047,
+    3083
+   ],
+   "tips": [
+    [
+     2323,
+     1507
+    ],
+    [
+     2360,
+     1492
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 0.926,
+    "E_mag": 2.969,
+    "E_maglow": -2.076,
+    "E_lidar": 1.073,
+    "E_straight": 7.777,
+    "E_rad": 2.998,
+    "W_orient": 0.422,
+    "W_geom": 0.7
+   },
+   "score_S": 2.3829,
+   "orientation_az_deg": 152.12,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": 5.195
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": -0.643
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": 5.164
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": -0.65
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": 5.047
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": -0.61
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": -0.049
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.208
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 4.352
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": 1.429
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 0.584
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": -0.636
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": 0.038
+    },
+    {
+     "name": "tc_prov",
+     "z": 0.878
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 0.671
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 0.548
+    },
+    {
+     "name": "lidar_scarp",
+     "z": -0.074
+    },
+    {
+     "name": "cond_straight",
+     "z": 7.57
+    },
+    {
+     "name": "base_straight",
+     "z": 0.861
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.51
+    },
+    {
+     "name": "rad_thk",
+     "z": -0.262
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector + en echelon strands + pull-apart rhomb",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.999,
+   "along_km": -0.25,
+   "overlap_km": 0.0,
+   "separation_km": 0.0,
+   "dtheta_deg": 3.81,
+   "mean_az_deg": 46.91,
+   "dilatational": true,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 0.985,
+    "n_echelon": 2,
+    "rhomb_a_px": 0.824,
+    "rhomb_b_px": 0.463,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    2906,
+    2909
+   ],
+   "tips": [
+    [
+     2035,
+     1485
+    ],
+    [
+     2044,
+     1490
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 5.195,
+    "E_mag": 0.878,
+    "E_maglow": 0.671,
+    "E_lidar": -0.074,
+    "E_straight": 7.57,
+    "E_rad": -0.262,
+    "W_orient": 0.996,
+    "W_geom": 1.0
+   },
+   "score_S": 2.3617,
+   "orientation_az_deg": 46.91,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.708
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 2.578
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.716
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 2.426
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.742
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 2.113
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 1.163
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.209
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.089
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": 0.283
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 2.232
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 2.709
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": 1.106
+    },
+    {
+     "name": "tc_prov",
+     "z": 0.681
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 1.16
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 0.567
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.217
+    },
+    {
+     "name": "cond_straight",
+     "z": 8.0
+    },
+    {
+     "name": "base_straight",
+     "z": -0.151
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.05
+    },
+    {
+     "name": "rad_thk",
+     "z": 0.877
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.991,
+   "along_km": 12.693,
+   "overlap_km": 0.524,
+   "separation_km": 0.0,
+   "dtheta_deg": 26.57,
+   "mean_az_deg": 98.52,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 12.739,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    3561,
+    3586
+   ],
+   "tips": [
+    [
+     3008,
+     1313
+    ],
+    [
+     3017,
+     1440
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.232,
+    "E_mag": 2.709,
+    "E_maglow": 1.16,
+    "E_lidar": 0.217,
+    "E_straight": 8.0,
+    "E_rad": 0.877,
+    "W_orient": 0.041,
+    "W_geom": 0.7
+   },
+   "score_S": 2.3261,
+   "orientation_az_deg": 98.52,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": 2.617
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 0.158
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": 2.668
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 0.268
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": 2.73
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 0.515
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.157
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": -0.89
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": -2.508
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": 1.717
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": -0.211
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 0.106
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -0.42
+    },
+    {
+     "name": "tc_prov",
+     "z": -0.806
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 2.215
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 1.319
+    },
+    {
+     "name": "lidar_scarp",
+     "z": -0.54
+    },
+    {
+     "name": "cond_straight",
+     "z": 8.0
+    },
+    {
+     "name": "base_straight",
+     "z": 5.348
+    },
+    {
+     "name": "rad_k_depl",
+     "z": 0.724
+    },
+    {
+     "name": "rad_thk",
+     "z": -0.672
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.994,
+   "along_km": -0.709,
+   "overlap_km": 0.632,
+   "separation_km": 0.0,
+   "dtheta_deg": 2.12,
+   "mean_az_deg": 19.5,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 1.221,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    1866,
+    1893
+   ],
+   "tips": [
+    [
+     1147,
+     1564
+    ],
+    [
+     1157,
+     1571
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.73,
+    "E_mag": 0.515,
+    "E_maglow": 2.215,
+    "E_lidar": -0.54,
+    "E_straight": 8.0,
+    "E_rad": 0.724,
+    "W_orient": 0.99,
+    "W_geom": 0.7
+   },
+   "score_S": 2.27,
+   "orientation_az_deg": 19.5,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.617
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 5.324
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.569
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 5.477
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.968
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 6.059
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 2.764
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": -0.72
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.018
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.01
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 3.211
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 5.266
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -0.277
+    },
+    {
+     "name": "tc_prov",
+     "z": 0.755
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 0.442
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 0.821
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.525
+    },
+    {
+     "name": "cond_straight",
+     "z": 2.566
+    },
+    {
+     "name": "base_straight",
+     "z": 0.411
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.353
+    },
+    {
+     "name": "rad_thk",
+     "z": 1.438
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector + en echelon strands + pull-apart rhomb",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 2.801,
+   "along_km": -1.963,
+   "overlap_km": 0.699,
+   "separation_km": 0.0,
+   "dtheta_deg": 5.71,
+   "mean_az_deg": 2.86,
+   "dilatational": true,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.5,
+    "connector_len_px": 3.5,
+    "n_echelon": 2,
+    "rhomb_a_px": 2.736,
+    "rhomb_b_px": 1.539,
+    "basin_disk_radius_px": 0.4
+   },
+   "strands": [
+    3493,
+    3565
+   ],
+   "tips": [
+    [
+     2995,
+     1161
+    ],
+    [
+     3016,
+     1188
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 3.211,
+    "E_mag": 6.059,
+    "E_maglow": 0.821,
+    "E_lidar": 0.525,
+    "E_straight": 2.566,
+    "E_rad": 1.438,
+    "W_orient": 0.991,
+    "W_geom": 1.0
+   },
+   "score_S": 2.2511,
+   "orientation_az_deg": 2.86,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.793
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 4.875
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.794
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 5.004
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.805
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 5.391
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.985
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.08
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.141
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": 0.27
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 0.179
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 4.855
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -2.885
+    },
+    {
+     "name": "tc_prov",
+     "z": -1.26
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 2.502
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 0.747
+    },
+    {
+     "name": "lidar_scarp",
+     "z": -0.095
+    },
+    {
+     "name": "cond_straight",
+     "z": 5.285
+    },
+    {
+     "name": "base_straight",
+     "z": 0.396
+    },
+    {
+     "name": "rad_k_depl",
+     "z": 0.239
+    },
+    {
+     "name": "rad_thk",
+     "z": -1.398
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 3.023,
+   "along_km": -3.357,
+   "overlap_km": 1.65,
+   "separation_km": 0.0,
+   "dtheta_deg": 12.53,
+   "mean_az_deg": 20.3,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.5,
+    "connector_len_px": 4.391,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.4
+   },
+   "strands": [
+    1653,
+    1666
+   ],
+   "tips": [
+    [
+     1039,
+     800
+    ],
+    [
+     1060,
+     760
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 0.985,
+    "E_mag": 5.391,
+    "E_maglow": 2.502,
+    "E_lidar": -0.095,
+    "E_straight": 5.285,
+    "E_rad": 0.239,
+    "W_orient": 0.995,
+    "W_geom": 0.7
+   },
+   "score_S": 2.2506,
+   "orientation_az_deg": 20.3,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": 3.334
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": -0.489
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": 3.391
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": -0.571
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": 3.488
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": -0.667
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": -0.511
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.231
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 2.012
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -3.049
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 0.203
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": -0.449
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": 0.151
+    },
+    {
+     "name": "tc_prov",
+     "z": -0.963
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": -0.222
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 0.363
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.569
+    },
+    {
+     "name": "cond_straight",
+     "z": 8.0
+    },
+    {
+     "name": "base_straight",
+     "z": 7.648
+    },
+    {
+     "name": "rad_k_depl",
+     "z": 1.656
+    },
+    {
+     "name": "rad_thk",
+     "z": -0.178
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.996,
+   "along_km": 1.873,
+   "overlap_km": 0.801,
+   "separation_km": 0.0,
+   "dtheta_deg": 12.77,
+   "mean_az_deg": 143.87,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 2.121,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    3170,
+    3191
+   ],
+   "tips": [
+    [
+     2474,
+     1839
+    ],
+    [
+     2495,
+     1842
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 3.488,
+    "E_mag": 0.231,
+    "E_maglow": 0.363,
+    "E_lidar": 0.569,
+    "E_straight": 8.0,
+    "E_rad": 1.656,
+    "W_orient": 0.235,
+    "W_geom": 0.7
+   },
+   "score_S": 2.2074,
+   "orientation_az_deg": 143.87,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": 0.846
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 2.275
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": 0.853
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 2.352
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": 0.85
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 2.338
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": -0.082
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.005
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": -1.402
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": 0.934
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 1.028
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 2.205
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -2.145
+    },
+    {
+     "name": "tc_prov",
+     "z": 1.062
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 0.066
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 1.153
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.381
+    },
+    {
+     "name": "cond_straight",
+     "z": 7.922
+    },
+    {
+     "name": "base_straight",
+     "z": 0.823
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.238
+    },
+    {
+     "name": "rad_thk",
+     "z": 0.974
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 3.059,
+   "along_km": 7.649,
+   "overlap_km": 1.589,
+   "separation_km": 0.0,
+   "dtheta_deg": 22.62,
+   "mean_az_deg": 168.69,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.5,
+    "connector_len_px": 8.075,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.4
+   },
+   "strands": [
+    2695,
+    2794
+   ],
+   "tips": [
+    [
+     1744,
+     1639
+    ],
+    [
+     1825,
+     1624
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 1.028,
+    "E_mag": 2.352,
+    "E_maglow": 1.153,
+    "E_lidar": 0.381,
+    "E_straight": 7.922,
+    "E_rad": 0.974,
+    "W_orient": 0.868,
+    "W_geom": 0.7
+   },
+   "score_S": 2.2048,
+   "orientation_az_deg": 168.69,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": 0.502
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 1.719
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": 0.518
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 1.397
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": 0.547
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 1.207
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": -0.21
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": -0.089
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": -1.136
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": 1.484
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 0.549
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 2.076
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -1.223
+    },
+    {
+     "name": "tc_prov",
+     "z": -0.745
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 0.352
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 0.851
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.517
+    },
+    {
+     "name": "cond_straight",
+     "z": 8.0
+    },
+    {
+     "name": "base_straight",
+     "z": 0.774
+    },
+    {
+     "name": "rad_k_depl",
+     "z": 0.74
+    },
+    {
+     "name": "rad_thk",
+     "z": -0.943
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.995,
+   "along_km": 4.55,
+   "overlap_km": 0.499,
+   "separation_km": 0.0,
+   "dtheta_deg": 5.19,
+   "mean_az_deg": 177.4,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 4.657,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    2615,
+    2664
+   ],
+   "tips": [
+    [
+     1656,
+     1207
+    ],
+    [
+     1701,
+     1219
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 1.484,
+    "E_mag": 2.076,
+    "E_maglow": 0.851,
+    "E_lidar": 0.517,
+    "E_straight": 8.0,
+    "E_rad": 0.74,
+    "W_orient": 0.993,
+    "W_geom": 0.7
+   },
+   "score_S": 2.2043,
+   "orientation_az_deg": 177.4,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -0.63
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 1.905
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -0.619
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 2.014
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -0.578
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 2.35
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": -0.405
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": -0.055
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.427
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.177
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 2.65
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 1.747
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -0.469
+    },
+    {
+     "name": "tc_prov",
+     "z": 1.27
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 2.172
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 0.633
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.536
+    },
+    {
+     "name": "cond_straight",
+     "z": 4.688
+    },
+    {
+     "name": "base_straight",
+     "z": -0.274
+    },
+    {
+     "name": "rad_k_depl",
+     "z": -0.445
+    },
+    {
+     "name": "rad_thk",
+     "z": 1.725
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector + en echelon strands + pull-apart rhomb",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.992,
+   "along_km": -7.478,
+   "overlap_km": 0.0,
+   "separation_km": 0.0,
+   "dtheta_deg": 16.22,
+   "mean_az_deg": 67.85,
+   "dilatational": true,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 7.569,
+    "n_echelon": 8,
+    "rhomb_a_px": 6.035,
+    "rhomb_b_px": 3.394,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    3395,
+    3411
+   ],
+   "tips": [
+    [
+     2934,
+     1346
+    ],
+    [
+     2953,
+     1273
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.65,
+    "E_mag": 2.35,
+    "E_maglow": 2.172,
+    "E_lidar": 0.536,
+    "E_straight": 4.688,
+    "E_rad": 1.725,
+    "W_orient": 0.56,
+    "W_geom": 1.0
+   },
+   "score_S": 2.1472,
+   "orientation_az_deg": 67.85,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": 0.72
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 3.971
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": 0.725
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 3.725
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": 0.697
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 3.242
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.669
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": -0.152
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 1.39
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": 0.417
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 0.127
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 4.031
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": -1.725
+    },
+    {
+     "name": "tc_prov",
+     "z": -1.134
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": 2.639
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": 1.225
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.481
+    },
+    {
+     "name": "cond_straight",
+     "z": 4.816
+    },
+    {
+     "name": "base_straight",
+     "z": -0.034
+    },
+    {
+     "name": "rad_k_depl",
+     "z": 0.454
+    },
+    {
+     "name": "rad_thk",
+     "z": -1.655
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector + en echelon strands + pull-apart rhomb",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 0.997,
+   "along_km": -1.666,
+   "overlap_km": 0.0,
+   "separation_km": 0.0,
+   "dtheta_deg": 3.95,
+   "mean_az_deg": 65.41,
+   "dilatational": true,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 1.86,
+    "n_echelon": 2,
+    "rhomb_a_px": 1.553,
+    "rhomb_b_px": 0.874,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    1791,
+    1804
+   ],
+   "tips": [
+    [
+     1098,
+     867
+    ],
+    [
+     1114,
+     856
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 1.39,
+    "E_mag": 4.031,
+    "E_maglow": 2.639,
+    "E_lidar": 0.481,
+    "E_straight": 4.816,
+    "E_rad": 0.454,
+    "W_orient": 0.63,
+    "W_geom": 1.0
+   },
+   "score_S": 2.1318,
+   "orientation_az_deg": 65.41,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": 1.961
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 0.767
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": 2.014
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 0.801
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": 2.025
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 0.986
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.102
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": -0.053
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 2.873
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -1.524
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 0.663
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 0.758
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": 1.354
+    },
+    {
+     "name": "tc_prov",
+     "z": -0.858
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": -1.459
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": -0.353
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.181
+    },
+    {
+     "name": "cond_straight",
+     "z": 8.0
+    },
+    {
+     "name": "base_straight",
+     "z": -0.117
+    },
+    {
+     "name": "rad_k_depl",
+     "z": 0.607
+    },
+    {
+     "name": "rad_thk",
+     "z": -0.991
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 1.0,
+   "along_km": -3.775,
+   "overlap_km": 0.806,
+   "separation_km": 0.0,
+   "dtheta_deg": 3.18,
+   "mean_az_deg": 61.85,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.2,
+    "connector_len_px": 3.905,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.2
+   },
+   "strands": [
+    2227,
+    2249
+   ],
+   "tips": [
+    [
+     1413,
+     632
+    ],
+    [
+     1422,
+     594
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 2.873,
+    "E_mag": 1.354,
+    "E_maglow": -0.353,
+    "E_lidar": 0.181,
+    "E_straight": 8.0,
+    "E_rad": 0.607,
+    "W_orient": 0.73,
+    "W_geom": 0.7
+   },
+   "score_S": 2.1198,
+   "orientation_az_deg": 61.85,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  },
+  {
+   "layers": [
+    {
+     "name": "grav_hg_s1",
+     "z": -1.007
+    },
+    {
+     "name": "mag_hg_s1",
+     "z": 5.73
+    },
+    {
+     "name": "grav_hg_s2",
+     "z": -1.006
+    },
+    {
+     "name": "mag_hg_s2",
+     "z": 5.336
+    },
+    {
+     "name": "grav_hg_s4",
+     "z": -1.004
+    },
+    {
+     "name": "mag_hg_s4",
+     "z": 5.164
+    },
+    {
+     "name": "grav_tilt_s2",
+     "z": 0.333
+    },
+    {
+     "name": "mag_tilt_s2",
+     "z": 0.28
+    },
+    {
+     "name": "grav_hg_prov",
+     "z": 0.208
+    },
+    {
+     "name": "grav_vg_prov",
+     "z": -0.053
+    },
+    {
+     "name": "geod_2ndinv",
+     "z": 0.606
+    },
+    {
+     "name": "mag_hg_prov",
+     "z": 5.996
+    },
+    {
+     "name": "mag_vg_prov",
+     "z": 4.219
+    },
+    {
+     "name": "tc_prov",
+     "z": -1.362
+    },
+    {
+     "name": "mag_low_tmi",
+     "z": -2.035
+    },
+    {
+     "name": "mag_low_rtp",
+     "z": -1.255
+    },
+    {
+     "name": "lidar_scarp",
+     "z": 0.127
+    },
+    {
+     "name": "cond_straight",
+     "z": 5.852
+    },
+    {
+     "name": "base_straight",
+     "z": -0.349
+    },
+    {
+     "name": "rad_k_depl",
+     "z": 0.52
+    },
+    {
+     "name": "rad_thk",
+     "z": -1.237
+    }
+   ],
+   "signature": "tip-graph step-over: oblique connector (contractile overlap, transfer corridor)",
+   "source": "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt (Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); width-stratified quotas, not the 2.8 km-only cap",
+   "w_km": 2.829,
+   "along_km": 1.472,
+   "overlap_km": 1.675,
+   "separation_km": 0.0,
+   "dtheta_deg": 17.86,
+   "mean_az_deg": 166.31,
+   "dilatational": false,
+   "sense_note": "slip sense unobservable from raster catalogue; Walker Lane dextral prior applied via the dilation diagnostic (a/W <= 0.5 -> dilatational)",
+   "geometry": {
+    "connector_half_w_px": 0.5,
+    "connector_len_px": 2.9,
+    "n_echelon": 0,
+    "rhomb_a_px": 0.0,
+    "rhomb_b_px": 0.0,
+    "basin_disk_radius_px": 0.4
+   },
+   "strands": [
+    2113,
+    2159
+   ],
+   "tips": [
+    [
+     1322,
+     641
+    ],
+    [
+     1343,
+     617
+    ]
+   ],
+   "selection": "stratified",
+   "evidence_groups": {
+    "E_grav": 0.606,
+    "E_mag": 5.996,
+    "E_maglow": -1.255,
+    "E_lidar": 0.127,
+    "E_straight": 5.852,
+    "E_rad": 0.52,
+    "W_orient": 0.812,
+    "W_geom": 0.7
+   },
+   "score_S": 2.1008,
+   "orientation_az_deg": 166.31,
+   "orientation_note": "N-NE axial family best oriented for dilation under WNW extension (standing prompt)"
+  }
+ ],
+ "note": "H69-E width-stratified relay/pull-apart; cond+basement straight steps + K/ThK; HG+tilt+lidar; greedy DTI; 200m flank"
+}

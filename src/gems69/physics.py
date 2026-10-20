@@ -250,6 +250,48 @@ def corridor_evidence_from_z(zstack: dict, corridor) -> dict[str, float]:
     return out
 
 
+def _finite_fill(field: np.ndarray) -> tuple[np.ndarray, np.ndarray]:
+    finite = np.isfinite(field)
+    fill = float(np.nanmedian(field)) if finite.any() else 0.0
+    return np.where(finite, field, fill).astype(np.float32), finite
+
+
+def straight_step(field: np.ndarray, sigma: float = 2.0, coh_sigma: float = 3.0) -> np.ndarray:
+    """Structure-tensor coherence times gradient magnitude (H69-E union port).
+
+    Ported verbatim from the merged H69-E session for its preregistration
+    tests; not used by the relayfix v1/v2/v3 stacks executed 2026-10-20.
+    A straight contact has a locally constant gradient azimuth, so
+    (lambda1-lambda2)/(lambda1+lambda2) is near 1; isotropic texture ~0.
+    """
+    filled, finite = _finite_fill(field)
+    g = ndi.gaussian_filter(filled, sigma)
+    gy, gx = np.gradient(g)
+    jxx = ndi.gaussian_filter(gx * gx, coh_sigma)
+    jyy = ndi.gaussian_filter(gy * gy, coh_sigma)
+    jxy = ndi.gaussian_filter(gx * gy, coh_sigma)
+    tr = jxx + jyy
+    det = jxx * jyy - jxy * jxy
+    disc = np.sqrt(np.maximum((tr * 0.5) ** 2 - det, 0.0))
+    l1 = tr * 0.5 + disc
+    l2 = tr * 0.5 - disc
+    coh = (l1 - l2) / (l1 + l2 + 1e-12)
+    out = (np.hypot(gx, gy) * coh).astype(np.float32)
+    out[~finite] = np.nan
+    return out
+
+
+def local_depletion(field: np.ndarray, sigma_local: float = 2.0,
+                    sigma_bg: float = 20.0) -> np.ndarray:
+    """Positive where the field is low vs a 2 km background (H69-E port)."""
+    filled, finite = _finite_fill(field)
+    loc = ndi.gaussian_filter(filled, sigma_local)
+    bg = ndi.gaussian_filter(filled, sigma_bg)
+    out = (bg - loc).astype(np.float32)
+    out[~finite] = np.nan
+    return out
+
+
 def corridor_evidence(corridor, stats: dict[str, LayerStats], pad: int = 4,
                       shape: tuple[int, int] | None = None) -> dict[str, float]:
     """Robust-z mean of every transform inside a Corridor (windowed reads)."""

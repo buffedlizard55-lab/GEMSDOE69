@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-20T21:02:20.247997+00:00",
+  "generated_utc": "2026-10-20T21:07:41.548051+00:00",
   "lane": "GEMSDOE69 relay-ramp & pull-apart corridor generator",
   "hypothesis": "H69-H2 transfer-only: oblique-connector corridors at overlapping (transfer) step-overs from the repaired catalogue tip graph (R1 interval offset, R2 546 px search) rank hidden breaching faults; tested 2026-10-20 under preregistered Exp1+Exp2b.",
   "mechanism": "Repaired tip-graph pairs (W 0.1-15 km, separation <=3.5W) restricted to non-dilatational transfer-overlap pairs; corridors scored v1 by gravity/magnetic HG+tilt, magnetic lows, lidar scarp and N-NE orientation; greedy marginal-DTI dots >=200 m off catalogue.",

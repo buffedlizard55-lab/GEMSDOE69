@@ -1,0 +1,46 @@
+{
+ "generated_utc": "20261020T182700Z",
+ "lane": "GEMSDOE69 relay-ramp & pull-apart corridor generator",
+ "hypothesis": "H69-D radiometric K/Th depletion halos inside corridors: hydrothermal alteration destroys magnetite and leaches K/Th, producing depletion halos that mark permeable damage zones even where no scarp survives; scoring corridors by depletion concentrates dots in pull-apart basins away from dense structural trends, reducing registry overlap.",
+ "mechanism": "Tip-graph step-over pairing (W 0.1-15 km, along <=3.5W, sub-parallel strikes) -> oblique connector + en echelon strands + pull-apart rhomb -> multi-scale HG/tilt grav+mag (incl. magnetic lows) + lidar scarp + radiometric K/Th low + WNW-extension orientation -> greedy marginal-DTI dot placement >=200m off catalogue.",
+ "non_fault_mimic": "Lithologic contacts, buried channel margins, terrace edges in detrended elevation, and survey-line artifacts can produce corridor-consistent HG/tilt; felsic intrusives can deplete K/Th without faulting; hydrothermally altered but unfaulted volcanics produce magnetic lows.",
+ "holdout": {
+  "instrument": "vendor/template66 gems57 pooled hide-and-recover (alpha 0.2, beta 0.8, 300m triangular kernel); seeds/modes/cells as recorded",
+  "corridor_mean_dti": 0.005975197860273526,
+  "corridor_ci95_half": 0.0014413577610952733,
+  "control_mean_dti": 0.0021479253641536293,
+  "paired_delta": 0.003827272496119896,
+  "withheld_positive_px_total": 22641,
+  "n_cells": 8,
+  "gate_passed": true,
+  "evidence_class": "HOLDOUT-DTI",
+  "hardlinked_recovery_within_300m_mean": 0.8636363636363636,
+  "hardlinked_n_tested": 22
+ },
+ "correlation_overlap_vs_registry": {
+  "worst_abs_spearman": 0.15442722757041327,
+  "worst_dot_overlap_dotlike": 0.6194286428705382,
+  "literal_gate": {
+   "rho_ok": true,
+   "overlap_ok": false
+  },
+  "stratified_gate_ok": true,
+  "n_compared": 750,
+  "n_registry_blobs": 751
+ },
+ "raster": {
+  "zeros_sha256": "be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7",
+  "zeros_path": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif",
+  "nan_sha256": "6ceceb6bd47817a3241d56a4f2d9730ca9010fc70b37a5cf146d01272cad3ec0",
+  "nan_path": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-nan.tif",
+  "n_dots": 31994,
+  "format_compliance_nan_ok": true,
+  "format_compliance_zeros_ok": true,
+  "validator_output": "no NaN inside the footprint (nan variant finite mask == sample_submission), values in [0,1], CRS EPSG:32611, shape 3730x3292, transform exact (see evidence/e3_receipt.json format_compliance)"
+ },
+ "submission_name": "h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros",
+ "submission_note": "H69-D radiometric halo; relay/pull-apart corridors; HG+tilt grav/mag + lidar scarp + K/Th depletion; 32k dots",
+ "verdict": "promote",
+ "banner": "ok",
+ "note": "verdict 'promote' means the holdout gate + registry scan + validator all passed; promotion to a scored slot is a separate selector step (protocol rule 6)"
+}

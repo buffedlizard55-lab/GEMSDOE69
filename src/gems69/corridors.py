@@ -331,6 +331,22 @@ def corridor_from_pair(cid: int, pair: TipPair, strands: list[Strand],
     else:
         subtype = "transfer-overlap"
 
+    # Basin-interior disk (pre-registered, not fit). Ties the connector at
+    # weight 1.0 so greedy placement can sit in the step-over interior, which
+    # is where Walker Lane hot systems concentrate, without erasing the
+    # oblique connector the prompt requires.
+    rad = max(2, int(round(min(pair.w_px / 8.0, 6.0))))
+    rr0 = max(0, mid_r - rad)
+    rr1 = min(lh, mid_r + rad + 1)
+    cc0 = max(0, mid_c - rad)
+    cc1 = min(lw, mid_c + rad + 1)
+    yy, xx = np.mgrid[rr0:rr1, cc0:cc1]
+    disk = (yy - mid_r) ** 2 + (xx - mid_c) ** 2 <= rad * rad
+    mask[rr0:rr1, cc0:cc1] |= disk
+    weight[rr0:rr1, cc0:cc1] = np.maximum(
+        weight[rr0:rr1, cc0:cc1], np.where(disk, 1.0, 0.0).astype(np.float32))
+    geom["basin_disk_radius_px"] = float(rad)
+
     geom_km = {k: (round(v / 10.0, 3) if k.endswith("_px") and v else v) for k, v in geom.items()}
     rationale = dict(
         layers=[],            # filled by scoring
@@ -362,21 +378,83 @@ def _priority(p: TipPair) -> tuple:
     return (0 if p.dilatational else 1, abs(p.w_px - 28.0), p.w_px)
 
 
+# H69-E pre-registered width bins (100 m pixels). The 2026-10-12 cap sorted by
+# |W - 2.8 km| and filled all 1,200 slots at exactly 2.8 km, so the published
+# 0.1-14.6 km range never entered the emission. Bins span that range.
+# Within each bin the quota is 70% dilatational / 30% overlapping (transfer).
+WIDTH_BINS_PX = ((1.0, 10.0), (10.0, 30.0), (30.0, 60.0), (60.0, 150.0))
+DILATATIONAL_FRACTION = 0.70
+
+
+def select_stratified(pairs: list[TipPair], max_corridors: int = 1200) -> list[TipPair]:
+    """Width-stratified, de-duplicated pair sample. Fixed quotas, not fit."""
+    if max_corridors <= 0 or not pairs:
+        return []
+    per = max(1, max_corridors // len(WIDTH_BINS_PX))
+    chosen: list[TipPair] = []
+    used: set[tuple] = set()
+
+    def take(group: list[TipPair], n: int) -> None:
+        if n <= 0:
+            return
+        got = 0
+        for p in group:
+            k = _pair_key(p)
+            if k in used:
+                continue
+            used.add(k)
+            chosen.append(p)
+            got += 1
+            if got >= n:
+                return
+
+    for lo, hi in WIDTH_BINS_PX:
+        bin_pairs = [p for p in pairs if lo <= p.w_px < hi or (hi == WIDTH_BINS_PX[-1][1] and p.w_px == hi)]
+        dil = sorted((p for p in bin_pairs if p.dilatational), key=_priority)
+        ov = sorted((p for p in bin_pairs if not p.dilatational), key=_priority)
+        n_dil = int(round(DILATATIONAL_FRACTION * per))
+        take(dil, n_dil)
+        take(ov, per - n_dil)
+        # if a class is short, fill the bin from the other class
+        if sum(1 for p in chosen if lo <= p.w_px <= hi) < per:
+            take(dil + ov, per - sum(1 for p in chosen if lo <= p.w_px <= hi))
+    if len(chosen) < max_corridors:
+        take(sorted(pairs, key=_priority), max_corridors - len(chosen))
+    return chosen[:max_corridors]
+
+
 def build_corridors(catalogue: np.ndarray, strands: list[Strand],
                     shape: tuple[int, int], max_corridors: int = 1200,
-                    w_min: float = W_MIN_PX, w_max: float = W_MAX_PX):
-    """Pairs + corridors, de-duplicated by (strand pair, W, along)."""
+                    w_min: float = W_MIN_PX, w_max: float = W_MAX_PX,
+                    selection: str = "stratified"):
+    """Pairs + corridors, de-duplicated by (strand pair, W, along).
+
+    ``selection='stratified'`` (H69-E default) spans the published width range.
+    ``selection='mean_width'`` is the 2026-10-12 cap (nearest to 2.8 km) kept
+    so the prior experiment remains reproducible.
+    """
     pairs = build_tip_pairs(strands, catalogue, w_min=w_min, w_max=w_max)
-    seen, uniq = set(), []
-    for p in sorted(pairs, key=_priority):
-        k = _pair_key(p)
-        if k in seen:
-            continue
-        seen.add(k)
-        uniq.append(p)
-        if len(uniq) >= max_corridors:
-            break
+    if selection == "mean_width":
+        seen, uniq = set(), []
+        for p in sorted(pairs, key=_priority):
+            k = _pair_key(p)
+            if k in seen:
+                continue
+            seen.add(k)
+            uniq.append(p)
+            if len(uniq) >= max_corridors:
+                break
+    else:
+        uniq = select_stratified(pairs, max_corridors=max_corridors)
     corridors = [corridor_from_pair(i, p, strands, shape) for i, p in enumerate(uniq)]
+    for c in corridors:
+        c.rationale["selection"] = selection
+        c.rationale["source"] = (
+            "GEMSDOE69 tip-graph H69-E; step-over geometry priors per standing prompt "
+            "(Giddens & Faulds 2025 SGP-TR-229, as cited in the prompt); "
+            "width-stratified quotas, not the 2.8 km-only cap"
+            if selection == "stratified" else c.rationale.get("source", "")
+        )
     return corridors, uniq
 
 

@@ -44,6 +44,10 @@ def evaluate(root=ROOT):
         reasons.append('Artifact is missing or does not match its recorded SHA-256.')
     if sha is None or uniq.get('my_sha256') != sha:
         reasons.append('Registry result is not bound to the current artifact hash.')
+    # A successful holdout from another candidate must never authorize these
+    # bytes (union port from merged H69-E session's stricter policy).
+    if sha is None or gate.get('artifact_sha256') != sha:
+        reasons.append('Holdout comparison is missing or not bound to the current artifact hash.')
     manifest = read(root, 'e3_method_manifest.json')
     source_hashes = manifest.get('source_sha256', {})
     source_ok = bool(source_hashes) and manifest.get('artifact_sha256') == sha and sha is not None
