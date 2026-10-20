@@ -3,9 +3,9 @@
  "all_files_passed": true,
  "reports": [
   {
-   "file": "docs/downloads/gems69-relay-pullapart-corridors-33680-20261012T015854Z-zeros.tif",
-   "bytes": 92433,
-   "sha256": "5ef7f9bdce16586544f819194bc3650156a78b66d36e03e6477e905a6b59a4df",
+   "file": "docs/downloads/gems69-relay-pullapart-corridors-43056-20261020T203325Z-zeros.tif",
+   "bytes": 141538,
+   "sha256": "5a860c3a7170dafa843d6025d3d4e9c9a77fa34f354e695c11f7c73ecb80ef40",
    "meta": {
     "count": 1,
     "dtype": "float32",
@@ -34,7 +34,7 @@
    "n_nan_inside_footprint": 0,
    "min": 0.0,
    "max": 1.0,
-   "positive_pixels": 33680,
+   "positive_pixels": 43056,
    "distinct_positive_values": [
     1.0
    ],
@@ -81,9 +81,9 @@
    "all_checks_passed": true
   },
   {
-   "file": "docs/downloads/gems69-relay-pullapart-corridors-33680-20261012T015854Z-nan.tif",
-   "bytes": 273241,
-   "sha256": "4686ea569850ad0d9b4938d38e164ba1b714f60fb2d7b9d8e5e390eecc7dc11f",
+   "file": "docs/downloads/gems69-relay-pullapart-corridors-43056-20261020T203325Z-nan.tif",
+   "bytes": 331429,
+   "sha256": "337681c20b64aaa3ccb2b9928e6c7c11d4d71c57cdff96600c2553ecf6ece709",
    "meta": {
     "count": 1,
     "dtype": "float32",
@@ -112,7 +112,7 @@
    "n_nan_inside_footprint": 0,
    "min": 0.0,
    "max": 1.0,
-   "positive_pixels": 33680,
+   "positive_pixels": 43056,
    "distinct_positive_values": [
     1.0
    ],

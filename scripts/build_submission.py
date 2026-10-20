@@ -62,9 +62,10 @@ def removed_mask(fold0):
 
 
 def fit_frozen_calibration(ctx):
-    """Edges from draw 1, rates pooled over both draws (all regions = training)."""
+    """Edges from draw 1, 3-level hierarchical rates pooled over both draws (all regions = training)."""
     edges = None
-    pos = cnt = None
+    tot_v = pos_v = tot_g = pos_g = tot_f = pos_f = None
+    dims_out = None
     receipts = []
     for seed in SEEDS:
         folds, _ = holdout.buffered_component_draw(ctx.grid, seed=seed, hide_frac=0.20, buffer_px=3)
@@ -75,25 +76,45 @@ def fit_frozen_calibration(ctx):
         regions = np.zeros(ctx.fp.shape, bool)
         for f in folds:
             regions |= f["region"]
-        train = allowed & regions & (geo["s_band"] > 0)
-        code, n, e = pipeline._codes(ARM, ctx, geo, d_vis, train, edges=edges)
+        train = allowed & regions & (geo["dline"] <= pipeline.BAND_MAX_PX)
+        code_info, _n, e = pipeline._codes(ARM, ctx, geo, d_vis, train, edges=edges)
         if edges is None:
             edges = e
-        y = folds[0]["hidden_all"] & train
-        c = code[train]
-        b_cnt = np.bincount(c, minlength=n).astype(np.float64)
-        b_pos = np.bincount(c, weights=y[train].astype(np.float64), minlength=n)
-        cnt = b_cnt if cnt is None else cnt + b_cnt
-        pos = b_pos if pos is None else pos + b_pos
+        vcode, gcode, fcode, dims = code_info
+        dims_out = dims
+        ndv, ng, nf = dims
+        y = (folds[0]["hidden_all"] & train)[train].astype(np.float64)
+        tv = np.bincount(vcode[train], minlength=ndv).astype(np.float64)
+        pv = np.bincount(vcode[train], weights=y, minlength=ndv).astype(np.float64)
+        tg = np.bincount(gcode[train], minlength=ng).astype(np.float64)
+        pg = np.bincount(gcode[train], weights=y, minlength=ng).astype(np.float64)
+        tf = np.bincount(fcode[train], minlength=nf).astype(np.float64)
+        pf = np.bincount(fcode[train], weights=y, minlength=nf).astype(np.float64)
+        tot_v = tv if tot_v is None else tot_v + tv
+        pos_v = pv if pos_v is None else pos_v + pv
+        tot_g = tg if tot_g is None else tot_g + tg
+        pos_g = pg if pos_g is None else pos_g + pg
+        tot_f = tf if tot_f is None else tot_f + tf
+        pos_f = pf if pos_f is None else pos_f + pf
         receipts.append(dict(seed=seed, train_pixels=int(train.sum()), train_truth=int(y.sum()),
                              tip_receipt=geo["tip_receipt"], corridor_counts=geo["corridor_counts"]))
         del geo, d_vis, allowed, folds
-    base = float(pos.sum() / max(cnt.sum(), 1))
-    rate = ((pos + 200.0 * base) / (cnt + 200.0)).astype(np.float32)
-    table = [dict(code=int(k), score_bin=int(k // 3), dist_to_trace_px=int(k % 3), n=int(cnt[k]),
-                  truth=int(pos[k]), rate=float(rate[k])) for k in range(len(rate))]
+    ndv, ng, nf = dims_out
+    nse = nf // ng
+    ndl_ndt = ng // ndv
+    base = float(pos_v.sum() / max(tot_v.sum(), 1.0))
+    vrate = (pos_v + 100.0 * base) / np.maximum(tot_v + 100.0, 1.0)
+    grate = (pos_g + 250.0 * np.tile(vrate, ndl_ndt)) / np.maximum(tot_g + 250.0, 1.0)
+    rate = ((pos_f + 350.0 * np.repeat(grate, nse)) / np.maximum(tot_f + 350.0, 1.0)).astype(np.float32)
+    s_edges, e_edges = edges
+    table = [dict(vbin=int(k), d_min_px=float(calibrate.D_EDGES[k]), d_max_px=float(calibrate.D_EDGES[k + 1]),
+                  n=int(tot_v[k]), truth=int(pos_v[k]), vrate=float(vrate[k])) for k in range(ndv)]
     return edges, rate, dict(base_rate=base, draws=receipts, table=table,
-                             edges=[float(x) for x in edges if np.isfinite(x)])
+                             s_edges=[float(x) for x in s_edges if np.isfinite(x)],
+                             e_edges=[float(x) for x in e_edges if np.isfinite(x)],
+                             d_edges=[float(x) for x in calibrate.D_EDGES if np.isfinite(x)],
+                             dline_edges=[float(x) for x in calibrate.DLINE_EDGES if np.isfinite(x)],
+                             dtip_edges=[float(x) for x in calibrate.DTIP_EDGES if np.isfinite(x)])
 
 
 def signature(ln) -> str:
@@ -122,12 +143,14 @@ def main():
     lines = geo["lines"]
     d_cat = ndi.distance_transform_edt(~cat).astype(np.float32)
     allowed = ctx.fp & ~cat & ~(d_cat <= pipeline.FLANK_PX)
-    band = geo["s_band"] > 0
+    band = geo["dline"] <= pipeline.BAND_MAX_PX
     cand = allowed & band
-    code, n, _ = pipeline._codes(ARM, ctx, geo, d_cat, cand, edges=edges)
+    code_info, _n, _ = pipeline._codes(ARM, ctx, geo, d_cat, cand, edges=edges)
+    _vcode, _gcode, fcode, _dims = code_info
     p = np.zeros(ctx.fp.shape, np.float32)
-    p[cand] = rate[code[cand]]
-    alloc = emit.greedy_allocate(p, cand, float(K_TRUTH_LIVE))
+    p[cand] = rate[fcode[cand]]
+    ranked, _ = emit.emit_decimated(p, cand, tile_px=pipeline.TILE_PX)
+    alloc = emit.greedy_allocate(p, cand & (ranked > 0), float(K_TRUTH_LIVE))
     dots = alloc.emitted & cand
     pred = dots.astype(np.float32)
     assert not (pred[cat] > 0).any() and not (pred[~ctx.fp] > 0).any()
@@ -161,7 +184,7 @@ def main():
     rows.sort(key=lambda r: (-r["n_dots"], -r["score"]))
     EVID.mkdir(exist_ok=True)
     with open(EVID / "e3_corridor_rationale.csv", "w", newline="") as f:
-        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()))
+        w = csv.DictWriter(f, fieldnames=list(rows[0].keys()), lineterminator="\n")
         w.writeheader()
         w.writerows(rows)
     setting_counts = {}
@@ -172,7 +195,7 @@ def main():
 
     # diagnostic: where does the live-scored champion (h33-2-b2, owner-reported 0.2778) sit vs our corridors?
     champ_diag = None
-    champ_path = Path("/tmp/ref/60GEMSDOE/registry/rasters/GEMSDOE32__h33-2-b2-zeros.tif")
+    champ_path = Path("/tmp/gems_registry_cache/c55bafc470054e82.tif")
     if champ_path.exists():
         with rasterio.open(champ_path) as src:
             ch = np.nan_to_num(src.read(1)) > 0

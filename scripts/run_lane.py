@@ -177,7 +177,7 @@ def e1(args):
                 row[k] = pipeline.auc(fv[pos_idx], fv[neg_idx])
                 pooled[k][0].append(fv[pos_idx]); pooled[k][1].append(fv[neg_idx])
             per_fold.append(row)
-            band = geo["s_band"] > 0
+            band = geo["dline"] <= pipeline.BAND_MAX_PX
             band_hits[f["name"]] = dict(
                 truth_in_band=float((band & f["truth"] & active).sum() / max(1, (f["truth"] & active).sum())),
                 band_fraction_of_active=float((band & active).sum() / max(1, active.sum())))
@@ -207,27 +207,29 @@ def run_arm(arm, ctx, geo, folds, d_vis, allowed_base, seed, a_counts=None):
         test = allowed_base & f["region"]
         truth_train = f["hidden_all"] & train
         if arm == "R_corridor_random":
-            band_ok = test & (geo["s_band"] > 0)
+            band_ok = test & (geo["dline"] <= pipeline.BAND_MAX_PX)
             n = a_counts[k] if a_counts else 0
             emitted = pipeline.poisson_random(band_ok, n, seed * 100 + k)
             calib = dict(n_requested=n)
             alloc_info = dict(n_dots=int(emitted.sum()))
         else:
-            code, n_codes, _edges = pipeline._codes(arm, ctx, geo, d_vis, train)
+            code_info, n_codes, _edges = pipeline._codes(arm, ctx, geo, d_vis, train)
             cand_train = train
             cand_test = test
             if arm == "A_corridor":
-                cand_train = train & (geo["s_band"] > 0)
-                cand_test = test & (geo["s_band"] > 0)
-            rate, calib = calibrate.fit_rates(code, truth_train, cand_train, n_codes)
+                cand_train = train & (geo["dline"] <= pipeline.BAND_MAX_PX)
+                cand_test = test & (geo["dline"] <= pipeline.BAND_MAX_PX)
+            code, rate, calib = pipeline.fit_arm_rates(arm, code_info, truth_train, cand_train, n_codes)
             p = np.zeros(ctx.fp.shape, np.float32)
             p[cand_test] = rate[code[cand_test]]
             k_truth = pipeline.K_TRUTH_RATIO * float((f["visible"] & f["region"]).sum())
-            alloc = emit.greedy_allocate(p, cand_test, k_truth)
+            ranked, _ = emit.emit_decimated(p, cand_test, tile_px=pipeline.TILE_PX)
+            alloc_cand = cand_test & (ranked > 0)
+            alloc = emit.greedy_allocate(p, alloc_cand, k_truth)
             emitted = alloc.emitted
             alloc_info = dict(n_dots=alloc.n_dots, surrogate_dti=alloc.surrogate_dti, rounds=alloc.rounds,
-                              k_truth_estimate=k_truth)
-            del p, code
+                              k_truth_estimate=k_truth, tile_px=pipeline.TILE_PX)
+            del p, code, code_info, ranked, alloc_cand
         res, terms = evaluate_holdout.evaluate(emitted.astype(np.float32), f, ctx.fp)
         terms_sum = terms if terms_sum is None else terms_sum + terms
         fold_rows.append(dict(fold=f["name"], dti=res["dti"], n_truth=res["n_truth"], tpw=res["tpw"],

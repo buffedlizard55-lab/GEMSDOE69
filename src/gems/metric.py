@@ -92,6 +92,20 @@ def dti_from_components(tp: float, fp: float, fn: float,
     return tp / (tp + alpha * fp + beta * fn + eps)
 
 
+dti_from_terms = dti_from_components
+
+
+def tversky_terms(pred, gt, pixel_m: float = 100.0, range_m: float = R_METRES):
+    """Return (TP_w, FP_w, FN_w) for a probability raster and a binary truth raster."""
+    tp, fp, fn, _ = components(pred, gt, cell_m=pixel_m, radius=range_m)
+    return tp, fp, fn
+
+
+def marginal_credit_bar(dti_value: float, alpha: float = ALPHA) -> float:
+    """Break-even kernel credit for one extra dot: k > alpha * DTI."""
+    return alpha * dti_value
+
+
 def dot_is_worth_adding(T: float, D: float, d_tp: float, m: float,
                         alpha: float = ALPHA, beta: float = BETA) -> bool:
     """Exact admission test for adding ONE unit-mass dot to a prediction.

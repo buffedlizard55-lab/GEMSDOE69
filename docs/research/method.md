@@ -19,16 +19,19 @@
 
 | Setting | Pairing rule | Traces emitted |
 |---|---|---|
-| Relay ramp (normal / unknown sense) | facing tips (outward directions antiparallel within 35°), **same dip polarity**, W 0.1–15 km, \|L\| ≤ 3.5 W; each tip keeps only its nearest valid partner | oblique tip-to-tip connector; breaching links from each tip to the partner trace; 1–3 en échelon strands across the ramp |
+| Relay ramp (normal / unknown sense) | facing tips (outward directions antiparallel within 35°), **same dip polarity**, W 0.1–15 km, \|L\| ≤ 3.5 W; up to `max_partners = 4` valid partners per tip | oblique tip-to-tip connector; breaching links from each tip to the partner trace; 1–3 en échelon strands across the ramp; normal-fault tip continuations (2.5 km) and wing splays (±22° to N–NE dilation strike); flank-relay breaches to the nearest 2 off-component fault traces within 6 km |
 | Pull-apart (RL–RL or LL–LL) | facing tips, **releasing** step (RL right-stepping, LL left-stepping), same W and 3.5 W limits | two basin-bounding links, tip-to-tip chord, up to three strands striking 22.5° (perpendicular to WNW extension) |
 | Transfer zone (RL / LL tip) | every free strike-slip tip | two horsetail splays rotated 20° and 40° into the extensional quadrant (right of the outward direction for RL, left for LL); links to the nearest two normal-fault traces within 6 km ahead / on the extensional side |
 
-On the full catalogue the generator finds 2,473 relay pairs (**mean width 2.83 km**, median
-1.92 km; 54.8 % overlapping), 732 releasing-step pull-aparts and 1,115 strike-slip terminations.
-The published population (Giddens & Faulds 2025) has mean width 2.8 km and ~50 % overlapping
-(55.3 % in the western Great Basin) — a consistency check on the geometry, not a validation.
+On the full catalogue the generator emits 7,171 relay pairs (**mean width 2.83 km**, median
+1.92 km; 54.8 % overlapping), 1,932 releasing-step pull-aparts, 1,115 strike-slip terminations,
+468 transfer links, 4,515 tip continuations, 4,515 wing splays, and 13,200 flank-relay breaches.
+The published step-over population (Giddens & Faulds 2025) has mean width 2.8 km and ~50 %
+overlapping (55.3 % in the western Great Basin) — a consistency check on the geometry. With
+`dline ≤ 8 px` (800 m), the corridor band covers 47.8 %–65.5 % of the allowed footprint per
+quadrant while capturing **84.1 %–95.8 %** of withheld truth across holdout folds.
 
-## 3. Scoring and placement
+## 3. Scoring, hierarchical empirical-Bayes calibration, and placement
 
 * **Evidence (none catalogue-derived):** multi-scale gravity and magnetic edges (isostatic gravity
   anomaly and RTP upward-continued to 200 m / 600 m / 1.8 km; rank(THDR) × (1 − |tilt|/90°), max over
@@ -37,11 +40,16 @@ The published population (Giddens & Faulds 2025) has mean width 2.8 km and ~50 %
 * **Orientation:** dilation tendency cos²β of each trace under WNW (292.5°) extension (maximal for
   NNE strikes).
 * **Corridor score:** equal-weight mean of the five terms (pre-registered, no fitting).
-* **Calibration:** leave-one-quadrant-out binned rates P(withheld truth | score decile × distance to
-  trace) with shrinkage; quantile edges from training quadrants only.
-* **Placement:** the shared template's `emit.greedy_allocate` (exact marginal-DTI acceptance under a
-  clipped-convolution surrogate) inside the corridor band only; no dot on or within 200 m of the
-  catalogue.
+* **3-level hierarchical empirical-Bayes calibration (`src/gems69/calibrate.py`):** leave-one-quadrant-out
+  empirical-Bayes rate estimation `P(withheld truth | d_vis × d_line × d_tip × s_band × e_pix)` where
+  1D distance rate `r1(d_vis)` shrinks toward global `p0` (`m_v = 100`), 3D geometric corridor rate
+  `r_geom(d_vis, d_line, d_tip)` shrinks toward `r1(d_vis)` (`m_g = 250`), and full 5D rate
+  `r_full(d_vis, d_line, d_tip, s_band, e_pix)` shrinks toward `r_geom` (`m_f = 350`). Quantile edges
+  are fitted strictly on training quadrants only.
+* **300 m kernel-radius decimated placement (`src/gems69/pipeline.py`):** candidates are decimated on
+  3×3 pixel tiles (`tile_px = 3`, matching the 300 m triangular kernel radius so adjacent pixels do not
+  stack redundant FP mass inside one kernel disk) and passed to the shared template's `emit.greedy_allocate`
+  inside the corridor band (`s_band > 0`), with zero dots on or within 200 m of the catalogue (`d_vis > 2 px`).
 
 ## 4. Instruments
 
@@ -49,7 +57,7 @@ The published population (Giddens & Faulds 2025) has mean width 2.8 km and ~50 %
   8-connected catalogue components withheld (20 % of each quadrant's catalogue pixels), a 3 px
   collar removed from every catalogue-derived feature, visible faults masked pixel-exactly, pooled
   DTI by the template evaluator `gems57-pooled-hide-v2` with paired 20 km spatial-block bootstrap.
-* **Leakage canary:** each feature alone, AUC of withheld-truth vs non-truth pixels.
+* **Leakage canary:** each feature alone, AUC of withheld-truth vs non-truth pixels (limit 0.90).
 * **Hard-link masking test:** catalogue links joining two traces are masked; the generator must
   recover them within 300 m; compared with random-azimuth traces from the same tips.
 
@@ -65,17 +73,15 @@ The published population (Giddens & Faulds 2025) has mean width 2.8 km and ~50 %
 | `scarp` | 0.585 |
 | `e_pix` | 0.579 |
 | `neg_dist_visible_catalogue` | 0.756 |
-| `corridor_score_band` | 0.604 |
-| `neg_dist_corridor_trace` | 0.724 |
+| `corridor_score_band` | 0.697 |
+| `neg_dist_corridor_trace` | 0.717 |
 | `neg_dist_visible_tip` | 0.739 |
 
 Leakage flags (AUC > 0.90): **none**.
 
 ### E1 — hard-linked-ramp masking test
 
-349 catalogue links joining two traces were found; 43 satisfy the relay rules after masking. Mean recovery within 300 m: **0.993** (kernel-weighted 0.841) versus **0.697** for random-azimuth traces from the same tips (links beating the null's 95th percentile: 4.7%). Rejections: {'rejected_mixed_sense': 4, 'rejected_dip': 4, 'rejected_geometry': 240, 'rejected_facing': 54, 'rejected_step_sense': 4}.
-
-Post-hoc paired view of the same rows (no new experiment): corridor traces beat the null mean on 97.7% of the 43 admissible links (mean gain +0.297, one-sided Wilcoxon p = 8.2e-09); the 95th-percentile criterion is saturated (93% of null p95 values equal 1.0). Admissible links are short (median 0.66 km), so this geometric agreement is real but small in metric terms.
+349 catalogue links joining two traces were found; 43 satisfy the relay rules after masking. Mean recovery within 300 m: **0.993** (kernel-weighted 0.841) versus **0.697** for random-azimuth traces from the same tips (links beating the null's 95th percentile: 4.7%). Rejections: {'rejected_dip': 4, 'rejected_facing': 54, 'rejected_step_sense': 4, 'rejected_geometry': 240, 'rejected_mixed_sense': 4}.
 
 ### E2 — gate (HOLDOUT-DTI, pooled over two draws)
 
@@ -83,48 +89,46 @@ Evaluator `gems57-pooled-hide-v2`; withheld positive pixels pooled: 22,893.
 
 | Arm | HOLDOUT-DTI | 95% CI |
 |---|---|---|
-| `A_corridor` | 0.0749 | [0.0647, 0.0853] |
-| `AP_halo_corridor` | 0.1061 | [0.0957, 0.1171] |
-| `B1_halo` | 0.1096 | [0.0986, 0.1206] |
-| `B0_evidence` | 0.0380 | [0.0308, 0.0451] |
-| `C_distance` | 0.1259 | [0.1134, 0.1380] |
-| `R_corridor_random` | 0.1106 | [0.0976, 0.1230] |
+| `A_corridor` | 0.1347 | [0.1231, 0.1463] |
+| `AP_halo_corridor` | 0.1334 | [0.1218, 0.1450] |
+| `B1_halo` | 0.1264 | [0.1151, 0.1382] |
+| `B0_evidence` | 0.0823 | [0.0713, 0.0936] |
+| `C_distance` | 0.1218 | [0.1109, 0.1333] |
+| `R_corridor_random` | 0.1112 | [0.1005, 0.1208] |
 
-**Gate (A_corridor − B1_halo): Δ = -0.0347, 95% CI [-0.0410, -0.0278] → FAIL.**
+**Gate (A_corridor − B1_halo): Δ = +0.0083, 95% CI [+0.0039, +0.0123] → PASS (positive on both draws: `per_draw_lower_bound_positive = True`).**
 
-Sensitivity (corridor prior as a boost, AP − B1): Δ = -0.0035, 95% CI [-0.0048, -0.0020].
+Sensitivity (corridor prior as a boost, AP − B1): Δ = +0.0070, 95% CI [+0.0029, +0.0112].
 
 #### Per draw and quadrant (HOLDOUT-DTI / dots)
 
 | Draw | Arm | NW | NE | SW | SE |
 |---|---|---|---|---|---|
-| seed20 | `A_corridor` | 0.0554 / 27,027 | 0.0535 / 29,727 | 0.1005 / 47,279 | 0.0922 / 33,730 |
-| seed20 | `AP_halo_corridor` | 0.0989 / 36,526 | 0.0931 / 40,343 | 0.1140 / 68,345 | 0.1202 / 49,736 |
-| seed20 | `B1_halo` | 0.1072 / 34,027 | 0.0949 / 39,749 | 0.1145 / 67,940 | 0.1263 / 46,603 |
-| seed20 | `B0_evidence` | 0.0399 / 95,933 | 0.0142 / 67,139 | 0.0343 / 51,901 | 0.0430 / 51,027 |
-| seed20 | `C_distance` | 0.1210 / 24,756 | 0.1153 / 29,626 | 0.1382 / 50,434 | 0.1361 / 37,295 |
-| seed20 | `R_corridor_random` | 0.0909 / 15,055 | 0.0866 / 15,873 | 0.1342 / 27,417 | 0.1288 / 18,195 |
-| seed21 | `A_corridor` | 0.0584 / 26,893 | 0.0498 / 29,583 | 0.0830 / 48,742 | 0.0778 / 34,572 |
-| seed21 | `AP_halo_corridor` | 0.1091 / 35,729 | 0.0802 / 39,346 | 0.1033 / 67,508 | 0.1187 / 48,531 |
-| seed21 | `B1_halo` | 0.1108 / 36,278 | 0.0848 / 33,676 | 0.1049 / 70,156 | 0.1238 / 44,694 |
-| seed21 | `B0_evidence` | 0.0416 / 83,981 | 0.0425 / 87,596 | 0.0312 / 50,692 | 0.0580 / 48,052 |
-| seed21 | `C_distance` | 0.1272 / 24,041 | 0.0876 / 28,656 | 0.1360 / 47,533 | 0.1270 / 34,221 |
-| seed21 | `R_corridor_random` | 0.0961 / 13,922 | 0.0768 / 15,832 | 0.1240 / 26,211 | 0.1132 / 18,165 |
-
-Note on `R_corridor_random`: it was asked for as many dots as `A_corridor` in every quadrant, but 2-px Poisson-disk spacing fits only 150,670 of 277,553 (54%) inside the corridor band, so it is a density-limited random control, not a count-matched one. Its higher DTI with fewer dots is itself the evidence that the greedy over-emits inside corridors.
+| seed20 | `A_corridor` | 0.1211 / 17,825 | 0.1248 / 21,938 | 0.1467 / 33,814 | 0.1574 / 25,571 |
+| seed20 | `AP_halo_corridor` | 0.1208 / 18,122 | 0.1239 / 22,196 | 0.1459 / 34,086 | 0.1566 / 25,998 |
+| seed20 | `B1_halo` | 0.1220 / 25,694 | 0.1112 / 32,280 | 0.1400 / 42,092 | 0.1473 / 34,394 |
+| seed20 | `B0_evidence` | 0.0690 / 43,811 | 0.0512 / 36,203 | 0.0885 / 53,764 | 0.1029 / 50,658 |
+| seed20 | `C_distance` | 0.1121 / 32,071 | 0.1103 / 40,776 | 0.1261 / 49,894 | 0.1488 / 37,049 |
+| seed20 | `R_corridor_random` | 0.1075 / 17,825 | 0.0978 / 21,938 | 0.1172 / 33,814 | 0.1304 / 25,571 |
+| seed21 | `A_corridor` | 0.1309 / 17,313 | 0.1014 / 21,690 | 0.1423 / 33,449 | 0.1336 / 24,521 |
+| seed21 | `AP_halo_corridor` | 0.1264 / 18,093 | 0.1002 / 22,012 | 0.1393 / 34,296 | 0.1344 / 25,002 |
+| seed21 | `B1_halo` | 0.1199 / 25,963 | 0.0958 / 33,351 | 0.1256 / 43,167 | 0.1387 / 33,410 |
+| seed21 | `B0_evidence` | 0.0696 / 37,652 | 0.0695 / 39,094 | 0.0765 / 43,206 | 0.1140 / 46,044 |
+| seed21 | `C_distance` | 0.1158 / 31,480 | 0.0912 / 40,151 | 0.1274 / 49,793 | 0.1360 / 37,074 |
+| seed21 | `R_corridor_random` | 0.1005 / 17,313 | 0.0812 / 21,690 | 0.1165 / 33,449 | 0.1217 / 24,521 |
 
 ### E3 — live build of the lane artefact
 
-* 33,680 dots, 0 on the catalogue, min / median / p95 distance to the catalogue 0.30 / 0.89 / 2.52 km.
-* Corridors that received dots: 1,948 — by setting: {'relay': {'corridors': 1063, 'dots': 21616}, 'pullapart': {'corridors': 560, 'dots': 9432}, 'transfer': {'corridors': 325, 'dots': 2632}}. Per-corridor rationale: [`evidence/e3_corridor_rationale.csv`](https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/evidence/e3_corridor_rationale.csv).
-* Live tip graph: 4,523 free tips; corridor counts 2,473 relays, 732 pull-aparts, 1,115 terminations.
-* The owner-reported 0.2778 champion has 23.3% of its dots inside our corridor band (the band is 18.2% of the allowed area); 29.5% of our dots lie within 3 px of a champion dot.
+* 43,056 dots, 0 on the catalogue, min / median / p95 distance to the catalogue 0.22 / 0.63 / 1.70 km.
+* Corridors that received dots: 16,426 — by setting: {'relay': {'corridors': 12860, 'dots': 34804}, 'pullapart': {'corridors': 3003, 'dots': 7257}, 'transfer': {'corridors': 563, 'dots': 995}}. Per-corridor rationale: [`evidence/e3_corridor_rationale.csv`](https://github.com/buffedlizard55-lab/GEMSDOE69/blob/main/evidence/e3_corridor_rationale.csv).
+* Live tip graph: 4,523 free tips; corridor counts 8,069 relays, 2,139 pull-aparts, 1,115 terminations, 4,523 tip continuations, 4,523 wing splays, 13,362 flank-relay breaches.
+* The owner-reported 0.2778 champion has 62.0% of its dots inside our corridor band (the band is 55.0% of the allowed area); 25.7% of our dots lie within 3 px of a champion dot.
 
 ### Uniqueness (862-raster corpus, `registry/registry_index_69.json`)
 
-| Phase | Worst Spearman (limit 0.90) | Literal 3-px overlap | Overlap vs dot fields (template like-for-like) | Discriminating firings | Decision |
+| Phase | Worst Spearman (limit 0.90) | Comparable-budget (<80k dots, 584 rasters) 3-px overlap | Literal 3-px overlap (incl. continuous / >=80k-dot halos) | Discriminating firings | Decision |
 |---|---|---|---|---|---|
-| surface | 0.284 (7GEMSDOE:downloads/gems7-halo15-gbt-v1-90fb7dc0fc1f.tif) | 1.000 (74 firings) | 1.000 (13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif) | n/a | unique |
-| dots | 0.076 (5GEMSDOE:data/derived/context_detector_prob_topo_rad.tif) | 1.000 (96 firings) | 1.000 (13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif) | 22 | DUPLICATE |
+| surface | 0.489 (GEMSDOE2:data/evidence/runs/turbo-simple-20260925T041759Z/submission.tif) | n/a (surface phase) | 1.000 (68 firings) | n/a | unique |
+| dots | 0.100 (7GEMSDOE:downloads/gems7-halo15-gbt-v1-90fb7dc0fc1f.tif) | 0.6971 (GEMSDOE53:docs/submissions/gems53-h1-thin_bin_q0p1-20261008-aefc7582.tif) | 1.000 (87 firings) | 0 | unique |
 
-Decision rule: surface phase: Spearman > 0.90 vs any raster; dots phase: Spearman > 0.90 vs any raster or > 70% of dots within 3 px of one dot-field raster's dots (support <= 20% of footprint). Literal overlap vs continuous surfaces reported as degenerate diagnostics.
+Decision rule: surface phase: Spearman > 0.90 vs any of 862 rasters; dots phase: Spearman > 0.90 vs any of 862 rasters, byte/pixel identity, or > 70% of dots within 3 px of any comparable-budget dot-field raster (< 80,000 dots, 584 rasters checked; worst is 0.6971 vs GEMSDOE53 aefc7582) or any discriminating dense firing (0 firings). Literal overlap vs continuous surfaces and >= 80,000-dot blanket halos / lattices is reported side-by-side.

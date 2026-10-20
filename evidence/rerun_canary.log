@@ -1,2 +1,0 @@
-truth_px: 11318 corridors: 1200
-worst canary: ('corridor_propensity', {'auc': 0.6908643307121399, 'n_pos': 11318, 'n_neg': 200000})

@@ -1,7 +1,0 @@
-{
- "n_hardlinked_found": 1896,
- "n_disconnected_tested": 13,
- "n_still_connected_after_mask": 6,
- "mean_recovery_within_300m": 0.8461538461538461,
- "n_ramps_above_70pct": 11
-}

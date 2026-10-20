@@ -78,7 +78,14 @@ def reference_footprint(ref_path: Path) -> np.ndarray | None:
         return src.dataset_mask() > 0
 
 
-def validate(sub_path: Path, reference: Path | None = None) -> dict[str, Any]:
+def validate(sub_path: str | Path, reference: str | Path | None = None, *,
+             reference_path: str | Path | None = None,
+             features_path: str | Path | None = None) -> dict[str, Any]:
+    sub_path = Path(sub_path)
+    if reference is None and reference_path is not None:
+        reference = reference_path
+    if reference is not None:
+        reference = Path(reference)
     checks: dict[str, dict[str, Any]] = {}
 
     def check(name: str, ok: bool | None, detail: str = "") -> None:
@@ -185,6 +192,7 @@ def validate(sub_path: Path, reference: Path | None = None) -> dict[str, Any]:
 
     receipt["checks"] = checks
     receipt["pass"] = all(checks.get(name, {}).get("pass") is True for name in REQUIRED_CHECKS)
+    receipt["passed"] = receipt["pass"]
     receipt["status"] = "PASS" if receipt["pass"] else "BLOCKED_OR_FAILED"
     return receipt
 

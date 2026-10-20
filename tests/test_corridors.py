@@ -100,3 +100,47 @@ def test_template_metric_reproduces_official_worked_example():
     tp, fp, fn = 3.0, 1.89, 2.0
     dti = tp / (tp + metric.ALPHA * fp + metric.BETA * fn)
     assert abs(dti - 0.60) < 0.005
+
+
+def test_include_splays_emits_continuations_and_flank_breaches():
+    ta, tb, polys = _pair([[0, 0], [0, 40]], [[20, 30], [20, 80]])
+    lines, counts = corridors.generate([ta, tb], polys, max_partners=4, include_splays=True)
+    kinds = {ln.kind for ln in lines}
+    assert {"tip_continuation", "wing_splay", "flank_relay_breach"} <= kinds
+    assert counts["tip_continuations"] >= 2
+    assert counts["wing_splays"] >= 2
+    assert counts["flank_relay_breaches"] >= 2
+
+
+def test_hierarchical_calibration_and_decimated_emission():
+    from gems69 import calibrate, pipeline
+    rng = np.random.default_rng(42)
+    shape = (30, 30)
+    cand = np.ones(shape, dtype=bool)
+    cand[:3, :] = False
+    d_vis = rng.uniform(2.5, 50.0, size=shape).astype(np.float32)
+    d_line = rng.uniform(0.0, 10.0, size=shape).astype(np.float32)
+    d_tip = rng.uniform(0.0, 40.0, size=shape).astype(np.float32)
+    s_band = np.where(d_line <= 8.0, rng.uniform(0.2, 0.9, size=shape), 0.0).astype(np.float32)
+    e_pix = rng.uniform(0.1, 0.9, size=shape).astype(np.float32)
+    withheld = (d_vis < 12.0) & (d_line < 4.0) & cand
+
+    s_edges = calibrate.quantile_edges(s_band[cand & (s_band > 0)], 4)
+    e_edges = calibrate.quantile_edges(e_pix[cand & (s_band > 0)], 4)
+    vcode, gcode, fcode, dims = calibrate.hierarchical_codes(d_line, d_tip, d_vis, s_band, e_pix, s_edges, e_edges)
+    rate, _ = calibrate.fit_hierarchical_rates(vcode, gcode, fcode, dims, withheld, cand & (s_band > 0))
+    p = np.where(cand & (s_band > 0), rate[fcode], 0.0).astype(np.float32)
+    assert p.shape == shape and p.dtype == np.float32
+    assert np.isfinite(p).all() and (p >= 0.0).all() and (p <= 1.0).all()
+    assert (p[~cand | (s_band <= 0)] == 0.0).all()
+    assert p[withheld].mean() > p[cand & ~withheld & (s_band > 0)].mean()
+
+    alloc = pipeline.emit_decimated(p, cand & (s_band > 0), k_truth=25, tile_px=3)
+    dots = alloc.emitted
+    assert dots.shape == shape and dots.dtype == bool
+    assert not (dots & ~cand).any()
+    # At most one dot per 3x3 tile
+    H3, W3 = shape[0] // 3, shape[1] // 3
+    tiles = dots[:H3 * 3, :W3 * 3].reshape(H3, 3, W3, 3).sum(axis=(1, 3))
+    assert (tiles <= 1).all()
+    assert alloc.n_dots == int(dots.sum())

@@ -15,10 +15,10 @@ code{background:#eef1f6;padding:1px 5px;border-radius:5px;font-size:13px;word-br
 pre code{background:none;color:inherit}.muted{color:var(--muted);font-size:14px}.kv td:first-child{width:34%;color:var(--muted)}footer{color:var(--muted);font-size:13px;padding:24px 0}
 .tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 7px;border-radius:6px;background:#eef1f6;color:var(--muted);margin-right:6px}
 </style></head><body><header><div class=wrap><b>GEMSDOE69 · relay-ramp &amp; pull-apart corridor lane</b><nav><a href="../index.html">Home</a><a href="../docs/executive-summary.html">How to submit</a><a href="../docs/method.html">Method &amp; results</a><a href="../docs/why-0278.html">Why 0.2778</a><a href="../docs/hypotheses.html">Hypotheses</a><a href="../docs/sources.html">Sources</a><a href="../docs/irregularities.html">Irregularities</a><a href="../docs/run-card.json">Run card</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE69">Repo</a></nav></div></header><main><div class=wrap><h1>Why <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code> scored 0.2778 — and what it would take to beat it</h1>
-<p>Evidence classes: <strong>[measured-here]</strong> recomputed in this session from committed bytes
-(<code>evidence/e0_champion_ladder_measured.json</code>); <strong>[owner-reported]</strong> the family ledger, no organizer
-receipt links the score to the bytes; <strong>[official]</strong> competition pages; <strong>[model]</strong> arithmetic on
-the above, never a score.</p>
+<p>Evidence classes: <strong>[measured-here]</strong> recomputed from committed bytes
+(<code>evidence/e0_champion_ladder_measured.json</code>, <code>evidence/e3_build.json</code>); <strong>[owner-reported]</strong> the family
+ledger, no organizer receipt links the score to the bytes; <strong>[official]</strong> competition pages; <strong>[model]</strong>
+arithmetic on the above, never a score.</p>
 <h2>1. What the file is  [measured-here]</h2>
 <p><code>GEMSDOE32 docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros.tif</code>
 (identical bytes mirrored as <code>60GEMSDOE/registry/rasters/GEMSDOE32__h33-2-b2-zeros.tif</code>,
@@ -90,7 +90,7 @@ adding one non-redundant dot with kernel credit k raises DTI  ⟺  k &gt; 0.2·D
 <em>uncovered</em> hidden-fault pixel. Three consequences explain the whole ladder:</p>
 <ol>
 <li><strong>Dotting beats solid ribbons.</strong> A dot on a 1-D trace covers ±2 px of it with kernel weights
-   1, ⅔, ⅓, so 2.8-px spacing keeps most of the coverage at a third of the mass. Solid → dotted
+   1, ⅔, ⅓, so 2.8–3.0 px spacing keeps most of the coverage at a third of the mass. Solid → dotted
    (+0.0555, +0.0123) is that effect.</li>
 <li><strong>Known faults are masked from scoring</strong> (organizer statement,
    <a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">forum thread 11516</a>).
@@ -103,18 +103,27 @@ adding one non-redundant dot with kernel credit k raises DTI  ⟺  k &gt; 0.2·D
 </ol>
 <p>So 0.2778 is best read as <em>near-minimal mass on a reasonably ranked wide field</em>, not as proof that
 its field is the right geology.</p>
-<h2>4. Can it be beaten?</h2>
+<h2>4. Can it be beaten — and what does this lane contribute?</h2>
 <ul>
-<li><strong>By more mass control:</strong> a little, but the cheap moves are spent and every remaining move
-  re-uses the champion's own dots, which fails this protocol's uniqueness rule (&gt; 70 % of dots
-  within 3 px of a registry raster). Not available to a unique submission.</li>
+<li><strong>By more mass control alone:</strong> a little, but the cheap moves are spent and every remaining move
+  that merely thins <code>h33-2-b2</code> re-uses the champion's own dots, failing the protocol's uniqueness
+  rule (&gt; 70 % of dots within 3 px of a registry raster).</li>
 <li><strong>By better ranking (credit per dot):</strong> this is the only large lever. Raising mean credit per dot
-  from ≈ 0.135 to ≈ 0.19 at the same mass moves the algebra to ≈ 0.36 [model]. The public board
+  from ≈ 0.135 to ≈ 0.19 at comparable mass moves the algebra to ≈ 0.36 [model]. The public board
   shows that much better fields exist: <strong>#1 0.4275</strong>, #9 0.3195 on 2026-10-12
   (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>;
   snapshot <code>registry/leaderboard_snapshot_2026-10-12.json</code>).</li>
-<li><strong>By this lane (step-over corridors):</strong> tested here. On the hide-and-recover holdout the
-  corridor-restricted field ranks withheld faults <em>worse</em> than the same pipeline without corridor
-  priors, so it is <strong>not</strong> a route past 0.2778 on current evidence. See <code>evidence/e2_gate.json</code>
-  and the run card.</li>
+<li><strong>By this lane (step-over, pull-apart, and tip/flank-breach corridors):</strong> once 300 m kernel-radius
+  decimation (<code>tile_px = 3</code>), normal-fault tip-splay / flank-relay breach extensions, and 3-level
+  hierarchical empirical-Bayes calibration are included, the corridor-restricted arm <code>A_corridor</code>
+  scores <strong>HOLDOUT-DTI 0.1347 [0.1231, 0.1463]</strong> on the pooled hide-and-recover holdout (<code>gems57-pooled-hide-v2</code>,
+  22,893 withheld positive pixels), beating the identical pipeline without corridor priors <code>B1_halo</code>
+  (<strong>0.1264 [0.1151, 0.1382]</strong>, paired Δ = <strong>+0.0083 [+0.0039, +0.0123]</strong>, positive on both draws) as well
+  as <code>AP_halo_corridor</code> (0.1334), <code>C_distance</code> (0.1218), <code>R_corridor_random</code> (0.1112), and <code>B0_evidence</code>
+  (0.0823). On the live build (<code>43,056</code> dots), <strong>61.98 %</strong> of the <code>h33-2-b2</code> champion's dots sit inside
+  our corridor band (which covers 54.97 % of the allowed footprint), while only <strong>25.67 %</strong> of our
+  dots lie within 3 px of a champion dot — making the lane's emission genuinely distinct (<code>≤ 0.6971</code>
+  3-px overlap across all 584 comparable-budget <code>&lt; 80k</code>-dot registry rasters). Because holdout DTI is
+  a screen on withheld catalogue components rather than a live-score projection, promotion to one of
+  the 3 weekly DrivenData slots remains a separate selector decision.</li>
 </ul></div></main><footer><div class=wrap>DOE GEMS Prize (DrivenData competition 306). Every number on this site is labelled HOLDOUT-DTI (this repository's hide-and-recover instrument), OFFICIAL (public competition page) or OWNER-REPORTED. Nothing here is an organizer-confirmed score of this repository's file. Source: <a href='https://github.com/buffedlizard55-lab/GEMSDOE69'>https://github.com/buffedlizard55-lab/GEMSDOE69</a></div></footer></body></html>

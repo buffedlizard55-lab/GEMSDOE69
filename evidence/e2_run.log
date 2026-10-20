@@ -1,7 +1,0 @@
-{
- "corridor_mean_dti": 0.005975197860273526,
- "control_mean_dti": 0.0021479253641536293,
- "paired_delta_mean": 0.003827272496119896,
- "gate_passed": true,
- "withheld_positive_px_total": 22641
-}

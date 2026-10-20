@@ -80,11 +80,8 @@ def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
     from .scoring import S0_DEFAULT
     s0 = S0_DEFAULT if s0 is None else s0
     shape = ctx.grid.footprint.shape
-    catalogue = ctx.grid.catalogue
     if zstack is None:
         zstack = build_z_stack(ctx.grid.footprint, stats)
-    d_cat = ndi.distance_transform_edt(~catalogue)
-    offcat = d_cat > flank_px
 
     # ---- control propensity: same layers, no corridor prior (full grid) -----
     ctrl_layers = ["grav_hg_s2", "grav_tilt_s2", "mag_hg_s2", "mag_tilt_s2",
@@ -105,6 +102,7 @@ def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
             continue
         key = cell.key
         visible = ctx.visible(key)
+        offcat = ndi.distance_transform_edt(~visible) > flank_px
         pipe = corridor_pipeline(visible, shape, stats, zstack=zstack)
         p_cor = pipe["propensity"]
         allowed = cell_allowed(cell, shape) & offcat
@@ -161,7 +159,8 @@ def leakage_canary(ctx, stats, max_neg: int = 200_000, seed: int = 69,
     sel = rng.choice(len(neg_pool[0]), size=n_neg, replace=False)
     ny, nx = neg_pool[0][sel], neg_pool[1][sel]
     ty, tx = np.nonzero(truth)
-    cor_pipe = corridor_pipeline(ctx.grid.catalogue, shape, stats, zstack=zstack)
+    vis_cat = ctx.visible(cells[0].key) if cells else ctx.grid.catalogue
+    cor_pipe = corridor_pipeline(vis_cat, shape, stats, zstack=zstack)
     p_cor = cor_pipe["propensity"]
 
     def auc(vals_t: np.ndarray, vals_n: np.ndarray) -> float | None:

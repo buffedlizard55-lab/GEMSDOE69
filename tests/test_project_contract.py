@@ -70,12 +70,25 @@ class ProjectContractTests(unittest.TestCase):
         self.assertIsNone(card["organizer_confirmed_submission_receipt"])
 
     def test_site_makes_no_download_status_unambiguous(self) -> None:
-        # Since PR #5 the site carries a data-backed NEGATIVE verdict: the lane TIF exists but is archived
-        # as a negative result and must be labelled "do not submit" wherever it is linked.
+        import hashlib
         index = (ROOT / "index.html").read_text(encoding="utf-8")
+        docs_index = (ROOT / "docs/index.html").read_text(encoding="utf-8")
         guide = (ROOT / "docs/executive-summary.html").read_text(encoding="utf-8")
         card = json.loads((ROOT / "evidence/run_card.json").read_text(encoding="utf-8"))
-        if card["verdict"] != "promote":
+        if card["verdict"] == "promote":
+            self.assertIn("OK TO DOWNLOAD AND SUBMIT", index)
+            self.assertIn("OK TO DOWNLOAD AND SUBMIT", docs_index)
+            self.assertIn("OK to download and submit", guide)
+            self.assertTrue(card["holdout"]["gate"]["passed"])
+            self.assertTrue(card["holdout"]["gate"]["per_draw_lower_bound_positive"])
+            self.assertLessEqual(card["submission_note_chars"], 140)
+            zeros_path = ROOT / card["raster"]["zeros_tif"]
+            nan_path = ROOT / card["raster"]["nan_twin_tif"]
+            self.assertTrue(zeros_path.exists())
+            self.assertTrue(nan_path.exists())
+            self.assertEqual(hashlib.sha256(zeros_path.read_bytes()).hexdigest(), card["raster"]["zeros_sha256"])
+            self.assertEqual(hashlib.sha256(nan_path.read_bytes()).hexdigest(), card["raster"]["nan_twin_sha256"])
+        else:
             self.assertIn("NOT OK TO SUBMIT", index)
             self.assertIn("DO NOT SUBMIT", index)
             self.assertIn("NOT OK TO SUBMIT", guide)

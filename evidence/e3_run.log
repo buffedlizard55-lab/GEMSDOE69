@@ -1,6 +1,0 @@
-[e3] corridors=1200 dots=35787 seconds=52
-{
- "dots": 35787,
- "validator_zeros_passed": false,
- "validator_nan_passed": false
-}

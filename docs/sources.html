@@ -1,35 +1,103 @@
-<!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sources · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css"></head>
-<body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="active">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
-<main class="wrap">
-
-<div class="card">
-<h2>Official &amp; verified sources for manual review</h2>
-<table><tr><th>Source</th><th>Link</th><th>Used for</th></tr>
-<tr><td>DrivenData competition 306 (DOE GEMS)</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a></td><td>problem statement, metric, leaderboard (login-walled data)</td></tr>
-<tr><td>Problem page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page/967</a></td><td>submission format + performance metric (alpha 0.2, beta 0.8, 300 m kernel)</td></tr>
-<tr><td>About page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">page/968</a></td><td>resources</td></tr>
-<tr><td>Data page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">/data/</a></td><td>training_features.tif, labels.tif, sample_submission.tif, existing_faults.tif (login-walled; family mirrors used, sha256-pinned)</td></tr>
-<tr><td>Reference solution</td><td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">github.com/drivendataorg/gems-prize-reference-solution</a></td><td>grid constants, metric transcription reference</td></tr>
-<tr><td>USGS GeoDAWN airborne magnetic &amp; radiometric surveys</td><td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">usgs.gov data release</a></td><td>provenance of the magnetic/radiometric layers</td></tr>
-<tr><td>INGENIOUS project</td><td><a href="https://gbcge.org/current-projects/ingenious/">gbcge.org</a></td><td>catalogue context (USGS/INGENIOUS faults)</td></tr>
-<tr><td>EPSG:32611</td><td><a href="https://epsg.io/32611">epsg.io/32611</a></td><td>UTM zone 11N grid definition</td></tr>
-<tr><td>Tversky index background</td><td><a href="https://en.wikipedia.org/wiki/Tversky_index">wikipedia.org/wiki/Tversky_index</a></td><td>metric family background</td></tr>
-<tr><td>GDR data (competition-linked)</td><td><a href="https://gdr.openei.org/submissions/1391">gdr.openei.org/submissions/1391</a></td><td>geothermal data registry node</td></tr>
-<tr><td>Step-over inventory cited in prompt</td><td>Giddens &amp; Faulds (2025), SGP-TR-229 (as cited in the standing prompt; not independently fetched in-sandbox)</td><td>ramp width statistics, hard-link fraction, Walker Lane pull-apart preference</td></tr>
+<!doctype html><html lang=en><head><meta charset=utf-8><meta name=viewport content='width=device-width,initial-scale=1'><title>Sources · GEMSDOE69</title><style>
+:root{--ink:#1d2433;--muted:#5b6577;--line:#e3e7ee;--bg:#f7f8fb;--ok:#0f7b3f;--okbg:#e8f6ee;--bad:#b42318;--badbg:#fdecea;--warn:#8a5a00;--warnbg:#fff6e0;--acc:#1f5fbf}
+*{box-sizing:border-box}body{margin:0;font:16px/1.55 -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Helvetica,Arial,sans-serif;color:var(--ink);background:var(--bg)}
+header{background:#fff;border-bottom:1px solid var(--line)}.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+header .wrap{display:flex;align-items:center;justify-content:space-between;gap:16px;padding-top:14px;padding-bottom:14px;flex-wrap:wrap}
+header b{font-size:17px}nav a{color:var(--muted);text-decoration:none;margin-left:14px;font-size:14px}nav a:hover{color:var(--acc)}
+main .wrap{padding-top:22px;padding-bottom:40px}h1{font-size:26px;margin:.2em 0 .4em}h2{font-size:20px;margin:1.6em 0 .5em}h3{font-size:17px}
+.banner{border-radius:12px;padding:18px 20px;margin:0 0 18px;border:1px solid}.banner h2{margin:0 0 6px;font-size:21px}
+.ok{background:var(--okbg);border-color:#b7e2c8;color:var(--ok)}.bad{background:var(--badbg);border-color:#f5c2bd;color:var(--bad)}.warn{background:var(--warnbg);border-color:#f0d58c;color:var(--warn)}
+.banner p{color:var(--ink);margin:.35em 0}.card{background:#fff;border:1px solid var(--line);border-radius:12px;padding:16px 18px;margin:14px 0}
+.btn{display:inline-block;padding:10px 16px;border-radius:9px;text-decoration:none;font-weight:600;margin:6px 8px 6px 0;border:1px solid var(--line);color:var(--ink);background:#fff}
+.btn.primary{background:var(--ok);border-color:var(--ok);color:#fff}.btn.danger{background:#fff;border-color:var(--bad);color:var(--bad)}
+table{border-collapse:collapse;width:100%;background:#fff;font-size:14px}th,td{border:1px solid var(--line);padding:7px 9px;text-align:left;vertical-align:top}th{background:#f1f3f8}
+code{background:#eef1f6;padding:1px 5px;border-radius:5px;font-size:13px;word-break:break-all}pre{background:#0f1729;color:#e6edf7;padding:12px;border-radius:9px;overflow:auto;font-size:13px}
+pre code{background:none;color:inherit}.muted{color:var(--muted);font-size:14px}.kv td:first-child{width:34%;color:var(--muted)}footer{color:var(--muted);font-size:13px;padding:24px 0}
+.tag{display:inline-block;font-size:12px;font-weight:700;padding:2px 7px;border-radius:6px;background:#eef1f6;color:var(--muted);margin-right:6px}
+</style></head><body><header><div class=wrap><b>GEMSDOE69 · relay-ramp &amp; pull-apart corridor lane</b><nav><a href="../index.html">Home</a><a href="../docs/executive-summary.html">How to submit</a><a href="../docs/method.html">Method &amp; results</a><a href="../docs/why-0278.html">Why 0.2778</a><a href="../docs/hypotheses.html">Hypotheses</a><a href="../docs/sources.html">Sources</a><a href="../docs/irregularities.html">Irregularities</a><a href="../docs/run-card.json">Run card</a><a href="https://github.com/buffedlizard55-lab/GEMSDOE69">Repo</a></nav></div></header><main><div class=wrap><h1>Sources (verified links for manual review)</h1>
+<p>"Verified" = fetched and read in this session (2026-10-12); the quoted fact is what was read.</p>
+<h2>Competition (official)</h2>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>What it establishes</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem description (page 967)</a></td>
+<td>Test set = faults identified by experts that are <strong>not</strong> in the USGS database; Initial round ($50k, top 5 × $10k) on a fixed private set; Final round ($250k: $100k/$70k/$40k/$25k/$15k) re-scores the <strong>single</strong> selected submission against an expanded label set; metric = distance-weighted Tversky, α = 0.2, β = 0.8, triangular kernel R = 300 m, worked example TP 3.00 / FP 1.89 / FN 2.00 → 0.60; format = single float32 layer, EPSG:32611, 100 m, same bounds, "data outside the bounds is null or nan", values between 0 and 1; external data allowed if licensed</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">Public leaderboard</a></td>
+<td>#1 xiaofanhu 0.4275, #2 cfld__ 0.3585, #9 DARD 0.3195; 0.2778 appears under <code>extradr19</code> (no file attribution) — snapshot <code>registry/leaderboard_snapshot_2026-10-12.json</code></td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">Forum 11516 — masking of known faults</a></td>
+<td>DrivenData staff: "Pixels corresponding to known USGS/INGENIOUS faults are masked / excluded from evaluation"; re-evaluation will also mask them</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527">Forum 11527 — how test faults were identified</a></td>
+<td>DrivenData staff (2026-09-23): data sources, fault types and coverage of the test faults are <strong>not disclosed</strong>; Phase 2 test set is updated by expert review of all Phase 1 submissions</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/rules/">Rules page</a> → <a href="https://www.herox.com/GEMSPrize/resource/2274">HeroX resource 2274</a> → <a href="https://www.nlr.gov/docs/fy26osti/96647.pdf">official rules PDF</a></td>
+<td>§1.1 "Participants will submit a single entry, which will be evaluated in two prize phases"; Phase 1 $50,000 split among the top five, Phase 2 $100k/$70k/$40k/$25k/$15k; §3.2 "You can make multiple submissions, subject to the limits specified on the competition website (three submissions per week)"; generative-AI use allowed but must be disclosed in the narrative; finalists submit complete code and documentation able to reproduce the results; new-fault labels by experts at NLR and USGS</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">Reference solution</a></td>
+<td>Commit <code>aebe92f7</code> (2026-06-16), notebook cell 19 writes the prediction with <code>rasterio.open(..., "w", driver="GTiff", count=1, dtype=..., crs=..., transform=...)</code> and <strong>no nodata tag</strong></td>
+<td>Verified (cloned)</td>
+</tr>
+<tr>
+<td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">GeoDAWN data release (USGS)</a> and <a href="https://gbcge.org/current-projects/ingenious/">INGENIOUS project</a></td>
+<td>Origin of the feature stack and labels (linked from the problem description)</td>
+<td>Links verified on the problem page</td>
+</tr>
+</tbody>
 </table>
-<p class="small">Mirror provenance: competition bytes restored from
-<code>registry/data_manifest_gemsdoe32.json</code> (owner-supplied public mirrors; integrity-pinned,
-NOT organizer-authenticated). Registry rasters from <code>registry/prior_rasters.json</code>
-(751 unique git blobs, family census 2026-10-11), verified content-addressed.</p>
-</div>
-
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
-</body></html>
+<h2>Geology used by the lane</h2>
+<table>
+<thead>
+<tr>
+<th>Source</th>
+<th>Fact used</th>
+<th>Status</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Giddens, M.H. &amp; Faulds, J.E. (2025) <em>Analysis of step-overs (or relay ramps) in normal fault systems in the Great Basin region</em>, 50th Stanford Geothermal Workshop, SGP-TR-229 — <a href="https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2025/Giddens.pdf">PDF</a></td>
+<td>&gt; 450 step-overs; relay widths 0.1–14.6 km, mean 2.8 km; step-overs at &gt; 120 °C systems ~70 % hard-linked, ~56 % overlapping, ~74 % between N–NNE strands; relays "typically 3 to 3.5 times longer than the width"; step-over = transfer to an adjacent parallel fault "with the same direction of dip"; breaching minor faults range from oblique connectors to en échelon strands</td>
+<td>Verified</td>
+</tr>
+<tr>
+<td>Faulds, J. et al. (2026) <em>Favorable structural settings for geothermal systems in the Great Basin region</em>, 51st Stanford Geothermal Workshop — <a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2026/Faulds.pdf">PDF</a></td>
+<td>Displacement-transfer zones and pull-aparts are more prominent in the transtensional western Great Basin within and near the Walker Lane; step-overs ~40 % of favorable settings</td>
+<td>Read from the search-engine excerpt of the PDF (not fully fetched)</td>
+</tr>
+<tr>
+<td>Peacock &amp; Sanderson (1994), AAPG Bulletin 78(2) — relay-ramp evolution stages (cited inside Giddens &amp; Faulds 2025, Fig. 4)</td>
+<td>Stage 3: upper ramp breached → hard-linked</td>
+<td>Cited via the verified Giddens &amp; Faulds text</td>
+</tr>
+<tr>
+<td>Miller &amp; Singh (1994), J. Applied Geophysics 32 — tilt angle <code>atan(VDR/THDR)</code></td>
+<td>Edge detector used for gravity / magnetics</td>
+<td>Standard method; not fetched</td>
+</tr>
+</tbody>
+</table>
+<h2>Data mirrors (integrity-pinned, not organizer-authenticated)</h2>
+<ul>
+<li>Feature stack: <code>buffedlizard55-lab/GEMSDOE</code> @ <code>c0c06ac8…</code> (five parts, SHA-256 <code>4371c82e…</code>); the mirror manifest records the organizer Dropbox links it was copied from.</li>
+<li>Catalogue raster, sample submission and external layers: <code>buffedlizard55-lab/60GEMSDOE</code> @ <code>32024716…</code> (<code>data/</code>), every file re-hashed against the pins in <code>src/gems69/data.py</code>.</li>
+<li>INGENIOUS Quaternary-fault polylines: <code>trace_segments_utm11.csv</code> (SHA-256 <code>c5edf9df…</code>) + <code>qfault_attributes.csv</code> (<code>3b8745f0…</code>); the join <code>record_id</code> = attribute row was verified on slip rate and slip sense for 1,126 / 1,126 records, and 99.98 % of catalogue pixels lie within 100 m of the rasterised traces.</li>
+</ul></div></main><footer><div class=wrap>DOE GEMS Prize (DrivenData competition 306). Every number on this site is labelled HOLDOUT-DTI (this repository's hide-and-recover instrument), OFFICIAL (public competition page) or OWNER-REPORTED. Nothing here is an organizer-confirmed score of this repository's file. Source: <a href='https://github.com/buffedlizard55-lab/GEMSDOE69'>https://github.com/buffedlizard55-lab/GEMSDOE69</a></div></footer></body></html>

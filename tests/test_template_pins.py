@@ -5,7 +5,10 @@ import sys
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(ROOT / "vendor" / "template66"))
+if str(ROOT / "src") not in sys.path:
+    sys.path.insert(0, str(ROOT / "src"))
+if str(ROOT / "vendor" / "template66") not in sys.path:
+    sys.path.append(str(ROOT / "vendor" / "template66"))
 
 
 def sha256(path: Path) -> str:
