@@ -56,92 +56,27 @@ def page(title: str, active: str, body: str) -> str:
 
 
 def submission_banner():
-    """The OK / DO-NOT-SUBMIT banner, derived strictly from evidence files."""
-    gate = load("e2_gate.json")
-    uniq = load("e3_uniqueness.json")
+    """Publish only the exact hash-bound artifact cleared by the literal policy."""
+    from release_gate import evaluate
+    decision = evaluate(ROOT)
+    downloads = DOCS / "downloads"
+    # Revoke previously published artifacts as well as hiding their links.
+    if downloads.exists():
+        for artifact in downloads.iterdir():
+            if artifact.suffix.lower() in (".tif", ".tiff", ".zip"):
+                artifact.unlink()
+    if not decision["download_enabled"]:
+        reasons = "".join(f"<li>{esc(r)}</li>" for r in decision["reasons"])
+        return ('<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b>'
+                '<p>No submission download is offered. The archived candidate is a negative result '
+                'under the literal protocol. No competition slot was used.</p><ul>' + reasons + '</ul></div>', None)
     receipt = load("e3_receipt.json")
-    if not gate or not receipt:
-        return ('<div class="banner bad"><b>DO NOT SUBMIT YET.</b> The gate has not been '
-                'evaluated in this session. Run <code>e2</code> and <code>e3</code> first.</div>', None)
-    gate_ok = bool(gate.get("gate_passed"))
-    rho_ok, overlap_ok = True, True
-    worst_ovl = None
-    if uniq:
-        lit = uniq.get("literal_gate", {})
-        strat = uniq.get("stratified_gate", {})
-        rho_ok = bool(lit.get("rho_ok"))
-        overlap_ok = bool(strat.get("dotlike_overlap_ok"))
-        worst_ovl = uniq.get("worst_dot_overlap_dotlike") or {}
-    uniq_ok = rho_ok and overlap_ok
-    fc = receipt.get("format_compliance", {})
-    nan_ok = bool(fc.get("nan", {})) and all(
-        bool(v) for k, v in fc.get("nan", {}).items() if k not in ("dots", "policy"))
-    zeros_ok = bool(fc.get("zeros", {})) and all(
-        bool(v) for k, v in fc.get("zeros", {}).items() if k not in ("dots", "policy"))
-    val_ok = nan_ok or zeros_ok
-    ok = gate_ok and uniq_ok and val_ok
-    review = gate_ok and rho_ok and val_ok and not overlap_ok
-    tifs = sorted(SUB.glob("h69-*-zeros.tif"))
-    tif = tifs[-1] if tifs else None
-    nan_tifs = sorted(SUB.glob("h69-*-nan.tif"))
-    nan_tif = nan_tifs[-1] if nan_tifs else None
-    if review and tif:
-        # conditional download: every gate passed except the literal 70% dot-overlap rule,
-        # which flagged ONE archived dense raster with near-zero surface correlation.
-        pub = DOCS / "downloads" / f"{tif.stem}.tif"
-        pub.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(tif, pub)
-        primary, fallback = (tif, nan_tif) if (zeros_ok and tif) else (nan_tif, None)
-        if nan_ok and nan_tif:
-            shutil.copy2(nan_tif, DOCS / "downloads" / f"{nan_tif.stem}.tif")
-        ovl_pct = f"{worst_ovl.get('dot_overlap_3px', 0):.1%}" if worst_ovl else "n/a"
-        ovl_rho = f"{worst_ovl.get('rho', 'n/a')}"
-        ban = (f'<div class="banner review"><b>&#9888;&#65039; CONDITIONAL: human selector review required '
-               f'before submitting.</b><br>'
-               f'Holdout gate <b>passed</b>, format compliance <b>passed</b>, surface uniqueness '
-               f'<b>passed</b> (worst Spearman &rho;=0.257 over 751 prior rasters, no exact pixel matches). '
-               f'One lane-drift flag: <b>{ovl_pct}</b> of dots within 3&#8201;px of the dots of one '
-               f'<i>archived</i> GEMSDOE51 dense raster (surface &rho;={ovl_rho} &mdash; not a copy; both '
-               f'fields concentrate on mapped structural trends), tripping the protocol\'s literal 70% '
-               f'overlap rule which fails closed. The submit decision is surfaced to the selector '
-               f'(family precedent GEMSDOE63) instead of being auto-promoted.<br>'
-               f'<span class="kv">If the selector judges the flag structural, the artifact below is ready; '
-               f'otherwise treat it as a logged negative result.</span></div>'
-               f'<a class="btn big" href="downloads/{esc(primary.stem)}.tif" download>&#11015;&#65039; Download PRIMARY submission TIF ({esc(primary.stem)}.tif)</a>'
-               + (f'<a class="btn alt" href="downloads/{esc(fallback.stem)}.tif" download>{fallback_label} ({esc(fallback.stem)}.tif)</a>' if fallback else '')
-               + f'<a class="btn alt" href="#how-to-submit">How to submit it</a>')
-        return ban, tif
-    if ok and tif:
-        # publish the artifacts under stable download names
-        pub = DOCS / "downloads" / f"{tif.stem}.tif"
-        pub.parent.mkdir(parents=True, exist_ok=True)
-        shutil.copy2(tif, pub)
-        primary, fallback = (tif, nan_tif) if (zeros_ok and tif) else (nan_tif, None)
-        if nan_ok and nan_tif:
-            shutil.copy2(nan_tif, DOCS / "downloads" / f"{nan_tif.stem}.tif")
-        fallback_label2 = "Diagnostic NaN variant" if fallback and "nan" in fallback.stem else "Fallback all-finite variant"
-        ban = (f'<div class="banner ok"><b>&#9989; OK TO DOWNLOAD AND SUBMIT.</b><br>'
-               f'The gate was met on the spatially-blocked hide-and-recover holdout, the '
-               f'registry lane-drift scan passed (surface Spearman and dot-like overlap), and the '
-               f'format compliance checks passed (single-band float32, EPSG:32611, 3730&times;3292, '
-               f'values in [0,1], footprint-exact against <code>sample_submission.tif</code>).<br>'
-               f'<span class="kv">This is a HOLDOUT-screened candidate, not an organizer-confirmed score. '
-               f'Promotion to a submission slot is a separate selector step.</span></div>'
-               f'<a class="btn big" href="downloads/{esc(primary.stem)}.tif" download>&#11015;&#65039; Download PRIMARY submission TIF ({esc(primary.stem)}.tif)</a>'
-               + (f'<a class="btn alt" href="downloads/{esc(fallback.stem)}.tif" download>{fallback_label2} ({esc(fallback.stem)}.tif)</a>' if fallback else '')
-               + f'<a class="btn alt" href="#how-to-submit">How to submit it</a>')
-        return ban, tif
-    reasons = []
-    if not gate_ok:
-        reasons.append("holdout gate not met (corridor arm did not beat the no-prior control)")
-    if not uniq_ok:
-        reasons.append("registry lane-drift gate not met")
-    if not val_ok:
-        reasons.append("format compliance failed")
-    ban = ('<div class="banner bad"><b>&#10060; DO NOT SUBMIT.</b> '
-           + "; ".join(esc(r) for r in reasons)
-           + '. The negative result is logged in <code>evidence/</code>.</div>')
-    return ban, tif
+    tif = ROOT / receipt["raster"]["zeros"]["path"]
+    downloads.mkdir(parents=True, exist_ok=True)
+    shutil.copy2(tif, downloads / tif.name)
+    return ('<div class="banner ok"><b>OK TO DOWNLOAD — HOLDOUT-SCREENED CANDIDATE.</b>'
+            '<p>All literal gates passed. A separate selector must authorize a real competition slot.</p></div>'
+            f'<a class="btn big" href="downloads/{esc(tif.name)}" download>Download submission TIFF</a>', tif)
 
 
 def build_index():
@@ -152,7 +87,7 @@ def build_index():
     card = load("run_card.json") or {}
     rows = ""
     if gate:
-        rows += f"""<tr><td>Corridor arm pooled DTI</td><td>{gate.get('corridor_mean_dti', float('nan')):.4f} &plusmn; {gate.get('corridor_ci95_half', float('nan')):.4f}</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, {gate.get('n_cells','?')} cells, {gate.get('withheld_positive_px_total','?')} withheld positives)</td></tr>
+        rows += f"""<tr><td>Corridor arm archived mean DTI</td><td>{gate.get('corridor_mean_dti', float('nan')):.4f} &plusmn; {gate.get('corridor_ci95_half', float('nan')):.4f}</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, {gate.get('n_cells','?')} cells, {gate.get('withheld_positive_px_total','?')} withheld positives)</td></tr>
 <tr><td>No-prior control arm</td><td>{gate.get('control_mean_dti', float('nan')):.4f} &plusmn; {gate.get('control_ci95_half', float('nan')):.4f}</td><td>HOLDOUT-DTI, same folds</td></tr>
 <tr><td>Paired &Delta; (corridor &minus; control)</td><td>{gate.get('paired_delta_mean', float('nan')):+.4f} &plusmn; {gate.get('paired_delta_ci95_half', float('nan')):.4f}</td><td>HOLDOUT-DTI</td></tr>"""
     body = f"""
@@ -160,7 +95,7 @@ def build_index():
 <div class="card" id="how-to-submit">
 <h2>How to submit the TIF (3 steps)</h2>
 <ol>
-<li>Download the <b>-zeros</b> variant above (all cells finite in [0,1] &mdash; this avoids the
+<li>Only after the banner explicitly permits a download, download the <b>-zeros</b> variant (all cells finite in [0,1] &mdash; this avoids the
 &ldquo;Predicted values must be in range [0, 1]&rdquo; portal error class seen with NaN-containing artifacts).</li>
 <li>Go to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition 306 &rarr; New submission</a>,
 choose <i>File to submit</i> = the downloaded <code>.tif</code> (a <code>.zip</code> with a single GeoTIFF is also accepted).</li>
@@ -171,7 +106,7 @@ choose <i>File to submit</i> = the downloaded <code>.tif</code> (a <code>.zip</c
 <code>sample_submission.tif</code> (sha256 <code>2176d08e&hellip;</code>) by the shared template validator.</p>
 </div>
 <div class="card">
-<h2>Current evidence at a glance</h2>
+<h2>Archived evidence at a glance — not independently reproduced</h2>
 <table>
 <tr><th>Measurement</th><th>Value</th><th>Evidence class</th></tr>
 {rows}
@@ -204,8 +139,7 @@ pull-aparts and displacement-transfer zones; N&ndash;NE faults are best oriented
 
 
 def build_executive_summary():
-    ban, tif = submission_banner()
-    body = ban + """
+    body = """
 <div class="card">
 <h2>Executive summary &mdash; how a submission is made and entered</h2>
 <ol>
@@ -242,88 +176,58 @@ GEMSDOE32 evidence).</li>
 </ul>
 </div>
 """
-    return page("Executive Summary", "executive-summary.html", body)
+    return page("Executive Summary", "executive-summary.html", submission_banner()[0] + body)
 
 
 def build_why_h33():
     body = """
-<div class="card">
-<h2>PhD analysis: why h33-h33-2-b2 scored 0.2778 (USER-REPORTED-NOT-ORGANIZER-CONFIRMED), and what would beat it</h2>
-<h3>1. The metric arithmetic</h3>
-<p>The competition metric is the distance-weighted Tversky index:
-<code>DTI = TP<sub>w</sub> / (TP<sub>w</sub> + 0.2&middot;FP<sub>w</sub> + 0.8&middot;FN<sub>w</sub> + &epsilon;)</code> with a 300&nbsp;m triangular kernel
-(official problem page; transcribed in <code>vendor/template66/gems/metric.py</code>). False negatives cost
-<b>4&times;</b> as much as false positives. Adding one dot with hit probability <i>p</i> near previously uncovered
-truth raises DTI iff <code>p &gt; &alpha;&middot;DTI</code>; at DTI = 0.2778 the break-even is
-<b>p &gt; 0.0556</b>. Any dot better than ~5.6% likely to touch a hidden fault within 300&nbsp;m is score-positive.
-Sparse, single-basin submissions (1&ndash;2k dots) therefore cap near 0.02&ndash;0.10: they pay the FN penalty on the
-other 99% of the basin.</p>
-<h3>2. What h33-2-b2 actually is (GEMSDOE32 audit bytes)</h3>
-<ul>
-<li><b>37,654 unit dots</b> (value 1.0), basin-wide, on the d28/h19-5 multi-physics lineament propensity
-(&ldquo;0.2708 base&rdquo;), zeros mode, all-finite [0,1] &mdash; format-safe.</li>
-<li><b>Catalogue flank prune B = 2 px (200 m)</b>: every dot within 200&nbsp;m of a mapped fault deleted. Known
-faults are masked out of scoring, so such dots earn zero TP credit while risking FP mass; excising them
-is a pure gain (audit: 0 dots within 100&nbsp;m or 200&nbsp;m of the catalogue after the prune).</li>
-<li>Live-mirror instrument: +0.00487 DTI in 4/4 folds vs the pre-prune base (HOLDOUT-DTI class in the
-GEMSDOE32 audit; the live receipt value quoted on that site is 0.2778).</li>
-</ul>
-<h3>3. Why it beat the other 37k-dot submissions</h3>
-<p>Within the family, three decisions separate 0.26&ndash;0.2708 from 0.2778: (a) dot spacing calibrated near
-the 300&nbsp;m kernel (the d2.8-px thinning beat d1.5 at equal physics: 0.2600 vs 0.2477 on receipts quoted in
-the prompt); (b) basin-wide coverage at the marginal bar above, rather than concentrated bets;
-(c) the 200&nbsp;m flank prune, worth the residual +0.007. The emission's <i>shape</i> &mdash; dots on multi-physics
-lineaments, off catalogue &mdash; matches the DTI optimum for a field of thin hidden faults.</p>
-<h3>4. Can we score higher than 0.2778? &mdash; the honest answer</h3>
-<p><b>Mechanism, yes</b>: the marginal-bar argument says any propensity improvement that puts more dots above
-the p &gt; 0.2&middot;DTI line raises the score; corridor geometry is exactly such an improvement <i>if</i> hidden faults
-preferentially occupy step-over corridors (the physical claim this lane tests). <b>Calibration, honestly
-uncertain</b>: the family's own instrument ranked live scores with cross-family Spearman &rho;&asymp;0.51 (p&asymp;0.09)
-only (GEMSDOE32 instrument-calibration evidence), and the user-cited leaderboard highs (0.3774, 0.3195 &mdash;
-USER-REPORTED) sit +0.04&ndash;+0.10 above the family ceiling, implying signal the family instrument has not
-captured. This lane therefore: validate on the spatially-blocked holdout, pass the gate, publish the TIF
-with an explicit OK/DO-NOT-SUBMIT banner, and treat promotion to a scored slot as a separate selector
-decision. No projection is ever written as a score.</p>
-</div>
+<div class="card"><h2>Why the reported H33 result is plausible — not proven</h2>
+<p>The value <b>0.2778 is USER-REPORTED, NOT ORGANIZER-CONFIRMED for this file</b>.
+No submission-page receipt binding that value to the H33 hash is available here. The user gives
+conflicting leaderboard highs; the archived leaderboard snapshot is not a current feed.</p>
+<p>The local family audit (<code>evidence/e0_champion_ladder_measured.json</code>) records
+progressively sparser dot fields. Under the implemented DTI, redundant dots can add false-positive
+mass without increasing the maximum coverage of a truth pixel. Thinning can therefore improve
+precision while retaining recovery within the distance kernel. This is a plausible explanation
+of the reported family trend, not a causal experiment on organizer hidden truth.</p>
+<p>Removing catalogue-adjacent dots is <b>not automatically a pure gain</b>: an adjacent dot may cover
+an unmasked hidden fault. For a new unit dot with marginal truth coverage dT and self-credit m,
+the exact improvement condition is <code>dT &gt; 0.2 DTI (dT + 1 - m)</code> for the stated weights.
+The simplified threshold <code>m &gt; 0.2 DTI</code> only follows when dT=m. It is not a universal
+5.6% fault-probability rule. There is no justified fixed score ceiling for sparse submissions.</p>
+<p>Can we beat H33? Possibly, but <b>not demonstrated</b>. That requires a reproducible,
+leakage-safe comparison and ultimately an organizer receipt. Our current literal uniqueness gate
+fails, so the correct action is a negative result, not a projected leaderboard score.</p>
+<p>Manual review: <a href="https://github.com/drivendataorg/gems-prize-reference-solution">organizer reference repository</a>,
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official problem description</a>,
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/index.html">family H33 page source</a>.
+Only the GitHub sources were accessible for this review; the competition page was not independently refreshed.</p></div>
 """
-    return page("Why H33 Scored", "why-h33-scored.html", body)
+    return page("H33 evidence review", "why-h33-scored.html", body)
 
 
 def build_hypotheses():
-    ev = load("e1_canaries.json") or {}
-    canary_rows = "".join(
-        f"<tr><td>{esc(k)}</td><td>{round(float(v.get('auc', 0)), 3) if isinstance(v, dict) and 'auc' in v else v}</td><td>LEAKAGE-CANARY (AUC &lt; 0.90 clean)</td></tr>"
-        for k, v in ev.items() if isinstance(v, dict) and "auc" in v)
-    body = f"""
-<div class="card">
-<h2>Five candidate geological hypotheses — ranked by expected HOLDOUT-DTI gain and cost</h2>
-<p>Each hypothesis names the specific layer(s), physical signature (edge/curvature transform), why it should catch a fault missing from the USGS/INGENIOUS catalogue, and how it differs from prior family implementations. Ranking is by expected HOLDOUT-DTI improvement over the no-prior control (B1_halo) then by implementation cost. The top hypothesis (H69-D) has been validated on the spatially-blocked holdout; the rest are queued.</p>
-<table>
-<tr><th>Rank</th><th>Hypothesis</th><th>Layers (official source)</th><th>Physical signature (transform)</th><th>Why it catches a catalogue-missing fault</th><th>Novelty vs family</th><th>Expected DTI gain / Cost / Status</th></tr>
-<tr><td><b>1 — TOP, IMPLEMENTED</b></td><td><b>H69-D Radiometric K/Th depletion halos inside corridors</b></td><td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a> <code>geodawn_rad_u8.tif</code> bands K, Th (DOI 10.5066/P93LGLVQ); <code>training_features.tif</code> + lidar scarp</td><td>Robust-low z of K and Th (hydrothermal leaching signal) averaged inside corridor masks; corridor score = weighted max of HG/tilt (grav/mag), magnetic lows, scarp, and K/Th depletion</td><td>Alteration halos mark permeable damage zones even where no scarp or fault-edge survives; radiometrics see chemistry, not geometry, so faults under thin cover or in basins are detectable where catalogue mapping has nothing to record</td><td>Family used radiometrics only in scarp-fusion blends (<a href="https://buffedlizard55-lab.github.io/GEMSDOE46/">GEMSDOE46</a>); never as corridor-interior primary channel</td><td><b>+0.003–0.005 HOLDOUT-DTI (moderate)</b> / <b>cheap</b> — data hash-pinned (<code>c22420f7…</code>) and already restored; <b>VALIDATED</b>: HOLDOUT-DTI gate passed (0.0060±0.0014 vs 0.0021±0.0006, Δ+0.0038±0.0015, n=22641), uniqueness passed (ρ=0.154 &lt; 0.90, overlap=0.619 &lt; 0.70), no leakage (AUC &lt;0.90)</td></tr>
-<tr><td>2</td><td><b>H69-A Relay-ramp / pull-apart corridors (baseline lane)</b></td><td>INGENIOUS polylines (<code>trace_segments_utm11.csv</code> + <code>qfault_attributes.csv</code>), DEM dip inference, <code>iso_grav_anom</code>, <code>rtp</code>, lidar scarp</td><td>Step-over geometry &rarr; corridor masks; multi-scale HG + tilt robust-z + magnetic-low + scarp; orientation vs WNW extension; greedy marginal-DTI inside corridors</td><td>Hidden breaching/relay faults live <i>between</i> mapped tips; geometry proposes them where pixel statistics are weakest</td><td>First vector tip graph with dip polarity and releasing-step logic; <a href="https://buffedlizard55-lab.github.io/GEMSDOE33/">GEMSDOE33</a> was single-tip analogs</td><td>Moderate / medium — <b>Run (E1,E2,E3)</b>: HOLDOUT-DTI 0.0060 vs 0.0021 control (Δ+0.0038), gate PASSED</td></tr>
-<tr><td>3</td><td><b>H69-C Straight conductivity / basement steps under cover</b></td><td><code>training_features.tif</code> bands <code>cond_surf</code> (MT conductivity), <code>depth_to_base_surf</code> (basement depth) — USGS-derived via GBCGE INGENIOUS</td><td>Gradient magnitude &times; 3&times;3 directional coherence of gradient orientation (straight-boundary test); rank coherence along corridor axis</td><td>MT conductivity and basement depth image subsurface: a straight conductivity step locates a fault under alluvium where surface mapping has no scarp to record</td><td>These bands entered family stacks only as scalars/plain gradients; never as straightness-filtered edges</td><td>Small-moderate / <b>cheap</b> — data already in stack; CPU-only</td></tr>
-<tr><td>4</td><td><b>H69-B Knickpoint-&chi; chains at step-over mouths</b></td><td><code>det_elev</code>, <code>det_elev_slope</code> detrended elevation (USGS 3DEP 1 m DEM via <a href="https://www.usgs.gov/faqs/what-types-elevation-datasets-are-available-what-formats-do-they-come-and-where-can-i-download">The National Map Downloader</a>, public domain, no account required)</td><td>&chi;-integral anomalies of bedrock streams crossing corridor axes; collinearity vote of knickpoints across drainages</td><td>Blind faults with no surface scarp still knick stream profiles; a chain of collinear knickpoints across drainages is structure a scarp map cannot see</td><td>All family DEM channels are local (curvature/ridge); nothing integrates along-stream profiles</td><td>Small-moderate / medium CPU — no new external data; tiles obtainable via <a href="https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e">3DEP 1 m collection</a></td></tr>
-<tr><td>5</td><td><b>H69-E Seismicity lineaments + nodal planes</b></td><td>Would replace <code>ieq/deq</code> bands with raw event catalogue <a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS ComCat FDSNWS</a> / <a href="https://service.scedc.caltech.edu/eq-catalogs/date_lat_lon.php">ANSS/SCEDC</a></td><td>Epicentre lineament density + focal-mechanism nodal-plane strikes</td><td>Active blind low-slip faults light up seismically while leaving no scarp</td><td>Family uses pre-binned density bands only</td><td>Small / <b>DATA-BLOCKED in-sandbox</b>: needs ComCat/ANSS catalogue (free, official; not reachable from this sandbox per network allowlist, IR-69-ENV-01)</td></tr>
-</table>
-<p class="small">Expected gains are HOLDOUT-DTI priors written before E2, not leaderboard projections. A projection is never written as a score (protocol rule 3). All hypotheses stay inside the assigned lane (catalogue-geometry corridors, W 0.1–15 km, along &le; 3.5W).</p>
-</div>
-
-<div class="card">
-<h2>Why H69-D was chosen as top candidate — PhD-level rationale</h2>
-<p><b>Mechanism:</b> In the Walker Lane, hot systems sit more often in pull-aparts and displacement-transfer zones than in normal-fault step-overs (standing prompt; Faulds et al. 2026, <a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2026/Faulds.pdf">PDF</a>). Pull-apart basins are partially covered by alluvium; surface scarps are subdued, but hydrothermal alteration leaves a radiometric fingerprint: K and Th are leached from the damage zone and reprecipitated in the halo, producing a <i>depletion low</i> in the airborne gamma-ray K/Th channels (USGS GeoDAWN <a href="https://doi.org/10.5066/P93LGLVQ">DOI 10.5066/P93LGLVQ</a>). Scoring corridors by K/Th depletion concentrates probability mass in basins — exactly where dense structural-trend rasters have low coverage, which explains why our new submission's dot overlap dropped from 0.921 to 0.619 and passed the 0.70 lane-drift gate.</p>
-<p><b>Non-fault mimic that could fool it:</b> Felsic intrusive bodies and lithologic contacts can produce K/Th highs/lows without faulting; a buried mafic dike produces a magnetic high without a fault (USGS Surprise Valley example, <a href="https://pubs.usgs.gov/publication/70271401">Pub 70271401</a>). We mitigate by requiring <i>both</i> depletion <i>and</i> corridor geometry + HG/tilt edge evidence + N–NE dilation orientation, and by recording a per-corridor rationale for geologist review.</p>
-<p><b>Validation:</b> Before touching a weekly submission slot, the top candidate was screened on the spatially-blocked hide-and-recover holdout (template <code>gems57 pooled hide-and-recover &alpha;=0.2 &beta;=0.8 R=300 m</code>, 8 cells, 22641 withheld positives). <b>HOLDOUT-DTI</b> corridor arm 0.0060&plusmn;0.0014 beat the no-prior control 0.0021&plusmn;0.0006 (&Delta;+0.0038&plusmn;0.0015, 95% CI lower &gt;0). Leakage canary: every single-feature AUC &lt;0.90 (corridor propensity 0.691 max). Hard-linked ramp masking: mean recovery 0.864 within 300 m (n=22, median 1.0). Registry scan: worst |&rho;|=0.154, worst dotlike overlap=0.619 (both &lt; limits). Format validator: PASS on both variants.</p>
-<p class="small">If this candidate could not be validated without new external data, the required source is <a href="https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e">USGS 3DEP 1 m DEM collection</a> (public domain, no account, GeoTIFF via The National Map Downloader) for H69-B, or <a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS ComCat</a> for H69-E — both free and official, but GDR/drivendata.org are not reachable from this sandbox, so they were checked as obtainable before proposing.</p>
-</div>
-
-<div class="card">
-<h2>Leakage canaries — this session (HOLDOUT-DTI, n=11318 withheld truth vs 200k negatives)</h2>
-<p class="small">Protocol rule 4: any single-feature AUC &gt;0.90 on the holdout = leakage until proven otherwise. Physics layers are catalogue-independent; corridor propensity is the catalogue-derived feature under test. All AUC &lt;0.90 &rArr; clean.</p>
-<table><tr><th>Feature (official band / transform)</th><th>AUC</th><th>Evidence class</th></tr>{canary_rows}</table>
-</div>
+    body = """
+<div class="card"><h2>Queued in-lane hypotheses — no experiment authorized after duplicate stop</h2>
+<p>Qualitative ranking by expected incremental recovery, then implementation cost; no numerical
+DTI improvement is predicted. These joint signatures are absent from the checked-in corridor scorer.
+All remain untested and not slot-eligible. Existing cached layers suffice in principle, but the
+full stack is not restored here. No new external dataset is represented as obtainable.</p>
+<table><tr><th>Rank / hypothesis</th><th>Layers and physical signature</th><th>Missing-fault argument / difference / mimic / cost</th></tr>
+<tr><td>1. Convergent relay-link edge phase</td><td>Gravity and magnetics: HG ridge directions and tilt-zero crossings on opposite corridor margins at several scales.</td>
+<td>Could locate a buried bridge between visible tips. Unlike the current independent maximum layer scores, requires a shared connector phase and axis. Lithologic contacts mimic it. Moderate cost; uncertain benefit.</td></tr>
+<tr><td>2. Releasing-basin margin asymmetry</td><td>Gravity curvature and paired HG flanks plus magnetic low, restricted to tip-derived pull-apart rhombs.</td>
+<td>Could find buried basin-bounding splays rather than rescore visible scarps. Tests transverse basin structure, not a scalar low. Sediment-filled paleochannels mimic it. Moderate cost; uncertain benefit. Slip sense must be verified, not inferred from overlap alone.</td></tr>
+<tr><td>3. En echelon scarp phase coherence</td><td>LiDAR-scarp channel: staggered oriented ridges aligned across a proposed connector, vetoing uninterrupted parallel terrace edges.</td>
+<td>Could recover short linking strands omitted by regional mapping. Current scorer averages channel magnitude, not staggered spatial phase. Pluvial shorelines and road cuts mimic it. Moderate-to-high cost; uncertain benefit.</td></tr>
+<tr><td>4. Corridor-confined radiometric contrast reversal</td><td>Radiometric K/Th local contrast relative to matched corridor flanks, conditional on magnetic depletion.</td>
+<td>May distinguish local alteration from broad lithologic domains, including K enrichment as well as depletion. Unlike the archived depletion-only claim, estimates signed within-unit contrast. Sediment sorting mimics it. High cost because lithologic controls are not authenticated; defer pending provenance.</td></tr></table>
+<p>Before any implementation: repair provenance, restore pinned inputs, verify feature-alone canaries,
+reserve untouched spatial blocks, compare with the current best on the identical evaluator, and check
+surface uniqueness before placing dots. Do not relax the literal overlap rule. Giddens &amp; Faulds
+statistics in the prompt remain unverified citations in this environment, not independently established facts.</p></div>
 """
-    return page("Hypotheses", "hypotheses.html", body)
+    return page("Queued hypotheses", "hypotheses.html", body)
 
 
 def build_method():
@@ -434,7 +338,8 @@ def build_results():
 def build_sources():
     body = """
 <div class="card">
-<h2>Official &amp; verified sources for manual review</h2>
+<h2>Source links and verification limits</h2>
+<p>Only the organizer GitHub reference repository was refreshed from an official source in this review. Other official links below are manual-review references, not freshly fetched or authenticated evidence. See the README review report for access limits.</p>
 <table><tr><th>Source</th><th>Link</th><th>Used for</th></tr>
 <tr><td>DrivenData competition 306 (DOE GEMS)</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a></td><td>problem statement, metric, leaderboard (login-walled data)</td></tr>
 <tr><td>Problem page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page/967</a></td><td>submission format + performance metric (alpha 0.2, beta 0.8, 300 m kernel)</td></tr>
@@ -465,8 +370,7 @@ def build_irregularities():
 <tr><td>IR-69-DATA-01</td><td><code>existing_faults.tif</code> is byte-identical to <code>labels.tif</code>
 (sha256 7ba308cc&hellip;) in every family mirror; the true organizer existing-faults raster is not
 available in this environment. Consequence: the public labels raster doubles as the mapped catalogue;
-the scored hidden truth is unpublished.</td><td>Accepted as the family standard (gems57/grid.py documents it);
-holdout hides whole catalogue segments so the instrument remains well-defined.</td></tr>
+the scored hidden truth is unpublished.</td><td>Mirror equality is not organizer authentication; holdout validity and catalogue provenance remain limitations.</td></tr>
 <tr><td>IR-69-DATA-02</td><td>No DrivenData auth: organizer bytes cannot be re-downloaded; all data are
 sha256-pinned family mirrors (NOT organizer-authenticated).</td><td>Fail-closed fetch scripts verify every byte
 on arrival; a mismatch aborts the run.</td></tr>
@@ -479,8 +383,7 @@ condition is proxied by sub-parallel terminal strikes (&le;30&deg;).</td><td>Dis
 check queued for a future session.</td></tr>
 <tr><td>IR-69-REG-01</td><td>The literal protocol overlap gate fails closed against ANY sparse dot field because the
 registry contains 27 universal soft surfaces and 134 high-density rasters (family precedent GEMSDOE63/64).
-The lane-drift gate is therefore evaluated on the dotlike stratum plus the surface Spearman against everything,
-with the structural condition reported separately.</td><td>Reported literally in evidence/e3_uniqueness.json.</td></tr>
+The stratified diagnostic does not override the literal protocol. A literal failure means duplicate-and-stop; no download is offered.</td><td>Reported literally in evidence/e3_uniqueness.json.</td></tr>
 <tr><td>IR-69-SCORE-01</td><td>All leaderboard values in the standing prompt (0.2778, 0.3774, 0.3195, &hellip;) are
 USER-REPORTED-NOT-ORGANIZER-CONFIRMED; no organizer receipt exists in this repo.</td><td>Labels applied everywhere.</td></tr>
 </table>
@@ -513,38 +416,15 @@ def main() -> int:
         "irregularities.html": build_irregularities(),
         "run-card.html": build_run_card(),
     }
+    # Root is a redirect with a fail-closed status message, avoiding divergent copies.
+    (ROOT / "index.html").write_text('<!doctype html><html lang="en"><head><meta charset="utf-8"><meta http-equiv="refresh" content="0;url=docs/index.html"><title>GEMSDOE69 submission status</title></head><body>' + submission_banner()[0].replace('href="downloads/', 'href="docs/downloads/') + '<p><a href="docs/index.html">Open project site</a></p></body></html>')
+    (DOCS / "run-card.json").write_text(json.dumps(load("run_card.json"), indent=2) + "\n")
+    from release_gate import evaluate
+    (DOCS / "status.json").write_text(json.dumps(evaluate(ROOT), indent=2) + "\n")
     for name, html_text in pages.items():
         (DOCS / name).write_text(html_text)
-    if (EV / "run_card.json").exists():
-        shutil.copy2(EV / "run_card.json", DOCS / "run-card.json")
-    (ROOT / "index.html").write_text(build_root_index())
-    print("built", len(pages), "pages + root index.html")
+    print("built", len(pages), "pages")
     return 0
-
-
-def build_root_index() -> str:
-    card = load("run_card.json") or {}
-    verdict = card.get("verdict", "")
-    tifs = sorted(SUB.glob("h69-*-zeros.tif"))
-    tif = tifs[-1] if tifs else None
-    tif_name = tif.name if tif else "submission.tif"
-    if verdict == "promote":
-        banner_html = f"""<div class="banner ok"><b>&#9989; OK TO DOWNLOAD AND SUBMIT.</b><br>
-The gate was met on the spatially-blocked hide-and-recover holdout, the registry lane-drift scan passed (surface Spearman &rho;=0.154 &lt; 0.90, dotlike dot overlap 61.9% &lt; 70%), and the format compliance checks passed (single-band float32, EPSG:32611, 3730&times;3292, values in [0,1], footprint-exact against <code>sample_submission.tif</code>).<br>
-<span class="kv">This is a HOLDOUT-screened candidate, not an organizer-confirmed score. Promotion to a submission slot is a separate selector step.</span></div>
-<p><a class="btn big" href="docs/downloads/{esc(tif_name)}" download>&#11015;&#65039; Download PRIMARY submission TIF ({esc(tif_name)})</a></p>"""
-    else:
-        banner_html = f"""<div class="banner bad"><b>&#10060; NOT OK TO SUBMIT &mdash; DO NOT SUBMIT TO A SCORED SLOT &mdash; negative result logged.</b><br>
-The unique submission TIF ({esc(tif_name)}) exists for download and inspection, but it is <b>not OK to submit</b>:
-the gate or uniqueness test failed or is pending, and is logged per protocol rule 1. No submission slot was spent.
-Promotion to a scored slot is a separate selector decision requiring a gate pass. Full evidence: <a href="docs/index.html">docs/index.html</a>.</div>"""
-
-    return f"""<!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GEMSDOE69 · submission status</title><link rel="stylesheet" href="docs/assets/site.css"></head><body><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1><div class="sub">DOE GEMS Prize (DrivenData #306) &middot; catalogue-geometry fault proposal &middot; parallel-run lane 69</div>
-{banner_html}
-<p><a class="btn" href="docs/index.html">&rarr; Go to the full GEMSDOE69 site (executive summary, hypotheses, method, results, sources)</a></p>
-</div></body></html>
-"""
 
 
 if __name__ == "__main__":

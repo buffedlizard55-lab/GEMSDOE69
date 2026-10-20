@@ -1,4 +1,4 @@
-# Standing prompt (verbatim, session of 2026-10-12) — read at the start of every session
+# Standing project brief (retained summary from 2026-10-12) — read at the start of every session
 
 > Review the repo.
 >

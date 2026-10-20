@@ -1,38 +1,94 @@
 {
-  "generated_utc": "2026-10-12T01:48:52Z",
-  "official_data": {
-    "training_features.tif": {
-      "present": false,
-      "bytes": null,
-      "provenance": "missing"
-    },
-    "labels.tif": {
-      "present": false,
-      "bytes": null,
-      "provenance": "missing"
-    },
-    "existing_faults.tif": {
-      "present": false,
-      "bytes": null,
-      "provenance": "missing"
-    },
-    "sample_submission.tif": {
-      "present": false,
-      "bytes": null,
-      "provenance": "missing"
-    },
-    "1m_DEM_links.csv": {
-      "present": false,
-      "bytes": null,
-      "provenance": "missing"
-    }
-  },
-  "all_official_files_present": false,
-  "gate": {
-    "status": "BLOCKED",
-    "download_enabled": false,
-    "reason": "no holdout receipt: gate not evaluated"
-  },
+  "verdict": "negative",
   "download_enabled": false,
-  "candidate_submission": null
+  "reasons": [
+    "No explicit same-evaluator evidence of beating the current holdout best.",
+    "Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.",
+    "Registry scan is incomplete or contains errors.",
+    "Reproducible method source manifest is missing, stale, or not artifact-bound.",
+    "Artifact-bound feature-alone leakage canaries are missing or flagged.",
+    "surface uniqueness phase is missing or not bound to the current artifact.",
+    "surface uniqueness phase failed or is incomplete.",
+    "dots uniqueness phase is missing or not bound to the current artifact.",
+    "dots uniqueness phase failed or is incomplete."
+  ],
+  "artifact_sha256": "be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7",
+  "validator_report": {
+    "file": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif",
+    "bytes": 228607,
+    "sha256": "be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7",
+    "meta": {
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ]
+    },
+    "n_nan": 0,
+    "n_nan_inside_footprint": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "positive_pixels": 31994,
+    "distinct_positive_values": [
+      1.0
+    ],
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "crs_epsg_32611": true,
+      "shape_3730x3292": true,
+      "transform_and_bounds_match_sample_submission": true,
+      "footprint_all_finite": true,
+      "footprint_values_in_0_1": true,
+      "no_infinite_values": true,
+      "nan_only_outside_footprint": true,
+      "no_sentinel_values": true,
+      "all_finite_values_in_0_1": true,
+      "no_positive_outside_footprint": true,
+      "zero_positive_on_mapped_catalogue": true,
+      "template_validator_passed": true
+    },
+    "template_validator": {
+      "all_checks_passed": true,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "dimensions_3730x3292": true,
+        "crs_epsg_32611": true,
+        "transform_matches_sample_submission": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "no_sentinel_values": true,
+        "range_0_1_guaranteed": true,
+        "min_ge_0": true,
+        "max_le_1": true,
+        "in_footprint_all_finite": true,
+        "in_footprint_range_0_1": true,
+        "outside_footprint_zero": true,
+        "zero_dots_on_mapped_catalogue": true
+      }
+    },
+    "template_format_report": {
+      "ok": true,
+      "problems": []
+    },
+    "all_checks_passed": true
+  }
 }
