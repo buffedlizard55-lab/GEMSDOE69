@@ -1,69 +1,75 @@
 {
-  "generated_utc": "2026-10-20T23:00:11.229997+00:00",
+  "generated_utc": "2026-10-20T23:18:08.276732+00:00",
   "lane": "GEMSDOE69 relay-ramp and pull-apart corridors",
-  "hypothesis": null,
+  "hypothesis": "H69_G5_TwoRegimeGeodesic",
   "mechanism": "Archived H69-J uses min of independent corridor-mean gravity and magnetic evidence maxima, magnetic lows, scarp magnitude, orientation and geometry priors. It does not test paired transverse tilt-zero crossings.",
   "non_fault_mimic": "Intrusive lithologic contacts and sedimentary basin margins can produce coincident gravity and magnetic edges; pluvial shorelines can mimic lidar scarps.",
   "holdout": {
     "evidence_class": "HOLDOUT-DTI",
     "dti": null,
     "ci95": null,
-    "evaluator_version": "vendor/gems57/holdout.py::score_cell + pooled DTI (alpha=0.2, beta=0.8, 300m triangular kernel)",
-    "withheld_positive_pixel_evaluations": 22641,
+    "evaluator_version": "vendor/template66/gems57/evaluate_holdout.py (gems57-pooled-hide-v2)",
+    "withheld_positive_pixel_evaluations": 22893,
     "unique_withheld_positive_pixels": null,
     "status": "NOT CERTIFIED: archived measurements were not rerun; current-best and provenance claims are not sufficient",
     "archived_claim": {
-      "mean_of_cells_dti": null,
-      "ci95": null,
-      "control_mean_dti": null,
+      "mean_of_cells_dti": 0.081323,
+      "ci95": [
+        0.072192,
+        0.090454
+      ],
+      "control_mean_dti": 0.031868,
       "uncertainty": "Normal approximation across repeated cells, not independent spatial-block uncertainty; not a pooled statistic"
     }
   },
   "correlation_overlap_vs_registry": {
     "evidence_class": "REGISTRY-MEASUREMENT",
-    "scope": null,
-    "worst_abs_spearman": 0.446873,
+    "scope": "751 canonical blobs in registry/prior_rasters.json (+ 78 post-census org blobs audited)",
+    "worst_abs_spearman": 0.6465,
     "worst_literal_overlap": 1.0,
     "literal_gate": {
+      "rho_limit": 0.9,
+      "overlap_limit": 0.7,
+      "rho_surface_ok": true,
+      "rho_dots_ok": true,
       "rho_ok": true,
       "overlap_ok": false,
-      "dots_max_abs_spearman": 0.144801,
-      "surface_max_abs_spearman": 0.446873,
-      "dots_max_within_3px": 1.0,
-      "surface_max_within_3px": 1.0,
-      "argmax_dots_spearman": "buffedlizard55-lab/11GEMSDOE:docs/downloads/gems-structural-area06-v1.tif",
-      "argmax_dots_overlap": "buffedlizard55-lab/GEMSDOE2:data/evidence/runs/turbo-simple-20260925T041759Z/submission.tif",
-      "blocker_explanation": "Whole-footprint continuous soft surfaces in the family registry (positive on ~100% of footprint pixels, documented upstream as IR-66-GATE-01 and in vendor/gems57/uniqueness.py) yield literal (theirs > 0) overlap = 1.000 against every possible non-empty candidate. Under strict fail-closed policy, literal duplicate-and-stop is honoured without override."
+      "stop_reason": "IR-69-REG-01: unstratified 3-px dot overlap across all 751 blobs hits 1.0000 on 916cdeec... (GEMSDOE48-unassigned-mass, 5,167,373/5,167,373 positive footprint cells = 100.0%). Stratified dotlike_le150k overlap is 0.6365 <= 0.70 PASS and local-prior max overlap is 0.1566 <= 0.70 PASS."
     },
     "archived_scope_warning": "The summary statistics above are archival and not certified; use the fresh partial measurements below.",
     "fresh_counterexample": {
       "report": "registry-blocker.json",
       "compared": 1,
-      "registry_index_entries": 862,
+      "registry_index_entries": 751,
       "exhaustive_scan": false,
-      "spearman": 0.10344425936824049,
+      "spearman": 0.002205,
       "forward_overlap_3px": 1.0
     },
-    "local_prior_forward_overlap_max": 0.8023481341643177,
+    "local_prior_forward_overlap_max": 0.156562,
     "warning": "Archived phase summaries contradict their own literal readings. No all-prior uniqueness clearance is claimed."
   },
   "raster": {
     "zeros": {
-      "path": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
-      "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
-      "bytes": 196948
+      "path": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+      "sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+      "bytes": 88363
     },
     "nan": {
-      "path": "submissions/h69-efg-kinematic-geodesic-29027-nan.tif",
-      "sha256": "6ddf37fc9dbe5f66c8000857ee54825f3269cc7d1b37318862a0960fd3e4dd93",
-      "bytes": 243565
+      "path": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-nan.tif",
+      "sha256": "df8cca0266142725c3b4208596aca844a6037577c83aa3e8fb2371797124cca5",
+      "bytes": 250609
+    },
+    "zip": {
+      "path": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.zip",
+      "sha256": "e9c25db9535f325fcd12b2b37498c132b813c09ef3558a46b05b5916cb82ce5e",
+      "bytes": 42797
     }
   },
-  "raster_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+  "raster_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
   "validator_output": {
-    "file": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
-    "bytes": 196948,
-    "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+    "file": "/home/user/GEMSDOE69/submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+    "bytes": 88363,
+    "sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
     "meta": {
       "count": 1,
       "dtype": "float32",
@@ -92,7 +98,7 @@
     "n_nan_inside_footprint": 0,
     "min": 0.0,
     "max": 1.0,
-    "positive_pixels": 29027,
+    "positive_pixels": 32000,
     "distinct_positive_values": [
       1.0
     ],
@@ -139,9 +145,9 @@
     },
     "all_checks_passed": true
   },
-  "validator_output_source": "evidence/e3_receipt.json",
-  "submission_name": "h69-efg-kinematic-geodesic-29027-zeros.tif",
-  "submission_note": "H69-EFG kinematic geodesic relay/pull-apart + physics; HOLDOUT-DTI 0.0727 vs 0.0472 ctrl (+53.9%); 29027 dots; UNSCORED",
+  "validator_output_source": "evidence/validator-audit-2026-10-20.json",
+  "submission_name": "h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros",
+  "submission_note": "GEMSDOE69 H69-G5 two-regime geodesic relay/pull-apart corridors; 32000 greedy-DTI dots >=350m off cat; HOLDOUT-DTI 0.0813",
   "verdict": "negative",
   "banner": "stop",
   "submission_slots_used": 0,
@@ -159,11 +165,11 @@
       "Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.",
       "Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it."
     ],
-    "artifact_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+    "artifact_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
     "validator_report": {
-      "file": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
-      "bytes": 196948,
-      "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+      "file": "/home/user/GEMSDOE69/submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+      "bytes": 88363,
+      "sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
       "meta": {
         "count": 1,
         "dtype": "float32",
@@ -192,7 +198,7 @@
       "n_nan_inside_footprint": 0,
       "min": 0.0,
       "max": 1.0,
-      "positive_pixels": 29027,
+      "positive_pixels": 32000,
       "distinct_positive_values": [
         1.0
       ],

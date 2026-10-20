@@ -10,11 +10,11 @@
     "Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.",
     "Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it."
   ],
-  "artifact_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+  "artifact_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
   "validator_report": {
-    "file": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
-    "bytes": 196948,
-    "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+    "file": "/home/user/GEMSDOE69/submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+    "bytes": 88363,
+    "sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
     "meta": {
       "count": 1,
       "dtype": "float32",
@@ -43,7 +43,7 @@
     "n_nan_inside_footprint": 0,
     "min": 0.0,
     "max": 1.0,
-    "positive_pixels": 29027,
+    "positive_pixels": 32000,
     "distinct_positive_values": [
       1.0
     ],

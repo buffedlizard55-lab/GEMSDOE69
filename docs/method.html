@@ -4,19 +4,50 @@
 <title>Method · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="active">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<header><div class="wrap"><h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · H69_G5_TwoRegimeGeodesic</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="active">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card"><h2>Reproducible H69-EFG architecture (hash-bound in <code>evidence/e3_method_manifest.json</code>)</h2>
+<div class="card"><h2>Hash-Bound Reproducible Architecture (<code>evidence/e3_method_manifest.json</code>)</h2>
 <ul>
-<li><b>Leak-free kinematics (<code>src/gems69/tips.py</code>):</b> Skeletonizes strictly visible catalogue pixels into 8-connected strands, attaches Qfaults <code>SLIPSENSE</code>, <code>SECONDARY</code>, <code>DIPDIRECT</code>, and 100 m DEM hanging-wall polarity strictly within visible masks, and rejects opposite-dip normal pairs.</li>
-<li><b>World-origin geometry &amp; geodesic routing (<code>src/gems69/corridors.py</code>):</b> Enforces <code>W &isin; [0.1, 15] km</code> and shared-origin separation <code>&le; 3.5W</code> across full <code>hypot(W, 3.5W)</code> radius, deduplicates to the unique minimum-distance facing tip pair per strand pair, and routes minimum-resistance Dijkstra connectors, paired pull-apart margin splays, Riedel strands, and free-tip wing-crack fans.</li>
-<li><b>28-layer leak-free physics stack (<code>src/gems69/physics.py</code>):</b> Wavenumber FFT upward continuation (150, 500, 1500 m) THDR&times;tilt-zero, multi-scale RTP magnetic lows, cultural-vetoed 1 m LiDAR scarp + compass strike <code>(raw*180/255 + 90) % 180</code>, Hessian curvature ridges, basement/conductivity steps, geodetic strain, flank-differenced <code>K/Th</code>, and physical thermal conduits.</li>
-<li><b>Leave-One-Quadrant-Out calibration &amp; greedy placement (<code>src/gems69/holdout69.py</code>):</b> Regularized <code>HistGradientBoostingClassifier</code> fitted strictly on the 3 non-test spatial quadrants + shared <code>gems57.emit.greedy_allocate</code> at &ge;200 m visible-catalogue flank exclusion.</li>
-</ul></div>
+<li><b>Vector Polyline &amp; Kinematics Engine (<code>src/gems69/traces.py</code>, <code>src/gems69/corridors.py</code>):</b> Extracts strictly visible fault polylines, assigns recorded slip sense + DEM hanging-wall dip polarity strictly inside visible masks, enforces Giddens &amp; Faulds (2025, SGP-TR-229) geometry (<code>W = 0.1&ndash;15 km</code>, <code>|L| &le; 3.5W</code>), rejects antithetic opposing dips and restraining strike-slip steps, and routes minimum-cost 2&times;-block-max Dijkstra geodesics.</li>
+<li><b>Multi-Physics Edge &amp; Alteration Stack (<code>src/gems69/geodesic.py</code>):</b> Multi-scale potential-field horizontal gradient &amp; tilt in gravity (<code>grav_edge</code>) and RTP + 150 m flight-line magnetics (<code>mag_edge</code>), magnetic lows (<code>mag_low</code>), coherence-weighted 1 m LiDAR scarps (<code>lidar_coh_scarp</code>), topographic ridges (<code>topo_ridge</code>), subsurface steps (<code>subsurface_step</code>), radiometric alteration (<code>rad_alteration</code>), SGMC bedrock contacts (<code>sgmc_bedrock</code>), and leak-free thermal wells/springs (<code>hydro_upflow</code>, dropping <code>dist_known_fault_px</code>).</li>
+<li><b>Two-Regime Out-of-Fold Calibration &amp; Greedy Marginal-DTI Placement (<code>scripts/run_lane69.py</code>):</b> Fits out-of-fold models strictly on non-held-out spatial quadrants separately for near-tip relay/splay corridors and buried basin transfer corridors, then runs <code>gems57.emit.greedy_allocate</code> at <code>&ge; 350 m</code> off mapped catalogue traces to emit <b>32,000</b> calibrated <code>float32</code> nodes in <code>[0, 1]</code>.</li>
+</ul>
+<h3>Verified Source SHA-256 Pins</h3>
+<pre>{
+  &quot;method_manifest&quot;: {
+    &quot;src/gems69/geodesic.py&quot;: &quot;78a7eaf9cd466e9ad91b3bb4cd9291f030d696a76d3fdf3225c1912149a66885&quot;,
+    &quot;src/gems69/corridors.py&quot;: &quot;1fb320974debfc4739c02e94f9a2e58f79730323ab49c7eba2b41be42f62e1c2&quot;,
+    &quot;src/gems69/traces.py&quot;: &quot;886f2229104c56e305fb8240ab21161587ccec43af0a6607520ddec0aebe6e25&quot;,
+    &quot;scripts/run_lane69.py&quot;: &quot;b37b661ffc31e4e430294af57c68c0c4593f36e89c4004b63e6954b4b32bdeb0&quot;
+  },
+  &quot;holdout_protocol_audit&quot;: {
+    &quot;evidence_class&quot;: &quot;HOLDOUT-PROTOCOL-AUDIT&quot;,
+    &quot;artifact_sha256&quot;: &quot;28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273&quot;,
+    &quot;evaluator&quot;: &quot;vendor/template66/gems57/evaluate_holdout.py (gems57-pooled-hide-v2)&quot;,
+    &quot;compliant&quot;: true,
+    &quot;whole_fault_segments_withheld&quot;: true,
+    &quot;segment_chunking&quot;: false,
+    &quot;withheld_context_buffer_px&quot;: 5,
+    &quot;catalogue_features_from_visible_faults_only&quot;: true,
+    &quot;visible_fault_mask_pixel_exact&quot;: true,
+    &quot;pooled_dti&quot;: true,
+    &quot;alpha&quot;: 0.2,
+    &quot;beta&quot;: 0.8,
+    &quot;kernel&quot;: &quot;triangular&quot;,
+    &quot;radius_m&quot;: 300,
+    &quot;source_sha256&quot;: {
+      &quot;vendor/template66/gems57/evaluate_holdout.py&quot;: &quot;ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a&quot;,
+      &quot;vendor/template66/gems57/holdout.py&quot;: &quot;7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1&quot;,
+      &quot;src/gems69/geodesic.py&quot;: &quot;78a7eaf9cd466e9ad91b3bb4cd9291f030d696a76d3fdf3225c1912149a66885&quot;,
+      &quot;scripts/run_lane69.py&quot;: &quot;b37b661ffc31e4e430294af57c68c0c4593f36e89c4004b63e6954b4b32bdeb0&quot;
+    }
+  }
+}</pre>
+</div>
 
 </main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<footer>GEMSDOE69 · every metric carries its strict evidence class · zero unverified projections</footer>
 </body></html>

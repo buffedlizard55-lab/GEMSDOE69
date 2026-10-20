@@ -23,6 +23,8 @@ jobs:
       - name: Re-open archived TIFF variants (format only)
         run: >-
           python scripts/validate_submission.py
+          submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif
+          submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-nan.tif
           submissions/h69-efg-kinematic-geodesic-29027-zeros.tif
           submissions/h69-efg-kinematic-geodesic-29027-nan.tif
           submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif

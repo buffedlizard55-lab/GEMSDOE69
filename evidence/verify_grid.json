@@ -13,8 +13,9 @@
  "footprint_px": 5167373,
  "catalogue_px": 60988,
  "sha256_labels": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
- "sha256_sample_submission": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
  "sha256_existing_faults": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
- "irregularity": "existing_faults.tif is byte-identical to labels.tif in every family mirror (IR-69-DATA-01); the public labels raster IS the mapped catalogue; scored truth is unpublished (see gems57/grid.py docstring)",
- "generated_utc": "20261020T182030Z"
+ "sha256_sample_submission": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
+ "sha256_training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
+ "irregularity": "existing_faults.tif is byte-identical to labels.tif in every family mirror (IR-69-DATA-01); the public labels raster IS the mapped catalogue; scored truth is unpublished.",
+ "generated_utc": "2026-10-20T195615Z"
 }

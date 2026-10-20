@@ -1,10 +1,11 @@
 {
   "evidence_class": "HOLDOUT-PROTOCOL-AUDIT",
-  "artifact_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
-  "evaluator": "vendor/gems57/holdout.py::score_cell + pooled DTI (alpha=0.2, beta=0.8, 300m triangular kernel)",
+  "artifact_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+  "evaluator": "vendor/template66/gems57/evaluate_holdout.py (gems57-pooled-hide-v2)",
   "compliant": true,
   "whole_fault_segments_withheld": true,
   "segment_chunking": false,
+  "withheld_context_buffer_px": 5,
   "catalogue_features_from_visible_faults_only": true,
   "visible_fault_mask_pixel_exact": true,
   "pooled_dti": true,
@@ -12,15 +13,10 @@
   "beta": 0.8,
   "kernel": "triangular",
   "radius_m": 300,
-  "withheld_context_buffer_px": 3,
   "source_sha256": {
-    "src/gems69/data.py": "a6d83a7c111672c643fab4585a14e61f9f1eeca9e7a984edc2dca450c4e63a87",
-    "src/gems69/physics.py": "29cca7033fc20826ff6b4440e7bd58686bb70d61fb613682d60a797555513bd9",
-    "src/gems69/tips.py": "b1e12c1c9b2a506a0b9917027f60a0ad90e0b28dbd239861ab3647863038d8c9",
-    "src/gems69/corridors.py": "36c369829795282349f778df25012d8667d06580102ea4c9b5b95e4030bc213a",
-    "src/gems69/scoring.py": "b6e60b06bcaf9175a7f5158cbccdefa44b72850234c1fa600518a0769875c1fd",
-    "src/gems69/holdout69.py": "0a8ed0a4c07935499359989bc0cb203122ca306b0528ed426c9c4706bcccb086",
-    "scripts/run_e1_e2.py": "89927afe5fd4ea06e586689017701196ca416166458316bb9570cbdbf9e96cc1",
-    "scripts/run_e3.py": "a0aff09d5fa915e3d1cc7c0a96a210cbca96133ed420d0a69f18d1fe3795ab12"
+    "vendor/template66/gems57/evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "vendor/template66/gems57/holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "src/gems69/geodesic.py": "78a7eaf9cd466e9ad91b3bb4cd9291f030d696a76d3fdf3225c1912149a66885",
+    "scripts/run_lane69.py": "b37b661ffc31e4e430294af57c68c0c4593f36e89c4004b63e6954b4b32bdeb0"
   }
 }

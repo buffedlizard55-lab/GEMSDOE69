@@ -1,21 +1,24 @@
-"""Tip-graph step-over pairing, geodesic multi-physics routing, pull-apart margin
-splays, and wing-crack termination corridors.
+"""Unified relay-ramp, synthetic-breach, pull-apart, splay & transfer corridor generator.
 
-Geometry & structural rules (standing prompt, Giddens & Faulds 2025 SGP-TR-229):
-  * Relay ramps typically 3-3.5x longer than wide, widths W in 0.1-15 km
-    ([1, 150] px at 100 m resolution; mean 2.8 km);
-  * Along-strike separation <= 3.5 W (evaluated in world coordinates on a shared
-    origin so distant colinear tips are strictly rejected);
-  * KD-tree search radius = hypot(W_max, 3.5 * W_max) = 3.64014 * W_max so long
-    narrow step-overs are never truncated by a cross-strike-only ball query;
-  * Measured dip compatibility: opposing pure-normal dips (d_a . d_b < -0.25)
-    are rejected;
-  * Measured Walker Lane / Great Basin kinematics: dextral (RL) right-steps and
-    sinistral (LL) left-steps form true releasing pull-apart rhombs emitting
-    paired basin-bounding margin splays + geodesic diagonal breach + Riedel
-    en echelon strands; normal synthetic ramps emit geodesic oblique breaching
-    traces + en echelon strands; free fault tips emit wing-crack / horse-tail
-    splay fans guided by multi-physics edge admittance.
+Combines:
+  1. Vector polyline + dip-polarity + slip-sense corridor API (`Line`,
+     `PolyIndex`, `dilation_tendency`, `_pair_ok`, `generate`,
+     `generate_extended`, `rasterize_lines`, `score_lines`, `line_id_raster`,
+     `corridor_fields`, `line_table`) driven by INGENIOUS Quaternary fault
+     polylines, recorded dip directions, DEM hanging-wall dip polarity, and
+     geodetic shear-rate context.
+  2. Raster skeleton tip-graph & corridor-polygon API (`TipPair`, `Corridor`,
+     `build_tip_pairs`, `corridor_from_pair`, `build_corridors`).
+
+Physical geometry priors:
+  * Giddens & Faulds (2025, SGP-TR-229): step-over widths W = 0.1-15 km
+    (1-150 px at 100 m/px), along-strike separation |L| <= 3.5 W; oblique
+    connectors + en echelon ramp strands; ~70% hard-linked above moderate T;
+  * Walker Lane dextral / conjugate sinistral releasing step-overs -> pull-apart
+    basins, cross-basin chords, N22.5E dilational strands, extensional horsetail
+    splays, and strike-slip-to-normal displacement-transfer zones;
+  * Asymmetric tip-to-flank synthetic breaches and normal fault-tip process zones
+    (Peacock & Sanderson, 1994; Kim & Sanderson, 2005).
 """
 from __future__ import annotations
 
@@ -28,17 +31,547 @@ from skimage.draw import line as skline
 from skimage.graph import route_through_array
 
 from .tips import Strand, StrandKinematics, axial_deg, axial_diff, axial_mean
+from .traces import Poly, Tip, rc_of, sample_polyline
 
-W_MIN_PX = 1.0             # 0.1 km
-W_MAX_PX = 150.0           # 15 km
+# ---------------------------------------------------------------------------
+# Constants shared across vector & raster corridor models
+# ---------------------------------------------------------------------------
+EXT_AZ = 292.5                         # WNW extension azimuth (deg)
+W_MIN, W_MAX = 1.0, 150.0              # px (0.1-15 km)
+ASPECT = 3.5
+FACING_COS = float(np.cos(np.radians(35.0)))
+STRAND_AZ = (EXT_AZ - 270.0) % 180.0   # 22.5 deg: perpendicular to WNW extension
+
+W_MIN_PX = 1.0
+W_MAX_PX = 150.0
 ALONG_MAX_RATIO = 3.5
-OVERLAP_RATIO = -1.0       # accept overlap up to 1.0 W
-MAX_DTHETA = 30.0          # deg, sub-parallel terminal strikes
+OVERLAP_RATIO = -1.0
+MAX_DTHETA = 30.0
 DILATATION_MAX_ALONG = 0.5
-ECH_ANGLE = 22.0           # deg, synthetic en echelon Riedel strand angle
-TIP_EXT_RATIO = 0.25       # extend anchor up to 0.25 W along strike
+ECH_ANGLE = 25.0
+CONNECTOR_HALF_W = lambda w: max(1, int(round(min(w / 6.0, 6.0))))
+TIP_EXT_RATIO = 0.35
 MIN_STRAND_PX = 4.0
 
+
+# ===========================================================================
+# PART 1: Vector polyline + dip-polarity + slip-sense corridor generator
+# ===========================================================================
+
+@dataclass
+class Line:
+    kind: str
+    setting: str
+    a: np.ndarray
+    b: np.ndarray
+    tips: tuple
+    W: float = 0.0
+    L: float = 0.0
+    meta: dict = field(default_factory=dict)
+    score: float = 0.0
+    terms: dict = field(default_factory=dict)
+    pix: np.ndarray | None = None          # flat indices of in-footprint, off-catalogue pixels
+
+    @property
+    def azimuth(self) -> float:
+        d = self.b - self.a
+        return float(np.degrees(np.arctan2(d[0], d[1])) % 180.0)
+
+
+def _right(t):
+    return np.array([t[1], -t[0]])
+
+
+def _unit(v):
+    n = float(np.hypot(*v))
+    return v / n if n > 0 else v
+
+
+def _rot(v, deg):
+    a = np.radians(deg)
+    c, s = np.cos(a), np.sin(a)
+    return np.array([c * v[0] + s * v[1], -s * v[0] + c * v[1]])
+
+
+class PolyIndex:
+    def __init__(self, polys: list[Poly]):
+        self.samples = [sample_polyline(q.verts, 0.5) for q in polys]
+        self.polys = polys
+        if self.samples:
+            P = np.vstack(self.samples)
+            self.owner = np.concatenate([np.full(len(s), i) for i, s in enumerate(self.samples)])
+            self.pos_in_poly = np.concatenate([
+                np.linspace(0.0, 1.0, len(s), dtype=np.float32) for s in self.samples
+            ])
+        else:
+            P = np.zeros((0, 2), float)
+            self.owner = np.zeros(0, int)
+            self.pos_in_poly = np.zeros(0, np.float32)
+        self.tree = cKDTree(P) if len(P) else None
+        self.P = P
+
+    def nearest_on(self, i: int, pt: np.ndarray) -> np.ndarray:
+        s = self.samples[i]
+        j = int(np.argmin(np.hypot(s[:, 0] - pt[0], s[:, 1] - pt[1])))
+        return s[j]
+
+    def nearest_on_with_frac(self, i: int, pt: np.ndarray) -> tuple[float, np.ndarray, float]:
+        s = self.samples[i]
+        dists = np.hypot(s[:, 0] - pt[0], s[:, 1] - pt[1])
+        j = int(np.argmin(dists))
+        frac = float(j) / max(len(s) - 1, 1)
+        return float(dists[j]), s[j], frac
+
+
+def dilation_tendency(az_deg: float) -> float:
+    normal = (az_deg + 90.0) % 180.0
+    beta = np.radians(((normal - EXT_AZ) + 90.0) % 180.0 - 90.0)
+    return float(np.cos(beta) ** 2)
+
+
+def _pair_ok(ti: Tip, tj: Tip) -> tuple[bool, str]:
+    """Relay / pull-apart admissibility of a tip pair."""
+    if ti.poly == tj.poly:
+        return False, "rejected_same_polyline"
+    ss_i, ss_j = ti.sense in ("RL", "LL"), tj.sense in ("RL", "LL")
+    if ss_i != ss_j or (ss_i and ti.sense != tj.sense):
+        return False, "rejected_mixed_sense"
+    if float(ti.out @ tj.out) > -FACING_COS:
+        return False, "rejected_facing"
+    u = _unit(ti.out - tj.out)
+    v = tj.pos - ti.pos
+    s, n = float(v @ u), float(v @ _right(u))
+    W = abs(n)
+    if not (W_MIN <= W <= W_MAX) or abs(s) > ASPECT * W:
+        return False, "rejected_geometry"
+    if not ss_i:
+        if ti.dip_vec is None or tj.dip_vec is None or float(ti.dip_vec @ tj.dip_vec) <= 0:
+            return False, "rejected_dip"
+    else:
+        releasing = (n > 0) if ti.sense == "RL" else (n < 0)
+        if not releasing:
+            return False, "rejected_step_sense"
+    return True, "ok"
+
+
+def generate(
+    tips: list[Tip],
+    polys: list[Poly],
+    *,
+    include_cut: bool = False,
+    k_partners: int = 1,
+    include_flank_breaches: bool = False,
+    include_normal_splays: bool = False,
+    shearrate_grid: np.ndarray | None = None,
+) -> tuple[list[Line], dict]:
+    """Emit candidate fault corridors from the visible fault-tip graph.
+
+    Default flags reproduce the strict single-partner vector contract tested by
+    `tests/test_corridors.py`. Setting `k_partners > 1`, `include_flank_breaches=True`,
+    and `include_normal_splays=True` enables multi-partner relays, asymmetric
+    tip-to-flank synthetic breaches, normal/transtensional fault-tip propagation
+    zones, and high-shear Walker Lane releasing pull-aparts.
+    """
+    idx = PolyIndex(polys)
+    use = [t for t in tips if include_cut or not t.cut]
+    lines: list[Line] = []
+    counts = dict(
+        relay_pairs=0,
+        pullapart_pairs=0,
+        flank_breaches=0,
+        termination_tips=0,
+        normal_tip_zones=0,
+        transfer_links=0,
+        rejected_dip=0,
+        rejected_facing=0,
+        rejected_geometry=0,
+        rejected_step_sense=0,
+        rejected_same_polyline=0,
+        rejected_mixed_sense=0,
+    )
+    if not use:
+        return lines, counts
+
+    # Optional Walker Lane high-shear promotion for unlabelled ("unk") strands
+    tip_shear = np.zeros(len(use), dtype=np.float32)
+    shear_thr = np.inf
+    if shearrate_grid is not None:
+        H_sr, W_sr = shearrate_grid.shape
+        rr, cc = rc_of(np.array([t.pos for t in use]))
+        rr = np.clip(rr, 0, H_sr - 1)
+        cc = np.clip(cc, 0, W_sr - 1)
+        tip_shear = shearrate_grid[rr, cc].astype(np.float32)
+        fin = tip_shear[np.isfinite(tip_shear)]
+        if fin.size:
+            shear_thr = float(np.quantile(fin, 0.78))
+
+    pos = np.array([t.pos for t in use])
+    tree = cKDTree(pos)
+    query_r = max(W_MAX * 1.2, float(np.hypot(W_MAX, ASPECT * W_MAX)) if k_partners > 1 else W_MAX * 1.2)
+    valid: list[tuple[float, int, int]] = []
+    for i, j in sorted(tree.query_pairs(query_r)):
+        ti, tj = use[i], use[j]
+        ok, why = _pair_ok(ti, tj)
+        if not ok:
+            counts[why] += 1
+            continue
+        valid.append((float(np.hypot(*(tj.pos - ti.pos))), i, j))
+
+    valid.sort(key=lambda t: t[0])
+    counts["valid_pairs_before_partner_selection"] = len(valid)
+
+    if k_partners <= 1:
+        best_for: dict[int, tuple[float, int, int]] = {}
+        for d, i, j in valid:
+            for k in (i, j):
+                if k not in best_for or d < best_for[k][0]:
+                    best_for[k] = (d, i, j)
+        chosen = sorted({(i, j) for _, i, j in best_for.values()})
+    else:
+        deg_count = [0] * len(use)
+        chosen_list: list[tuple[int, int]] = []
+        for d, i, j in valid:
+            if deg_count[i] >= k_partners or deg_count[j] >= k_partners:
+                continue
+            deg_count[i] += 1
+            deg_count[j] += 1
+            chosen_list.append((i, j))
+        chosen = sorted(set(chosen_list))
+
+    for i, j in chosen:
+        ti, tj = use[i], use[j]
+        ss_i = ti.sense in ("RL", "LL")
+        u = _unit(ti.out - tj.out)
+        r = _right(u)
+        v = tj.pos - ti.pos
+        s, n = float(v @ u), float(v @ r)
+        W = abs(n)
+        inferred_rl = (
+            not ss_i
+            and ti.sense == "unk"
+            and tj.sense == "unk"
+            and n > 0
+            and max(float(tip_shear[i]), float(tip_shear[j])) >= shear_thr
+        )
+        eff_sense = "RL" if inferred_rl else ti.sense
+        meta = dict(
+            overlap=s < 0,
+            W_km=W / 10.0,
+            L_km=s / 10.0,
+            sense=eff_sense,
+            dip_source="geod_shear_prior" if inferred_rl else f"{ti.dip_source}/{tj.dip_source}",
+            records=(ti.record, tj.record),
+        )
+        if not (ss_i or inferred_rl):
+            counts["relay_pairs"] += 1
+            pair = (ti.tid, tj.tid)
+            lines.append(Line("relay_connector", "relay", ti.pos, tj.pos, pair, W, s, dict(meta)))
+            pb = idx.nearest_on(tj.poly, ti.pos)
+            if np.hypot(*(pb - tj.pos)) > 2:
+                lines.append(Line("relay_breach", "relay", ti.pos, pb, pair, W, s, dict(meta)))
+            pa = idx.nearest_on(ti.poly, tj.pos)
+            if np.hypot(*(pa - ti.pos)) > 2:
+                lines.append(Line("relay_breach", "relay", tj.pos, pa, pair, W, s, dict(meta)))
+            K = int(np.clip(round(W / 10.0), 1, 3))
+            lo, hi = min(0.0, s) - 0.25 * W, max(0.0, s) + 0.25 * W
+            if hi - lo > 60:
+                mid = 0.5 * (lo + hi)
+                lo, hi = mid - 30, mid + 30
+            for k in range(1, K + 1):
+                off = n * k / (K + 1)
+                a = ti.pos + lo * u + off * r
+                b = ti.pos + hi * u + off * r
+                lines.append(Line("relay_enechelon", "relay", a, b, pair, W, s, dict(meta, strand=k)))
+        else:
+            counts["pullapart_pairs"] += 1
+            pair = (ti.tid, tj.tid)
+            pb = idx.nearest_on(tj.poly, ti.pos)
+            pa = idx.nearest_on(ti.poly, tj.pos)
+            lines.append(Line("pullapart_link", "pullapart", ti.pos, pb, pair, W, s, dict(meta)))
+            lines.append(Line("pullapart_link", "pullapart", tj.pos, pa, pair, W, s, dict(meta)))
+            lines.append(Line("pullapart_chord", "pullapart", ti.pos, tj.pos, pair, W, s, dict(meta)))
+            c = 0.5 * (ti.pos + tj.pos)
+            az = np.radians(STRAND_AZ)
+            d = np.array([np.sin(az), np.cos(az)])
+            half = 0.5 * min(max(W, 5.0), 40.0)
+            span = 0.5 * max(abs(s), 0.5 * W)
+            for k, f in enumerate((-0.5, 0.0, 0.5)):
+                cc = c + f * span * u
+                lines.append(Line("pullapart_strand", "pullapart", cc - half * d, cc + half * d, pair,
+                                  W, s, dict(meta, strand=k)))
+
+    # Optional: asymmetric tip-to-flank synthetic breaches (W in 0.1..12 km)
+    if include_flank_breaches and idx.tree is not None:
+        w_flank_max = 120.0
+        for t in use:
+            near = idx.tree.query_ball_point(t.pos, w_flank_max)
+            cand_polys = set(int(idx.owner[k]) for k in near)
+            cand_polys.discard(t.poly)
+            hits: list[tuple[float, int, np.ndarray]] = []
+            for o in cand_polys:
+                po = polys[o].part
+                if po.record == t.record:
+                    continue
+                d_fl, foot, frac = idx.nearest_on_with_frac(o, t.pos)
+                if not (0.08 <= frac <= 0.92):
+                    continue
+                if not (W_MIN <= d_fl <= w_flank_max):
+                    continue
+                v = foot - t.pos
+                ahead = float(v @ t.out)
+                if ahead < -0.5 * d_fl or ahead > 2.5 * d_fl:
+                    continue
+                # Local strike alignment with target strand
+                s_arr = idx.samples[o]
+                k0 = max(0, int(round(frac * (len(s_arr) - 1))) - 4)
+                k1 = min(len(s_arr) - 1, k0 + 8)
+                t_other = _unit(s_arr[k1] - s_arr[k0])
+                if abs(float(t.out @ t_other)) < FACING_COS:
+                    continue
+                # Check dip compatibility for dip-slip strands
+                if t.sense not in ("RL", "LL") and po.sense not in ("RL", "LL"):
+                    if t.dip_vec is not None and po.dip_side != 0:
+                        dv_o = po.dip_side * _right(t_other)
+                        if float(t.dip_vec @ dv_o) <= 0:
+                            continue
+                hits.append((d_fl, o, foot))
+            hits.sort(key=lambda item: item[0])
+            for d_fl, o, foot in hits[:2]:
+                counts["flank_breaches"] += 1
+                meta_f = dict(
+                    W_km=round(d_fl / 10.0, 3),
+                    L_km=0.0,
+                    sense=t.sense,
+                    dip_source=f"{t.dip_source}/{polys[o].part.dip_source}",
+                    records=(t.record, int(polys[o].part.record)),
+                )
+                lines.append(Line("flank_breach", "relay", t.pos, foot, (t.tid,),
+                                  d_fl, 0.0, meta_f))
+                # Synthetic diagonal ramp link shifted 0.6 W forward along target strand
+                s_arr = idx.samples[o]
+                mid_pt = s_arr[len(s_arr) // 2]
+                diag_pt = 0.65 * foot + 0.35 * mid_pt
+                if np.hypot(*(diag_pt - t.pos)) <= 1.8 * d_fl:
+                    lines.append(Line("flank_synthetic", "relay", t.pos, diag_pt, (t.tid,),
+                                      d_fl, 0.0, dict(meta_f)))
+
+    # Strike-slip terminations -> horsetail splays + displacement-transfer links
+    normal_polys = np.array([q.part.sense in ("N", "unk") for q in polys])
+    for t in use:
+        if t.sense in ("RL", "LL"):
+            counts["termination_tips"] += 1
+            side = 1.0 if t.sense == "RL" else -1.0
+            length = float(np.clip(0.2 * t.part_len, 10.0, 40.0))
+            for ang in (20.0, 40.0):
+                d = _rot(t.out, side * ang)
+                lines.append(Line("termination_splay", "transfer", t.pos, t.pos + length * d, (t.tid,),
+                                  0.0, length, dict(sense=t.sense, angle=ang)))
+            if idx.tree is not None:
+                near = idx.tree.query_ball_point(t.pos, 80.0 if include_flank_breaches else 60.0)
+                best: dict[int, tuple[float, np.ndarray]] = {}
+                for k in near:
+                    o = int(idx.owner[k])
+                    if o == t.poly or not normal_polys[o]:
+                        continue
+                    p = idx.P[k]
+                    v = p - t.pos
+                    if float(v @ t.out) < -5.0 or side * float(v @ _right(t.out)) < -5.0:
+                        continue
+                    dist = float(np.hypot(*v))
+                    if dist < 2.0:
+                        continue
+                    if o not in best or dist < best[o][0]:
+                        best[o] = (dist, p)
+                for o, (dist, p) in sorted(best.items(), key=lambda kv: kv[1][0])[:2]:
+                    counts["transfer_links"] += 1
+                    lines.append(Line("transfer_link", "transfer", t.pos, p, (t.tid,), 0.0, dist,
+                                      dict(sense=t.sense, target_record=int(polys[o].part.record))))
+        elif include_normal_splays:
+            counts["normal_tip_zones"] += 1
+            Lp = float(np.clip(0.35 * t.part_len, 6.0, 38.0))
+            meta_tip = dict(sense=t.sense, dip_source=t.dip_source, records=(t.record,))
+            lines.append(Line("tip_propagation", "relay", t.pos, t.pos + Lp * t.out, (t.tid,),
+                              0.0, Lp, dict(meta_tip)))
+            az_opt = np.radians(STRAND_AZ)
+            u_opt = np.array([np.sin(az_opt), np.cos(az_opt)])
+            if float(u_opt @ t.out) < 0:
+                u_opt = -u_opt
+            wing = _unit(0.55 * t.out + 0.45 * u_opt)
+            lines.append(Line("tip_wing_splay", "relay", t.pos, t.pos + 0.72 * Lp * wing, (t.tid,),
+                              0.0, 0.72 * Lp, dict(meta_tip)))
+
+    return lines, counts
+
+
+def rasterize_lines(
+    lines: list[Line],
+    footprint: np.ndarray,
+    visible: np.ndarray,
+    *,
+    cost_surface_2x: np.ndarray | None = None,
+    ridge_field: np.ndarray | None = None,
+) -> None:
+    """Rasterize candidate traces cleanly off the visible catalogue.
+
+    When `cost_surface_2x` (downsampled 2x positive cost grid) and/or
+    `ridge_field` (100 m multi-physics edge strength) are provided, links
+    longer than 10 px follow the minimum-cost geodesic path across their cropped
+    corridor box (`skimage.graph.route_through_array`) and snap within +-1 px to
+    local multi-physics ridge maxima rather than blind straight chords.
+    """
+    H, W = footprint.shape
+    H2, W2 = cost_surface_2x.shape if cost_surface_2x is not None else (0, 0)
+    geodesic_kinds = {
+        "relay_connector", "relay_breach", "flank_breach",
+        "pullapart_chord", "pullapart_link", "transfer_link",
+    }
+    geodesic_budget = 2500
+    geodesic_used = 0
+
+    for ln in lines:
+        chord_len = float(np.hypot(*(ln.b - ln.a)))
+        use_geodesic = (
+            cost_surface_2x is not None
+            and geodesic_used < geodesic_budget
+            and ln.kind in geodesic_kinds
+            and 10.0 <= chord_len <= 140.0
+        )
+        if use_geodesic:
+            geodesic_used += 1
+            ends = np.vstack([ln.a, ln.b])
+            r_end, c_end = rc_of(ends)
+            r0_2, c0_2 = int(np.clip(r_end[0] // 2, 0, H2 - 1)), int(np.clip(c_end[0] // 2, 0, W2 - 1))
+            r1_2, c1_2 = int(np.clip(r_end[1] // 2, 0, H2 - 1)), int(np.clip(c_end[1] // 2, 0, W2 - 1))
+            pad = max(5, min(20, int(round(0.28 * chord_len / 2.0))))
+            br0 = max(0, min(r0_2, r1_2) - pad)
+            br1 = min(H2, max(r0_2, r1_2) + pad + 1)
+            bc0 = max(0, min(c0_2, c1_2) - pad)
+            bc1 = min(W2, max(c0_2, c1_2) + pad + 1)
+            if (br1 - br0) >= 3 and (bc1 - bc0) >= 3 and (r0_2, c0_2) != (r1_2, c1_2):
+                sub_cost = cost_surface_2x[br0:br1, bc0:bc1]
+                path, _ = route_through_array(
+                    sub_cost,
+                    (r0_2 - br0, c0_2 - bc0),
+                    (r1_2 - br0, c1_2 - bc0),
+                    fully_connected=True,
+                    geometric=True,
+                )
+                p_arr = np.asarray(path, dtype=np.float64)
+                # Convert 2x grid cell centres back to 100 m (E, N) map-pixel coords
+                pts_e = 2.0 * (p_arr[:, 1] + bc0) + 1.0
+                pts_n = -(2.0 * (p_arr[:, 0] + br0) + 1.0)
+                s = sample_polyline(np.column_stack([pts_e, pts_n]), 0.5)
+            else:
+                s = sample_polyline(np.vstack([ln.a, ln.b]), 0.5)
+        else:
+            s = sample_polyline(np.vstack([ln.a, ln.b]), 0.5)
+
+        r, c = rc_of(s)
+        ok = (r >= 0) & (r < H) & (c >= 0) & (c < W)
+        r, c = r[ok], c[ok]
+        # Optional +-1 px local ridge snapping along normal direction
+        if ridge_field is not None and r.size >= 4:
+            best_v = ridge_field[r, c]
+            best_r, best_c = r.copy(), c.copy()
+            for dr, dc in ((-1, 0), (1, 0), (0, -1), (0, 1)):
+                nr = np.clip(r + dr, 0, H - 1)
+                nc = np.clip(c + dc, 0, W - 1)
+                v = ridge_field[nr, nc]
+                upd = (v > best_v) & footprint[nr, nc] & ~visible[nr, nc]
+                best_v = np.where(upd, v, best_v)
+                best_r = np.where(upd, nr, best_r)
+                best_c = np.where(upd, nc, best_c)
+            r, c = best_r, best_c
+
+        keep = footprint[r, c] & ~visible[r, c]
+        flat = np.unique(r[keep] * W + c[keep])
+        ln.pix = flat
+
+
+def score_lines(
+    lines: list[Line],
+    layers: dict[str, np.ndarray],
+    weights: dict[str, float] | None = None,
+) -> None:
+    """Score every candidate trace on all pre-registered physical channels + dilation tendency."""
+    for ln in lines:
+        td = dilation_tendency(ln.azimuth)
+        if ln.pix is None or ln.pix.size == 0:
+            ln.terms = dict(td=td)
+            ln.score = 0.0
+            continue
+        terms = {k: float(v.ravel()[ln.pix].mean()) for k, v in layers.items()}
+        terms["td"] = td
+        ln.terms = terms
+        if weights is None:
+            ln.score = float(np.mean(list(terms.values())))
+        else:
+            num = sum(weights.get(k, 0.0) * val for k, val in terms.items())
+            den = max(sum(weights.get(k, 0.0) for k in terms), 1e-9)
+            ln.score = float(num / den)
+
+
+def line_id_raster(lines: list[Line], shape: tuple[int, int]) -> np.ndarray:
+    """int32 raster: id of the highest-scoring trace through each pixel (-1 = none)."""
+    H, W = shape
+    lid = np.full(H * W, -1, np.int32)
+    best = np.full(H * W, -np.inf, np.float32)
+    for k, ln in enumerate(lines):
+        if ln.pix is None or ln.pix.size == 0:
+            continue
+        better = best[ln.pix] < ln.score
+        sel = ln.pix[better]
+        lid[sel] = k
+        best[sel] = ln.score
+    return lid.reshape(H, W)
+
+
+def corridor_fields(lines: list[Line], shape: tuple[int, int], band_px: float = 2.0):
+    """Per-pixel corridor score (max over traces within `band_px`), distance, and trace mask."""
+    H, W = shape
+    smax = np.zeros(H * W, np.float32)
+    on = np.zeros(H * W, bool)
+    for ln in lines:
+        if ln.pix is None or ln.pix.size == 0:
+            continue
+        np.maximum.at(smax, ln.pix, np.float32(ln.score))
+        on[ln.pix] = True
+    smax = smax.reshape(H, W)
+    on = on.reshape(H, W)
+    if not on.any():
+        return np.zeros(shape, np.float32), np.full(shape, np.inf, np.float32), on
+    d, (iy, ix) = ndi.distance_transform_edt(~on, return_indices=True)
+    band = d <= band_px
+    s_band = np.where(band, smax[iy, ix], 0).astype(np.float32)
+    return s_band, d.astype(np.float32), on
+
+
+def line_table(lines: list[Line]) -> list[dict]:
+    rows = []
+    for k, ln in enumerate(lines):
+        rows.append(dict(
+            id=k,
+            kind=ln.kind,
+            setting=ln.setting,
+            a_E=float(ln.a[0]),
+            a_N=float(ln.a[1]),
+            b_E=float(ln.b[0]),
+            b_N=float(ln.b[1]),
+            azimuth=ln.azimuth,
+            W_km=round(ln.W / 10.0, 3),
+            L_km=round(ln.L / 10.0, 3),
+            n_pix=int(ln.pix.size if ln.pix is not None else 0),
+            score=ln.score,
+            **{f"t_{k2}": v for k2, v in ln.terms.items()},
+            **{k2: (v if isinstance(v, (int, float, str, bool)) else str(v)) for k2, v in ln.meta.items()},
+        ))
+    return rows
+
+
+
+# ===========================================================================
+# PART 2: Raster skeleton tip-graph & kinematics-verified corridor generator
+# ===========================================================================
 
 @dataclass
 class TipPair:
@@ -611,108 +1144,6 @@ def build_corridors(
         corridors.extend(terms)
     return corridors, uniq
 
-
-def dilation_tendency(az: float) -> float:
-    """Dilation tendency peaks for N-NE strike (~22.5 deg) under WNW extension (112.5 deg)."""
-    return float(np.cos(np.radians(az - 22.5)) ** 2)
-
-
-# --- Vector compatibility interface retained for tests/test_vector_corridors.py ---
-
-@dataclass
-class Line:
-    kind: str
-    a: np.ndarray
-    b: np.ndarray
-    W: float = 0.0
-    setting: str = "relay"
-    azimuth: float = 0.0
-    score: float = 0.0
-    terms: dict = field(default_factory=dict)
-    meta: dict = field(default_factory=dict)
-
-
-def _unit(v: np.ndarray) -> np.ndarray:
-    v = np.asarray(v, float)
-    n = float(np.linalg.norm(v))
-    return v / n if n > 1e-9 else np.array([0.0, 1.0])
-
-
-def _pair_ok(ta, tb) -> tuple[bool, str]:
-    """Test geometric and kinematic admissibility of vector tip pair (ta, tb)."""
-    if hasattr(ta, "dip_vec") and hasattr(tb, "dip_vec"):
-        if ta.dip_vec is not None and tb.dip_vec is not None:
-            if float(np.dot(ta.dip_vec, tb.dip_vec)) < 0:
-                return False, "rejected_dip"
-
-    pa = np.asarray(ta.pos, float)
-    pb = np.asarray(tb.pos, float)
-    d = pb - pa
-    out_a = _unit(ta.out)
-    right_a = np.array([out_a[1], -out_a[0]])
-    cross_step = float(np.dot(d, right_a))
-    along_step = float(np.dot(d, out_a))
-    w_px = abs(cross_step)
-
-    if w_px < 1.0 or w_px > 150.0:
-        return False, "rejected_geometry"
-    if along_step > 3.5 * w_px:
-        return False, "rejected_geometry"
-
-    sense_a = getattr(ta, "sense", "N")
-    if sense_a == "RL" and cross_step < 0:
-        return False, "rejected_step_sense"
-    if sense_a == "LL" and cross_step > 0:
-        return False, "rejected_step_sense"
-    return True, "ok"
-
-
-def generate(tips: list, polys: list, include_cut: bool = False) -> tuple[list[Line], dict]:
-    """Generate vector corridor lines from free tips and polylines."""
-    lines: list[Line] = []
-    counts = {"relay_pairs": 0, "pull_apart": 0, "terminations": 0}
-
-    if len(tips) >= 2:
-        for i in range(len(tips)):
-            for j in range(i + 1, len(tips)):
-                ta, tb = tips[i], tips[j]
-                if not include_cut and (getattr(ta, "cut", False) or getattr(tb, "cut", False)):
-                    continue
-                ok, _ = _pair_ok(ta, tb)
-                if ok:
-                    pa = np.asarray(ta.pos, float)
-                    pb = np.asarray(tb.pos, float)
-                    d = pb - pa
-                    out_a = _unit(ta.out)
-                    right_a = np.array([out_a[1], -out_a[0]])
-                    w = abs(float(np.dot(d, right_a)))
-                    along = float(np.dot(d, out_a))
-                    is_overlap = along < 0
-                    sense_a = getattr(ta, "sense", "N")
-                    setting = "pullapart" if sense_a in ("RL", "LL") else "relay"
-                    counts["pull_apart" if setting == "pullapart" else "relay_pairs"] += 1
-                    meta = {"overlap": is_overlap, "W_km": w / 10.0,
-                            "L_km": abs(along) / 10.0, "sense": sense_a}
-                    lines.append(Line("relay_connector", pa, pb, W=w, setting=setting, meta=meta))
-                    lines.append(Line("relay_breach", pa, pb, W=w, setting=setting, meta=meta))
-                    lines.append(Line("relay_enechelon", pa, pb, W=w, setting=setting, meta=meta))
-
-    for t in tips:
-        if not include_cut and getattr(t, "cut", False):
-            continue
-        sense = getattr(t, "sense", "N")
-        if sense in ("RL", "LL"):
-            pos = np.asarray(t.pos, float)
-            out = _unit(t.out)
-            right = np.array([out[1], -out[0]])
-            sgn = 1.0 if sense == "RL" else -1.0
-            splay1 = pos + 15.0 * (out + 0.5 * sgn * right)
-            splay2 = pos + 15.0 * (out + 1.0 * sgn * right)
-            counts["terminations"] += 1
-            lines.append(Line("termination_splay", pos, splay1, setting="transfer", meta={"sense": sense}))
-            lines.append(Line("termination_splay", pos, splay2, setting="transfer", meta={"sense": sense}))
-
-    return lines, counts
 
 
 def select_stratified(

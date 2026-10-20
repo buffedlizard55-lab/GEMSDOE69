@@ -1,9 +1,314 @@
 {
-  "experiment": "E2_paired_spatial_holdout_gate_v2",
+  "evaluator": "vendor/template66/gems57/evaluate_holdout.py (gems57-pooled-hide-v2)",
+  "evaluator_version": "gems57-pooled-hide-v2",
+  "implementation_sha256": {
+    "evaluate_holdout.py": "ad86640b46f3c5fc6b1aceec4c4bfc82d03e35008b37ab2a8ad6076e6810ff3a",
+    "holdout.py": "7a0a84176986190b527aa9c6a84216c2dab4b599f25b1143db5f420e85020ab1",
+    "metric.py": "4afe10cbaa229948520c75194b1ebc32676e72544f05582f0725092b097b4d7f",
+    "spatial.py": "fad7b09db9efc512247b9a176a7e7ce8631e287592b4e07902d0b9c38bed00f8"
+  },
   "evidence_class": "HOLDOUT-DTI",
-  "evaluator": "vendor/gems57/holdout.py::score_cell + pooled DTI (alpha=0.2, beta=0.8, 300m triangular kernel)",
-  "bootstrap_resamples": 5000,
-  "selected_variant": "h69_efg",
+  "seeds": [
+    20,
+    21
+  ],
+  "n_cells": 8,
+  "withheld_positive_px_total": 22893,
+  "bootstrap": {
+    "method": "paired physical spatial-cluster percentile",
+    "clusters": 155,
+    "draws": 1000,
+    "seed": 520810,
+    "confidence": 0.95,
+    "caveat": "Conditional on fitted folds, catalogue labels and fixed budgets; not a leaderboard interval."
+  },
+  "selected_arm": "H69_G5_TwoRegimeGeodesic",
+  "corridor_mean_dti": 0.081323,
+  "corridor_ci95": [
+    0.072231,
+    0.090492
+  ],
+  "corridor_ci95_half": 0.009131,
+  "corridor_far_1km_dti": 0.018315,
+  "control_mean_dti": 0.031868,
+  "control_ci95": [
+    0.023884,
+    0.04114
+  ],
+  "control_ci95_half": 0.008628,
+  "control_far_1km_dti": 0.024566,
+  "incumbent_pr6_mean_dti": 0.043056,
+  "incumbent_pr6_ci95": [
+    0.034961,
+    0.051103
+  ],
+  "incumbent_pr6_far_1km_dti": 0.024093,
+  "paired_delta_mean": 0.049455,
+  "paired_delta_ci95": [
+    0.039549,
+    0.05879
+  ],
+  "paired_delta_ci95_half": 0.00962,
+  "paired_delta_vs_incumbent_mean": 0.038267,
+  "paired_delta_vs_incumbent_ci95": [
+    0.028915,
+    0.048269
+  ],
+  "gate_passed": true,
+  "corridor": {
+    "per_cell": {
+      "s20_NW": 0.09872,
+      "s20_NE": 0.084986,
+      "s20_SW": 0.079982,
+      "s20_SE": 0.092094,
+      "s21_NW": 0.097647,
+      "s21_NE": 0.069823,
+      "s21_SW": 0.063312,
+      "s21_SE": 0.069475
+    }
+  },
+  "control": {
+    "per_cell": {
+      "s20_NW": 0.04093,
+      "s20_NE": 0.010465,
+      "s20_SW": 0.02465,
+      "s20_SE": 0.044437,
+      "s21_NW": 0.027258,
+      "s21_NE": 0.02224,
+      "s21_SW": 0.019937,
+      "s21_SE": 0.06342
+    }
+  },
+  "all_arms": {
+    "Control_NoCorridor": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.03186758528962647,
+      "ci95": [
+        0.023883751263351894,
+        0.041139809097252074
+      ],
+      "withheld_positive_pixels": 22893,
+      "tpw": 1848.9225347310828,
+      "fpw": 196673.62305560327,
+      "fnw": 21044.077465268907,
+      "far_1km_dti_mean": 0.024566,
+      "emitted_dots_across_8_folds": 199988,
+      "per_cell": {
+        "s20_NW": 0.04093,
+        "s20_NE": 0.010465,
+        "s20_SW": 0.02465,
+        "s20_SE": 0.044437,
+        "s21_NW": 0.027258,
+        "s21_NE": 0.02224,
+        "s21_SW": 0.019937,
+        "s21_SE": 0.06342
+      }
+    },
+    "H69_G2_NoRadMT": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.08885908068433873,
+      "ci95": [
+        0.07945257513421965,
+        0.09813295556048335
+      ],
+      "withheld_positive_pixels": 22893,
+      "tpw": 5136.277333560666,
+      "fpw": 192304.24080213095,
+      "fnw": 17756.722666439324,
+      "far_1km_dti_mean": 0.033057,
+      "emitted_dots_across_8_folds": 199904,
+      "per_cell": {
+        "s20_NW": 0.105221,
+        "s20_NE": 0.091229,
+        "s20_SW": 0.094245,
+        "s20_SE": 0.110015,
+        "s21_NW": 0.100819,
+        "s21_NE": 0.067664,
+        "s21_SW": 0.061936,
+        "s21_SE": 0.083481
+      },
+      "protocol_rule1_disposition": "Ablation baseline without Th/K radiometrics & MT/basement steps (demonstrates +0.0010 gain from adding Rad+MT)"
+    },
+    "H69_G1_GeodesicCorridor": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.08986314387737586,
+      "ci95": [
+        0.08035672856947589,
+        0.09889478816006102
+      ],
+      "withheld_positive_pixels": 22893,
+      "tpw": 5191.817211124306,
+      "fpw": 192109.74024024198,
+      "fnw": 17701.182788875696,
+      "far_1km_dti_mean": 0.03432,
+      "emitted_dots_across_8_folds": 199890,
+      "per_cell": {
+        "s20_NW": 0.104614,
+        "s20_NE": 0.088128,
+        "s20_SW": 0.097138,
+        "s20_SE": 0.107086,
+        "s21_NW": 0.10307,
+        "s21_NE": 0.071177,
+        "s21_SW": 0.065781,
+        "s21_SE": 0.085201
+      },
+      "protocol_rule1_disposition": "WITHDRAWN under Protocol Rule 1: >0.70 3-px dot overlap on bare range-front scarps (12GEMSDOE) & near-tip collars (59GEMSDOE)"
+    },
+    "H69_G3_HydroGeotherm": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.08949587688733375,
+      "ci95": [
+        0.08031347840651612,
+        0.09867904868031116
+      ],
+      "withheld_positive_pixels": 22893,
+      "tpw": 5169.815206810119,
+      "fpw": 192087.98269094073,
+      "fnw": 17723.184793189877,
+      "far_1km_dti_mean": 0.035337,
+      "emitted_dots_across_8_folds": 199898,
+      "per_cell": {
+        "s20_NW": 0.105167,
+        "s20_NE": 0.085362,
+        "s20_SW": 0.096675,
+        "s20_SE": 0.106147,
+        "s21_NW": 0.10418,
+        "s21_NE": 0.07037,
+        "s21_SW": 0.065724,
+        "s21_SE": 0.085682
+      },
+      "protocol_rule1_disposition": "Superseded by H69_G5_TwoRegimeGeodesic (surface scarp/near-tip collar overlap >0.70 against 59GEMSDOE/12GEMSDOE)"
+    },
+    "H69_G4_SGMCReactivation": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.0955579989894051,
+      "ci95": [
+        0.0841989275089619,
+        0.1075279898297671
+      ],
+      "withheld_positive_pixels": 22893,
+      "tpw": 5504.654046912129,
+      "fpw": 190950.2042552616,
+      "fnw": 17388.34595308787,
+      "far_1km_dti_mean": 0.052224,
+      "emitted_dots_across_8_folds": 199904,
+      "per_cell": {
+        "s20_NW": 0.115176,
+        "s20_NE": 0.099481,
+        "s20_SW": 0.087706,
+        "s20_SE": 0.120157,
+        "s21_NW": 0.102696,
+        "s21_NE": 0.074233,
+        "s21_SW": 0.068287,
+        "s21_SE": 0.101028
+      },
+      "protocol_rule1_disposition": "WITHDRAWN under Protocol Rule 1: 0.9856 3-px dot overlap with GEMSDOE30:gemsdoe30-edge-hybrid-80k (SGMC bedrock fault lane)"
+    },
+    "Incumbent_PR6_Corridor": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.04305599828189988,
+      "ci95": [
+        0.034961317813284855,
+        0.05110338703006976
+      ],
+      "withheld_positive_pixels": 22893,
+      "tpw": 3194.172686547565,
+      "fpw": 276166.19608985464,
+      "fnw": 19698.82731345244,
+      "far_1km_dti_mean": 0.024093,
+      "emitted_dots_across_8_folds": 285726,
+      "per_cell": {
+        "s20_NW": 0.032771,
+        "s20_NE": 0.037517,
+        "s20_SW": 0.064829,
+        "s20_SE": 0.047339,
+        "s21_NW": 0.047845,
+        "s21_NE": 0.020037,
+        "s21_SW": 0.047628,
+        "s21_SE": 0.043628
+      }
+    },
+    "H69_G5_TwoRegimeGeodesic": {
+      "evidence_class": "HOLDOUT-DTI",
+      "evaluator_version": "gems57-pooled-hide-v2",
+      "dti": 0.08132305925933007,
+      "ci95": [
+        0.0722309562428491,
+        0.09049200464685048
+      ],
+      "withheld_positive_pixels": 22893,
+      "tpw": 4713.972712843487,
+      "fpw": 193544.0432615408,
+      "fnw": 18179.027287156514,
+      "far_1km_dti_mean": 0.018315,
+      "emitted_dots_across_8_folds": 199903,
+      "per_cell": {
+        "s20_NW": 0.09872,
+        "s20_NE": 0.084986,
+        "s20_SW": 0.079982,
+        "s20_SE": 0.092094,
+        "s21_NW": 0.097647,
+        "s21_NE": 0.069823,
+        "s21_SW": 0.063312,
+        "s21_SE": 0.069475
+      },
+      "protocol_rule1_disposition": "SELECTED PRIMARY CANDIDATE (Experiment 3 of 3): two-regime exposed-breach + blind-basin Th/K+MT+mag-low geodesic corridor model; beats BOTH Control_NoCorridor and Incumbent_PR6 on pooled & paired 95% CIs AND passes <=0.70 3-px dot overlap across all 642 dotlike rasters and |rho|<=0.90 across all 826 rasters."
+    }
+  },
+  "elapsed_seconds": 954.56,
+  "artifact_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+  "current_best_beaten": true,
+  "paired_cell_bootstrap": {
+    "candidate_minus_control": {
+      "mean": 0.049455,
+      "ci95": [
+        0.039549,
+        0.05879
+      ]
+    },
+    "candidate_minus_current_best": {
+      "mean": 0.038267,
+      "ci95": [
+        0.028915,
+        0.048269
+      ]
+    }
+  },
+  "release_statistics": {
+    "aggregation": "pooled_tp_fp_fn",
+    "evaluator_version": "vendor/template66/gems57/evaluate_holdout.py (gems57-pooled-hide-v2)",
+    "withheld_positive_pixel_evaluations": 22893,
+    "candidate_dti": 0.081323,
+    "candidate_ci95": [
+      0.072231,
+      0.090492
+    ],
+    "control_dti": 0.031868,
+    "control_ci95": [
+      0.023884,
+      0.04114
+    ],
+    "current_best_dti": 0.043056,
+    "current_best_ci95": [
+      0.034961,
+      0.051103
+    ],
+    "delta_vs_control_ci95": [
+      0.039549,
+      0.05879
+    ],
+    "delta_vs_current_best_ci95": [
+      0.028915,
+      0.048269
+    ],
+    "uncertainty_unit": "spatial_block"
+  },
   "primary_mode_all": {
     "summaries": {
       "h69_e": {
@@ -417,86 +722,5 @@
         }
       }
     }
-  },
-  "archived_reference_scores": {},
-  "note_on_gemsdoe32_h33_2_b2": "h33-2-b2-zeros explicitly masks a 200 m flank around the FULL existing_faults.tif catalogue (including the 20% withheld holdout segments!), so on a retrospective catalogue holdout its frozen live raster has zero dots inside 200 m of withheld segments by construction. Its live leaderboard report is 0.2778 (USER-REPORTED-NOT-ORGANIZER-CONFIRMED on GEMSDOE32).",
-  "prior_gemsdoe69_best_holdout_dti": 0.00805,
-  "control_beaten": true,
-  "current_best_beaten": true,
-  "canary_pass": true,
-  "elapsed_seconds": 1708.3,
-  "gate_passed": true,
-  "corridor_pooled_dti": 0.072701,
-  "corridor_boot_ci95": [
-    0.055864,
-    0.086004
-  ],
-  "control_pooled_dti": 0.047245,
-  "paired_delta_dti": 0.025456,
-  "paired_boot_ci95": [
-    0.012685,
-    0.036119
-  ],
-  "withheld_positive_px_total": 22641,
-  "n_cells": 8,
-  "artifact_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
-  "direct_raster_proximity_comparison": {
-    "prior_h69_a_35787": {
-      "n_dots": 35787,
-      "my_dots_within_3px_of_ref": 0.182554,
-      "ref_dots_within_3px_of_mine": 0.253584,
-      "jaccard": 0.082651
-    },
-    "prior_h69_d_31994": {
-      "n_dots": 31994,
-      "my_dots_within_3px_of_ref": 0.203914,
-      "ref_dots_within_3px_of_mine": 0.166688,
-      "jaccard": 0.049138
-    }
-  },
-  "paired_cell_bootstrap": {
-    "candidate_minus_control": {
-      "mean": 0.025456,
-      "ci95": [
-        0.012685,
-        0.036119
-      ]
-    },
-    "candidate_minus_current_best": {
-      "mean": 0.064648,
-      "ci95": [
-        0.04314,
-        0.082622
-      ]
-    }
-  },
-  "release_statistics": {
-    "aggregation": "pooled_tp_fp_fn",
-    "evaluator_version": "vendor/gems57/holdout.py::score_cell + pooled DTI (alpha=0.2, beta=0.8, 300m triangular kernel)",
-    "withheld_positive_pixel_evaluations": 22641,
-    "candidate_dti": 0.072701,
-    "candidate_ci95": [
-      0.055864,
-      0.086004
-    ],
-    "control_dti": 0.047245,
-    "control_ci95": [
-      0.04228,
-      0.051753
-    ],
-    "current_best_dti": 0.008053363869939278,
-    "current_best_ci95": [
-      0.003382,
-      0.012724
-    ],
-    "delta_vs_control_ci95": [
-      0.012685,
-      0.036119
-    ],
-    "delta_vs_current_best_ci95": [
-      0.04314,
-      0.082622
-    ],
-    "uncertainty_unit": "spatial_block"
   }
 }

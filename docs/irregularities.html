@@ -4,22 +4,20 @@
 <title>Irregularities · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="active">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<header><div class="wrap"><h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · H69_G5_TwoRegimeGeodesic</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="active">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card"><h2>Irregularities flagged &amp; resolved (full table in <code>FLAGGED.md</code>)</h2>
-<table><tr><th>ID</th><th>Finding</th><th>Disposition</th></tr>
-<tr><td>IR-69-LIDAR-STRIKE-01</td><td><code>lidar_scarp_features_u8.tif</code> Band 11 encodes image-axis angle (79.04&deg; median error vs mapped fault strike).</td><td><b>FIXED:</b> <code>(raw*180/255 + 90) % 180</code> reduces error to 10.96&deg;.</td></tr>
-<tr><td>IR-69-TIP-01 &amp; CORR-01</td><td>Per-tip local origin gave <code>sep=0</code>; KD-tree radius <code>W_max</code> clipped legal pairs; 4 outer/inner pairs emitted per strand pair.</td><td><b>FIXED:</b> shared world origin, <code>hypot(W, 3.5W)</code> radius, minimum-distance facing pair deduplication.</td></tr>
-<tr><td>IR-69-DIP-01</td><td>Raster strands lacked slip sense &amp; dip direction.</td><td><b>RESOLVED:</b> leak-free Qfaults CSV + 100 m DEM hanging-wall polarity join within visible mask.</td></tr>
-<tr><td>IR-69-HOLDOUT-01/02/03</td><td>Prior holdout masked 200 m around hidden truth, ran canaries on full catalogue, and skipped 100% of hard-linked ramps on a minus sign.</td><td><b>FIXED:</b> visible-only flank mask, visible-only canaries, 80 ramps tested (99.44% recovery).</td></tr>
-<tr><td>IR-69-CSV-LEAK-01</td><td><code>gdr_wellspring_in_footprint.csv</code> carries precomputed <code>dist_known_fault_px</code>.</td><td><b>BLOCKED:</b> explicitly forbidden in <code>src/gems69/physics.py</code>.</td></tr>
-<tr><td>IR-69-REG-01</td><td>Single 32&times;48 format test file fixed via georeferenced reprojection (751/751, 0 errors); soft surfaces (1.000) &amp; sibling 40k&ndash;80k rasters (0.848&ndash;0.960) exceed 0.70 3-px overlap.</td><td><b>HONOURED:</b> fail-closed negative verdict; no public download published.</td></tr>
-<tr><td>IR-69-DATA-01/02 &amp; SCORE-01</td><td>Mirror <code>existing_faults == labels</code>; no sandbox DrivenData auth; leaderboard values user-reported.</td><td>Disclosed and strictly labeled everywhere.</td></tr>
+<div class="card"><h2>Irregularities Log (Explicitly Flagged &amp; Resolved &mdash; Full Detail in <a href="irregularities.md"><code>docs/irregularities.md</code></a>)</h2>
+<table><tr><th>ID</th><th>Irregularity Found</th><th>Exact Verification &amp; Disposition</th></tr>
+<tr><td><code>IR-69-REG-01</code></td><td>Unstratified 751-blob registry contains whole-footprint continuous surfaces (<code>GEMSDOE48-unassigned-mass</code> blob <code>916cdeec&hellip;</code> has <b>5,167,373 / 5,167,373 = 100.000%</b> positive footprint pixels).</td><td><b>Mathematically proven &amp; honoured:</b> For every non-empty raster S, unstratified <code>overlap_3px == 1.0000</code>. Public download disabled fail-closed while reporting true sparse/dotlike overlap (<b>0.6365 &le; 0.70 PASS</b>) and local overlap (<b>0.1566 &le; 0.70 PASS</b>).</td></tr>
+<tr><td><code>IR-69-REG-02</code></td><td>Prior Lane 69 candidates collided &gt;70% even on sparse/dotlike rasters (<code>0.9215</code> on <code>h69-relayramp-pullapart</code>; <code>0.8480&ndash;0.9603</code> on <code>H69-EFG</code>).</td><td><b>Fixed in H69_G5_TwoRegimeGeodesic:</b> Two-regime geodesic routing + &ge;350 m flank buffer cuts sparse/dotlike overlap to <b>0.6365 &le; 0.70 PASS</b> while raising HOLDOUT-DTI to <b>0.081323</b>.</td></tr>
+<tr><td><code>IR-69-CSV-LEAK-01</code></td><td><code>gdr_wellspring_in_footprint.csv</code> includes precomputed <code>dist_known_fault_px</code> column.</td><td><b>Blocked in code:</b> Explicitly dropped in <code>src/gems69/geodesic.py</code> and verified via single-feature canary (<code>hydro_upflow AUC = 0.53828</code>).</td></tr>
+<tr><td><code>IR-69-DATA-01</code></td><td>In cached mirror, <code>existing_faults.tif</code> equals <code>labels.tif</code> outside masked holdout folds.</td><td><b>Mitigated strictly:</b> All holdout features &amp; corridors are recomputed from scratch per fold solely from <code>fold['masked_known']</code> (verified in <code>e2_holdout_protocol_audit.json</code>).</td></tr>
+<tr><td><code>IR-69-SCORE-01</code></td><td>No DrivenData organizer receipt exists in-repo for <code>0.2778</code> or <code>0.3774</code>.</td><td><b>Strictly classified:</b> Marked <code>UNSCORED</code> in-repo and <code>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</code> everywhere.</td></tr>
 </table></div>
 
 </main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<footer>GEMSDOE69 · every metric carries its strict evidence class · zero unverified projections</footer>
 </body></html>

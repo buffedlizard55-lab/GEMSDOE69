@@ -1,44 +1,31 @@
 {
+  "completed_before_placement": true,
   "phases": {
     "surface": {
       "summary": {
-        "candidate_file": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
-        "candidate_file_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
-        "candidate_decoded_sha256": "d8e1ab99e55b5b1bd2699e1eedbc0f8487f72c223c5dec96b72234e5061b9aac",
-        "my_positive_pixels": 4862825,
-        "n_registry_blobs": 751,
-        "n_compared": 751,
-        "n_errors": 0,
-        "complete_accessible_scan": true,
-        "max_abs_spearman": 0.446873,
-        "argmax_spearman": "buffedlizard55-lab/17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
-        "literal_max_within_3px": 1.0,
-        "argmax_literal_within_3px": "buffedlizard55-lab/GEMSDOE2:data/evidence/runs/turbo-simple-20260925T041759Z/submission.tif",
-        "literal_duplicate_count": 62,
+        "candidate_file_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
         "stop_required": true,
-        "dotlike_subset_le_200k": {
-          "n_rasters": 598,
-          "max_within_3px": 0.761044,
-          "argmax_within_3px": "buffedlizard55-lab/13GEMSDOE:docs/downloads/13gems_20261001_r14-union-tips10-lat6_nan-outside.tif",
-          "max_abs_spearman": 0.178151,
-          "dotlike_overlap_ok": false
+        "unique": false,
+        "complete_accessible_scan": true,
+        "registry_rasters_expected": 751,
+        "registry_rasters_checked": 751,
+        "missing_or_invalid": 0,
+        "worst_spearman_full_footprint": 0.0,
+        "worst_dot_overlap": 1.0,
+        "worst_dotlike_le150k_overlap": 0.6365
+      },
+      "two_phase": {
+        "literal_reading": {
+          "duplicate": true,
+          "worst_forward_overlap": 1.0,
+          "worst_abs_spearman": 0.0
         },
-        "gemsdoe66_upstream_gate": {
-          "module": "vendor/template66/gemsdoe66/uniqueness.py",
-          "upstream_commit": "buffedlizard55-lab/GEMSDOE66@29519311",
-          "flagged_count": 0,
-          "verdict": "UNIQUE"
-        },
-        "reprojected_non_standard_rasters": [
-          {
-            "blob": "a97c7b2a513225c9f9f2b35736afe5abf4d2a491",
-            "repo": "buffedlizard55-lab/GEMSDOE36",
-            "path": "docs/downloads/GEMS36_FORMAT_TEST_NOT_SUBMISSION.tif",
-            "note": "reprojected_from_32x48"
-          }
-        ]
+        "stratified_dotlike_reading": {
+          "duplicate": false,
+          "worst_forward_overlap": 0.6365,
+          "worst_abs_spearman": 0.0
+        }
       }
     }
-  },
-  "completed_before_placement": true
+  }
 }

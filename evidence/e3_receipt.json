@@ -1,37 +1,159 @@
 {
-  "experiment": "E3_live_build_validation_and_registry_audit",
-  "submission_name": "h69-efg-kinematic-geodesic-29027-zeros.tif",
-  "submission_note": "H69-EFG kinematic geodesic relay/pull-apart + physics; HOLDOUT-DTI 0.0727 vs 0.0472 ctrl (+53.9%); 29027 dots; UNSCORED",
-  "n_corridors": 3900,
-  "n_dots": 29027,
-  "lattice_diagnostic": {
-    "n_dots": 29027,
-    "max_row_fill_fraction": 0.10037,
-    "max_col_fill_fraction": 0.06019,
-    "lag14_row_autocorr": 0.79648,
-    "lag14_col_autocorr": 0.80508,
-    "lattice_artifact_detected": false
+  "generated_utc": "20261020T225640Z",
+  "selected_arm": "H69_G5_TwoRegimeGeodesic",
+  "primary_submission": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+  "docs_download_copy": "docs/downloads/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+  "primary_zip": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.zip",
+  "nan_companion": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-nan.tif",
+  "primary_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+  "nan_sha256": "df8cca0266142725c3b4208596aca844a6037577c83aa3e8fb2371797124cca5",
+  "submission_name": "h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros",
+  "submission_name_unique": true,
+  "note": "GEMSDOE69 H69-G5 two-regime geodesic relay/pull-apart corridors; 32000 greedy-DTI dots >=350m off cat; HOLDOUT-DTI 0.0813",
+  "n_dots": 32000,
+  "allocation": {
+    "expected_covered_credit": 1123.27,
+    "expected_self_credit": 5156.65,
+    "rounds": 5,
+    "surrogate_dti": 0.07134
   },
-  "raster": {
-    "zeros": {
-      "path": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
-      "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
-      "bytes": 196948
+  "catalogue_collision_px": 0,
+  "dot_distance_from_catalogue_px": {
+    "min": 3.606,
+    "p25": 5.385,
+    "median": 6.403,
+    "p75": 16.492,
+    "p95": 37.486
+  },
+  "writer_receipt": {
+    "file": "h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+    "sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+    "bytes": 88363,
+    "submission_name": "h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros",
+    "note": "GEMSDOE69 H69-G5 two-regime geodesic relay/pull-apart corridors; 32000 greedy-DTI dots >=350m off cat; HOLDOUT-DTI 0.0813",
+    "note_chars": 121,
+    "validator": {
+      "file": "/home/user/GEMSDOE69/submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+      "bytes": 88363,
+      "sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+      "meta": {
+        "crs": "EPSG:32611",
+        "shape": [
+          3730,
+          3292
+        ],
+        "dtype": "float32",
+        "count": 1,
+        "nodata": null,
+        "transform": [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        "profile_compress": "deflate"
+      },
+      "band_description": [
+        null
+      ],
+      "n_finite": 12279160,
+      "n_nan": 0,
+      "n_infinite": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.002606041496619582,
+      "emitted_positive_pixels": 32000,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "dimensions_3730x3292": true,
+        "crs_epsg_32611": true,
+        "transform_matches_sample_submission": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "no_sentinel_values": true,
+        "range_0_1_guaranteed": true,
+        "min_ge_0": true,
+        "max_le_1": true,
+        "in_footprint_all_finite": true,
+        "in_footprint_range_0_1": true,
+        "outside_footprint_zero": true,
+        "zero_dots_on_mapped_catalogue": true
+      },
+      "all_checks_passed": true,
+      "validation_class": "local format/range preflight; not organizer acceptance or uniqueness clearance",
+      "on_catalogue_positive_pixels": 0,
+      "in_footprint_positive_pixels": 32000,
+      "footprint_fraction": 0.006192701784833415
     },
-    "nan": {
-      "path": "submissions/h69-efg-kinematic-geodesic-29027-nan.tif",
-      "sha256": "6ddf37fc9dbe5f66c8000857ee54825f3269cc7d1b37318862a0960fd3e4dd93",
-      "bytes": 243565
+    "template_report": {
+      "path": "/home/user/GEMSDOE69/submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+      "bytes": 88363,
+      "sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+      "bands": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "width": 3292,
+      "height": 3730,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "ref_bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "blocksize": [
+        256,
+        256
+      ],
+      "fixture_grid": false,
+      "has_validity_mask": false,
+      "nan_pixels": 0,
+      "infinity_pixels": 0,
+      "n_nan": 0,
+      "min": 0.0,
+      "max": 1.0,
+      "mean": 0.002606041496619582,
+      "n_nonzero": 32000,
+      "mass": 32000.0,
+      "mass_outside_footprint": 0,
+      "problems": [],
+      "ok": true,
+      "validation_class": "local on-disk template/range check; not organizer upload acceptance"
+    },
+    "zip_file": "h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.zip",
+    "zip_sha256": "e9c25db9535f325fcd12b2b37498c132b813c09ef3558a46b05b5916cb82ce5e",
+    "approved_for_weekly_slot": false,
+    "promoted": false,
+    "submission_slots_used": 0,
+    "status": "locally validated within separately recorded inventory scope; not organizer acceptance or slot approval",
+    "metadata": {
+      "arm": "H69_G5_TwoRegimeGeodesic",
+      "evaluator_version": "gems57-pooled-hide-v2"
     }
   },
   "validator": {
-    "validator": "scripts/validate_submission.py",
-    "all_files_passed": true,
     "reports": [
       {
-        "file": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
-        "bytes": 196948,
-        "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+        "file": "/home/user/GEMSDOE69/submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+        "bytes": 88363,
+        "sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
         "meta": {
           "count": 1,
           "dtype": "float32",
@@ -60,7 +182,7 @@
         "n_nan_inside_footprint": 0,
         "min": 0.0,
         "max": 1.0,
-        "positive_pixels": 29027,
+        "positive_pixels": 32000,
         "distinct_positive_values": [
           1.0
         ],
@@ -108,9 +230,9 @@
         "all_checks_passed": true
       },
       {
-        "file": "submissions/h69-efg-kinematic-geodesic-29027-nan.tif",
-        "bytes": 243565,
-        "sha256": "6ddf37fc9dbe5f66c8000857ee54825f3269cc7d1b37318862a0960fd3e4dd93",
+        "file": "/home/user/GEMSDOE69/submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-nan.tif",
+        "bytes": 250609,
+        "sha256": "df8cca0266142725c3b4208596aca844a6037577c83aa3e8fb2371797124cca5",
         "meta": {
           "count": 1,
           "dtype": "float32",
@@ -139,7 +261,7 @@
         "n_nan_inside_footprint": 0,
         "min": 0.0,
         "max": 1.0,
-        "positive_pixels": 29027,
+        "positive_pixels": 32000,
         "distinct_positive_values": [
           1.0
         ],
@@ -165,5 +287,2112 @@
       }
     ]
   },
-  "evidence_class": "SUBMISSION-RECEIPT"
+  "format_compliance": {
+    "zeros": {
+      "dots": 32000,
+      "policy": "zeros_all_finite_0_1",
+      "all_finite": true,
+      "validator_pass": true,
+      "in_unit_interval": true,
+      "matches_sample_grid": true
+    },
+    "nan": {
+      "dots": 32000,
+      "policy": "nan_outside_footprint",
+      "finite_mask_matches_sample_submission": true,
+      "validator_pass": true,
+      "in_unit_interval": true,
+      "matches_sample_grid": true
+    }
+  },
+  "top_corridor_rationales": [
+    {
+      "rank": 1,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.9013,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 17.63,
+      "start_utm11_m": [
+        349674.3,
+        4464680.6
+      ],
+      "end_utm11_m": [
+        349492.6,
+        4464108.8
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.6936,
+        "mag_edge": 0.8926,
+        "mag_low": 0.9876,
+        "lidar_coh_scarp": 0.9549,
+        "rad_alteration": 0.8116,
+        "subsurface_step": 0.9761,
+        "td": 0.9928
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          802
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 2,
+      "setting": "relay",
+      "kind": "relay_enechelon",
+      "score": 0.8839,
+      "W_km": 0.184,
+      "L_km": 0.509,
+      "azimuth_deg": 7.35,
+      "start_utm11_m": [
+        349694.8,
+        4464118.2
+      ],
+      "end_utm11_m": [
+        349771.7,
+        4464714.6
+      ],
+      "n_corridor_px": 6,
+      "channels": {
+        "grav_edge": 0.6884,
+        "mag_edge": 0.9147,
+        "mag_low": 0.9862,
+        "lidar_coh_scarp": 0.9595,
+        "rad_alteration": 0.7308,
+        "subsurface_step": 0.9761,
+        "td": 0.9317
+      },
+      "meta": {
+        "overlap": false,
+        "W_km": 0.18447257554684848,
+        "L_km": 0.5090648523478092,
+        "sense": "N",
+        "dip_source": "inferred/inferred",
+        "records": [
+          801,
+          802
+        ],
+        "strand": 1
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 3,
+      "setting": "relay",
+      "kind": "relay_enechelon",
+      "score": 0.883,
+      "W_km": 0.43,
+      "L_km": 0.299,
+      "azimuth_deg": 10.64,
+      "start_utm11_m": [
+        349482.9,
+        4464825.9
+      ],
+      "end_utm11_m": [
+        349388.0,
+        4464320.8
+      ],
+      "n_corridor_px": 6,
+      "channels": {
+        "grav_edge": 0.6827,
+        "mag_edge": 0.8854,
+        "mag_low": 0.9924,
+        "lidar_coh_scarp": 0.8962,
+        "rad_alteration": 0.7891,
+        "subsurface_step": 0.9774,
+        "td": 0.9578
+      },
+      "meta": {
+        "overlap": false,
+        "W_km": 0.42991191878301693,
+        "L_km": 0.2990286708865525,
+        "sense": "N",
+        "dip_source": "inferred/inferred",
+        "records": [
+          802,
+          802
+        ],
+        "strand": 1
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 4,
+      "setting": "pullapart",
+      "kind": "pullapart_strand",
+      "score": 0.8807,
+      "W_km": 1.027,
+      "L_km": -3.368,
+      "azimuth_deg": 22.5,
+      "start_utm11_m": [
+        402900.5,
+        4206941.5
+      ],
+      "end_utm11_m": [
+        403293.5,
+        4207890.3
+      ],
+      "n_corridor_px": 9,
+      "channels": {
+        "grav_edge": 0.8173,
+        "mag_edge": 0.7371,
+        "mag_low": 0.8982,
+        "lidar_coh_scarp": 0.9144,
+        "rad_alteration": 0.8127,
+        "subsurface_step": 0.9854,
+        "td": 1.0
+      },
+      "meta": {
+        "overlap": true,
+        "W_km": 1.026951494787212,
+        "L_km": -3.367724857378414,
+        "sense": "LL",
+        "dip_source": "inferred/inferred",
+        "records": [
+          1379,
+          1380
+        ],
+        "strand": 1
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 5,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8783,
+      "W_km": 0.0,
+      "L_km": 0.485,
+      "azimuth_deg": 29.38,
+      "start_utm11_m": [
+        411735.3,
+        4290980.1
+      ],
+      "end_utm11_m": [
+        411497.2,
+        4290557.2
+      ],
+      "n_corridor_px": 4,
+      "channels": {
+        "grav_edge": 0.8789,
+        "mag_edge": 0.8403,
+        "mag_low": 0.9637,
+        "lidar_coh_scarp": 0.8536,
+        "rad_alteration": 0.6756,
+        "subsurface_step": 0.9504,
+        "td": 0.9856
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          376
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 6,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8778,
+      "W_km": 0.0,
+      "L_km": 0.674,
+      "azimuth_deg": 35.01,
+      "start_utm11_m": [
+        411735.3,
+        4290980.1
+      ],
+      "end_utm11_m": [
+        411348.6,
+        4290428.0
+      ],
+      "n_corridor_px": 6,
+      "channels": {
+        "grav_edge": 0.885,
+        "mag_edge": 0.8736,
+        "mag_low": 0.8895,
+        "lidar_coh_scarp": 0.8897,
+        "rad_alteration": 0.7172,
+        "subsurface_step": 0.9362,
+        "td": 0.9531
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          376
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 7,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8775,
+      "W_km": 0.0,
+      "L_km": 0.432,
+      "azimuth_deg": 23.96,
+      "start_utm11_m": [
+        413495.3,
+        4379187.5
+      ],
+      "end_utm11_m": [
+        413670.7,
+        4379582.3
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.7976,
+        "mag_edge": 0.9493,
+        "mag_low": 0.9151,
+        "lidar_coh_scarp": 0.8773,
+        "rad_alteration": 0.8411,
+        "subsurface_step": 0.7629,
+        "td": 0.9993
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          1070
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 8,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8763,
+      "W_km": 0.0,
+      "L_km": 0.432,
+      "azimuth_deg": 21.94,
+      "start_utm11_m": [
+        309854.3,
+        4458644.9
+      ],
+      "end_utm11_m": [
+        309692.9,
+        4458244.2
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.6845,
+        "mag_edge": 0.7518,
+        "mag_low": 0.9143,
+        "lidar_coh_scarp": 0.9002,
+        "rad_alteration": 0.9302,
+        "subsurface_step": 0.9533,
+        "td": 0.9999
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          630
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 9,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8763,
+      "W_km": 0.0,
+      "L_km": 0.432,
+      "azimuth_deg": 11.16,
+      "start_utm11_m": [
+        413546.1,
+        4379810.2
+      ],
+      "end_utm11_m": [
+        413462.5,
+        4379386.4
+      ],
+      "n_corridor_px": 4,
+      "channels": {
+        "grav_edge": 0.7617,
+        "mag_edge": 0.9893,
+        "mag_low": 0.8434,
+        "lidar_coh_scarp": 0.953,
+        "rad_alteration": 0.8329,
+        "subsurface_step": 0.7926,
+        "td": 0.9614
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          1070
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 10,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8739,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 21.48,
+      "start_utm11_m": [
+        309854.3,
+        4458644.9
+      ],
+      "end_utm11_m": [
+        309634.6,
+        4458086.6
+      ],
+      "n_corridor_px": 6,
+      "channels": {
+        "grav_edge": 0.68,
+        "mag_edge": 0.7393,
+        "mag_low": 0.9102,
+        "lidar_coh_scarp": 0.8955,
+        "rad_alteration": 0.9372,
+        "subsurface_step": 0.9554,
+        "td": 0.9997
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          630
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 11,
+      "setting": "relay",
+      "kind": "relay_enechelon",
+      "score": 0.8718,
+      "W_km": 0.521,
+      "L_km": -1.73,
+      "azimuth_deg": 14.12,
+      "start_utm11_m": [
+        398805.1,
+        4318212.6
+      ],
+      "end_utm11_m": [
+        399290.6,
+        4320142.7
+      ],
+      "n_corridor_px": 21,
+      "channels": {
+        "grav_edge": 0.8555,
+        "mag_edge": 0.8059,
+        "mag_low": 0.9184,
+        "lidar_coh_scarp": 0.7993,
+        "rad_alteration": 0.768,
+        "subsurface_step": 0.9771,
+        "td": 0.9788
+      },
+      "meta": {
+        "overlap": true,
+        "W_km": 0.5214147040268433,
+        "L_km": -1.7295498238227651,
+        "sense": "N",
+        "dip_source": "inferred/inferred",
+        "records": [
+          446,
+          446
+        ],
+        "strand": 1
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 12,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8718,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 25.16,
+      "start_utm11_m": [
+        413495.3,
+        4379187.5
+      ],
+      "end_utm11_m": [
+        413750.3,
+        4379730.6
+      ],
+      "n_corridor_px": 7,
+      "channels": {
+        "grav_edge": 0.7794,
+        "mag_edge": 0.9631,
+        "mag_low": 0.8402,
+        "lidar_coh_scarp": 0.8922,
+        "rad_alteration": 0.8541,
+        "subsurface_step": 0.7754,
+        "td": 0.9978
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          1070
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 13,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8696,
+      "W_km": 0.0,
+      "L_km": 0.432,
+      "azimuth_deg": 13.74,
+      "start_utm11_m": [
+        379121.6,
+        4326840.9
+      ],
+      "end_utm11_m": [
+        379019.0,
+        4326421.3
+      ],
+      "n_corridor_px": 4,
+      "channels": {
+        "grav_edge": 0.9618,
+        "mag_edge": 0.4061,
+        "mag_low": 0.919,
+        "lidar_coh_scarp": 0.8595,
+        "rad_alteration": 0.9678,
+        "subsurface_step": 0.9964,
+        "td": 0.9768
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          1609
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 14,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.869,
+      "W_km": 0.0,
+      "L_km": 0.444,
+      "azimuth_deg": 30.3,
+      "start_utm11_m": [
+        342227.1,
+        4402524.1
+      ],
+      "end_utm11_m": [
+        342003.3,
+        4402141.0
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.8104,
+        "mag_edge": 0.9008,
+        "mag_low": 0.9722,
+        "lidar_coh_scarp": 0.9376,
+        "rad_alteration": 0.5257,
+        "subsurface_step": 0.955,
+        "td": 0.9816
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          443
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 15,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.867,
+      "W_km": 0.0,
+      "L_km": 0.432,
+      "azimuth_deg": 19.89,
+      "start_utm11_m": [
+        398584.1,
+        4318402.6
+      ],
+      "end_utm11_m": [
+        398437.1,
+        4317996.4
+      ],
+      "n_corridor_px": 6,
+      "channels": {
+        "grav_edge": 0.9668,
+        "mag_edge": 0.8861,
+        "mag_low": 0.87,
+        "lidar_coh_scarp": 0.7347,
+        "rad_alteration": 0.6362,
+        "subsurface_step": 0.9774,
+        "td": 0.9979
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          446
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 16,
+      "setting": "relay",
+      "kind": "relay_enechelon",
+      "score": 0.8655,
+      "W_km": 0.402,
+      "L_km": 1.219,
+      "azimuth_deg": 0.75,
+      "start_utm11_m": [
+        349589.9,
+        4464054.3
+      ],
+      "end_utm11_m": [
+        349608.5,
+        4465474.4
+      ],
+      "n_corridor_px": 12,
+      "channels": {
+        "grav_edge": 0.6545,
+        "mag_edge": 0.885,
+        "mag_low": 0.9857,
+        "lidar_coh_scarp": 0.9639,
+        "rad_alteration": 0.7361,
+        "subsurface_step": 0.9704,
+        "td": 0.8627
+      },
+      "meta": {
+        "overlap": false,
+        "W_km": 0.40205106151241904,
+        "L_km": 1.219217702225749,
+        "sense": "N",
+        "dip_source": "inferred/inferred",
+        "records": [
+          801,
+          802
+        ],
+        "strand": 1
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 17,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8654,
+      "W_km": 0.0,
+      "L_km": 0.432,
+      "azimuth_deg": 2.0,
+      "start_utm11_m": [
+        496788.5,
+        4458213.6
+      ],
+      "end_utm11_m": [
+        496803.5,
+        4458645.3
+      ],
+      "n_corridor_px": 4,
+      "channels": {
+        "grav_edge": 0.9733,
+        "mag_edge": 0.861,
+        "mag_low": 0.8088,
+        "lidar_coh_scarp": 0.8454,
+        "rad_alteration": 0.797,
+        "subsurface_step": 0.8949,
+        "td": 0.8773
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          862
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 18,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8621,
+      "W_km": 0.0,
+      "L_km": 0.674,
+      "azimuth_deg": 22.9,
+      "start_utm11_m": [
+        393678.6,
+        4329096.0
+      ],
+      "end_utm11_m": [
+        393416.5,
+        4328475.6
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.566,
+        "mag_edge": 0.9648,
+        "mag_low": 0.8464,
+        "lidar_coh_scarp": 0.8811,
+        "rad_alteration": 0.8635,
+        "subsurface_step": 0.9132,
+        "td": 1.0
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          1577
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 19,
+      "setting": "relay",
+      "kind": "relay_enechelon",
+      "score": 0.8621,
+      "W_km": 0.588,
+      "L_km": 0.161,
+      "azimuth_deg": 21.57,
+      "start_utm11_m": [
+        309635.1,
+        4458889.5
+      ],
+      "end_utm11_m": [
+        309468.1,
+        4458466.9
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.7178,
+        "mag_edge": 0.7954,
+        "mag_low": 0.8721,
+        "lidar_coh_scarp": 0.8464,
+        "rad_alteration": 0.9319,
+        "subsurface_step": 0.8713,
+        "td": 0.9997
+      },
+      "meta": {
+        "overlap": false,
+        "W_km": 0.5875112869785429,
+        "L_km": 0.1606099300598182,
+        "sense": "N",
+        "dip_source": "recorded/recorded",
+        "records": [
+          630,
+          630
+        ],
+        "strand": 1
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 20,
+      "setting": "relay",
+      "kind": "relay_enechelon",
+      "score": 0.8593,
+      "W_km": 0.443,
+      "L_km": 0.225,
+      "azimuth_deg": 11.03,
+      "start_utm11_m": [
+        349644.9,
+        4465442.9
+      ],
+      "end_utm11_m": [
+        349559.4,
+        4465004.1
+      ],
+      "n_corridor_px": 4,
+      "channels": {
+        "grav_edge": 0.6251,
+        "mag_edge": 0.9054,
+        "mag_low": 0.983,
+        "lidar_coh_scarp": 0.9396,
+        "rad_alteration": 0.6318,
+        "subsurface_step": 0.9695,
+        "td": 0.9605
+      },
+      "meta": {
+        "overlap": false,
+        "W_km": 0.4433681188738167,
+        "L_km": 0.2254081690626102,
+        "sense": "N",
+        "dip_source": "inferred/inferred",
+        "records": [
+          802,
+          802
+        ],
+        "strand": 1
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 21,
+      "setting": "pullapart",
+      "kind": "pullapart_strand",
+      "score": 0.8576,
+      "W_km": 0.627,
+      "L_km": -1.702,
+      "azimuth_deg": 22.5,
+      "start_utm11_m": [
+        405478.4,
+        4206840.7
+      ],
+      "end_utm11_m": [
+        405718.5,
+        4207420.4
+      ],
+      "n_corridor_px": 7,
+      "channels": {
+        "grav_edge": 0.9238,
+        "mag_edge": 0.687,
+        "mag_low": 0.7864,
+        "lidar_coh_scarp": 0.7843,
+        "rad_alteration": 0.8285,
+        "subsurface_step": 0.993,
+        "td": 1.0
+      },
+      "meta": {
+        "overlap": true,
+        "W_km": 0.6274978015455906,
+        "L_km": -1.7024278307087015,
+        "sense": "LL",
+        "dip_source": "inferred/inferred",
+        "records": [
+          1379,
+          1379
+        ],
+        "strand": 2
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 22,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8569,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 17.75,
+      "start_utm11_m": [
+        398584.1,
+        4318402.6
+      ],
+      "end_utm11_m": [
+        398401.1,
+        4317831.2
+      ],
+      "n_corridor_px": 8,
+      "channels": {
+        "grav_edge": 0.9647,
+        "mag_edge": 0.8664,
+        "mag_low": 0.853,
+        "lidar_coh_scarp": 0.7076,
+        "rad_alteration": 0.6487,
+        "subsurface_step": 0.9648,
+        "td": 0.9932
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          446
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 23,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8566,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 6.59,
+      "start_utm11_m": [
+        379121.6,
+        4326840.9
+      ],
+      "end_utm11_m": [
+        379052.8,
+        4326244.9
+      ],
+      "n_corridor_px": 7,
+      "channels": {
+        "grav_edge": 0.9608,
+        "mag_edge": 0.4839,
+        "mag_low": 0.9258,
+        "lidar_coh_scarp": 0.8502,
+        "rad_alteration": 0.8542,
+        "subsurface_step": 0.9964,
+        "td": 0.9248
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          1609
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 24,
+      "setting": "relay",
+      "kind": "relay_breach",
+      "score": 0.8563,
+      "W_km": 1.628,
+      "L_km": -4.403,
+      "azimuth_deg": 8.38,
+      "start_utm11_m": [
+        378885.3,
+        4325895.2
+      ],
+      "end_utm11_m": [
+        379331.2,
+        4328922.4
+      ],
+      "n_corridor_px": 26,
+      "channels": {
+        "grav_edge": 0.9351,
+        "mag_edge": 0.4078,
+        "mag_low": 0.9291,
+        "lidar_coh_scarp": 0.88,
+        "rad_alteration": 0.9084,
+        "subsurface_step": 0.9931,
+        "td": 0.9405
+      },
+      "meta": {
+        "overlap": true,
+        "W_km": 1.6283622785870957,
+        "L_km": -4.402756173255255,
+        "sense": "N",
+        "dip_source": "inferred/inferred",
+        "records": [
+          1609,
+          1610
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 25,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8559,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 1.91,
+      "start_utm11_m": [
+        413546.1,
+        4379810.2
+      ],
+      "end_utm11_m": [
+        413526.1,
+        4379210.5
+      ],
+      "n_corridor_px": 6,
+      "channels": {
+        "grav_edge": 0.7811,
+        "mag_edge": 0.9557,
+        "mag_low": 0.892,
+        "lidar_coh_scarp": 0.8869,
+        "rad_alteration": 0.8218,
+        "subsurface_step": 0.7771,
+        "td": 0.8763
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          1070
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 26,
+      "setting": "transfer",
+      "kind": "termination_splay",
+      "score": 0.8551,
+      "W_km": 0.0,
+      "L_km": 1.0,
+      "azimuth_deg": 29.41,
+      "start_utm11_m": [
+        405104.2,
+        4207318.5
+      ],
+      "end_utm11_m": [
+        404613.2,
+        4206447.3
+      ],
+      "n_corridor_px": 8,
+      "channels": {
+        "grav_edge": 0.955,
+        "mag_edge": 0.7778,
+        "mag_low": 0.624,
+        "lidar_coh_scarp": 0.8824,
+        "rad_alteration": 0.7731,
+        "subsurface_step": 0.9881,
+        "td": 0.9855
+      },
+      "meta": {
+        "sense": "LL",
+        "angle": 40.0
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 27,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8544,
+      "W_km": 0.0,
+      "L_km": 0.53,
+      "azimuth_deg": 6.57,
+      "start_utm11_m": [
+        350562.0,
+        4457443.8
+      ],
+      "end_utm11_m": [
+        350622.6,
+        4457970.2
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.6628,
+        "mag_edge": 0.8188,
+        "mag_low": 0.6452,
+        "lidar_coh_scarp": 0.9802,
+        "rad_alteration": 0.9822,
+        "subsurface_step": 0.9673,
+        "td": 0.9247
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          1201
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 28,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8541,
+      "W_km": 0.0,
+      "L_km": 0.675,
+      "azimuth_deg": 26.59,
+      "start_utm11_m": [
+        342628.6,
+        4401791.9
+      ],
+      "end_utm11_m": [
+        342326.5,
+        4401188.3
+      ],
+      "n_corridor_px": 7,
+      "channels": {
+        "grav_edge": 0.8556,
+        "mag_edge": 0.9018,
+        "mag_low": 0.992,
+        "lidar_coh_scarp": 0.9581,
+        "rad_alteration": 0.4123,
+        "subsurface_step": 0.8641,
+        "td": 0.9949
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          443
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 29,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8537,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 12.69,
+      "start_utm11_m": [
+        395647.3,
+        4325843.9
+      ],
+      "end_utm11_m": [
+        395515.5,
+        4325258.6
+      ],
+      "n_corridor_px": 4,
+      "channels": {
+        "grav_edge": 0.5793,
+        "mag_edge": 0.8953,
+        "mag_low": 0.9917,
+        "lidar_coh_scarp": 0.8657,
+        "rad_alteration": 0.7182,
+        "subsurface_step": 0.9547,
+        "td": 0.971
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          2669
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 30,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8531,
+      "W_km": 0.0,
+      "L_km": 0.432,
+      "azimuth_deg": 28.37,
+      "start_utm11_m": [
+        396403.7,
+        4346098.1
+      ],
+      "end_utm11_m": [
+        396609.0,
+        4346478.3
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.9745,
+        "mag_edge": 0.5922,
+        "mag_low": 0.8217,
+        "lidar_coh_scarp": 0.8425,
+        "rad_alteration": 0.7561,
+        "subsurface_step": 0.9953,
+        "td": 0.9896
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          1576
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 31,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8529,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 177.07,
+      "start_utm11_m": [
+        349792.2,
+        4464152.1
+      ],
+      "end_utm11_m": [
+        349761.5,
+        4464751.4
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.6759,
+        "mag_edge": 0.9317,
+        "mag_low": 0.9818,
+        "lidar_coh_scarp": 0.9872,
+        "rad_alteration": 0.6013,
+        "subsurface_step": 0.9768,
+        "td": 0.8156
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          801
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 32,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8508,
+      "W_km": 0.0,
+      "L_km": 0.937,
+      "azimuth_deg": 29.94,
+      "start_utm11_m": [
+        342628.6,
+        4401791.9
+      ],
+      "end_utm11_m": [
+        342160.7,
+        4400979.6
+      ],
+      "n_corridor_px": 8,
+      "channels": {
+        "grav_edge": 0.846,
+        "mag_edge": 0.8835,
+        "mag_low": 0.9914,
+        "lidar_coh_scarp": 0.9622,
+        "rad_alteration": 0.4515,
+        "subsurface_step": 0.8377,
+        "td": 0.9832
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          443
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 33,
+      "setting": "pullapart",
+      "kind": "pullapart_strand",
+      "score": 0.8507,
+      "W_km": 1.696,
+      "L_km": -3.983,
+      "azimuth_deg": 22.5,
+      "start_utm11_m": [
+        294980.1,
+        4408744.6
+      ],
+      "end_utm11_m": [
+        295629.1,
+        4410311.5
+      ],
+      "n_corridor_px": 17,
+      "channels": {
+        "grav_edge": 0.8069,
+        "mag_edge": 0.7226,
+        "mag_low": 0.9773,
+        "lidar_coh_scarp": 0.5,
+        "rad_alteration": 0.9881,
+        "subsurface_step": 0.9602,
+        "td": 1.0
+      },
+      "meta": {
+        "overlap": true,
+        "W_km": 1.696070974726263,
+        "L_km": -3.983455005060377,
+        "sense": "RL",
+        "dip_source": "inferred/inferred",
+        "records": [
+          749,
+          749
+        ],
+        "strand": 2
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 34,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8504,
+      "W_km": 0.0,
+      "L_km": 0.524,
+      "azimuth_deg": 9.54,
+      "start_utm11_m": [
+        278842.1,
+        4485359.3
+      ],
+      "end_utm11_m": [
+        278755.2,
+        4484842.1
+      ],
+      "n_corridor_px": 6,
+      "channels": {
+        "grav_edge": 0.8791,
+        "mag_edge": 0.6916,
+        "mag_low": 0.9695,
+        "lidar_coh_scarp": 0.952,
+        "rad_alteration": 0.6083,
+        "subsurface_step": 0.9024,
+        "td": 0.9497
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          367
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 35,
+      "setting": "transfer",
+      "kind": "termination_splay",
+      "score": 0.8502,
+      "W_km": 0.0,
+      "L_km": 1.0,
+      "azimuth_deg": 12.2,
+      "start_utm11_m": [
+        372544.0,
+        4307551.4
+      ],
+      "end_utm11_m": [
+        372755.3,
+        4308528.8
+      ],
+      "n_corridor_px": 11,
+      "channels": {
+        "grav_edge": 0.947,
+        "mag_edge": 0.9706,
+        "mag_low": 0.4612,
+        "lidar_coh_scarp": 0.8628,
+        "rad_alteration": 0.7931,
+        "subsurface_step": 0.9488,
+        "td": 0.968
+      },
+      "meta": {
+        "sense": "RL",
+        "angle": 40.0
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 36,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8498,
+      "W_km": 0.0,
+      "L_km": 0.432,
+      "azimuth_deg": 4.21,
+      "start_utm11_m": [
+        278791.4,
+        4484631.7
+      ],
+      "end_utm11_m": [
+        278823.1,
+        4485062.5
+      ],
+      "n_corridor_px": 4,
+      "channels": {
+        "grav_edge": 0.8732,
+        "mag_edge": 0.7719,
+        "mag_low": 0.9625,
+        "lidar_coh_scarp": 0.9338,
+        "rad_alteration": 0.6242,
+        "subsurface_step": 0.8815,
+        "td": 0.9015
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          367
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 37,
+      "setting": "pullapart",
+      "kind": "pullapart_strand",
+      "score": 0.8495,
+      "W_km": 0.33,
+      "L_km": 0.6,
+      "azimuth_deg": 22.5,
+      "start_utm11_m": [
+        412308.5,
+        4235943.7
+      ],
+      "end_utm11_m": [
+        412499.9,
+        4236405.6
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.9892,
+        "mag_edge": 0.8683,
+        "mag_low": 0.7101,
+        "lidar_coh_scarp": 0.8933,
+        "rad_alteration": 0.7983,
+        "subsurface_step": 0.6872,
+        "td": 1.0
+      },
+      "meta": {
+        "overlap": false,
+        "W_km": 0.32972224580829324,
+        "L_km": 0.6000564883604542,
+        "sense": "RL",
+        "dip_source": "inferred/inferred",
+        "records": [
+          31,
+          33
+        ],
+        "strand": 0
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 38,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8494,
+      "W_km": 0.0,
+      "L_km": 0.432,
+      "azimuth_deg": 12.56,
+      "start_utm11_m": [
+        349406.1,
+        4465376.5
+      ],
+      "end_utm11_m": [
+        349312.2,
+        4464954.8
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.6334,
+        "mag_edge": 0.9413,
+        "mag_low": 0.9821,
+        "lidar_coh_scarp": 0.7502,
+        "rad_alteration": 0.6992,
+        "subsurface_step": 0.9695,
+        "td": 0.9702
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          802
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 39,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8493,
+      "W_km": 0.0,
+      "L_km": 0.432,
+      "azimuth_deg": 16.73,
+      "start_utm11_m": [
+        305124.2,
+        4485749.9
+      ],
+      "end_utm11_m": [
+        305248.5,
+        4486163.6
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.9635,
+        "mag_edge": 0.4875,
+        "mag_low": 0.8882,
+        "lidar_coh_scarp": 0.8943,
+        "rad_alteration": 0.9591,
+        "subsurface_step": 0.7626,
+        "td": 0.9899
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          855
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 40,
+      "setting": "relay",
+      "kind": "relay_enechelon",
+      "score": 0.8491,
+      "W_km": 0.559,
+      "L_km": -1.425,
+      "azimuth_deg": 13.95,
+      "start_utm11_m": [
+        399292.5,
+        4319764.2
+      ],
+      "end_utm11_m": [
+        398881.6,
+        4318110.3
+      ],
+      "n_corridor_px": 17,
+      "channels": {
+        "grav_edge": 0.8738,
+        "mag_edge": 0.7793,
+        "mag_low": 0.881,
+        "lidar_coh_scarp": 0.7336,
+        "rad_alteration": 0.7153,
+        "subsurface_step": 0.9826,
+        "td": 0.9779
+      },
+      "meta": {
+        "overlap": true,
+        "W_km": 0.5586302010092263,
+        "L_km": -1.4248967733626186,
+        "sense": "N",
+        "dip_source": "inferred/inferred",
+        "records": [
+          446,
+          446
+        ],
+        "strand": 1
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 41,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8487,
+      "W_km": 0.0,
+      "L_km": 0.57,
+      "azimuth_deg": 22.67,
+      "start_utm11_m": [
+        353960.8,
+        4465303.3
+      ],
+      "end_utm11_m": [
+        353741.2,
+        4464777.4
+      ],
+      "n_corridor_px": 6,
+      "channels": {
+        "grav_edge": 0.6118,
+        "mag_edge": 0.9107,
+        "mag_low": 0.8564,
+        "lidar_coh_scarp": 0.7309,
+        "rad_alteration": 0.8759,
+        "subsurface_step": 0.9554,
+        "td": 1.0
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          802
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 42,
+      "setting": "relay",
+      "kind": "relay_connector",
+      "score": 0.8487,
+      "W_km": 0.521,
+      "L_km": -1.73,
+      "azimuth_deg": 30.9,
+      "start_utm11_m": [
+        399511.6,
+        4319952.7
+      ],
+      "end_utm11_m": [
+        398584.1,
+        4318402.6
+      ],
+      "n_corridor_px": 16,
+      "channels": {
+        "grav_edge": 0.8085,
+        "mag_edge": 0.6862,
+        "mag_low": 0.9577,
+        "lidar_coh_scarp": 0.767,
+        "rad_alteration": 0.7644,
+        "subsurface_step": 0.9783,
+        "td": 0.9787
+      },
+      "meta": {
+        "overlap": true,
+        "W_km": 0.5214147040268433,
+        "L_km": -1.7295498238227651,
+        "sense": "N",
+        "dip_source": "inferred/inferred",
+        "records": [
+          446,
+          446
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 43,
+      "setting": "relay",
+      "kind": "relay_enechelon",
+      "score": 0.8479,
+      "W_km": 0.29,
+      "L_km": 0.298,
+      "azimuth_deg": 29.6,
+      "start_utm11_m": [
+        396460.4,
+        4346491.5
+      ],
+      "end_utm11_m": [
+        396241.8,
+        4346106.7
+      ],
+      "n_corridor_px": 4,
+      "channels": {
+        "grav_edge": 0.9774,
+        "mag_edge": 0.6375,
+        "mag_low": 0.7754,
+        "lidar_coh_scarp": 0.8413,
+        "rad_alteration": 0.7236,
+        "subsurface_step": 0.9956,
+        "td": 0.9847
+      },
+      "meta": {
+        "overlap": false,
+        "W_km": 0.2900740037019282,
+        "L_km": 0.29753077882177326,
+        "sense": "N",
+        "dip_source": "inferred/inferred",
+        "records": [
+          1576,
+          1576
+        ],
+        "strand": 1
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 44,
+      "setting": "relay",
+      "kind": "tip_wing_splay",
+      "score": 0.8479,
+      "W_km": 0.0,
+      "L_km": 0.432,
+      "azimuth_deg": 12.13,
+      "start_utm11_m": [
+        349196.6,
+        4464466.1
+      ],
+      "end_utm11_m": [
+        349287.3,
+        4464888.5
+      ],
+      "n_corridor_px": 4,
+      "channels": {
+        "grav_edge": 0.6826,
+        "mag_edge": 0.9649,
+        "mag_low": 0.9854,
+        "lidar_coh_scarp": 0.8199,
+        "rad_alteration": 0.5368,
+        "subsurface_step": 0.9781,
+        "td": 0.9676
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          802
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 45,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8477,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 33.16,
+      "start_utm11_m": [
+        396403.7,
+        4346098.1
+      ],
+      "end_utm11_m": [
+        396732.0,
+        4346600.4
+      ],
+      "n_corridor_px": 6,
+      "channels": {
+        "grav_edge": 0.971,
+        "mag_edge": 0.5236,
+        "mag_low": 0.8585,
+        "lidar_coh_scarp": 0.8574,
+        "rad_alteration": 0.7628,
+        "subsurface_step": 0.9953,
+        "td": 0.9658
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          1576
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 46,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.847,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 4.43,
+      "start_utm11_m": [
+        349406.1,
+        4465376.5
+      ],
+      "end_utm11_m": [
+        349359.8,
+        4464778.3
+      ],
+      "n_corridor_px": 6,
+      "channels": {
+        "grav_edge": 0.6405,
+        "mag_edge": 0.9135,
+        "mag_low": 0.9853,
+        "lidar_coh_scarp": 0.818,
+        "rad_alteration": 0.6969,
+        "subsurface_step": 0.9711,
+        "td": 0.9038
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          802
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 47,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.846,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 12.01,
+      "start_utm11_m": [
+        305124.2,
+        4485749.9
+      ],
+      "end_utm11_m": [
+        305249.0,
+        4486336.7
+      ],
+      "n_corridor_px": 5,
+      "channels": {
+        "grav_edge": 0.9635,
+        "mag_edge": 0.4875,
+        "mag_low": 0.8882,
+        "lidar_coh_scarp": 0.8943,
+        "rad_alteration": 0.9591,
+        "subsurface_step": 0.7626,
+        "td": 0.9668
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          855
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 48,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8453,
+      "W_km": 0.0,
+      "L_km": 0.616,
+      "azimuth_deg": 36.67,
+      "start_utm11_m": [
+        342227.1,
+        4402524.1
+      ],
+      "end_utm11_m": [
+        341859.1,
+        4402029.8
+      ],
+      "n_corridor_px": 4,
+      "channels": {
+        "grav_edge": 0.8073,
+        "mag_edge": 0.8545,
+        "mag_low": 0.9727,
+        "lidar_coh_scarp": 0.8639,
+        "rad_alteration": 0.5236,
+        "subsurface_step": 0.9547,
+        "td": 0.9401
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "recorded",
+        "records": [
+          443
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 49,
+      "setting": "relay",
+      "kind": "tip_propagation",
+      "score": 0.8444,
+      "W_km": 0.0,
+      "L_km": 0.6,
+      "azimuth_deg": 12.37,
+      "start_utm11_m": [
+        349561.6,
+        4462412.3
+      ],
+      "end_utm11_m": [
+        349690.1,
+        4462998.4
+      ],
+      "n_corridor_px": 6,
+      "channels": {
+        "grav_edge": 0.7641,
+        "mag_edge": 0.8618,
+        "mag_low": 0.7888,
+        "lidar_coh_scarp": 0.8033,
+        "rad_alteration": 0.8979,
+        "subsurface_step": 0.8261,
+        "td": 0.969
+      },
+      "meta": {
+        "sense": "N",
+        "dip_source": "inferred",
+        "records": [
+          802
+        ]
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    },
+    {
+      "rank": 50,
+      "setting": "pullapart",
+      "kind": "pullapart_strand",
+      "score": 0.8443,
+      "W_km": 0.659,
+      "L_km": 2.092,
+      "azimuth_deg": 22.5,
+      "start_utm11_m": [
+        294712.2,
+        4408769.9
+      ],
+      "end_utm11_m": [
+        294964.5,
+        4409379.1
+      ],
+      "n_corridor_px": 8,
+      "channels": {
+        "grav_edge": 0.805,
+        "mag_edge": 0.7361,
+        "mag_low": 0.937,
+        "lidar_coh_scarp": 0.5,
+        "rad_alteration": 0.9604,
+        "subsurface_step": 0.9717,
+        "td": 1.0
+      },
+      "meta": {
+        "overlap": false,
+        "W_km": 0.6594559888123219,
+        "L_km": 2.092022903604927,
+        "sense": "RL",
+        "dip_source": "inferred/inferred",
+        "records": [
+          749,
+          749
+        ],
+        "strand": 0
+      },
+      "sources": [
+        "Giddens & Faulds (2025), SGP-TR-229",
+        "USGS/INGENIOUS GBSFaults (OpenEI GDR #1391)",
+        "USGS GeoDAWN magnetic & radiometric compilation",
+        "DOE GEMS 1m LiDAR scarp & MT/gravity training stack"
+      ]
+    }
+  ],
+  "elapsed_seconds": 434.42,
+  "evidence_class": "SUBMISSION-RECEIPT",
+  "hypothesis_id": "H69_G5_TwoRegimeGeodesic",
+  "submission_note": "GEMSDOE69 H69-G5 two-regime geodesic relay/pull-apart corridors; 32000 greedy-DTI dots >=350m off cat; HOLDOUT-DTI 0.0813",
+  "raster": {
+    "zeros": {
+      "path": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+      "sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+      "bytes": 88363
+    },
+    "nan": {
+      "path": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-nan.tif",
+      "sha256": "df8cca0266142725c3b4208596aca844a6037577c83aa3e8fb2371797124cca5",
+      "bytes": 250609
+    },
+    "zip": {
+      "path": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.zip",
+      "sha256": "e9c25db9535f325fcd12b2b37498c132b813c09ef3558a46b05b5916cb82ce5e",
+      "bytes": 42797
+    }
+  }
 }

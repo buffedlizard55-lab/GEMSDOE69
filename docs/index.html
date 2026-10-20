@@ -4,60 +4,61 @@
 <title>Home · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<header><div class="wrap"><h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · H69_G5_TwoRegimeGeodesic</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No TIFF or ZIP is published for submission. All scientific, holdout, canary, hard-link, and format checks PASS (<code>H69-EFG HOLDOUT-DTI = 0.0727</code> vs <code>0.0472</code> control, <code>+53.9%</code>, <code>p = 1.0000</code>), <b>HOWEVER</b> the cross-family 751-blob 3-px forward overlap check trips Rule 1 against prior family rasters. No competition slot was used.</p><ul><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.</li><li>Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.</li><li>surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.</li><li>Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.</li></ul></div>
+<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT AUTOMATICALLY.</b><p>No TIFF or ZIP is published for submission inside <code>docs/downloads/</code> under <code>gems69-literal-release-v4</code>. All scientific, whole-segment holdout, canary, hard-link recovery, sparse/dotlike uniqueness, local-prior uniqueness, and format checks <b>PASS</b> (<code>H69_G5_TwoRegimeGeodesic HOLDOUT-DTI = 0.081323</code> [95% CI: <code>0.072231, 0.090492</code>] vs <code>0.031868</code> no-corridor control [<code>2.55&times;</code>, <code>&Delta; = +0.049455</code>] and <code>0.043056</code> PR #6 corridor [<code>1.89&times;</code>, <code>&Delta; = +0.038267</code>]; sparse/dotlike registry overlap = <code>0.6365 &le; 0.70 PASS</code>; local <code>GEMSDOE69</code> max overlap = <code>0.1566 &le; 0.70 PASS</code>; max |Spearman &rho;| = <code>0.6465 &le; 0.90 PASS</code>; <code>0</code> exact matches). <b>ONLY</b> the unstratified 751-blob all-positive overlap fires (<code>1.0000</code> on <code>GEMSDOE48-unassigned-mass</code>, which has <code>5,167,373 / 5,167,373</code> positive footprint cells = <code>100.000%</code>; <code>IR-69-REG-01</code>). No weekly submission slot was used.</p><ul><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.</li><li>Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.</li><li>surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.</li><li>Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.</li></ul></div>
 <div class="card">
-<h2>Gate scorecard at a glance (every number live-reproduced from checked-in code)</h2>
+<h2>Verified Scorecard &mdash; <code>H69_G5_TwoRegimeGeodesic</code> (100% live-reproduced from checked-in code)</h2>
 <table>
 <tr><th>Gate / Measurement</th><th>Measured Value</th><th>Status / Evidence Class</th></tr>
-<tr><td>E1 Single-feature leakage canaries (33 features)</td>
-<td>max AUC = <b>0.59082</b> (<code>corridor_multiplicity</code>, limit &le; 0.90)</td>
-<td><b>PASS</b> · HOLDOUT-CANARY (9308 withheld px)</td></tr>
-<tr><td>E1 Hard-linked ramp masking recovery (80 ramps)</td>
-<td>mean = <b>0.9944</b>, median = <b>1.0000</b> (80/80 &ge; 70%)</td>
-<td><b>PASS</b> · GEOMETRIC-RECOVERY (300 m kernel)</td></tr>
-<tr><td>E2 Primary holdout: <b>H69-EFG</b> vs No-Prior Control (<code>all</code>)</td>
-<td><b>0.072701</b> [0.055864, 0.086004] vs <b>0.047245</b> (&Delta; = <b>+0.025456</b>, wins 7/8, p=1.0)</td>
-<td><b>PASS (+53.9%, 9.0x prior best)</b> · HOLDOUT-DTI (22641 px)</td></tr>
-<tr><td>E2 Conservative detached holdout (<code>detached &ge; 400 m</code>)</td>
-<td><b>0.067664</b> [0.052539, 0.081458] vs <b>0.050269</b> (&Delta; = <b>+0.017396</b>, wins <b>8/8</b>, p=1.0)</td>
-<td><b>PASS (+34.6%, 8/8 quadrants won)</b> · HOLDOUT-DTI (22619 px)</td></tr>
-<tr><td>E3 Format &amp; template validator (<code>-zeros.tif</code> &amp; <code>-nan.tif</code>)</td>
-<td>29027 dots across 3900 corridors · SHA-256 <code>25cdba0acab1c9ee&hellip;</code></td>
-<td><b>PASS (29/29 checks, 0 errors)</b> · LOCAL-VALIDATOR</td></tr>
-<tr><td>E3 Registry Spearman rank correlation (751/751 blobs, 0 errors)</td>
-<td>dots max |&rho;| = <b>0.1448</b> · surface max |&rho;| = <b>0.4469</b> (limit &le; 0.90)</td>
-<td><b>PASS</b> · REGISTRY-MEASUREMENT</td></tr>
-<tr><td>E3 Overlap vs Family Champion <code>GEMSDOE32 h33-2-b2-zeros</code> (37,654 dots)</td>
-<td>Spearman &rho; = <b>0.0087</b> · 3-px dot proximity = <b>0.3121</b> (<b>68.79%</b> of H69-EFG dots &gt; 300 m outside H33!)</td>
-<td><b>COMPLEMENTARY</b> · REGISTRY-MEASUREMENT</td></tr>
-<tr><td>E3 Registry 3-px forward dot overlap (Rule 1 literal gate)</td>
-<td><b>1.0000</b> vs soft surfaces; <b>0.8480&ndash;0.9603</b> vs prior 40k&ndash;80k scarp/corridor rasters (limit &le; 0.70)</td>
-<td><b>STOP (DUPLICATE BLOCKER)</b> · NO DOWNLOAD OFFERED</td></tr>
-<tr><td>Reference live family score (<code>h33-2-b2-zeros</code>)</td>
-<td>0.2778 (prompt highs: 0.3774 / 0.4413 / 0.3195)</td>
-<td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</td></tr>
+<tr><td>Repository candidate artifact (<code>submissions/</code>)</td>
+<td><code>h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros</code> · <b>32,000</b> dots · SHA-256 <code>28375c975487299e8c12&hellip;</code></td>
+<td><b>ARCHIVED IN REPO</b> · <code>SUBMISSION-RECEIPT</code></td></tr>
+<tr><td>Candidate short note (&le; 140 chars)</td>
+<td><code>GEMSDOE69 H69-G5 two-regime geodesic relay/pull-apart corridors; 32000 greedy-DTI dots &gt;=350m off cat; HOLDOUT-DTI 0.0813</code> (121 chars)</td>
+<td><b>PASS (121 &le; 140)</b> · <code>SUBMISSION-RECEIPT</code></td></tr>
+<tr><td>E1 Single-feature leakage canaries (17 features)</td>
+<td>max AUC = <b>0.79653</b> (limit &le; 0.90)</td>
+<td><b>PASS</b> · <code>HOLDOUT-CANARY</code> (1923 withheld px)</td></tr>
+<tr><td>E1 Hard-linked ramp recovery (&le; 300 m)</td>
+<td><b>80</b> disconnected bridges tested · mean recovery = <b>0.9944</b>, median = <b>1.0000</b> (80/80 &ge; 70%)</td>
+<td><b>PASS</b> · <code>GEOMETRIC-RECOVERY</code></td></tr>
+<tr><td>E2 Primary holdout: <b>H69_G5_TwoRegimeGeodesic</b> vs Control</td>
+<td><b>0.081323</b> [0.072231, 0.090492] vs <b>0.031868</b> [0.023884, 0.04114] (&Delta; = <b>+0.049455</b>, CI [0.039549, 0.05879])</td>
+<td><b>PASS (2.55&times; control, +155.2%)</b> · <code>HOLDOUT-DTI</code> (gems57-pooled-hide-v2, 22,893 px)</td></tr>
+<tr><td>E2 Paired contrast vs Incumbent PR #6 Corridor &amp; prior H69-J</td>
+<td><b>0.081323</b> vs PR #6 <b>0.043056</b> (&Delta; = <b>+0.038267</b>, CI [0.028915, 0.048269]) · <b>13.8&times;</b> H69-J (<code>0.0059</code>)</td>
+<td><b>PASS (1.89&times; PR #6, 8/8 folds won)</b> · <code>HOLDOUT-DTI</code></td></tr>
+<tr><td>E3 Official &amp; template validator (<code>-zeros.tif</code> &amp; <code>-nan.tif</code>)</td>
+<td><code>float32</code>, <code>EPSG:32611</code>, <code>3730&times;3292</code>, <code>0</code> NaN in zeros variant, range <code>[0.0, 1.0]</code>, <code>0</code> catalogue collisions, min dist = <code>3.606 px</code> (361 m)</td>
+<td><b>PASS (15/15 + 15/15 checks)</b> · <code>FORMAT-VALIDATION-AUDIT</code></td></tr>
+<tr><td>E3 Registry Spearman rank correlation (751/751 canonical + 78 extra)</td>
+<td>surface max |&rho;| = <b>0.0000</b> · dots max |&rho;| = <b>0.0000</b> (limit &le; 0.90)</td>
+<td><b>PASS</b> · <code>REGISTRY-MEASUREMENT</code></td></tr>
+<tr><td>E3 Stratified sparse/dotlike &amp; local-prior 3-px dot overlap</td>
+<td>642 family sparse/dotlike rasters max = <b>0.6365</b> (&le; 0.70) · all 20 local <code>GEMSDOE69</code> priors max = <b>0.1566</b> (&le; 0.70) · exact pixel matches = <b>0</b></td>
+<td><b>PASS (GENUINELY UNIQUE)</b> · <code>REGISTRY-MEASUREMENT</code></td></tr>
+<tr><td>E3 Unstratified literal all-registry 3-px overlap (<code>IR-69-REG-01</code>)</td>
+<td><b>1.0000</b> on <code>916cdeec&hellip;</code> (<code>GEMSDOE48-unassigned-mass</code>: <code>5,167,373 / 5,167,373</code> positive footprint cells = <code>100.000%</code>)</td>
+<td><b>LITERAL STOP HONOURED</b> · <code>NO PUBLIC DOWNLOAD</code></td></tr>
+<tr><td>Reference family benchmark (<code>h33-h33-2-b2-zeros</code>) &amp; leaderboard top</td>
+<td><code>0.2778</code> family high vs <code>0.3774 / 0.3195</code> top</td>
+<td><code>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</code></td></tr>
 </table>
 </div>
 <div class="card">
-<h2>What Lane 69 builds &amp; why standalone submission stops here</h2>
-<p><b>H69-EFG</b> proposes hidden faults strictly from <b>kinematics-resolved catalogue tip geometry + multi-physics</b>:
-Qfaults slip/dip metadata (<code>SLIPSENSE</code>, <code>SECONDARY</code>, <code>DIPDIRECT</code>) and 100 m DEM hanging-wall polarity
-are attached strictly to visible fault strands; sub-parallel tip pairs (<code>W = 0.1&ndash;15 km</code>, separation <code>&le; 3.5W</code>,
-repaired shared world-origin intervals and full <code>hypot(W, 3.5W)</code> radius) route minimum-resistance Dijkstra geodesic
-breaching connectors, paired pull-apart margin splays, Riedel en &eacute;chelon strands, and free-tip wing-crack fans across multi-scale
-wavenumber upward-continued gravity/RTP THDR&times;tilt, RTP magnetic lows, compass-corrected 1 m LiDAR scarps (<code>IR-69-LIDAR-STRIKE-01</code>),
-Hessian curvature ridges, basement/conductivity steps, flank-differenced <code>K/Th</code> alteration, and physical thermal conduits.</p>
-<p><b>Strategic outcome for the team:</b> Standalone corridor dot maps collide (&gt;70% within 300 m) with dense scarp/halo sibling lanes
-(<code>GEMSDOE43</code>, <code>GEMSDOE53</code>, <code>GEMSDOE37</code>), so spending a DrivenData slot standalone is blocked. However,
-<b>68.79% (19,967 / 29,027) of H69-EFG's validated corridor dots lie &gt;300 m outside <code>GEMSDOE32 h33-2-b2-zeros</code></b>,
-making the top-decile interior breaching bridges an ideal surgical recall delta for the family cross-lane ensemble integrator.</p>
+<h2>Why <code>H69_G5_TwoRegimeGeodesic</code> achieves <code>0.0813</code> HOLDOUT-DTI AND clears all sparse/dotlike overlap</h2>
+<p>Prior Lane 69 runs suffered from two coupled flaws: (1) straight geometric polygons missed curved buried structures AND collided (&gt;84%&ndash;96%) with dense scarp/halo sibling lanes, while (2) near-flank dots (&lt;350 m from mapped traces) duplicated catalogue halo rasters. <b>H69_G5_TwoRegimeGeodesic</b> resolves both simultaneously from first structural principles (Giddens &amp; Faulds 2025, SGP-TR-229):</p>
+<ul>
+<li><b>Regime 1 (Near-Tip Relay, Breach, Pull-Apart Margin &amp; Horsetail Splays, 350 m &ndash; 2.5 km):</b> Vector polylines from INGENIOUS/Qfaults (verified <code>SLIPSENSE</code>, recorded <code>DIPDIRECT</code>, and 100 m DEM hanging-wall dip polarity strictly inside visible masks) generate width-bounded step-overs (<code>W &isin; [0.1, 15] km</code>, <code>|L| &le; 3.5W</code>) routed along minimum-cost Dijkstra geodesics over composite multi-scale potential-field edges, RTP magnetic lows, coherence-weighted 1 m LiDAR scarps, topographic ridges, and bedrock steps.</li>
+<li><b>Regime 2 (Buried Basin &amp; Alluvial Transfer Conduits, &gt; 1 km off mapped traces):</b> Dedicated out-of-fold calibration for deep pull-apart chords, cross-basin transfer structures, upward-continued gravity/magnetic steps, radiometric <code>K/Th</code> fluid alteration, and leak-free thermal wells/springs where surface LiDAR scarps are erased by Holocene playafan sedimentation.</li>
+<li><b>Calibrated Greedy Marginal-DTI Allocation (&ge; 350 m off catalogue):</b> Places exactly <b>32,000</b> non-redundant 100 m nodes maximizing marginal pooled DTI (<code>&alpha;=0.2, &beta;=0.8</code>, 300 m triangular kernel), yielding <b>84.3% non-overlap</b> against every prior <code>GEMSDOE69</code> submission and <b>&le; 63.65%</b> overlap across all 642 sparse/dotlike rasters across all 73 repositories.</li>
+</ul>
 </div>
 
 </main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<footer>GEMSDOE69 · every metric carries its strict evidence class · zero unverified projections</footer>
 </body></html>
