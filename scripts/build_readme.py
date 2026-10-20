@@ -25,7 +25,8 @@ A valid file is not necessarily a unique or scientifically validated submission.
 ## Latest review — 2026-10-20
 
 Read [three-pass audit and next steps](reports/review-2026-10-20.md) and the
-[follow-up audit](reports/followup-2026-10-20.md) before continuing.
+[follow-up audit](reports/followup-2026-10-20.md), plus the concurrent
+[checkout review](reports/checkout-audit-2026-10-20.md), before continuing.
 The archived HOLDOUT-DTI result is not an organizer score and was not rerun in this review.
 Both current TIFF variants were revalidated on the pinned bridge grid; see [fresh validator output](evidence/review_validator_2026-10-20.json).
 The latest radiometric method is not reproducible from the checked-in scoring code. Do not claim a leaderboard improvement.
