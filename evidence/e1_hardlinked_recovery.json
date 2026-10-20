@@ -1,134 +1,572 @@
 {
- "n_hardlinked_found": 2079,
- "n_tested": 17,
- "n_disconnected_tested": 17,
- "n_still_connected_after_mask": 17,
- "mean_recovery_within_300m": 0.9411764705882353,
- "median_recovery_within_300m": 1.0,
- "n_ramps_above_70pct": 16,
- "definition": "virtual pair = geometrically valid tip pair in ONE 8-connected component; linking mass = corridor-masked catalogue pixels belonging to neither flank strand; ramps are scored only when masking DISCONNECTS the flanks (the link was the only connection = hard-linked ramp); recovery = fraction of masked linking pixels within 3 px (300 m) of the corridor rebuilt from the remaining visible catalogue",
- "ramps": [
-  {
-   "w_px": 1.559841174476409,
-   "linking_px": 28,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 1.855829169656483,
-   "linking_px": 13,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 1.1997671671503358,
-   "linking_px": 25,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 1.8190674449245252,
-   "linking_px": 9,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 30.73477654230796,
-   "linking_px": 96,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 32.77867631362021,
-   "linking_px": 89,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 21.62950557837223,
-   "linking_px": 102,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 28.80612022856995,
-   "linking_px": 76,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 30.850019999882203,
-   "linking_px": 67,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 21.92387606479047,
-   "linking_px": 97,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 3.707994266606419,
-   "linking_px": 8,
-   "within_3px": 0.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 0
-  },
-  {
-   "w_px": 3.2335994400781427,
-   "linking_px": 30,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 2.694418390954871,
-   "linking_px": 16,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 10.499721745705557,
-   "linking_px": 67,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 6.8471329602037265,
-   "linking_px": 26,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 11.350687008319394,
-   "linking_px": 52,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  },
-  {
-   "w_px": 3.8850321760961144,
-   "linking_px": 26,
-   "within_3px": 1.0,
-   "subtype": "pull-apart",
-   "reemitted_pairs": 1
-  }
- ],
- "evidence_class": "HOLDOUT-GEOMETRY",
- "generated_utc": "20261020T215414Z",
- "seconds": 371.3
+  "n_hardlinked_found": 781,
+  "n_tested": 80,
+  "n_disconnected_tested": 80,
+  "n_still_connected_after_mask": 131,
+  "mean_recovery_within_300m": 0.9944,
+  "median_recovery_within_300m": 1.0,
+  "frac_ramps_above_70pct": 1.0,
+  "n_ramps_above_70pct": 80,
+  "ramps": [
+    {
+      "w_px": 30.85,
+      "linking_px": 97,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 156
+    },
+    {
+      "w_px": 21.92,
+      "linking_px": 84,
+      "within_3px": 0.9881,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 143
+    },
+    {
+      "w_px": 4.2,
+      "linking_px": 24,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 67
+    },
+    {
+      "w_px": 3.71,
+      "linking_px": 13,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 138
+    },
+    {
+      "w_px": 10.5,
+      "linking_px": 47,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 387
+    },
+    {
+      "w_px": 6.85,
+      "linking_px": 19,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 261
+    },
+    {
+      "w_px": 2.98,
+      "linking_px": 17,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 386
+    },
+    {
+      "w_px": 2.53,
+      "linking_px": 35,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 291
+    },
+    {
+      "w_px": 3.47,
+      "linking_px": 15,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 458
+    },
+    {
+      "w_px": 14.15,
+      "linking_px": 40,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 458
+    },
+    {
+      "w_px": 4.16,
+      "linking_px": 24,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 456
+    },
+    {
+      "w_px": 24.01,
+      "linking_px": 64,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 459
+    },
+    {
+      "w_px": 18.97,
+      "linking_px": 27,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 455
+    },
+    {
+      "w_px": 16.68,
+      "linking_px": 51,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 461
+    },
+    {
+      "w_px": 16.87,
+      "linking_px": 50,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 459
+    },
+    {
+      "w_px": 24.04,
+      "linking_px": 109,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 469
+    },
+    {
+      "w_px": 1.59,
+      "linking_px": 22,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 454
+    },
+    {
+      "w_px": 12.55,
+      "linking_px": 32,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 108
+    },
+    {
+      "w_px": 6.2,
+      "linking_px": 34,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 471
+    },
+    {
+      "w_px": 2.78,
+      "linking_px": 22,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 89
+    },
+    {
+      "w_px": 3.7,
+      "linking_px": 30,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 100
+    },
+    {
+      "w_px": 16.09,
+      "linking_px": 35,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 454
+    },
+    {
+      "w_px": 3.65,
+      "linking_px": 29,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 101
+    },
+    {
+      "w_px": 2.24,
+      "linking_px": 26,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 106
+    },
+    {
+      "w_px": 25.08,
+      "linking_px": 72,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 376
+    },
+    {
+      "w_px": 3.62,
+      "linking_px": 26,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 452
+    },
+    {
+      "w_px": 3.62,
+      "linking_px": 26,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 452
+    },
+    {
+      "w_px": 37.7,
+      "linking_px": 171,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 464
+    },
+    {
+      "w_px": 42.69,
+      "linking_px": 193,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 371
+    },
+    {
+      "w_px": 59.49,
+      "linking_px": 542,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 434
+    },
+    {
+      "w_px": 38.17,
+      "linking_px": 311,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 464
+    },
+    {
+      "w_px": 52.1,
+      "linking_px": 505,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 467
+    },
+    {
+      "w_px": 46.25,
+      "linking_px": 369,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 466
+    },
+    {
+      "w_px": 48.18,
+      "linking_px": 379,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 466
+    },
+    {
+      "w_px": 41.43,
+      "linking_px": 349,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 464
+    },
+    {
+      "w_px": 7.27,
+      "linking_px": 11,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 84
+    },
+    {
+      "w_px": 35.95,
+      "linking_px": 317,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 468
+    },
+    {
+      "w_px": 21.72,
+      "linking_px": 159,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 474
+    },
+    {
+      "w_px": 25.01,
+      "linking_px": 199,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 474
+    },
+    {
+      "w_px": 24.42,
+      "linking_px": 165,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 466
+    },
+    {
+      "w_px": 25.34,
+      "linking_px": 39,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 459
+    },
+    {
+      "w_px": 16.45,
+      "linking_px": 127,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 473
+    },
+    {
+      "w_px": 31.98,
+      "linking_px": 198,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 471
+    },
+    {
+      "w_px": 11.13,
+      "linking_px": 71,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 461
+    },
+    {
+      "w_px": 10.59,
+      "linking_px": 87,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 462
+    },
+    {
+      "w_px": 6.54,
+      "linking_px": 25,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 455
+    },
+    {
+      "w_px": 4.55,
+      "linking_px": 22,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 455
+    },
+    {
+      "w_px": 5.95,
+      "linking_px": 64,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 462
+    },
+    {
+      "w_px": 1.94,
+      "linking_px": 40,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 461
+    },
+    {
+      "w_px": 9.68,
+      "linking_px": 47,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 459
+    },
+    {
+      "w_px": 8.83,
+      "linking_px": 63,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 460
+    },
+    {
+      "w_px": 3.06,
+      "linking_px": 45,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 196
+    },
+    {
+      "w_px": 9.11,
+      "linking_px": 42,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 290
+    },
+    {
+      "w_px": 9.04,
+      "linking_px": 52,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 268
+    },
+    {
+      "w_px": 6.76,
+      "linking_px": 61,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 492
+    },
+    {
+      "w_px": 6.42,
+      "linking_px": 63,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 492
+    },
+    {
+      "w_px": 4.72,
+      "linking_px": 71,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 488
+    },
+    {
+      "w_px": 5.42,
+      "linking_px": 58,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 485
+    },
+    {
+      "w_px": 9.43,
+      "linking_px": 61,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 493
+    },
+    {
+      "w_px": 8.73,
+      "linking_px": 67,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 488
+    },
+    {
+      "w_px": 2.94,
+      "linking_px": 62,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 492
+    },
+    {
+      "w_px": 2.2,
+      "linking_px": 36,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 321
+    },
+    {
+      "w_px": 1.58,
+      "linking_px": 20,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 460
+    },
+    {
+      "w_px": 2.94,
+      "linking_px": 30,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 295
+    },
+    {
+      "w_px": 6.08,
+      "linking_px": 28,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 96
+    },
+    {
+      "w_px": 3.43,
+      "linking_px": 22,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 390
+    },
+    {
+      "w_px": 3.62,
+      "linking_px": 32,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 428
+    },
+    {
+      "w_px": 9.3,
+      "linking_px": 80,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 480
+    },
+    {
+      "w_px": 4.39,
+      "linking_px": 45,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 470
+    },
+    {
+      "w_px": 5.26,
+      "linking_px": 66,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 478
+    },
+    {
+      "w_px": 5.48,
+      "linking_px": 55,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 480
+    },
+    {
+      "w_px": 13.41,
+      "linking_px": 111,
+      "within_3px": 0.7568,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 466
+    },
+    {
+      "w_px": 23.93,
+      "linking_px": 159,
+      "within_3px": 0.805,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 468
+    },
+    {
+      "w_px": 6.5,
+      "linking_px": 87,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 461
+    },
+    {
+      "w_px": 1.7,
+      "linking_px": 27,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 199
+    },
+    {
+      "w_px": 1.32,
+      "linking_px": 38,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 537
+    },
+    {
+      "w_px": 4.07,
+      "linking_px": 58,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 456
+    },
+    {
+      "w_px": 1.88,
+      "linking_px": 69,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 452
+    },
+    {
+      "w_px": 2.97,
+      "linking_px": 69,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 454
+    },
+    {
+      "w_px": 3.27,
+      "linking_px": 28,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 467
+    }
+  ]
 }

@@ -1,125 +1,177 @@
 {
- "grav_hg_s1": {
-  "auc": 0.5305418979556492,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "mag_hg_s1": {
-  "auc": 0.5376840831238601,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "grav_hg_s2": {
-  "auc": 0.5305355347954177,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "mag_hg_s2": {
-  "auc": 0.5389047017061042,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "grav_hg_s4": {
-  "auc": 0.529309748848189,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "mag_hg_s4": {
-  "auc": 0.5378066802300789,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "grav_tilt_s2": {
-  "auc": 0.5062428593765597,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "mag_tilt_s2": {
-  "auc": 0.5148141127382865,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "grav_hg_prov": {
-  "auc": 0.49734889203039406,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "grav_vg_prov": {
-  "auc": 0.5224056920392296,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "geod_2ndinv": {
-  "auc": 0.5530383954762326,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "mag_hg_prov": {
-  "auc": 0.5364947113005831,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "mag_vg_prov": {
-  "auc": 0.48237893134829474,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "tc_prov": {
-  "auc": 0.43950500574306417,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "mag_low_tmi": {
-  "auc": 0.4963676795811981,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "mag_low_rtp": {
-  "auc": 0.48283129749072273,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "lidar_scarp": {
-  "auc": 0.572205257428365,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "cond_hg_s2": {
-  "auc": 0.5148613804248792,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "cond_tilt_s2": {
-  "auc": 0.4897269378725811,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "base_hg_s2": {
-  "auc": 0.5418839679488846,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "base_tilt_s2": {
-  "auc": 0.4782775330006289,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "rad_depl": {
-  "auc": 0.5654800284944337,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "corridor_propensity": {
-  "auc": 0.6888400357837073,
-  "n_pos": 11318,
-  "n_neg": 200000
- },
- "_truth_px": 11318,
- "_corridors": 1200,
- "evidence_class": "LEAKAGE-CANARY",
- "rule": "single-feature AUC > 0.90 on the holdout = leakage until proven otherwise",
- "generated_utc": "20261020T215538Z",
- "seconds": 79.8,
- "artifact_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
- "artifact_path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif"
+  "grav_hg_s1": {
+    "auc": 0.52657,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "mag_hg_s1": {
+    "auc": 0.54247,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "grav_hg_s2": {
+    "auc": 0.52712,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "mag_hg_s2": {
+    "auc": 0.54345,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "grav_hg_s4": {
+    "auc": 0.52648,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "mag_hg_s4": {
+    "auc": 0.54043,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "grav_upward_edge": {
+    "auc": 0.53399,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "mag_upward_edge": {
+    "auc": 0.53752,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "grav_tilt_s2": {
+    "auc": 0.50771,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "mag_tilt_s2": {
+    "auc": 0.51475,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "grav_hg_prov": {
+    "auc": 0.49816,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "grav_vg_prov": {
+    "auc": 0.52207,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "geod_2ndinv": {
+    "auc": 0.5474,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "geod_shear": {
+    "auc": 0.54754,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "geod_dilat": {
+    "auc": 0.5316,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "mag_hg_prov": {
+    "auc": 0.54127,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "mag_vg_prov": {
+    "auc": 0.48233,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "tc_prov": {
+    "auc": 0.43451,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "mag_low_rtp_res": {
+    "auc": 0.50118,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "mag_low_tmi": {
+    "auc": 0.49108,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "mag_low_rtp": {
+    "auc": 0.47724,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "lidar_scarp": {
+    "auc": 0.57725,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "elev_curv_ridge": {
+    "auc": 0.54683,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "det_elev_slope": {
+    "auc": 0.56623,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "basement_step": {
+    "auc": 0.54244,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "cond_step": {
+    "auc": 0.51606,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "rad_kth_contrast": {
+    "auc": 0.51311,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "thermal_conduit": {
+    "auc": 0.50625,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "corridor_propensity": {
+    "auc": 0.59033,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "corridor_core_weight": {
+    "auc": 0.5905,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "corridor_phase": {
+    "auc": 0.58965,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "corridor_multiplicity": {
+    "auc": 0.59082,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "neg_dist_corridor_trace": {
+    "auc": 0.58791,
+    "n_pos": 9308,
+    "n_neg": 200000
+  },
+  "_summary": {
+    "max_single_feature": "corridor_multiplicity",
+    "max_single_auc": 0.59082,
+    "canary_pass": true,
+    "truth_px": 9308,
+    "corridors_built": 2900,
+    "catalogue_used": "visible_only (existing_faults & ~hidden_draw20)"
+  },
+  "artifact_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+  "measurement_origin": "computed_holdout"
 }

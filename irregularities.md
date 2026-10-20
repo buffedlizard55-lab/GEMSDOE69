@@ -1,5 +1,5 @@
-# Irregularities — current index
+# Irregularities Summary — GEMSDOE69
 
-**NOT OK TO SUBMIT.** Read [the integrity register](evidence/integrity_review.json), [the current audit card](evidence/run_card.json), and [the literal integrity review](reports/literal-integrity-review-2026-10-20.md).
-
-[FLAGGED.md](FLAGGED.md), docs/parallel and older reports retain historical observations. Their old pass/score/provenance claims are not current scientific clearance. No dense-support exemption, old receipt rebinding or cosmetic output change is authorized.
+See [FLAGGED.md](FLAGGED.md) for the complete 14-item line-cited audit table covering:
+- **Resolved Code & Data Defects:** `IR-69-DATA-03`, `IR-69-LIDAR-STRIKE-01` (`79.04° -> 10.96°` compass strike fix), `IR-69-TIP-01` (world-origin separation interval), `IR-69-CORR-01` (`hypot(W, 3.5W)` search radius & minimum-distance facing tip-pair deduplication), `IR-69-DIP-01` (leak-free Qfaults + DEM hanging-wall kinematics), `IR-69-HOLDOUT-01` (visible-only flank exclusion), `IR-69-HOLDOUT-02` (visible-only canary input), `IR-69-HOLDOUT-03` (hard-linked ramp minus-sign bug fix -> `99.44%` 300 m recovery across `80` ramps), and `IR-69-CSV-LEAK-01` (blocking `dist_known_fault_px`).
+- **Active Environment & Protocol Constraints:** `IR-69-DATA-01` (`existing_faults.tif == labels.tif` in public mirrors), `IR-69-DATA-02` (sandbox auth boundary), `IR-69-REG-01` (`751/751` zero-error registry scan showing `0.3121` overlap with `h33-2-b2-zeros` and `max |Spearman| = 0.1448`, while tripping `> 0.70` 3-px forward overlap against prior `40k–103k`-dot rasters and universal soft surfaces -> fail-closed `NOT OK TO SUBMIT`), `IR-69-VAL-01` (`-zeros.tif` vs `-nan.tif`), and `IR-69-SCORE-01` (`USER-REPORTED-NOT-ORGANIZER-CONFIRMED` vs `HOLDOUT-DTI` labeling).

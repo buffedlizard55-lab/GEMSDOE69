@@ -1,33 +1,55 @@
 {
-  "generated_utc": "20261020T214510Z",
-  "artifact_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
-  "artifact_path": "/home/user/GEMSDOE69/submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
-  "scoring_mode": "joint",
-  "source_sha256": {
-    "src/gems69/scoring_joint.py": "be876fc49abfd9dde82f434f70dc9d4a5877e3784d7e1d054a99e4a28f47b8dc",
-    "src/gems69/scoring.py": "fcec41129c4214ad1f4e570abe49122584a9ab3a5735910ace4287c395eec7bf",
-    "src/gems69/corridors.py": "2e7677a20e23943b40cd53459da371da9623ef7668d370e19ce5dd368cfb9f56",
-    "src/gems69/physics.py": "725b0f48b6483dbc88e3f32640312f674552bd5d062cd709beb95a1f7fa9417a",
-    "src/gems69/holdout69.py": "1eb442f5a16866df82a1b9c0dd0c52934ec1dce486a6dc8bad97287208822fe7"
-  },
+  "artifact_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+  "variant": "h69_efg",
   "feature_names": [
+    "grav_upward_edge",
     "grav_hg_s1",
-    "mag_hg_s1",
     "grav_hg_s2",
-    "mag_hg_s2",
     "grav_hg_s4",
-    "mag_hg_s4",
     "grav_tilt_s2",
-    "mag_tilt_s2",
     "grav_hg_prov",
     "grav_vg_prov",
-    "geod_2ndinv",
+    "mag_upward_edge",
+    "mag_hg_s1",
+    "mag_hg_s2",
+    "mag_hg_s4",
+    "mag_tilt_s2",
     "mag_hg_prov",
     "mag_vg_prov",
     "tc_prov",
+    "mag_low_rtp_res",
     "mag_low_tmi",
     "mag_low_rtp",
     "lidar_scarp",
-    "corridor_propensity"
-  ]
+    "elev_curv_ridge",
+    "det_elev_slope",
+    "geod_2ndinv",
+    "geod_shear",
+    "geod_dilat",
+    "basement_step",
+    "cond_step",
+    "rad_kth_contrast",
+    "thermal_conduit",
+    "corridor_propensity",
+    "corridor_core_weight",
+    "corridor_phase",
+    "corridor_multiplicity",
+    "neg_dist_corridor_trace"
+  ],
+  "source_sha256": {
+    "src/gems69/data.py": "a6d83a7c111672c643fab4585a14e61f9f1eeca9e7a984edc2dca450c4e63a87",
+    "src/gems69/physics.py": "29cca7033fc20826ff6b4440e7bd58686bb70d61fb613682d60a797555513bd9",
+    "src/gems69/tips.py": "b1e12c1c9b2a506a0b9917027f60a0ad90e0b28dbd239861ab3647863038d8c9",
+    "src/gems69/corridors.py": "36c369829795282349f778df25012d8667d06580102ea4c9b5b95e4030bc213a",
+    "src/gems69/scoring.py": "b6e60b06bcaf9175a7f5158cbccdefa44b72850234c1fa600518a0769875c1fd",
+    "src/gems69/holdout69.py": "0a8ed0a4c07935499359989bc0cb203122ca306b0528ed426c9c4706bcccb086",
+    "scripts/run_e1_e2.py": "89927afe5fd4ea06e586689017701196ca416166458316bb9570cbdbf9e96cc1",
+    "scripts/run_e3.py": "a0aff09d5fa915e3d1cc7c0a96a210cbca96133ed420d0a69f18d1fe3795ab12"
+  },
+  "catalogue_features_visible_only": true,
+  "geological_requirements": {
+    "source_polylines_used": true,
+    "same_dip_verified": true,
+    "releasing_slip_sense_verified": true
+  }
 }

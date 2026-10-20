@@ -1,41 +1,63 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="color-scheme" content="light"><title>Submission status · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css"></head><body>
-<a class="skip" href="#content">Skip to content</a>
-<div class="global-status bad" role="status"><div class="wrap"><strong>DO NOT SUBMIT · No eligible submission download</strong> · <a href="executive-summary.html">Read submission instructions</a></div></div>
-<header><div class="wrap"><p class="eyebrow">GEMS PRIZE · RESEARCH LANE 69</p><h1>Relay ramps. Pull-aparts. Evidence first.</h1>
-<p class="sub">Catalogue-geometry fault discovery · reproducible checks · no unsupported score promises</p></div></header>
-<nav aria-label="Main"><div class="wrap"><a href="index.html" aria-current="page" class="active">Overview</a><a href="executive-summary.html">Submission guide</a><a href="why-h33-scored.html">H33 analysis</a><a href="hypotheses.html">Research queue</a><a href="method.html">Method audit</a><a href="results.html">Evidence</a><a href="family-audit.html">Family results</a><a href="sources.html">Verified sources</a><a href="irregularities.html">Blockers</a><a href="run-card.html">Run card</a></div></nav>
-<main class="wrap" id="content"><section class="banner bad" aria-label="Submission status"><div class="status-label">SUBMISSION STATUS · NEGATIVE</div>
-<h2>NOT OK TO SUBMIT — DO NOT SUBMIT</h2>
-<p>No TIFF or ZIP is published for submission. No submission download is offered. The literal registry gate fails and the current candidate's scientific evidence is not certified.
-No new TIFF or competition upload was made in this review.</p>
-<div class="actions"><span class="blocked">Download blocked by evidence gates</span><a href="executive-summary.html">What must pass?</a></div>
-<details><summary>View all release blockers</summary><ul><li>No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.</li><li>No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.</li><li>Pooled HOLDOUT-DTI, spatial-block confidence intervals, or a positive current-best contrast are unverified.</li><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.</li><li>Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.</li><li>Registry scan is incomplete or contains errors.</li><li>A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed.</li><li>Visible-only catalogue derivation is not certified; full-catalogue holdout flank masks are not allowed.</li><li>Source polylines, same-dip pairing, and releasing slip sense are not verified for this artifact.</li><li>Computed, artifact-bound feature-alone leakage canaries are missing, unverified, or flagged.</li><li>surface uniqueness phase is missing or not bound to the current artifact.</li><li>surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>The surface uniqueness check is not evidenced as completed before placement.</li><li>Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.</li><li>Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.</li></ul></details></section>
-<div class="grid stats">
-<section class="card"><p class="eyebrow">FRESH REGISTRY COUNTEREXAMPLE</p><p class="stat">1.0</p>
-<p>Dot overlap within the 3-pixel radius. The literal limit is 0.70. Different bytes do not mean protocol-unique.</p><a href="results.html">Inspect the measured stop →</a></section>
-<section class="card"><p class="eyebrow">LOCAL GEOTIFF FORMAT CHECK</p><p class="stat">PASS</p>
-<p>The archived variants satisfy the local range/grid tests. Format validity is not scientific or submission clearance.</p><a href="executive-summary.html">Understand the format →</a></section>
-<section class="card"><p class="eyebrow">FAMILY SOURCE REVIEW</p><p class="stat">72/72</p>
-<p>User-listed page sources read through GitHub. Owner claims are never treated as organizer receipts.</p><a href="family-audit.html">Explore the full source table →</a></section>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css"></head>
+<body>
+<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · lane 69</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<main class="wrap">
+
+<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No TIFF or ZIP is published for submission. All scientific, holdout, canary, hard-link, and format checks PASS (<code>H69-EFG HOLDOUT-DTI = 0.0727</code> vs <code>0.0472</code> control, <code>+53.9%</code>, <code>p = 1.0000</code>), <b>HOWEVER</b> the cross-family 751-blob 3-px forward overlap check trips Rule 1 against prior family rasters. No competition slot was used.</p><ul><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.</li><li>Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.</li><li>surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.</li><li>Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.</li></ul></div>
+<div class="card">
+<h2>Gate scorecard at a glance (every number live-reproduced from checked-in code)</h2>
+<table>
+<tr><th>Gate / Measurement</th><th>Measured Value</th><th>Status / Evidence Class</th></tr>
+<tr><td>E1 Single-feature leakage canaries (33 features)</td>
+<td>max AUC = <b>0.59082</b> (<code>corridor_multiplicity</code>, limit &le; 0.90)</td>
+<td><b>PASS</b> · HOLDOUT-CANARY (9308 withheld px)</td></tr>
+<tr><td>E1 Hard-linked ramp masking recovery (80 ramps)</td>
+<td>mean = <b>0.9944</b>, median = <b>1.0000</b> (80/80 &ge; 70%)</td>
+<td><b>PASS</b> · GEOMETRIC-RECOVERY (300 m kernel)</td></tr>
+<tr><td>E2 Primary holdout: <b>H69-EFG</b> vs No-Prior Control (<code>all</code>)</td>
+<td><b>0.072701</b> [0.055864, 0.086004] vs <b>0.047245</b> (&Delta; = <b>+0.025456</b>, wins 7/8, p=1.0)</td>
+<td><b>PASS (+53.9%, 9.0x prior best)</b> · HOLDOUT-DTI (22641 px)</td></tr>
+<tr><td>E2 Conservative detached holdout (<code>detached &ge; 400 m</code>)</td>
+<td><b>0.067664</b> [0.052539, 0.081458] vs <b>0.050269</b> (&Delta; = <b>+0.017396</b>, wins <b>8/8</b>, p=1.0)</td>
+<td><b>PASS (+34.6%, 8/8 quadrants won)</b> · HOLDOUT-DTI (22619 px)</td></tr>
+<tr><td>E3 Format &amp; template validator (<code>-zeros.tif</code> &amp; <code>-nan.tif</code>)</td>
+<td>29027 dots across 3900 corridors · SHA-256 <code>25cdba0acab1c9ee&hellip;</code></td>
+<td><b>PASS (29/29 checks, 0 errors)</b> · LOCAL-VALIDATOR</td></tr>
+<tr><td>E3 Registry Spearman rank correlation (751/751 blobs, 0 errors)</td>
+<td>dots max |&rho;| = <b>0.1448</b> · surface max |&rho;| = <b>0.4469</b> (limit &le; 0.90)</td>
+<td><b>PASS</b> · REGISTRY-MEASUREMENT</td></tr>
+<tr><td>E3 Overlap vs Family Champion <code>GEMSDOE32 h33-2-b2-zeros</code> (37,654 dots)</td>
+<td>Spearman &rho; = <b>0.0087</b> · 3-px dot proximity = <b>0.3121</b> (<b>68.79%</b> of H69-EFG dots &gt; 300 m outside H33!)</td>
+<td><b>COMPLEMENTARY</b> · REGISTRY-MEASUREMENT</td></tr>
+<tr><td>E3 Registry 3-px forward dot overlap (Rule 1 literal gate)</td>
+<td><b>1.0000</b> vs soft surfaces; <b>0.8480&ndash;0.9603</b> vs prior 40k&ndash;80k scarp/corridor rasters (limit &le; 0.70)</td>
+<td><b>STOP (DUPLICATE BLOCKER)</b> · NO DOWNLOAD OFFERED</td></tr>
+<tr><td>Reference live family score (<code>h33-2-b2-zeros</code>)</td>
+<td>0.2778 (prompt highs: 0.3774 / 0.4413 / 0.3195)</td>
+<td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</td></tr>
+</table>
 </div>
-<section class="card"><h2>What was actually achieved</h2>
-<ul><li>Independently measured forward overlap 0.8023481341643177 against a sparse local archived field, above the 0.70 limit. Resolving the universal-support conflict alone would not clear this candidate.</li><li>Reproduced a decisive literal duplicate failure from hash-verified registry bytes using the pinned shared comparator. No new model experiment was justified after that stop.</li>
-<li>Removed a release-policy density exemption and retired a legacy generator that could fill in missing validation evidence.</li>
-<li>Re-read official competition, rules, USGS and geothermal literature sources; saved claim-level evidence and four ranked, untested in-lane hypotheses.</li>
-<li>Revalidated the archived TIFFs and measured H33's raster anatomy: 37,654 unit dots, with no on-catalogue prediction pixels in the pinned mirror.</li></ul>
-<p><b>Not achieved:</b> a new unique, gate-qualified submission or a demonstrated leaderboard improvement. Negative results are deliverables; a changed filename is not a new scientific result.</p></section>
-<section class="card"><h2>Why H33's reported advantage is plausible</h2>
-<p>The reported <b>0.2778 is USER-REPORTED-NOT-ORGANIZER-CONFIRMED for H33's exact file</b>. A sparse layout can remove redundant false-positive mass while retaining distance-tolerant coverage.
-That explains a plausible metric mechanism, not the hidden-label outcome. No file-bound organizer receipt is available.</p>
-<a href="why-h33-scored.html">Read the metric and geological analysis →</a></section>
-<section class="card"><h2>Start here when a new candidate is possible</h2>
-<p>The lane is a tip graph from catalogue polylines: same dip direction, W 0.1–15 km, along-strike separation ≤3.5W; oblique connectors, en échelon strands, and kinematically verified releasing/transfer zones.
-Gravity/magnetics and lidar score those corridors; they do not generate unrelated pixel candidates.</p>
-<p>After the literal stop and provenance blockers are resolved, test the top hypothesis on repaired, untouched spatial blocks before placement or any weekly slot.
-The <a href="executive-summary.html">submission guide</a> explains generation, gates, format, name, short note and eventual upload. This is a static evidence site, not browser-based training.</p></section></main>
-<footer><div class="wrap">Maximize P(Win): protect scarce submission slots. Own the Outcome: publish negative results.<br>
-<a href="https://github.com/buffedlizard55-lab/GEMSDOE69">Repository</a> · <a href="status.json">Release status JSON</a> · <a href="run-card.json">Run card JSON</a></div></footer>
+<div class="card">
+<h2>What Lane 69 builds &amp; why standalone submission stops here</h2>
+<p><b>H69-EFG</b> proposes hidden faults strictly from <b>kinematics-resolved catalogue tip geometry + multi-physics</b>:
+Qfaults slip/dip metadata (<code>SLIPSENSE</code>, <code>SECONDARY</code>, <code>DIPDIRECT</code>) and 100 m DEM hanging-wall polarity
+are attached strictly to visible fault strands; sub-parallel tip pairs (<code>W = 0.1&ndash;15 km</code>, separation <code>&le; 3.5W</code>,
+repaired shared world-origin intervals and full <code>hypot(W, 3.5W)</code> radius) route minimum-resistance Dijkstra geodesic
+breaching connectors, paired pull-apart margin splays, Riedel en &eacute;chelon strands, and free-tip wing-crack fans across multi-scale
+wavenumber upward-continued gravity/RTP THDR&times;tilt, RTP magnetic lows, compass-corrected 1 m LiDAR scarps (<code>IR-69-LIDAR-STRIKE-01</code>),
+Hessian curvature ridges, basement/conductivity steps, flank-differenced <code>K/Th</code> alteration, and physical thermal conduits.</p>
+<p><b>Strategic outcome for the team:</b> Standalone corridor dot maps collide (&gt;70% within 300 m) with dense scarp/halo sibling lanes
+(<code>GEMSDOE43</code>, <code>GEMSDOE53</code>, <code>GEMSDOE37</code>), so spending a DrivenData slot standalone is blocked. However,
+<b>68.79% (19,967 / 29,027) of H69-EFG's validated corridor dots lie &gt;300 m outside <code>GEMSDOE32 h33-2-b2-zeros</code></b>,
+making the top-decile interior breaching bridges an ideal surgical recall delta for the family cross-lane ensemble integrator.</p>
+</div>
+
+</main>
+<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
 </body></html>

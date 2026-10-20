@@ -20,9 +20,11 @@ jobs:
         run: python -m pip install -r requirements-dev.txt
       - name: Test literal gates, source parsing, geometry and pinned shared tools
         run: python -m pytest -q
-      - name: Re-open both archived TIFF variants (format only)
+      - name: Re-open archived TIFF variants (format only)
         run: >-
           python scripts/validate_submission.py
+          submissions/h69-efg-kinematic-geodesic-29027-zeros.tif
+          submissions/h69-efg-kinematic-geodesic-29027-nan.tif
           submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
           submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-nan.tif
       - name: Regenerate the policy-controlled static site

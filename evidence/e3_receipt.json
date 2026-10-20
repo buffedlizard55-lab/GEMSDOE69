@@ -1,177 +1,169 @@
 {
- "evidence_class": "SUBMISSION-RECEIPT",
- "generated_utc": "20261020T221150Z",
- "hypothesis_id": "H69-joint-convergent-joint",
- "s0_calibrated": 0.75,
- "k_truth_prior": 12691,
- "k_truth_source": "GEMSDOE32 evidence/emission_models_mc.json truth_px=12691",
- "n_corridors": 1200,
- "n_pairs": 1200,
- "n_strands": 3887,
- "n_dots": 39958,
- "catalogue_collision_px": 0,
- "raster": {
-  "zeros": {
-   "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
-   "sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
-   "bytes": 782296
+  "experiment": "E3_live_build_validation_and_registry_audit",
+  "submission_name": "h69-efg-kinematic-geodesic-29027-zeros.tif",
+  "submission_note": "H69-EFG kinematic geodesic relay/pull-apart + physics; HOLDOUT-DTI 0.0727 vs 0.0472 ctrl (+53.9%); 29027 dots; UNSCORED",
+  "n_corridors": 3900,
+  "n_dots": 29027,
+  "lattice_diagnostic": {
+    "n_dots": 29027,
+    "max_row_fill_fraction": 0.10037,
+    "max_col_fill_fraction": 0.06019,
+    "lag14_row_autocorr": 0.79648,
+    "lag14_col_autocorr": 0.80508,
+    "lattice_artifact_detected": false
   },
-  "nan": {
-   "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-nan.tif",
-   "sha256": "e59602fa48fe15db6ab3627922810258bcbfe3ae776b82af7fe93a3c75b93bbd",
-   "bytes": 1543672
-  }
- },
- "validator": {
-  "reports": [
-   {
-    "file": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
-    "bytes": 782296,
-    "sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
-    "meta": {
-     "count": 1,
-     "dtype": "float32",
-     "crs": "EPSG:32611",
-     "shape": [
-      3730,
-      3292
-     ],
-     "transform": [
-      100.0,
-      0.0,
-      243350.0,
-      0.0,
-      -100.0,
-      4508550.0
-     ],
-     "nodata": null,
-     "bounds": [
-      243350.0,
-      4135550.0,
-      572550.0,
-      4508550.0
-     ]
+  "raster": {
+    "zeros": {
+      "path": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
+      "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+      "bytes": 196948
     },
-    "n_nan": 0,
-    "n_nan_inside_footprint": 0,
-    "min": 0.0,
-    "max": 1.0,
-    "positive_pixels": 39958,
-    "distinct_positive_values": [
-     1.0
-    ],
-    "checks": {
-     "single_band": true,
-     "dtype_float32": true,
-     "crs_epsg_32611": true,
-     "shape_3730x3292": true,
-     "transform_and_bounds_match_sample_submission": true,
-     "footprint_all_finite": true,
-     "footprint_values_in_0_1": true,
-     "no_infinite_values": true,
-     "nan_only_outside_footprint": true,
-     "no_sentinel_values": true,
-     "all_finite_values_in_0_1": true,
-     "no_positive_outside_footprint": true,
-     "zero_positive_on_mapped_catalogue": true,
-     "template_validator_passed": true
-    },
-    "template_validator": {
-     "all_checks_passed": true,
-     "checks": {
-      "single_band": true,
-      "dtype_float32": true,
-      "dimensions_3730x3292": true,
-      "crs_epsg_32611": true,
-      "transform_matches_sample_submission": true,
-      "no_nan_anywhere": true,
-      "no_inf_anywhere": true,
-      "no_sentinel_values": true,
-      "range_0_1_guaranteed": true,
-      "min_ge_0": true,
-      "max_le_1": true,
-      "in_footprint_all_finite": true,
-      "in_footprint_range_0_1": true,
-      "outside_footprint_zero": true,
-      "zero_dots_on_mapped_catalogue": true
-     }
-    },
-    "template_format_report": {
-     "ok": true,
-     "problems": []
-    },
-    "all_checks_passed": true
-   },
-   {
-    "file": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-nan.tif",
-    "bytes": 1543672,
-    "sha256": "e59602fa48fe15db6ab3627922810258bcbfe3ae776b82af7fe93a3c75b93bbd",
-    "meta": {
-     "count": 1,
-     "dtype": "float32",
-     "crs": "EPSG:32611",
-     "shape": [
-      3730,
-      3292
-     ],
-     "transform": [
-      100.0,
-      0.0,
-      243350.0,
-      0.0,
-      -100.0,
-      4508550.0
-     ],
-     "nodata": "nan",
-     "bounds": [
-      243350.0,
-      4135550.0,
-      572550.0,
-      4508550.0
-     ]
-    },
-    "n_nan": 7111787,
-    "n_nan_inside_footprint": 0,
-    "min": 0.0,
-    "max": 1.0,
-    "positive_pixels": 39958,
-    "distinct_positive_values": [
-     1.0
-    ],
-    "checks": {
-     "single_band": true,
-     "dtype_float32": true,
-     "crs_epsg_32611": true,
-     "shape_3730x3292": true,
-     "transform_and_bounds_match_sample_submission": true,
-     "footprint_all_finite": true,
-     "footprint_values_in_0_1": true,
-     "no_infinite_values": true,
-     "nan_only_outside_footprint": true,
-     "no_sentinel_values": true,
-     "all_finite_values_in_0_1": true,
-     "no_positive_outside_footprint": true,
-     "zero_positive_on_mapped_catalogue": true,
-     "nan_mask_equals_sample_submission_nan_mask": true
-    },
-    "template_validator": "skipped: file carries outside-footprint NaN (spec-literal twin); the template enforces an all-finite policy",
-    "all_checks_passed": true
-   }
-  ],
-  "all_files_passed": true
- },
- "format_compliance": {
-  "zeros": {
-   "all_finite": true,
-   "policy": "gems57/grid.py zeros all-finite"
+    "nan": {
+      "path": "submissions/h69-efg-kinematic-geodesic-29027-nan.tif",
+      "sha256": "6ddf37fc9dbe5f66c8000857ee54825f3269cc7d1b37318862a0960fd3e4dd93",
+      "bytes": 243565
+    }
   },
-  "nan": {
-   "finite_mask_matches_sample_submission": true,
-   "policy": "prompt NaN outside"
-  }
- },
- "propensity_sha256": "74c22ad2",
- "note": "H69 joint convergent grav+mag joint; pull-apart transfer; greedy marginal-DTI 200m prune 39958 dots",
- "submission_name": "h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros",
- "submission_note": "H69 joint convergent grav+mag; HG+tilt + maglow + lidar; pull-apart+transfer; 39958 dots"
+  "validator": {
+    "validator": "scripts/validate_submission.py",
+    "all_files_passed": true,
+    "reports": [
+      {
+        "file": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
+        "bytes": 196948,
+        "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+        "meta": {
+          "count": 1,
+          "dtype": "float32",
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "nodata": null,
+          "bounds": [
+            243350.0,
+            4135550.0,
+            572550.0,
+            4508550.0
+          ]
+        },
+        "n_nan": 0,
+        "n_nan_inside_footprint": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "positive_pixels": 29027,
+        "distinct_positive_values": [
+          1.0
+        ],
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "crs_epsg_32611": true,
+          "shape_3730x3292": true,
+          "transform_and_bounds_match_sample_submission": true,
+          "mask_shapes_match_raster": true,
+          "footprint_all_finite": true,
+          "footprint_values_in_0_1": true,
+          "no_infinite_values": true,
+          "nan_only_outside_footprint": true,
+          "no_sentinel_values": true,
+          "all_finite_values_in_0_1": true,
+          "no_positive_outside_footprint": true,
+          "zero_positive_on_mapped_catalogue": true,
+          "template_validator_passed": true
+        },
+        "template_validator": {
+          "all_checks_passed": true,
+          "checks": {
+            "single_band": true,
+            "dtype_float32": true,
+            "dimensions_3730x3292": true,
+            "crs_epsg_32611": true,
+            "transform_matches_sample_submission": true,
+            "no_nan_anywhere": true,
+            "no_inf_anywhere": true,
+            "no_sentinel_values": true,
+            "range_0_1_guaranteed": true,
+            "min_ge_0": true,
+            "max_le_1": true,
+            "in_footprint_all_finite": true,
+            "in_footprint_range_0_1": true,
+            "outside_footprint_zero": true,
+            "zero_dots_on_mapped_catalogue": true
+          }
+        },
+        "template_format_report": {
+          "ok": true,
+          "problems": []
+        },
+        "all_checks_passed": true
+      },
+      {
+        "file": "submissions/h69-efg-kinematic-geodesic-29027-nan.tif",
+        "bytes": 243565,
+        "sha256": "6ddf37fc9dbe5f66c8000857ee54825f3269cc7d1b37318862a0960fd3e4dd93",
+        "meta": {
+          "count": 1,
+          "dtype": "float32",
+          "crs": "EPSG:32611",
+          "shape": [
+            3730,
+            3292
+          ],
+          "transform": [
+            100.0,
+            0.0,
+            243350.0,
+            0.0,
+            -100.0,
+            4508550.0
+          ],
+          "nodata": "nan",
+          "bounds": [
+            243350.0,
+            4135550.0,
+            572550.0,
+            4508550.0
+          ]
+        },
+        "n_nan": 7111787,
+        "n_nan_inside_footprint": 0,
+        "min": 0.0,
+        "max": 1.0,
+        "positive_pixels": 29027,
+        "distinct_positive_values": [
+          1.0
+        ],
+        "checks": {
+          "single_band": true,
+          "dtype_float32": true,
+          "crs_epsg_32611": true,
+          "shape_3730x3292": true,
+          "transform_and_bounds_match_sample_submission": true,
+          "mask_shapes_match_raster": true,
+          "footprint_all_finite": true,
+          "footprint_values_in_0_1": true,
+          "no_infinite_values": true,
+          "nan_only_outside_footprint": true,
+          "no_sentinel_values": true,
+          "all_finite_values_in_0_1": true,
+          "no_positive_outside_footprint": true,
+          "zero_positive_on_mapped_catalogue": true,
+          "nan_mask_equals_sample_submission_nan_mask": true
+        },
+        "template_validator": "skipped: file carries outside-footprint NaN (spec-literal twin); the template enforces an all-finite policy",
+        "all_checks_passed": true
+      }
+    ]
+  },
+  "evidence_class": "SUBMISSION-RECEIPT"
 }

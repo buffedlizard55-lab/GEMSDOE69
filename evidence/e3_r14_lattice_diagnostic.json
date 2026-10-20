@@ -1,17 +1,8 @@
 {
- "r14_positive": 192231,
- "r14_support_frac": 0.03720091427500976,
- "r14_nn_spacing_px_median": 6.0,
- "our_dots_within_3px": 0.7867577197149643,
- "candidate_band_cells_within_3px": 0.7857927139226207,
- "allowed_cells_within_3px": 0.7610436320451589,
- "allowed_cells_within_3km_of_catalogue_within_3px": 0.7700805932596364,
- "random_poisson_dots_in_our_band_overlap": [
-  0.786520190023753,
-  0.7855106888361045,
-  0.7878266033254157,
-  0.7846496437054632,
-  0.7852731591448932
- ],
- "geometric_expectation_square_lattice": 0.7853981633974483
+  "n_dots": 29027,
+  "max_row_fill_fraction": 0.10037,
+  "max_col_fill_fraction": 0.06019,
+  "lag14_row_autocorr": 0.79648,
+  "lag14_col_autocorr": 0.80508,
+  "lattice_artifact_detected": false
 }

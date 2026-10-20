@@ -1,45 +1,43 @@
 {
- "index": "registry/registry_index_69.json",
- "index_rasters": 862,
- "index_complete_accessible_scan": true,
- "index_errors": [],
- "order_note": "Both phases were computed after placement because the corpus download ran concurrently with the build; the surface phase still compares the pre-placement surface. A duplicate verdict in either phase would have stopped promotion.",
- "phases": {
-  "dots": {
-   "summary": {
-    "my_file": null,
-    "evidence_class": "REGISTRY-MEASUREMENT",
-    "my_dots": 39958,
-    "candidate_decoded_sha256": "930e8ac10de3c90874d5e7a9af47da275e9edde8fe69f10ef152ac06de8f6d5c",
-    "candidate_file_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
-    "rho_limit": 0.9,
-    "overlap_limit": 0.7,
-    "jaccard_limit": 0.5,
-    "registry_rasters_expected": 862,
-    "registry_rasters_checked": 0,
-    "complete_accessible_scan": false,
-    "missing_or_invalid": 862,
-    "source_errors": [],
-    "worst_spearman_full_footprint": null,
-    "worst_rho_submission": null,
-    "worst_dot_overlap": null,
-    "worst_overlap_submission": null,
-    "worst_jaccard_dot_sets": null,
-    "worst_jaccard_submission": null,
-    "byte_unique_among_checked": false,
-    "pixel_unique_among_checked": false,
-    "duplicate_count": 0,
-    "unique": false,
-    "jaccard_diagnostic_only": true,
-    "verdict": "negative",
-    "stop_required": true,
-    "candidate_rank_variation": true,
-    "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
-   },
-   "two_phase": null,
-   "rows_checked": 0,
-   "rows_with_errors": 862
+  "phases": {
+    "dots": {
+      "summary": {
+        "candidate_file": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
+        "candidate_file_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+        "candidate_decoded_sha256": "c6341ec08d1bd61f66250687ee4fa7d3038135dd07eb27a40b4ee6c2b9e67876",
+        "my_positive_pixels": 29027,
+        "n_registry_blobs": 751,
+        "n_compared": 751,
+        "n_errors": 0,
+        "complete_accessible_scan": true,
+        "max_abs_spearman": 0.144801,
+        "argmax_spearman": "buffedlizard55-lab/11GEMSDOE:docs/downloads/gems-structural-area06-v1.tif",
+        "literal_max_within_3px": 1.0,
+        "argmax_literal_within_3px": "buffedlizard55-lab/GEMSDOE2:data/evidence/runs/turbo-simple-20260925T041759Z/submission.tif",
+        "literal_duplicate_count": 150,
+        "stop_required": true,
+        "dotlike_subset_le_200k": {
+          "n_rasters": 598,
+          "max_within_3px": 0.960278,
+          "argmax_within_3px": "buffedlizard55-lab/GEMSDOE37:docs/downloads/gemsdoe37-h6-physics-dotted-80k-20261005T055000Z-0bef9211631c.tif",
+          "max_abs_spearman": 0.140895,
+          "dotlike_overlap_ok": false
+        },
+        "gemsdoe66_upstream_gate": {
+          "module": "vendor/template66/gemsdoe66/uniqueness.py",
+          "upstream_commit": "buffedlizard55-lab/GEMSDOE66@29519311",
+          "flagged_count": 81,
+          "verdict": "DUPLICATE"
+        },
+        "reprojected_non_standard_rasters": [
+          {
+            "blob": "a97c7b2a513225c9f9f2b35736afe5abf4d2a491",
+            "repo": "buffedlizard55-lab/GEMSDOE36",
+            "path": "docs/downloads/GEMS36_FORMAT_TEST_NOT_SUBMISSION.tif",
+            "note": "reprojected_from_32x48"
+          }
+        ]
+      }
+    }
   }
- },
- "seconds": 1.5885059833526611
 }

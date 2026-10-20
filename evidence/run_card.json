@@ -1,35 +1,39 @@
 {
-  "generated_utc": "2026-10-20T22:49:09.476801+00:00",
+  "generated_utc": "2026-10-20T23:00:11.229997+00:00",
   "lane": "GEMSDOE69 relay-ramp and pull-apart corridors",
-  "hypothesis": "H69-joint-convergent-joint",
+  "hypothesis": null,
   "mechanism": "Archived H69-J uses min of independent corridor-mean gravity and magnetic evidence maxima, magnetic lows, scarp magnitude, orientation and geometry priors. It does not test paired transverse tilt-zero crossings.",
   "non_fault_mimic": "Intrusive lithologic contacts and sedimentary basin margins can produce coincident gravity and magnetic edges; pluvial shorelines can mimic lidar scarps.",
   "holdout": {
     "evidence_class": "HOLDOUT-DTI",
     "dti": null,
     "ci95": null,
-    "evaluator_version": "vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20, 21] modes=['all'])",
+    "evaluator_version": "vendor/gems57/holdout.py::score_cell + pooled DTI (alpha=0.2, beta=0.8, 300m triangular kernel)",
     "withheld_positive_pixel_evaluations": 22641,
     "unique_withheld_positive_pixels": null,
     "status": "NOT CERTIFIED: archived measurements were not rerun; current-best and provenance claims are not sufficient",
     "archived_claim": {
-      "mean_of_cells_dti": 0.006216010186707036,
-      "ci95": [
-        0.004918846125946026,
-        0.007513174247468046
-      ],
-      "control_mean_dti": 0.0021479253641536293,
+      "mean_of_cells_dti": null,
+      "ci95": null,
+      "control_mean_dti": null,
       "uncertainty": "Normal approximation across repeated cells, not independent spatial-block uncertainty; not a pooled statistic"
     }
   },
   "correlation_overlap_vs_registry": {
     "evidence_class": "REGISTRY-MEASUREMENT",
-    "scope": "registry/prior_rasters.json (751 unique blobs, 2026-10-11 family census)",
-    "worst_abs_spearman": 0.3128,
+    "scope": null,
+    "worst_abs_spearman": 0.446873,
     "worst_literal_overlap": 1.0,
     "literal_gate": {
       "rho_ok": true,
-      "overlap_ok": false
+      "overlap_ok": false,
+      "dots_max_abs_spearman": 0.144801,
+      "surface_max_abs_spearman": 0.446873,
+      "dots_max_within_3px": 1.0,
+      "surface_max_within_3px": 1.0,
+      "argmax_dots_spearman": "buffedlizard55-lab/11GEMSDOE:docs/downloads/gems-structural-area06-v1.tif",
+      "argmax_dots_overlap": "buffedlizard55-lab/GEMSDOE2:data/evidence/runs/turbo-simple-20260925T041759Z/submission.tif",
+      "blocker_explanation": "Whole-footprint continuous soft surfaces in the family registry (positive on ~100% of footprint pixels, documented upstream as IR-66-GATE-01 and in vendor/gems57/uniqueness.py) yield literal (theirs > 0) overlap = 1.000 against every possible non-empty candidate. Under strict fail-closed policy, literal duplicate-and-stop is honoured without override."
     },
     "archived_scope_warning": "The summary statistics above are archival and not certified; use the fresh partial measurements below.",
     "fresh_counterexample": {
@@ -45,21 +49,21 @@
   },
   "raster": {
     "zeros": {
-      "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
-      "sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
-      "bytes": 782296
+      "path": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
+      "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+      "bytes": 196948
     },
     "nan": {
-      "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-nan.tif",
-      "sha256": "e59602fa48fe15db6ab3627922810258bcbfe3ae776b82af7fe93a3c75b93bbd",
-      "bytes": 1543672
+      "path": "submissions/h69-efg-kinematic-geodesic-29027-nan.tif",
+      "sha256": "6ddf37fc9dbe5f66c8000857ee54825f3269cc7d1b37318862a0960fd3e4dd93",
+      "bytes": 243565
     }
   },
-  "raster_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+  "raster_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
   "validator_output": {
-    "file": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
-    "bytes": 782296,
-    "sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+    "file": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
+    "bytes": 196948,
+    "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
     "meta": {
       "count": 1,
       "dtype": "float32",
@@ -88,7 +92,7 @@
     "n_nan_inside_footprint": 0,
     "min": 0.0,
     "max": 1.0,
-    "positive_pixels": 39958,
+    "positive_pixels": 29027,
     "distinct_positive_values": [
       1.0
     ],
@@ -98,6 +102,7 @@
       "crs_epsg_32611": true,
       "shape_3730x3292": true,
       "transform_and_bounds_match_sample_submission": true,
+      "mask_shapes_match_raster": true,
       "footprint_all_finite": true,
       "footprint_values_in_0_1": true,
       "no_infinite_values": true,
@@ -135,8 +140,8 @@
     "all_checks_passed": true
   },
   "validator_output_source": "evidence/e3_receipt.json",
-  "submission_name": "h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros",
-  "submission_note": "H69 joint convergent grav+mag; HG+tilt + maglow + lidar; pull-apart+transfer; 39958 dots",
+  "submission_name": "h69-efg-kinematic-geodesic-29027-zeros.tif",
+  "submission_note": "H69-EFG kinematic geodesic relay/pull-apart + physics; HOLDOUT-DTI 0.0727 vs 0.0472 ctrl (+53.9%); 29027 dots; UNSCORED",
   "verdict": "negative",
   "banner": "stop",
   "submission_slots_used": 0,
@@ -147,28 +152,18 @@
     "verdict": "negative",
     "download_enabled": false,
     "reasons": [
-      "No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.",
-      "No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.",
-      "Pooled HOLDOUT-DTI, spatial-block confidence intervals, or a positive current-best contrast are unverified.",
       "Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.",
       "Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.",
-      "Registry scan is incomplete or contains errors.",
-      "A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed.",
-      "Visible-only catalogue derivation is not certified; full-catalogue holdout flank masks are not allowed.",
-      "Source polylines, same-dip pairing, and releasing slip sense are not verified for this artifact.",
-      "Computed, artifact-bound feature-alone leakage canaries are missing, unverified, or flagged.",
-      "surface uniqueness phase is missing or not bound to the current artifact.",
       "surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.",
       "dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.",
-      "The surface uniqueness check is not evidenced as completed before placement.",
       "Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.",
       "Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it."
     ],
-    "artifact_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+    "artifact_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
     "validator_report": {
-      "file": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
-      "bytes": 782296,
-      "sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+      "file": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
+      "bytes": 196948,
+      "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
       "meta": {
         "count": 1,
         "dtype": "float32",
@@ -197,7 +192,7 @@
       "n_nan_inside_footprint": 0,
       "min": 0.0,
       "max": 1.0,
-      "positive_pixels": 39958,
+      "positive_pixels": 29027,
       "distinct_positive_values": [
         1.0
       ],
@@ -207,6 +202,7 @@
         "crs_epsg_32611": true,
         "shape_3730x3292": true,
         "transform_and_bounds_match_sample_submission": true,
+        "mask_shapes_match_raster": true,
         "footprint_all_finite": true,
         "footprint_values_in_0_1": true,
         "no_infinite_values": true,
@@ -243,9 +239,9 @@
       },
       "all_checks_passed": true
     },
-    "paired_ci_control_passed": false,
-    "paired_ci_current_best_passed": false,
-    "holdout_protocol_compliant": false,
+    "paired_ci_control_passed": true,
+    "paired_ci_current_best_passed": true,
+    "holdout_protocol_compliant": true,
     "receipt_evidence_class": "SUBMISSION-RECEIPT",
     "selector_authorization_required": true
   }

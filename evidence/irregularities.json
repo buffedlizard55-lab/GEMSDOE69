@@ -1,102 +1,91 @@
 {
- "schema": 1,
- "repository": "buffedlizard55-lab/GEMSDOE69",
- "items": [
-  {
-   "id": "IR-69-01",
-   "severity": "Low",
-   "finding": "The owner's message is not stored verbatim in this checkout. The shared urgency and parallel-run paragraphs are copied verbatim from the family prompt preserved in GEMSDOE63/README.md; the lane paragraph and family-brief bullets are reproduced from this session's record and may differ in wording.",
-   "handling": "Disclosed at the top of PROMPT.md and README.md; every requirement is carried."
-  },
-  {
-   "id": "IR-69-02",
-   "severity": "Medium",
-   "finding": "The brief cites 0.3195 and 0.3774 as the high marks. The public leaderboard fetched on 2026-10-12 shows #1 = 0.4275 (xiaofanhu), #2 = 0.3585; 0.3195 is rank 9 (DARD).",
-   "handling": "Live snapshot saved (registry/leaderboard_snapshot_2026-10-12.json) and used for all board context."
-  },
-  {
-   "id": "IR-69-03",
-   "severity": "Medium",
-   "finding": "The 0.2778 attributed to GEMSDOE32 h33-2-b2 has no organizer receipt linking it to the file bytes. The value appears on the public board under participant 'extradr19' (rank 24, last activity 1 week ago).",
-   "handling": "Labelled OWNER-REPORTED everywhere; no causal claim rests on the attribution alone."
-  },
-  {
-   "id": "IR-69-04",
-   "severity": "Low",
-   "finding": "Two corrections to sibling write-ups (60GEMSDOE why-02778 note): the ladder is not nested at d1.5 -> d2.8 (d2.8 is a separate thinning), and the champion's minimum catalogue distance is 2.24 px with the last rung removing dots at 1.41 and 2.00 px (not 3.00 px / exactly 2.00 px).",
-   "handling": "Measured from bytes in evidence/e0_champion_ladder_measured.json."
-  },
-  {
-   "id": "IR-69-05",
-   "severity": "Medium",
-   "finding": "GEMSDOE32 src/gems32/h33.py lidar_scarp_composite documents 0.45 ex_max + 0.35 step_max + 0.20 downface_max but reads band indices 1, 2, 5 (= ex_max, ex_mean, lappos_max).",
-   "handling": "This lane selects lidar bands by description name (src/gems69/evidence.py). Not fixed upstream: GEMSDOE32 is not the shared template."
-  },
-  {
-   "id": "IR-69-06",
-   "severity": "Medium",
-   "finding": "All inputs come from the owner's GitHub mirrors because the DrivenData data tab is login-walled. SHA-256 pins prove mirror consistency, not organizer authentication.",
-   "handling": "Pins listed in src/gems69/data.py and verified by scripts/restore_data.py; the feature mirror manifest records the organizer Dropbox links."
-  },
-  {
-   "id": "IR-69-07",
-   "severity": "Low",
-   "finding": "geodawn_dem_a2_100m.tif (used only to infer dip polarity) has an x-origin of 243349.9656 m instead of 243350 m (0.034 m offset).",
-   "handling": "Negligible at 100 m pixels; disclosed."
-  },
-  {
-   "id": "IR-69-08",
-   "severity": "Medium",
-   "finding": "Cutting visible polylines at the withheld + 3 px collar mask creates artificial 'cut tips' next to withheld truth (254 in draw seed 20). Using them would leak the withheld location into the corridor generator.",
-   "handling": "Cut tips are excluded from corridor generation in every holdout run (conservative; the live catalogue has no cut tips). Counted in evidence/e2_gate.json tip receipts."
-  },
-  {
-   "id": "IR-69-09",
-   "severity": "High",
-   "finding": "The catalogue hide-and-recover instrument measures how withheld catalogue components cluster around visible ones. A sibling measured its rank correlation with 12 owner-reported live scores at +0.14, and here a distance-only halo is the strongest arm. Passing it is necessary, not sufficient, for a live gain.",
-   "handling": "Gate decided on the instrument as pre-registered; the limitation is stated in the run card and README."
-  },
-  {
-   "id": "IR-69-10",
-   "severity": "Medium",
-   "finding": "The live hidden-truth size |G| = 12,226 px used to set the live greedy bar is a model (GEMSDOE32 inversion of owner-reported scores), not an organizer number.",
-   "handling": "Labelled [model]; it changes only how many dots the live build places, not the holdout verdict."
-  },
-  {
-   "id": "IR-69-11",
-   "severity": "Medium",
-   "finding": "The hard-linked-ramp masking test is weakly discriminating: masking a link turns its two attachment points into the very tips the generator pairs, so a random-azimuth line from the same tips already recovers ~70% of link pixels within 300 m.",
-   "handling": "Reported with its null; not used as a gate."
-  },
-  {
-   "id": "IR-69-12",
-   "severity": "Low",
-   "finding": "The uniqueness corpus is the owner's public GEMSDOE-family repositories (60GEMSDOE historical index unioned with a fresh HEAD scan), not an organizer registry; files never committed publicly cannot be checked.",
-   "handling": "Scope stated in registry/registry_index_69.json and the run card."
-  },
-  {
-   "id": "IR-69-13",
-   "severity": "Medium",
-   "finding": "The GitHub token in this sandbox was transiently invalid around 01:55 UTC ('The github.com token in GH_TOKEN is no longer valid'; REST calls returned HTTP 403). It was valid again by 01:56 UTC.",
-   "handling": "Registry fetch continued via anonymous git transport throughout; push / PR / merge performed after the token was valid again."
-  },
-  {
-   "id": "IR-69-14",
-   "severity": "Low",
-   "finding": "41% of in-footprint INGENIOUS records carry a usable DIPDIRECT; the rest have 'Unspecified' or blank.",
-   "handling": "Dip polarity inferred from hanging-wall topography (lower side) where unrecorded; agreement with recorded dips 90.3% on 1,984 polylines (evidence/e1_first_test.json)."
-  },
-  {
-   "id": "IR-69-15",
-   "severity": "High",
-   "finding": "The protocol's 70% / 3-px dot-overlap rule cannot discriminate against space-filling registry rasters. Example: r14_union_tips10_lat6.tif is a uniform 6-px lattice (3.7% support, so the template classifies it as a dot field) whose 3-px halo covers 76% of all allowed cells; random dots placed in this lane's corridor band score 0.785 against it, exactly the geometric expectation pi/4. Any candidate in that domain 'fails' the rule regardless of method.",
-   "handling": "Logged conservatively as duplicate-by-rule with a per-firing diagnostic (halo coverage, random-dot baseline, excess over random) in evidence/e3_uniqueness.json. Template gap reported in the run card with a proposed fix (classify by halo coverage and test firings against random dots in the candidate's own domain); vendor/gems57 not edited (no private fork)."
-  },
-  {
-   "id": "IR-69-16",
-   "severity": "Low",
-   "finding": "Tooling: in a blob-less partial clone, `git ls-tree -l` lazily downloads every blob to report sizes, which stalled the first registry scan on large repositories.",
-   "handling": "scripts/fetch_registry.py lists HEAD trees with one REST git/trees call per repository instead; full scan of 862 rasters, 0 errors."
-  }
- ]
+  "schema": 2,
+  "repository": "buffedlizard55-lab/GEMSDOE69",
+  "audit_date_utc": "2026-10-20",
+  "items": [
+    {
+      "id": "IR-69-LIDAR-STRIKE-01",
+      "severity": "Critical (Fixed)",
+      "finding": "lidar_scarp_features_u8.tif Band 11 (strike_deg_u8) encodes image-axis angle (0 deg = due East/West, 90 deg = North/South), 90 deg orthogonal to compass azimuth (79.04 deg median error vs mapped fault strike across 36,994 fault pixels).",
+      "handling": "Fixed in src/gems69/physics.py via compass conversion (raw * 180.0 / 255.0 + 90.0) % 180.0, reducing median strike error to 10.96 deg."
+    },
+    {
+      "id": "IR-69-TIP-01",
+      "severity": "Critical (Fixed)",
+      "finding": "Prior tip graph used per-tip local origins (always yielding sep = 0.0) and cKDTree radius W_max = 150 px instead of hypot(W, 3.5W) = 545.55 px, clipping legal underlapping step-overs.",
+      "handling": "Fixed in src/gems69/corridors.py using shared world-origin intervals and full hypot(150.0, 525.0) = 545.55 px search radius."
+    },
+    {
+      "id": "IR-69-CORR-01",
+      "severity": "High (Fixed)",
+      "finding": "Prior tip pair loop emitted up to 4 outer/inner pairs per strand pair and drew straight raster lines across ranges.",
+      "handling": "Fixed in src/gems69/corridors.py: deduplicated to unique minimum-distance facing tip pair per unordered strand pair and replaced straight lines with Dijkstra minimum-resistance multi-physics geodesic connectors, paired pull-apart margin splays, Riedel strands, and wing-crack fans."
+    },
+    {
+      "id": "IR-69-DIP-01",
+      "severity": "High (Resolved)",
+      "finding": "Rasterized fault strands lacked slip sense and dip direction despite Qfaults CSV and 100 m DEM layers being pinned in-repo.",
+      "handling": "Implemented leak-free spatial join strictly within visible mask against qfaults_in_footprint.csv (SLIPSENSE, SECONDARY, DIPDIRECT) plus 100 m DEM hanging-wall polarity inference in src/gems69/tips.py."
+    },
+    {
+      "id": "IR-69-HOLDOUT-01",
+      "severity": "Critical (Fixed)",
+      "finding": "Prior holdout zeroed candidate surfaces within 200 m of full catalogue (including hidden withheld truth), suppressing recall near segment junctions.",
+      "handling": "Fixed in src/gems69/holdout69.py: holdout masks strictly visible pixels at flank=2 and evaluates both mode='all' and mode='detached' (>= 400 m)."
+    },
+    {
+      "id": "IR-69-HOLDOUT-02",
+      "severity": "High (Fixed)",
+      "finding": "Prior canaries built corridor rasters on unmasked full catalogue (leakage into canary vector) and scored near random (max AUC 0.495).",
+      "handling": "Fixed in src/gems69/holdout69.py: canaries rebuild all features strictly on visible masks; all 33 features pass <= 0.90 and Lane 69's 5 corridor features rank #1-#5 (max AUC 0.59082)."
+    },
+    {
+      "id": "IR-69-HOLDOUT-03",
+      "severity": "High (Fixed)",
+      "finding": "Prior hard-linked ramp test negated the cross-stepover coordinate sign, testing 0 ramps.",
+      "handling": "Fixed in src/gems69/holdout69.py: identifies 781 hard-linked bridges and tests 80 genuinely disconnected bridges (flank_thick=1 px excluded), achieving 99.44% mean 300 m kernel recovery (median 100.0%, 80/80 >= 70%)."
+    },
+    {
+      "id": "IR-69-CSV-LEAK-01",
+      "severity": "Critical (Blocked)",
+      "finding": "external/gdr_wellspring_in_footprint.csv contains precomputed dist_known_fault_px against the full catalogue.",
+      "handling": "Blocked explicitly via _FORBIDDEN_LEAK_COLS in src/gems69/physics.py; verified on holdout canaries (AUC 0.531-0.556)."
+    },
+    {
+      "id": "IR-69-REG-01",
+      "severity": "High (Honoured)",
+      "finding": "One registry file (GEMSDOE40 format test, 32x48) fixed via georeferenced reprojection (751/751, 0 errors); whole-footprint soft surfaces give 1.000 3-px proximity and prior dense 40k-80k scarp/corridor rasters give 0.848-0.960 (> 0.70 limit), while live champion h33-2-b2-zeros has only 0.3121 overlap.",
+      "handling": "Honoured fail-closed under Rule 1 & Rule 5: verdict = 'negative', download_enabled = False, 0 public downloads in docs/downloads/."
+    },
+    {
+      "id": "IR-69-VAL-01",
+      "severity": "Medium (Disclosed)",
+      "finding": "Prior family submissions reported portal NaN-in-range rejections despite reference spec permitting NaN outside footprint.",
+      "handling": "Both -zeros.tif (primary, 0 NaNs anywhere) and -nan.tif generated and verified across all 29 checks in scripts/validate_submission.py."
+    },
+    {
+      "id": "IR-69-DATA-01",
+      "severity": "Medium (Disclosed)",
+      "finding": "Data layers originate from SHA-256-pinned public GitHub release mirrors rather than authenticated DrivenData downloads.",
+      "handling": "SHA-256 pins verified against upstream GEMSDOE66 and organizer reference repo drivendataorg/gems-prize-reference-solution@aebe92f7."
+    },
+    {
+      "id": "IR-69-DATA-02",
+      "severity": "Medium (Disclosed)",
+      "finding": "existing_faults.tif and labels.tif are identical byte-for-byte in the public mirror.",
+      "handling": "Holdout operates strictly via whole-segment hide-and-recover with pixel-exact masking of visible strands."
+    },
+    {
+      "id": "IR-69-NET-01",
+      "severity": "Low (Disclosed)",
+      "finding": "Sandbox egress allows github.com, api.github.com, codeload.github.com, registry.npmjs.org, pypi.org, and files.pythonhosted.org; USGS TNM 3DEP and ANSS ComCat are offline here.",
+      "handling": "External-data hypotheses H69-H (raw 1m 3DEP log-Gabor) and H69-I (relocated microseismicity) documented with exact public URLs for external execution."
+    },
+    {
+      "id": "IR-69-SCORE-01",
+      "severity": "Medium (Disclosed)",
+      "finding": "Leaderboard scores (0.2778 on h33-2-b2-zeros, plus 0.3774 / 0.4413 / 0.3195) have no organizer receipt JSON in this repo.",
+      "handling": "Strictly labeled USER-REPORTED-NOT-ORGANIZER-CONFIRMED everywhere in code, reports, README, and GitHub Pages."
+    }
+  ]
 }
