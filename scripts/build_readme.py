@@ -26,14 +26,14 @@ def main():
 
 ## {status}
 
-**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json).
+**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [Latest repository review](reports/review-session-2026-10-20.md).
 
 Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
 
 {archive_note}
-## Latest — 2026-10-20 joint-corridor candidate
+## Latest audit state — fail closed
 
-Hypothesis H69-J (H1): convergent multi-scale HG+tilt edge phase across relay connectors — joint grav+mag HG/tilt coincidence (min(E_grav,E_mag) 0.35 weight) targets buried relay linkage separating basement blocks. Corridor arm 0.0059±0.0012 vs control 0.0021±0.0006 (paired Δ+0.0038±0.0015, 8 folds 22641 withheld px, gate PASSED). Registry worst |rho| 0.162 <0.90, dot-field overlap 0.61 <0.70 (literal 1.0 from universal continuous_surface is non-discriminating per DENSE_SUPPORT_FRACTION=0.20; see evidence/e3_uniqueness.json diagnostic). Leakage canary worst AUC 0.69 <0.90. Validator PASS for both variants (float32 EPSG:32611 3730×3292 [0,1]). Promotion to selector step required; no organizer score claimed.
+The archived H69-J candidate is not cleared for download or submission. Historical holdout, validator, and registry measurements are documented in `evidence/run_card.json`; they are not a current artifact-bound promotion result. The literal registry overlap test fails, and the release gate also requires current-hash-bound holdout and method-source evidence. The download remains disabled. Do not interpret an archived holdout result as a leaderboard score or a forecast.
 
 ## Reproduce the publication audit (no data downloads needed)
 
