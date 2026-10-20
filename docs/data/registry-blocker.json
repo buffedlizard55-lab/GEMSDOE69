@@ -1,0 +1,29 @@
+{
+  "evidence_class": "REGISTRY-MEASUREMENT",
+  "checked_utc": "2026-10-20T22:21:07.243504+00:00",
+  "candidate_file": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
+  "candidate_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+  "candidate_dots": 38669,
+  "registry_source": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+  "registry_blob_sha1": "374c88b1da2b803e2ed160de467fd71ae114010d",
+  "registry_sha256": "ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be",
+  "registry_bytes": 25065181,
+  "registry_download": "https://api.github.com/repos/buffedlizard55-lab/17GEMSDOE/git/blobs/374c88b1da2b803e2ed160de467fd71ae114010d",
+  "footprint_pixels": 5167373,
+  "registry_positive_footprint_pixels": 5167373,
+  "registry_covers_entire_footprint": true,
+  "full_footprint_spearman": 0.10344425936824049,
+  "candidate_dots_within_3px": 1.0,
+  "exact_bytes_equal": false,
+  "footprint_pixel_agreement": 0.0,
+  "literal_gate": {
+    "rho_ok": true,
+    "overlap_ok": false
+  },
+  "stop_required": true,
+  "compared_this_review": 1,
+  "registry_index_entries": 862,
+  "exhaustive_scan": false,
+  "conclusion": "One pinned universal-support registry raster is a decisive duplicate-and-stop counterexample. With the inherited positive-finite support definition, every nonempty in-footprint field has overlap 1 with this raster. This is a protocol/representation conflict, not proof of identical geological proposals.",
+  "surface_phase": "No new surface or placement generated after the stop. Archived surface receipts are quarantined. Universal-support certificate applies to every nonempty in-footprint surface as well as dots."
+}

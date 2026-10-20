@@ -1,6 +1,6 @@
 import numpy as np
 
-from gems69.evidence_quota import apportion, tile_ids
+from gems69_s3.evidence_quota import apportion, tile_ids
 
 
 class _P:

@@ -1,0 +1,170 @@
+{
+  "evidence_class": "LOCAL-PRIOR-AUDIT",
+  "candidate_path": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+  "candidate_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+  "n_local_priors_checked": 20,
+  "max_dot_overlap_3px": 0.156562,
+  "all_local_priors_le_0p70": true,
+  "rows": [
+    {
+      "path": "submissions/h69-efg-kinematic-geodesic-29027-nan.tif",
+      "sha256": "6ddf37fc9dbe5f66c8000857ee54825f3269cc7d1b37318862a0960fd3e4dd93",
+      "their_positive_px": 29027,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.156562
+    },
+    {
+      "path": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
+      "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+      "their_positive_px": 29027,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.156562
+    },
+    {
+      "path": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-nan.tif",
+      "sha256": "9d4774ff6158ea92edd67bb173426f8d6531babe5d3153c1fe1dab4cded480b6",
+      "their_positive_px": 38669,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.073594
+    },
+    {
+      "path": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
+      "sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+      "their_positive_px": 38669,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.073594
+    },
+    {
+      "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-nan.tif",
+      "sha256": "e59602fa48fe15db6ab3627922810258bcbfe3ae776b82af7fe93a3c75b93bbd",
+      "their_positive_px": 39958,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.071781
+    },
+    {
+      "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
+      "sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+      "their_positive_px": 39958,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.071781
+    },
+    {
+      "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T215915Z-74c22ad2-nan.tif",
+      "sha256": "e59602fa48fe15db6ab3627922810258bcbfe3ae776b82af7fe93a3c75b93bbd",
+      "their_positive_px": 39958,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.071781
+    },
+    {
+      "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T215915Z-74c22ad2-zeros.tif",
+      "sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+      "their_positive_px": 39958,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.071781
+    },
+    {
+      "path": "submissions/h69-relayfix-v1-35235-20261020T202813Z-a2917d46-nan.tif",
+      "sha256": "8bbf3fea17a370b85de1f9a737e4f6d48d4da184d779f2ca1610d2bb49008837",
+      "their_positive_px": 35235,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.076719
+    },
+    {
+      "path": "submissions/h69-relayfix-v1-35235-20261020T202813Z-a2917d46-zeros.tif",
+      "sha256": "13b3fe7bdda7690bd1b4306a6a068748b4ec78e44378aa3903a899956d94a9ce",
+      "their_positive_px": 35235,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.076719
+    },
+    {
+      "path": "submissions/h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-nan.tif",
+      "sha256": "9c0bc4a5d095b00ba3485dab22f67dfb255065f4c6e93a70cc02dc1744ab0f23",
+      "their_positive_px": 35787,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.07425
+    },
+    {
+      "path": "submissions/h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-zeros.tif",
+      "sha256": "55f6215c72990ec6a4184985d401c8adffa57673d678ebbc052045ceede3cce6",
+      "their_positive_px": 35787,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.07425
+    },
+    {
+      "path": "submissions/h69-relayramp-pullapart-35787-20261020T201246Z-0e22fe3c-nan.tif",
+      "sha256": "9c0bc4a5d095b00ba3485dab22f67dfb255065f4c6e93a70cc02dc1744ab0f23",
+      "their_positive_px": 35787,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.07425
+    },
+    {
+      "path": "submissions/h69-relayramp-pullapart-35787-20261020T201246Z-0e22fe3c-zeros.tif",
+      "sha256": "55f6215c72990ec6a4184985d401c8adffa57673d678ebbc052045ceede3cce6",
+      "their_positive_px": 35787,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.07425
+    },
+    {
+      "path": "submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-nan.tif",
+      "sha256": "9b15eef3bb3eb844527f784e201b900578fe4575fddf7c163512ee499d93b967",
+      "their_positive_px": 36325,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.09475
+    },
+    {
+      "path": "submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif",
+      "sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+      "their_positive_px": 36325,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.09475
+    },
+    {
+      "path": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-nan.tif",
+      "sha256": "6ceceb6bd47817a3241d56a4f2d9730ca9010fc70b37a5cf146d01272cad3ec0",
+      "their_positive_px": 31994,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.108625
+    },
+    {
+      "path": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif",
+      "sha256": "be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7",
+      "their_positive_px": 31994,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.108625
+    },
+    {
+      "path": "submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-nan.tif",
+      "sha256": "db7915f3304edaefe3b74f925bd4c0dca57d2b93d656f46a5de5df7b13d528ab",
+      "their_positive_px": 33199,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.088688
+    },
+    {
+      "path": "submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-zeros.tif",
+      "sha256": "ad03bd333dacc28ebaf474599f3fc7aabf65d181373a2afd52f5adf8fdc15045",
+      "their_positive_px": 33199,
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "dots_within_3px": 0.088688
+    }
+  ]
+}

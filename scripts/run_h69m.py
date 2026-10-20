@@ -62,8 +62,8 @@ def _auc(pos, neg):
 
 
 def load_inputs():
-    from gems69.holdout69 import load_template_grid
-    from gems69.physics import build_layer_stats, build_z_stack
+    from gems69_s3.holdout69 import load_template_grid
+    from gems69_s3.physics import build_layer_stats, build_z_stack
     g = load_template_grid()
     stats = build_layer_stats(g.footprint)
     zstack = build_z_stack(g.footprint, stats)
@@ -71,7 +71,7 @@ def load_inputs():
 
 
 def control_surface(g, zstack):
-    from gems69.scoring import S0_DEFAULT
+    from gems69_s3.scoring import S0_DEFAULT
     layers = ["grav_hg_s2", "grav_tilt_s2", "mag_hg_s2", "mag_tilt_s2", "mag_low_tmi", "mag_low_rtp", "lidar_scarp"]
     C = np.zeros(g.footprint.shape, np.float32)
     for name in layers:
@@ -85,7 +85,7 @@ def control_surface(g, zstack):
 
 def transfer_ref_corridors(pairs, strands, shape, max_corridors=1200):
     """Exp2b transfer-only selector, identical logic to scripts/run_exp2b_transfer.py."""
-    from gems69.corridors import _pair_key, _priority, corridor_from_pair
+    from gems69_s3.corridors import _pair_key, _priority, corridor_from_pair
     seen, chosen = set(), []
     for p in sorted(pairs, key=_priority):
         k = _pair_key(p)
@@ -102,12 +102,12 @@ def transfer_ref_corridors(pairs, strands, shape, max_corridors=1200):
 
 def arm_surfaces(visible, shape, zstack, want=("transfer_ref", "joint_priority", "h69m_evidence_first")):
     """Build every corridor arm's propensity from ONE visible catalogue (shared tip graph)."""
-    from gems69.corridors import build_tip_pairs, corridor_from_pair, select_stratified
-    from gems69.evidence_first import build_evidence_first_corridors
-    from gems69.physics import corridor_evidence_from_z
-    from gems69.scoring import build_propensity, score_corridor
-    from gems69.scoring_joint import build_propensity_joint, score_corridor_joint
-    from gems69.tips import vectorize
+    from gems69_s3.corridors import build_tip_pairs, corridor_from_pair, select_stratified
+    from gems69_s3.evidence_first import build_evidence_first_corridors
+    from gems69_s3.physics import corridor_evidence_from_z
+    from gems69_s3.scoring import build_propensity, score_corridor
+    from gems69_s3.scoring_joint import build_propensity_joint, score_corridor_joint
+    from gems69_s3.tips import vectorize
     strands = vectorize(visible)
     pairs = build_tip_pairs(strands, visible)
     out, meta, objs = {}, dict(n_strands=len(strands), n_raw_pairs=len(pairs)), {}
@@ -154,8 +154,8 @@ def cmd_gate(limit: int | None = None) -> int:
     from scipy import ndimage as ndi
     from gems57 import holdout as thold
     from gems57.emit import greedy_allocate
-    from gems69.evidence_first import JOINT_LAYERS
-    from gems69.holdout69 import cell_allowed
+    from gems69_s3.evidence_first import JOINT_LAYERS
+    from gems69_s3.holdout69 import cell_allowed
     t_all = time.time()
     g, _stats, zstack = load_inputs()
     shape = g.footprint.shape
@@ -274,7 +274,7 @@ def cmd_emit() -> int:
     from scipy import ndimage as ndi
     from gems57 import grid as tgrid
     from gems57.emit import greedy_allocate
-    from gems69.holdout69 import load_template_grid
+    from gems69_s3.holdout69 import load_template_grid
     g = load_template_grid()
     frozen = json.loads((TMP / "surface_frozen.json").read_text())
     p = np.load(frozen["surface_file"])

@@ -3,14 +3,15 @@ Generated: 2026-10-20T19:40Z — Pre-registration before implementation
 Evidence class: hypothesis proposal (no holdout look yet); ranked by expected HOLDOUT-DTI improvement, then implementation cost.
 All use the catalogue-geometry tip graph (W 0.1–15 km, along ≤3.5W, same-dip via sub-parallel strikes) rather than pixel statistics.
 
-## Current baseline (HOLDOUT-DTI, evaluator gems57 pooled hide-and-recover α0.2 β0.8 R300m, seeds 20/21)
-- Corridor arm (additive multi-scale HG/tilt+maglow+lidar+orient+geom): 0.0060±0.0014 (8 cells, 22641 withheld px)
-- Control (no corridor prior, same physics composite): 0.0021±0.0006, Δ+0.0038±0.0015, gate PASSED
-- Leakage canary worst AUC 0.69 (corridor_propensity), pass (<0.90)
-- Hard-link recovery 0.86 within 300m (median 1.0, 11/13 ≥70%)
+## Current baseline (HOLDOUT-DTI, evaluator gems57 pooled hide-and-recover α0.2 β0.8 R300m, seeds 20/21, 2026-10-20 run)
+- Corridor arm (additive multi-scale HG/tilt+maglow+lidar+orient+geom): 0.006216±0.0014 (8 cells, 22641 withheld px)
+- Control (no corridor prior, same physics composite): 0.002148±0.0006, Δ+0.004068±0.0015, gate PASSED
+- Leakage canary worst AUC 0.689 (corridor_propensity), pass (<0.90)
+- Hard-link recovery 0.941 within 300m (16/17 tested, ≥70%)
+- Registry lane-drift scan: worst |Spearman| 0.313 <0.90 pass; dotlike 3-px overlap 0.8285 vs registry blob 23ff31cf... FAIL >0.70 → duplicate-and-stop, NEGATIVE, no download, no slot spent (evidence/run_card.json)
 - Family best download h33-h33-2-b2: 0.2778 USER-REPORTED-NOT-ORGANIZER-CONFIRMED (37,654 dots, median 1.97km from catalogue)
 
-Question: why did 0.2778 score and can we beat it? H33 is a sparse dotted field (2.8px spacing) on a wide multi-physics lineament, far from catalogue (min 2.24px), exploiting metric marginal bar p>0.0556 at DTI 0.2778. Its mean credit ~0.13–0.14/dot is 2.4× bar. Beating it requires higher mean credit per dot at same mass (~0.19/dot for ~0.36 DTI) — i.e. better ranking, not more mass. Corridor lane currently ranks near-catalogue step-overs; to improve we need joint signatures that reject lithologic contacts and focus on buried linkage.
+Question: why did 0.2778 score and can we beat it? H33 is a sparse dotted field (2.8px spacing) on a wide multi-physics lineament, far from catalogue (min 2.24px), exploiting metric marginal bar p>0.0556 at DTI 0.2778. Its mean credit ~0.13–0.14/dot is 2.4× bar. Beating it requires higher mean credit per dot at same mass (~0.19/dot for ~0.36 DTI) — i.e. better ranking, not more mass. The 2026-10-20 corridor emission beat its holdout control but FAILED the uniqueness gate (0.8285 > 0.70 dotlike overlap against a dense registry fault-dot raster): corridor dots sit too close to the mapped-fault network that this registry raster blankets. To beat 0.2778 the lane needs a unique, higher-credit-per-dot field that also clears the <0.70 dot-overlap gate — e.g. one of the queued hypotheses H1–H5 that shifts credit away from catalogue-adjacent dots, validated on holdout first.
 
 ## Ranked hypotheses (layers → signature → why hidden fault → difference → expected gain/cost)
 

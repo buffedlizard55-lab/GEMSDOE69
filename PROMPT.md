@@ -1,3 +1,9 @@
+# Active request location — 2026-10-20 review
+
+Read `PROJECT_REQUEST.md` (also embedded in README) first. The text below is a historical standing brief, not current scientific clearance. The literal duplicate-and-stop is binding; see `evidence/integrity_review.json`. Do not follow older handoff advice to rebind receipts or rerun the retired generator.
+
+---
+
 # Standing prompt — read at the start of every session
 
 Session of 2026-10-20 addendum (user instruction, not a score): the user cites **0.3195** as the current competition high and asks for a unique submission that could beat it. That figure is USER-REPORTED-NOT-ORGANIZER-CONFIRMED. The in-repo official public-leaderboard snapshot (`registry/leaderboard_snapshot_2026-10-12.json`, retrieved 2026-10-12 from the public leaderboard page) shows rank 1 at 0.4275 and 0.3195 at rank 9. drivendata.org is not reachable from this sandbox, so the live board was not re-fetched. Do not write either number as a projection of this lane.
@@ -53,6 +59,20 @@ it conflicts with other highs in the prompt and must not be called current fact.
 Core values remain Maximize P(Win) and Own the Outcome. No leaderboard improvement,
 source verification, data access, or completed submission may be invented.
 The duplicate-and-stop rule remains binding even when it prevents a new TIFF.
+
+## Fail-closed continuation note — 2026-10-20
+
+A downloadable candidate now additionally requires an artifact-bound HOLDOUT-DTI
+record, positive paired 95% bootstrap CIs against both the no-prior control and
+current lane-best, and an audited whole-segment protocol (no chunking, at least
+3 px withheld-context buffer, visible-only catalogue features, pixel-exact
+visible-fault masking, pooled DTI with α=0.2, β=0.8, 300 m triangular kernel).
+The TIFF receipt must be classified `SUBMISSION-RECEIPT`; this local artifact
+receipt is not an organizer score or organizer confirmation. A passing gate
+only makes a candidate eligible for the separate selector and never spends a
+slot. The historical `scripts/run_exp2b_transfer.py` gate/emitter is disabled
+because it used chunked, unbuffered holdouts; do not remove its guard without a
+new authorized shared-tool runner and both literal uniqueness phases passing.
 
 ## Active request refresh — 2026-10-20 session 3
 

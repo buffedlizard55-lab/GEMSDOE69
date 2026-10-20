@@ -1,5 +1,9 @@
 #!/usr/bin/env python3
 """Re-run the hard-linked ramp recovery after the disconnect-aware fix."""
+
+if __name__ == "__main__":
+    from lane_preflight import require_open_lane
+    require_open_lane()
 import json
 import sys
 from pathlib import Path

@@ -93,7 +93,7 @@ def main():
     phase = sys.argv[1]
     cid = sys.argv[2] if len(sys.argv) > 2 else "h69m"
     tmp = Path(f"/tmp/gems69_{cid}")
-    from gems69.holdout69 import load_template_grid
+    from gems69_s3.holdout69 import load_template_grid
     g = load_template_grid()
     fp = g.footprint
     if phase == "surface":

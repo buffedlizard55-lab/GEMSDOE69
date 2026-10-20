@@ -1,14 +1,98 @@
 {
+  "policy_version": "gems69-literal-release-v4",
   "verdict": "negative",
   "download_enabled": false,
   "reasons": [
-    "No candidate passed this session's preregistered gates; negative results logged (see evidence/run_card.json experiments)."
+    "Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.",
+    "Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.",
+    "surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.",
+    "dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.",
+    "Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.",
+    "Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it."
   ],
-  "artifact_sha256": null,
-  "validator_report": {},
-  "candidate": {
-    "hypothesis": null,
-    "generated_utc": "2026-10-20T23:20:37.577493+00:00",
-    "note": "No session candidate passed its preregistered gates; see evidence/run_card.json."
-  }
+  "artifact_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+  "validator_report": {
+    "file": "/home/user/GEMSDOE69/submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+    "bytes": 88363,
+    "sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+    "meta": {
+      "count": 1,
+      "dtype": "float32",
+      "crs": "EPSG:32611",
+      "shape": [
+        3730,
+        3292
+      ],
+      "transform": [
+        100.0,
+        0.0,
+        243350.0,
+        0.0,
+        -100.0,
+        4508550.0
+      ],
+      "nodata": null,
+      "bounds": [
+        243350.0,
+        4135550.0,
+        572550.0,
+        4508550.0
+      ]
+    },
+    "n_nan": 0,
+    "n_nan_inside_footprint": 0,
+    "min": 0.0,
+    "max": 1.0,
+    "positive_pixels": 32000,
+    "distinct_positive_values": [
+      1.0
+    ],
+    "checks": {
+      "single_band": true,
+      "dtype_float32": true,
+      "crs_epsg_32611": true,
+      "shape_3730x3292": true,
+      "transform_and_bounds_match_sample_submission": true,
+      "mask_shapes_match_raster": true,
+      "footprint_all_finite": true,
+      "footprint_values_in_0_1": true,
+      "no_infinite_values": true,
+      "nan_only_outside_footprint": true,
+      "no_sentinel_values": true,
+      "all_finite_values_in_0_1": true,
+      "no_positive_outside_footprint": true,
+      "zero_positive_on_mapped_catalogue": true,
+      "template_validator_passed": true
+    },
+    "template_validator": {
+      "all_checks_passed": true,
+      "checks": {
+        "single_band": true,
+        "dtype_float32": true,
+        "dimensions_3730x3292": true,
+        "crs_epsg_32611": true,
+        "transform_matches_sample_submission": true,
+        "no_nan_anywhere": true,
+        "no_inf_anywhere": true,
+        "no_sentinel_values": true,
+        "range_0_1_guaranteed": true,
+        "min_ge_0": true,
+        "max_le_1": true,
+        "in_footprint_all_finite": true,
+        "in_footprint_range_0_1": true,
+        "outside_footprint_zero": true,
+        "zero_dots_on_mapped_catalogue": true
+      }
+    },
+    "template_format_report": {
+      "ok": true,
+      "problems": []
+    },
+    "all_checks_passed": true
+  },
+  "paired_ci_control_passed": true,
+  "paired_ci_current_best_passed": true,
+  "holdout_protocol_compliant": true,
+  "receipt_evidence_class": "SUBMISSION-RECEIPT",
+  "selector_authorization_required": true
 }

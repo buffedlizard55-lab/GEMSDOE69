@@ -18,8 +18,8 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 EV = ROOT / "evidence"
-COMMON = ["src/gems69/corridors.py", "src/gems69/tips.py", "src/gems69/physics.py", "src/gems69/scoring.py",
-          "src/gems69/scoring_joint.py", "src/gems69/evidence_first.py", "src/gems69/holdout69.py",
+COMMON = ["src/gems69_s3/corridors.py", "src/gems69_s3/tips.py", "src/gems69_s3/physics.py", "src/gems69_s3/scoring.py",
+          "src/gems69_s3/scoring_joint.py", "src/gems69_s3/evidence_first.py", "src/gems69_s3/holdout69.py",
           "scripts/run_h69m.py", "scripts/uniqueness_h69m.py",
           "vendor/template66/gems57/holdout.py", "vendor/template66/gems57/emit.py",
           "vendor/template66/gems57/uniqueness.py", "vendor/template66/gems57/grid.py"]
@@ -27,7 +27,7 @@ SPEC = {
     "h69m": dict(hypothesis="H69-M", prereg="registry/preregistration-2026-10-20-h69m-evidence-first.json",
                  extra=[]),
     "h69n": dict(hypothesis="H69-N", prereg="registry/preregistration-2026-10-20-h69n-evidence-quota.json",
-                 extra=["src/gems69/evidence_quota.py", "scripts/run_h69n.py"]),
+                 extra=["src/gems69_s3/evidence_quota.py", "scripts/run_h69n.py"]),
 }
 
 

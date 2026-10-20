@@ -1,33 +1,36 @@
 {
-  "generated_utc": "20261020T201504Z",
-  "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
-  "artifact_path": "/home/user/GEMSDOE69/submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
-  "scoring_mode": "joint",
-  "source_sha256": {
-    "src/gems69/scoring_joint.py": "be876fc49abfd9dde82f434f70dc9d4a5877e3784d7e1d054a99e4a28f47b8dc",
-    "src/gems69/scoring.py": "47976561bee65b931571f23a0638faaa1091cc35f70fb01f91656f336ffe1ba9",
-    "src/gems69/corridors.py": "3c7d1d844c6c414218b2c520fd5ce03d870133bb6803a4457d29458cd5560dbb",
-    "src/gems69/physics.py": "70ec0c2aaa7692f5422284932e01df8286e8c266cd4ce693e2989a809e8e2774",
-    "src/gems69/holdout69.py": "effddba656037cfc04801e278ea934ba9c27980e902a080740fd8c2d59b35a85"
-  },
+  "evidence_class": "METHOD-MANIFEST",
+  "hypothesis_id": "H69_G5_TwoRegimeGeodesic",
+  "artifact_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
   "feature_names": [
-    "grav_hg_s1",
-    "mag_hg_s1",
-    "grav_hg_s2",
-    "mag_hg_s2",
-    "grav_hg_s4",
-    "mag_hg_s4",
-    "grav_tilt_s2",
-    "mag_tilt_s2",
-    "grav_hg_prov",
-    "grav_vg_prov",
-    "geod_2ndinv",
-    "mag_hg_prov",
-    "mag_vg_prov",
-    "tc_prov",
-    "mag_low_tmi",
-    "mag_low_rtp",
-    "lidar_scarp",
-    "corridor_propensity"
-  ]
+    "grav_edge",
+    "mag_edge",
+    "mag_low",
+    "lidar_coh_scarp",
+    "topo_ridge",
+    "rad_alteration",
+    "subsurface_step",
+    "hydro_upflow",
+    "sgmc_bedrock",
+    "f_corr_narrow",
+    "f_corr_mid",
+    "f_corr_broad",
+    "f_corr_rel",
+    "f_corr_tip",
+    "f_corr_mult",
+    "f_tip_near",
+    "f_tip_mid"
+  ],
+  "catalogue_features_visible_only": true,
+  "geological_requirements": {
+    "source_polylines_used": true,
+    "same_dip_verified": true,
+    "releasing_slip_sense_verified": true
+  },
+  "source_sha256": {
+    "src/gems69/geodesic.py": "78a7eaf9cd466e9ad91b3bb4cd9291f030d696a76d3fdf3225c1912149a66885",
+    "src/gems69/corridors.py": "1fb320974debfc4739c02e94f9a2e58f79730323ab49c7eba2b41be42f62e1c2",
+    "src/gems69/traces.py": "886f2229104c56e305fb8240ab21161587ccec43af0a6607520ddec0aebe6e25",
+    "scripts/run_lane69.py": "b37b661ffc31e4e430294af57c68c0c4593f36e89c4004b63e6954b4b32bdeb0"
+  }
 }

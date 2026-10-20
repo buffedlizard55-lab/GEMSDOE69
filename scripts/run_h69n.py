@@ -38,12 +38,12 @@ log, utcnow, sha256_file = M.log, M.utcnow, M.sha256_file
 
 
 def arm_surfaces(visible, shape, zstack, want=("transfer_ref", NEW)):
-    from gems69.corridors import build_tip_pairs
-    from gems69.evidence_quota import build_evidence_quota_corridors
-    from gems69.physics import corridor_evidence_from_z
-    from gems69.scoring import build_propensity, score_corridor
-    from gems69.scoring_joint import build_propensity_joint, score_corridor_joint
-    from gems69.tips import vectorize
+    from gems69_s3.corridors import build_tip_pairs
+    from gems69_s3.evidence_quota import build_evidence_quota_corridors
+    from gems69_s3.physics import corridor_evidence_from_z
+    from gems69_s3.scoring import build_propensity, score_corridor
+    from gems69_s3.scoring_joint import build_propensity_joint, score_corridor_joint
+    from gems69_s3.tips import vectorize
     strands = vectorize(visible)
     pairs = build_tip_pairs(strands, visible)
     out, meta, objs = {}, dict(n_strands=len(strands), n_raw_pairs=len(pairs)), {}
@@ -67,8 +67,8 @@ def cmd_gate() -> int:
     from scipy import ndimage as ndi
     from gems57 import holdout as thold
     from gems57.emit import greedy_allocate
-    from gems69.evidence_first import JOINT_LAYERS
-    from gems69.holdout69 import cell_allowed
+    from gems69_s3.evidence_first import JOINT_LAYERS
+    from gems69_s3.holdout69 import cell_allowed
     t_all = time.time()
     g, _stats, zstack = M.load_inputs()
     shape = g.footprint.shape
@@ -173,7 +173,7 @@ def cmd_emit() -> int:
     from scipy import ndimage as ndi
     from gems57 import grid as tgrid
     from gems57.emit import greedy_allocate
-    from gems69.holdout69 import load_template_grid
+    from gems69_s3.holdout69 import load_template_grid
     g = load_template_grid()
     frozen = json.loads((TMP / "surface_frozen.json").read_text())
     p = np.load(frozen["surface_file"])

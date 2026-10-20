@@ -34,6 +34,5 @@
   "11": "strike",
   "12": "valid"
  },
- "source": "read from GeoTIFF band descriptions (this session)",
  "sha256_training_features": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5"
 }

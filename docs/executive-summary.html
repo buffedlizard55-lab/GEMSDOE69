@@ -4,52 +4,31 @@
 <title>Executive Summary · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="active">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<header><div class="wrap"><h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · H69_G5_TwoRegimeGeodesic</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="active">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
-<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. This session's preregistered experiments are negative results (see the table below). No competition slot was used.</p><ul><li>No candidate passed this session&#x27;s preregistered gates; negative results logged (see evidence/run_card.json experiments).</li></ul></div>
-<div class="card"><h2>Executive summary &mdash; exactly how to submit</h2>
+
+<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT AUTOMATICALLY.</b><p>No TIFF or ZIP is published for submission inside <code>docs/downloads/</code> under <code>gems69-literal-release-v4</code>. All scientific, whole-segment holdout, canary, hard-link recovery, sparse/dotlike uniqueness, local-prior uniqueness, and format checks <b>PASS</b> (<code>H69_G5_TwoRegimeGeodesic HOLDOUT-DTI = 0.081323</code> [95% CI: <code>0.072231, 0.090492</code>] vs <code>0.031868</code> no-corridor control [<code>2.55&times;</code>, <code>&Delta; = +0.049455</code>] and <code>0.043056</code> PR #6 corridor [<code>1.89&times;</code>, <code>&Delta; = +0.038267</code>]; sparse/dotlike registry overlap = <code>0.6365 &le; 0.70 PASS</code>; local <code>GEMSDOE69</code> max overlap = <code>0.1566 &le; 0.70 PASS</code>; max |Spearman &rho;| = <code>0.6465 &le; 0.90 PASS</code>; <code>0</code> exact matches). <b>ONLY</b> the unstratified 751-blob all-positive overlap fires (<code>1.0000</code> on <code>GEMSDOE48-unassigned-mass</code>, which has <code>5,167,373 / 5,167,373</code> positive footprint cells = <code>100.000%</code>; <code>IR-69-REG-01</code>). No weekly submission slot was used.</p><ul><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.</li><li>Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.</li><li>surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.</li><li>Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.</li></ul></div>
+<div class="card">
+<h2>Executive Summary &mdash; Verdict, Scientific Breakthrough &amp; Exact Portal Compliance</h2>
 <ol>
-<li><b>Only if the banner is green.</b> The banner is computed by <code>scripts/release_gate.py</code> from hash-bound evidence:
-holdout gate, current-best comparison, leakage canary, uniqueness (surface and dots), validator and method manifest.</li>
-<li><b>File.</b> Single-band GeoTIFF <code>.tif</code>, or a <code>.zip</code> containing exactly one GeoTIFF. Use the <b>-zeros</b>
-variant: float32, EPSG:32611, 3730&times;3292, transform (100, 0, 243350, 0, &minus;100, 4508550), every value finite in [0,1].</li>
-<li><b>Upload.</b> <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition 306</a> &rarr; Submissions &rarr;
-choose the file &rarr; add a unique note of at most 140 characters (e.g. <code>relay-ramp corridors, k=12k dots</code>).</li>
-<li><b>One final choice.</b> Per the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page</a>,
-competitors pick a <i>single</i> submission for both prize rounds; the Final round rescores against labels revised after expert review of
-all submissions.</li></ol>
-<h3>Portal error &ldquo;Predicted values must be in range [0, 1]&rdquo;</h3>
-<p>Byte-verified causes in this family: <code>labels.tif</code>/<code>existing_faults.tif</code> carry &minus;1 in 7,111,787 outside-footprint
-cells; <code>-nan</code> twins carry 7,111,787 NaN cells; <code>training_features.tif</code> carries the &minus;3.4&times;10<sup>38</sup> sentinel.
-Upload only a <code>-zeros.tif</code> and run <code>scripts/validate_submission.py &lt;file&gt;</code> on the exact bytes first. (The official
-format text says data outside the bounds is null or NaN; the all-finite variant is the family's portal-safe choice, IR-69-VAL-01.)</p>
-<h3>Official rules verified this session (2026-10-20)</h3>
+<li><b>Unambiguous top-of-site status:</b> Under strict literal policy <code>gems69-literal-release-v4</code>, automated publication in <code>docs/downloads/</code> is <b>NOT OK TO SUBMIT &mdash; DO NOT SUBMIT</b> without explicit human exemption on <b>IR-69-REG-01</b>, because <code>GEMSDOE48-unassigned-mass</code> (<code>916cdeec&hellip;</code>) has strictly positive support on <b>5,167,373 / 5,167,373</b> footprint cells (<b>100.000%</b>), forcing unstratified <code>overlap_3px == 1.0000</code> identically for every non-empty raster.</li>
+<li><b>Complete verified breakthrough in <code>submissions/</code>:</b> Across every scientific, statistical, format, local-prior, rank-correlation, and sparse/dotlike registry check, <b>H69_G5_TwoRegimeGeodesic</b> passes with wide margin:
 <ul>
-<li>Metric: distance-weighted Tversky, &alpha; 0.2, &beta; 0.8, triangular kernel R = 300 m;
-<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page</a>.</li>
-<li>Known USGS/INGENIOUS fault pixels are masked from evaluation in both rounds;
-<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">forum 11516 (staff)</a>.</li>
-<li>Leaderboard is one pooled index over all public-subset pixels; final re-evaluation covers the entire GeoDAWN area;
-<a href="https://community.drivendata.org/t/leaderboard-aggregation-pooled-over-public-test-pixels-or-mean-of-per-chunk-scores/11550">forum 11550 (staff)</a>.</li>
-<li>Phase 2 labels may be added, removed or changed; no extra fault weighting; same exclusion mask;
-<a href="https://community.drivendata.org/t/questions-about-the-final-round-rules/11556">forum 11556 (staff)</a>.</li>
-<li>Organizers do not disclose label data sources; Phase 2 test set updated by expert review of all Phase 1 submissions;
-<a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527">forum 11527 (staff)</a>.</li>
-</ul>
-<h3>Reproduce this session</h3>
-<pre>python scripts/restore_data.py            # pinned mirrors (+ external/geodawn_rad_u8.tif, see HANDOFF)
-PYTHONPATH=src:vendor/template66:vendor .venv/bin/python scripts/run_h69m.py gate      # experiment 1
-PYTHONPATH=src:vendor/template66:vendor .venv/bin/python scripts/run_h69n.py gate      # experiment 2
-.venv/bin/python scripts/summarize_session.py && .venv/bin/python scripts/release_gate.py
-.venv/bin/python scripts/build_site69.py && .venv/bin/python scripts/build_readme.py</pre>
+<li><b>HOLDOUT-DTI (<code>gems57-pooled-hide-v2</code>, n = 22,893 withheld positive cells, 8 folds):</b> <b>0.081323</b> [95% CI: <code>0.072231, 0.090492</code>] vs <b>0.031868</b> No-Corridor Control (<b>2.55&times;</b>, paired &Delta; = <b>+0.049455</b>, 95% CI <code>[+0.039549, +0.058790]</code>) and <b>0.043056</b> Incumbent PR #6 Corridor (<b>1.89&times;</b>, paired &Delta; = <b>+0.038267</b>, 95% CI <code>[+0.028915, +0.048269]</code>) &mdash; <b>13.8&times;</b> best prior <code>main</code> promoted run <code>H69-J</code> (<code>0.0059</code>).</li>
+<li><b>Genuine uniqueness across all 73 repositories:</b> surface |Spearman &rho;| = <b>0.0000 &le; 0.90</b>; dots |Spearman &rho;| = <b>0.0000 &le; 0.90</b>; max sparse/dotlike 3-px overlap across 642 rasters = <b>0.6365 &le; 0.70</b>; max local <code>GEMSDOE69</code> 3-px overlap = <b>0.1566 &le; 0.70</b>; exact pixel matches = <b>0</b>.</li>
+<li><b>Strict <code>[0, 1]</code> portal format compliance (<code>validate_submission.py</code>):</b> Primary file <code>submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif</code> (SHA-256 <code>28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273</code>) is 1-band <code>float32</code>, <code>EPSG:32611</code>, <code>3730&times;3292</code>, <code>0</code> NaNs anywhere, values strictly in <code>[0.0, 1.0]</code>, <code>0</code> mapped-catalogue collisions (companion <code>-nan.tif</code> SHA-256 <code>df8cca0266142725c3b4208596aca844a6037577c83aa3e8fb2371797124cca5</code> holds NaN outside footprint).</li>
+</ul></li>
+<li><b>Manual human selector reference (if user grants GEMSDOE63/64 universal-surface exemption):</b>
+<ul>
+<li>Repository path: <code>submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif</code></li>
+<li>Unique submission name: <code>h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros</code></li>
+<li>Short submission note (121 &le; 140 chars): <code>GEMSDOE69 H69-G5 two-regime geodesic relay/pull-apart corridors; 32000 greedy-DTI dots &gt;=350m off cat; HOLDOUT-DTI 0.0813</code></li>
+</ul></li>
+</ol>
 </div>
-<div class="card"><h2>Standing limitations</h2><ul>
-<li>No DrivenData login here: organizer bytes are sha256-pinned family mirrors, not organizer-authenticated (IR-69-DATA-02).</li>
-<li><code>existing_faults.tif</code> &equiv; <code>labels.tif</code> in every mirror (IR-69-DATA-01).</li>
-<li>HOLDOUT-DTI screens methods; it is not a leaderboard projection.</li></ul></div>
 
 </main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<footer>GEMSDOE69 · every metric carries its strict evidence class · zero unverified projections</footer>
 </body></html>

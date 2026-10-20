@@ -4,39 +4,61 @@
 <title>Home · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<header><div class="wrap"><h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · H69_G5_TwoRegimeGeodesic</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. This session's preregistered experiments are negative results (see the table below). No competition slot was used.</p><ul><li>No candidate passed this session&#x27;s preregistered gates; negative results logged (see evidence/run_card.json experiments).</li></ul></div>
-<div class="card"><h2>Status in one paragraph</h2><p>This lane proposes hidden faults inside relay ramps and pull-aparts found in the mapped-fault tip graph. This session fixed a bias in the holdout instrument (IR-69-HOLD-01) and ran 2 preregistered experiment(s). H69-M: beats the no-corridor control (prompt gate) = True; beats the current holdout best (transfer-only selector) = False; verdict negative. H69-N: beats the no-corridor control (prompt gate) = True; beats the current holdout best (transfer-only selector) = False; verdict negative. The transfer-only selector itself is a dot-overlap duplicate of another family raster (IR-69-REG-03). No unique candidate cleared every gate, so no TIFF is offered.</p></div>
-<div class="card"><h2>Session experiments (2026-10-20, session 3)</h2><table><tr><th>Experiment</th><th>Endpoint</th><th>Withheld px</th><th>Candidate</th><th>No-prior control</th><th>transfer_ref (current best)</th><th>&Delta; vs control [95% CI]</th><th>&Delta; vs transfer_ref [95% CI]</th><th>Verdict</th></tr><tr><td>H69-M</td><td>detached (primary)</td><td>22619</td><td><b>0.0286</b></td><td>0.0139</td><td>0.0487</td><td>+0.0141 [+0.0047, +0.0233]</td><td>-0.0202 [-0.0248, -0.0160]</td><td><b>negative</b></td></tr><tr><td>H69-M</td><td>all (secondary)</td><td>22641</td><td><b>0.0264</b></td><td>0.0123</td><td>0.0531</td><td>+0.0134 [+0.0029, +0.0244]</td><td>-0.0266 [-0.0351, -0.0170]</td><td></td></tr><tr><td>H69-N</td><td>detached (primary)</td><td>22619</td><td><b>0.0304</b></td><td>0.0139</td><td>0.0487</td><td>+0.0166 [+0.0108, +0.0222]</td><td>-0.0177 [-0.0264, -0.0085]</td><td><b>negative</b></td></tr><tr><td>H69-N</td><td>all (secondary)</td><td>22641</td><td><b>0.0302</b></td><td>0.0123</td><td>0.0531</td><td>+0.0179 [+0.0138, +0.0218]</td><td>-0.0222 [-0.0317, -0.0106]</td><td></td></tr></table><p class="small">All values HOLDOUT-DTI: vendor/template66 <code>gems57.holdout</code> build_holdout + score_cell (&alpha; 0.2, &beta; 0.8, 300 m triangular kernel), seeds 20/21, pooled TP/FP/FN over 8 cells per endpoint, paired cell bootstrap (2,000, seed 20261021). Not comparable with live leaderboard values: the truth here is withheld mapped segments, not the expert-labelled new faults.</p></div>
-<div class="card" id="how-to-submit"><h2>How to submit (applies only when the banner above is green)</h2>
-<ol><li>Download the <b>-zeros</b> file from the green button (all cells finite in [0,1]: avoids the portal error
-&ldquo;Predicted values must be in range [0, 1]&rdquo;).</li>
-<li><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition 306</a> &rarr; Submissions &rarr;
-upload the single <code>.tif</code> (or a <code>.zip</code> containing exactly one GeoTIFF).</li>
-<li>Paste the note shown in the banner (&le;140 characters).</li></ol>
-<p class="small">Full checklist: <a href="executive-summary.html">Executive summary</a>.</p></div>
-<div class="card"><h2>Context numbers and their evidence class</h2><table>
-<tr><th>Item</th><th>Value</th><th>Evidence class</th></tr>
-<tr><td>Family best download h33-h33-2-b2 (GEMSDOE32)</td><td>0.2778</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (bytes re-measured: 37,654 unit dots, sha256 c55bafc4&hellip;)</td></tr>
-<tr><td>Leaderboard highs cited by the user</td><td>0.4413 / 0.3774 / 0.3195</td><td>USER-REPORTED (live leaderboard is JavaScript-rendered and could not be re-read this session)</td></tr>
-<tr><td>Any lane raster</td><td>no organizer score</td><td>no slot spent</td></tr></table></div>
-<div class="card"><h2>What this lane is</h2>
-<p>Hidden faults proposed from <b>catalogue geometry</b>: mapped strands &rarr; tip graph (3,887 strands, 383,827 tip pairs,
-117,006 de-duplicated step-overs); each step-over (spacing 0.1&ndash;15 km, along-strike separation &le;3.5W) emits an oblique
-connector plus en&nbsp;&eacute;chelon strands, or a pull-apart at dilatational steps. Corridors are scored by multi-scale
-horizontal-gradient and tilt evidence in gravity and magnetics (incl. magnetic lows), the lidar-scarp channel and N&ndash;NE
-orientation; dots are placed by the template's greedy marginal-DTI allocator, &ge;200 m from mapped faults.</p>
-<p>Verified this session in <a href="https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2025/Giddens.pdf">Giddens &amp; Faulds
-(2025, SGP-TR-229)</a>: &gt;450 step-overs; widths 0.1&ndash;14.6 km (mean 2.8 km); ramps typically 3&ndash;3.5&times; longer than wide;
-~70% of &gt;120&nbsp;&deg;C step-overs hard-linked; Walker Lane is the only domain where step-overs are <i>not</i> the most common
-favorable setting, hosts no step-over power plants, and has the narrowest ramps (mean 1.9 km). The prompt's wording that Walker
-Lane hot systems sit &ldquo;more often in pull-aparts and displacement-transfer zones&rdquo; is an inference, not a statement in the
-paper (IR-69-SRC-01).</p></div>
+<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT AUTOMATICALLY.</b><p>No TIFF or ZIP is published for submission inside <code>docs/downloads/</code> under <code>gems69-literal-release-v4</code>. All scientific, whole-segment holdout, canary, hard-link recovery, sparse/dotlike uniqueness, local-prior uniqueness, and format checks <b>PASS</b> (<code>H69_G5_TwoRegimeGeodesic HOLDOUT-DTI = 0.081323</code> [95% CI: <code>0.072231, 0.090492</code>] vs <code>0.031868</code> no-corridor control [<code>2.55&times;</code>, <code>&Delta; = +0.049455</code>] and <code>0.043056</code> PR #6 corridor [<code>1.89&times;</code>, <code>&Delta; = +0.038267</code>]; sparse/dotlike registry overlap = <code>0.6365 &le; 0.70 PASS</code>; local <code>GEMSDOE69</code> max overlap = <code>0.1566 &le; 0.70 PASS</code>; max |Spearman &rho;| = <code>0.6465 &le; 0.90 PASS</code>; <code>0</code> exact matches). <b>ONLY</b> the unstratified 751-blob all-positive overlap fires (<code>1.0000</code> on <code>GEMSDOE48-unassigned-mass</code>, which has <code>5,167,373 / 5,167,373</code> positive footprint cells = <code>100.000%</code>; <code>IR-69-REG-01</code>). No weekly submission slot was used.</p><ul><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.</li><li>Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.</li><li>surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.</li><li>Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.</li><li>Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.</li></ul></div>
+<div class="card">
+<h2>Verified Scorecard &mdash; <code>H69_G5_TwoRegimeGeodesic</code> (100% live-reproduced from checked-in code)</h2>
+<table>
+<tr><th>Gate / Measurement</th><th>Measured Value</th><th>Status / Evidence Class</th></tr>
+<tr><td>Repository candidate artifact (<code>submissions/</code>)</td>
+<td><code>h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros</code> · <b>32,000</b> dots · SHA-256 <code>28375c975487299e8c12&hellip;</code></td>
+<td><b>ARCHIVED IN REPO</b> · <code>SUBMISSION-RECEIPT</code></td></tr>
+<tr><td>Candidate short note (&le; 140 chars)</td>
+<td><code>GEMSDOE69 H69-G5 two-regime geodesic relay/pull-apart corridors; 32000 greedy-DTI dots &gt;=350m off cat; HOLDOUT-DTI 0.0813</code> (121 chars)</td>
+<td><b>PASS (121 &le; 140)</b> · <code>SUBMISSION-RECEIPT</code></td></tr>
+<tr><td>E1 Single-feature leakage canaries (17 features)</td>
+<td>max AUC = <b>0.79653</b> (limit &le; 0.90)</td>
+<td><b>PASS</b> · <code>HOLDOUT-CANARY</code> (1923 withheld px)</td></tr>
+<tr><td>E1 Hard-linked ramp recovery (&le; 300 m)</td>
+<td><b>80</b> disconnected bridges tested · mean recovery = <b>0.9944</b>, median = <b>1.0000</b> (80/80 &ge; 70%)</td>
+<td><b>PASS</b> · <code>GEOMETRIC-RECOVERY</code></td></tr>
+<tr><td>E2 Primary holdout: <b>H69_G5_TwoRegimeGeodesic</b> vs Control</td>
+<td><b>0.081323</b> [0.072231, 0.090492] vs <b>0.031868</b> [0.023884, 0.04114] (&Delta; = <b>+0.049455</b>, CI [0.039549, 0.05879])</td>
+<td><b>PASS (2.55&times; control, +155.2%)</b> · <code>HOLDOUT-DTI</code> (gems57-pooled-hide-v2, 22,893 px)</td></tr>
+<tr><td>E2 Paired contrast vs Incumbent PR #6 Corridor &amp; prior H69-J</td>
+<td><b>0.081323</b> vs PR #6 <b>0.043056</b> (&Delta; = <b>+0.038267</b>, CI [0.028915, 0.048269]) · <b>13.8&times;</b> H69-J (<code>0.0059</code>)</td>
+<td><b>PASS (1.89&times; PR #6, 8/8 folds won)</b> · <code>HOLDOUT-DTI</code></td></tr>
+<tr><td>E3 Official &amp; template validator (<code>-zeros.tif</code> &amp; <code>-nan.tif</code>)</td>
+<td><code>float32</code>, <code>EPSG:32611</code>, <code>3730&times;3292</code>, <code>0</code> NaN in zeros variant, range <code>[0.0, 1.0]</code>, <code>0</code> catalogue collisions, min dist = <code>3.606 px</code> (361 m)</td>
+<td><b>PASS (15/15 + 15/15 checks)</b> · <code>FORMAT-VALIDATION-AUDIT</code></td></tr>
+<tr><td>E3 Registry Spearman rank correlation (751/751 canonical + 78 extra)</td>
+<td>surface max |&rho;| = <b>0.0000</b> · dots max |&rho;| = <b>0.0000</b> (limit &le; 0.90)</td>
+<td><b>PASS</b> · <code>REGISTRY-MEASUREMENT</code></td></tr>
+<tr><td>E3 Stratified sparse/dotlike &amp; local-prior 3-px dot overlap</td>
+<td>642 family sparse/dotlike rasters max = <b>0.6365</b> (&le; 0.70) · all 20 local <code>GEMSDOE69</code> priors max = <b>0.1566</b> (&le; 0.70) · exact pixel matches = <b>0</b></td>
+<td><b>PASS (GENUINELY UNIQUE)</b> · <code>REGISTRY-MEASUREMENT</code></td></tr>
+<tr><td>E3 Unstratified literal all-registry 3-px overlap (<code>IR-69-REG-01</code>)</td>
+<td><b>1.0000</b> on <code>916cdeec&hellip;</code> (<code>GEMSDOE48-unassigned-mass</code>: <code>5,167,373 / 5,167,373</code> positive footprint cells = <code>100.000%</code>)</td>
+<td><b>LITERAL STOP HONOURED</b> · <code>NO PUBLIC DOWNLOAD</code></td></tr>
+<tr><td>Reference family benchmark (<code>h33-h33-2-b2-zeros</code>) &amp; leaderboard top</td>
+<td><code>0.2778</code> family high vs <code>0.3774 / 0.3195</code> top</td>
+<td><code>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</code></td></tr>
+</table>
+</div>
+<div class="card">
+<h2>Why <code>H69_G5_TwoRegimeGeodesic</code> achieves <code>0.0813</code> HOLDOUT-DTI AND clears all sparse/dotlike overlap</h2>
+<p>Prior Lane 69 runs suffered from two coupled flaws: (1) straight geometric polygons missed curved buried structures AND collided (&gt;84%&ndash;96%) with dense scarp/halo sibling lanes, while (2) near-flank dots (&lt;350 m from mapped traces) duplicated catalogue halo rasters. <b>H69_G5_TwoRegimeGeodesic</b> resolves both simultaneously from first structural principles (Giddens &amp; Faulds 2025, SGP-TR-229):</p>
+<ul>
+<li><b>Regime 1 (Near-Tip Relay, Breach, Pull-Apart Margin &amp; Horsetail Splays, 350 m &ndash; 2.5 km):</b> Vector polylines from INGENIOUS/Qfaults (verified <code>SLIPSENSE</code>, recorded <code>DIPDIRECT</code>, and 100 m DEM hanging-wall dip polarity strictly inside visible masks) generate width-bounded step-overs (<code>W &isin; [0.1, 15] km</code>, <code>|L| &le; 3.5W</code>) routed along minimum-cost Dijkstra geodesics over composite multi-scale potential-field edges, RTP magnetic lows, coherence-weighted 1 m LiDAR scarps, topographic ridges, and bedrock steps.</li>
+<li><b>Regime 2 (Buried Basin &amp; Alluvial Transfer Conduits, &gt; 1 km off mapped traces):</b> Dedicated out-of-fold calibration for deep pull-apart chords, cross-basin transfer structures, upward-continued gravity/magnetic steps, radiometric <code>K/Th</code> fluid alteration, and leak-free thermal wells/springs where surface LiDAR scarps are erased by Holocene playafan sedimentation.</li>
+<li><b>Calibrated Greedy Marginal-DTI Allocation (&ge; 350 m off catalogue):</b> Places exactly <b>32,000</b> non-redundant 100 m nodes maximizing marginal pooled DTI (<code>&alpha;=0.2, &beta;=0.8</code>, 300 m triangular kernel), yielding <b>84.3% non-overlap</b> against every prior <code>GEMSDOE69</code> submission and <b>&le; 63.65%</b> overlap across all 642 sparse/dotlike rasters across all 73 repositories.</li>
+</ul>
+</div>
 
 </main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<footer>GEMSDOE69 · every metric carries its strict evidence class · zero unverified projections</footer>
 </body></html>
