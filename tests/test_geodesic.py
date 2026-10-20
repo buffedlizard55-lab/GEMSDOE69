@@ -123,29 +123,34 @@ def test_scan_registry_handles_constant_all_ones_raster_cleanly(tmp_path: Path) 
 
 
 def test_live_deliverables_and_gate_pass_strictly() -> None:
-    """End-to-end verification of the generated primary submission, receipt, and fail-closed gate."""
+    """End-to-end verification of H69_G5_TwoRegimeGeodesic, receipts, and fail-closed gate."""
+    from scripts import release_gate
+
     card = json.loads((ROOT / "evidence" / "run_card.json").read_text())
-    receipt = json.loads((ROOT / "docs" / "receipts" / "h69_latest_receipt.json").read_text())
-    decision = local_gate.decide(receipt)
-    assert decision["status"] == "OFFER_DOWNLOAD"
-    assert decision["download_enabled"] is True
-    assert card["verdict"] == "promote"
-    assert card["holdout"]["evidence_class"] == "HOLDOUT-DTI"
-    assert card["holdout"]["candidate_dti"] > card["holdout"]["no_corridor_control_dti"]
-    assert card["holdout"]["candidate_dti"] > card["holdout"]["incumbent_pr6_dti"]
-    assert card["holdout"]["paired_delta_vs_control_ci95"][0] > 0.0
-    assert card["holdout"]["paired_delta_vs_incumbent_ci95"][0] > 0.0
-    assert card["holdout"]["leakage_canaries_clean"] is True
-    assert card["uniqueness"]["max_surface_abs_spearman"] <= 0.90
-    assert card["uniqueness"]["max_dots_abs_spearman"] <= 0.90
-    assert card["uniqueness"]["max_dot_overlap_3px_dotlike_le150k"] <= 0.70
-    assert card["uniqueness"]["exact_pixel_match_found"] is False
+    gate = json.loads((ROOT / "evidence" / "e2_gate.json").read_text())
+    uniq = json.loads((ROOT / "evidence" / "e3_uniqueness.json").read_text())
+    receipt = json.loads((ROOT / "evidence" / "e3_receipt.json").read_text())
+    loc = json.loads((ROOT / "evidence" / "local-prior-audit.json").read_text())
+    policy = release_gate.evaluate(ROOT)
+
+    assert policy["holdout_protocol_compliant"] is True
+    assert policy["paired_ci_control_passed"] is True
+    assert policy["paired_ci_current_best_passed"] is True
+    assert policy["validator_report"]["all_checks_passed"] is True
+    assert card["verdict"] == policy["verdict"]
+    assert card["release_policy"] == policy
+    assert gate["corridor_mean_dti"] > gate["incumbent_pr6_mean_dti"] > gate["control_mean_dti"]
+    assert gate["paired_delta_ci95"][0] > 0.0
+    assert gate["paired_delta_vs_incumbent_ci95"][0] > 0.0
+    assert uniq["worst_abs_spearman"] <= 0.90
+    assert uniq["worst_dot_overlap_dotlike"]["dot_overlap_3px"] <= 0.70
+    assert loc["max_dot_overlap_3px"] <= 0.70
+    assert uniq["exact_pixel_match_found"] is False
     assert 0 < len(card["submission_note"]) <= 140
 
-    zeros_tif = ROOT / card["artifact"]["primary_zeros_tif"]
-    nan_tif = ROOT / card["artifact"]["nan_companion_tif"]
-    docs_tif = ROOT / card["artifact"]["docs_download_copy"]
-    assert zeros_tif.is_file() and nan_tif.is_file() and docs_tif.is_file()
+    zeros_tif = ROOT / receipt["raster"]["zeros"]["path"]
+    nan_tif = ROOT / receipt["raster"]["nan"]["path"]
+    assert zeros_tif.is_file() and nan_tif.is_file()
 
     sample_ref = ROOT / ".cache" / "gems_data" / "sample_submission.tif"
     if sample_ref.is_file():

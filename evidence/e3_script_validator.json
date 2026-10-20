@@ -1,0 +1,139 @@
+{
+ "validator": "scripts/validate_submission.py",
+ "all_files_passed": true,
+ "reports": [
+  {
+   "file": "submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-zeros.tif",
+   "bytes": 786328,
+   "sha256": "ad03bd333dacc28ebaf474599f3fc7aabf65d181373a2afd52f5adf8fdc15045",
+   "meta": {
+    "count": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "shape": [
+     3730,
+     3292
+    ],
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "nodata": null,
+    "bounds": [
+     243350.0,
+     4135550.0,
+     572550.0,
+     4508550.0
+    ]
+   },
+   "n_nan": 0,
+   "n_nan_inside_footprint": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_pixels": 33199,
+   "distinct_positive_values": [
+    1.0
+   ],
+   "checks": {
+    "single_band": true,
+    "dtype_float32": true,
+    "crs_epsg_32611": true,
+    "shape_3730x3292": true,
+    "transform_and_bounds_match_sample_submission": true,
+    "footprint_all_finite": true,
+    "footprint_values_in_0_1": true,
+    "no_infinite_values": true,
+    "nan_only_outside_footprint": true,
+    "no_sentinel_values": true,
+    "all_finite_values_in_0_1": true,
+    "no_positive_outside_footprint": true,
+    "zero_positive_on_mapped_catalogue": true,
+    "template_validator_passed": true
+   },
+   "template_validator": {
+    "all_checks_passed": true,
+    "checks": {
+     "single_band": true,
+     "dtype_float32": true,
+     "dimensions_3730x3292": true,
+     "crs_epsg_32611": true,
+     "transform_matches_sample_submission": true,
+     "no_nan_anywhere": true,
+     "no_inf_anywhere": true,
+     "no_sentinel_values": true,
+     "range_0_1_guaranteed": true,
+     "min_ge_0": true,
+     "max_le_1": true,
+     "in_footprint_all_finite": true,
+     "in_footprint_range_0_1": true,
+     "outside_footprint_zero": true,
+     "zero_dots_on_mapped_catalogue": true
+    }
+   },
+   "template_format_report": {
+    "ok": true,
+    "problems": []
+   },
+   "all_checks_passed": true
+  },
+  {
+   "file": "submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-nan.tif",
+   "bytes": 1548448,
+   "sha256": "db7915f3304edaefe3b74f925bd4c0dca57d2b93d656f46a5de5df7b13d528ab",
+   "meta": {
+    "count": 1,
+    "dtype": "float32",
+    "crs": "EPSG:32611",
+    "shape": [
+     3730,
+     3292
+    ],
+    "transform": [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    "nodata": "nan",
+    "bounds": [
+     243350.0,
+     4135550.0,
+     572550.0,
+     4508550.0
+    ]
+   },
+   "n_nan": 7111787,
+   "n_nan_inside_footprint": 0,
+   "min": 0.0,
+   "max": 1.0,
+   "positive_pixels": 33199,
+   "distinct_positive_values": [
+    1.0
+   ],
+   "checks": {
+    "single_band": true,
+    "dtype_float32": true,
+    "crs_epsg_32611": true,
+    "shape_3730x3292": true,
+    "transform_and_bounds_match_sample_submission": true,
+    "footprint_all_finite": true,
+    "footprint_values_in_0_1": true,
+    "no_infinite_values": true,
+    "nan_only_outside_footprint": true,
+    "no_sentinel_values": true,
+    "all_finite_values_in_0_1": true,
+    "no_positive_outside_footprint": true,
+    "zero_positive_on_mapped_catalogue": true,
+    "nan_mask_equals_sample_submission_nan_mask": true
+   },
+   "template_validator": "skipped: file carries outside-footprint NaN (spec-literal twin); the template enforces an all-finite policy",
+   "all_checks_passed": true
+  }
+ ]
+}

@@ -1,0 +1,139 @@
+{
+ "n_hardlinked_found": 2079,
+ "n_tested": 17,
+ "n_disconnected_tested": 17,
+ "n_still_connected_after_mask": 17,
+ "mean_recovery_within_300m": 0.8823529411764706,
+ "median_recovery_within_300m": 1.0,
+ "n_ramps_above_70pct": 15,
+ "definition": "virtual pair = geometrically valid tip pair in ONE 8-connected component; linking mass = corridor-masked catalogue pixels belonging to neither flank strand; ramps are scored only when masking DISCONNECTS the flanks (the link was the only connection = hard-linked ramp); recovery = fraction of masked linking pixels within 3 px (300 m) of the corridor rebuilt from the remaining visible catalogue",
+ "ramps": [
+  {
+   "w_px": 1.559841174476409,
+   "linking_px": 28,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 1.855829169656483,
+   "linking_px": 13,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 1.1997671671503358,
+   "linking_px": 25,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 1.8190674449245252,
+   "linking_px": 6,
+   "within_3px": 0.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 0
+  },
+  {
+   "w_px": 30.73477654230796,
+   "linking_px": 96,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 32.77867631362021,
+   "linking_px": 89,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 21.62950557837223,
+   "linking_px": 102,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 28.80612022856995,
+   "linking_px": 76,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 30.850019999882203,
+   "linking_px": 67,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 21.92387606479047,
+   "linking_px": 97,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 3.707994266606419,
+   "linking_px": 8,
+   "within_3px": 0.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 0
+  },
+  {
+   "w_px": 3.2335994400781427,
+   "linking_px": 30,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 2.694418390954871,
+   "linking_px": 16,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 10.499721745705557,
+   "linking_px": 67,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 6.8471329602037265,
+   "linking_px": 26,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 11.350687008319394,
+   "linking_px": 52,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  },
+  {
+   "w_px": 3.8850321760961144,
+   "linking_px": 26,
+   "within_3px": 1.0,
+   "subtype": "pull-apart",
+   "reemitted_pairs": 1
+  }
+ ],
+ "evidence_class": "HOLDOUT-GEOMETRY",
+ "generated_utc": "20261020T200722Z",
+ "seconds": 264.4,
+ "repairs": [
+  "R1",
+  "R2",
+  "shared-build_tip_pairs"
+ ]
+}

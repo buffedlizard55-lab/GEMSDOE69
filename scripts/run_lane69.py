@@ -34,8 +34,14 @@ import sys
 import time
 
 ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 sys.path.insert(0, str(ROOT / "vendor" / "template66"))
 sys.path.insert(0, str(ROOT / "src"))
+
+if len(sys.argv) > 1 and sys.argv[1] in ("e1", "e2", "e3", "all"):
+    from scripts.lane_preflight import require_open_lane
+
+    require_open_lane(ROOT)
 
 import numpy as np  # noqa: E402
 import rasterio  # noqa: E402

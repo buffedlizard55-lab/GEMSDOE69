@@ -22,6 +22,10 @@ The artefact's verdict (OK to submit or negative) is decided by the E2 gate
 """
 from __future__ import annotations
 
+if __name__ == "__main__":
+    from lane_preflight import require_open_lane
+    require_open_lane()
+
 import csv
 import hashlib
 import json
@@ -43,7 +47,7 @@ from gems57 import emit, holdout, submission_writer, uniqueness  # noqa: E402
 from gems57.grid import TRANSFORM  # noqa: E402
 
 EVID = ROOT / "evidence"
-DOWN = ROOT / "docs" / "downloads"
+DOWN = ROOT / "submissions"
 K_TRUTH_LIVE = 12226          # [model] GEMSDOE32 live-anchor inversion of the owner-reported ladder
 ARM = "A_corridor"
 SEEDS = (20, 21)

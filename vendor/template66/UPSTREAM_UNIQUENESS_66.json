@@ -1,0 +1,10 @@
+{
+  "upstream_repository": "buffedlizard55-lab/GEMSDOE66",
+  "upstream_ref": "29519311",
+  "reason": "IR-66-GATE-01 / IR-69-REG-01: upstream shared uniqueness gate with random-placement lift check so full-footprint soft surfaces (5,167,373 positive pixels) do not false-flag every non-empty raster.",
+  "sha256": {
+    "gemsdoe66/__init__.py": "c97c2f3c0ec6ae08ee022ddf91785a7df8f1040fc30a5c0ea50c982b798faa9b",
+    "gemsdoe66/grid.py": "ea82be5bf643df381a6a1888969a816ef07e43f70c7f1ae9ad05615e19d3bfbc",
+    "gemsdoe66/uniqueness.py": "32f9858c554192005cdb16b21d111f2ad097c38a1e61539681cbb03d2d254fae"
+  }
+}

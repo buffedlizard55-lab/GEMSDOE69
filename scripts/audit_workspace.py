@@ -17,22 +17,27 @@ INPUT_CANDIDATES = {
     "training_features": (
         "data/training_features.tif",
         "data/raw/training_features.tif",
+        "data/bridge/training_features.tif",
     ),
     "labels": (
         "data/labels.tif",
         "data/raw/labels.tif",
+        "data/bridge/labels.tif",
     ),
     "existing_faults": (
         "data/existing_faults.tif",
         "data/raw/existing_faults.tif",
+        "data/bridge/existing_faults.tif",
     ),
     "dem_links": (
         "data/1m_DEM_links.csv",
         "data/raw/1m_DEM_links.csv",
+        "data/bridge/1m_DEM_links.csv",
     ),
     "sample_submission": (
         "data/sample_submission.tif",
         "data/raw/sample_submission.tif",
+        "data/bridge/sample_submission.tif",
     ),
 }
 HELPER_CANDIDATES = {
@@ -41,11 +46,13 @@ HELPER_CANDIDATES = {
     "holdout_evaluator": (
         "scripts/evaluate_holdout.py",
         "evaluate_holdout.py",
+        "vendor/template66/gems57/evaluate_holdout.py",
         "vendor/gems57/evaluate_holdout.py",
     ),
     "submission_writer": (
         "scripts/submission_writer.py",
         "submission_writer.py",
+        "vendor/template66/gems57/submission_writer.py",
         "vendor/gems57/submission_writer.py",
     ),
 }
@@ -109,6 +116,8 @@ def build_report(root: Path = ROOT) -> dict[str, Any]:
     download_candidates = [
         "scripts/download_competition_data.sh",
         "scripts/prepare_data.py",
+        "scripts/fetch_data.py",
+        "scripts/restore_data.py",
     ]
     downloads = {
         path: (root / path).is_file()
@@ -122,6 +131,8 @@ def build_report(root: Path = ROOT) -> dict[str, Any]:
 
     return {
         "repository_root": str(root),
+        "provenance_scope": "Filesystem presence only, not authenticated organizer bytes or scientific clearance",
+        "gpu_required": False,
         "python": sys.version.split()[0],
         "inputs": inputs,
         "shared_tools": helpers,

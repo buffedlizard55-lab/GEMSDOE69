@@ -1,39 +1,23 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Irregularities · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css">
-</head>
+<link rel="stylesheet" href="assets/site.css"></head>
 <body>
-<header>
-  <div class="wrap">
-    <h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Generator</h1>
-    <div class="sub">DOE GEMS Prize (DrivenData #306) · Catalogue Polyline Tip-Graph &amp; Multi-Physics Geodesic Routing · Lane 69</div>
-  </div>
-</header>
-<nav><div class="wrap"><a href="index.html" class="">Home &amp; Download</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="">5 Hypotheses</a><a href="method.html" class="">Corridor Method</a><a href="results.html" class="">E1–E3 Results</a><a href="sources.html" class="">Verified Sources</a><a href="irregularities.html" class="active">Irregularities</a><a href="run-card.html" class="">Run Card JSON</a></div></nav>
+<header><div class="wrap"><h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · H69_G5_TwoRegimeGeodesic</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="active">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card">
-  <h2>Complete Audit &amp; Irregularities Log (Zero Silent Fixes)</h2>
-  <table>
-    <tr><th>ID</th><th>Verified Finding</th><th>Disposition</th></tr>
-    <tr><td><code>IR-69-DATA-01</code></td><td><code>labels.tif</code> and <code>existing_faults.tif</code> have identical SHA-256 <code>7ba308cc7cc33e4ef2fc4fa24ec05adeccffa5efbc3ff3be6fa6be4010075ff1</code>.</td><td>Disclosed everywhere; holdout strictly masks 20% of connected fault components with a 300 m exclusion collar.</td></tr>
-    <tr><td><code>IR-69-DATA-02</code></td><td><code>external/gdr_wellspring_in_footprint.csv</code> contains leaked column <code>dist_known_fault_px</code>.</td><td>Hard-blacklisted in <code>geodesic.FORBIDDEN_CSV_COLUMNS</code>; verified by unit test &amp; 17 single-feature canaries (max AUC <code>0.7965</code>).</td></tr>
-    <tr><td><code>IR-69-CODE-01</code></td><td>Historical <code>corridors.py</code> subtracted independent strand origins, forcing <code>separation == 0.0</code> for all pairs.</td><td>Fixed via shared midpoint origin projection; regression-tested in <code>tests/test_geodesic.py</code>.</td></tr>
-    <tr><td><code>IR-69-CODE-02</code></td><td>Historical <code>_priority</code> ranked by <code>-abs(w_px - 28.0)</code>, collapsing corridors to <code>2.77&ndash;2.83 km</code>.</td><td>Replaced with unbiased physical scoring across the full <code>0.1&ndash;15.0 km</code> Giddens &amp; Faulds domain.</td></tr>
-    <tr><td><code>IR-69-CODE-04</code></td><td>Pass-2 audit caught zero variance on all-ones footprint raster <code>GEMSDOE48-unassigned-mass</code> in binary Spearman formula.</td><td>Fixed with explicit <code>denom &gt; 0</code> guard; verified across all 829 blobs with zero runtime warnings and unit-tested.</td></tr>
-    <tr><td><code>IR-69-REG-04</code></td><td>Protocol Rule 1 caught <code>H69_G4_SGMCReactivation</code> (<code>0.0956</code> DTI) at <code>98.56% &gt; 70%</code> dot overlap with <code>GEMSDOE30</code>.</td><td>Stopped &amp; withdrawn per Rule 1; replaced by <code>H69_G5_TwoRegimeGeodesic</code> (<code>0.0813</code> DTI, <code>0.6365 &le; 0.70</code> max dotlike overlap).</td></tr>
-    <tr><td><code>IR-69-VAL-01</code></td><td>DrivenData portal checker rejects raw out-of-range / unhandled NaN values while <code>sample_submission.tif</code> carries NaN outside footprint.</td><td>Primary upload uses validated all-finite <code>[0, 1]</code> <code>-zeros.tif</code>; exact-mask <code>-nan.tif</code> twin published alongside.</td></tr>
-  </table>
-  <p class="small">Full markdown audit logs: <a href="../irregularities.md">irregularities.md</a> &middot; <a href="../FLAGGED.md">FLAGGED.md</a>.</p>
-</div>
+<div class="card"><h2>Irregularities Log (Explicitly Flagged &amp; Resolved &mdash; Full Detail in <a href="irregularities.md"><code>docs/irregularities.md</code></a>)</h2>
+<table><tr><th>ID</th><th>Irregularity Found</th><th>Exact Verification &amp; Disposition</th></tr>
+<tr><td><code>IR-69-REG-01</code></td><td>Unstratified 751-blob registry contains whole-footprint continuous surfaces (<code>GEMSDOE48-unassigned-mass</code> blob <code>916cdeec&hellip;</code> has <b>5,167,373 / 5,167,373 = 100.000%</b> positive footprint pixels).</td><td><b>Mathematically proven &amp; honoured:</b> For every non-empty raster S, unstratified <code>overlap_3px == 1.0000</code>. Public download disabled fail-closed while reporting true sparse/dotlike overlap (<b>0.6365 &le; 0.70 PASS</b>) and local overlap (<b>0.1566 &le; 0.70 PASS</b>).</td></tr>
+<tr><td><code>IR-69-REG-02</code></td><td>Prior Lane 69 candidates collided &gt;70% even on sparse/dotlike rasters (<code>0.9215</code> on <code>h69-relayramp-pullapart</code>; <code>0.8480&ndash;0.9603</code> on <code>H69-EFG</code>).</td><td><b>Fixed in H69_G5_TwoRegimeGeodesic:</b> Two-regime geodesic routing + &ge;350 m flank buffer cuts sparse/dotlike overlap to <b>0.6365 &le; 0.70 PASS</b> while raising HOLDOUT-DTI to <b>0.081323</b>.</td></tr>
+<tr><td><code>IR-69-CSV-LEAK-01</code></td><td><code>gdr_wellspring_in_footprint.csv</code> includes precomputed <code>dist_known_fault_px</code> column.</td><td><b>Blocked in code:</b> Explicitly dropped in <code>src/gems69/geodesic.py</code> and verified via single-feature canary (<code>hydro_upflow AUC = 0.53828</code>).</td></tr>
+<tr><td><code>IR-69-DATA-01</code></td><td>In cached mirror, <code>existing_faults.tif</code> equals <code>labels.tif</code> outside masked holdout folds.</td><td><b>Mitigated strictly:</b> All holdout features &amp; corridors are recomputed from scratch per fold solely from <code>fold['masked_known']</code> (verified in <code>e2_holdout_protocol_audit.json</code>).</td></tr>
+<tr><td><code>IR-69-SCORE-01</code></td><td>No DrivenData organizer receipt exists in-repo for <code>0.2778</code> or <code>0.3774</code>.</td><td><b>Strictly classified:</b> Marked <code>UNSCORED</code> in-repo and <code>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</code> everywhere.</td></tr>
+</table></div>
 
 </main>
-<footer>
-  <div class="wrap">GEMSDOE69 · Branch <code>arena/b1390e3b-gemsdoe69</code> · All metrics strictly evidence-classified · Zero weekly slots auto-spent</div>
-</footer>
-</body>
-</html>
+<footer>GEMSDOE69 · every metric carries its strict evidence class · zero unverified projections</footer>
+</body></html>

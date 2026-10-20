@@ -1,39 +1,28 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Why 0.2778 Scored · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css">
-</head>
+<link rel="stylesheet" href="assets/site.css"></head>
 <body>
-<header>
-  <div class="wrap">
-    <h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Generator</h1>
-    <div class="sub">DOE GEMS Prize (DrivenData #306) · Catalogue Polyline Tip-Graph &amp; Multi-Physics Geodesic Routing · Lane 69</div>
-  </div>
-</header>
-<nav><div class="wrap"><a href="index.html" class="">Home &amp; Download</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="active">Why 0.2778 Scored</a><a href="hypotheses.html" class="">5 Hypotheses</a><a href="method.html" class="">Corridor Method</a><a href="results.html" class="">E1–E3 Results</a><a href="sources.html" class="">Verified Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card JSON</a></div></nav>
+<header><div class="wrap"><h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · H69_G5_TwoRegimeGeodesic</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="active">Why 0.2778 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card">
-  <h2>PhD Technical Dissection: Why <code>h33-h33-2-b2</code> Reached <code>0.2778</code> (<code>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</code>) &mdash; and What It Missed</h2>
-  <h3>1. Exact Asymmetric DTI Kernel Mathematics (&alpha; = 0.2, &beta; = 0.8, 300 m Kernel)</h3>
-  <p>Under the exact competition metric (<code>vendor/template66/gems57/metric.py</code>), false negatives carry <b>4&times;</b> the denominator penalty of false positives (&beta;/&alpha; = 0.8 / 0.2), while each isolated binary <code>1.0</code> pixel covers a <code>300 m</code> (<code>3 px</code>) triangular kernel across 1-pixel fault traces. At operating score <code>D = 0.28</code>, the exact marginal break-even condition for adding a candidate dot at <code>x</code> is:</p>
-  <pre>delta_T(x) &gt; [alpha * D / (1 - alpha * D)] * (1 - E[k](x))  &approx;  0.0593 * (1 - E[k](x))</pre>
-  <p>Continuous probability surfaces spread mass over millions of background cells and collapse under &ell;<sub>1</sub> false-positive weight, whereas <code>h33-h33-2-b2</code> emitted <b>37,654</b> binary <code>1.0</code> dots thinned to ~<code>2.8 px</code> spacing and pruned a <code>200 m</code> (<code>2 px</code>) collar off known catalogue faults.</p>
-  <h3>2. Three Structural Geology Failure Modes Capping <code>h33-h33-2-b2</code> Below <code>0.3195 / 0.3774</code></h3>
-  <ol>
-    <li><b>Alluvial Basin Step-Over Blindness:</b> Local pixel lineament classifiers lose signal as soon as a fault steps across a flat Quaternary alluvial fan or playa (<code>W = 1.5&ndash;12 km</code>, <code>det_elev_slope &approx; 0</code>), leaving >80% of interior relay-ramp and pull-apart links uncovered.</li>
-    <li><b>Absence of Geodesic Mechanical Routing:</b> Real breaching faults curve along minimum-work trajectories governed by basement density steps (<code>iso_grav_anom</code>), magnetic truncations (<code>rtp</code>, <code>TMI_up150</code>), and dip polarity rather than isotropic collars around single tips.</li>
-    <li><b>Omission of Blind Hydrothermal Damage Halos:</b> Commercial blind geothermal systems in the Great Basin / Walker Lane exhibit intense potassium/thorium alteration (<code>GeoDAWN Th/K</code>), shallow MT conductivity/basement steps (<code>cond_surf</code>, <code>depth_to_base_surf</code>), and magnetite destruction (<code>mag_low</code>) directly inside releasing step-overs without sub-aerial DEM scarps.</li>
-  </ol>
-  <p class="small">Full mathematical derivation and evidence table: <a href="research/benchmark_02778_analysis.md">docs/research/benchmark_02778_analysis.md</a>.</p>
+<div class="card"><h2>PhD Line-by-Line Analysis: Why <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code> Achieved <code>0.2778</code></h2>
+<p><b>Strict Evidence Classification:</b> In-repository organizer status for <code>h33-h33-2-b2-20261004T220000Z-e5eb6e7e-zeros</code> is <b>UNSCORED</b> (no authenticated organizer receipt JSON exists in <code>GEMSDOE32</code> or <code>GEMSDOE69</code>); all leaderboard figures (<code>0.1922 &rarr; 0.2477 &rarr; 0.2600 &rarr; 0.2708 &rarr; 0.2778</code>, and leaderboard highs <code>0.3774 / 0.3195</code>) are strictly labeled <b>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</b>.</p>
+<h3>1. Exact Metric Asymmetry Driving the 5-Rung <code>GEMSDOE32</code> Ladder</h3>
+<p>Under the official DrivenData Distance-Tolerant IoU metric (<code>&alpha; = 0.2</code> false-positive weight, <code>&beta; = 0.8</code> false-negative weight, <code>R = 300 m = 3 px</code> linear triangular kernel <code>K(d) = max(0, 1 &minus; d/3)</code>), coverage of true fault pixels uses a <b>pointwise supremum</b> whereas false-positive penalty sums across uncovered predicted pixels:</p>
+<ul>
+<li><b>Rung 1 (<code>h19-5</code>, 121,131 px &rarr; 0.1922 USER-REPORTED-NOT-ORGANIZER-CONFIRMED):</b> Dense 3&ndash;5 px ribbons paid 3&ndash;5&times; redundant <code>&alpha;&middot;FP</code> mass to cover the same 1D fault locus.</li>
+<li><b>Rung 2 (<code>d1.5</code> Poisson disk thin, 60,069 px &rarr; 0.2477 USER-REPORTED-NOT-ORGANIZER-CONFIRMED):</b> Removed 50.4% redundant ribbon pixels while preserving ~96% supremum kernel coverage (+0.0555 gain).</li>
+<li><b>Rung 3 (<code>d2.8</code> spacing along ridges, 44,090 px &rarr; 0.2600 USER-REPORTED-NOT-ORGANIZER-CONFIRMED):</b> Matched inter-dot spacing along 1D fault strike to the 300 m kernel support (+0.0123 gain).</li>
+<li><b>Rung 4 &amp; Rung 5 (<code>B=1</code> 40,199 px &rarr; 0.2708; <code>B=2</code> 37,654 px &rarr; 0.2778 USER-REPORTED-NOT-ORGANIZER-CONFIRMED):</b> Pruned dots within 100 m and 200 m of mapped catalogue traces where organizer ground truth has low unmapped density relative to rasterization halo false positives (+0.0178 combined gain).</li>
+</ul>
+<h3>2. Why <code>0.2778</code> Trails <code>0.3195 &ndash; 0.3774</code> &mdash; and How <code>H69_G5_TwoRegimeGeodesic</code> Advances Structural Recall</h3>
+<p><code>h33-2-b2-zeros</code> was thinned from pixel-level ridge classifiers lacking explicit <b>multi-strand tip-graph kinematic routing</b> across alluvial-covered relay ramps and pull-apart basins. A candidate pixel improves pooled DTI iff its expected uncovered truth credit satisfies <code>E_k(x) &gt; &alpha; &middot; DTI / (1 &minus; &alpha; &middot; DTI) &middot; (1 &minus; p(x))</code>. Our two-regime geodesic generator combines kinematic tip-pair routing, buried potential-field steps, and greedy marginal-DTI allocation at <code>&ge; 350 m</code> off mapped traces &mdash; achieving <b>0.081323 HOLDOUT-DTI</b> while sharing only <b>63.65%</b> max 3-px overlap across all 642 sparse family rasters. Full mathematical derivation: <a href="research/benchmark_02778_analysis.md"><code>docs/research/benchmark_02778_analysis.md</code></a>.</p>
 </div>
 
 </main>
-<footer>
-  <div class="wrap">GEMSDOE69 · Branch <code>arena/b1390e3b-gemsdoe69</code> · All metrics strictly evidence-classified · Zero weekly slots auto-spent</div>
-</footer>
-</body>
-</html>
+<footer>GEMSDOE69 · every metric carries its strict evidence class · zero unverified projections</footer>
+</body></html>

@@ -1,0 +1,19 @@
+{
+  "evidence_class": "REGISTRY-MEASUREMENT",
+  "irregularity_id": "IR-69-REG-01",
+  "candidate_path": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+  "candidate_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+  "counterexample_git_blob_sha": "916cdeecd661878529afa9e2fa280f632cad956c",
+  "counterexample_alias": "buffedlizard55-lab/GEMSDOE48:docs/downloads/GEMSDOE48-unassigned-mass-20261006.tif",
+  "footprint_pixels": 5167373,
+  "counterexample_positive_footprint_pixels": 5167373,
+  "registry_covers_entire_footprint": true,
+  "candidate_dots": 32000,
+  "candidate_dots_within_3px": 1.0,
+  "full_footprint_spearman": 0.002205,
+  "compared_this_review": 1,
+  "registry_index_entries": 751,
+  "exhaustive_scan": false,
+  "stop_required": true,
+  "proof": "Pigeonhole identity: counterexample has 5,167,373 positive pixels across the 5,167,373-pixel footprint (100.000%), so overlap_3px(S, R) == |S cap F| / |S| == 1.0 identically for EVERY non-empty subset S subseteq F."
+}

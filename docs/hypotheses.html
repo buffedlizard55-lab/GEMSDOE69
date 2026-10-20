@@ -1,44 +1,38 @@
 <!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
+<html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>5 Hypotheses · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css">
-</head>
+<title>Hypotheses · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css"></head>
 <body>
-<header>
-  <div class="wrap">
-    <h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Generator</h1>
-    <div class="sub">DOE GEMS Prize (DrivenData #306) · Catalogue Polyline Tip-Graph &amp; Multi-Physics Geodesic Routing · Lane 69</div>
-  </div>
-</header>
-<nav><div class="wrap"><a href="index.html" class="">Home &amp; Download</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="active">5 Hypotheses</a><a href="method.html" class="">Corridor Method</a><a href="results.html" class="">E1–E3 Results</a><a href="sources.html" class="">Verified Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card JSON</a></div></nav>
+<header><div class="wrap"><h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · H69_G5_TwoRegimeGeodesic</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="active">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card">
-  <h2>Five Pre-Implementation Geological Hypotheses (Ranked &amp; Empirically Tested)</h2>
-  <table>
-    <tr><th>Rank</th><th>Hypothesis ID &amp; Structural Mechanism</th><th>Layers &amp; Physical Transform</th><th>Why Unmapped in USGS/INGENIOUS</th><th> Empirical Outcome</th></tr>
-    <tr><td><b>1</b></td><td><b>H69-G5 / G1: Multi-Partner Geodesic Breach + Blind Pull-Apart Tie-In</b></td><td>13,953 polyline parts + DEM dip polarity + Dijkstra routing over gravity/mag HG+tilt+lows, 1 m LiDAR coherence, GeoDAWN <code>Th/K</code>, MT/basement step</td><td>Alluvial/playa fill buries relay breaches &amp; blind pull-aparts between mapped tips</td><td><b>SELECTED PRIMARY (<code>0.0813</code> HOLDOUT-DTI; <code>0.6365</code> max overlap &le; 0.70)</b></td></tr>
-    <tr><td><b>2</b></td><td><b>H69-G2 Core vs Extended Subsurface Step &amp; Alteration Ablation</b></td><td><code>cond_surf</code>, <code>depth_to_base_surf</code>, GeoDAWN <code>K, Th, U</code></td><td>Subsurface basement offset &amp; illite/adularia alteration persist under Holocene cover</td><td><b>VERIFIED POSITIVE (+0.0010 DTI lift: <code>0.0889 &rarr; 0.0899</code>; anchors blind tie-in)</b></td></tr>
-    <tr><td><b>3</b></td><td><b>H69-G3 Geothermal Upflow Damage-Zone Weighting</b></td><td><code>heatflow</code>, <code>gw_temp</code>, <code>wellspring</code> (<code>dist_known_fault_px</code> blocked)</td><td>Convective thermal plumes localize at permeable fault intersections &amp; step-overs</td><td><b>TESTED (<code>0.0895</code> pooled; lifts &ge;1 km far-field DTI <code>0.0343 &rarr; 0.0353</code>)</b></td></tr>
-    <tr><td><b>4</b></td><td><b>H69-G4 Pre-Quaternary SGMC Bedrock Reactivation</b></td><td><code>derived_sgmc_faults_100m_u8</code> inside WNW-extension step-overs</td><td>Mesozoic/Cenozoic bedrock structures reactivated without Quaternary scarp compilation</td><td><b>CAUGHT &amp; WITHDRAWN PER RULE 1 (<code>0.0956</code> DTI, <code>0.9856</code> overlap w/ <code>GEMSDOE30</code>)</b></td></tr>
-    <tr><td><b>5</b></td><td><b>H69-E Relocated Microseismicity Lineaments &amp; Focal Nodal Planes</b></td><td>USGS ComCat / Nevada Seismological Lab double-difference hypocenters &amp; focal mechanisms</td><td>Active blind strike-slip &amp; normal splays illuminate nodal planes before surface rupture</td><td><b>QUEUED NEXT STEP (official free USGS ComCat API blocked inside offline sandbox)</b></td></tr>
-  </table>
-  <p class="small">Full pre-implementation specification: <a href="research/new_hypotheses.md">docs/research/new_hypotheses.md</a>.</p>
-</div>
-<div class="card">
-  <h2>Protocol Rule 4 Single-Feature Leakage Canaries (All 17 Channels &le; 0.90)</h2>
-  <table>
-    <tr><th>Single Feature Channel</th><th>Holdout ROC-AUC</th><th>Rule 4 Status</th></tr>
-    <tr><td><code>grav_edge</code></td><td><code>0.52480</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>mag_edge</code></td><td><code>0.56735</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>mag_low</code></td><td><code>0.53066</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>lidar_coh_scarp</code></td><td><code>0.60794</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>topo_ridge</code></td><td><code>0.67089</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>rad_alteration</code></td><td><code>0.53931</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>subsurface_step</code></td><td><code>0.51661</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>hydro_upflow</code></td><td><code>0.53828</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>sgmc_bedrock</code></td><td><code>0.77813</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>f_corr_narrow</code></td><td><code>0.75948</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>f_corr_mid</code></td><td><code>0.77044</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>f_corr_broad</code></td><td><code>0.77124</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>f_corr_rel</code></td><td><code>0.70026</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>f_corr_tip</code></td><td><code>0.54651</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>f_corr_mult</code></td><td><code>0.73417</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>f_tip_near</code></td><td><code>0.79653</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr><tr><td><code>f_tip_mid</code></td><td><code>0.79653</code></td><td><span class="pill pass">PASS (&le; 0.90)</span></td></tr>
-  </table>
-</div>
+<div class="card"><h2>Five Ranked Structural Geology Hypotheses (Ablated in E2 on <code>gems57-pooled-hide-v2</code>)</h2>
+<p>Complete pre-implementation documentation: <a href="research/new_hypotheses.md"><code>docs/research/new_hypotheses.md</code></a>.</p>
+<table>
+<tr><th>Rank &amp; Hypothesis</th><th>Physical Mechanism &amp; Layers</th><th>Why Missing in Catalogue &amp; Non-Fault Mimic</th></tr>
+<tr><td><b>1. H69-G5 Two-Regime Geodesic Corridor + Buried Basin Transfer</b> (Selected Winner)</td>
+<td>INGENIOUS/Qfaults polylines + DEM hanging-wall dip + geodetic shear rate + Dijkstra geodesic routing over multi-scale gravity/RTP potential edges, magnetic lows, coherence-weighted 1 m LiDAR scarps, bedrock steps, K/Th alteration &amp; thermal springs, calibrated separately for near-tip (&le;1 km) vs buried basin (&gt;1 km) regimes.</td>
+<td>Holocene alluvial fans &amp; playas bury soft- to hard-linked breaching relays before continuous surface scarps form. Mimic: intrusive pluton contacts &amp; pluvial shorelines. <b>Measured HOLDOUT-DTI: 0.081323 [0.072231, 0.090492] (2.55&times; control).</b></td></tr>
+<tr><td><b>2. H69-G3 Multi-Partner Geodesic Breaching Relays &amp; Flank Breaches</b></td>
+<td><code>k_partners = 4</code> facing/overlapping sub-parallel tips (<code>W &isin; [0.1, 15] km, |L| &le; 3.5W</code>) + tip-to-flank synthetic breaches routed through composite geophysical admittance.</td>
+<td>Single-nearest-tip pairing misses compound nested relays documented by Giddens &amp; Faulds (2025, SGP-TR-229). Mimic: erosional piedmont channels.</td></tr>
+<tr><td><b>3. H69-G2 Walker Lane High-Shear Releasing Pull-Apart Rhombs &amp; Horsetails</b></td>
+<td>Promotes unlabelled high-shear strands (&ge;78th percentile geodetic shear rate) to dextral/sinistral releasing rhombs, cross-basin chords, and N22.5&deg;E dilational splays under WNW extension (292.5&deg;).</td>
+<td>Distributed Walker Lane dextral shear partitions across dozens of unmapped short strands inside pull-apart basins. Mimic: volcanic dike swarms.</td></tr>
+<tr><td><b>4. H69-Ext1 Sub-Grid 1 m 3DEP Scarp Micro-En-&Eacute;chelon Tensor</b> (External Free Data)</td>
+<td>Oriented log-Gabor steerable wavelets on raw 1 m USGS 3DEP DEM tiles aligned to local step-over Riedel azimuth.</td>
+<td>Sub-meter staggered en &eacute;chelon scarps average out at 100 m grid scale. Free source: USGS TNM 3DEP API.</td></tr>
+<tr><td><b>5. H69-Ext2 Relocated Microseismicity Planar RANSAC Step-Over Tomo</b> (External Free Data)</td>
+<td>Planar cluster fitting of M&ge;0.5 hypocenters (2&ndash;12 km depth) beneath zero-relief blind step-overs outside 1 m LiDAR coverage.</td>
+<td>Active blind transfer faults nucleate microearthquakes without surface rupture. Free source: USGS ANSS ComCat / UNR NSL.</td></tr>
+</table></div>
+<div class="card"><h2>Controlled E2 Holdout Ablation Table (<code>gems57-pooled-hide-v2</code>, n = 22,893 px)</h2>
+<table><tr><th>Arm</th><th>Pooled DTI</th><th>95% Spatial-Block CI</th><th>Far (&gt;1 km) DTI</th><th>Dots (8 folds)</th><th>Class</th></tr>
+<tr><td><code>Control_NoCorridor</code></td><td><b>0.031868</b></td><td><code>[0.023883751263351894, 0.041139809097252074]</code></td><td>0.024566</td><td>199,988</td><td><code>HOLDOUT-DTI</code></td></tr><tr><td><code>H69_G2_NoRadMT</code></td><td><b>0.088859</b></td><td><code>[0.07945257513421965, 0.09813295556048335]</code></td><td>0.033057</td><td>199,904</td><td><code>HOLDOUT-DTI</code></td></tr><tr><td><code>H69_G1_GeodesicCorridor</code></td><td><b>0.089863</b></td><td><code>[0.08035672856947589, 0.09889478816006102]</code></td><td>0.034320</td><td>199,890</td><td><code>HOLDOUT-DTI</code></td></tr><tr><td><code>H69_G3_HydroGeotherm</code></td><td><b>0.089496</b></td><td><code>[0.08031347840651612, 0.09867904868031116]</code></td><td>0.035337</td><td>199,898</td><td><code>HOLDOUT-DTI</code></td></tr><tr><td><code>H69_G4_SGMCReactivation</code></td><td><b>0.095558</b></td><td><code>[0.0841989275089619, 0.1075279898297671]</code></td><td>0.052224</td><td>199,904</td><td><code>HOLDOUT-DTI</code></td></tr><tr><td><code>Incumbent_PR6_Corridor</code></td><td><b>0.043056</b></td><td><code>[0.034961317813284855, 0.05110338703006976]</code></td><td>0.024093</td><td>285,726</td><td><code>HOLDOUT-DTI</code></td></tr><tr><td><code>H69_G5_TwoRegimeGeodesic</code></td><td><b>0.081323</b></td><td><code>[0.0722309562428491, 0.09049200464685048]</code></td><td>0.018315</td><td>199,903</td><td><code>HOLDOUT-DTI</code></td></tr></table></div>
 
 </main>
-<footer>
-  <div class="wrap">GEMSDOE69 · Branch <code>arena/b1390e3b-gemsdoe69</code> · All metrics strictly evidence-classified · Zero weekly slots auto-spent</div>
-</footer>
-</body>
-</html>
+<footer>GEMSDOE69 · every metric carries its strict evidence class · zero unverified projections</footer>
+</body></html>

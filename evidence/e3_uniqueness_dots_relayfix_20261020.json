@@ -1,0 +1,43 @@
+{
+ "index": "registry/registry_index_69.json",
+ "index_rasters": 862,
+ "index_complete_accessible_scan": true,
+ "index_errors": [],
+ "order_note": "surface frozen before TIF writing (see receipt); comparisons after emission",
+ "phases": {
+  "dots": {
+   "summary": {
+    "my_file": null,
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "my_dots": 36325,
+    "candidate_decoded_sha256": "a114b6c47c6f3db1869610b4dba9dd5e335224ef70d0e13092d69d64a3ad05d7",
+    "candidate_file_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+    "rho_limit": 0.9,
+    "overlap_limit": 0.7,
+    "jaccard_limit": 0.5,
+    "registry_rasters_expected": 862,
+    "registry_rasters_checked": 862,
+    "complete_accessible_scan": true,
+    "missing_or_invalid": 0,
+    "source_errors": [],
+    "worst_spearman_full_footprint": 0.11031126875912463,
+    "worst_rho_submission": "7GEMSDOE:downloads/gems7-halo15-gbt-v1-90fb7dc0fc1f.tif",
+    "worst_dot_overlap": 1.0,
+    "worst_overlap_submission": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+    "worst_jaccard_dot_sets": 0.055485803966329,
+    "worst_jaccard_submission": "GEMSDOE37:docs/downloads/gemsdoe37-rankmix-strain-topo-20261005T030338376116Z-52bf89742e.tif",
+    "byte_unique_among_checked": true,
+    "pixel_unique_among_checked": true,
+    "duplicate_count": 107,
+    "unique": false,
+    "jaccard_diagnostic_only": true,
+    "verdict": "negative",
+    "stop_required": true,
+    "candidate_rank_variation": true,
+    "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only.",
+    "phase": "dots"
+   },
+   "seconds": 507.3
+  }
+ }
+}

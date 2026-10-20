@@ -42,29 +42,38 @@ def check(path: Path, grid) -> dict:
         same_transform = src.transform == ref.transform and src.bounds == ref.bounds
     fp, cat = grid.footprint, grid.catalogue
     finite = np.isfinite(a)
-    inside = a[fp]
+    same_mask_shape = a.shape == fp.shape == cat.shape
+    inside = a[fp] if same_mask_shape else np.empty(0, dtype=a.dtype)
+    finite_values = a[finite]
+    inside_valid = bool(same_mask_shape and inside.size and np.isfinite(inside).all())
     checks = {
         "single_band": meta["count"] == 1,
         "dtype_float32": meta["dtype"] == "float32",
         "crs_epsg_32611": meta["crs"] == "EPSG:32611",
         "shape_3730x3292": meta["shape"] == [3730, 3292],
         "transform_and_bounds_match_sample_submission": bool(same_transform),
-        "footprint_all_finite": bool(np.isfinite(inside).all()),
-        "footprint_values_in_0_1": bool(np.isfinite(inside).all() and inside.min() >= 0 and inside.max() <= 1),
+        "mask_shapes_match_raster": bool(same_mask_shape),
+        "footprint_all_finite": inside_valid,
+        "footprint_values_in_0_1": bool(inside_valid and inside.min() >= 0 and inside.max() <= 1),
         "no_infinite_values": bool(not np.isinf(a).any()),
-        "nan_only_outside_footprint": bool(not np.isnan(inside).any()),
+        "nan_only_outside_footprint": bool(same_mask_shape and not np.isnan(inside).any()),
         "no_sentinel_values": bool(not np.isin(a[finite], SENTINELS).any()),
-        "all_finite_values_in_0_1": bool(a[finite].min() >= 0 and a[finite].max() <= 1),
-        "no_positive_outside_footprint": bool(not (np.nan_to_num(a[~fp]) > 0).any()),
-        "zero_positive_on_mapped_catalogue": bool(not (np.nan_to_num(a[cat]) > 0).any()),
+        "all_finite_values_in_0_1": bool(finite_values.size and finite_values.min() >= 0 and finite_values.max() <= 1),
+        "no_positive_outside_footprint": bool(same_mask_shape and not (np.nan_to_num(a[~fp]) > 0).any()),
+        "zero_positive_on_mapped_catalogue": bool(same_mask_shape and not (np.nan_to_num(a[cat]) > 0).any()),
     }
     rep = dict(file=str(path), bytes=path.stat().st_size, sha256=hashlib.sha256(path.read_bytes()).hexdigest(),
-               meta=meta, n_nan=int(np.isnan(a).sum()), n_nan_inside_footprint=int(np.isnan(inside).sum()),
-               min=float(a[finite].min()), max=float(a[finite].max()),
+               meta=meta, n_nan=int(np.isnan(a).sum()),
+               n_nan_inside_footprint=int(np.isnan(inside).sum()) if same_mask_shape else None,
+               min=float(finite_values.min()) if finite_values.size else None,
+               max=float(finite_values.max()) if finite_values.size else None,
                positive_pixels=int((np.nan_to_num(a) > 0).sum()),
                distinct_positive_values=sorted({float(v) for v in np.unique(a[finite & (a > 0)])})[:10],
                checks=checks)
-    if rep["n_nan"] == 0:
+    if not same_mask_shape:
+        rep["template_validator"] = "not run: invalid raster/mask grid shape"
+        checks["template_validator_passed"] = False
+    elif rep["n_nan"] == 0:
         from gems57 import gates, validate
         tv = validate.validate(path, fp, cat)
         fr = gates.format_report(path, DATA / "sample_submission.tif", footprint=fp)
@@ -88,7 +97,7 @@ def main():
     ok = all(r["all_checks_passed"] for r in reports)
     out = dict(validator="scripts/validate_submission.py", all_files_passed=ok, reports=reports)
     if args.json:
-        Path(args.json).write_text(json.dumps(out, indent=1))
+        Path(args.json).write_text(json.dumps(out, indent=1, allow_nan=False))
     for r in reports:
         bad = [k for k, v in r["checks"].items() if not v]
         print(f"{'PASS' if r['all_checks_passed'] else 'FAIL'}  {r['file']}  sha256={r['sha256'][:16]}  "
