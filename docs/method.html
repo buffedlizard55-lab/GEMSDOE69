@@ -1,59 +1,40 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="en">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Method · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css"></head>
+<title>Corridor Method · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
 <body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="active">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<header>
+  <div class="wrap">
+    <h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Generator</h1>
+    <div class="sub">DOE GEMS Prize (DrivenData #306) · Catalogue Polyline Tip-Graph &amp; Multi-Physics Geodesic Routing · Lane 69</div>
+  </div>
+</header>
+<nav><div class="wrap"><a href="index.html" class="">Home &amp; Download</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="">5 Hypotheses</a><a href="method.html" class="active">Corridor Method</a><a href="results.html" class="">E1–E3 Results</a><a href="sources.html" class="">Verified Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card JSON</a></div></nav>
 <main class="wrap">
 
 <div class="card">
-<h2>Method</h2>
-<h3>Tip graph</h3>
-<p>The pinned catalogue mirror (labels &equiv; existing_faults, IR-69-DATA-01) is skeletonized
-(scikit-image), traced into 3,887 strands between endpoints/branch points, and every strand carries its
-two tips with terminal strikes (PCA of the tip-adjacent 12-px tail).</p>
-<h3>Pair acceptance (all lengths in 100 m px)</h3>
-<ul>
-<li>tips from different 8-connected components (same-component pairs are reserved for the hard-link test);</li>
-<li>terminal strikes sub-parallel, axial &Delta;&theta; &le; 30&deg; &mdash; the raster carries no dip polarity, so
-&ldquo;same dip&rdquo; is proxied by sub-parallel strike (disclosed limitation IR-69-DIP-01);</li>
-<li>cross-strike spacing W &isin; [1, 150] px (0.1&ndash;15 km);</li>
-<li>along-strike separation &le; 3.5W and overlap &le; 1.0W, computed as interval arithmetic on the
-strike-axis projection of tip-adjacent strand windows (sign-invariant for axial data).</li>
-</ul>
-<h3>Corridor emission</h3>
-<ul><li><b>Oblique connector</b>: tip-to-tip line, extended 0.35W along the local strikes, half-width
-clamp(W/6, 1, 6) px;</li>
-<li><b>En &eacute;chelon strands</b> (dilatational pairs): 2&ndash;8 strands of length clamp(1.5W, 4, 30) px at
-&plusmn;25&deg; to the connector, staggered along it;</li>
-<li><b>Pull-apart rhomb</b> (dilatational pairs): rotated ellipse, semi-axes 0.8/0.45 of the tip diagonal;
-Walker-Lane dextral prior applied through the dilation diagnostic (overlap &le; 0.5W &rArr; dilatational),
-because slip sense is unobservable from the raster (recorded per corridor);</li>
-<li>strongly overlapping steps emit the narrower <b>transfer-overlap</b> corridor.</li></ul>
-<h3>Corridor scoring</h3>
-<p>S = 0.20&middot;E<sub>grav</sub> + 0.20&middot;E<sub>mag</sub> + 0.18&middot;E<sub>maglow</sub> + 0.15&middot;E<sub>lidar</sub>
-+ 0.10&middot;W<sub>orient</sub> + 0.17&middot;W<sub>geom</sub> &mdash; weights pre-registered before any holdout look.
-E-terms are maxima of robust-z means (footprint median/MAD) over multi-scale horizontal gradients
-(&sigma; = 1, 2, 4 px), tilt-edge |sin(arctan2(VD, HG))| with VD the &sigma;/2&sigma; upward-continuation difference,
-the provided HG/VG/tilt products, and &minus;tmi/&minus;rtp magnetic lows; E<sub>lidar</sub> is the
-max(ex_max, step_max, downface_max) scarp channel; W<sub>orient</sub> scores the corridor axis against the
-N&ndash;NE axial family best oriented for dilation under WNW extension; W<sub>geom</sub> is the subtype prior
-(pull-apart 1.0, relay 0.9, transfer-overlap 0.6). Every corridor carries a rationale record
-(layers with z-values, signature, source) in <code>evidence/e3_receipt.json</code>.</p>
-<h3>Emission &amp; gate</h3>
-<p>Propensity P(x) = logistic(1.5(S &minus; S<sub>0</sub>)) &times; corridor membership weight; dots placed by the
-shared template's exact greedy marginal-DTI allocator with truth-size prior |G| = 12,691 px
-(GEMSDOE32 receipt-derived estimate, cited), restricted &ge;2 px from the mapped catalogue. Gate: the
-corridor arm must beat the identical pipeline with the corridor prior removed (per-pixel physics
-composite, same layer set, same allocator) on the shared template's spatially-blocked hide-and-recover
-holdout (seeds 20/21 &times; four quadrants), paired with 95% CIs. Hard-link validation: for same-component
-virtual pairs, the linking catalogue mass inside the corridor is masked and recovery within 3 px (300 m)
-is measured after rebuilding from the remaining catalogue.</p>
+  <h2>Lane 69 Method &mdash; Structural Geometry, Geodesic Routing &amp; Two-Regime Calibration</h2>
+  <ul>
+    <li><b>Catalogue Tip &amp; Polyline Graph:</b> Compiles <b>13,953</b> USGS/INGENIOUS polyline segments (<code>4,523</code> free tips) plus <b>3,887</b> raster skeleton strands. Infers normal-fault hanging-wall dip polarity from cross-strike DEM offsets at 600 m &amp; 1.2 km with <b>90.28% agreement</b> across <code>n = 1,985</code> USGS QFF recorded dip directions.</li>
+    <li><b>Giddens &amp; Faulds (2025, SGP-TR-229) Structural Families:</b> Evaluates <code>36,946</code> valid geometric pairs (<code>W = 0.1&ndash;15 km</code>, <code>L &le; 3.5W</code>, common-origin interval projection fixing <code>IR-69-CODE-01</code>), emitting <b>5,901</b> synthetic relay connectors, <b>1,520</b> Walker Lane dextral pull-aparts, <b>3,990</b> asymmetric tip-to-flank synthetic breaches, <b>1,115</b> termination horsetail splays, and <b>841</b> displacement-transfer corridors.</li>
+    <li><b>Dijkstra Least-Cost Geodesic Routing &amp; Two-Regime Propensity:</b> Routes each proposed strand along minimum-cost geophysical paths through multi-scale gravity/magnetic HG &amp; tilt, magnetic lows, 1 m LiDAR scarp coherence, GeoDAWN <code>Th/K</code> alteration, and MT/basement steps, then combines 8-fold OOF L2 logistic breach probability (&ge;350 m off catalogue) with the <code>q0.995</code> scale-invariant blind basin hydrothermal/MT/mag-low tie-in (&ge;900 m off catalogue) prior to exact greedy marginal-DTI dot allocation.</li>
+  </ul>
+</div>
+<div class="card">
+  <h2>Sample Top-Ranked Geologist Corridor Rationales (Full Top-50 in <code>evidence/e3_receipt.json</code>)</h2>
+  <table>
+    <tr><th>#</th><th>Setting / Corridor Kind</th><th>W / L (km)</th><th>Strike</th><th>Score</th><th>UTM Zone 11N Endpoints (m)</th></tr>
+    <tr><td>1</td><td><code>relay</code> / <code>tip_propagation</code></td><td>0.00 / 0.60</td><td>17.6&deg;</td><td><b>0.901</b></td><td class="small">(349674, 4464681) &rarr; (349493, 4464109)</td></tr><tr><td>2</td><td><code>relay</code> / <code>relay_enechelon</code></td><td>0.18 / 0.51</td><td>7.3&deg;</td><td><b>0.884</b></td><td class="small">(349695, 4464118) &rarr; (349772, 4464715)</td></tr><tr><td>3</td><td><code>relay</code> / <code>relay_enechelon</code></td><td>0.43 / 0.30</td><td>10.6&deg;</td><td><b>0.883</b></td><td class="small">(349483, 4464826) &rarr; (349388, 4464321)</td></tr><tr><td>4</td><td><code>pullapart</code> / <code>pullapart_strand</code></td><td>1.03 / -3.37</td><td>22.5&deg;</td><td><b>0.881</b></td><td class="small">(402900, 4206942) &rarr; (403294, 4207890)</td></tr><tr><td>5</td><td><code>relay</code> / <code>tip_wing_splay</code></td><td>0.00 / 0.48</td><td>29.4&deg;</td><td><b>0.878</b></td><td class="small">(411735, 4290980) &rarr; (411497, 4290557)</td></tr><tr><td>6</td><td><code>relay</code> / <code>tip_propagation</code></td><td>0.00 / 0.67</td><td>35.0&deg;</td><td><b>0.878</b></td><td class="small">(411735, 4290980) &rarr; (411349, 4290428)</td></tr><tr><td>7</td><td><code>relay</code> / <code>tip_wing_splay</code></td><td>0.00 / 0.43</td><td>24.0&deg;</td><td><b>0.877</b></td><td class="small">(413495, 4379188) &rarr; (413671, 4379582)</td></tr><tr><td>8</td><td><code>relay</code> / <code>tip_wing_splay</code></td><td>0.00 / 0.43</td><td>21.9&deg;</td><td><b>0.876</b></td><td class="small">(309854, 4458645) &rarr; (309693, 4458244)</td></tr><tr><td>9</td><td><code>relay</code> / <code>tip_wing_splay</code></td><td>0.00 / 0.43</td><td>11.2&deg;</td><td><b>0.876</b></td><td class="small">(413546, 4379810) &rarr; (413462, 4379386)</td></tr><tr><td>10</td><td><code>relay</code> / <code>tip_propagation</code></td><td>0.00 / 0.60</td><td>21.5&deg;</td><td><b>0.874</b></td><td class="small">(309854, 4458645) &rarr; (309635, 4458087)</td></tr><tr><td>11</td><td><code>relay</code> / <code>relay_enechelon</code></td><td>0.52 / -1.73</td><td>14.1&deg;</td><td><b>0.872</b></td><td class="small">(398805, 4318213) &rarr; (399291, 4320143)</td></tr><tr><td>12</td><td><code>relay</code> / <code>tip_propagation</code></td><td>0.00 / 0.60</td><td>25.2&deg;</td><td><b>0.872</b></td><td class="small">(413495, 4379188) &rarr; (413750, 4379731)</td></tr><tr><td>13</td><td><code>relay</code> / <code>tip_wing_splay</code></td><td>0.00 / 0.43</td><td>13.7&deg;</td><td><b>0.870</b></td><td class="small">(379122, 4326841) &rarr; (379019, 4326421)</td></tr><tr><td>14</td><td><code>relay</code> / <code>tip_wing_splay</code></td><td>0.00 / 0.44</td><td>30.3&deg;</td><td><b>0.869</b></td><td class="small">(342227, 4402524) &rarr; (342003, 4402141)</td></tr><tr><td>15</td><td><code>relay</code> / <code>tip_wing_splay</code></td><td>0.00 / 0.43</td><td>19.9&deg;</td><td><b>0.867</b></td><td class="small">(398584, 4318403) &rarr; (398437, 4317996)</td></tr>
+  </table>
 </div>
 
 </main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
-</body></html>
+<footer>
+  <div class="wrap">GEMSDOE69 · Branch <code>arena/b1390e3b-gemsdoe69</code> · All metrics strictly evidence-classified · Zero weekly slots auto-spent</div>
+</footer>
+</body>
+</html>

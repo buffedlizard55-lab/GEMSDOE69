@@ -203,7 +203,7 @@ def leakage_canary(ctx, stats, max_neg: int = 200_000, seed: int = 69,
     return out
 
 
-def hardlinked_recovery(catalogue: np.ndarray, shape: tuple[int, int], stats: dict,
+def hardlinked_recovery(catalogue: np.ndarray, shape: tuple[int, int], stats: dict | None = None,
                         max_ramps: int = 40, w_max: float = 60.0) -> dict:
     """Mask known linking faults in hard-linked ramps; test corridor recovery
     within 3 px (300 m) of the masked trace.
@@ -256,14 +256,17 @@ def hardlinked_recovery(catalogue: np.ndarray, shape: tuple[int, int], stats: di
             if not (1.0 <= cross <= w_max):
                 continue
             window = max(4.0 * cross, 40.0)
-            ia = _tip_window_interval(sa, end_a, u_e, u_n, window)
-            ib = _tip_window_interval(sb, end_b, u_e, u_n, window)
+            ia = _tip_window_interval(sa, end_a, (r0, c0), u_e, u_n, window)
+            ib = _tip_window_interval(sb, end_b, (r0, c0), u_e, u_n, window)
             overlap = max(0.0, min(ia[1], ib[1]) - max(ia[0], ib[0]))
             separation = max(0.0, max(ia[0], ib[0]) - min(ia[1], ib[1]))
             if separation > ALONG_MAX_RATIO * cross or overlap > -OVERLAP_RATIO * cross:
                 continue
+            along_v = de * u_e + dn * u_n
+            if abs(along_v) > ALONG_MAX_RATIO * cross:
+                continue
             virtual.append(TipPair(sid_a, sid_b, (int(r0), int(c0)), (int(r1), int(c1)),
-                                   float(cross), de * u_e + dn * u_n, float(dth), float(m_az),
+                                   float(cross), along_v, float(dth), float(m_az),
                                    float(np.hypot(de, dn)), overlap <= DILATATION_MAX_ALONG * cross,
                                    int(comp[r0, c0]), int(comp[r1, c1]),
                                    overlap_px=float(overlap), separation_px=float(separation)))
@@ -279,27 +282,29 @@ def hardlinked_recovery(catalogue: np.ndarray, shape: tuple[int, int], stats: di
         if linking.sum() < 5:
             continue
         visible2 = catalogue & ~linking
-        comp2, _ = ndi.label(visible2, structure=np.ones((3, 3), int))
         ta, tb = vp.tip_a, vp.tip_b
         if not (visible2[ta] and visible2[tb]):
             continue
-        if comp2[ta] == comp2[tb]:
-            # the masked pixels were not the only link: flanks stay connected,
-            # so the pair is (correctly) not re-emitted. Not a recovery target.
+        pad = int(w_max) + 90
+        yr0 = max(0, min(ta[0], tb[0]) - pad)
+        yr1 = min(shape[0], max(ta[0], tb[0]) + pad + 1)
+        xc0 = max(0, min(ta[1], tb[1]) - pad)
+        xc1 = min(shape[1], max(ta[1], tb[1]) + pad + 1)
+        vis_crop = visible2[yr0:yr1, xc0:xc1]
+        lta = (ta[0] - yr0, ta[1] - xc0)
+        ltb = (tb[0] - yr0, tb[1] - xc0)
+        comp2, _ = ndi.label(vis_crop, structure=np.ones((3, 3), int))
+        if comp2[lta] == comp2[ltb]:
             still_connected += 1
             continue
-        strands2 = vectorize(visible2)
-        pairs2 = build_tip_pairs(strands2, visible2, w_max=w_max)
-        # re-emission test: does the tip graph reform a pair at the same place?
-        near = [p for p in pairs2
-                if (abs(p.tip_a[0] - ta[0]) <= 2 and abs(p.tip_a[1] - ta[1]) <= 2
-                    and abs(p.tip_b[0] - tb[0]) <= 2 and abs(p.tip_b[1] - tb[1]) <= 2)
-                or (abs(p.tip_b[0] - ta[0]) <= 2 and abs(p.tip_b[1] - ta[1]) <= 2
-                    and abs(p.tip_a[0] - tb[0]) <= 2 and abs(p.tip_a[1] - tb[1]) <= 2)]
-        rebuilt = np.zeros(shape, bool)
+        strands2 = vectorize(vis_crop)
+        pairs2 = build_tip_pairs(strands2, vis_crop, w_max=w_max)
+        target_comps = {int(comp2[lta]), int(comp2[ltb])}
+        near = [p for p in pairs2 if {p.comp_a, p.comp_b} == target_comps]
+        rebuilt = np.zeros(vis_crop.shape, bool)
         for k, np_ in enumerate(near[:4]):
-            rebuilt |= corridor_from_pair(k, np_, strands2, shape).full_mask(shape)
-        ly, lx = np.nonzero(linking)
+            rebuilt |= corridor_from_pair(k, np_, strands2, vis_crop.shape).full_mask(vis_crop.shape)
+        ly, lx = np.nonzero(linking[yr0:yr1, xc0:xc1])
         if len(ly) == 0:
             continue
         d = ndi.distance_transform_edt(~rebuilt)

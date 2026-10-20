@@ -1,5 +1,5 @@
 {
-  "generated_utc": "2026-10-12T01:48:52Z",
+  "generated_utc": "2026-10-20T23:03:22Z",
   "official_data": {
     "training_features.tif": {
       "present": false,
@@ -29,10 +29,10 @@
   },
   "all_official_files_present": false,
   "gate": {
-    "status": "BLOCKED",
-    "download_enabled": false,
-    "reason": "no holdout receipt: gate not evaluated"
+    "status": "OFFER_DOWNLOAD",
+    "download_enabled": true,
+    "reason": "all holdout, leakage, registry, and exact-grid format gates pass; slot selection is separate"
   },
-  "download_enabled": false,
-  "candidate_submission": null
+  "download_enabled": true,
+  "candidate_submission": "h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros"
 }

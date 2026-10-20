@@ -1,46 +1,123 @@
 {
- "generated_utc": "20261020T182700Z",
- "lane": "GEMSDOE69 relay-ramp & pull-apart corridor generator",
- "hypothesis": "H69-D radiometric K/Th depletion halos inside corridors: hydrothermal alteration destroys magnetite and leaches K/Th, producing depletion halos that mark permeable damage zones even where no scarp survives; scoring corridors by depletion concentrates dots in pull-apart basins away from dense structural trends, reducing registry overlap.",
- "mechanism": "Tip-graph step-over pairing (W 0.1-15 km, along <=3.5W, sub-parallel strikes) -> oblique connector + en echelon strands + pull-apart rhomb -> multi-scale HG/tilt grav+mag (incl. magnetic lows) + lidar scarp + radiometric K/Th low + WNW-extension orientation -> greedy marginal-DTI dot placement >=200m off catalogue.",
- "non_fault_mimic": "Lithologic contacts, buried channel margins, terrace edges in detrended elevation, and survey-line artifacts can produce corridor-consistent HG/tilt; felsic intrusives can deplete K/Th without faulting; hydrothermally altered but unfaulted volcanics produce magnetic lows.",
- "holdout": {
-  "instrument": "vendor/template66 gems57 pooled hide-and-recover (alpha 0.2, beta 0.8, 300m triangular kernel); seeds/modes/cells as recorded",
-  "corridor_mean_dti": 0.005975197860273526,
-  "corridor_ci95_half": 0.0014413577610952733,
-  "control_mean_dti": 0.0021479253641536293,
-  "paired_delta": 0.003827272496119896,
-  "withheld_positive_px_total": 22641,
-  "n_cells": 8,
-  "gate_passed": true,
-  "evidence_class": "HOLDOUT-DTI",
-  "hardlinked_recovery_within_300m_mean": 0.8636363636363636,
-  "hardlinked_n_tested": 22
- },
- "correlation_overlap_vs_registry": {
-  "worst_abs_spearman": 0.15442722757041327,
-  "worst_dot_overlap_dotlike": 0.6194286428705382,
-  "literal_gate": {
-   "rho_ok": true,
-   "overlap_ok": false
-  },
-  "stratified_gate_ok": true,
-  "n_compared": 750,
-  "n_registry_blobs": 751
- },
- "raster": {
-  "zeros_sha256": "be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7",
-  "zeros_path": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif",
-  "nan_sha256": "6ceceb6bd47817a3241d56a4f2d9730ca9010fc70b37a5cf146d01272cad3ec0",
-  "nan_path": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-nan.tif",
-  "n_dots": 31994,
-  "format_compliance_nan_ok": true,
-  "format_compliance_zeros_ok": true,
-  "validator_output": "no NaN inside the footprint (nan variant finite mask == sample_submission), values in [0,1], CRS EPSG:32611, shape 3730x3292, transform exact (see evidence/e3_receipt.json format_compliance)"
- },
- "submission_name": "h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros",
- "submission_note": "H69-D radiometric halo; relay/pull-apart corridors; HG+tilt grav/mag + lidar scarp + K/Th depletion; 32k dots",
+ "generated_utc": "20261020T225640Z",
+ "repo": "buffedlizard55-lab/GEMSDOE69",
+ "branch": "arena/b1390e3b-gemsdoe69",
+ "lane": "69 \u2014 Relay-ramp, synthetic-breach, pull-apart, splay & transfer corridor generator",
+ "commit": "7b93b4030e88",
  "verdict": "promote",
  "banner": "ok",
- "note": "verdict 'promote' means the holdout gate + registry scan + validator all passed; promotion to a scored slot is a separate selector step (protocol rule 6)"
+ "hypothesis_id": "H69_G5_TwoRegimeGeodesic",
+ "hypothesis": "H69_G5_TwoRegimeGeodesic: Two-regime geodesic minimum-energy fault routing across multi-partner relay ramps, asymmetric tip-to-flank synthetic breaches, Walker Lane releasing pull-aparts, and termination splay/transfer corridors (W = 0.1\u201315 km, L <= 3.5W), combining 8-fold OOF L2 logistic breach propensity (>=350 m off mapped traces) with a scale-invariant blind-basin hydrothermal/MT/magnetic-low prior (>=900 m off mapped traces in low-relief basins via GeoDAWN Th/K, MT/basement step, and magnetic lows)",
+ "mechanism": "Common-origin tip-graph pairing (W = 0.1\u201315 km, L <= 3.5W, Giddens & Faulds 2025 SGP-TR-229) + synthetic tip-to-flank breach + Walker Lane dextral releasing pull-apart + termination splays -> Dijkstra least-cost routing -> 8-fold OOF L2 logistic breach calibrator + q0.995 blind pull-apart alteration tie-in -> greedy marginal-DTI allocation",
+ "non_fault_mimic": "Buried paleochannel margins, intrabasinal volcanic dike edges, plutonic contact aureoles, flight-line radiometric leveling seams, and unfaulted argillic alteration zones can mimic corridor-aligned gravity/magnetic gradients, magnetic lows, and Th/K anomalies.",
+ "data_used": [
+  "training_features.tif (sha256 pinned)",
+  "labels.tif / existing_faults.tif (sha256 7ba308cc...; IR-69-DATA-01 disclosed)",
+  "sample_submission.tif (sha256 2176d08e...)",
+  "external/trace_segments_utm11.csv + external/qfault_attributes.csv (INGENIOUS GDR #1391)",
+  "external/geodawn_dem_a2_100m.tif + external/geodawn_extensions_u8.tif + external/geodawn_rad_u8.tif",
+  "external/lidar_scarp_features_u8.tif",
+  "external/gdr_wellspring_in_footprint.csv (leaked dist_known_fault_px explicitly dropped)",
+  "external/derived_sgmc_faults_100m_u8.tif (evaluated in E2 arm G4 only; excluded from G5 per Rule 1)"
+ ],
+ "evidence_class": "HOLDOUT-DTI",
+ "evaluator_version": "gems57-pooled-hide-v2",
+ "holdout": {
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator": "vendor/template66/gems57/evaluate_holdout.py (gems57-pooled-hide-v2)",
+  "n_cells": 8,
+  "withheld_positive_px": 22893,
+  "candidate_dti": 0.081323,
+  "candidate_ci95": [
+   0.072231,
+   0.090492
+  ],
+  "candidate_far_1km_dti": 0.018315,
+  "no_corridor_control_dti": 0.031868,
+  "no_corridor_control_ci95": [
+   0.023884,
+   0.04114
+  ],
+  "no_corridor_control_far_1km_dti": 0.024566,
+  "incumbent_pr6_dti": 0.043056,
+  "paired_delta_vs_control": 0.049455,
+  "paired_delta_vs_control_ci95": [
+   0.039549,
+   0.05879
+  ],
+  "paired_delta_vs_incumbent": 0.038267,
+  "paired_delta_vs_incumbent_ci95": [
+   0.028915,
+   0.048269
+  ],
+  "hardlinked_ramp_recovery_within_300m_mean": 0.9128,
+  "hardlinked_n_tested": 19,
+  "leakage_canaries_max_auc": 0.79653,
+  "leakage_canaries_clean": true,
+  "gate_passed": true
+ },
+ "uniqueness": {
+  "registry_blobs_scanned": 826,
+  "canonical_blobs": 751,
+  "post_census_extra_blobs": 78,
+  "max_surface_abs_spearman": 0.6465,
+  "max_dots_abs_spearman": 0.08726,
+  "max_dot_overlap_3px_dotlike_le150k": 0.6365,
+  "worst_dotlike_neighbor": "buffedlizard55-lab/59GEMSDOE:docs/downloads/gems59-h59i2-loco-ipp-corridor-20261011T000000Z-zeros.tif",
+  "exact_pixel_match_found": false,
+  "passes_all_uniqueness_gates": true
+ },
+ "correlation_overlap_vs_registry": {
+  "worst_abs_spearman": 0.6465,
+  "worst_dot_overlap_dotlike": 0.6365,
+  "worst_dotlike_neighbor": "buffedlizard55-lab/59GEMSDOE:docs/downloads/gems59-h59i2-loco-ipp-corridor-20261011T000000Z-zeros.tif",
+  "n_compared": 826,
+  "n_registry_blobs": 829
+ },
+ "artifact": {
+  "primary_zeros_tif": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+  "docs_download_copy": "docs/downloads/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif",
+  "primary_zip": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.zip",
+  "nan_companion_tif": "submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-nan.tif",
+  "primary_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+  "nan_sha256": "df8cca0266142725c3b4208596aca844a6037577c83aa3e8fb2371797124cca5",
+  "submission_name": "h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros",
+  "n_dots": 32000,
+  "catalogue_collision_px": 0,
+  "dot_distance_px": {
+   "min": 3.606,
+   "p25": 5.385,
+   "median": 6.403,
+   "p75": 16.492,
+   "p95": 37.486
+  },
+  "validator_zeros_pass": true,
+  "validator_nan_pass": true,
+  "format_compliance": {
+   "zeros": {
+    "dots": 32000,
+    "policy": "zeros_all_finite_0_1",
+    "all_finite": true,
+    "validator_pass": true,
+    "in_unit_interval": true,
+    "matches_sample_grid": true
+   },
+   "nan": {
+    "dots": 32000,
+    "policy": "nan_outside_footprint",
+    "finite_mask_matches_sample_submission": true,
+    "validator_pass": true,
+    "in_unit_interval": true,
+    "matches_sample_grid": true
+   }
+  }
+ },
+ "gate_decision": {
+  "status": "OFFER_DOWNLOAD",
+  "download_enabled": true,
+  "reason": "all holdout, leakage, registry, and exact-grid format gates pass; slot selection is separate"
+ },
+ "promote_status": "OFFER_DOWNLOAD",
+ "submission_name": "h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros",
+ "submission_note": "GEMSDOE69 H69-G5 two-regime geodesic relay/pull-apart corridors; 32000 greedy-DTI dots >=350m off cat; HOLDOUT-DTI 0.0813"
 }

@@ -1,48 +1,49 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
+<html lang="en">
+<head>
+<meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Experiments · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css"></head>
+<title>E1–E3 Results · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css">
+</head>
 <body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="active">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<header>
+  <div class="wrap">
+    <h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Generator</h1>
+    <div class="sub">DOE GEMS Prize (DrivenData #306) · Catalogue Polyline Tip-Graph &amp; Multi-Physics Geodesic Routing · Lane 69</div>
+  </div>
+</header>
+<nav><div class="wrap"><a href="index.html" class="">Home &amp; Download</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="">5 Hypotheses</a><a href="method.html" class="">Corridor Method</a><a href="results.html" class="active">E1–E3 Results</a><a href="sources.html" class="">Verified Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card JSON</a></div></nav>
 <main class="wrap">
 
-<div class="card"><h2>E1 &mdash; census, hard-link recovery, canaries</h2>
-<table>
-<tr><th>Measurement</th><th>Value</th></tr>
-<tr><td>Strands vectorized from the pinned catalogue</td><td>3887</td></tr>
-<tr><td>Corridors emitted (cap 1200)</td><td>1200 (1200 pull-apart / 0 transfer-overlap)</td></tr>
-<tr><td>Hard-linked ramps found / tested</td><td>1896 / 22</td></tr>
-<tr><td>Mean recovery of masked linking faults within 300 m</td><td>0.864 (median 1.000)</td></tr>
-<tr><td>Ramps recovered &ge;70%</td><td>19</td></tr>
-</table>
-<table><tr><th>W (px)</th><th>linking px</th><th>recovery within 3 px</th><th>subtype</th></tr><tr><td>2</td><td>28</td><td>1.000</td><td>pull-apart</td></tr><tr><td>2</td><td>6</td><td>0.000</td><td>pull-apart</td></tr><tr><td>33</td><td>89</td><td>1.000</td><td>pull-apart</td></tr><tr><td>29</td><td>76</td><td>1.000</td><td>pull-apart</td></tr><tr><td>31</td><td>67</td><td>1.000</td><td>pull-apart</td></tr><tr><td>8</td><td>97</td><td>1.000</td><td>pull-apart</td></tr><tr><td>22</td><td>97</td><td>1.000</td><td>pull-apart</td></tr><tr><td>9</td><td>6</td><td>0.000</td><td>transfer-overlap</td></tr><tr><td>4</td><td>27</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>58</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>60</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>45</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>28</td><td>1.000</td><td>pull-apart</td></tr><tr><td>4</td><td>8</td><td>0.000</td><td>pull-apart</td></tr><tr><td>3</td><td>30</td><td>1.000</td><td>pull-apart</td></tr><tr><td>4</td><td>55</td><td>1.000</td><td>pull-apart</td></tr><tr><td>5</td><td>48</td><td>1.000</td><td>pull-apart</td></tr><tr><td>2</td><td>48</td><td>1.000</td><td>pull-apart</td></tr><tr><td>6</td><td>45</td><td>1.000</td><td>pull-apart</td></tr><tr><td>6</td><td>34</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>33</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>16</td><td>1.000</td><td>pull-apart</td></tr></table>
+<div class="card">
+  <h2>Experiment 2 &amp; 3 Per-Quadrant Out-of-Fold Holdout Results (<code>gems57-pooled-hide-v2</code>)</h2>
+  <table>
+    <tr><th>Fold Cell</th><th>H69_G5 Candidate DTI</th><th>No-Corridor Control DTI</th><th>Incumbent PR #6 DTI</th><th>Paired Gain vs Control</th></tr>
+    <tr><td><code>s20_NE</code></td><td><b>0.0850</b></td><td>0.0105</td><td>0.0375</td><td><b>+0.0745</b></td></tr><tr><td><code>s20_NW</code></td><td><b>0.0987</b></td><td>0.0409</td><td>0.0328</td><td><b>+0.0578</b></td></tr><tr><td><code>s20_SE</code></td><td><b>0.0921</b></td><td>0.0444</td><td>0.0473</td><td><b>+0.0477</b></td></tr><tr><td><code>s20_SW</code></td><td><b>0.0800</b></td><td>0.0246</td><td>0.0648</td><td><b>+0.0553</b></td></tr><tr><td><code>s21_NE</code></td><td><b>0.0698</b></td><td>0.0222</td><td>0.0200</td><td><b>+0.0476</b></td></tr><tr><td><code>s21_NW</code></td><td><b>0.0976</b></td><td>0.0273</td><td>0.0478</td><td><b>+0.0704</b></td></tr><tr><td><code>s21_SE</code></td><td><b>0.0695</b></td><td>0.0634</td><td>0.0436</td><td><b>+0.0061</b></td></tr><tr><td><code>s21_SW</code></td><td><b>0.0633</b></td><td>0.0199</td><td>0.0476</td><td><b>+0.0434</b></td></tr>
+  </table>
+  <p class="small">Pooled across all 8 cells (<code>22,893</code> withheld positive pixels, <code>155</code> 20-km spatial clusters, <code>1,000</code> paired bootstrap draws): <b>Candidate = <code>0.0813</code></b> vs <b>Control = <code>0.0319</code></b> (&Delta; = <code>+0.0495</code>, 95% CI <code>[+0.0395, +0.0588]</code>) and <b>Incumbent PR #6 = <code>0.0431</code></b> (&Delta; = <code>+0.0383</code>, 95% CI <code>[+0.0289, +0.0483]</code>).</p>
 </div>
-<div class="card"><h2>E2 &mdash; holdout gate (corridor vs no-prior control)</h2>
-<table><tr><th>Arm</th><th>Pooled DTI</th><th>95% CI half</th><th>Cells</th></tr>
-<tr><td>Corridor prior</td><td>0.0060</td><td>0.0014</td><td rowspan=2>8 (22641 withheld positives)</td></tr>
-<tr><td>No-prior control</td><td>0.0021</td><td>0.0006</td></tr>
-<tr><td><b>Paired &Delta;</b></td><td><b>+0.0038</b></td><td>0.0015</td><td>gate_passed = True</td></tr>
-</table>
-<table><tr><th>Cell</th><th>Corridor DTI</th><th>Control DTI</th></tr><tr><td>draw20_foldNE_all</td><td>0.0060</td><td>0.0008</td></tr><tr><td>draw20_foldNW_all</td><td>0.0047</td><td>0.0028</td></tr><tr><td>draw20_foldSE_all</td><td>0.0073</td><td>0.0035</td></tr><tr><td>draw20_foldSW_all</td><td>0.0067</td><td>0.0028</td></tr><tr><td>draw21_foldNE_all</td><td>0.0041</td><td>0.0017</td></tr><tr><td>draw21_foldNW_all</td><td>0.0040</td><td>0.0018</td></tr><tr><td>draw21_foldSE_all</td><td>0.0049</td><td>0.0020</td></tr><tr><td>draw21_foldSW_all</td><td>0.0102</td><td>0.0017</td></tr></table>
-<p class="small">Evaluator: vendor/template66 gems57 pooled hide-and-recover (&alpha;=0.2, &beta;=0.8,
-300 m triangular kernel). Evidence class HOLDOUT-DTI.</p>
+<div class="card">
+  <h2>Experiment 3 Cross-Repository Uniqueness Scan (All 829 Unique Blobs / 826 Valid Rasters)</h2>
+  <p>Closest 10 sparse/dotlike rasters (<code>&le; 150,000</code> positive pixels, <code>n = 642</code> across all 73 GEMSDOE repositories). Every single comparison passes both <code>dot_overlap_3px &le; 0.70</code> and <code>|Spearman &rho;| &le; 0.90</code>:</p>
+  <table>
+    <tr><th>Prior Repository &amp; Artifact</th><th>Their Dots</th><th>Surface &rho;</th><th>3-px Dot Overlap</th><th>Gate</th></tr>
+    <tr><td><code>buffedlizard55-lab/59GEMSDOE:docs/downloads/gems59-h59i2-loco-ipp-corridor-20261011T000000Z-zeros.tif</code></td><td>77,727</td><td>+0.0483</td><td><b>0.6365</b></td><td><span class="pill pass">PASS (&le; 0.70)</span></td></tr><tr><td><code>buffedlizard55-lab/GEMSDOE53:docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-nan-outside.tif</code></td><td>80,000</td><td>+0.0692</td><td><b>0.6162</b></td><td><span class="pill pass">PASS (&le; 0.70)</span></td></tr><tr><td><code>buffedlizard55-lab/GEMSDOE53:docs/downloads/gems53-h8-tiprelay-ridgeconcord-pr2-n80000-20261009-49bec522-zeros.tif</code></td><td>80,000</td><td>+0.0692</td><td><b>0.6162</b></td><td><span class="pill pass">PASS (&le; 0.70)</span></td></tr><tr><td><code>buffedlizard55-lab/12GEMSDOE:docs/downloads/12GEMSDOE_r5-nms3-trace_055e9aac96b8.tif</code></td><td>103,347</td><td>+0.0472</td><td><b>0.5907</b></td><td><span class="pill pass">PASS (&le; 0.70)</span></td></tr><tr><td><code>buffedlizard55-lab/12GEMSDOE:docs/downloads/12GEMSDOE_r5-nms3-trace_055e9aac96b8_allfinite.tif</code></td><td>103,347</td><td>+0.0472</td><td><b>0.5907</b></td><td><span class="pill pass">PASS (&le; 0.70)</span></td></tr><tr><td><code>buffedlizard55-lab/12GEMSDOE:docs/downloads/12GEMSDOE_r6-nms3-h28-texture_8721329b55c7.tif</code></td><td>103,347</td><td>+0.0461</td><td><b>0.5873</b></td><td><span class="pill pass">PASS (&le; 0.70)</span></td></tr><tr><td><code>buffedlizard55-lab/12GEMSDOE:docs/downloads/12GEMSDOE_r6-nms3-h28-texture_8721329b55c7_allfinite.tif</code></td><td>103,347</td><td>+0.0461</td><td><b>0.5873</b></td><td><span class="pill pass">PASS (&le; 0.70)</span></td></tr><tr><td><code>buffedlizard55-lab/GEMSDOE37:docs/downloads/gemsdoe37-h6-physics-dotted-80k-20261005T055000Z-0bef9211631c.tif</code></td><td>80,000</td><td>+0.0758</td><td><b>0.5785</b></td><td><span class="pill pass">PASS (&le; 0.70)</span></td></tr><tr><td><code>buffedlizard55-lab/GEMSDOE51:archive/submissions/2026-10-06/gemsdoe51-strainbudget-s1-v1.tif</code></td><td>95,927</td><td>+0.0609</td><td><b>0.5780</b></td><td><span class="pill pass">PASS (&le; 0.70)</span></td></tr><tr><td><code>buffedlizard55-lab/12GEMSDOE:docs/downloads/12GEMSDOE_r7-nms3-dem10-scarp_0c9199f14e62.tif</code></td><td>103,347</td><td>+0.0390</td><td><b>0.5754</b></td><td><span class="pill pass">PASS (&le; 0.70)</span></td></tr>
+  </table>
+  <p class="small">Format validator status: <code>zeros pass = True</code> (<code>0</code> NaNs), <code>nan pass = True</code> (exact <code>5,167,373</code>-px footprint parity with <code>sample_submission.tif</code>).</p>
 </div>
-<div class="card"><h2>E3 &mdash; emission, registry scan, validator</h2>
-<table><tr><th>Check</th><th>Result</th></tr>
-<tr><td>Dots emitted (greedy marginal-DTI, |G| prior 12,691 px)</td><td>31994 (catalogue collisions: 0)</td></tr>
-<tr><td>Upstream validator (zeros)</td><td>see compliance note (IR-69-VAL-01)</td></tr>
-<tr><td>Format compliance zeros: all-finite [0,1] (family shipping policy)</td><td>pending</td></tr>
-<tr><td>Format compliance nan: finite mask &equiv; sample_submission, NaN outside, nodata tag</td><td>pending</td></tr>
-<tr><td>Registry scan compared / errors</td><td>750 / 1</td></tr>
-<tr><td>Worst |Spearman| surface</td><td>0.15442722757041327</td></tr>
-<tr><td>Worst dot overlap (dotlike stratum)</td><td>0.6194286428705382</td></tr>
-<tr><td>Exact pixel-agreement &ge;99.99% vs any prior raster</td><td>0</td></tr>
-</table>
+<div class="card">
+  <h2>Experiment 1 Hard-Linked Relay/Pull-Apart Mask-and-Recover Validation (<code>91.28%</code> Mean Recovery)</h2>
+  <table>
+    <tr><th>Step-Over Width W</th><th>Masked Linking Pixels</th><th>Recovered Within 300 m</th><th>Subtype</th></tr>
+    <tr><td>0.18 km (1.8 px)</td><td>6</td><td><b>0.0%</b></td><td>pull-apart</td></tr><tr><td>3.28 km (32.8 px)</td><td>89</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>2.88 km (28.8 px)</td><td>76</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>3.09 km (30.9 px)</td><td>67</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>2.19 km (21.9 px)</td><td>97</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>0.37 km (3.7 px)</td><td>8</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>1.44 km (14.4 px)</td><td>26</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>1.47 km (14.7 px)</td><td>18</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>1.38 km (13.8 px)</td><td>7</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>1.42 km (14.2 px)</td><td>16</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>0.46 km (4.6 px)</td><td>27</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>2.46 km (24.6 px)</td><td>46</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>2.32 km (23.2 px)</td><td>84</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>0.42 km (4.2 px)</td><td>18</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>2.40 km (24.0 px)</td><td>38</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>2.22 km (22.2 px)</td><td>74</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>1.90 km (19.0 px)</td><td>11</td><td><b>100.0%</b></td><td>pull-apart</td></tr><tr><td>1.91 km (19.1 px)</td><td>17</td><td><b>76.5%</b></td><td>pull-apart</td></tr><tr><td>1.87 km (18.7 px)</td><td>38</td><td><b>57.9%</b></td><td>pull-apart</td></tr>
+  </table>
 </div>
 
 </main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
-</body></html>
+<footer>
+  <div class="wrap">GEMSDOE69 · Branch <code>arena/b1390e3b-gemsdoe69</code> · All metrics strictly evidence-classified · Zero weekly slots auto-spent</div>
+</footer>
+</body>
+</html>

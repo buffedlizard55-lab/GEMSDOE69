@@ -30,13 +30,18 @@ def main() -> int:
     receipts = sorted((ROOT / "docs" / "receipts").glob("*.json")) if (ROOT / "docs" / "receipts").exists() else []
     receipt = json.loads(receipts[-1].read_text()) if receipts else None
     decision = gate.decide(receipt)
+    cand_name = (
+        receipt.get("submission_name")
+        if (receipt and decision["download_enabled"])
+        else None
+    )
     status = {
         "generated_utc": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "official_data": data,
         "all_official_files_present": all(v["present"] for v in data.values()),
         "gate": decision,
         "download_enabled": decision["download_enabled"],
-        "candidate_submission": None,
+        "candidate_submission": cand_name,
     }
     out = ROOT / "docs" / "status.json"
     out.write_text(json.dumps(status, indent=2) + "\n")

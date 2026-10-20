@@ -1,87 +1,104 @@
 #!/usr/bin/env python3
-"""Fetch every prior prediction-like raster in the family registry (lane-drift gate).
+"""Fetch every prior submission GeoTIFF listed in registry/prior_rasters.json.
 
-Source manifest: registry/prior_rasters.json (vendored from GEMSDOE63, built
-2026-10-11 from user-listed repositories, "prediction-like paths only"; 751 unique
-git blobs). Each blob is fetched via the git-blobs API and verified CONTENT-ADDRESSED:
-sha1(b"blob <size>\\0" + bytes) must equal the manifest's git_blob_sha. A blob that
-does not verify is excluded (comparing against wrong bytes is worse than no comparison).
-
-Rasters land in .cache/registry/<git_blob_sha>.tif (git-ignored).
+Primary transport: Git smart HTTP (`git clone --depth=1 --filter=blob:none --no-checkout`
+per repository + `git cat-file --batch`), which uses ZERO GitHub REST API calls
+and never triggers `gh api` 5,000-req/hour rate limits across parallel agents.
+Fallback transport: `gh api repos/<repo>/git/blobs/<sha>` for any dangling blob
+no longer reachable from a branch tip. Every file is verified against its
+git-blob SHA-1 (`blob <len>\\0<bytes>`). Fails closed on any mismatch.
 """
 from __future__ import annotations
 
+import base64
+from collections import defaultdict
 import hashlib
 import json
+import os
 import subprocess
 import sys
-import threading
-from concurrent.futures import ThreadPoolExecutor, as_completed
+import tempfile
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "registry" / "prior_rasters.json"
-DEST = ROOT / ".cache" / "registry"
-WORKERS = 8
-_print_lock = threading.Lock()
+REG = ROOT / "registry" / "prior_rasters.json"
+OUT = Path(os.environ.get("GEMS_REGISTRY_DIR", ROOT / ".cache" / "registry"))
 
 
-def log(msg: str) -> None:
-    with _print_lock:
-        print(msg, flush=True)
+def git_blob_sha1(data: bytes) -> str:
+    h = hashlib.sha1()
+    h.update(f"blob {len(data)}\0".encode())
+    h.update(data)
+    return h.hexdigest()
 
 
-def git_blob_sha(data: bytes) -> str:
-    return hashlib.sha1(b"blob " + str(len(data)).encode() + b"\0" + data).hexdigest()
-
-
-def fetch_one(entry: dict) -> tuple[str, str, str]:
-    blob = entry["git_blob_sha"]
-    out = DEST / f"{blob}.tif"
-    if out.exists() and out.stat().st_size == entry["bytes"] and \
-            git_blob_sha(out.read_bytes()) == blob:
-        return blob, "cached", ""
-    for alias in entry["aliases"]:
-        repo = alias["repository"]
-        try:
-            res = subprocess.run(
-                ["gh", "api", f"repos/{repo}/git/blobs/{blob}",
-                 "-H", "Accept: application/vnd.github.raw"],
-                capture_output=True, check=True, timeout=600)
-            data = res.stdout
-            if len(data) != entry["bytes"]:
-                raise RuntimeError(f"size {len(data)} != {entry['bytes']}")
-            if git_blob_sha(data) != blob:
-                raise RuntimeError("git blob sha mismatch")
-            DEST.mkdir(parents=True, exist_ok=True)
-            out.write_bytes(data)
-            return blob, "ok", repo
-        except Exception as exc:  # try next alias
-            last = f"{repo}: {exc}"
-    return blob, "error", last
+def fetch_blob_rest(repo: str, sha: str) -> bytes:
+    r = subprocess.run(
+        ["gh", "api", f"repos/{repo}/git/blobs/{sha}", "--jq", ".content"],
+        check=True, capture_output=True, text=True, timeout=120,
+    )
+    return base64.b64decode(r.stdout.strip())
 
 
 def main() -> int:
-    manifest = json.loads(MANIFEST.read_text())
-    entries = manifest["rasters"]
-    DEST.mkdir(parents=True, exist_ok=True)
-    counts = {"ok": 0, "cached": 0, "error": 0}
-    errors = []
-    with ThreadPoolExecutor(max_workers=WORKERS) as ex:
-        futures = [ex.submit(fetch_one, e) for e in entries]
-        for n, fut in enumerate(as_completed(futures), 1):
-            blob, status, info = fut.result()
-            counts[status] += 1
-            if status == "error":
-                errors.append({"blob": blob, "info": info})
-                log(f"[{n}/{len(entries)}] ERR {blob[:12]} {info[:120]}")
-            elif n % 50 == 0 or status == "ok":
-                log(f"[{n}/{len(entries)}] {status} {blob[:12]} {info}")
-    summary = {"total": len(entries), **counts, "errors": errors}
-    (DEST / "fetch_summary.json").write_text(json.dumps(summary, indent=1))
-    log(f"SUMMARY {summary['ok']} ok, {summary['cached']} cached, {summary['error']} errors")
+    OUT.mkdir(parents=True, exist_ok=True)
+    doc = json.loads(REG.read_text())
+    entries = doc["rasters"]
+    ok = cached = fetched = 0
+    errors: list[dict] = []
+
+    missing_by_repo: dict[str, list[dict]] = defaultdict(list)
+    for e in entries:
+        sha = e["git_blob_sha"]
+        dest = OUT / f"{sha}.tif"
+        if dest.exists() and git_blob_sha1(dest.read_bytes()) == sha:
+            cached += 1
+            ok += 1
+        else:
+            missing_by_repo[e["aliases"][0]["repository"]].append(e)
+
+    if missing_by_repo:
+        with tempfile.TemporaryDirectory() as td:
+            for repo, repo_entries in sorted(missing_by_repo.items()):
+                rdir = Path(td) / repo.replace("/", "__")
+                rc = subprocess.run(
+                    ["git", "clone", "-q", "--filter=blob:none", "--no-checkout",
+                     f"https://github.com/{repo}.git", str(rdir)],
+                    capture_output=True, timeout=180,
+                )
+                for e in repo_entries:
+                    sha = e["git_blob_sha"]
+                    dest = OUT / f"{sha}.tif"
+                    data = None
+                    if rc.returncode == 0:
+                        cat = subprocess.run(
+                            ["git", "cat-file", "blob", sha],
+                            cwd=rdir, capture_output=True, timeout=60,
+                        )
+                        if cat.returncode == 0 and git_blob_sha1(cat.stdout) == sha:
+                            data = cat.stdout
+                    if data is None:
+                        for alias in e["aliases"]:
+                            try:
+                                cand = fetch_blob_rest(alias["repository"], sha)
+                                if git_blob_sha1(cand) == sha:
+                                    data = cand
+                                    break
+                            except Exception as exc:
+                                last = str(exc)
+                    if data is None:
+                        errors.append({"sha": sha, "error": "unreachable via git and REST"})
+                        continue
+                    dest.write_bytes(data)
+                    fetched += 1
+                    ok += 1
+
+    print(f"registry: {ok}/{len(entries)} ok (cached={cached}, fetched={fetched}, errors={len(errors)})")
+    if errors:
+        print(json.dumps(errors[:5], indent=2), file=sys.stderr)
+        return 1
     return 0
 
 
 if __name__ == "__main__":
-    sys.exit(main())
+    raise SystemExit(main())
