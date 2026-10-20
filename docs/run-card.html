@@ -6,16 +6,16 @@
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
 <div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="active">Run Card</a></div></nav>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">H33 Source Audit</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="active">Run Card</a></div></nav>
 <main class="wrap">
 <div class="card"><h2>Run card (JSON)</h2><pre>{
- &quot;generated_utc&quot;: &quot;2026-10-20T21:10:54.604517+00:00&quot;,
+ &quot;generated_utc&quot;: &quot;2026-10-20T21:45:47.280399+00:00&quot;,
  &quot;lane&quot;: &quot;GEMSDOE69 relay-ramp &amp; pull-apart corridor generator&quot;,
- &quot;hypothesis&quot;: &quot;H69-J: convergent multi-scale HG+tilt edge phase across relay connectors (H1)&quot;,
- &quot;mechanism&quot;: &quot;Tip-graph corridor proposals scored by joint grav+mag HG and tilt coincidence (AND logic, min(E_grav,E_mag) 0.35), mag low gated by joint, lidar scarp, N-NE orientation, pull-apart prior; greedy marginal-DTI placement. Targets buried relay linkage between step-over tips separating basement blocks.&quot;,
- &quot;non_fault_mimic&quot;: &quot;Lithologic intrusive contacts and basin edges produce single-physics HG without paired opposite-polarity tilt; alluvial composition alters radiometrics but not joint grav+mag edge coincidence. Pluvial shorelines mimic scarps but lack paired HG ridges.&quot;,
+ &quot;hypothesis&quot;: &quot;Archived H69-J convergent HG+tilt relay-connector screen; no new candidate tested in this review.&quot;,
+ &quot;mechanism&quot;: &quot;Archived tip-graph corridor proposals used joint gravity/magnetic HG and tilt coincidence, magnetic-low, lidar-scarp, orientation, and pull-apart terms with greedy marginal-DTI placement. The current review does not treat those historical bytes as a promotion.&quot;,
+ &quot;non_fault_mimic&quot;: &quot;Lithologic intrusive contacts, basin edges, alluvial composition, pluvial shorelines, and terrace/road scarps can mimic the archived geophysical or lidar signatures.&quot;,
  &quot;holdout&quot;: {
-  &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
+  &quot;evidence_class&quot;: &quot;ARCHIVED HOLDOUT-DTI (not artifact-bound on this checkout)&quot;,
   &quot;evaluator_version&quot;: &quot;vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20,21] modes=[all])&quot;,
   &quot;dti&quot;: 0.00591266418023039,
   &quot;ci95&quot;: [
@@ -26,6 +26,7 @@
   &quot;n_cells&quot;: 8,
   &quot;comparator_dti&quot;: 0.0021479253641536293,
   &quot;paired_delta&quot;: 0.0037647388160767605,
+  &quot;artifact_hash_bound&quot;: false,
   &quot;uncertainty_note&quot;: &quot;Archived normal-approximation interval across repeated cells; not an independent block bootstrap. Not rerun this session.&quot;
  },
  &quot;correlation_overlap_vs_registry&quot;: {
@@ -99,6 +100,7 @@
   &quot;verdict&quot;: &quot;negative&quot;,
   &quot;download_enabled&quot;: false,
   &quot;reasons&quot;: [
+   &quot;Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified dotlike overlap is diagnostic only and cannot override the literal protocol.&quot;,
    &quot;Holdout comparison is missing or not bound to the current artifact hash.&quot;,
    &quot;Reproducible method source manifest is missing, stale, or not artifact-bound.&quot;
   ],

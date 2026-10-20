@@ -2,6 +2,7 @@
   "verdict": "negative",
   "download_enabled": false,
   "reasons": [
+    "Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified dotlike overlap is diagnostic only and cannot override the literal protocol.",
     "Holdout comparison is missing or not bound to the current artifact hash.",
     "Reproducible method source manifest is missing, stale, or not artifact-bound."
   ],

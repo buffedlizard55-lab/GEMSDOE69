@@ -47,6 +47,15 @@ def test_missing_evidence_fails_closed(tmp_path):
     assert policy.evaluate(tmp_path)['verdict'] == 'negative'
 
 
+def test_write_card_records_hash_bound_holdout(cleared):
+    # Exercise the CLI/card path as well as evaluate(); this caught a prior
+    # local-variable binding error in the publication metadata writer.
+    card = policy.write_card(cleared)
+    assert card['verdict'] == 'promote'
+    assert card['holdout']['evidence_class'] == 'HOLDOUT-DTI'
+    assert card['holdout']['artifact_hash_bound'] is True
+
+
 @pytest.mark.parametrize('phase', ['surface', 'dots'])
 def test_stale_phase_blocks(cleared, phase):
     put(cleared, f'e3_uniqueness_{phase}.json', {'phases': {phase: {'summary': dict(
@@ -55,11 +64,18 @@ def test_stale_phase_blocks(cleared, phase):
 
 
 def test_stratified_gate_cannot_override_literal_failure(cleared):
+    # Deliberately make the historical diagnostic fully qualifying.  The
+    # publication policy must still fail because the user specified the
+    # literal all-registry overlap gate, not a dense-support exception.
     u = policy.read(cleared, 'e3_uniqueness.json')
     u['literal_gate']['overlap_ok'] = False
     u['stratified_gate'] = {'dotlike_overlap_ok': True}
+    u['worst_dot_overlap_dotlike'] = {'dot_overlap_3px': 0.01}
     put(cleared, 'e3_uniqueness.json', u)
-    assert policy.evaluate(cleared)['verdict'] == 'negative'
+    decision = policy.evaluate(cleared)
+    assert decision['verdict'] == 'negative'
+    assert decision['download_enabled'] is False
+    assert any('Literal registry dot-overlap gate failed' in r for r in decision['reasons'])
 
 
 @pytest.mark.parametrize('change', ['missing', 'modified', 'validator', 'registry_error', 'holdout'])
@@ -90,6 +106,7 @@ def test_current_repo_fails_closed_until_h69j_rebound():
     result = policy.evaluate()
     assert result['verdict'] == 'negative'
     assert result['download_enabled'] is False
+    assert any('Literal registry dot-overlap gate failed' in reason for reason in result['reasons'])
     assert any('method source manifest' in reason for reason in result['reasons'])
 
 

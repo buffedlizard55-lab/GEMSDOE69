@@ -22,9 +22,15 @@ Two candidates exist in `submissions/`; neither is currently downloadable:
 
 ## Needed upstream
 
-One selector ruling on overlap policy: literal (this session) vs
-stratified dotlike (H69-J session). Until then both stay unsubmitted.
-Exp1 findings stand: H69-F subsurface and H69-G radiometric arms not
-established; Exp1 v1 emission is a logged duplicate. Tip-graph R1/R2
-repairs + 100 tests are on the tree. No slot was spent by this session.
-Negative results are deliverables.
+The literal overlap rule is now the enforced publication policy: a dotlike
+stratification is diagnostic only. The protocol owner must either provide a
+well-defined registry-support rule that permits a meaningful literal test or
+explicitly amend the standing protocol. Do not relax it locally. Until then
+both candidates stay unsubmitted, even if their science/format receipts pass.
+
+If and only if that upstream policy changes, first re-run H69-J from the
+repaired generator and bind a fresh holdout, two-phase scan, canaries, and
+method manifest to its exact SHA-256. Exp1 findings stand: H69-F subsurface
+and H69-G radiometric arms not established; Exp1 v1 emission is a logged
+duplicate. Tip-graph R1/R2 repairs + tests are on the tree. No slot was spent
+by this session. Negative results are deliverables.
