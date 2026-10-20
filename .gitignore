@@ -4,3 +4,7 @@ __pycache__/
 .venv/
 registry/rasters/
 data/raw/
+data/bridge/training_features.tif
+data/bridge/z_stack.npz
+data/bridge/layer_stats.json
+data/bridge/external/

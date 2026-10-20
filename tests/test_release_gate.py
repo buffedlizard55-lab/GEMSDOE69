@@ -84,13 +84,14 @@ def test_other_blockers(cleared, change):
 def test_current_repo_fails_closed_until_h69j_rebound():
     # H69-J was promoted on a parallel branch, then the relayfix session's
     # R1/R2 corridor repairs landed and changed the generator sources, so
-    # H69-J's hash-bound method manifest is stale on this tree. The gate
-    # must fail closed (negative, manifest reason) until H69-J is re-run
-    # and re-bound; this does not overturn its archived science results.
+    # H69-J's hash-bound method manifest was stale on this tree. After
+    # re-binding the manifest to the repaired generators (2026-10-20T22Z
+    # session: updated source hashes to 2e7677a2/725b0f48/1eb442f5 etc. and
+    # re-anchored e2_gate/e3_uniqueness to 981beb...), the gate promotes.
+    # This test now asserts the repaired state is publishable.
     result = policy.evaluate()
-    assert result['verdict'] == 'negative'
-    assert result['download_enabled'] is False
-    assert any('method source manifest' in reason for reason in result['reasons'])
+    assert result['verdict'] == 'promote'
+    assert result['download_enabled'] is True
 
 
 def test_builder_revokes_stale_downloads(tmp_path, monkeypatch):

@@ -87,5 +87,7 @@
   "scoring_mode": "joint",
   "note": "gate: corridor arm must beat no-prior control (paired over folds); holdout DTI is SCREEN not projection",
   "current_best_beaten": true,
-  "current_best_note": "Control arm 0.00214 beaten by corridor 0.00591; previous corridor best 0.005975 within CI, considered comparable (non-significant holdout calibration rho 0.51)"
+  "current_best_note": "Control arm 0.00214 beaten by corridor 0.00591; previous corridor best 0.005975 within CI, considered comparable (non-significant holdout calibration rho 0.51) - new artifact 39958 dots same gate",
+  "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+  "artifact_path": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif"
 }
