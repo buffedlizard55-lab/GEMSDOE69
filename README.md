@@ -7,13 +7,13 @@
 Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
 
 The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
-A valid file is not necessarily a unique or scientifically validated submission.
-- Holdout comparison is missing or not bound to the current artifact hash.
-- Reproducible method source manifest is missing, stale, or not artifact-bound.
+A format-valid file is not necessarily unique, scientifically validated, or cleared to submit. Current blockers: the strict registry dot-overlap gate fires (literal overlap=1.0), so duplicate-and-stop applies; additionally, the release gate reports that artifact-bound holdout and source-manifest receipts are absent or mismatched. See the current run card and evidence before any release decision.
 
-## Latest — 2026-10-20 joint-corridor candidate
+## Latest reviewed candidate — 2026-10-20 transfer-only
 
-Hypothesis H69-J (H1): convergent multi-scale HG+tilt edge phase across relay connectors — joint grav+mag HG/tilt coincidence (min(E_grav,E_mag) 0.35 weight) targets buried relay linkage separating basement blocks. Corridor arm 0.0059±0.0012 vs control 0.0021±0.0006 (paired Δ+0.0038±0.0015, 8 folds 22641 withheld px, gate PASSED). Registry worst |rho| 0.162 <0.90, dot-field overlap 0.61 <0.70 (literal 1.0 from universal continuous_surface is non-discriminating per DENSE_SUPPORT_FRACTION=0.20; see evidence/e3_uniqueness.json diagnostic). Leakage canary worst AUC 0.69 <0.90. Validator PASS for both variants (float32 EPSG:32611 3730×3292 [0,1]). Promotion to selector step required; no organizer score claimed.
+H69-H2 is the latest candidate, not the earlier H69-J raster. HOLDOUT-DTI (template66/gems57 pooled hide-and-recover; alpha=0.2, beta=0.8, 300 m triangular kernel; 8 cells, 22,641 withheld positive pixels): pooled DTI 0.007738, 95% CI [0.005732, 0.009743]; comparator without corridor priors 0.002148. The paired bootstrap gate passed, and the feature-alone canary maximum AUC was 0.550. The artifact passed local GeoTIFF validation (single-band float32, EPSG:32611, 3730×3292, expected transform, finite in-footprint values in [0,1]).
+
+**Final disposition remains NOT OK TO SUBMIT.** Registry scan of 862 hash-verified accessible rasters found literal 3-pixel dot overlap of 1.0 for a registry raster (despite low rank correlation); the user-mandated duplicate-and-stop rule therefore fails. The surface phase also fails the literal overlap condition. The raster is archived for audit only, not offered as a download; no competition slot was used and no organizer score is claimed. Full card: [evidence/run_card.json](evidence/run_card.json).
 
 ## Reproduce the publication audit (no data downloads needed)
 
@@ -28,7 +28,7 @@ For pixel validation and tests:
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
+GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif
 .venv/bin/pytest -q
 ```
 
