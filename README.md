@@ -46,6 +46,17 @@ All live leaderboard scores (`0.1922 -> 0.2477 -> 0.2600 -> 0.2708 -> 0.2778` an
 
 ---
 
+## Session 3 (2026-10-20): evidence-first corridor selectors, both negative (HOLDOUT-DTI, not organizer scores)
+
+| Experiment | Detached pooled DTI (candidate / no-prior control / transfer_ref) | Δ vs control [95% CI] | Δ vs transfer_ref [95% CI] | Verdict |
+|---|---|---|---|---|
+| H69-M | 0.0286 / 0.0139 / 0.0487 | +0.0141 [+0.0047, +0.0233] | -0.0202 [-0.0248, -0.0160] | **negative** |
+| H69-N | 0.0304 / 0.0139 / 0.0487 | +0.0166 [+0.0108, +0.0222] | -0.0177 [-0.0264, -0.0085] | **negative** |
+
+Evaluator: unmodified `vendor/template66` gems57 holdout (α 0.2, β 0.8, 300 m triangular), seeds 20/21, 8 detached cells, 22,619 withheld positive px, 2,000-resample paired cell bootstrap; allowed mask built from the *visible* catalogue only (instrument fix IR-69-HOLD-01). Both beat the no-prior control but trail transfer_ref, which duplicates GEMSDOE53 (IR-69-REG-03). No raster emitted. Report: [`reports/session3-2026-10-20.md`](reports/session3-2026-10-20.md); pinned code: `src/gems69_s3/`.
+
+---
+
 ## Standing Project Request (Verbatim)
 
 # Current project request — 2026-10-20

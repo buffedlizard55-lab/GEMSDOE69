@@ -1,0 +1,28 @@
+{
+  "id": "H69-N",
+  "title": "Evidence-first corridor selection with a spatial quota (fixes H69-M coverage collapse)",
+  "frozen_utc": "2026-10-20T22:04:26Z",
+  "frozen_before_any_holdout_look": false,
+  "look_disclosure": "Frozen after 4 of 16 H69-M gate cells were visible in the live log. Those cells showed H69-M placing only 208 / 103 dots (DTI 0.0000) in the two draw-20 NE-fold cells because the global top-1,200 by evidence left that fold without corridors. H69-N is designed from that observed failure mode (coverage), NOT from any per-cell DTI ranking; no weight, constant or threshold below was tuned on holdout values. The 4 visible cells are part of the same 16-cell instrument and are not excluded.",
+  "lane": "GEMSDOE69 relay-ramp and pull-apart corridor generator (standing prompt, unchanged)",
+  "experiment_number": "2 of at most 3 this session",
+  "change_vs_H69M": "Only the selection step changes. H69-M: global top 1,200 by connector line score S_line. H69-N: partition the footprint into 200 x 200 px (20 km) tiles; each de-duplicated step-over belongs to the tile of its tip-to-tip midpoint; tile quota q_t = largest-remainder apportionment of 1,200 in proportion to the tile's de-duplicated step-over count n_t; inside each tile keep the top q_t by S_line. Everything else (dedupe, 17 joint layers, <=64 connector samples, S_line weights, corridor_from_pair, score_corridor_joint, build_propensity_joint, allocator, flank rule) is byte-identical to H69-M.",
+  "rationale": "The prompt asks to score corridors and place nodes in the top corridors. Geometry density (where the tip graph has step-overs) decides HOW MANY corridors a region gets; evidence decides WHICH ones. A pure global evidence ranking is dominated by a few high-gradient provinces and abandons regions where hidden faults still exist (observed: NE fold).",
+  "arms": {
+    "control_noprior": "identical to H69-M (no corridor prior; same evidence composite; same allocator)",
+    "transfer_ref": "identical to H69-M (Exp2b transfer-only selector recomputed in-run; current holdout best under the corrected visible-catalogue flank rule IR-69-HOLD-01)",
+    "h69n_evidence_quota": "NEW, as described in change_vs_H69M"
+  },
+  "fixed_constants": {"max_corridors": 1200, "tile_px": 200, "line_samples_max": 64, "S0": 0.75,
+    "allocator": "gems57.emit.greedy_allocate(floor=0.05, max_dots=250000, candidate_cap=300000); k_truth = cell.n_truth in holdout (identical oracle for every arm); 12691 for emission",
+    "flank_rule": "dots only where distance to the VISIBLE catalogue > 2 px"},
+  "instrument": "identical to H69-M: vendor/template66 gems57.holdout.build_holdout(seeds=(20,21), modes=('all','detached')) + score_cell; 16 cells",
+  "endpoints": {"primary": "pooled HOLDOUT-DTI over the 8 detached cells", "secondary": "pooled HOLDOUT-DTI over the 8 all cells", "uncertainty": "paired cell bootstrap, 2000 resamples, default_rng(20261021), 95% percentile CI"},
+  "decision_rules": {
+    "prompt_gate": "h69n pooled > control_noprior pooled on PRIMARY with bootstrap CI lower bound > 0",
+    "current_best": "h69n pooled > transfer_ref pooled on PRIMARY with CI lower bound > 0, AND upper CI bound of (h69n - transfer_ref) on SECONDARY > 0",
+    "leakage_canary": "every layer and arm propensity AUC <= 0.90 in every cell",
+    "uniqueness": "identical to H69-M preregistration (rho <= 0.90 vs every raster of registry_index_69_v2 + own submissions; forward 3 px overlap <= 0.70 vs every dot field and vs rank-matched top-K of every non-binary continuous surface)",
+    "publication": "download offered only if prompt_gate AND current_best AND canary AND uniqueness AND validator pass, bound to artifact SHA-256 by scripts/release_gate.py"
+  }
+}

@@ -15,6 +15,34 @@ if str(ROOT) not in sys.path:
 from scripts.release_gate import evaluate  # noqa: E402
 
 
+def session3_section() -> str:
+    """Session-3 preregistered experiments (H69-M, H69-N), rendered from evidence only."""
+    path = ROOT / "evidence" / "session_experiments.json"
+    if not path.exists():
+        return ""
+    exps = json.loads(path.read_text()).get("experiments", [])
+    rows = []
+    for e in exps:
+        r = e["results"]["primary_detached"]; pd = r["pooled_dti"]; arm = e["candidate_arm"]
+        c, t = r["candidate_minus_control"], r["candidate_minus_transfer_ref"]
+        rows.append(
+            f"| {e['id']} | {pd[arm]:.4f} / {pd['control_noprior']:.4f} / {pd['transfer_ref']:.4f} | "
+            f"{c['mean']:+.4f} [{c['ci95'][0]:+.4f}, {c['ci95'][1]:+.4f}] | "
+            f"{t['mean']:+.4f} [{t['ci95'][0]:+.4f}, {t['ci95'][1]:+.4f}] | **{e.get('verdict', 'negative')}** |")
+    if not rows:
+        return ""
+    n = exps[0]["results"]["primary_detached"]["withheld_positive_px"]
+    return (
+        "## Session 3 (2026-10-20): evidence-first corridor selectors, both negative (HOLDOUT-DTI, not organizer scores)\n\n"
+        "| Experiment | Detached pooled DTI (candidate / no-prior control / transfer_ref) | Δ vs control [95% CI] | "
+        "Δ vs transfer_ref [95% CI] | Verdict |\n|---|---|---|---|---|\n" + "\n".join(rows) + "\n\n"
+        f"Evaluator: unmodified `vendor/template66` gems57 holdout (α 0.2, β 0.8, 300 m triangular), seeds 20/21, "
+        f"8 detached cells, {n:,} withheld positive px, 2,000-resample paired cell bootstrap; allowed mask built from the "
+        "*visible* catalogue only (instrument fix IR-69-HOLD-01). Both beat the no-prior control but trail "
+        "transfer_ref, which duplicates GEMSDOE53 (IR-69-REG-03). No raster emitted. Report: "
+        "[`reports/session3-2026-10-20.md`](reports/session3-2026-10-20.md); pinned code: `src/gems69_s3/`.\n\n---\n\n")
+
+
 def main() -> None:
     decision = evaluate(ROOT)
     status = (
@@ -81,7 +109,7 @@ All live leaderboard scores (`0.1922 -> 0.2477 -> 0.2600 -> 0.2708 -> 0.2778` an
 
 """
     req_text = (ROOT / "PROJECT_REQUEST.md").read_text(encoding="utf-8") if (ROOT / "PROJECT_REQUEST.md").exists() else ""
-    (ROOT / "README.md").write_text(head + req_text, encoding="utf-8")
+    (ROOT / "README.md").write_text(head.replace("## Standing Project Request (Verbatim)", session3_section() + "## Standing Project Request (Verbatim)", 1) + req_text, encoding="utf-8")
 
 
 if __name__ == "__main__":

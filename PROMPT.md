@@ -73,3 +73,17 @@ only makes a candidate eligible for the separate selector and never spends a
 slot. The historical `scripts/run_exp2b_transfer.py` gate/emitter is disabled
 because it used chunked, unbuffered holdouts; do not remove its guard without a
 new authorized shared-tool runner and both literal uniqueness phases passing.
+
+## Active request refresh — 2026-10-20 session 3
+
+The user re-issued the standing prompt unchanged (lane 69 relay-ramp / pull-apart corridor
+generator; parallel-run protocol rules 1–6; 3–5 untried ranked hypotheses validated on the
+spatial holdout before any slot; explain why h33-h33-2-b2 scored 0.2778 and whether a unique
+submission can beat it; obvious OK / DO-NOT-SUBMIT banner with the download at the top;
+executive-summary page on how to submit — single-band .tif or a .zip with one GeoTIFF, matching
+CRS/shape/transform, values in [0, 1], unique name + note ≤140 chars; the user previously hit
+"Predicted values must be in range [0, 1]"; run card JSON; three passes; PR merged to main;
+only free public official data; verify line by line from official sources with links; flag
+irregularities; no hallucinations; no manual input). Core values: Maximize P(Win), Own the Outcome.
+Leaderboard figures 0.2778 / 0.4413 / 0.3774 / 0.3195 remain USER-REPORTED-NOT-ORGANIZER-CONFIRMED.
+Session-3 decisions a human may want to revisit are listed in HANDOFF.md ("Decisions for the user").
