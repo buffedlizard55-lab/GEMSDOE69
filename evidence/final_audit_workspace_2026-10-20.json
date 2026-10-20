@@ -1,0 +1,122 @@
+{
+  "available_python_modules": {
+    "geopandas": false,
+    "numpy": true,
+    "osgeo": false,
+    "pytest": true,
+    "rasterio": true,
+    "scipy": true
+  },
+  "feature_cache_locations": [],
+  "inputs": {
+    "dem_links": {
+      "checked_paths": [
+        "data/1m_DEM_links.csv",
+        "data/raw/1m_DEM_links.csv"
+      ],
+      "path": null,
+      "present": false
+    },
+    "existing_faults": {
+      "checked_paths": [
+        "data/existing_faults.tif",
+        "data/raw/existing_faults.tif"
+      ],
+      "path": null,
+      "present": false
+    },
+    "labels": {
+      "checked_paths": [
+        "data/labels.tif",
+        "data/raw/labels.tif"
+      ],
+      "path": null,
+      "present": false
+    },
+    "sample_submission": {
+      "checked_paths": [
+        "data/sample_submission.tif",
+        "data/raw/sample_submission.tif"
+      ],
+      "path": null,
+      "present": false
+    },
+    "training_features": {
+      "checked_paths": [
+        "data/training_features.tif",
+        "data/raw/training_features.tif"
+      ],
+      "path": null,
+      "present": false
+    }
+  },
+  "missing_prerequisites": [
+    "input:training_features",
+    "input:labels",
+    "input:existing_faults",
+    "input:dem_links",
+    "input:sample_submission"
+  ],
+  "nvidia_smi_available": false,
+  "project_tools": {
+    "dti_metric": {
+      "checked_paths": [
+        "src/gems/metric.py"
+      ],
+      "path": "src/gems/metric.py",
+      "present": true
+    },
+    "format_validator": {
+      "checked_paths": [
+        "src/gems/validate_submission.py"
+      ],
+      "path": "src/gems/validate_submission.py",
+      "present": true
+    },
+    "promotion_gate": {
+      "checked_paths": [
+        "src/gems/gate.py"
+      ],
+      "path": "src/gems/gate.py",
+      "present": true
+    },
+    "status_script": {
+      "checked_paths": [
+        "scripts/status.py"
+      ],
+      "path": "scripts/status.py",
+      "present": true
+    }
+  },
+  "python": "3.11.2",
+  "referenced_data_scripts": {
+    "scripts/download_competition_data.sh": false,
+    "scripts/prepare_data.py": false
+  },
+  "registry_directories": [
+    "registry"
+  ],
+  "repository_root": "/home/user/GEMSDOE69",
+  "safety": "This audit only reads filesystem metadata; it does not fetch data or create a submission.",
+  "shared_tools": {
+    "holdout_evaluator": {
+      "checked_paths": [
+        "scripts/evaluate_holdout.py",
+        "evaluate_holdout.py",
+        "vendor/gems57/evaluate_holdout.py"
+      ],
+      "path": "vendor/gems57/evaluate_holdout.py",
+      "present": true
+    },
+    "submission_writer": {
+      "checked_paths": [
+        "scripts/submission_writer.py",
+        "submission_writer.py",
+        "vendor/gems57/submission_writer.py"
+      ],
+      "path": "vendor/gems57/submission_writer.py",
+      "present": true
+    }
+  },
+  "status": "blocked"
+}

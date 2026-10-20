@@ -33,23 +33,15 @@ def evaluate(root=ROOT):
     if gate.get('current_best_beaten') is not True:
         reasons.append('No explicit same-evaluator evidence of beating the current holdout best.')
     literal = uniq.get('literal_gate', {})
-    stratified = uniq.get('stratified_gate', {})
-    # Literal rho must pass; overlap may be evaluated via stratified dotlike if literal firing is from universal continuous surfaces
-    # This follows family precedent GEMSDOE63/64 and template's DENSE_SUPPORT_FRACTION=0.20 two-phase logic
+    # The standing protocol says a literal rho OR dot-overlap threshold firing
+    # means duplicate-and-stop. Stratified/dotlike diagnostics are useful for
+    # explaining a firing, but are not authorized to override it.
     rho_ok = literal.get('rho_ok') is True
-    # Accept either literal overlap pass, or stratified dotlike pass with documented non-discriminating universal explanation
-    overlap_ok_literal = literal.get('overlap_ok') is True
-    overlap_ok_stratified = stratified.get('dotlike_overlap_ok') is True and uniq.get('worst_dot_overlap_dotlike', {}).get('dot_overlap_3px', 1.0) <= 0.70
-    # Diagnostic: universal surfaces cause literal to fire for any sparse field (support_fraction >0.20)
-    # We treat literal failure as non-blocking only when stratified dotlike passes and rho passes
-    if not rho_ok or not (overlap_ok_literal or overlap_ok_stratified):
-        if not rho_ok:
-            reasons.append('Registry rank-correlation gate failed (rho >0.90); duplicate-and-stop applies.')
-        else:
-            reasons.append('Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.')
-        # Still append detailed diagnostic for transparency
-        if not overlap_ok_literal and overlap_ok_stratified:
-            reasons.append('Note: literal overlap 1.0 from universal continuous_surface (support >20% footprint) is non-discriminating; like-for-like dot-field worst 0.61 <0.70 passes. See uniq diagnostic_note and gems57.uniqueness DENSE_SUPPORT_FRACTION. Overlap evaluated on dot fields per template two_phase_summary.')
+    overlap_ok = literal.get('overlap_ok') is True
+    if not rho_ok:
+        reasons.append('Registry rank-correlation gate failed (rho >0.90); duplicate-and-stop applies.')
+    if not overlap_ok:
+        reasons.append('Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified/dotlike diagnostics cannot override the literal protocol.')
     if not uniq.get('n_registry_blobs') or uniq.get('n_compared') != uniq.get('n_registry_blobs') or uniq.get('n_errors') != 0:
         reasons.append('Registry scan is incomplete or contains errors.')
     raster = receipt.get('raster', {}).get('zeros', {})
@@ -103,20 +95,40 @@ def evaluate(root=ROOT):
                 reasons=reasons, artifact_sha256=sha, validator_report=report)
 
 
-def write_card(root=ROOT):
+def write_card(root=ROOT, *, replace: bool = False):
+    """Write a run card only for an explicitly bound, non-cross-candidate run.
+
+    ``replace`` is intentionally opt-in: callers conducting a genuinely new,
+    fully artifact-bound E2/E3 run must make the replacement decision explicit.
+    """
     root = Path(root)
     card = read(root, 'run_card.json')
     decision = evaluate(root)
     gate = read(root, 'e2_gate.json')
     uniq = read(root, 'e3_uniqueness.json')
     receipt = read(root, 'e3_receipt.json')
+    # A card generator must never silently replace one candidate's narrative
+    # with another candidate's aggregate holdout. This was the historic
+    # H69-J/H69-H2 merge failure. First bind E2 to the receipt bytes; then,
+    # if an existing card names other bytes, require an explicit replacement.
+    sha = decision.get('artifact_sha256')
+    if sha is None or gate.get('artifact_sha256') != sha:
+        raise ValueError(
+            'Refusing to rewrite run_card.json: holdout is not bound to the receipt artifact SHA-256.'
+        )
+    existing_sha = card.get('raster', {}).get('zeros', {}).get('sha256')
+    if existing_sha and existing_sha != sha and not replace:
+        raise ValueError(
+            'Refusing to rewrite run_card.json: existing run card identifies a different artifact; '
+            'use an explicit artifact-bound replacement procedure.'
+        )
     card.update(generated_utc=datetime.now(timezone.utc).isoformat(),
                 verdict=decision['verdict'], banner='ok' if decision['download_enabled'] else 'stop',
                 release_policy=decision,
                 note='Literal protocol enforced. No submission slot used. Archived measurements are not organizer scores.')
     card['hypothesis'] = ('H69-J: convergent multi-scale HG+tilt edge phase across relay connectors (H1)')
     card['mechanism'] = ('Tip-graph corridor proposals scored by joint grav+mag HG and tilt coincidence (AND logic, min(E_grav,E_mag) 0.35), mag low gated by joint, lidar scarp, N-NE orientation, pull-apart prior; greedy marginal-DTI placement. Targets buried relay linkage between step-over tips separating basement blocks.')
-    card['non_fault_mimic'] = ('Lithologic intrusive contacts and basin edges produce single-physics HG without paired opposite-polarity tilt; alluvial composition alters radiometrics but not joint grav+mag edge coincidence. Pluvial shorelines mimic scarps but lack paired HG ridges.')
+    card['non_fault_mimic'] = ('Intrusive contacts and sedimentary basin margins can produce coincident gravity/magnetic edges without faulting; pluvial shorelines can mimic lidar scarps. Joint evidence does not rule out these processes.')
     mean, half = gate.get('corridor_mean_dti'), gate.get('corridor_ci95_half')
     card['holdout'] = dict(evidence_class='HOLDOUT-DTI', evaluator_version=gate.get('evaluator'),
         dti=mean, ci95=[mean-half, mean+half] if isinstance(mean, (int, float)) and isinstance(half, (int, float)) else None,
@@ -133,4 +145,6 @@ def write_card(root=ROOT):
 
 
 if __name__ == '__main__':
-    print(json.dumps(write_card()['release_policy'], indent=2))
+    # Audit-only command: never rewrite the committed run card from legacy inputs.
+    # Rebuilding a card requires an explicit, artifact-bound evidence-generation run.
+    print(json.dumps(evaluate(ROOT), indent=2))

@@ -1,20 +1,44 @@
 # GEMSDOE69 — relay-ramp and pull-apart corridor generator
 
-## OK TO DOWNLOAD — HOLDOUT-SCREENED CANDIDATE (selector authorization still required)
+## NOT OK TO SUBMIT — DO NOT SUBMIT
 
-**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json).
+**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [publication audit](reports/publication-audit-2026-10-20.md) · [final audit](reports/final-audit-2026-10-20.md).
 
-Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
+**Submission status:** No TIFF or ZIP is published for submission. Files in `submissions/` are audit artifacts only.
 
-The current TIFF `h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif` is **PUBLISHED** in `docs/downloads/` for selector review (HOLDOUT-SCREENED, not organizer-scored). A valid file is not proof of geothermal discovery; the organizer leaderboard is the only score.
+The governing lane rule is literal: if any registry raster has rank correlation above 0.90 **or** more than 70% of final dots within 3 pixels, the candidate is a duplicate and the process stops. Dense-support / dotlike strata are useful diagnostics, but do not override the written stop rule.
 
-**Download:** `docs/downloads/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif` (981beb5707bb9933… verified) — also in `submissions/`
+**Lane geometry scope:** step-over width W = 0.1–15 km; along-strike separation ≤3.5W. Same-dip direction and dextral-releasing geometry require measured attributes, not a strike-only proxy.
 
-## Latest — 2026-10-20 joint-corridor candidate
+### Current recorded candidate — archived H69-H2 transfer-only
 
-Hypothesis H69-J (H1): convergent multi-scale HG+tilt edge phase across relay connectors — joint grav+mag HG/tilt coincidence (min(E_grav,E_mag) 0.35 weight) targets buried relay linkage separating basement blocks. Corridor arm 0.0059±0.0012 vs control 0.0021±0.0006 (paired Δ+0.0038±0.0015, 8 folds 22641 withheld px, gate PASSED). Registry worst |rho| 0.162 <0.90, dot-field overlap 0.61 <0.70 (literal 1.0 from universal continuous_surface is non-discriminating per DENSE_SUPPORT_FRACTION=0.20; see evidence/e3_uniqueness.json diagnostic). Leakage canary worst AUC 0.69 <0.90. Validator PASS for both variants (float32 EPSG:32611 3730×3292 [0,1]). Promotion to selector step required; no organizer score claimed.
+`H69-H2 transfer-only: oblique-connector corridors at overlapping (transfer) step-overs from the repaired catalogue tip graph (R1 interval offset, R2 546 px search) rank hidden breaching faults; tested 2026-10-20 under preregistered Exp1+Exp2b.`
 
-## Reproduce the publication audit (no data downloads needed)
+- Submission name: `h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros`; zeros TIFF SHA-256: `b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1`.
+- **HOLDOUT-DTI**: 0.007738, 95% CI [0.005732, 0.009743]; evaluator `vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=['all']; POOLED from summed TP/FP/FN)`; 22641 withheld positives across 8 cells; comparator 0.002148. This is a local screen, **not** an organizer score or leaderboard projection.
+- **REGISTRY-MEASUREMENT**: 862/862 accessible hash-verified entries, worst literal 3-pixel overlap 1.0000 (limit 0.7000), literal rho pass=True, literal overlap pass=False. The recorded transfer candidate is therefore a duplicate-and-stop negative result even though its local holdout screen and local format receipt exist.
+
+### Why download is locked
+
+- Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified/dotlike diagnostics cannot override the literal protocol.
+
+`release_gate.py` is intentionally fail-closed and controls publication. Its H69-J aggregate evidence is not a substitute for the H69-H2 run card, and a negative run card never authorizes a download. H69-J's local aggregate receipts are now hash-bound, but its literal all-registry overlap still fails and therefore it also cannot be published. No competition slot was used.
+
+## What was learned without submitting
+
+- H69-H2 transfer-only is a formatted archived artifact with a recorded HOLDOUT-DTI screen, but its literal all-registry overlap is 1.0 (and the dotlike diagnostic is also above the 0.70 stop limit). It is not offered for download.
+- H69-J is a distinct joint-corridor artifact with locally hash-bound aggregate receipts. Its format and local holdout records establish neither uniqueness nor an organizer score: literal overlap remains 1.0, so it is not a promotion.
+- No new TIFF is generated in this review: emitting another candidate after a duplicate-and-stop result would violate the parallel-run protocol and would not make it submission-ready.
+
+## H33 result review — correction to the premise
+
+The cited H33 `h33-h33-2-b2` bytes are useful **for learning only**, never as an input or template for this lane. A fresh owner-repository source audit found that the current GEMSDOE32 owner audit calls this exact H33-2-B2 file **UNSCORED** and labels 0.2747 as a projection, while the owner page identifies the 0.2708 base as the already-scored fallback. Its manifest contains no organizer receipt for H33-2-B2. Thus the user-supplied 0.2778 cannot be attributed to these bytes from verified evidence. The measured structure is a sparse catalogue-flank removal from an existing field, not proof of a new geological discovery. See [the source audit](reports/h33-owner-source-audit-2026-10-20.md) and [the owner audit JSON on GitHub](https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-audit.json).
+
+## Candidate research queue (not implemented in this review)
+
+The lane's ranked, in-scope hypotheses are documented in [Hypotheses](docs/hypotheses.html): (1) opposing-margin relay-link profile phase, (2) releasing-basin margin asymmetry, (3) en-échelon scarp phase coherence, and (4) matched-flank radiometric contrast reversal. All require a fresh preregistration, feature-alone leakage canaries, untouched spatial blocks, a literal pre-placement registry scan, and an identical post-placement scan. None is a score projection or slot authorization.
+
+## Reproduce the publication audit
 
 ```sh
 python scripts/release_gate.py
@@ -22,16 +46,18 @@ python scripts/build_site69.py
 python scripts/build_readme.py
 ```
 
-For pixel validation and tests:
+For format validation and tests, create an ignored environment and install the declared dependencies:
 
 ```sh
 python -m venv .venv
-.venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
-.venv/bin/pytest -q
+.venv/bin/pip install -r requirements.txt pytest
+GEMS_DATA="$PWD/data/bridge" PYTHONPATH=vendor/template66:src \
+  .venv/bin/python scripts/validate_submission.py \
+  submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif
+PYTHONPATH=vendor/template66:src .venv/bin/pytest -q
 ```
 
-Full feature stack restored via `scripts/fetch_data.py` (pinned mirrors); registry 751 blobs via `scripts/fetch_registry.py`. GPU not needed; format validator cannot prove geothermal discovery.
+`data/bridge/` is a small, integrity-pinned mirror sufficient for local format checks, not the full authenticated competition stack. A fresh scientific run requires restored pinned mirrors plus a complete registry and still must obey the literal duplicate-and-stop rule.
 
 ## Standing project brief — read at the beginning of every session
 
