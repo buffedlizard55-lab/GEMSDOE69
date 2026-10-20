@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
-"""Rebuild README.md from the fail-closed release decision and standing brief.
+"""Rebuild README.md from the fail-closed policy, run card, and standing brief.
 
-This intentionally does not reinterpret archived science evidence.  It only
-summarises its provenance so a format-valid historical TIFF cannot be mistaken
-for a current, submit-ready artifact.
+The release policy is deliberately narrower than the run card: it is the only
+component allowed to publish a binary.  The run card can record an archived
+negative experiment, but cannot make it downloadable.
 """
 from __future__ import annotations
 
@@ -17,76 +17,75 @@ ROOT = Path(__file__).resolve().parents[1]
 
 def load_evidence(name: str) -> dict:
     try:
-        return json.loads((ROOT / "evidence" / name).read_text())
+        return json.loads((ROOT / "evidence" / name).read_text(encoding="utf-8"))
     except (OSError, json.JSONDecodeError):
         return {}
 
 
-def number(value: object, digits: int = 6) -> str:
+def fmt(value: object, digits: int = 6) -> str:
     return f"{value:.{digits}f}" if isinstance(value, (int, float)) else "not recorded"
 
 
 def main() -> None:
-    decision = evaluate(ROOT)
-    gate = load_evidence("e2_gate.json")
-    uniq = load_evidence("e3_uniqueness.json")
-    receipt = load_evidence("e3_receipt.json")
-    raster = receipt.get("raster", {}).get("zeros", {})
-    artifact_name = Path(raster.get("path", "no-artifact")).name
-    artifact_sha = raster.get("sha256", "not recorded")
-    reasons = "\n".join(f"- {reason}" for reason in decision["reasons"])
+    policy = evaluate(ROOT)
+    card = load_evidence("run_card.json")
+    holdout = card.get("holdout", {})
+    registry = card.get("correlation_overlap_vs_registry", {})
+    raster = card.get("raster", {}).get("zeros", {})
+    candidate = card.get("hypothesis", "archived candidate")
+    name = card.get("submission_name", "not recorded")
+    sha = raster.get("sha256", "not recorded")
+    ci = holdout.get("ci95")
+    ci_text = (
+        f"[{fmt(ci[0], 6)}, {fmt(ci[1], 6)}]"
+        if isinstance(ci, list) and len(ci) == 2
+        else "not recorded"
+    )
+    release_reasons = "\n".join(f"- {reason}" for reason in policy["reasons"])
+    literal = registry.get("literal_gate", {})
+    overlap = (registry.get("worst_dot_overlap_all") or {}).get("dot_overlap_3px")
 
     status = (
         "OK TO DOWNLOAD — HOLDOUT-SCREENED CANDIDATE (selector authorization still required)"
-        if decision["download_enabled"]
+        if policy["download_enabled"]
         else "NOT OK TO SUBMIT — DO NOT SUBMIT"
     )
     artifact_status = (
-        f"The exact hash-bound TIFF `{artifact_name}` is published in `docs/downloads/`."
-        if decision["download_enabled"]
+        "The exact hash-bound artifact is published in `docs/downloads/`."
+        if policy["download_enabled"]
         else "No TIFF or ZIP is published for submission. Files in `submissions/` are audit artifacts only."
-    )
-
-    archived_holdout = (
-        "ARCHIVED HOLDOUT-DTI (not artifact-bound on this checkout): "
-        f"corridor mean {number(gate.get('corridor_mean_dti'))}, "
-        f"95% CI half-width {number(gate.get('corridor_ci95_half'))}, "
-        f"control mean {number(gate.get('control_mean_dti'))}, "
-        f"{gate.get('n_cells', 'not recorded')} cells, "
-        f"{gate.get('withheld_positive_px_total', 'not recorded')} withheld positive pixels."
-    )
-    literal = uniq.get("literal_gate", {})
-    registry = (
-        "REGISTRY-MEASUREMENT (archived): "
-        f"worst absolute Spearman {number(uniq.get('worst_abs_spearman'), 3)}; "
-        f"literal rho pass={literal.get('rho_ok', 'not recorded')}; "
-        f"literal overlap pass={literal.get('overlap_ok', 'not recorded')}."
     )
 
     head = f"""# GEMSDOE69 — relay-ramp and pull-apart corridor generator
 
 ## {status}
 
-**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [latest audit](reports/final-audit-2026-10-20.md).
+**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [publication audit](reports/publication-audit-2026-10-20.md) · [final audit](reports/final-audit-2026-10-20.md).
 
 **Submission status:** {artifact_status}
 
-The governing lane rule is literal: if any registry raster has rank correlation above 0.90 **or** more than 70% of final dots within 3 pixels, the candidate is a duplicate and the process stops. Dense-support / dotlike strata are useful diagnostics, but do not override this release decision.
+The governing lane rule is literal: if any registry raster has rank correlation above 0.90 **or** more than 70% of final dots within 3 pixels, the candidate is a duplicate and the process stops. Dense-support / dotlike strata are useful diagnostics, but do not override the written stop rule.
 
 **Lane geometry scope:** step-over width W = 0.1–15 km; along-strike separation ≤3.5W. Same-dip direction and dextral-releasing geometry require measured attributes, not a strike-only proxy.
 
+### Current recorded candidate — archived H69-H2 transfer-only
+
+`{candidate}`
+
+- Submission name: `{name}`; zeros TIFF SHA-256: `{sha}`.
+- **HOLDOUT-DTI**: {fmt(holdout.get('dti'), 6)}, 95% CI {ci_text}; evaluator `{holdout.get('evaluator_version', 'not recorded')}`; {holdout.get('withheld_positive_pixels', 'not recorded')} withheld positives across {holdout.get('n_cells', 'not recorded')} cells; comparator {fmt(holdout.get('comparator_dti'), 6)}. This is a local screen, **not** an organizer score or leaderboard projection.
+- **REGISTRY-MEASUREMENT**: {registry.get('n_compared', 'not recorded')}/{registry.get('n_registry_blobs', 'not recorded')} accessible hash-verified entries, worst literal 3-pixel overlap {fmt(overlap, 4)} (limit 0.7000), literal rho pass={literal.get('rho_ok', 'not recorded')}, literal overlap pass={literal.get('overlap_ok', 'not recorded')}. The recorded transfer candidate is therefore a duplicate-and-stop negative result even though its local holdout screen and local format receipt exist.
+
 ### Why download is locked
 
-{reasons}
+{release_reasons}
 
-The historical candidate's zeros-TIFF SHA-256 is `{artifact_sha}`. Its local format receipt can establish byte-level format only; it cannot cure an unbound holdout, a stale method manifest, or a failed literal uniqueness gate. No competition slot was used by this repository state.
+`release_gate.py` is intentionally fail-closed and controls publication. Its legacy aggregate evidence is not a substitute for the H69-H2 run card, and a negative run card never authorizes a download. The historical H69-J joint artifact is separately stale after the tip-graph repair and also fails literal overlap. No competition slot was used.
 
 ## What was learned without submitting
 
-- {archived_holdout}
-- {registry}
-- The H69-J joint-corridor artifact is **not a current promotion**: its method-source and holdout bindings are stale after the tip-graph repair, and the literal overlap gate is independently failing.
-- The transfer-only artifact is a distinct negative result. Its archived HOLDOUT-DTI screen exceeded its stated internal comparator, but its literal all-registry overlap was 1.0 and its worst dotlike overlap was 0.8497; therefore it is also not offered.
+- H69-H2 transfer-only is a formatted archived artifact with a recorded HOLDOUT-DTI screen, but its literal all-registry overlap is 1.0 (and the dotlike diagnostic is also above the 0.70 stop limit). It is not offered for download.
+- H69-J is a distinct archived joint-corridor artifact. Its format receipt establishes byte-level format only; its holdout/source bindings are stale on this checkout and it is not a current promotion.
 - No new TIFF is generated in this review: emitting another candidate after a duplicate-and-stop result would violate the parallel-run protocol and would not make it submission-ready.
 
 ## H33 result review — correction to the premise
@@ -110,9 +109,9 @@ For format validation and tests, create an ignored environment and install the d
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest
-GEMS_DATA="$PWD/data/bridge" PYTHONPATH=vendor/template66:src \
-  .venv/bin/python scripts/validate_submission.py \
-  submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
+GEMS_DATA="$PWD/data/bridge" PYTHONPATH=vendor/template66:src \\
+  .venv/bin/python scripts/validate_submission.py \\
+  submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif
 PYTHONPATH=vendor/template66:src .venv/bin/pytest -q
 ```
 
@@ -123,7 +122,7 @@ PYTHONPATH=vendor/template66:src .venv/bin/pytest -q
 The following is the retained project brief, not a verbatim transcript of every user message. The active request additionally requires strict duplicate-and-stop enforcement, three review passes, and a PR merged to main. Never infer authorization to submit to DrivenData.
 
 """
-    (ROOT / "README.md").write_text(head + (ROOT / "PROMPT.md").read_text())
+    (ROOT / "README.md").write_text(head + (ROOT / "PROMPT.md").read_text(encoding="utf-8"), encoding="utf-8")
 
 
 if __name__ == "__main__":

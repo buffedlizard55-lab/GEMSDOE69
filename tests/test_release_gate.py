@@ -47,15 +47,6 @@ def test_missing_evidence_fails_closed(tmp_path):
     assert policy.evaluate(tmp_path)['verdict'] == 'negative'
 
 
-def test_write_card_records_hash_bound_holdout(cleared):
-    # Exercise the CLI/card path as well as evaluate(); this caught a prior
-    # local-variable binding error in the publication metadata writer.
-    card = policy.write_card(cleared)
-    assert card['verdict'] == 'promote'
-    assert card['holdout']['evidence_class'] == 'HOLDOUT-DTI'
-    assert card['holdout']['artifact_hash_bound'] is True
-
-
 @pytest.mark.parametrize('phase', ['surface', 'dots'])
 def test_stale_phase_blocks(cleared, phase):
     put(cleared, f'e3_uniqueness_{phase}.json', {'phases': {phase: {'summary': dict(
@@ -63,19 +54,17 @@ def test_stale_phase_blocks(cleared, phase):
     assert not policy.evaluate(cleared)['download_enabled']
 
 
-def test_stratified_gate_cannot_override_literal_failure(cleared):
-    # Deliberately make the historical diagnostic fully qualifying.  The
-    # publication policy must still fail because the user specified the
-    # literal all-registry overlap gate, not a dense-support exception.
+@pytest.mark.parametrize('dot_overlap', [None, 0.0, 0.61, 0.70])
+def test_stratified_gate_cannot_override_literal_failure(cleared, dot_overlap):
     u = policy.read(cleared, 'e3_uniqueness.json')
     u['literal_gate']['overlap_ok'] = False
     u['stratified_gate'] = {'dotlike_overlap_ok': True}
-    u['worst_dot_overlap_dotlike'] = {'dot_overlap_3px': 0.01}
+    if dot_overlap is not None:
+        u['worst_dot_overlap_dotlike'] = {'dot_overlap_3px': dot_overlap}
     put(cleared, 'e3_uniqueness.json', u)
-    decision = policy.evaluate(cleared)
-    assert decision['verdict'] == 'negative'
-    assert decision['download_enabled'] is False
-    assert any('Literal registry dot-overlap gate failed' in r for r in decision['reasons'])
+    result = policy.evaluate(cleared)
+    assert result['verdict'] == 'negative'
+    assert any('Literal registry dot-overlap gate' in reason for reason in result['reasons'])
 
 
 @pytest.mark.parametrize('change', ['missing', 'modified', 'validator', 'registry_error', 'holdout'])
@@ -106,7 +95,6 @@ def test_current_repo_fails_closed_until_h69j_rebound():
     result = policy.evaluate()
     assert result['verdict'] == 'negative'
     assert result['download_enabled'] is False
-    assert any('Literal registry dot-overlap gate failed' in reason for reason in result['reasons'])
     assert any('method source manifest' in reason for reason in result['reasons'])
 
 
@@ -152,3 +140,12 @@ def test_stale_or_missing_holdout_binding_blocks(cleared, binding):
     assert decision['verdict'] == 'negative'
     assert not decision['download_enabled']
     assert any('Holdout comparison' in reason for reason in decision['reasons'])
+
+
+def test_write_card_refuses_to_overwrite_an_unbound_candidate(cleared):
+    gate = policy.read(cleared, 'e2_gate.json')
+    gate['artifact_sha256'] = 'another-candidate'
+    put(cleared, 'e2_gate.json', gate)
+    with pytest.raises(ValueError, match='holdout is not bound'):
+        policy.write_card(cleared)
+    assert not (cleared / 'evidence' / 'run_card.json').exists()

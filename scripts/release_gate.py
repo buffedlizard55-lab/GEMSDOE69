@@ -33,21 +33,15 @@ def evaluate(root=ROOT):
     if gate.get('current_best_beaten') is not True:
         reasons.append('No explicit same-evaluator evidence of beating the current holdout best.')
     literal = uniq.get('literal_gate', {})
-    stratified = uniq.get('stratified_gate', {})
-    # The standing protocol is literal: BOTH registry checks must pass before
-    # publication.  A dense/universal-support diagnostic can explain why an
-    # overlap fired, but it cannot authorize a download or replace the stated
-    # >70%-within-3px stop rule.  This deliberately differs from historical
-    # family conventions that stratified dense rasters out of the gate.
+    # The standing protocol says a literal rho OR dot-overlap threshold firing
+    # means duplicate-and-stop. Stratified/dotlike diagnostics are useful for
+    # explaining a firing, but are not authorized to override it.
     rho_ok = literal.get('rho_ok') is True
-    overlap_ok_literal = literal.get('overlap_ok') is True
+    overlap_ok = literal.get('overlap_ok') is True
     if not rho_ok:
         reasons.append('Registry rank-correlation gate failed (rho >0.90); duplicate-and-stop applies.')
-    if not overlap_ok_literal:
-        suffix = ''
-        if stratified.get('dotlike_overlap_ok') is True:
-            suffix = ' Stratified dotlike overlap is diagnostic only and cannot override the literal protocol.'
-        reasons.append('Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies.' + suffix)
+    if not overlap_ok:
+        reasons.append('Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified/dotlike diagnostics cannot override the literal protocol.')
     if not uniq.get('n_registry_blobs') or uniq.get('n_compared') != uniq.get('n_registry_blobs') or uniq.get('n_errors') != 0:
         reasons.append('Registry scan is incomplete or contains errors.')
     raster = receipt.get('raster', {}).get('zeros', {})
@@ -105,28 +99,31 @@ def write_card(root=ROOT):
     root = Path(root)
     card = read(root, 'run_card.json')
     decision = evaluate(root)
-    sha = decision.get('artifact_sha256')
     gate = read(root, 'e2_gate.json')
     uniq = read(root, 'e3_uniqueness.json')
     receipt = read(root, 'e3_receipt.json')
+    # A card generator must never silently replace one candidate's narrative
+    # with another candidate's aggregate holdout.  This was the historic
+    # H69-J/H69-H2 merge failure: card generation is permitted only once the
+    # E2 holdout explicitly binds to the receipt's exact raster bytes.
+    sha = decision.get('artifact_sha256')
+    if sha is None or gate.get('artifact_sha256') != sha:
+        raise ValueError(
+            'Refusing to rewrite run_card.json: holdout is not bound to the receipt artifact SHA-256.'
+        )
     card.update(generated_utc=datetime.now(timezone.utc).isoformat(),
                 verdict=decision['verdict'], banner='ok' if decision['download_enabled'] else 'stop',
                 release_policy=decision,
                 note='Literal protocol enforced. No submission slot used. Archived measurements are not organizer scores.')
-    card['hypothesis'] = ('Archived H69-J convergent HG+tilt relay-connector screen; no new candidate tested in this review.')
-    card['mechanism'] = ('Archived tip-graph corridor proposals used joint gravity/magnetic HG and tilt coincidence, magnetic-low, lidar-scarp, orientation, and pull-apart terms with greedy marginal-DTI placement. The current review does not treat those historical bytes as a promotion.')
-    card['non_fault_mimic'] = ('Lithologic intrusive contacts, basin edges, alluvial composition, pluvial shorelines, and terrace/road scarps can mimic the archived geophysical or lidar signatures.')
+    card['hypothesis'] = ('H69-J: convergent multi-scale HG+tilt edge phase across relay connectors (H1)')
+    card['mechanism'] = ('Tip-graph corridor proposals scored by joint grav+mag HG and tilt coincidence (AND logic, min(E_grav,E_mag) 0.35), mag low gated by joint, lidar scarp, N-NE orientation, pull-apart prior; greedy marginal-DTI placement. Targets buried relay linkage between step-over tips separating basement blocks.')
+    card['non_fault_mimic'] = ('Intrusive contacts and sedimentary basin margins can produce coincident gravity/magnetic edges without faulting; pluvial shorelines can mimic lidar scarps. Joint evidence does not rule out these processes.')
     mean, half = gate.get('corridor_mean_dti'), gate.get('corridor_ci95_half')
-    holdout_bound = bool(sha is not None and gate.get('artifact_sha256') == sha)
-    card['holdout'] = dict(
-        evidence_class=('HOLDOUT-DTI' if holdout_bound else 'ARCHIVED HOLDOUT-DTI (not artifact-bound on this checkout)'),
-        evaluator_version=gate.get('evaluator'),
+    card['holdout'] = dict(evidence_class='HOLDOUT-DTI', evaluator_version=gate.get('evaluator'),
         dti=mean, ci95=[mean-half, mean+half] if isinstance(mean, (int, float)) and isinstance(half, (int, float)) else None,
         withheld_positive_pixels=gate.get('withheld_positive_px_total'), n_cells=gate.get('n_cells'),
         comparator_dti=gate.get('control_mean_dti'), paired_delta=gate.get('paired_delta_mean'),
-        artifact_hash_bound=holdout_bound,
-        uncertainty_note='Archived normal-approximation interval across repeated cells; not an independent block bootstrap. Not rerun this session.' if not holdout_bound else None,
-    )
+        uncertainty_note='Archived normal-approximation interval across repeated cells; not an independent block bootstrap. Not rerun this session.')
     card['correlation_overlap_vs_registry'] = uniq
     card['raster'] = receipt.get('raster', {})
     card['validator_output'] = decision['validator_report']
@@ -137,4 +134,6 @@ def write_card(root=ROOT):
 
 
 if __name__ == '__main__':
-    print(json.dumps(write_card()['release_policy'], indent=2))
+    # Audit-only command: never rewrite the committed run card from legacy inputs.
+    # Rebuilding a card requires an explicit, artifact-bound evidence-generation run.
+    print(json.dumps(evaluate(ROOT), indent=2))

@@ -86,11 +86,20 @@ def build_index():
     uniq = load("e3_uniqueness.json") or {}
     receipt = load("e3_receipt.json") or {}
     card = load("run_card.json") or {}
+    holdout = card.get("holdout", {})
     rows = ""
+    if holdout:
+        ci = holdout.get("ci95") or [None, None]
+        lo = ci[0] if len(ci) > 0 else None
+        hi = ci[1] if len(ci) > 1 else None
+        rows += f"""<tr><td>Current archived H69-H2 transfer-only DTI</td><td>{holdout.get('dti', float('nan')):.4f} (95% CI {lo:.4f} to {hi:.4f})</td><td>HOLDOUT-DTI ({esc(holdout.get('evaluator_version', 'evaluator not recorded'))}; {holdout.get('n_cells','?')} cells, {holdout.get('withheld_positive_pixels','?')} withheld positives). A local screen, not an organizer score.</td></tr>
+<tr><td>Current archived no-prior comparator</td><td>{holdout.get('comparator_dti', float('nan')):.4f}</td><td>HOLDOUT-DTI, same recorded H69-H2 evaluation</td></tr>
+<tr><td>Current archived paired &Delta;</td><td>{holdout.get('paired_delta', float('nan')):+.4f}</td><td>HOLDOUT-DTI; never a release override</td></tr>"""
     if gate:
-        rows += f"""<tr><td>Archived corridor mean DTI</td><td>{gate.get('corridor_mean_dti', float('nan')):.4f} &plusmn; {gate.get('corridor_ci95_half', float('nan')):.4f}</td><td>ARCHIVED HOLDOUT-DTI (gems57 pooled hide-and-recover, {gate.get('n_cells','?')} cells, {gate.get('withheld_positive_px_total','?')} withheld positives; not bound to the current artifact)</td></tr>
-<tr><td>Archived no-prior control arm</td><td>{gate.get('control_mean_dti', float('nan')):.4f} &plusmn; {gate.get('control_ci95_half', float('nan')):.4f}</td><td>ARCHIVED HOLDOUT-DTI, same historical folds</td></tr>
-<tr><td>Archived paired &Delta; (corridor &minus; control)</td><td>{gate.get('paired_delta_mean', float('nan')):+.4f} &plusmn; {gate.get('paired_delta_ci95_half', float('nan')):.4f}</td><td>ARCHIVED HOLDOUT-DTI</td></tr>"""
+        rows += f"""<tr><td>Historical H69-J corridor mean DTI</td><td>{gate.get('corridor_mean_dti', float('nan')):.4f} &plusmn; {gate.get('corridor_ci95_half', float('nan')):.4f}</td><td>ARCHIVED HOLDOUT-DTI; stale/unbound to the current repaired source tree</td></tr>"""
+    card_registry = card.get("correlation_overlap_vs_registry", {})
+    current_overlap = (card_registry.get("worst_dot_overlap_all") or {}).get("dot_overlap_3px", "n/a")
+    current_rho = card_registry.get("worst_abs_spearman", "n/a")
     if tif is None:
         workflow = """
 <div class="card" id="how-to-submit">
@@ -119,12 +128,12 @@ def build_index():
 <table>
 <tr><th>Measurement</th><th>Value</th><th>Evidence class</th></tr>
 {rows}
-<tr><td>Archived registry scan: worst surface |Spearman| / dot-like dot overlap</td>
-<td>{abs(uniq.get('worst_abs_spearman', 0) or 0):.3f} / {(uniq.get('worst_dot_overlap_dotlike') or {}).get('dot_overlap_3px', 'n/a')}</td>
+<tr><td>Current H69-H2 registry scan: worst |Spearman| / literal dot overlap</td>
+<td>{current_rho} / {current_overlap}</td>
 <td>REGISTRY-MEASUREMENT; the literal all-registry overlap check is false and controls publication</td></tr>
 <tr><td>H33-2-B2 owner audit</td><td>UNSCORED; owner projection 0.2747</td><td>OWNER-REPORTED, NOT ORGANIZER-CONFIRMED; current owner audit contains no organizer receipt for these bytes. The user-supplied 0.2778 is not attributed to this file here.</td></tr>
 <tr><td>User-cited leaderboard figures</td><td>not refreshed in this review</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED unless copied from an organizer receipt</td></tr>
-<tr><td>Transfer-only candidate</td><td>no organizer score &mdash; no slot spent</td><td>ARCHIVED HOLDOUT-DTI pooled 0.008470 vs control 0.002154; literal registry gate failed, so it is not downloadable</td></tr>
+<tr><td>H69-H2 transfer-only candidate</td><td>no organizer score &mdash; no slot spent</td><td>Recorded HOLDOUT-DTI screen exists, but literal registry gate failed, so it is not downloadable</td></tr>
 </table>
 <p class="small">A holdout DTI is a <b>screen</b>, never a leaderboard projection. Read the H33 source audit before treating owner-reported values as competition results.</p>
 </div>
@@ -206,7 +215,7 @@ def build_hypotheses():
 <tr><td>3. En-echelon scarp phase coherence</td><td>LiDAR-scarp orientation, stagger, and phase continuity across a proposed relay connector; veto uninterrupted terrace-parallel edges.</td>
 <td>A set of short aligned scarps may identify a linking strand individually below regional mapping threshold. This differs from average scarp magnitude by testing arrangement. <b>Mimics:</b> pluvial shorelines, roads, terrace edges. <b>Expected HOLDOUT-DTI effect:</b> low-medium (qualitative). <b>Cost:</b> moderate-high. Existing LiDAR channel is sufficient once the full stack is restored.</td></tr>
 <tr><td>4. Matched-flank radiometric contrast reversal</td><td>GeoDAWN K/Th/total-count contrast inside versus matched corridor flanks, conditioned on magnetic response.</td>
-<td>Could distinguish local alteration or structural contrast under cover from broad background domains, unlike H69-G&apos;s simple depletion score. <b>Mimic:</b> sediment sorting or lithologic variation. <b>Expected HOLDOUT-DTI effect:</b> uncertain (qualitative). <b>Cost:</b> high. It is <b>not viable yet</b>: a verified lithologic control source and coverage check are missing, so it will not be implemented or promoted as an external-data hypothesis.</td></tr></table>
+<td>Could distinguish local alteration or structural contrast under cover from broad background domains, unlike H69-G&apos;s simple depletion score. <b>Mimic:</b> sediment sorting or lithologic variation. <b>Expected HOLDOUT-DTI effect:</b> uncertain (qualitative). <b>Cost:</b> high. It is <b>not viable yet</b>: the candidate would need a checked lithologic control such as the official USGS National Geologic Map Database State Geologic Map Compilation; its exact AOI coverage/obtainability was not verified in this sandbox, so it will not be implemented or promoted as an external-data hypothesis.</td></tr></table>
 <p>Before any implementation: restore the pinned feature stack, verify each feature-alone leakage canary, reserve untouched spatial blocks, compare against the current best with the identical evaluator, and run a literal surface registry scan before placing dots and a literal dot scan after. Do not relax the literal overlap rule. Giddens &amp; Faulds statistics in the prompt remain cited, not independently verified in this environment.</p></div>
 """
     return page("Queued hypotheses", "hypotheses.html", body)
@@ -268,6 +277,9 @@ def build_results():
     census = load("e1_tipgraph_census.json") or {}
     uniq = load("e3_uniqueness.json") or {}
     receipt = load("e3_receipt.json") or {}
+    card = load("run_card.json") or {}
+    current_holdout = card.get("holdout", {})
+    current_registry = card.get("correlation_overlap_vs_registry", {})
     rows = ""
     for k in sorted(gate.get("per_cell", {})):
         pass
@@ -280,6 +292,11 @@ def build_results():
         f"<tr><td>{r['w_px']:.0f}</td><td>{r['linking_px']}</td><td>{r['within_3px']:.3f}</td><td>{esc(r['subtype'])}</td></tr>"
         for r in ramps[:40])
     body = f"""
+<div class="card"><h2>Current archived candidate &mdash; H69-H2 transfer-only</h2>
+<p><b>Negative: duplicate-and-stop.</b> The run card records HOLDOUT-DTI
+{current_holdout.get('dti', float('nan')):.4f}, 95% CI {((current_holdout.get('ci95') or [float('nan')])[0]):.4f} to {((current_holdout.get('ci95') or [float('nan'), float('nan')])[1]):.4f},
+against comparator {current_holdout.get('comparator_dti', float('nan')):.4f}; {current_holdout.get('withheld_positive_pixels', '?')} withheld positives and {current_holdout.get('n_cells', '?')} cells. These are local HOLDOUT-DTI measurements, not an organizer score. Its literal all-registry overlap is {(current_registry.get('worst_dot_overlap_all') or {}).get('dot_overlap_3px', 'pending')} (limit 0.70), so no TIFF is downloadable.</p>
+</div>
 <div class="card"><h2>E1 &mdash; census, hard-link recovery, canaries</h2>
 <table>
 <tr><th>Measurement</th><th>Value</th></tr>
@@ -291,7 +308,7 @@ def build_results():
 </table>
 <table><tr><th>W (px)</th><th>linking px</th><th>recovery within 3 px</th><th>subtype</th></tr>{ramp_rows}</table>
 </div>
-<div class="card"><h2>E2 &mdash; archived holdout screen (not bound to the current artifact)</h2>
+<div class="card"><h2>Historical H69-J E2 &mdash; archived holdout screen (not bound to the current repaired source tree)</h2>
 <table><tr><th>Arm</th><th>Pooled DTI</th><th>95% CI half</th><th>Cells</th></tr>
 <tr><td>Corridor prior</td><td>{gate.get('corridor_mean_dti', float('nan')):.4f}</td><td>{gate.get('corridor_ci95_half', float('nan')):.4f}</td><td rowspan=2>{gate.get('n_cells','?')} ({gate.get('withheld_positive_px_total','?')} withheld positives)</td></tr>
 <tr><td>No-prior control</td><td>{gate.get('control_mean_dti', float('nan')):.4f}</td><td>{gate.get('control_ci95_half', float('nan')):.4f}</td></tr>
@@ -322,7 +339,7 @@ def build_sources():
     body = """
 <div class="card">
 <h2>Source links and verification limits</h2>
-<p>Only the organizer GitHub reference repository was refreshed from an official source in this review. Other official links below are manual-review references, not freshly fetched or authenticated evidence. See the README review report for access limits.</p>
+<p>GitHub sources were refreshed in this review: the organizer reference repository and the owner-hosted H33 provenance materials. The latter are owner sources, not organizer receipts. Other official links below are manual-review references, not freshly fetched or authenticated evidence. See the README review report for access limits.</p>
 <table><tr><th>Source</th><th>Link</th><th>Used for</th></tr>
 <tr><td>DrivenData competition 306 (DOE GEMS)</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a></td><td>problem statement, metric, leaderboard (login-walled data)</td></tr>
 <tr><td>Problem page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page/967</a></td><td>submission format + performance metric (alpha 0.2, beta 0.8, 300 m kernel)</td></tr>

@@ -2,28 +2,34 @@
 
 ## NOT OK TO SUBMIT — DO NOT SUBMIT
 
-**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [latest audit](reports/final-audit-2026-10-20.md).
+**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [publication audit](reports/publication-audit-2026-10-20.md) · [final audit](reports/final-audit-2026-10-20.md).
 
 **Submission status:** No TIFF or ZIP is published for submission. Files in `submissions/` are audit artifacts only.
 
-The governing lane rule is literal: if any registry raster has rank correlation above 0.90 **or** more than 70% of final dots within 3 pixels, the candidate is a duplicate and the process stops. Dense-support / dotlike strata are useful diagnostics, but do not override this release decision.
+The governing lane rule is literal: if any registry raster has rank correlation above 0.90 **or** more than 70% of final dots within 3 pixels, the candidate is a duplicate and the process stops. Dense-support / dotlike strata are useful diagnostics, but do not override the written stop rule.
 
 **Lane geometry scope:** step-over width W = 0.1–15 km; along-strike separation ≤3.5W. Same-dip direction and dextral-releasing geometry require measured attributes, not a strike-only proxy.
 
+### Current recorded candidate — archived H69-H2 transfer-only
+
+`H69-H2 transfer-only: oblique-connector corridors at overlapping (transfer) step-overs from the repaired catalogue tip graph (R1 interval offset, R2 546 px search) rank hidden breaching faults; tested 2026-10-20 under preregistered Exp1+Exp2b.`
+
+- Submission name: `h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros`; zeros TIFF SHA-256: `b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1`.
+- **HOLDOUT-DTI**: 0.007738, 95% CI [0.005732, 0.009743]; evaluator `vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=['all']; POOLED from summed TP/FP/FN)`; 22641 withheld positives across 8 cells; comparator 0.002148. This is a local screen, **not** an organizer score or leaderboard projection.
+- **REGISTRY-MEASUREMENT**: 862/862 accessible hash-verified entries, worst literal 3-pixel overlap 1.0000 (limit 0.7000), literal rho pass=True, literal overlap pass=False. The recorded transfer candidate is therefore a duplicate-and-stop negative result even though its local holdout screen and local format receipt exist.
+
 ### Why download is locked
 
-- Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified dotlike overlap is diagnostic only and cannot override the literal protocol.
+- Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified/dotlike diagnostics cannot override the literal protocol.
 - Holdout comparison is missing or not bound to the current artifact hash.
 - Reproducible method source manifest is missing, stale, or not artifact-bound.
 
-The historical candidate's zeros-TIFF SHA-256 is `981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6`. Its local format receipt can establish byte-level format only; it cannot cure an unbound holdout, a stale method manifest, or a failed literal uniqueness gate. No competition slot was used by this repository state.
+`release_gate.py` is intentionally fail-closed and controls publication. Its legacy aggregate evidence is not a substitute for the H69-H2 run card, and a negative run card never authorizes a download. The historical H69-J joint artifact is separately stale after the tip-graph repair and also fails literal overlap. No competition slot was used.
 
 ## What was learned without submitting
 
-- ARCHIVED HOLDOUT-DTI (not artifact-bound on this checkout): corridor mean 0.005913, 95% CI half-width 0.001246, control mean 0.002148, 8 cells, 22641 withheld positive pixels.
-- REGISTRY-MEASUREMENT (archived): worst absolute Spearman 0.162; literal rho pass=True; literal overlap pass=False.
-- The H69-J joint-corridor artifact is **not a current promotion**: its method-source and holdout bindings are stale after the tip-graph repair, and the literal overlap gate is independently failing.
-- The transfer-only artifact is a distinct negative result. Its archived HOLDOUT-DTI screen exceeded its stated internal comparator, but its literal all-registry overlap was 1.0 and its worst dotlike overlap was 0.8497; therefore it is also not offered.
+- H69-H2 transfer-only is a formatted archived artifact with a recorded HOLDOUT-DTI screen, but its literal all-registry overlap is 1.0 (and the dotlike diagnostic is also above the 0.70 stop limit). It is not offered for download.
+- H69-J is a distinct archived joint-corridor artifact. Its format receipt establishes byte-level format only; its holdout/source bindings are stale on this checkout and it is not a current promotion.
 - No new TIFF is generated in this review: emitting another candidate after a duplicate-and-stop result would violate the parallel-run protocol and would not make it submission-ready.
 
 ## H33 result review — correction to the premise
@@ -47,7 +53,9 @@ For format validation and tests, create an ignored environment and install the d
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest
-GEMS_DATA="$PWD/data/bridge" PYTHONPATH=vendor/template66:src   .venv/bin/python scripts/validate_submission.py   submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
+GEMS_DATA="$PWD/data/bridge" PYTHONPATH=vendor/template66:src \
+  .venv/bin/python scripts/validate_submission.py \
+  submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif
 PYTHONPATH=vendor/template66:src .venv/bin/pytest -q
 ```
 
