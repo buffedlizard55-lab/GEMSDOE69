@@ -56,6 +56,14 @@ jobs:
           cp -r docs/. .cache/pages/docs/
           mkdir -p .cache/source-baseline
           cp docs/data/family-feed.json docs/data/source-health.json .cache/source-baseline/
+      - name: Select workflow-based Pages publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          source=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type)
+          if [ "$source" != "workflow" ]; then
+            gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f build_type=workflow
+          fi
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
@@ -63,6 +71,7 @@ jobs:
   deploy:
     needs: build
     runs-on: ubuntu-latest
+    timeout-minutes: 10
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}

@@ -61,5 +61,6 @@
   "new_tiff_emissions_this_review": 0,
   "shared_scientific_template_changes": [],
   "integrated_main": "5c68edc",
-  "github_outcomes": "Preparation checkpoint; verify final delivery PR and Actions links. No merge/deployment asserted here."
+  "github_outcomes": "Initial two verify jobs succeeded at 0ecde41; follow latest-head checks, actual merge and Pages deployment in PR/Actions. Settings API source change was denied to Arena app; workflow Pages token outcome not asserted by this preparation checkpoint.",
+  "delivery_pr": "https://github.com/buffedlizard55-lab/GEMSDOE69/pull/29"
 }

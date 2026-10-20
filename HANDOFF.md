@@ -55,7 +55,9 @@ Main advanced while parallel reviews merged. Integrated `5c68edc` on the fixed s
 
 The inherited H69-H2 run card was preserved byte-for-byte in `evidence/run_card_archived_c332a322c3981c4d3015487119fc0525cedee8919f5f5d25e9902c20cc85442d.json` before an explicit `make_run_card.py --replace-artifact-bound-card` selected the **negative H69-J audit card**. Its certified DTI/CI remain null; no old H2 score was assigned to H69-J. The new 39,958-dot files came from another merged session, not this review's experiment budget.
 
-This checkpoint does not by itself assert PR merge or Pages deployment. The final delivery section/GitHub links will identify actual outcomes. Other concurrent PRs are separate; do not infer that their score/promotion claims were certified here.
+Delivery: [PR #29](https://github.com/buffedlizard55-lab/GEMSDOE69/pull/29). Its initial two `verify` jobs succeeded on GitHub; latest-head checks, actual merge state and deployment are authoritative in the PR and [Actions](https://github.com/buffedlizard55-lab/GEMSDOE69/actions/workflows/pages.yml), not inferred from this local checkpoint. The site target is https://buffedlizard55-lab.github.io/GEMSDOE69/.
+
+The Arena GitHub app could read Pages settings but was denied permission to change its legacy source via the settings API (403, Resource not accessible by integration). The workflow explicitly uses its repository-scoped `pages: write` token to select workflow publication. Verify its actual outcome in Actions; if GitHub denies that too, deployment is blocked pending a Pages permission/source-setting fix, not silently successful. Do not request personal credentials. Other concurrent PRs are separate; their score/promotion claims were not certified here.
 
 ## Only legitimate path to another experiment
 
