@@ -4,7 +4,7 @@ Read README.md and PROMPT.md first, then reports/relayfix-2026-10-20.md.
 
 ## State: NEGATIVE — DO NOT SUBMIT (fail-closed)
 
-Two candidates exist in `submissions/`; neither is currently downloadable:
+Three candidate TIFFs now exist in `submissions/`; none is currently downloadable:
 
 1. **H69-J joint** (38,669 dots) — a parallel session later rebound its local
    holdout and method-source receipts, but this does **not** permit publication:
@@ -19,6 +19,7 @@ Two candidates exist in `submissions/`; neither is currently downloadable:
    Both are local screens only. The candidate fails the literal registry-overlap
    gate (1.0 universal; 0.8497 worst dotlike; rho <=0.28). Negative; evidence
    in `evidence/relayfix_*`, `evidence/*_relayfix_20261020.json`, and the run card.
+3. **H69-J joint repair** (39,958 dots; SHA-256 `287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4`) — added to `submissions/` by merged PR #26. Its TIFF passes the local format validator, but the current receipt, method manifest, holdout, and uniqueness evidence are still bound to the separate 38,669-dot SHA `981beb...`; the 39,958-dot artifact has no artifact-bound receipts or literal two-phase scan. PR #26's body reported 751 registry-fetch errors for it. Audit-only; not downloadable.
 
 ## Needed upstream
 

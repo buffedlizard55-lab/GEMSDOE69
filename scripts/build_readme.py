@@ -85,7 +85,8 @@ The governing lane rule is literal: if any registry raster has rank correlation 
 ## What was learned without submitting
 
 - H69-H2 transfer-only is a formatted archived artifact with a recorded HOLDOUT-DTI screen, but its literal all-registry overlap is 1.0 (and the dotlike diagnostic is also above the 0.70 stop limit). It is not offered for download.
-- H69-J is a distinct joint-corridor artifact with locally hash-bound aggregate receipts. Its format and local holdout records establish neither uniqueness nor an organizer score: literal overlap remains 1.0, so it is not a promotion.
+- H69-J is a distinct joint-corridor artifact with locally hash-bound aggregate receipts. Its format and local holdout records establish neither uniqueness nor an organizer score: literal overlap remains 1.0, so it is not eligible for the separate selector.
+- A separate 39,958-dot TIFF in `submissions/` (SHA-256 `287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4`) passes local format checks only. The current receipt, method manifest, holdout and uniqueness scans are bound to different bytes; it has no current evidence and is not downloadable.
 - No new TIFF is generated in this review: emitting another candidate after a duplicate-and-stop result would violate the parallel-run protocol and would not make it submission-ready.
 
 ## H33 result review — correction to the premise
