@@ -2,18 +2,22 @@
 
 ## NOT OK TO SUBMIT — DO NOT SUBMIT
 
-**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json).
+**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [Parallel review](reports/review-session-2026-10-20.md).
 
 Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
 
 The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
-A format-valid file is not necessarily unique, scientifically validated, or cleared to submit. Current blockers: the strict registry dot-overlap gate fires (literal overlap=1.0), so duplicate-and-stop applies; additionally, the release gate reports that artifact-bound holdout and source-manifest receipts are absent or mismatched. See the current run card and evidence before any release decision.
+A format-valid file is not necessarily unique or scientifically validated.
+- Literal registry dot-overlap gate failed (1.0 > 0.70); duplicate-and-stop applies.
+- The generic release CLI's legacy evidence inputs are not bound to the H69-H2 candidate; it remains fail-closed. See the run card and review report.
 
 ## Latest reviewed candidate — 2026-10-20 transfer-only
 
-H69-H2 is the latest candidate, not the earlier H69-J raster. HOLDOUT-DTI (template66/gems57 pooled hide-and-recover; alpha=0.2, beta=0.8, 300 m triangular kernel; 8 cells, 22,641 withheld positive pixels): pooled DTI 0.007738, 95% CI [0.005732, 0.009743]; comparator without corridor priors 0.002148. The paired bootstrap gate passed, and the feature-alone canary maximum AUC was 0.550. The artifact passed local GeoTIFF validation (single-band float32, EPSG:32611, 3730×3292, expected transform, finite in-footprint values in [0,1]).
+**NEGATIVE: duplicate-and-stop.** Current archived candidate H69-H2 transfer-only is not cleared to submit. Registry scan of 862 hash-verified accessible rasters found literal 3-pixel dot overlap 1.0 (limit 0.70); the surface phase also fails. A lower Spearman value does not override the literal overlap rule. See [latest audit](reports/review-2026-10-20-agent-review.md) and [run card](evidence/run_card.json).
 
-**Final disposition remains NOT OK TO SUBMIT.** Registry scan of 862 hash-verified accessible rasters found literal 3-pixel dot overlap of 1.0 for a registry raster (despite low rank correlation); the user-mandated duplicate-and-stop rule therefore fails. The surface phase also fails the literal overlap condition. The raster is archived for audit only, not offered as a download; no competition slot was used and no organizer score is claimed. Full card: [evidence/run_card.json](evidence/run_card.json).
+HOLDOUT-DTI, vendor/template66/gems57 pooled hide-and-recover (alpha=0.2, beta=0.8, 300 m triangular kernel): H69-H2 pooled DTI 0.007738, 95% CI [0.005732, 0.009743], 22,641 withheld positive pixels across 8 cells; no-prior comparator 0.002148. The paired gate passed. These are local holdout measurements, not an organizer score or leaderboard projection. The TIFF format passes while the artifact remains ineligible.
+
+No competition slot was used and no organizer-confirmed score is claimed. A higher competition score than the user-reported 0.2778 has **not been demonstrated**. See [H33 analysis](docs/why-h33-scored.html).
 
 ## Reproduce the publication audit (no data downloads needed)
 
@@ -32,7 +36,7 @@ GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py sub
 .venv/bin/pytest -q
 ```
 
-Full feature stack restored via `scripts/fetch_data.py` (pinned mirrors); registry 751 blobs via `scripts/fetch_registry.py`. GPU not needed; format validator cannot prove geothermal discovery.
+To restore the absent full feature stack, use `scripts/fetch_data.py` (pinned mirrors); restore registry bytes via `scripts/fetch_registry.py`. Archived registry censuses differ (751 vs 862); reconcile before reuse. GPU not needed; format validator cannot prove geothermal discovery.
 
 ## Standing project brief — read at the beginning of every session
 

@@ -28,3 +28,14 @@ Exp1 findings stand: H69-F subsurface and H69-G radiometric arms not
 established; Exp1 v1 emission is a logged duplicate. Tip-graph R1/R2
 repairs + 100 tests are on the tree. No slot was spent by this session.
 Negative results are deliverables.
+
+## Latest publication audit (same date, after inherited state)
+
+Read `reports/publication-audit-2026-10-20.md`. Repaired a merge regression that
+allowed dotlike-only diagnostics to override literal all-registry overlap.
+The former regression test never supplied a dotlike overlap value; expanded it.
+Current release reasons now include literal duplicate-and-stop plus stale
+holdout/source bindings. Independently revalidated archived H69-J pixels;
+`evidence/publication_audit_validator_20261020.json` passes. No new experiment,
+TIFF, registry scan, or slot was used in this audit. 103 tests pass. Do not treat
+prior-session public-page fetch claims as independent verification this audit.
