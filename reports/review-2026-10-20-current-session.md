@@ -12,7 +12,7 @@ This is not an organizer rejection or a leaderboard score. No organizer receipt 
 
 - Read `PROMPT.md`, `README.md`, `AGENTS.md`, `HANDOFF.md`, the existing run card, release gate, candidate hypotheses, validator, and tests.
 - Installed the declared Python requirements and pytest in the ignored local `.venv`; no project dependency files were changed.
-- Ran `PYTHONPATH=vendor/template66:src .venv/bin/pytest -q`: **89 passed, 1 xfailed**. The expected failure documents the known tip-interval gap defect; it is not a passing geometry validation. Rasterio emitted 18 upstream pending-deprecation warnings.
+- Initial checkout test run: `PYTHONPATH=vendor/template66:src .venv/bin/pytest -q` gave **89 passed, 1 xfailed**. After merging the concurrently advanced `main` changes into this branch and rerunning the complete suite, the final result was **92 passed, 1 xfailed**. The expected failure documents the known tip-interval gap defect; it is not a passing geometry validation. Rasterio emitted 18 upstream pending-deprecation warnings.
 - Revalidated the archived all-finite raster with the local bridge grid:
   `GEMS_DATA="$PWD/data/bridge" PYTHONPATH=vendor/template66:src .venv/bin/python scripts/validate_submission.py submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif`
   Result: `PASS`, SHA-256 `be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7`; the prior receipt records single-band float32, EPSG:32611, shape 3730×3292, transform (100, 0, 243350, 0, -100, 4508550), finite footprint, and values in [0,1]. This establishes local format compliance only.

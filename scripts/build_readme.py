@@ -26,7 +26,7 @@ A valid file is not necessarily a unique or scientifically validated submission.
 
 **Read the canonical project brief in `PROMPT.md` at the beginning of every session.** It is appended to this README when the README is rebuilt.
 
-Read the [current-session three-pass review](reports/review-2026-10-20-current-session.md) and the [prior repository audit](reports/review-2026-10-20.md) before continuing. The current-session review ran the test suite (89 passed, 1 expected failure) and revalidated the archived all-finite TIFF against `data/bridge`.
+Read the [current-session three-pass review](reports/review-2026-10-20-current-session.md), [prior repository audit](reports/review-2026-10-20.md), [follow-up audit](reports/followup-2026-10-20.md), and [checkout review](reports/checkout-audit-2026-10-20.md) before continuing. The current-session review ran the final test suite (92 passed, 1 expected failure) and revalidated the archived all-finite TIFF against `data/bridge`.
 
 **Status remains NOT OK TO SUBMIT.** The locally format-valid TIFF is an archived negative result: its registry scan triggers the literal dot-overlap duplicate stop, is incomplete, and does not have current-artifact-bound pre-placement and final-dot phase receipts. The radiometric method is not reproducible from the checked-in scoring code. No new TIFF was generated and no download is offered. A passing file-format validator is not clearance to submit.
 

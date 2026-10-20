@@ -12,6 +12,7 @@ A valid file is not necessarily a unique or scientifically validated submission.
 - No explicit same-evaluator evidence of beating the current holdout best.
 - Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.
 - Registry scan is incomplete or contains errors.
+- Holdout comparison is missing or not bound to the current artifact hash.
 - Reproducible method source manifest is missing, stale, or not artifact-bound.
 - Artifact-bound feature-alone leakage canaries are missing or flagged.
 - surface uniqueness phase is missing or not bound to the current artifact.
@@ -23,7 +24,7 @@ A valid file is not necessarily a unique or scientifically validated submission.
 
 **Read the canonical project brief in `PROMPT.md` at the beginning of every session.** It is appended to this README when the README is rebuilt.
 
-Read the [current-session three-pass review](reports/review-2026-10-20-current-session.md) and the [prior repository audit](reports/review-2026-10-20.md) before continuing. The current-session review ran the test suite (89 passed, 1 expected failure) and revalidated the archived all-finite TIFF against `data/bridge`.
+Read the [current-session three-pass review](reports/review-2026-10-20-current-session.md), [prior repository audit](reports/review-2026-10-20.md), [follow-up audit](reports/followup-2026-10-20.md), and [checkout review](reports/checkout-audit-2026-10-20.md) before continuing. The current-session review ran the final test suite (92 passed, 1 expected failure) and revalidated the archived all-finite TIFF against `data/bridge`.
 
 **Status remains NOT OK TO SUBMIT.** The locally format-valid TIFF is an archived negative result: its registry scan triggers the literal dot-overlap duplicate stop, is incomplete, and does not have current-artifact-bound pre-placement and final-dot phase receipts. The radiometric method is not reproducible from the checked-in scoring code. No new TIFF was generated and no download is offered. A passing file-format validator is not clearance to submit.
 
@@ -87,3 +88,15 @@ The following is the retained project brief, not a verbatim transcript of every 
 > Pass protocol: Pass 1 implement and verify; Pass 2 review for bugs/missing requirements/edge cases, fix; Pass 3 re-check against this file, improve, fix. Finish with a pull request merged to main, plus suggestions and limitations for the next session.
 >
 > Core values (Arena): Maximize P(Win) — weigh tradeoffs, assess risk, choose the path that maximizes the probability of winning. Own the Outcome — own results end to end, treat failure as a signal, stay accountable to the final outcome.
+
+## Active request refresh — 2026-10-20 follow-up
+
+Read the full standing brief above on every session. Continue the handoff before
+starting new experiments. The user again requests an autonomous three-pass
+review, a unique gated TIFF, an obvious download/submission status, ranked
+in-lane hypotheses, source-linked scientific reasoning, and a PR merged to main.
+The additional user-reported leaderboard high of 0.4413 is not organizer-confirmed;
+it conflicts with other highs in the prompt and must not be called current fact.
+Core values remain Maximize P(Win) and Own the Outcome. No leaderboard improvement,
+source verification, data access, or completed submission may be invented.
+The duplicate-and-stop rule remains binding even when it prevents a new TIFF.
