@@ -1,12 +1,16 @@
 # GEMSDOE69 — Relay-ramp & pull-apart corridor lane (DOE GEMS Prize, DrivenData #306)
 
 **Lane method:** propose hidden faults from **catalogue geometry** (tip graph of
-mapped fault polylines → relay-ramp / pull-apart corridors), scored by
-multi-scale horizontal-gradient + tilt evidence in gravity and magnetics
-(including magnetic lows), the 1 m lidar-scarp channel, and orientation
-consistency with WNW extension — then **calibrated greedy marginal-DTI dot
-placement** inside the top corridors. Standing prompt: [PROMPT.md](PROMPT.md)
-(read it at the start of every session).
+mapped fault polylines → relay-ramp / pull-apart corridors). For each
+same-dip, overlapping or underlapping tip pair with spacing W of 0.1–15 km and
+along-strike separation ≤3.5W, emit candidate corridors (an oblique connector
+plus en échelon strands); add pull-apart and transfer-zone corridors at
+dextral releasing steps and terminations. Score corridors by multi-scale
+horizontal-gradient and tilt evidence in gravity and magnetics (including
+magnetic lows), the 1 m lidar-scarp channel, and orientation consistency with
+WNW extension — then **calibrated greedy marginal-DTI dot placement** inside
+the top corridors. Standing prompt: [PROMPT.md](PROMPT.md) (read it at the
+start of every session).
 
 ## Site
 

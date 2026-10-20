@@ -91,7 +91,7 @@ def submission_banner():
         pub = DOCS / "downloads" / f"{tif.stem}.tif"
         pub.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(tif, pub)
-        primary, fallback = (nan_tif, tif) if (nan_ok and nan_tif) else (tif, None)
+        primary, fallback = (tif, nan_tif) if (zeros_ok and tif) else (nan_tif, None)
         if nan_ok and nan_tif:
             shutil.copy2(nan_tif, DOCS / "downloads" / f"{nan_tif.stem}.tif")
         ovl_pct = f"{worst_ovl.get('dot_overlap_3px', 0):.1%}" if worst_ovl else "n/a"
@@ -108,7 +108,7 @@ def submission_banner():
                f'<span class="kv">If the selector judges the flag structural, the artifact below is ready; '
                f'otherwise treat it as a logged negative result.</span></div>'
                f'<a class="btn big" href="downloads/{esc(primary.stem)}.tif" download>&#11015;&#65039; Download PRIMARY submission TIF ({esc(primary.stem)}.tif)</a>'
-               + (f'<a class="btn alt" href="downloads/{esc(fallback.stem)}.tif" download>Fallback all-finite variant ({esc(fallback.stem)}.tif)</a>' if fallback else '')
+               + (f'<a class="btn alt" href="downloads/{esc(fallback.stem)}.tif" download>{fallback_label} ({esc(fallback.stem)}.tif)</a>' if fallback else '')
                + f'<a class="btn alt" href="#how-to-submit">How to submit it</a>')
         return ban, tif
     if ok and tif:
@@ -116,9 +116,10 @@ def submission_banner():
         pub = DOCS / "downloads" / f"{tif.stem}.tif"
         pub.parent.mkdir(parents=True, exist_ok=True)
         shutil.copy2(tif, pub)
-        primary, fallback = (nan_tif, tif) if (nan_ok and nan_tif) else (tif, None)
+        primary, fallback = (tif, nan_tif) if (zeros_ok and tif) else (nan_tif, None)
         if nan_ok and nan_tif:
             shutil.copy2(nan_tif, DOCS / "downloads" / f"{nan_tif.stem}.tif")
+        fallback_label2 = "Diagnostic NaN variant" if fallback and "nan" in fallback.stem else "Fallback all-finite variant"
         ban = (f'<div class="banner ok"><b>&#9989; OK TO DOWNLOAD AND SUBMIT.</b><br>'
                f'The gate was met on the spatially-blocked hide-and-recover holdout, the '
                f'registry lane-drift scan passed (surface Spearman and dot-like overlap), and the '
@@ -127,7 +128,7 @@ def submission_banner():
                f'<span class="kv">This is a HOLDOUT-screened candidate, not an organizer-confirmed score. '
                f'Promotion to a submission slot is a separate selector step.</span></div>'
                f'<a class="btn big" href="downloads/{esc(primary.stem)}.tif" download>&#11015;&#65039; Download PRIMARY submission TIF ({esc(primary.stem)}.tif)</a>'
-               + (f'<a class="btn alt" href="downloads/{esc(fallback.stem)}.tif" download>Fallback all-finite variant ({esc(fallback.stem)}.tif)</a>' if fallback else '')
+               + (f'<a class="btn alt" href="downloads/{esc(fallback.stem)}.tif" download>{fallback_label2} ({esc(fallback.stem)}.tif)</a>' if fallback else '')
                + f'<a class="btn alt" href="#how-to-submit">How to submit it</a>')
         return ban, tif
     reasons = []
