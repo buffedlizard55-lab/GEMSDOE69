@@ -5,41 +5,14 @@
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="active">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
-<main class="wrap">
-
-<div class="card"><h2>Why the reported H33 result is plausible — not proven</h2>
-<p>The value <b>0.2778 is USER-REPORTED, NOT ORGANIZER-CONFIRMED for this file</b>.
-No submission-page receipt binding that value to the H33 hash is available here. The user gives
-conflicting leaderboard highs; the archived leaderboard snapshot is not a current feed.</p>
-<p>The local family audit (<code>evidence/e0_champion_ladder_measured.json</code>) records
-progressively sparser dot fields. Under the implemented DTI, redundant dots can add false-positive
-mass without increasing the maximum coverage of a truth pixel. Thinning can therefore improve
-precision while retaining recovery within the distance kernel. This is a plausible explanation
-of the reported family trend, not a causal experiment on organizer hidden truth.</p>
-<p>Removing catalogue-adjacent dots is <b>not automatically a pure gain</b>: an adjacent dot may cover
-an unmasked hidden fault. For a new unit dot with marginal truth coverage dT and self-credit m,
-the exact improvement condition is <code>dT &gt; 0.2 DTI (dT + 1 - m)</code> for the stated weights.
-The simplified threshold <code>m &gt; 0.2 DTI</code> only follows when dT=m. It is not a universal
-5.6% fault-probability rule. There is no justified fixed score ceiling for sparse submissions.</p>
-<p><b>Re-measured here (2026-10-20, from fetched registry bytes, evidence/relayfix_champion_anatomy.json)</b>:
-the H33 zeros file (sha256 c55bafc4&hellip;) holds 37,654 unit dots, none on the catalogue, nearest 2.24 px
-from it, median 1.96 km away, only 5.8% within 300 m of a mapped fault. At DTI 0.2778 a new dot pays only
-if its marginal kernel credit clears the metric bar (exact condition above; the 300 m kernel and
-&alpha;=0.2/&beta;=0.8 were re-verified on the official problem page fetched this session). The reported ladder is
-therefore consistent with near-minimal mass on a wide, reasonably ranked field &mdash; dotted emission plus
-removal of below-bar catalogue-flank dots &mdash; not proof of uniquely correct geology.</p>
-<p>Can a unique lane submission beat 0.2778? <b>Not demonstrated.</b> The public leaderboard fetched
-2026-10-20 is led at 0.4413, so much better-ranked fields exist, but beating H33 by reusing its dots would
-fail this protocol's uniqueness rule, and our holdout is a screen (&rho;&asymp;0.51 cross-family), never a projection.
-This session's transfer-only candidate beat its same-evaluator holdout comparators; only an organizer
-receipt could convert that into a leaderboard claim, and no slot was spent.</p>
-<p>Manual review: <a href="https://github.com/drivendataorg/gems-prize-reference-solution">organizer reference repository</a>,
-<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official problem description (fetched 2026-10-20)</a>,
-<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">public leaderboard (fetched 2026-10-20)</a>,
-<a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/index.html">family H33 page source</a>.</p></div>
-
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<div class="sub">DOE GEMS Prize · catalogue-geometry fault proposal · submission status is evidence-gated</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="active">Why H33</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Results</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<main class="wrap"><div class="card">
+<h2>Why H33 was reported at 0.2778 — what is and is not supported</h2>
+<p><b>0.2778 is USER-REPORTED-NOT-ORGANIZER-CONFIRMED.</b> The repository has no submission receipt binding that value to the exact H33 artifact. Do not present it as a verified score, current leaderboard rank, causal effect, or target this method can beat.</p>
+<p><b>REGISTRY-MEASUREMENT:</b> a local anatomy audit of a family-repository H33 raster recorded 37654 unit dots and SHA-256 <code>c55bafc470054e8271dcb89347a17e07fefe50de6af6e6ba6c4b169ef7ab6fa9</code>. This is a measurement of accessible file bytes, not authentication of the score. A sparse, distance-tolerant field can plausibly avoid paying for redundant false-positive mass while retaining some kernel coverage; the exact impact depends on the hidden faults, which are not available here.</p>
+<p>The competition metric recorded in the source register is distance-weighted Tversky (alpha 0.2, beta 0.8, 300 m triangular kernel). A score on a private holdout is not calibrated to organizer leaderboard scores by any evidence in this candidate's run card. No unique lane result has demonstrated an organizer-score improvement. For a full source and uncertainty note, see <a href="research/0.2778-analysis.md">the repository analysis</a>.</p>
+<p>Current limitation: no official receipt ties 0.2778 to the measured H33 bytes; historical leaderboard snapshots are not live. No leaderboard page was fetched during this review.</p>
+</div></main>
+<footer>Negative results are deliverables · no organizer score is inferred from a local holdout.</footer>
 </body></html>

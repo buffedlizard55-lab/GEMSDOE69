@@ -1,0 +1,35 @@
+{
+  "candidate_id": "H69-H2-transfer-only",
+  "artifact_path": "submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif",
+  "artifact_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+  "submission_name": "h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros",
+  "submission_note": "H69 transfer-only relay corridors; repaired tip graph; 36325 dots",
+  "registry_index_path": "registry/registry_index_69.json",
+  "registry_index_sha256": "1b76b63e9052cffeaab8191aa0285e19f9a3a71fd9b14e68b9b6c3ddb6903787",
+  "registry_expected_rasters": 862,
+  "evidence_files": {
+    "artifact_receipt": "relayfix_transfer_receipt.json",
+    "holdout": "relayfix_exp2b_gate.json",
+    "uniqueness": "e3_uniqueness_relayfix_20261020.json",
+    "surface_phase": "e3_uniqueness_surface_relayfix_20261020.json",
+    "dots_phase": "e3_uniqueness_dots_relayfix_20261020.json",
+    "method_manifest": "e3_method_manifest_relayfix_20261020.json",
+    "canaries": "e1_canaries_relayfix_20261020.json",
+    "validator": "relayfix_transfer_validator.json"
+  },
+  "evidence_sha256": {
+    "artifact_receipt": "46c0220de595f7ef78bdc8b8a72d7e2d95d4caa2d6a5e71e8e9d2cef5d0e7c1a",
+    "holdout": "ee40748160f0318dd7d13db3c1e1cbcca5016bf9a63fe15e9fe40441d5d3017c",
+    "uniqueness": "fd7d006051cb19bd79f18b3ecbe66b8ded964015616e46f51143337e86716062",
+    "surface_phase": "c891c90cc0b7ad406fad73a5112e71dda93272efd3c5917d986c35799eb7b934",
+    "dots_phase": "733375081d4f25d577bbb8707837b082daabb459fe6568f35c45fc7e5d82d57e",
+    "method_manifest": "92a796eb2044b31042bd18993e8db61b083685489a690b1230f601d5d193505e",
+    "canaries": "4562eceb4812b9f0d7d457bc66fa347d13646b8db2415ef24ea7d1cbd0dab8ce",
+    "validator": "7fea92f1603b4af35ddc80ed9b6f68f5b2e61848254c00e730968cb07da8b018"
+  },
+  "scope_note": "Latest emitted candidate. Evidence scans 862 hash-verified, grid-matching rasters in the accessible owner-repository index; the index explicitly excludes private, external, and never-committed rasters.",
+  "protocol_registration": {
+    "path": "registry/preregistration-2026-10-20-exp2b-transfer.json",
+    "sha256": "ae30a1279ebdb20b9f081358a21b90dd60f4b92325a6738c13ba5dbb8184831c"
+  }
+}

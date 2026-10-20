@@ -1,4 +1,6 @@
-# Method — relay-ramp and pull-apart corridor generator
+# Historical method narrative — relay-ramp and pull-apart corridor generator
+
+> This narrative records an earlier source-rich design and is not a claim about the current `src/gems69` implementation. Its polyline/attributes and dip-inference statements require renewed provenance checks; the current code uses the raster catalogue and does not measure dip polarity or slip sense. See the current method page and `evidence/run_card.json`.
 
 ## 1. Catalogue polylines and the tip graph
 

@@ -19,10 +19,12 @@ INPUT_CANDIDATES = {
         "data/raw/training_features.tif",
     ),
     "labels": (
+        "data/bridge/labels.tif",
         "data/labels.tif",
         "data/raw/labels.tif",
     ),
     "existing_faults": (
+        "data/bridge/existing_faults.tif",
         "data/existing_faults.tif",
         "data/raw/existing_faults.tif",
     ),
@@ -31,6 +33,7 @@ INPUT_CANDIDATES = {
         "data/raw/1m_DEM_links.csv",
     ),
     "sample_submission": (
+        "data/bridge/sample_submission.tif",
         "data/sample_submission.tif",
         "data/raw/sample_submission.tif",
     ),

@@ -2,14 +2,22 @@
   "verdict": "negative",
   "download_enabled": false,
   "reasons": [
-    "Holdout comparison is missing or not bound to the current artifact hash.",
-    "Reproducible method source manifest is missing, stale, or not artifact-bound."
+    "Recorded preregistration is not earlier than HOLDOUT-DTI generation; protocol order is unverified.",
+    "No hash-bound paired HOLDOUT-DTI 95% CI proves improvement over the declared current holdout best.",
+    "Literal registry dot-overlap is 1.000 against 17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif; above 0.700, so duplicate-and-stop applies.",
+    "surface uniqueness phase failed its literal duplicate gate or is missing.",
+    "surface uniqueness phase exceeds or lacks the literal 3-px dot-overlap limit.",
+    "surface uniqueness scan is not certified at the required before placement stage.",
+    "dots uniqueness phase failed its literal duplicate gate or is missing.",
+    "dots uniqueness phase exceeds or lacks the literal 3-px dot-overlap limit.",
+    "dots uniqueness scan is not certified at the required after placement stage.",
+    "Reproducible method source manifest is missing, stale, or not artifact-bound; source hash mismatch: src/gems69/holdout69.py."
   ],
-  "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+  "artifact_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
   "validator_report": {
-    "file": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
-    "bytes": 780354,
-    "sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+    "file": "submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif",
+    "bytes": 796082,
+    "sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
     "meta": {
       "count": 1,
       "dtype": "float32",
@@ -38,7 +46,7 @@
     "n_nan_inside_footprint": 0,
     "min": 0.0,
     "max": 1.0,
-    "positive_pixels": 38669,
+    "positive_pixels": 36325,
     "distinct_positive_values": [
       1.0
     ],
@@ -83,5 +91,6 @@
       "problems": []
     },
     "all_checks_passed": true
-  }
+  },
+  "scope_note": "Latest emitted candidate. Evidence scans 862 hash-verified, grid-matching rasters in the accessible owner-repository index; the index explicitly excludes private, external, and never-committed rasters."
 }

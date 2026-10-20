@@ -1,4 +1,7 @@
-# Candidate geological hypotheses — GEMSDOE69 relay-ramp lane
+# Historical candidate geological hypotheses — GEMSDOE69 relay-ramp lane
+
+> Archive of the 2026-10-20T19:40Z preregistration before implementation. H1/H69-J was later implemented as a scalar amplitude-coincidence scorer; it did not implement the spatial phase mechanism described here. Do not use this as a current untried queue or score claim. See `untried-hypotheses-2026-10-20.md` and `../../evidence/run_card.json`.
+
 Generated: 2026-10-20T19:40Z — Pre-registration before implementation
 Evidence class: hypothesis proposal (no holdout look yet); ranked by expected HOLDOUT-DTI improvement, then implementation cost.
 All use the catalogue-geometry tip graph (W 0.1–15 km, along ≤3.5W, same-dip via sub-parallel strikes) rather than pixel statistics.

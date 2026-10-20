@@ -1,5 +1,7 @@
 # Geothermal knowledge base — GeoDAWN / Walker Lane / GEMS competition
 
+> Historical source-labelled notes, not a live inventory. As of the 2026-10-20 current review, the full feature stack/cache is absent from this checkout and no external page was fetched. Use `evidence/run_card.json` and `docs/research/untried-hypotheses-2026-10-20.md` for current status. Mirror pins do not establish organizer authentication.
+
 Accumulated, source-labelled knowledge. Every entry states where it came from:
 **[OFFICIAL]** organizer/USGS product or page, **[PROMPT]** stated in the standing
 prompt (Giddens & Faulds 2025 SGP-TR-229 numbers are quoted from the prompt, which
@@ -54,7 +56,7 @@ obtainable in-sandbox, with the reason.
 * **[FAMILY, GEMSDOE32]** catalogue_hidden proxy flaw: mass on mapped faults is
   free in the naive proxy but penalized live (strict variant charges it).
 
-## 4. Data inventory available to this lane (all hash-verified this session)
+## 4. Historical data inventory (hash pins from an earlier review; not present locally now)
 
 | asset | sha256 (16) | notes |
 | --- | --- | --- |
@@ -67,13 +69,18 @@ obtainable in-sandbox, with the reason.
 | derived_sgmc_faults_100m_u8.tif | 643cbe992ef4ba37 | 83,593 px, overlaps labels in only 3,978 px |
 | gdr_wellspring/qfaults/volcanic CSVs | see manifest | GDR points inside footprint |
 
-## 5. Open questions for next sessions
+## 5. Current blockers and research queue
 
-1. Does the corridor arm's holdout edge survive the conservative 'detached' folds
-   (segments with no visible continuation)? — queued sensitivity run.
-2. Radiometric K/Th lows inside corridors (H69-D): cheap to test next session;
-   data already pinned.
-3. The 0.2778 → 0.3195+ gap to user-reported leaderboard highs: the family
-   instrument cannot rank across that gap (ρ≈0.51). A promotion experiment needs
-   organizer receipts, i.e. actually spending a scored slot — a selector
-   decision, not a lane decision.
+1. The active H69-H2 transfer-only candidate is duplicate-and-stop under the
+   literal 3-px overlap rule. No stratified diagnostic can waive the firing.
+2. The transfer source manifest has a stale `holdout69.py` hash; H69-J has four
+   source mismatches. Do not revise manifests without artifact-reproducing runs.
+3. The holdout receipt lacks a hash-bound paired confidence interval against an
+   explicitly declared current holdout-best artifact. The old boolean claim is
+   insufficient.
+4. `.cache/gems_data` is absent, and no data restoration was performed in the
+   current review. See `docs/research/untried-hypotheses-2026-10-20.md` for three
+   qualitative, untried in-lane tests and the reasons the best was not run.
+5. H33's 0.2778 remains USER-REPORTED-NOT-ORGANIZER-CONFIRMED; no receipt binds
+   that value to a specific TIFF. Do not infer a leaderboard projection from
+   the local HOLDOUT-DTI screen.

@@ -1,4 +1,6 @@
-# Review passes — 2026-10-20 (H69-E)
+# Historical review passes — 2026-10-20 (H69-E)
+
+> This is the earlier H69-E experiment report and does not describe the current candidate or release status. See [`repo-review-2026-10-20.md`](repo-review-2026-10-20.md) and `evidence/run_card.json` for the reconciled current state.
 
 ## Pass 1 — implement and measure
 

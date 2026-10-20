@@ -5,35 +5,21 @@
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="active">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
-<main class="wrap">
-
-<div class="card">
-<h2>Irregularities flagged for review</h2>
+<div class="sub">DOE GEMS Prize · catalogue-geometry fault proposal · submission status is evidence-gated</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Results</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="active">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<main class="wrap"><div class="card">
+<h2>Irregularities and limitations</h2>
 <table><tr><th>ID</th><th>Finding</th><th>Disposition</th></tr>
-<tr><td>IR-69-DATA-01</td><td><code>existing_faults.tif</code> is byte-identical to <code>labels.tif</code>
-(sha256 7ba308cc&hellip;) in every family mirror; the true organizer existing-faults raster is not
-available in this environment. Consequence: the public labels raster doubles as the mapped catalogue;
-the scored hidden truth is unpublished.</td><td>Mirror equality is not organizer authentication; holdout validity and catalogue provenance remain limitations.</td></tr>
-<tr><td>IR-69-DATA-02</td><td>No DrivenData auth: organizer bytes cannot be re-downloaded; all data are
-sha256-pinned family mirrors (NOT organizer-authenticated).</td><td>Fail-closed fetch scripts verify every byte
-on arrival; a mismatch aborts the run.</td></tr>
-<tr><td>IR-69-TPL-01</td><td>GEMSDOE63's vendored <code>gems57/grid.py</code> drifted from its sha256 pin (an
-unrepinned REPO_ROOT fix). Upstream <code>gems/submission_writer.py</code> and <code>validate_submission.py</code>
-are strictly stronger than GEMSDOE63's vendored copies.</td><td>gems57 restored to the pinned bytes (data_dir passed
-explicitly); gems/ taken from upstream GEMSDOE66 (the template owner) and the drift documented here.</td></tr>
-<tr><td>IR-69-DIP-01</td><td>The raster catalogue carries no dip polarity, so the prompt's &ldquo;same-dip&rdquo; pairing
-condition is proxied by sub-parallel terminal strikes (&le;30&deg;).</td><td>Disclosed in the method; sensitivity
-check queued for a future session.</td></tr>
-<tr><td>IR-69-REG-01</td><td>The literal protocol overlap gate fails closed against ANY sparse dot field because the
-registry contains 27 universal soft surfaces and 134 high-density rasters (family precedent GEMSDOE63/64).
-The stratified diagnostic does not override the literal protocol. A literal failure means duplicate-and-stop; no download is offered.</td><td>Reported literally in evidence/e3_uniqueness.json.</td></tr>
-<tr><td>IR-69-SCORE-01</td><td>All leaderboard values in the standing prompt (0.2778, 0.3774, 0.3195, &hellip;) are
-USER-REPORTED-NOT-ORGANIZER-CONFIRMED; no organizer receipt exists in this repo.</td><td>Labels applied everywhere.</td></tr>
+<tr><td>IR-69-REG-01</td><td>Current transfer candidate has literal dot-overlap 1.0 in the accessible registry scan, above the 0.700 stop threshold. Surface and final-dot phases both require stop.</td><td>Duplicate-and-stop. No stratified/dotlike diagnostic can override it; no TIFF offered.</td></tr>
+<tr><td>IR-69-REG-02</td><td>862-raster registry index is an accessible public owner-repository inventory, not an organizer-complete census; private, external, and never-committed rasters are excluded.</td><td>State scope explicitly; do not claim global uniqueness.</td></tr>
+<tr><td>IR-69-ORDER-01</td><td>The recorded surface comparison occurred after emission; it is not certified as a pre-placement check. The final-dots comparison is not independently certified as an after-placement phase in its manifest.</td><td>Release policy fails closed on phase-order evidence.</td></tr>
+<tr><td>IR-69-SOURCE-01</td><td>The transfer method manifest has a stale <code>holdout69.py</code> hash. The H69-J manifest has four source mismatches. These manifests do not prove that the current checkout reproduces the artifacts.</td><td>Do not rewrite the hashes without an artifact-reproducing run; no experiment was rerun.</td></tr>
+<tr><td>IR-69-BEST-01</td><td>Archived HOLDOUT-DTI evidence compares transfer with corridor-v1 and a no-prior control, but has no hash-bound paired interval against a declared current holdout-best artifact.</td><td>Do not treat an old <code>current_best_beaten</code> boolean as sufficient; no current-best claim.</td></tr>
+<tr><td>IR-69-PROTOCOL-01</td><td>The preregistration records <code>frozen_utc=2026-10-20T20:50:00Z</code>, later than the HOLDOUT-DTI record's <code>generated_utc=20261020T204429Z</code>. These UTC fields conflict with the text claiming it was frozen before the look.</td><td>Pin both records, mark preregistration order unverified, and do not treat this holdout as protocol-certified until the timestamp discrepancy is resolved.</td></tr>
+<tr><td>IR-69-DATA-01</td><td>Competition inputs in the manifests are owner-supplied, hash-pinned mirrors, not organizer-authenticated. The feature cache is absent from this checkout.</td><td>No current local feature restoration or experiment was performed.</td></tr>
+<tr><td>IR-69-SCORE-01</td><td>H33's reported 0.2778 has no organizer receipt binding the score to file bytes; historical leaderboard snapshots are stale.</td><td>Label USER-REPORTED-NOT-ORGANIZER-CONFIRMED; no projection.</td></tr>
+<tr><td>IR-69-DIP-01</td><td>The catalogue raster does not encode dip polarity or fault slip sense.</td><td>Strike similarity and regional dextral assumptions remain proxies, not observations.</td></tr>
 </table>
-</div>
-
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+</div></main>
+<footer>Negative results are deliverables · no organizer score is inferred from a local holdout.</footer>
 </body></html>

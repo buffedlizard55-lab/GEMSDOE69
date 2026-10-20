@@ -1,48 +1,40 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Experiments · GEMSDOE69</title>
+<title>Results and evidence · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="active">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
-<main class="wrap">
-
-<div class="card"><h2>E1 &mdash; census, hard-link recovery, canaries</h2>
-<table>
-<tr><th>Measurement</th><th>Value</th></tr>
-<tr><td>Strands vectorized from the pinned catalogue</td><td>3887</td></tr>
-<tr><td>Corridors emitted (cap 1200)</td><td>1200 (1200 pull-apart / 0 transfer-overlap)</td></tr>
-<tr><td>Hard-linked ramps found / tested</td><td>1896 / 22</td></tr>
-<tr><td>Mean recovery of masked linking faults within 300 m</td><td>0.864 (median 1.000)</td></tr>
-<tr><td>Ramps recovered &ge;70%</td><td>19</td></tr>
+<div class="sub">DOE GEMS Prize · catalogue-geometry fault proposal · submission status is evidence-gated</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="active">Results</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<main class="wrap"><div class="card">
+<h2>HOLDOUT-DTI — screening result, not a leaderboard score</h2>
+<p>Evaluator: <code>vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=[&#x27;all&#x27;]; POOLED from summed TP/FP/FN)</code>; 8 holdout cells; 22641 withheld positive pixels. Primary statistic: pooled DTI from summed TP/FP/FN.</p>
+<table><tr><th>Quantity</th><th>HOLDOUT-DTI</th><th>95% interval</th><th>Meaning</th></tr>
+<tr><td>Transfer-only candidate, primary pooled</td><td>0.008470</td><td>not available for absolute pooled DTI</td><td>Summed TP/FP/FN; not directly comparable to leaderboard scores</td></tr>
+<tr><td>Mean of cell DTI</td><td>0.007738</td><td>[0.0057316537303127996, 0.009743409030497476]</td><td>Normal approximation over cells; different estimand from pooled DTI</td></tr>
+<tr><td>Candidate − corridor-v1</td><td>0.002042</td><td>[0.0008402106830173246, 0.003013982730174917]</td><td>HOLDOUT-DTI paired delta</td></tr>
+<tr><td>Candidate − no-prior control</td><td>0.006235</td><td>[0.0044373728488070535, 0.007874044988124924]</td><td>HOLDOUT-DTI paired delta</td></tr>
 </table>
-<table><tr><th>W (px)</th><th>linking px</th><th>recovery within 3 px</th><th>subtype</th></tr><tr><td>2</td><td>28</td><td>1.000</td><td>pull-apart</td></tr><tr><td>2</td><td>6</td><td>0.000</td><td>pull-apart</td></tr><tr><td>33</td><td>89</td><td>1.000</td><td>pull-apart</td></tr><tr><td>29</td><td>76</td><td>1.000</td><td>pull-apart</td></tr><tr><td>31</td><td>67</td><td>1.000</td><td>pull-apart</td></tr><tr><td>8</td><td>97</td><td>1.000</td><td>pull-apart</td></tr><tr><td>22</td><td>97</td><td>1.000</td><td>pull-apart</td></tr><tr><td>9</td><td>6</td><td>0.000</td><td>transfer-overlap</td></tr><tr><td>4</td><td>27</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>58</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>60</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>45</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>28</td><td>1.000</td><td>pull-apart</td></tr><tr><td>4</td><td>8</td><td>0.000</td><td>pull-apart</td></tr><tr><td>3</td><td>30</td><td>1.000</td><td>pull-apart</td></tr><tr><td>4</td><td>55</td><td>1.000</td><td>pull-apart</td></tr><tr><td>5</td><td>48</td><td>1.000</td><td>pull-apart</td></tr><tr><td>2</td><td>48</td><td>1.000</td><td>pull-apart</td></tr><tr><td>6</td><td>45</td><td>1.000</td><td>pull-apart</td></tr><tr><td>6</td><td>34</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>33</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>16</td><td>1.000</td><td>pull-apart</td></tr></table>
+<p><b>Current-best comparison:</b> NOT ESTABLISHED: no hash-bound paired CI against an explicitly declared current-best artifact is present. The stored <code>beats_current_best</code> boolean in older evidence is not accepted without artifact-bound same-evaluator paired evidence.</p>
+<p class="small">Method/evaluator and withheld counts are shown with each number as required. Paired-delta intervals are not absolute candidate-score intervals.</p>
 </div>
-<div class="card"><h2>E2 &mdash; holdout gate (corridor vs no-prior control)</h2>
-<table><tr><th>Arm</th><th>Pooled DTI</th><th>95% CI half</th><th>Cells</th></tr>
-<tr><td>Corridor prior</td><td>0.0059</td><td>0.0012</td><td rowspan=2>8 (22641 withheld positives)</td></tr>
-<tr><td>No-prior control</td><td>0.0021</td><td>0.0006</td></tr>
-<tr><td><b>Paired &Delta;</b></td><td><b>+0.0038</b></td><td>0.0015</td><td>gate_passed = True</td></tr>
+<div class="card">
+<h2>REGISTRY-MEASUREMENT — literal uniqueness</h2>
+<p>Accessible indexed rasters: 862/862; scan errors: 0. Scope: Latest emitted candidate. Evidence scans 862 hash-verified, grid-matching rasters in the accessible owner-repository index; the index explicitly excludes private, external, and never-committed rasters.</p>
+<table><tr><th>Phase</th><th>Worst absolute Spearman</th><th>Worst literal 3-px overlap</th><th>Required order / outcome</th></tr>
+<tr><td>Pre-placement surface</td><td>0.270782</td><td>1.0</td><td>None; stop required = True</td></tr>
+<tr><td>Final dots</td><td>0.110311</td><td>1.0</td><td>None; stop required = True</td></tr>
+<tr><td>Aggregate literal gate</td><td>True</td><td>False</td><td>Any |rho| &gt; 0.90 or overlap &gt; 0.700 means duplicate-and-stop</td></tr>
 </table>
-<table><tr><th>Cell</th><th>Corridor DTI</th><th>Control DTI</th></tr><tr><td>draw20_foldNE_all</td><td>0.0068</td><td>0.0008</td></tr><tr><td>draw20_foldNW_all</td><td>0.0050</td><td>0.0028</td></tr><tr><td>draw20_foldSE_all</td><td>0.0054</td><td>0.0035</td></tr><tr><td>draw20_foldSW_all</td><td>0.0068</td><td>0.0028</td></tr><tr><td>draw21_foldNE_all</td><td>0.0049</td><td>0.0017</td></tr><tr><td>draw21_foldNW_all</td><td>0.0042</td><td>0.0018</td></tr><tr><td>draw21_foldSE_all</td><td>0.0046</td><td>0.0020</td></tr><tr><td>draw21_foldSW_all</td><td>0.0097</td><td>0.0017</td></tr></table>
-<p class="small">Evaluator: vendor/template66 gems57 pooled hide-and-recover (&alpha;=0.2, &beta;=0.8,
-300 m triangular kernel). Evidence class HOLDOUT-DTI.</p>
+<p>The saved per-raster scan has a literal dot overlap of 1.0 against at least one accessible raster. A smaller-raster/dotlike diagnostic is not a waiver. The 862-raster public owner-repository index explicitly omits private, external, and never-committed files, so it is not an exhaustive organizer registry.</p>
 </div>
-<div class="card"><h2>E3 &mdash; emission, registry scan, validator</h2>
-<table><tr><th>Check</th><th>Result</th></tr>
-<tr><td>Dots emitted (greedy marginal-DTI, |G| prior 12,691 px)</td><td>38669 (catalogue collisions: 0)</td></tr>
-<tr><td>Validator on exact bytes (scripts/validate_submission.py, both variants)</td><td>FAIL/pending — see evidence/relayfix_transfer_validator.json</td></tr>
-<tr><td>Portal file (-zeros): all-finite float32 in [0,1], EPSG:32611, 3730&times;3292</td><td>pending</td></tr>
-<tr><td>Diagnostic twin (-nan): NaN only outside footprint &mdash; DO NOT UPLOAD</td><td>archived for audit</td></tr>
-<tr><td>Registry scan compared / errors</td><td>751 / 0</td></tr>
-<tr><td>Worst |Spearman| surface</td><td>0.162</td></tr>
-<tr><td>Worst dot overlap (dotlike stratum)</td><td>0.61</td></tr>
-<tr><td>Exact pixel-agreement &ge;99.99% vs any prior raster</td><td>0</td></tr>
-</table>
-</div>
-
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<div class="card">
+<h2>Artifact, validator, and provenance</h2>
+<p>Archived path: <code>submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif</code><br>SHA-256: <code>b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1</code></p>
+<p>Exact-byte local validator: <b>PASS</b>; values min/max 0.0/1.0; NaNs inside footprint 0; grid EPSG:32611, [3730, 3292], transform [100.0, 0.0, 243350.0, 0.0, -100.0, 4508550.0]. This is a format check only.</p>
+<p>Method manifest: stale source hashes were detected for the transfer candidate (<code>holdout69.py</code>) and for H69-J (four source files). Those hashes were not silently rewritten.</p>
+<h3>Why publication is blocked</h3><ul><li>Recorded preregistration is not earlier than HOLDOUT-DTI generation; protocol order is unverified.</li><li>No hash-bound paired HOLDOUT-DTI 95% CI proves improvement over the declared current holdout best.</li><li>Literal registry dot-overlap is 1.000 against 17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif; above 0.700, so duplicate-and-stop applies.</li><li>surface uniqueness phase failed its literal duplicate gate or is missing.</li><li>surface uniqueness phase exceeds or lacks the literal 3-px dot-overlap limit.</li><li>surface uniqueness scan is not certified at the required before placement stage.</li><li>dots uniqueness phase failed its literal duplicate gate or is missing.</li><li>dots uniqueness phase exceeds or lacks the literal 3-px dot-overlap limit.</li><li>dots uniqueness scan is not certified at the required after placement stage.</li><li>Reproducible method source manifest is missing, stale, or not artifact-bound; source hash mismatch: src/gems69/holdout69.py.</li></ul>
+</div></main>
+<footer>Negative results are deliverables · no organizer score is inferred from a local holdout.</footer>
 </body></html>

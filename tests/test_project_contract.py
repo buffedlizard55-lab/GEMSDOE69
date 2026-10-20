@@ -47,10 +47,12 @@ class ProjectContractTests(unittest.TestCase):
         self.assertEqual(report["status"], "blocked")
         self.assertTrue(report["missing_prerequisites"])
         self.assertFalse(report["inputs"]["training_features"]["present"])
-        self.assertFalse(report["inputs"]["labels"]["present"])
-        self.assertFalse(report["inputs"]["existing_faults"]["present"])
+        self.assertTrue(report["inputs"]["labels"]["present"])
+        self.assertTrue(report["inputs"]["existing_faults"]["present"])
         self.assertFalse(report["inputs"]["dem_links"]["present"])
-        self.assertFalse(report["inputs"]["sample_submission"]["present"])
+        self.assertTrue(report["inputs"]["sample_submission"]["present"])
+        self.assertEqual(report["inputs"]["labels"]["path"], "data/bridge/labels.tif")
+        self.assertEqual(report["inputs"]["sample_submission"]["path"], "data/bridge/sample_submission.tif")
         # Since PR #5 the shared template is vendored byte-for-byte (vendor/gems57); competition inputs
         # are restored outside git by scripts/restore_data.py, so a fresh checkout still lacks them.
         self.assertTrue(report["shared_tools"]["holdout_evaluator"]["present"])
@@ -58,6 +60,18 @@ class ProjectContractTests(unittest.TestCase):
         self.assertTrue(report["project_tools"]["dti_metric"]["present"])
         self.assertTrue(report["project_tools"]["format_validator"]["present"])
         self.assertTrue(report["project_tools"]["promotion_gate"]["present"])
+
+    def test_current_run_card_is_fail_closed_and_fully_labelled(self) -> None:
+        card = json.loads((ROOT / "evidence/run_card.json").read_text(encoding="utf-8"))
+        self.assertEqual(card["verdict"], "negative")
+        self.assertEqual(card["banner"], "stop")
+        self.assertLessEqual(len(card["submission_note"]), 140)
+        self.assertEqual(card["holdout"]["evidence_class"], "HOLDOUT-DTI")
+        self.assertIsNone(card["holdout"]["pooled_dti_ci95"])
+        self.assertIn("NOT ESTABLISHED", card["holdout"]["current_best_comparison"])
+        self.assertFalse(card["release_policy"]["download_enabled"])
+        self.assertEqual(card["release_policy"]["artifact_sha256"], card["raster"]["sha256"])
+        self.assertTrue(any("duplicate-and-stop" in reason for reason in card["release_policy"]["reasons"]))
 
     def test_run_card_is_valid_negative_and_has_short_note(self) -> None:
         card_path = ROOT / "reports/run-card-2026-10-12.json"

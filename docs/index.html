@@ -1,61 +1,40 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Home · GEMSDOE69</title>
+<title>Submission status · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
-<main class="wrap">
-
-<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. The archived candidate is a negative result under the literal protocol. No competition slot was used.</p><ul><li>Holdout comparison is missing or not bound to the current artifact hash.</li><li>Reproducible method source manifest is missing, stale, or not artifact-bound.</li></ul></div>
-<div class="card" id="how-to-submit">
-<h2>How to submit the TIF (3 steps)</h2>
-<ol>
-<li>Only after the banner explicitly permits a download, download the <b>-zeros</b> variant (all cells finite in [0,1] &mdash; this avoids the
-&ldquo;Predicted values must be in range [0, 1]&rdquo; portal error class seen with NaN-containing artifacts).</li>
-<li>Go to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition 306 &rarr; New submission</a>,
-choose <i>File to submit</i> = the downloaded <code>.tif</code> (a <code>.zip</code> with a single GeoTIFF is also accepted).</li>
-<li>Paste this note (&le;140 chars):<br><code>H69 joint convergent grav+mag joint; pull-apart transfer; greedy marginal-DTI 200m prune 38669 dots</code></li>
-</ol>
-<p class="small">Format contract: single-band GeoTIFF, float32, EPSG:32611, 3730&times;3292, transform
-(100, 0, 243350, 0, &minus;100, 4508550), values in [0,1]. Verified against
-<code>sample_submission.tif</code> (sha256 <code>2176d08e&hellip;</code>) by the shared template validator.</p>
-</div>
+<div class="sub">DOE GEMS Prize · catalogue-geometry fault proposal · submission status is evidence-gated</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Results</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<main class="wrap"><div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No TIFF download is offered. The archived candidate failed one or more literal, provenance, holdout, or validation gates. No competition slot was used.</p><ul><li>Recorded preregistration is not earlier than HOLDOUT-DTI generation; protocol order is unverified.</li><li>No hash-bound paired HOLDOUT-DTI 95% CI proves improvement over the declared current holdout best.</li><li>Literal registry dot-overlap is 1.000 against 17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif; above 0.700, so duplicate-and-stop applies.</li><li>surface uniqueness phase failed its literal duplicate gate or is missing.</li><li>surface uniqueness phase exceeds or lacks the literal 3-px dot-overlap limit.</li><li>surface uniqueness scan is not certified at the required before placement stage.</li><li>dots uniqueness phase failed its literal duplicate gate or is missing.</li><li>dots uniqueness phase exceeds or lacks the literal 3-px dot-overlap limit.</li><li>dots uniqueness scan is not certified at the required after placement stage.</li><li>Reproducible method source manifest is missing, stale, or not artifact-bound; source hash mismatch: src/gems69/holdout69.py.</li></ul></div>
 <div class="card">
-<h2>Evidence at a glance — fresh 2026-10-20 relay-fix session (Exp1 + Exp2b)</h2>
-<table>
-<tr><th>Measurement</th><th>Value</th><th>Evidence class</th></tr>
-<tr><td>Corridor arm archived mean DTI</td><td>0.0059 &plusmn; 0.0012</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, 8 cells, 22641 withheld positives)</td></tr>
-<tr><td>No-prior control arm</td><td>0.0021 &plusmn; 0.0006</td><td>HOLDOUT-DTI, same folds</td></tr>
-<tr><td>Paired &Delta; (corridor &minus; control)</td><td>+0.0038 &plusmn; 0.0015</td><td>HOLDOUT-DTI</td></tr>
-<tr><td>Registry scan: worst surface |Spearman| / dot-like dot overlap</td>
-<td>0.162 / 0.61</td>
-<td>REGISTRY-MEASUREMENT (limits 0.90 / 0.70)</td></tr>
-<tr><td>Family best download (h33-2-b2)</td><td>0.2778</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (no organizer receipt binds score to bytes; anatomy re-measured this session: 37,654 dots, sha256 c55bafc4&hellip;)</td></tr>
-<tr><td>Public leaderboard #1 (fetched 2026-10-20)</td><td>0.4413 (xiaofanhu)</td><td>ORGANIZER-LEADERBOARD (public page fetched this session; not our receipt)</td></tr>
-<tr><td>This candidate (transfer-only)</td><td>no organizer score &mdash; no slot spent</td><td>HOLDOUT-DTI pooled 0.00847 vs control 0.00215 (screen only; see Experiments)</td></tr>
+<h2>Current run — negative release decision</h2>
+<p>The latest emitted candidate is <code>H69-H2-transfer-only</code>. Its local format validator passed, but that is not release clearance. The current policy is <strong>NEGATIVE</strong>; there is no active download unless the red banner above changes after all gates pass.</p>
+<table><tr><th>Evidence</th><th>Result</th><th>Interpretation</th></tr>
+<tr><td>Primary pooled score</td><td>0.008470</td><td>HOLDOUT-DTI; pooled from summed TP/FP/FN; no absolute pooled-DTI 95% CI is recorded</td></tr>
+<tr><td>Evaluator and sample</td><td>vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=[&#x27;all&#x27;]; POOLED from summed TP/FP/FN)</td><td>HOLDOUT-DTI; 8 cells, 22641 withheld positives</td></tr>
+<tr><td>Mean of cell DTI</td><td>0.007738</td><td>HOLDOUT-DTI, normal-approximation interval [0.0057316537303127996, 0.009743409030497476]; not a pooled-DTI CI</td></tr>
+<tr><td>Transfer − corridor-v1 paired delta</td><td>0.002042</td><td>[0.0008402106830173246, 0.003013982730174917]</td><td>HOLDOUT-DTI paired delta</td></tr>
+<tr><td>Transfer − no-prior-control paired delta</td><td>0.006235</td><td>[0.0044373728488070535, 0.007874044988124924]</td><td>HOLDOUT-DTI paired delta</td></tr>
+<tr><td>Current holdout best</td><td>NOT ESTABLISHED: no hash-bound paired CI against an explicitly declared current-best artifact is present.</td><td>No hash-bound paired CI against a declared current-best artifact; no improvement claim</td></tr>
+<tr><td>Literal registry scan</td><td>862/862 accessible rasters; errors 0</td><td>REGISTRY-MEASUREMENT; public owner-repository index only, not organizer-complete</td></tr>
+<tr><td>Worst final-dot overlap</td><td>1.0</td><td>REGISTRY-MEASUREMENT; literal duplicate threshold is &gt;0.700 within 3 px</td></tr>
+<tr><td>Surface phase</td><td>|rho| 0.270782; overlap 1.0</td><td>REGISTRY-MEASUREMENT; required before placement; current order: None</td></tr>
+<tr><td>Final dots phase</td><td>|rho| 0.110311; overlap 1.0</td><td>REGISTRY-MEASUREMENT; required after placement; current order: None</td></tr>
+<tr><td>Artifact bytes</td><td><code>b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1</code></td><td>36325 positives; archived at <code>submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif</code></td></tr>
+<tr><td>Local validator</td><td>PASS</td><td>Format/range only; does not prove uniqueness, method provenance, or organizer acceptance</td></tr>
 </table>
-<p class="small">A holdout DTI is a <b>screen</b>, never a leaderboard projection: the family's own
-instrument calibration (GEMSDOE32) measured cross-family Spearman &rho;&asymp;0.51 (p&asymp;0.09) against live scores.</p>
+<p class="small"><b>Literal rule:</b> if any raster has |Spearman| &gt; 0.90 or &gt;70% of candidate dots within 3 px, record duplicate and stop. A stratified/dotlike diagnostic cannot override that failure.</p>
 </div>
 <div class="card">
-<h2>What this lane is</h2>
-<p>Hidden faults are proposed from <b>catalogue geometry</b>, not pixel statistics: the tips of mapped
-fault strands form a graph; step-over tip pairs (spacing 0.1&ndash;15 km, along-strike separation &le; 3.5W,
-sub-parallel strikes) emit <b>relay-ramp corridors</b> &mdash; an oblique connector plus en&nbsp;&eacute;chelon strands
-&mdash; and, at dilatational steps under the Walker-Lane dextral prior, <b>pull-apart rhombs</b>. Corridors are
-scored by multi-scale horizontal-gradient and tilt evidence in gravity and magnetics (including magnetic
-lows), the 1&nbsp;m lidar-scarp channel, and orientation consistency with WNW extension. Dots are placed by
-dots placed by greedy marginal-DTI selection inside the top corridors (pre-registered propensity map
-S<sub>0</sub>=0.75; template allocator), &ge;200&nbsp;m from the mapped catalogue.</p>
-<p>Geometry priors as cited in the standing prompt: Giddens &amp; Faulds (2025, SGP-TR-229) inventoried
-&gt;450 step-overs; ramps are typically 3&ndash;3.5&times; longer than wide (widths 0.1&ndash;14.6 km, mean 2.8 km);
-~70% of higher-temperature step-overs are hard-linked; in the Walker Lane, hot systems sit more often in
-pull-aparts and displacement-transfer zones; N&ndash;NE faults are best oriented for dilation under WNW extension.</p>
+<h2>H33 reported 0.2778 — cautious interpretation</h2>
+<p><b>USER-REPORTED-NOT-ORGANIZER-CONFIRMED.</b> No organizer receipt in this repository binds the reported 0.2778 to H33 file bytes. An anatomy audit of an accessible family raster measures 37,654 unit dots, but that is not score authentication. Sparse fields can reduce redundant false-positive mass under a distance-weighted Tversky metric, yet this mechanism alone neither explains the reported score causally nor predicts that this lane will beat it. Holdout-DTI is a screening metric, not a leaderboard projection. See <a href="why-h33-scored.html">the full evidence note</a>.</p>
 </div>
-
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<div class="card">
+<h2>What this project does</h2>
+<p>The only active method lane is relay-ramp and pull-apart corridors proposed from catalogue tip geometry, using the shared template and cached features when available. Candidate corridors are scored with gravity/magnetic gradients and tilt, magnetic lows, LiDAR scarp evidence, and orientation priors; the current transfer-only candidate is not eligible. Strike is not dip, and dextral/releasing sense is not measured by a raster-only catalogue.</p>
+<p><a href="hypotheses.html">Read the three untried, in-lane hypotheses</a> · <a href="results.html">Evidence and limitations</a> · <a href="run-card.html">Machine-readable run card</a>.</p>
+</div></main>
+<footer>Negative results are deliverables · no organizer score is inferred from a local holdout.</footer>
 </body></html>

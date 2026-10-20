@@ -1,4 +1,6 @@
-# New candidate hypotheses for GEMSDOE69 (not yet implemented in this repo)
+# Historical candidate hypotheses for GEMSDOE69 (2026-10-12/20)
+
+> This queue predates later H69-D/E/J and H69-H2 runs. Its “current best,” data-availability, and untried-status statements are stale; several candidates are no longer untried. Do not use its numeric DTI projections or expected gains. The reconciled current queue is `untried-hypotheses-2026-10-20.md`; the current evidence is `../../evidence/run_card.json`.
 
 Ranked by expected HOLDOUT-DTI improvement over the no-prior control, then by implementation cost.
 "Expected" values are priors written before any holdout look, not measurements. Protocol rules:

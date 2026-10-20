@@ -1,4 +1,6 @@
-# Candidate hypotheses, session 2026-10-20
+# Historical hypothesis preregistration, session 2026-10-20
+
+> Archived before the H69-E holdout look. It is not current status, and its proposal list must not be treated as untried after the later runs. See `untried-hypotheses-2026-10-20.md` and `../../evidence/run_card.json`.
 
 Ranked before the H69-E holdout look. "Expected" is a prior, not a measurement. Every hypothesis stays inside the relay-ramp / pull-apart lane. Leaderboard numbers below are USER-REPORTED or an in-repo public snapshot, never organizer receipts.
 

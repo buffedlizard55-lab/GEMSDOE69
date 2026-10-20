@@ -1,0 +1,73 @@
+{
+  "evidence_class": "HYPOTHESIS-PRIOR",
+  "review_date": "2026-10-20",
+  "lane": "Catalogue-geometry relay-ramp and pull-apart corridors only; no raster-only proposal generation.",
+  "untried_scope": "Code/evidence review of this checkout and its registered run cards; not a claim about private, external, or never-committed sibling-project work.",
+  "reviewed_sources": [
+    "src/gems69/physics.py",
+    "src/gems69/evidence.py",
+    "src/gems69/scoring.py",
+    "src/gems69/scoring_joint.py",
+    "src/gems69/corridors.py",
+    "docs/research/hypotheses*.md",
+    "evidence/run_card*.json",
+    "evidence/e3_receipt*.json"
+  ],
+  "excluded_as_not_new": [
+    "H69-H2 transfer-only corridors: tested; duplicate-and-stop.",
+    "H69-D radiometric depletion and H69-E conductivity/basement/radiometric variants: archived candidates; not fresh ideas.",
+    "H69-J joint scorer: previously tested as scalar group-amplitude coincidence (min of gravity and magnetic maxima), not spatial phase locking.",
+    "Previously registered connector-axis coincidence, pull-apart interior/rim asymmetry, scarp strike coherence, and knickpoint/chi proposals are not relabelled as novel hypotheses here. The new hypotheses below are narrower, different feature tests; no evidence says they have beaten the current holdout best."
+  ],
+  "items": [
+    {
+      "rank": 1,
+      "id": "U1-potential-field-depth-persistence",
+      "name": "Depth-persistent potential-field edges inside catalogue-derived relay corridors",
+      "layers": ["training_features band 13 iso_grav", "training_features band 14 tmi", "derived upward-continuation levels and their directional edge fields"],
+      "signature": "Within each already-proposed corridor, track paired edge position, orientation, and signed cross-corridor profile at several upward-continuation heights. Score only edges that remain spatially coherent across height; do not score a scalar maximum or infer depth from one derivative.",
+      "why_catalogue_missing_fault": "A buried breaching link or fault-bounded basement step can produce a coherent potential-field boundary even where the surface scarp is absent. Persistence is a test of source-scale consistency, not proof that the source is a fault.",
+      "difference_from_implemented_methods": "The current physics stack uses single-scale Gaussian HG ladders, a tilt proxy, and provided HG/VG fields; the H69-J joint mode takes independent per-layer maxima and combines them with min(). No scorer tracks edge displacement or signed phase across upward-continuation heights.",
+      "closest_prior_and_untried_check": "Related prior H69-J was run, but its source (src/gems69/scoring_joint.py) contains only scalar maxima/minima and no upward continuation. Exact proposed persistence statistic is absent from src/gems69 and the reviewed run receipts.",
+      "mimics": "Intrusive or lithologic contacts, regional basement boundaries, and survey-line artifacts may also persist across heights; require tip-derived corridor localization and controls matched for corridor geometry.",
+      "expected_holdout_improvement": "Moderate potential, low confidence; qualitative prior only, no numeric score projection.",
+      "implementation_cost": "Medium: FFT/upward continuation, edge tracking across several heights, and a preregistered corridor-level statistic.",
+      "data_and_validation": "Uses pinned gravity/magnetic input bands; no new external data source. The feature cache is absent in this checkout, so inputs are not currently available locally. Test feature alone, then the frozen corridor arm, with whole-segment hide-and-recover, exact visible-fault mask, pooled DTI (alpha 0.2, beta 0.8, 300 m triangular kernel), and the current-best paired CI. No test was run.",
+      "source_note": "Relay geometry is grounded in the Giddens & Faulds source recorded in docs/research/sources.md. The source-depth interpretation is a geophysical hypothesis; no new literature was fetched in this review, so that mechanism remains unverified here."
+    },
+    {
+      "rank": 2,
+      "id": "U2-lidar-scarp-endpoint-linkage",
+      "name": "Scarp-segment endpoint linkage across tip-derived relay corridors",
+      "layers": ["lidar_scarp_features_u8: ex_max, step_max, lapneg_max, lappos_max, downface_max, upface_max, cross_max, relief, coh100, strike, valid"],
+      "signature": "Extract short, valid scarp segments and their endpoints; test for two-sided, staggered endpoint-to-connector support inside a geometry-proposed relay. The test is topology/termination continuity, not average scarp amplitude or a strike-angle fraction.",
+      "why_catalogue_missing_fault": "Short breaching scarps can be separated by a gap or be below the line-mapping threshold. Endpoint pairs that face a tip-derived connector could support a missing link without simply extending the mapped fault raster.",
+      "difference_from_implemented_methods": "Current src/gems69/physics.py reads only ex_max, step_max, downface_max, and valid, then reduces them to one maximum channel. It does not segment lineaments or score endpoints/connectivity.",
+      "closest_prior_and_untried_check": "A previous H69-J proposal registered scarp strike coherence; no code path or run receipt implements that statistic. This proposal instead tests segment endpoints and connectivity; it is a distinct, unrun feature test, not a claim that the broader scarp-coherence idea is new.",
+      "mimics": "Pluvial shorelines, road cuts, fan margins, and erosional scarps can create aligned endpoints; require terrain-context vetoes and compare with geometry-matched non-corridor controls.",
+      "expected_holdout_improvement": "Low-to-moderate potential, low confidence; qualitative prior only, no numeric score projection.",
+      "implementation_cost": "High: robust line extraction, endpoint uncertainty, topology checks, and mimic controls.",
+      "data_and_validation": "Uses the pinned LiDAR descriptor stack; no new external data source. The feature cache is absent in this checkout. Freeze the extractor before any holdout scoring; test this feature alone for AUC leakage, then evaluate the unchanged corridor proposal/placement pipeline. No test was run.",
+      "source_note": "Relay-ramp breaching geometry is described in Giddens & Faulds (source register, previously verified); the endpoint-specific LiDAR signature is a new hypothesis and is not established by that citation."
+    },
+    {
+      "rank": 3,
+      "id": "U3-drainage-deflection-at-relays",
+      "name": "Planform drainage deflection across catalogue-derived transfer mouths",
+      "layers": ["training_features band 12 det_elev", "training_features band 19 det_elev_slope"],
+      "signature": "Derive a scale-stable flow network from the DEM and measure paired channel azimuth changes, tributary asymmetry, and cross-corridor deflection at relay/transfer mouths. Exclude simple along-profile knickpoint or chi-integral scores.",
+      "why_catalogue_missing_fault": "A subtle buried structure may perturb channel planform or drainage partitioning even without a mapped surface scarp. The geometry graph supplies the search location; the DEM-derived network supplies independent geomorphic evidence.",
+      "difference_from_implemented_methods": "No drainage-network extraction, flow routing, planform-deflection, or catchment-asymmetry scorer exists in src/gems69. An earlier H69-B note proposed stream-profile knickpoint/chi chains; this is a different planform statistic and has not been run in the reviewed receipts.",
+      "mimics": "Lithologic resistance contrasts, alluvial fans, ephemeral channels, roads, and DEM artifacts can deflect drainage without a fault; expect weaker and less specific evidence than potential-field edges.",
+      "expected_holdout_improvement": "Low potential, low confidence; qualitative prior only, no numeric score projection.",
+      "implementation_cost": "High: depression handling, flow routing, scale sensitivity, and catchment-matched controls.",
+      "data_and_validation": "Uses pinned DEM-derived bands; no new external data source. The feature cache is absent in this checkout. Validate only after preregistration and feature-alone leakage tests; preserve whole-fault-segment holdout and exact visible-fault mask. No test was run.",
+      "source_note": "The lane's relay geometry is supported by the Giddens & Faulds source in docs/research/sources.md. Drainage deflection as a signal in this footprint was not independently sourced or verified during this review."
+    }
+  ],
+  "selection": {
+    "best_next_candidate": "U1-potential-field-depth-persistence",
+    "decision": "DO NOT TEST NOW",
+    "reason": "The current candidate is duplicate-and-stop, its source manifest is stale, the exact current-best paired holdout comparison is absent, and the cached feature stack is missing. No new candidate was generated or tested in this review; no submission slot or TIFF download is authorized."
+  }
+}

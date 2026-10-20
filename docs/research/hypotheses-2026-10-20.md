@@ -1,4 +1,6 @@
-# Candidate hypotheses — 2026-10-20 session (ranked before implementation)
+# Historical hypothesis preregistration — 2026-10-20 (before implementation)
+
+> This is a pre-run archive, not current status. Some ideas were subsequently implemented, tested, or retired; the old “data present” and queue statements do not describe this checkout now. See `untried-hypotheses-2026-10-20.md` and `../../evidence/run_card.json`.
 
 Lane constraint (parallel-run protocol rule 1): every candidate stays inside the
 relay-ramp / pull-apart corridor generator — faults proposed from catalogue

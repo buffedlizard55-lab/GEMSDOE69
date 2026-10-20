@@ -1,65 +1,90 @@
 #!/usr/bin/env python3
-"""Rebuild the README with current status and the standing project brief."""
-from pathlib import Path
-from release_gate import evaluate
+"""Rebuild README status from the current run card and append the full brief."""
+from __future__ import annotations
+
 import json
+from pathlib import Path
+
+from release_gate import evaluate
 
 ROOT = Path(__file__).resolve().parents[1]
 
-def main():
+
+def main() -> None:
     decision = evaluate(ROOT)
-    status = 'OK TO DOWNLOAD — HOLDOUT-SCREENED CANDIDATE (selector authorization still required)' if decision['download_enabled'] else 'NOT OK TO SUBMIT — DO NOT SUBMIT'
-    reasons = '\n'.join('- ' + r for r in decision['reasons']) if decision['reasons'] else 'All gates passed: holdout improvement, registry uniqueness (dot-field like-for-like), validator, method manifest, and leakage canaries.'
-    try:
-        receipt = json.loads((ROOT/'evidence'/'e3_receipt.json').read_text())
-        zeros_path = receipt.get('raster',{}).get('zeros',{}).get('path','')
-        zeros_name = zeros_path.split('/')[-1] if zeros_path else 'no artifact'
-        sha = receipt.get('raster',{}).get('zeros',{}).get('sha256','')
-        dl_extra = f"\n**Download:** `docs/downloads/{zeros_name}` ({sha[:16]}… verified) — also in `submissions/`\n" if decision['download_enabled'] else ""
-        if decision['download_enabled']:
-            archive_note = f"The current TIFF `{zeros_name}` is **PUBLISHED** in `docs/downloads/` for selector review (HOLDOUT-SCREENED, not organizer-scored). A valid file is not proof of geothermal discovery; the organizer leaderboard is the only score.\n{dl_extra}"
-        else:
-            archive_note = f"The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.\nA valid file is not necessarily a unique or scientifically validated submission.\n{reasons}\n"
-    except Exception as e:
-        archive_note = f"The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.\nA valid file is not necessarily a unique or scientifically validated submission.\n{reasons}\n"
-    head = f'''# GEMSDOE69 — relay-ramp and pull-apart corridor generator
+    card_path = ROOT / "evidence" / "run_card.json"
+    card = json.loads(card_path.read_text(encoding="utf-8")) if card_path.exists() else {}
+    holdout = card.get("holdout", {})
+    raster = card.get("raster", {})
+    reasons = "\n".join(f"- {reason}" for reason in decision["reasons"]) or "- All publication gates passed."
 
-## {status}
+    current_status = "NOT OK TO SUBMIT — DO NOT SUBMIT" if not decision["download_enabled"] else "OK TO DOWNLOAD — SELECTOR AUTHORIZATION STILL REQUIRED"
+    if decision["download_enabled"]:
+        publication = f"A gated download may be published for `{raster.get('path', 'candidate')}` only after the policy passes. A separate selector must authorize any competition slot."
+    else:
+        publication = (f"Candidate `{raster.get('path', 'unavailable')}` is archived for audit only. "
+                       "There is no submission download, no offer of a TIFF, and no competition slot was used. "
+                       "Local format validation is not release clearance.")
 
-**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json).
+    pooled = holdout.get("pooled_dti")
+    mean_cell = holdout.get("mean_of_cell_dti")
+    current_holdout = (
+        f"The current archived experiment is labelled **HOLDOUT-DTI** ({holdout.get('evaluator_version', 'evaluator not recorded')}; "
+        f"{holdout.get('n_cells', 'unknown')} cells; {holdout.get('withheld_positive_pixels', 'unknown')} withheld positives). "
+        f"Primary pooled DTI from summed TP/FP/FN: `{pooled}`; pooled absolute 95% CI: `{holdout.get('pooled_dti_ci95')}`. "
+        f"Mean-of-cell DTI: `{mean_cell}` with normal-approximation CI `{holdout.get('mean_of_cell_dti_ci95_normal_approximation')}`. "
+        "Paired CIs below are deltas against their named comparators, not absolute pooled-DTI CIs."
+    )
 
-Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
+    head = f'''# GEMSDOE69 — relay-ramp and pull-apart corridor lane
 
-{archive_note}
-## Latest — 2026-10-20 joint-corridor candidate
+## {current_status}
 
-Hypothesis H69-J (H1): convergent multi-scale HG+tilt edge phase across relay connectors — joint grav+mag HG/tilt coincidence (min(E_grav,E_mag) 0.35 weight) targets buried relay linkage separating basement blocks. Corridor arm 0.0059±0.0012 vs control 0.0021±0.0006 (paired Δ+0.0038±0.0015, 8 folds 22641 withheld px, gate PASSED). Registry worst |rho| 0.162 <0.90, dot-field overlap 0.61 <0.70 (literal 1.0 from universal continuous_surface is non-discriminating per DENSE_SUPPORT_FRACTION=0.20; see evidence/e3_uniqueness.json diagnostic). Leakage canary worst AUC 0.69 <0.90. Validator PASS for both variants (float32 EPSG:32611 3730×3292 [0,1]). Promotion to selector step required; no organizer score claimed.
+{publication}
 
-## Reproduce the publication audit (no data downloads needed)
+**Start here:** [Executive summary](docs/executive-summary.html) · [Project site](docs/index.html) · [Current JSON run card](evidence/run_card.json) · [Current holdout and release audit](reports/repo-review-2026-10-20.md).
+
+**Lane contract:** catalogue tip-graph relay ramps / pull-aparts only; W 0.1–15 km; along-strike separation ≤3.5W. Dip direction and dextral slip sense must not be inferred from strike alone.
+
+### Current decision
+
+{current_holdout}
+
+**Literal registry result** (`REGISTRY-MEASUREMENT`, not a score): accessible index {card.get('correlation_overlap_vs_registry', {}).get('registry_rasters_compared', 'unknown')} rasters; worst final-dot overlap `{(card.get('correlation_overlap_vs_registry', {}).get('worst_dot_overlap_all') or {}).get('dot_overlap_3px', 'not recorded')}`. The literal protocol requires stop if Spearman exceeds 0.90 **or** more than 70% of candidate dots are within 3 px of one raster. Stratified/dotlike diagnostics cannot waive that failure. The scanned public owner-repository index is not a complete organizer registry.
+
+**Release blockers:**
+{reasons}
+
+### H33 and leaderboard claims
+
+The reported H33 value **0.2778 is USER-REPORTED-NOT-ORGANIZER-CONFIRMED**: this repository has no organizer submission receipt binding that score to a file. It is not a target that this lane has demonstrated it can beat. Holdout DTI is a screening instrument, not a leaderboard projection. No fresh leaderboard fetch was performed in this review; conflicting historic/user-reported values remain unverified.
+
+### Ranked untried work (not authorization to test)
+
+See [three in-lane hypotheses](docs/research/untried-hypotheses-2026-10-20.md). They are qualitative priors confirmed untested **in this checkout** by source/evidence review, not global novelty claims. The preferred next hypothesis was **not tested**: the feature cache is absent, current-candidate provenance is stale, and the current-best paired comparison is missing. No new candidate or TIFF was generated.
+
+### Reproduce status and tests (no experiment or data restore)
 
 ```sh
-python scripts/release_gate.py
-python scripts/build_site69.py
-python scripts/build_readme.py
+PYTHONPATH=vendor/template66:src .venv/bin/python scripts/release_gate.py
+PYTHONPATH=vendor/template66:src .venv/bin/python scripts/build_site69.py
+PYTHONPATH=vendor/template66:src .venv/bin/python scripts/build_readme.py
+PYTHONPATH=vendor/template66:src .venv/bin/python -m pytest -q
 ```
 
-For pixel validation and tests:
+`release_gate.py` is read-only by default. `--write-card` only rebinds the existing frozen receipts into `evidence/run_card.json`; it does not rerun an experiment. The local feature cache is absent from this checkout, so the archived science is not reproducible here without separately authorized data restoration. Exact candidate bytes previously passed the local format/range validator; that does not clear uniqueness, provenance, current-best, or organizer-authentication gates.
 
-```sh
-python -m venv .venv
-.venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
-.venv/bin/pytest -q
-```
+### Review status
 
-Full feature stack restored via `scripts/fetch_data.py` (pinned mirrors); registry 751 blobs via `scripts/fetch_registry.py`. GPU not needed; format validator cannot prove geothermal discovery.
+Three review passes are recorded in `reports/repo-review-2026-10-20.md`: requirements/status, code and evidence binding, then final adversarial re-check. No competition slot was selected or used. PR/merge status is tracked in GitHub separately from the scientific run card.
 
-## Standing project brief — read at the beginning of every session
+## Standing project brief — read in full at the beginning of every session
 
-The following is the retained project brief, not a verbatim transcript of every user message. The active request additionally requires strict duplicate-and-stop enforcement, three review passes, and a PR merged to main. Never infer authorization to submit to DrivenData.
+The full retained brief is included below from `PROMPT.md`; read it before taking any action.
 
 '''
-    (ROOT / 'README.md').write_text(head + (ROOT / 'PROMPT.md').read_text())
+    (ROOT / "README.md").write_text(head + (ROOT / "PROMPT.md").read_text(encoding="utf-8"), encoding="utf-8")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     main()

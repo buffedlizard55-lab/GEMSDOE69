@@ -1,4 +1,6 @@
-# Candidate hypotheses for the relay-ramp / pull-apart lane (ranked before implementation)
+# Historical candidate hypotheses for the relay-ramp / pull-apart lane (ranked before implementation)
+
+> Archived pre-E2 register. Its data, holdout, and implementation-status statements are historical and are not the current run card or current-best evidence. See `untried-hypotheses-2026-10-20.md` for the reconciled current queue and `../../evidence/run_card.json` for current status.
 
 Ranked by expected HOLDOUT-DTI improvement over the same pipeline without corridor priors, then by
 implementation cost. "Expected" values are **priors written before E2**, not measurements.

@@ -1,36 +1,28 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Sources · GEMSDOE69</title>
+<title>Sources and verification · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="active">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
-<main class="wrap">
-
-<div class="card">
-<h2>Source links and verification limits</h2>
-<p>Only the organizer GitHub reference repository was refreshed from an official source in this review. Other official links below are manual-review references, not freshly fetched or authenticated evidence. See the README review report for access limits.</p>
-<table><tr><th>Source</th><th>Link</th><th>Used for</th></tr>
-<tr><td>DrivenData competition 306 (DOE GEMS)</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">competition page</a></td><td>problem statement, metric, leaderboard (login-walled data)</td></tr>
-<tr><td>Problem page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">page/967</a></td><td>submission format + performance metric (alpha 0.2, beta 0.8, 300 m kernel)</td></tr>
-<tr><td>About page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">page/968</a></td><td>resources</td></tr>
-<tr><td>Data page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">/data/</a></td><td>training_features.tif, labels.tif, sample_submission.tif, existing_faults.tif (login-walled; family mirrors used, sha256-pinned)</td></tr>
-<tr><td>Reference solution</td><td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">github.com/drivendataorg/gems-prize-reference-solution</a></td><td>grid constants, metric transcription reference</td></tr>
-<tr><td>USGS GeoDAWN airborne magnetic &amp; radiometric surveys</td><td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">usgs.gov data release</a></td><td>provenance of the magnetic/radiometric layers</td></tr>
-<tr><td>INGENIOUS project</td><td><a href="https://gbcge.org/current-projects/ingenious/">gbcge.org</a></td><td>catalogue context (USGS/INGENIOUS faults)</td></tr>
-<tr><td>EPSG:32611</td><td><a href="https://epsg.io/32611">epsg.io/32611</a></td><td>UTM zone 11N grid definition</td></tr>
-<tr><td>Tversky index background</td><td><a href="https://en.wikipedia.org/wiki/Tversky_index">wikipedia.org/wiki/Tversky_index</a></td><td>metric family background</td></tr>
-<tr><td>GDR data (competition-linked)</td><td><a href="https://gdr.openei.org/submissions/1391">gdr.openei.org/submissions/1391</a></td><td>geothermal data registry node</td></tr>
-<tr><td>Step-over inventory cited in prompt</td><td>Giddens &amp; Faulds (2025), SGP-TR-229 (as cited in the standing prompt; not independently fetched in-sandbox)</td><td>ramp width statistics, hard-link fraction, Walker Lane pull-apart preference</td></tr>
+<div class="sub">DOE GEMS Prize · catalogue-geometry fault proposal · submission status is evidence-gated</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Results</a><a href="sources.html" class="active">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<main class="wrap"><div class="card">
+<h2>Official and primary references — access status</h2>
+<p>No external web page was fetched during this review. These links are supplied for manual verification; the local source register records prior access dates and limitations. Do not treat the historic leaderboard snapshot as current.</p>
+<table><tr><th>Source</th><th>Link</th><th>Use / status</th></tr>
+<tr><td>DrivenData DOE GEMS competition 306</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition</a></td><td>Official competition page; not refreshed in this review</td></tr>
+<tr><td>DrivenData problem description</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">Problem page 967</a></td><td>Metric, task, data and format reference; login/access limitations recorded in sources.md</td></tr>
+<tr><td>DrivenData about page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/968/">About page 968</a></td><td>Competition context; not refreshed in this review</td></tr>
+<tr><td>DrivenData data page</td><td><a href="https://www.drivendata.org/competitions/306/competition-doe-gems/data/">Data page</a></td><td>Login-walled organizer inputs; local copies are owner-supplied mirrors, not organizer-authenticated</td></tr>
+<tr><td>Organizer reference solution</td><td><a href="https://github.com/drivendataorg/gems-prize-reference-solution">GitHub repository</a></td><td>Code-format reference, cloned/inspected in an earlier documented review</td></tr>
+<tr><td>USGS GeoDAWN release</td><td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS data release</a></td><td>Official source link for geophysical input provenance; not fetched this review</td></tr>
+<tr><td>INGENIOUS project</td><td><a href="https://gbcge.org/current-projects/ingenious/">Project page</a></td><td>Catalogue context; not fetched this review</td></tr>
+<tr><td>Giddens &amp; Faulds (2025), SGP-TR-229</td><td><a href="https://pangea.stanford.edu/ERE/pdf/IGAstandard/SGW/2025/Giddens.pdf">Stanford Geothermal Workshop PDF</a></td><td>Relay-ramp/step-over prior; the local source register reports prior verification (2026-10-12), not re-fetched now</td></tr>
+<tr><td>EPSG:32611</td><td><a href="https://epsg.io/32611">EPSG reference</a></td><td>Grid CRS manual reference; not refreshed in this review</td></tr>
+<tr><td>Potential theory reference</td><td>Blakely (1995), <i>Potential Theory in Gravity and Magnetic Applications</i>, Cambridge University Press</td><td>Suggested background for the depth-persistence hypothesis; not fetched/verified in this review</td></tr>
 </table>
-<p class="small">Mirror provenance: competition bytes restored from
-<code>registry/data_manifest_gemsdoe32.json</code> (owner-supplied public mirrors; integrity-pinned,
-NOT organizer-authenticated). Registry rasters from <code>registry/prior_rasters.json</code>
-(751 unique git blobs, family census 2026-10-11), verified content-addressed.</p>
-</div>
-
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<p class="small">See <a href="research/sources.md">source register</a> and <a href="../evidence/official-reference-readme-2026-10-20.md">official-reference access note</a>. Current feature cache is absent; data manifests pin owner mirrors but do not prove organizer provenance.</p>
+</div></main>
+<footer>Negative results are deliverables · no organizer score is inferred from a local holdout.</footer>
 </body></html>

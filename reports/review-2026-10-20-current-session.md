@@ -1,4 +1,6 @@
-# GEMSDOE69 current-session review — 2026-10-20
+# Historical continuation review — 2026-10-20
+
+> Superseded by [`repo-review-2026-10-20.md`](repo-review-2026-10-20.md). This checkpoint predates the latest transfer-only artifact scan, the 862-raster saved-row analysis, and the source-hash audit; its experiment-count, candidate, and next-step statements are not current.
 
 ## Decision
 

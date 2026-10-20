@@ -1,6 +1,6 @@
 # Sources (verified links for manual review)
 
-"Verified" = fetched and read in this session (2026-10-12); the quoted fact is what was read.
+"Verified" refers to pages fetched/read in the earlier review on 2026-10-12, or to the specific earlier provenance note stated in a row. No external pages were fetched during the current 2026-10-20 review. Links below are references for manual review, not live confirmation of competition status.
 
 ## Competition (official)
 
