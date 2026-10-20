@@ -2,38 +2,38 @@
  "evidence_class": "HOLDOUT-DTI",
  "evaluator": "vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20, 21] modes=['all'])",
  "n_cells": 8,
- "corridor_mean_dti": 0.005975197860273526,
- "corridor_ci95_half": 0.0014413577610952733,
- "control_mean_dti": 0.0021479253641536293,
- "control_ci95_half": 0.0005776711996184226,
- "paired_delta_mean": 0.003827272496119896,
- "paired_delta_ci95_half": 0.0015001391776340205,
+ "corridor_mean_dti": 0.006373444106110174,
+ "corridor_ci95_half": 0.0017078948021320769,
+ "control_mean_dti": 0.0025267341867155494,
+ "control_ci95_half": 0.000705866055806869,
+ "paired_delta_mean": 0.003846709919394625,
+ "paired_delta_ci95_half": 0.0013799960045768117,
  "gate_passed": true,
  "withheld_positive_px_total": 22641,
  "corridor": {
-  "mean_dti": 0.005975197860273526,
-  "std_dti": 0.0020799874428292396,
-  "ci95_half": 0.0014413577610952733,
+  "mean_dti": 0.006373444106110174,
+  "std_dti": 0.002464620400287446,
+  "ci95_half": 0.0017078948021320769,
   "n_cells": 8,
   "per_cell": {
-   "draw20_foldNE_all": 0.005977084081316553,
-   "draw20_foldNW_all": 0.004697028315028838,
-   "draw20_foldSE_all": 0.007250154623105283,
-   "draw20_foldSW_all": 0.006729379286247911,
-   "draw21_foldNE_all": 0.0041144898541310366,
-   "draw21_foldNW_all": 0.00396821061742391,
-   "draw21_foldSE_all": 0.004876016686576572,
-   "draw21_foldSW_all": 0.0101892194183581
+   "draw20_foldNE_all": 0.002848017855388047,
+   "draw20_foldNW_all": 0.005062619967109085,
+   "draw20_foldSE_all": 0.009892295187066146,
+   "draw20_foldSW_all": 0.006023734702668321,
+   "draw21_foldNE_all": 0.005140855344323241,
+   "draw21_foldNW_all": 0.0047421789452365744,
+   "draw21_foldSE_all": 0.007795164801962583,
+   "draw21_foldSW_all": 0.009482686045127395
   },
   "dots": [
-   37491,
-   39124,
-   39545,
-   39977,
-   39788,
-   37840,
-   39343,
-   39712
+   38453,
+   37372,
+   34483,
+   34394,
+   39733,
+   36776,
+   39953,
+   39934
   ],
   "n_truth": [
    2360,
@@ -47,29 +47,29 @@
   ]
  },
  "control": {
-  "mean_dti": 0.0021479253641536293,
-  "std_dti": 0.0008336229031558253,
-  "ci95_half": 0.0005776711996184226,
+  "mean_dti": 0.0025267341867155494,
+  "std_dti": 0.0010186177034090594,
+  "ci95_half": 0.000705866055806869,
   "n_cells": 8,
   "per_cell": {
-   "draw20_foldNE_all": 0.0008460821063652749,
-   "draw20_foldNW_all": 0.002839389945325117,
-   "draw20_foldSE_all": 0.0034959848881212932,
-   "draw20_foldSW_all": 0.0027568260843450344,
-   "draw21_foldNE_all": 0.0017016831084029581,
-   "draw21_foldNW_all": 0.0018278190837102218,
-   "draw21_foldSE_all": 0.0019874447687677995,
-   "draw21_foldSW_all": 0.0017281729281913346
+   "draw20_foldNE_all": 0.0009489545885175801,
+   "draw20_foldNW_all": 0.002973094111126358,
+   "draw20_foldSE_all": 0.003026135965790883,
+   "draw20_foldSW_all": 0.0036258366646484386,
+   "draw21_foldNE_all": 0.0011239576716654508,
+   "draw21_foldNW_all": 0.0025854384156930063,
+   "draw21_foldSE_all": 0.00234828464925365,
+   "draw21_foldSW_all": 0.0035821714270290266
   },
   "dots": [
-   30736,
-   29208,
-   29317,
-   29219,
-   30736,
-   29208,
-   29317,
-   29219
+   30240,
+   29742,
+   29159,
+   28631,
+   30240,
+   29742,
+   29159,
+   28631
   ],
   "n_truth": [
    2360,
@@ -82,7 +82,7 @@
    3786
   ]
  },
- "seconds": 562.9,
- "generated_utc": "20261012T022905Z",
+ "seconds": 516.8,
+ "generated_utc": "20261020T193132Z",
  "note": "gate: corridor arm must beat the same pipeline without corridor priors (paired over folds); holdout DTI is a SCREEN, not a leaderboard projection (GEMSDOE32 instrument-calibration evidence: cross-family Spearman rho=0.51, p~0.09)"
 }

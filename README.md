@@ -15,6 +15,7 @@ A valid file is not necessarily a unique or scientifically validated submission.
 - Holdout comparison is missing or not bound to the current artifact hash.
 - Reproducible method source manifest is missing, stale, or not artifact-bound.
 - Artifact-bound feature-alone leakage canaries are missing or flagged.
+- Hash-bound validator receipt is missing or failed.
 - surface uniqueness phase is missing or not bound to the current artifact.
 - surface uniqueness phase failed or is incomplete.
 - dots uniqueness phase is missing or not bound to the current artifact.
@@ -24,9 +25,9 @@ A valid file is not necessarily a unique or scientifically validated submission.
 
 **Read the canonical project brief in `PROMPT.md` at the beginning of every session.** It is appended to this README when the README is rebuilt.
 
-Read the [current-session three-pass review](reports/review-2026-10-20-current-session.md), [prior repository audit](reports/review-2026-10-20.md), [follow-up audit](reports/followup-2026-10-20.md), and [checkout review](reports/checkout-audit-2026-10-20.md) before continuing. The current-session review ran the final test suite (92 passed, 1 expected failure) and revalidated the archived all-finite TIFF against `data/bridge`.
+Read the [H69-E three-pass review](reports/review-passes-2026-10-20.md), [current-session audit](reports/review-2026-10-20-current-session.md), [prior repository audit](reports/review-2026-10-20.md), [follow-up audit](reports/followup-2026-10-20.md), and [checkout review](reports/checkout-audit-2026-10-20.md) before continuing. After the main merge, `pytest` reported 95 passed and 1 expected failure. That is not clearance to submit.
 
-**Status remains NOT OK TO SUBMIT.** The locally format-valid TIFF is an archived negative result: its registry scan triggers the literal dot-overlap duplicate stop, is incomplete, and does not have current-artifact-bound pre-placement and final-dot phase receipts. The radiometric method is not reproducible from the checked-in scoring code. No new TIFF was generated and no download is offered. A passing file-format validator is not clearance to submit.
+**Status remains NOT OK TO SUBMIT.** H69-E (2026-10-20) generated an additional TIFF. Its holdout beat the no-prior control, but 84.1% of dots fall within 3 px of one registry raster, so protocol rule 1 stops it. It is committed under `submissions/` for audit only and is not offered. The earlier radiometric TIFF remains an archived negative as well: its registry scan triggers the literal dot-overlap duplicate stop, and it does not have current-artifact-bound phase receipts. No download is offered. A passing file-format validator is not clearance to submit.
 
 ## Reproduce the publication audit (no data downloads needed)
 
@@ -52,8 +53,15 @@ CPU validation works; GPU training is not required for this geometry lane. A for
 
 The following is the retained project brief, not a verbatim transcript of every user message. The active request additionally requires strict duplicate-and-stop enforcement, three review passes, and a PR merged to main. Never infer authorization to submit to DrivenData.
 
-# Standing project brief (retained summary from 2026-10-12) — read at the start of every session
+# Standing prompt — read at the start of every session
 
+Session of 2026-10-20 addendum (user instruction, not a score): the user cites **0.3195** as the current competition high and asks for a unique submission that could beat it. That figure is USER-REPORTED-NOT-ORGANIZER-CONFIRMED. The in-repo official public-leaderboard snapshot (`registry/leaderboard_snapshot_2026-10-12.json`, retrieved 2026-10-12 from the public leaderboard page) shows rank 1 at 0.4275 and 0.3195 at rank 9. drivendata.org is not reachable from this sandbox, so the live board was not re-fetched. Do not write either number as a projection of this lane.
+
+Core values to apply on every decision: Maximize P(Win); Own the Outcome.
+
+The lane paragraph below is unchanged and is the only method this session may implement.
+
+# Standing prompt (verbatim, session of 2026-10-12, still in force)
 > Review the repo.
 >
 > THE FOLLOWING IS THE HIGHEST URGENCY AND MUST BE FOLLOWED!

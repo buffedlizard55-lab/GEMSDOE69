@@ -100,23 +100,40 @@ def write_card(root=ROOT):
                 verdict=decision['verdict'], banner='ok' if decision['download_enabled'] else 'stop',
                 release_policy=decision,
                 note='Literal protocol enforced. No submission slot used. Archived measurements are not organizer scores.')
-    card['hypothesis'] = ('H69-D: radiometric depletion inside catalogue-tip relay/pull-apart corridors; '
-                          'previously generated candidate, audited here without another experiment.')
-    card['mechanism'] = ('Tip-graph corridor proposals scored using gravity/magnetic HG and tilt, magnetic lows, '
-                         'lidar scarps, orientation, and K/Th depletion; greedy marginal-DTI placement.')
-    card['non_fault_mimic'] = ('Alluvial sediment composition and lithologic contacts can alter radiometric ratios; '
-                              'pluvial shorelines can mimic scarps. K depletion is not a universal alteration signature.')
+    # Do not relabel a later experiment's evidence as the H69-D audit.
+    if str(receipt.get('hypothesis_id', '')).startswith('H69-E'):
+        card['hypothesis'] = (
+            'H69-E: width-stratified relay/pull-apart corridors scored with conductivity and basement '
+            'straightness plus K depletion / Th/K. Logged negative: holdout vs control passed; literal '
+            'dot-overlap gate failed. Not offered for a scored slot.')
+        card['mechanism'] = (
+            'Tip-graph step-overs, width-stratified quotas, oblique connector and en echelon strands, '
+            'HG/tilt grav+mag, lidar, structure-tensor straightness, radiometric K/ThK, greedy marginal-DTI.')
+        card['non_fault_mimic'] = (
+            'Lithologic contacts can make straight conductivity and basement steps; felsic intrusions and '
+            'soil moisture change K and Th/K; survey-line artifacts mimic HG/tilt edges.')
+    else:
+        card['hypothesis'] = ('H69-D: radiometric depletion inside catalogue-tip relay/pull-apart corridors; '
+                              'previously generated candidate, audited here without another experiment.')
+        card['mechanism'] = ('Tip-graph corridor proposals scored using gravity/magnetic HG and tilt, magnetic lows, '
+                             'lidar scarps, orientation, and K/Th depletion; greedy marginal-DTI placement.')
+        card['non_fault_mimic'] = ('Alluvial sediment composition and lithologic contacts can alter radiometric ratios; '
+                                  'pluvial shorelines can mimic scarps. K depletion is not a universal alteration signature.')
     mean, half = gate.get('corridor_mean_dti'), gate.get('corridor_ci95_half')
     card['holdout'] = dict(evidence_class='HOLDOUT-DTI', evaluator_version=gate.get('evaluator'),
         dti=mean, ci95=[mean-half, mean+half] if isinstance(mean, (int, float)) and isinstance(half, (int, float)) else None,
         withheld_positive_pixels=gate.get('withheld_positive_px_total'), n_cells=gate.get('n_cells'),
         comparator_dti=gate.get('control_mean_dti'), paired_delta=gate.get('paired_delta_mean'),
-        uncertainty_note='Archived normal-approximation interval across repeated cells; not an independent block bootstrap. Not rerun this session.')
+        uncertainty_note=('Normal-approximation interval across the 8 repeated cells; not an independent block bootstrap. '
+                          + ('H69-E was measured this session (seeds 20 and 21).' if str(receipt.get('hypothesis_id', '')).startswith('H69-E')
+                             else 'Not rerun this session.')))
     card['correlation_overlap_vs_registry'] = uniq
     card['raster'] = receipt.get('raster', {})
     card['validator_output'] = decision['validator_report']
-    card['submission_name'] = receipt.get('submission_name')
-    card['submission_note'] = receipt.get('submission_note', '')[:140]
+    zeros = (receipt.get('raster') or {}).get('zeros') or {}
+    name = receipt.get('submission_name') or Path(str(zeros.get('path', ''))).stem
+    card['submission_name'] = name or None
+    card['submission_note'] = (receipt.get('submission_note') or receipt.get('note') or '')[:140]
     (root / 'evidence' / 'run_card.json').write_text(json.dumps(card, indent=2) + '\n')
     return card
 

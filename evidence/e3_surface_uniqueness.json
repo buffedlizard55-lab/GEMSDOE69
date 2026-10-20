@@ -1,0 +1,14 @@
+{
+ "evidence_class": "REGISTRY-MEASUREMENT",
+ "phase": "surface-before-placement",
+ "generated_utc": "20261020T193510Z",
+ "subsample": 250000,
+ "n_compared": 746,
+ "n_errors": 1,
+ "n_registry_blobs": 751,
+ "worst_abs_spearman": 0.4294610016107123,
+ "worst_rho": 0.4294610016107123,
+ "worst_blob": "374c88b1da2b803e2ed160de467fd71ae114010d",
+ "rho_ok": true,
+ "seconds": 77.4
+}

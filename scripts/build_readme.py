@@ -26,9 +26,9 @@ A valid file is not necessarily a unique or scientifically validated submission.
 
 **Read the canonical project brief in `PROMPT.md` at the beginning of every session.** It is appended to this README when the README is rebuilt.
 
-Read the [current-session three-pass review](reports/review-2026-10-20-current-session.md), [prior repository audit](reports/review-2026-10-20.md), [follow-up audit](reports/followup-2026-10-20.md), and [checkout review](reports/checkout-audit-2026-10-20.md) before continuing. The current-session review ran the final test suite (92 passed, 1 expected failure) and revalidated the archived all-finite TIFF against `data/bridge`.
+Read the [H69-E three-pass review](reports/review-passes-2026-10-20.md), [current-session audit](reports/review-2026-10-20-current-session.md), [prior repository audit](reports/review-2026-10-20.md), [follow-up audit](reports/followup-2026-10-20.md), and [checkout review](reports/checkout-audit-2026-10-20.md) before continuing. After the main merge, `pytest` reported 95 passed and 1 expected failure. That is not clearance to submit.
 
-**Status remains NOT OK TO SUBMIT.** The locally format-valid TIFF is an archived negative result: its registry scan triggers the literal dot-overlap duplicate stop, is incomplete, and does not have current-artifact-bound pre-placement and final-dot phase receipts. The radiometric method is not reproducible from the checked-in scoring code. No new TIFF was generated and no download is offered. A passing file-format validator is not clearance to submit.
+**Status remains NOT OK TO SUBMIT.** H69-E (2026-10-20) generated an additional TIFF. Its holdout beat the no-prior control, but 84.1% of dots fall within 3 px of one registry raster, so protocol rule 1 stops it. It is committed under `submissions/` for audit only and is not offered. The earlier radiometric TIFF remains an archived negative as well: its registry scan triggers the literal dot-overlap duplicate stop, and it does not have current-artifact-bound phase receipts. No download is offered. A passing file-format validator is not clearance to submit.
 
 ## Reproduce the publication audit (no data downloads needed)
 

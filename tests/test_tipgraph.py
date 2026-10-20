@@ -4,7 +4,6 @@ import sys
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
-sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "vendor" / "template66"))
 
 from gems69.tips import vectorize, axial_deg, axial_diff, axial_mean
 from gems69.corridors import build_tip_pairs, build_corridors

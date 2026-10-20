@@ -178,6 +178,68 @@ def cmd_e2(seeds=(20, 21), modes=("all",)) -> int:
     return 0
 
 
+def surface_precheck(propensity: np.ndarray, footprint: np.ndarray) -> dict:
+    """Rank-correlation of the pre-placement surface vs registry rasters.
+
+    Protocol rule 1: check the surface BEFORE placement. rho > 0.90 is a
+    duplicate; the caller must not emit dots.
+    """
+    import rasterio
+    from scipy.stats import spearmanr
+
+    man = json.loads((ROOT / "registry" / "prior_rasters.json").read_text())
+    reg_dir = ROOT / ".cache" / "registry"
+    # subsample mutually finite cells; rank correlation is stable at this N
+    rng = np.random.default_rng(69)
+    fy, fx = np.nonzero(footprint)
+    sel = rng.choice(len(fy), size=min(250_000, len(fy)), replace=False)
+    sy, sx = fy[sel], fx[sel]
+    mine = propensity[sy, sx].astype(np.float32)
+    worst = 0.0
+    worst_blob = None
+    n_compared = 0
+    errors = 0
+    t0 = time.time()
+    for e in man["rasters"]:
+        path = reg_dir / f"{e['git_blob_sha']}.tif"
+        if not path.exists():
+            errors += 1
+            continue
+        try:
+            with rasterio.open(path) as src:
+                if (src.height, src.width) != propensity.shape:
+                    errors += 1
+                    continue
+                # windowed point reads would be slower; one band is ~50 MB
+                theirs = src.read(1)
+            tv = theirs[sy, sx]
+            ok = np.isfinite(tv) & np.isfinite(mine)
+            if ok.sum() < 1000 or mine[ok].std() == 0 or np.nanstd(tv[ok]) == 0:
+                continue
+            rho = float(spearmanr(mine[ok], tv[ok]).statistic)
+            n_compared += 1
+            if abs(rho) > abs(worst):
+                worst = rho
+                worst_blob = e["git_blob_sha"]
+            del theirs
+        except Exception:  # noqa: BLE001
+            errors += 1
+    return dict(
+        evidence_class="REGISTRY-MEASUREMENT",
+        phase="surface-before-placement",
+        generated_utc=utcnow(),
+        subsample=int(len(sy)),
+        n_compared=n_compared,
+        n_errors=errors,
+        n_registry_blobs=len(man["rasters"]),
+        worst_abs_spearman=abs(worst),
+        worst_rho=worst,
+        worst_blob=worst_blob,
+        rho_ok=bool(abs(worst) <= 0.90),
+        seconds=round(time.time() - t0, 1),
+    )
+
+
 def cmd_e3(s0: float | None = None) -> int:
     from gems57 import grid as tgrid
     from gems57.emit import greedy_allocate
@@ -194,6 +256,14 @@ def cmd_e3(s0: float | None = None) -> int:
     pipe = corridor_pipeline(g.catalogue, g.footprint.shape, stats, max_corridors=1200,
                              zstack=zstack)
     p = pipe["propensity"]
+    del zstack
+    print(f"[e3] surface precheck corridors={pipe['corridors']} kept={pipe.get('corridors_kept')}", flush=True)
+    pre = surface_precheck(p, g.footprint)
+    dump("e3_surface_uniqueness.json", pre)
+    print("[e3] surface", json.dumps({k: pre[k] for k in ("worst_abs_spearman", "rho_ok", "n_compared", "seconds")}), flush=True)
+    if not pre["rho_ok"]:
+        print("[e3] DUPLICATE on the surface; stopping before placement", flush=True)
+        return 2
     flank = ndi.distance_transform_edt(~g.catalogue) > 2     # 200 m catalogue flank prune
     allowed = g.footprint & flank & (p > 0)
     K_TRUTH = 12691   # GEMSDOE32 emission_models_mc.json: receipt-derived prior (cited)
@@ -208,7 +278,7 @@ def cmd_e3(s0: float | None = None) -> int:
     values[dots] = 1.0
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     h8 = hashlib.sha256(p.tobytes()).hexdigest()[:8]
-    base = f"h69-relayramp-pullapart-{n_dots}-{stamp}-{h8}"
+    base = f"h69e-strat-straight-rad-{n_dots}-{stamp}-{h8}"
     sub = ROOT / "submissions"
     sub.mkdir(exist_ok=True)
     rec_z = tgrid.write_submission(sub / f"{base}-zeros.tif", values, mode="zeros")
@@ -259,7 +329,7 @@ def cmd_e3(s0: float | None = None) -> int:
     rationale.sort(key=lambda r: -r["score_S"])
     receipt = dict(
         evidence_class="SUBMISSION-RECEIPT",
-        generated_utc=stamp, hypothesis_id="H69-relayramp-pullapart",
+        generated_utc=stamp, hypothesis_id="H69-E-stratified-straight-rad",
         s0_calibrated=s0, k_truth_prior=K_TRUTH,
         k_truth_source=("GEMSDOE32 evidence/emission_models_mc.json truth_px=12691, "
                         "source 'GEMSDOE25 H28 (owner-report-derived prior)'"),
@@ -277,8 +347,8 @@ def cmd_e3(s0: float | None = None) -> int:
                                     "portal contract = sample_submission finite mask (IR-69-VAL-01)"),
         propensity_sha256=h8,
         top_corridors=rationale[:25],
-        note=("relay-ramp/pull-apart corridors from tip graph; HG+tilt grav/mag + lidar scarp; "
-              "greedy marginal-DTI; 200m flank-pruned")[:140],
+        note=("H69-E width-stratified relay/pull-apart; cond+basement straight steps + K/ThK; "
+              "HG+tilt+lidar; greedy DTI; 200m flank")[:140],
     )
     dump("e3_receipt.json", receipt)
     dump("e3_validator.json", dict(zeros=vz, nan=vn, generated_utc=stamp))
@@ -295,7 +365,7 @@ def cmd_unique() -> int:
 
     man = json.loads((ROOT / "registry" / "prior_rasters.json").read_text())
     reg_dir = ROOT / ".cache" / "registry"
-    subs = sorted((ROOT / "submissions").glob("h69-*-zeros.tif"))
+    subs = sorted((ROOT / "submissions").glob("h69*-zeros.tif"))
     if not subs:
         print("no submission to scan; run e3 first")
         return 1
@@ -352,6 +422,38 @@ def cmd_unique() -> int:
     dotlike = [r for r in rows if r["stratum"] == "dotlike"]
     worst_overlap_dotlike = max(dotlike, key=lambda r: r["dot_overlap_3px"], default=None)
     exact = [r for r in rows if r["pixel_agreement"] >= 0.9999]
+    # Own prior emissions are not in the 2026-10-11 registry. The standing
+    # prompt forbids copying a previous submission, so they are scanned too.
+    local_rows = []
+    local_paths = list((ROOT / "submissions").glob("*.tif")) + list((ROOT / "docs" / "downloads").glob("*.tif"))
+    mine_stem = mine_path.name.replace("-zeros.tif", "").replace("-nan.tif", "")
+    for lp in local_paths:
+        if lp.resolve() == mine_path.resolve():
+            continue
+        # the diagnostic twin of this same emission is not a prior submission
+        if mine_stem and mine_stem in lp.name:
+            continue
+        if "zeros" not in lp.name and "nan" not in lp.name:
+            continue
+        try:
+            with rasterio.open(lp) as src:
+                if (src.height, src.width) != mine.shape:
+                    continue
+                theirs = src.read(1)
+            tpos = np.isfinite(theirs) & (theirs > 0)
+            if int(tpos.sum()) == 0 or n_my_dots == 0:
+                continue
+            yy, xx = np.mgrid[-3:4, -3:4]
+            disk = (yy * yy + xx * xx) <= 9
+            near = ndi.binary_dilation(tpos, structure=disk)
+            local_rows.append(dict(
+                path=str(lp.relative_to(ROOT)), their_dots=int(tpos.sum()),
+                dot_overlap_3px=round(float(near[mine_dots].mean()), 4),
+            ))
+        except Exception as exc:  # noqa: BLE001
+            local_rows.append(dict(path=str(lp), err=str(exc)[:160]))
+    worst_local = max((r for r in local_rows if "dot_overlap_3px" in r),
+                      key=lambda r: r["dot_overlap_3px"], default=None)
     out = dict(
         evidence_class="REGISTRY-MEASUREMENT",
         generated_utc=utcnow(), my_file=str(mine_path), my_dots=n_my_dots,
@@ -374,6 +476,12 @@ def cmd_unique() -> int:
             note=("universal soft surfaces and dense rasters overlap ANY sparse dot field by "
                   "construction; family precedent GEMSDOE63/64 treats them as a registry-"
                   "structure condition, reported separately from the dotlike lane-drift gate"),
+        ),
+        local_prior_overlap=dict(
+            n_scanned=len(local_rows),
+            worst=worst_local,
+            ok=bool(worst_local is None or worst_local["dot_overlap_3px"] <= 0.70),
+            note="overlap of this emission's dots with earlier GEMSDOE69 submissions (not in the 2026-10-11 registry)",
         ),
         errors=errors[:50], seconds=round(time.time() - t0, 1),
     )
