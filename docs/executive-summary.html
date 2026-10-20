@@ -8,48 +8,47 @@
 <div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="active">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
-<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. The archived candidate is a negative result under the literal protocol. No competition slot was used.</p><ul><li>Holdout comparison is missing or not bound to the current artifact hash.</li><li>Reproducible method source manifest is missing, stale, or not artifact-bound.</li></ul></div>
-<div class="card">
-<h2>Executive summary &mdash; how a submission is made and entered</h2>
+<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. This session's preregistered experiments are negative results (see the table below). No competition slot was used.</p><ul><li>No candidate passed this session&#x27;s preregistered gates; negative results logged (see evidence/run_card.json experiments).</li></ul></div>
+<div class="card"><h2>Executive summary &mdash; exactly how to submit</h2>
 <ol>
-<li><b>Generate</b> (2026-10-20 relay-fix session): restore pinned mirrors
-(<code>scripts/restore_data.py</code>), run the preregistered gate
-(<code>scripts/run_relayfix_20261020.py gate</code>), then the Exp2b transfer arm
-(<code>scripts/run_exp2b_transfer.py gate</code> + <code>emit</code>), which writes
-<code>submissions/h69-transferonly-&lt;dots&gt;-&lt;stamp&gt;-&lt;sha8&gt;-zeros.tif</code>
-(all-finite [0,1]) plus a <code>-nan</code> diagnostic twin, with JSON receipts in <code>evidence/</code>.</li>
-<li><b>Validate</b>: the shared template validator (<code>vendor/template66/gems/validate_submission.py</code>)
-re-reads the bytes from disk and checks CRS EPSG:32611, shape 3730&times;3292, transform, single band,
-float32, values in [0,1], and (for the nan twin) NaN only outside the footprint.</li>
-<li><b>Gate</b>: the corridor arm must beat the identical pipeline without corridor priors on the
-spatially-blocked hide-and-recover holdout (evidence/e2_gate.json), and the registry lane-drift scan
-must pass (evidence/e3_uniqueness.json). The download banner on the home page is generated from those
-two files &mdash; it cannot say OK unless they do.</li>
-<li><b>Submit</b>: DrivenData competition 306 &rarr; <i>New submission</i> &rarr; upload the single <code>.tif</code>
-(or a zip containing exactly one GeoTIFF). It must match the submission format's CRS, shape, and
-geotransform &mdash; ours is written against <code>sample_submission.tif</code> so it matches by construction.
-Add a short note (&le;140 characters) identifying the run, e.g. the receipt note.</li>
-</ol>
-<p><b>Portal error &ldquo;Predicted values must be in range [0, 1]&rdquo; &mdash; byte-verified causes (2026-10-20)</b>:
-uploading any of these files by mistake triggers exactly this class: (1) <code>labels.tif</code>/<code>existing_faults.tif</code>
-contain the value <b>&minus;1 in all 7,111,787 outside-footprint cells</b> (int8 nodata); (2) a <code>-nan</code> twin carries
-7,111,787 NaN cells, which fail a naive 0&nbsp;&le;&nbsp;v&nbsp;&le;&nbsp;1 check; (3) <code>training_features.tif</code> carries the
-&minus;3.4&times;10<sup>38</sup> sentinel. The fix is procedural: upload <b>only</b> the <code>-zeros.tif</code> named on this page
-(verified all-finite, min 0.0, max 1.0, nodata unset) and re-run
-<code>scripts/validate_submission.py &lt;file&gt;</code> on the exact bytes before uploading. Portal internals are not
-observable here, so this identifies the verified byte-level causes consistent with the error, not portal source code.</p>
-</div>
-<div class="card">
-<h2>Standing limitations (do not re-discover these)</h2>
+<li><b>Only if the banner is green.</b> The banner is computed by <code>scripts/release_gate.py</code> from hash-bound evidence:
+holdout gate, current-best comparison, leakage canary, uniqueness (surface and dots), validator and method manifest.</li>
+<li><b>File.</b> Single-band GeoTIFF <code>.tif</code>, or a <code>.zip</code> containing exactly one GeoTIFF. Use the <b>-zeros</b>
+variant: float32, EPSG:32611, 3730&times;3292, transform (100, 0, 243350, 0, &minus;100, 4508550), every value finite in [0,1].</li>
+<li><b>Upload.</b> <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">Competition 306</a> &rarr; Submissions &rarr;
+choose the file &rarr; add a unique note of at most 140 characters (e.g. <code>relay-ramp corridors, k=12k dots</code>).</li>
+<li><b>One final choice.</b> Per the <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page</a>,
+competitors pick a <i>single</i> submission for both prize rounds; the Final round rescores against labels revised after expert review of
+all submissions.</li></ol>
+<h3>Portal error &ldquo;Predicted values must be in range [0, 1]&rdquo;</h3>
+<p>Byte-verified causes in this family: <code>labels.tif</code>/<code>existing_faults.tif</code> carry &minus;1 in 7,111,787 outside-footprint
+cells; <code>-nan</code> twins carry 7,111,787 NaN cells; <code>training_features.tif</code> carries the &minus;3.4&times;10<sup>38</sup> sentinel.
+Upload only a <code>-zeros.tif</code> and run <code>scripts/validate_submission.py &lt;file&gt;</code> on the exact bytes first. (The official
+format text says data outside the bounds is null or NaN; the all-finite variant is the family's portal-safe choice, IR-69-VAL-01.)</p>
+<h3>Official rules verified this session (2026-10-20)</h3>
 <ul>
-<li>No DrivenData auth in this environment: organizer bytes cannot be auto-downloaded; sha256-pinned
-family mirrors are used (integrity-pinned, NOT organizer-authenticated).</li>
-<li><code>existing_faults.tif</code> &equiv; <code>labels.tif</code> in every family mirror (IR-69-DATA-01): the public labels
-raster IS the mapped catalogue; the scored truth is unpublished (&asymp;12,691 px receipt-derived estimate,
-GEMSDOE32 evidence).</li>
-<li>Holdout DTI screens but does not rank across families (&rho;&asymp;0.51 vs live, GEMSDOE32 calibration).</li>
+<li>Metric: distance-weighted Tversky, &alpha; 0.2, &beta; 0.8, triangular kernel R = 300 m;
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">problem page</a>.</li>
+<li>Known USGS/INGENIOUS fault pixels are masked from evaluation in both rounds;
+<a href="https://community.drivendata.org/t/scoring-clarification-are-known-usgs-ingenious-faults-masked-when-scoring-and-are-they-in-the-final-round-label-set/11516">forum 11516 (staff)</a>.</li>
+<li>Leaderboard is one pooled index over all public-subset pixels; final re-evaluation covers the entire GeoDAWN area;
+<a href="https://community.drivendata.org/t/leaderboard-aggregation-pooled-over-public-test-pixels-or-mean-of-per-chunk-scores/11550">forum 11550 (staff)</a>.</li>
+<li>Phase 2 labels may be added, removed or changed; no extra fault weighting; same exclusion mask;
+<a href="https://community.drivendata.org/t/questions-about-the-final-round-rules/11556">forum 11556 (staff)</a>.</li>
+<li>Organizers do not disclose label data sources; Phase 2 test set updated by expert review of all Phase 1 submissions;
+<a href="https://community.drivendata.org/t/how-were-the-new-test-faults-identified-data-sources-and-fault-types/11527">forum 11527 (staff)</a>.</li>
 </ul>
+<h3>Reproduce this session</h3>
+<pre>python scripts/restore_data.py            # pinned mirrors (+ external/geodawn_rad_u8.tif, see HANDOFF)
+PYTHONPATH=src:vendor/template66:vendor .venv/bin/python scripts/run_h69m.py gate      # experiment 1
+PYTHONPATH=src:vendor/template66:vendor .venv/bin/python scripts/run_h69n.py gate      # experiment 2
+.venv/bin/python scripts/summarize_session.py && .venv/bin/python scripts/release_gate.py
+.venv/bin/python scripts/build_site69.py && .venv/bin/python scripts/build_readme.py</pre>
 </div>
+<div class="card"><h2>Standing limitations</h2><ul>
+<li>No DrivenData login here: organizer bytes are sha256-pinned family mirrors, not organizer-authenticated (IR-69-DATA-02).</li>
+<li><code>existing_faults.tif</code> &equiv; <code>labels.tif</code> in every mirror (IR-69-DATA-01).</li>
+<li>HOLDOUT-DTI screens methods; it is not a leaderboard projection.</li></ul></div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

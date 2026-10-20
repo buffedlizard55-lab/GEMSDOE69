@@ -1,0 +1,45 @@
+{
+  "id": "H69-M",
+  "title": "Evidence-first corridor selection (score every de-duplicated step-over, place nodes in the top corridors)",
+  "frozen_utc": "2026-10-20T21:55:00Z",
+  "frozen_before_any_holdout_look": true,
+  "lane": "GEMSDOE69 relay-ramp and pull-apart corridor generator (standing prompt, unchanged)",
+  "motivation": [
+    "The prompt says: 'Score corridors by ... Place nodes inside the top corridors'. Every earlier implementation in this repo capped the candidate list at 1,200 corridors by a GEOMETRY priority (dilatational first, |W-2.8 km|) BEFORE scoring; scoring then only modulated propensity inside a set that was never chosen by evidence (IR-69-CAP-01, IR-69-SEL-01).",
+    "The repaired tip graph (R1/R2) yields ~384k raw pairs; outer-tip combinations duplicate one step-over many times (IR-69-SEL-01).",
+    "H69-M scores every step-over (one tip pair per unordered strand pair: the closest tips) with the same convergent joint grav+mag scorer as H69-J, evaluated along the oblique tip-to-tip connector, and keeps the top 1,200 by that score."
+  ],
+  "arms": {
+    "control_noprior": "sigmoid(mean robust-z of grav_hg_s2, grav_tilt_s2, mag_hg_s2, mag_tilt_s2, mag_low_tmi, mag_low_rtp, lidar_scarp) over the whole cell; identical allocator (the 'same pipeline without corridor priors').",
+    "transfer_ref": "Exp2b transfer-only corridors (current holdout best, archived pooled HOLDOUT-DTI 0.008470 on the 'all' cells), recomputed in this run.",
+    "joint_priority": "H69-J joint scorer on the default stratified geometry-priority cap under the repaired tip graph (the rebind run requested in HANDOFF.md).",
+    "h69m_evidence_first": "NEW. Dedupe to one pair per unordered strand pair (min tip-to-tip distance); connector-line evidence = mean robust z of the 17 joint layers sampled along the tip-to-tip segment (<=64 samples); S_line = 0.35 min(E_grav,E_mag)+ + 0.15 max(E_grav,E_mag)+ + 0.15 E_low_gated + 0.15 E_lidar+ + 0.10 W_orient + 0.10 W_geom (same weights as scoring_joint.py); top 1,200 by S_line; rasterize with corridor_from_pair; final per-corridor score with score_corridor_joint over the full corridor mask; propensity via build_propensity_joint."
+  },
+  "fixed_constants": {
+    "max_corridors": 1200,
+    "line_samples_max": 64,
+    "allocator": "gems57.emit.greedy_allocate(floor=0.05, max_dots=250000, candidate_cap=300000), k_truth = cell.n_truth in holdout (same oracle for every arm, disclosed), 12691 for emission (family estimate used by every earlier emission)",
+    "flank_rule": "dots only where distance to the VISIBLE catalogue > 2 px (as every earlier arm)",
+    "S0": 0.75
+  },
+  "instrument": {
+    "evaluator": "vendor/template66 gems57.holdout.build_holdout + score_cell (alpha 0.2, beta 0.8, 300 m triangular kernel), byte-pinned template",
+    "seeds": [20, 21],
+    "modes": ["all", "detached"],
+    "cells": 16,
+    "note": "'detached' cells withhold only segments >= 400 m from every other catalogue component: the template's own 'closer analogue to a genuinely unmapped splay'. Never run by this lane before (knowledge-base open question 1)."
+  },
+  "endpoints": {
+    "primary": "pooled HOLDOUT-DTI over the 8 'detached' cells (sum TP, FP, FN then DTI)",
+    "secondary": "pooled HOLDOUT-DTI over the 8 'all' cells (comparable to archived 0.008470 / 0.002154)",
+    "uncertainty": "paired cell bootstrap, 2000 resamples, numpy default_rng(20261021), 95% percentile CI"
+  },
+  "decision_rules": {
+    "prompt_gate": "h69m_evidence_first pooled > control_noprior pooled on the PRIMARY endpoint with bootstrap CI lower bound > 0",
+    "current_best": "h69m_evidence_first pooled > transfer_ref pooled on the PRIMARY endpoint with bootstrap CI lower bound > 0, AND not below transfer_ref on the SECONDARY endpoint by more than the bootstrap CI (upper bound of h69m - transfer_ref on 'all' must be > 0)",
+    "leakage_canary": "every single layer and every arm propensity: AUC(truth vs 50k negatives per cell) <= 0.90 in every cell; otherwise leakage until proven otherwise -> stop",
+    "uniqueness": "against registry/registry_index_69_v2.json (942 grid rasters incl. 80 published after 2026-10-12) plus this repo's own archived submissions: Spearman <= 0.90 vs EVERY raster (surface before placement and final dots); forward 3 px dot overlap <= 0.70 vs every DOT-FIELD raster (template gems57.uniqueness.two_phase_summary like-for-like reading, support <= 20% of footprint) AND vs the rank-matched top-K pixels of every non-binary continuous surface (K = my dot count). The literal all-positive-pixel reading is always reported. Any firing = duplicate-and-stop.",
+    "publication": "download offered only if prompt_gate AND current_best AND canary AND uniqueness AND validator all pass, all bound to the exact artifact SHA-256 by scripts/release_gate.py"
+  },
+  "budget": "this is experiment 1 of at most 3 in this session; no submission slot is spent by this lane (promotion is a separate selector step)"
+}

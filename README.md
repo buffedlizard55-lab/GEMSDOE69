@@ -8,12 +8,16 @@ Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip di
 
 The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
 A valid file is not necessarily a unique or scientifically validated submission.
-- Holdout comparison is missing or not bound to the current artifact hash.
-- Reproducible method source manifest is missing, stale, or not artifact-bound.
+- No candidate passed this session's preregistered gates; negative results logged (see evidence/run_card.json experiments).
 
-## Latest — 2026-10-20 joint-corridor candidate
+## Latest — 2026-10-20 session 3 (preregistered experiments; HOLDOUT-DTI, not organizer scores)
 
-Hypothesis H69-J (H1): convergent multi-scale HG+tilt edge phase across relay connectors — joint grav+mag HG/tilt coincidence (min(E_grav,E_mag) 0.35 weight) targets buried relay linkage separating basement blocks. Corridor arm 0.0059±0.0012 vs control 0.0021±0.0006 (paired Δ+0.0038±0.0015, 8 folds 22641 withheld px, gate PASSED). Registry worst |rho| 0.162 <0.90, dot-field overlap 0.61 <0.70 (literal 1.0 from universal continuous_surface is non-discriminating per DENSE_SUPPORT_FRACTION=0.20; see evidence/e3_uniqueness.json diagnostic). Leakage canary worst AUC 0.69 <0.90. Validator PASS for both variants (float32 EPSG:32611 3730×3292 [0,1]). Promotion to selector step required; no organizer score claimed.
+| Experiment | Detached pooled DTI (candidate / control / transfer_ref) | Δ vs control [95% CI] | Δ vs transfer_ref [95% CI] | Verdict |
+|---|---|---|---|---|
+| H69-M | 0.0286 / 0.0139 / 0.0487 | +0.0141 [+0.0047, +0.0233] | -0.0202 [-0.0248, -0.0160] | **negative** |
+| H69-N | 0.0304 / 0.0139 / 0.0487 | +0.0166 [+0.0108, +0.0222] | -0.0177 [-0.0264, -0.0085] | **negative** |
+
+Evaluator: vendor/template66 `gems57.holdout` (α 0.2, β 0.8, 300 m triangular), seeds 20/21, 8 detached cells, 22619 withheld positive px; paired cell bootstrap (2,000). Instrument fix IR-69-HOLD-01: archived lane numbers are not comparable. Details: `reports/session3-2026-10-20.md`.
 
 ## Reproduce the publication audit (no data downloads needed)
 
@@ -28,11 +32,11 @@ For pixel validation and tests:
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
+GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/<candidate>-zeros.tif
 .venv/bin/pytest -q
 ```
 
-Full feature stack restored via `scripts/fetch_data.py` (pinned mirrors); registry 751 blobs via `scripts/fetch_registry.py`. GPU not needed; format validator cannot prove geothermal discovery.
+Full feature stack restored via `scripts/fetch_data.py` (pinned mirrors); registry index v2 (942 grid rasters) via `scripts/refresh_registry_v2.py`. GPU not needed; format validator cannot prove geothermal discovery.
 
 ## Standing project brief — read at the beginning of every session
 
@@ -93,3 +97,17 @@ it conflicts with other highs in the prompt and must not be called current fact.
 Core values remain Maximize P(Win) and Own the Outcome. No leaderboard improvement,
 source verification, data access, or completed submission may be invented.
 The duplicate-and-stop rule remains binding even when it prevents a new TIFF.
+
+## Active request refresh — 2026-10-20 session 3
+
+The user re-issued the standing prompt unchanged (lane 69 relay-ramp / pull-apart corridor
+generator; parallel-run protocol rules 1–6; 3–5 untried ranked hypotheses validated on the
+spatial holdout before any slot; explain why h33-h33-2-b2 scored 0.2778 and whether a unique
+submission can beat it; obvious OK / DO-NOT-SUBMIT banner with the download at the top;
+executive-summary page on how to submit — single-band .tif or a .zip with one GeoTIFF, matching
+CRS/shape/transform, values in [0, 1], unique name + note ≤140 chars; the user previously hit
+"Predicted values must be in range [0, 1]"; run card JSON; three passes; PR merged to main;
+only free public official data; verify line by line from official sources with links; flag
+irregularities; no hallucinations; no manual input). Core values: Maximize P(Win), Own the Outcome.
+Leaderboard figures 0.2778 / 0.4413 / 0.3774 / 0.3195 remain USER-REPORTED-NOT-ORGANIZER-CONFIRMED.
+Session-3 decisions a human may want to revisit are listed in HANDOFF.md ("Decisions for the user").

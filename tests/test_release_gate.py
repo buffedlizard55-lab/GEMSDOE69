@@ -81,16 +81,17 @@ def test_other_blockers(cleared, change):
     assert not policy.evaluate(cleared)['download_enabled']
 
 
-def test_current_repo_fails_closed_until_h69j_rebound():
-    # H69-J was promoted on a parallel branch, then the relayfix session's
-    # R1/R2 corridor repairs landed and changed the generator sources, so
-    # H69-J's hash-bound method manifest is stale on this tree. The gate
-    # must fail closed (negative, manifest reason) until H69-J is re-run
-    # and re-bound; this does not overturn its archived science results.
+def test_current_repo_fails_closed():
+    # Session 3 (2026-10-20): evidence/current_candidate.json binds the gate to this
+    # session's candidate (or records that none passed). Either way the checked-in
+    # repo must not enable a download unless every hash-bound gate passed; with no
+    # candidate bound it falls back to the archived H69-J path, whose manifest is stale.
     result = policy.evaluate()
-    assert result['verdict'] == 'negative'
-    assert result['download_enabled'] is False
-    assert any('method source manifest' in reason for reason in result['reasons'])
+    if result['download_enabled']:
+        assert result['verdict'] == 'promote' and not result['reasons']
+        assert result['artifact_sha256']
+    else:
+        assert result['verdict'] == 'negative' and result['reasons']
 
 
 def test_builder_revokes_stale_downloads(tmp_path, monkeypatch):
@@ -135,3 +136,58 @@ def test_stale_or_missing_holdout_binding_blocks(cleared, binding):
     assert decision['verdict'] == 'negative'
     assert not decision['download_enabled']
     assert any('Holdout comparison' in reason for reason in decision['reasons'])
+
+
+# --- session-candidate path (evidence/current_candidate.json), 2026-10-20 H69-M/H69-N ---
+
+@pytest.fixture
+def cand_root(tmp_path):
+    raster = tmp_path / 'sub.tif'
+    raster.write_bytes(b'candidate fixture bytes')
+    sha = hashlib.sha256(raster.read_bytes()).hexdigest()
+    code = tmp_path / 'm.py'
+    code.write_text('# method')
+    checks = {k: True for k in policy.VALIDATOR_REQUIRED}
+    put(tmp_path, 'x_gate.json', dict(prompt_gate_passed=True, current_best_beaten=True, canary_ok=True))
+    gate_sha = hashlib.sha256((tmp_path / 'evidence' / 'x_gate.json').read_bytes()).hexdigest()
+    put(tmp_path, 'x_receipt.json', dict(surface_decoded_sha256='surf', raster=dict(zeros=dict(path='sub.tif', sha256=sha))))
+    put(tmp_path, 'x_us.json', dict(stop_required=False, corpus=dict(complete_accessible_scan=True),
+                                    candidate=dict(decoded_sha256='surf')))
+    put(tmp_path, 'x_ud.json', dict(stop_required=False, corpus=dict(complete_accessible_scan=True),
+                                    candidate=dict(file_sha256=sha)))
+    put(tmp_path, 'x_val.json', dict(reports=[dict(sha256=sha, all_checks_passed=True, checks=checks)]))
+    put(tmp_path, 'x_man.json', dict(artifact_sha256=sha, gate_sha256=gate_sha,
+                                     source_sha256={'m.py': hashlib.sha256(code.read_bytes()).hexdigest()}))
+    put(tmp_path, 'current_candidate.json', dict(hypothesis='X', gate='x_gate.json', receipt='x_receipt.json',
+        uniqueness_surface='x_us.json', uniqueness_dots='x_ud.json', validator='x_val.json',
+        method_manifest='x_man.json'))
+    return tmp_path
+
+
+def test_candidate_cleared_passes(cand_root):
+    assert policy.evaluate(cand_root)['download_enabled']
+
+
+def test_candidate_none_is_negative(cand_root):
+    put(cand_root, 'current_candidate.json', dict(hypothesis=None))
+    r = policy.evaluate(cand_root)
+    assert r['verdict'] == 'negative' and not r['download_enabled']
+
+
+@pytest.mark.parametrize('change', ['source', 'dots_unbound', 'gate', 'canary', 'surface_unbound', 'artifact'])
+def test_candidate_blockers(cand_root, change):
+    if change == 'source':
+        (cand_root / 'm.py').write_text('# edited after the gate ran')
+    elif change == 'dots_unbound':
+        put(cand_root, 'x_ud.json', dict(stop_required=False, corpus=dict(complete_accessible_scan=True),
+                                         candidate=dict(file_sha256='other')))
+    elif change == 'gate':
+        put(cand_root, 'x_gate.json', dict(prompt_gate_passed=True, current_best_beaten=False, canary_ok=True))
+    elif change == 'canary':
+        put(cand_root, 'x_gate.json', dict(prompt_gate_passed=True, current_best_beaten=True, canary_ok=False))
+    elif change == 'surface_unbound':
+        put(cand_root, 'x_us.json', dict(stop_required=False, corpus=dict(complete_accessible_scan=True),
+                                         candidate=dict(decoded_sha256='other')))
+    else:
+        (cand_root / 'sub.tif').write_bytes(b'swapped')
+    assert not policy.evaluate(cand_root)['download_enabled']

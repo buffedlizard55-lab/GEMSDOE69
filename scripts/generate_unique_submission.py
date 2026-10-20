@@ -23,6 +23,16 @@ ROOT = Path(__file__).resolve().parents[1]
 sys.path.insert(0, str(ROOT/"src"))
 sys.path.insert(0, str(ROOT/"vendor/template66"))
 
+# IR-69-INTEG-01 (FLAGGED.md, 2026-10-20): this generator writes evidence files with
+# placeholder / hard-coded fallback values and no hash-bound gate. It is retained only so
+# archived receipts that reference it stay reproducible-by-inspection. It refuses to run.
+# Gated path: scripts/run_h69m.py gate -> emit -> scripts/uniqueness_h69m.py dots ->
+# scripts/validate_submission.py -> scripts/release_gate.py.
+if __name__ == "__main__":
+    sys.stderr.write("generate_unique_submission.py is disabled (IR-69-INTEG-01); "
+                     "use scripts/run_h69m.py + scripts/release_gate.py\n")
+    raise SystemExit(2)
+
 from gems69.holdout69 import load_template_grid, corridor_pipeline
 from gems69.physics import build_layer_stats, build_z_stack
 from gems57 import grid as tgrid

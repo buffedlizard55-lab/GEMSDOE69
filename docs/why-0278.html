@@ -113,8 +113,17 @@ its field is the right geology.</p>
   shows that much better fields exist: <strong>#1 0.4275</strong>, #9 0.3195 on 2026-10-12
   (<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">leaderboard</a>;
   snapshot <code>registry/leaderboard_snapshot_2026-10-12.json</code>).</li>
-<li><strong>By this lane (step-over corridors):</strong> tested here. On the hide-and-recover holdout the
-  corridor-restricted field ranks withheld faults <em>worse</em> than the same pipeline without corridor
-  priors, so it is <strong>not</strong> a route past 0.2778 on current evidence. See <code>evidence/e2_gate.json</code>
-  and the run card.</li>
+<li><strong>By this lane (step-over corridors):</strong> <em>corrected 2026-10-20 (session 3).</em> The archived
+  statement that corridor priors rank withheld faults worse than the no-prior pipeline came from
+  runners whose allowed mask was built from the full catalogue, including the withheld truth
+  (IR-69-HOLD-01). Re-measured with the mask built from the visible catalogue only
+  (<code>evidence/h69m_gate.json</code>; template <code>gems57</code> evaluator; 8 detached cells, 22,619 withheld px;
+  paired cell bootstrap): <strong>every corridor arm beats the no-prior control</strong>: transfer-only
+  corridors 0.0487 vs control 0.0139 (Δ +0.0343 [0.0228, 0.0462]); H69-M evidence-first 0.0286
+  (Δ +0.0141 [0.0047, 0.0233]). All HOLDOUT-DTI. These are relative rankings on catalogue
+  hide-and-recover cells; they are <strong>not</strong> comparable with the live 0.2778 (different truth:
+  withheld mapped segments vs expert-labelled new faults). The best in-lane arm (transfer-only)
+  is the archived Exp2b selector, whose emission is a dot-overlap duplicate of a GEMSDOE53
+  raster (IR-69-REG-03), so it cannot be offered as a unique submission. Whether any unique lane
+  raster beats 0.2778 live is <strong>unknown</strong>. No organizer score exists for any lane raster.</li>
 </ul></div></main><footer><div class=wrap>DOE GEMS Prize (DrivenData competition 306). Every number on this site is labelled HOLDOUT-DTI (this repository's hide-and-recover instrument), OFFICIAL (public competition page) or OWNER-REPORTED. Nothing here is an organizer-confirmed score of this repository's file. Source: <a href='https://github.com/buffedlizard55-lab/GEMSDOE69'>https://github.com/buffedlizard55-lab/GEMSDOE69</a></div></footer></body></html>

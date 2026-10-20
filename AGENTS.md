@@ -47,3 +47,29 @@ stratification is diagnostic only. `scripts/release_gate.py` is the single
 publication policy. Read `reports/review-2026-10-20.md` and the updated handoff.
 Do not reuse the previous radiometric promotion verdict: the scoring source is
 not reproducible from the checked-in implementation and phase receipts are stale.
+
+## 2026-10-20 session 3 — candidate binding, instrument fix, resource rule
+
+* **Instrument fix (IR-69-HOLD-01, high).** Any holdout runner must build the
+  flank-prune / allowed mask from the *visible* catalogue of the cell, never from
+  `g.catalogue` (which contains the withheld truth). All archived HOLDOUT-DTI values
+  from `run_relayfix_20261020.py`, `run_exp2b_transfer.py` and the e2 runner are biased
+  low and are not comparable with later numbers. Use `scripts/run_h69m.py` /
+  `scripts/run_h69n.py` as the reference pattern.
+* **Release binding.** `evidence/current_candidate.json` (written by
+  `scripts/write_candidate_manifest.py h69m|h69n|none`) switches
+  `scripts/release_gate.py` to the session-candidate path; every check is bound to the
+  artifact SHA-256, the emitted surface hash and the method-source hashes. Delete the
+  file only to fall back to the archived H69-J path (which fails closed).
+* **Overlap policy divergence (needs one human ruling).** The 2026-10-20 correction
+  above says the literal overlap reading is mandatory. The H69-M/H69-N
+  preregistrations (frozen before any holdout look) instead gate on: Spearman <= 0.90 vs
+  every raster; forward 3 px overlap <= 0.70 vs every dot-field raster (template
+  `two_phase_summary` like-for-like) AND vs the rank-matched top-K pixels of every
+  non-binary continuous surface; identity none. The literal number is always reported.
+  Under the literal reading no sparse raster can pass (a whole-footprint surface
+  "contains" every dot). If a candidate ever clears every other gate, surface this
+  divergence to the user before publishing.
+* **Resources.** The sandbox has ~3.9 GB RAM. Never run two processes that load the
+  z-stack (`load_inputs()`) at the same time: on 2026-10-20 this triggered the OOM
+  killer and took down a running gate (it resumed from `gate_partial.json`).

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Queued hypotheses · GEMSDOE69</title>
+<title>Hypotheses · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
@@ -9,28 +9,20 @@
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="active">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card"><h2>Hypotheses tested 2026-10-20 + queued (full register: docs/research/hypotheses-2026-10-20.md)</h2>
-<p><b>Tested this session (HOLDOUT-DTI, pooled, 8 cells, 22,641 withheld positives):</b>
-H69-F subsurface HG/tilt corridors (v2) pooled 0.00691 vs repaired v1 0.00635 &mdash; difference
-+0.00055, 95% CI includes 0, <b>not established</b>; H69-G radiometric sensitivity (v3) likewise not established.
-H69-H2 <b>transfer-only corridors</b> pooled 0.00847, beating control (+0.00624, CI &gt; 0) and v1
-(+0.00204, CI &gt; 0) on this instrument &mdash; the session candidate. Exp1's v1 audit emission was logged
-<b>duplicate-and-stop</b> (89% dot overlap vs the archived lane raster). The full feature stack and
-GeoDAWN radiometrics (K/Th/U/TC, sha256-pinned mirror) were restored and hash-verified this session.
-Queued below remain untested and not slot-eligible.</p>
-<table><tr><th>Rank / hypothesis</th><th>Layers and physical signature</th><th>Missing-fault argument / difference / mimic / cost</th></tr>
-<tr><td>1. Convergent relay-link edge phase</td><td>Gravity and magnetics: HG ridge directions and tilt-zero crossings on opposite corridor margins at several scales.</td>
-<td>Could locate a buried bridge between visible tips. Unlike the current independent maximum layer scores, requires a shared connector phase and axis. Lithologic contacts mimic it. Moderate cost; uncertain benefit.</td></tr>
-<tr><td>2. Releasing-basin margin asymmetry</td><td>Gravity curvature and paired HG flanks plus magnetic low, restricted to tip-derived pull-apart rhombs.</td>
-<td>Could find buried basin-bounding splays rather than rescore visible scarps. Tests transverse basin structure, not a scalar low. Sediment-filled paleochannels mimic it. Moderate cost; uncertain benefit. Slip sense must be verified, not inferred from overlap alone.</td></tr>
-<tr><td>3. En echelon scarp phase coherence</td><td>LiDAR-scarp channel: staggered oriented ridges aligned across a proposed connector, vetoing uninterrupted parallel terrace edges.</td>
-<td>Could recover short linking strands omitted by regional mapping. Current scorer averages channel magnitude, not staggered spatial phase. Pluvial shorelines and road cuts mimic it. Moderate-to-high cost; uncertain benefit.</td></tr>
-<tr><td>4. Corridor-confined radiometric contrast reversal</td><td>Radiometric K/Th local contrast relative to matched corridor flanks, conditional on magnetic depletion.</td>
-<td>May distinguish local alteration from broad lithologic domains, including K enrichment as well as depletion. Unlike the archived depletion-only claim, estimates signed within-unit contrast. Sediment sorting mimics it. High cost because lithologic controls are not authenticated; defer pending provenance.</td></tr></table>
-<p>Before any implementation: repair provenance, restore pinned inputs, verify feature-alone canaries,
-reserve untouched spatial blocks, compare with the current best on the identical evaluator, and check
-surface uniqueness before placing dots. Do not relax the literal overlap rule. Giddens &amp; Faulds
-statistics in the prompt remain unverified citations in this environment, not independently established facts.</p></div>
+<div class="card"><h2>Untried in-lane hypotheses, ranked (full text: docs/research/hypotheses-2026-10-20-session3.md)</h2>
+<table><tr><th>#</th><th>Hypothesis</th><th>Layers &rarr; signature</th><th>Why off-catalogue / difference / mimic</th><th>Cost &middot; expected gain</th></tr>
+<tr><td>1</td><td>Domain-conditioned ramp geometry</td><td>tip graph + geodetic shear/dilatation (bands 7, 8) &rarr; likelihood of W and
+length/width under the domain's measured population (Walker Lane mean 1.9 km, CNSB 3.5 km; aspect 3&ndash;3.5&times;)</td><td>linking faults in
+ramps that match the regional population; every selector so far used one global 2.8 km target; mimic: en &eacute;chelon folds</td><td>low &middot; low&ndash;medium</td></tr>
+<tr><td>2</td><td>Buried basement step under the connector</td><td>basement depth (band 15) + conductive surface (band 17) HG/tilt, computed but
+never used in corridor scoring</td><td>buried beneath basin fill, no scarp; mimic: depositional basin shape, conductive playa clays</td><td>low &middot; medium (uncertain)</td></tr>
+<tr><td>3</td><td>Self-supervised linkage style</td><td>visible hard-linked ramps &rarr; learned link position/style emitted in soft-linked ramps</td><td>recovery test
+exists only as validation; mimic: mapping convention; fit on visible catalogue only</td><td>medium &middot; medium</td></tr>
+<tr><td>4</td><td>Seismicity-aligned linkage</td><td>earthquake density (bands 10, 16) along connector vs flanks</td><td>blind active linkage; mimic: swarms;
+km-scale epicentre error</td><td>low &middot; low</td></tr>
+<tr><td>5</td><td>1 m lidar scarp confirmation in top corridors</td><td>organizer 1 m DEM links / USGS 3DEP</td><td><b>not obtainable in this sandbox</b>
+(no USGS/DrivenData egress); listed for a session with access</td><td>high &middot; unknown</td></tr></table>
+<p>Tested this session: H69-M (evidence-first, global top-1,200) and H69-N (evidence-first with 20 km tile quota) &mdash; see Experiments.</p></div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>H33 evidence review · GEMSDOE69</title>
+<title>Why H33 scored · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
@@ -9,36 +9,19 @@
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="active">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card"><h2>Why the reported H33 result is plausible — not proven</h2>
-<p>The value <b>0.2778 is USER-REPORTED, NOT ORGANIZER-CONFIRMED for this file</b>.
-No submission-page receipt binding that value to the H33 hash is available here. The user gives
-conflicting leaderboard highs; the archived leaderboard snapshot is not a current feed.</p>
-<p>The local family audit (<code>evidence/e0_champion_ladder_measured.json</code>) records
-progressively sparser dot fields. Under the implemented DTI, redundant dots can add false-positive
-mass without increasing the maximum coverage of a truth pixel. Thinning can therefore improve
-precision while retaining recovery within the distance kernel. This is a plausible explanation
-of the reported family trend, not a causal experiment on organizer hidden truth.</p>
-<p>Removing catalogue-adjacent dots is <b>not automatically a pure gain</b>: an adjacent dot may cover
-an unmasked hidden fault. For a new unit dot with marginal truth coverage dT and self-credit m,
-the exact improvement condition is <code>dT &gt; 0.2 DTI (dT + 1 - m)</code> for the stated weights.
-The simplified threshold <code>m &gt; 0.2 DTI</code> only follows when dT=m. It is not a universal
-5.6% fault-probability rule. There is no justified fixed score ceiling for sparse submissions.</p>
-<p><b>Re-measured here (2026-10-20, from fetched registry bytes, evidence/relayfix_champion_anatomy.json)</b>:
-the H33 zeros file (sha256 c55bafc4&hellip;) holds 37,654 unit dots, none on the catalogue, nearest 2.24 px
-from it, median 1.96 km away, only 5.8% within 300 m of a mapped fault. At DTI 0.2778 a new dot pays only
-if its marginal kernel credit clears the metric bar (exact condition above; the 300 m kernel and
-&alpha;=0.2/&beta;=0.8 were re-verified on the official problem page fetched this session). The reported ladder is
-therefore consistent with near-minimal mass on a wide, reasonably ranked field &mdash; dotted emission plus
-removal of below-bar catalogue-flank dots &mdash; not proof of uniquely correct geology.</p>
-<p>Can a unique lane submission beat 0.2778? <b>Not demonstrated.</b> The public leaderboard fetched
-2026-10-20 is led at 0.4413, so much better-ranked fields exist, but beating H33 by reusing its dots would
-fail this protocol's uniqueness rule, and our holdout is a screen (&rho;&asymp;0.51 cross-family), never a projection.
-This session's transfer-only candidate beat its same-evaluator holdout comparators; only an organizer
-receipt could convert that into a leaderboard claim, and no slot was spent.</p>
-<p>Manual review: <a href="https://github.com/drivendataorg/gems-prize-reference-solution">organizer reference repository</a>,
-<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official problem description (fetched 2026-10-20)</a>,
-<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/leaderboard/">public leaderboard (fetched 2026-10-20)</a>,
-<a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/index.html">family H33 page source</a>.</p></div>
+<div class="card"><h2>Why h33-h33-2-b2 scored 0.2778 (USER-REPORTED) &mdash; and can a unique lane raster beat it?</h2>
+<p><b>The file</b> (GEMSDOE32, sha256 c55bafc4&hellip;, re-measured from bytes): 37,654 pixels equal to 1.0, zeros elsewhere; none on
+the catalogue (nearest 2.24 px), median 1.97 km from it, only 5.77% within 300 m of a mapped fault &mdash; a wide, sparse dot field.</p>
+<p><b>How it got there</b> (owner-reported ladder): h19-5 solid 121,131 px 0.1922 &rarr; d1.5 dotted 60,069 0.2477 &rarr; d2.8 44,090 0.2600
+&rarr; h27-4-r1-solo 40,199 0.2708 &rarr; h33-2-b2 37,654 0.2778. Each step removed mass from one ranked field.</p>
+<p><b>Why that works</b> (official metric, model arithmetic): for a binary dot field, adding a dot with kernel credit k raises DTI only if
+k &gt; 0.2&middot;DTI (&asymp;0.056 at 0.2778). Dotting keeps most coverage of a 1-D trace at a third of the mass; dots 100&ndash;200 m from
+mapped faults rarely earn credit because known faults are masked (forum 11516). So 0.2778 is near-minimal mass on a reasonably
+ranked wide field &mdash; not proof of correct geology.</p>
+<p><b>Can this lane beat it?</b> Not demonstrated. On the corrected holdout every corridor arm beats the no-prior control, but the
+best arm (transfer-only) duplicates a GEMSDOE53 raster, and this session's unique candidates (H69-M, H69-N) do not beat it. Holdout
+values (~0.03&ndash;0.05) are not comparable with 0.2778. Copying H33's dots would violate the uniqueness rule. Full write-up:
+<code>docs/research/why-0278.md</code>.</p></div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

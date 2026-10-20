@@ -6,12 +6,34 @@ import json
 
 ROOT = Path(__file__).resolve().parents[1]
 
+
+def latest_section():
+    p = ROOT / 'evidence' / 'session_experiments.json'
+    if not p.exists():
+        return '## Latest\n\nNo session experiment summary found (evidence/session_experiments.json).\n'
+    doc = json.loads(p.read_text())
+    lines = ['## Latest — 2026-10-20 session 3 (preregistered experiments; HOLDOUT-DTI, not organizer scores)', '',
+             '| Experiment | Detached pooled DTI (candidate / control / transfer_ref) | Δ vs control [95% CI] | Δ vs transfer_ref [95% CI] | Verdict |',
+             '|---|---|---|---|---|']
+    for e in doc['experiments']:
+        r = e['results']['primary_detached']; pd = r['pooled_dti']
+        c = pd[e['candidate_arm']]
+        dc, dt = r['candidate_minus_control'], r['candidate_minus_transfer_ref']
+        f = lambda d: f"{d['mean']:+.4f} [{d['ci95'][0]:+.4f}, {d['ci95'][1]:+.4f}]"
+        lines.append(f"| {e['id']} | {c:.4f} / {pd['control_noprior']:.4f} / {pd['transfer_ref']:.4f} | {f(dc)} | {f(dt)} | **{e['verdict']}** |")
+    lines += ['', 'Evaluator: vendor/template66 `gems57.holdout` (α 0.2, β 0.8, 300 m triangular), seeds 20/21, 8 detached cells, '
+              f"{doc['experiments'][0]['results']['primary_detached']['withheld_positive_px'] if doc['experiments'] else 0} withheld positive px; paired cell bootstrap (2,000). "
+              'Instrument fix IR-69-HOLD-01: archived lane numbers are not comparable. Details: `reports/session3-2026-10-20.md`.', '']
+    return '\n'.join(lines)
+
+
 def main():
     decision = evaluate(ROOT)
     status = 'OK TO DOWNLOAD — HOLDOUT-SCREENED CANDIDATE (selector authorization still required)' if decision['download_enabled'] else 'NOT OK TO SUBMIT — DO NOT SUBMIT'
     reasons = '\n'.join('- ' + r for r in decision['reasons']) if decision['reasons'] else 'All gates passed: holdout improvement, registry uniqueness (dot-field like-for-like), validator, method manifest, and leakage canaries.'
     try:
-        receipt = json.loads((ROOT/'evidence'/'e3_receipt.json').read_text())
+        cand = decision.get('candidate') or {}
+        receipt = json.loads((ROOT/'evidence'/(cand.get('receipt') or 'e3_receipt.json')).read_text())
         zeros_path = receipt.get('raster',{}).get('zeros',{}).get('path','')
         zeros_name = zeros_path.split('/')[-1] if zeros_path else 'no artifact'
         sha = receipt.get('raster',{}).get('zeros',{}).get('sha256','')
@@ -22,6 +44,7 @@ def main():
             archive_note = f"The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.\nA valid file is not necessarily a unique or scientifically validated submission.\n{reasons}\n"
     except Exception as e:
         archive_note = f"The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.\nA valid file is not necessarily a unique or scientifically validated submission.\n{reasons}\n"
+    latest = latest_section()
     head = f'''# GEMSDOE69 — relay-ramp and pull-apart corridor generator
 
 ## {status}
@@ -31,10 +54,7 @@ def main():
 Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
 
 {archive_note}
-## Latest — 2026-10-20 joint-corridor candidate
-
-Hypothesis H69-J (H1): convergent multi-scale HG+tilt edge phase across relay connectors — joint grav+mag HG/tilt coincidence (min(E_grav,E_mag) 0.35 weight) targets buried relay linkage separating basement blocks. Corridor arm 0.0059±0.0012 vs control 0.0021±0.0006 (paired Δ+0.0038±0.0015, 8 folds 22641 withheld px, gate PASSED). Registry worst |rho| 0.162 <0.90, dot-field overlap 0.61 <0.70 (literal 1.0 from universal continuous_surface is non-discriminating per DENSE_SUPPORT_FRACTION=0.20; see evidence/e3_uniqueness.json diagnostic). Leakage canary worst AUC 0.69 <0.90. Validator PASS for both variants (float32 EPSG:32611 3730×3292 [0,1]). Promotion to selector step required; no organizer score claimed.
-
+{latest}
 ## Reproduce the publication audit (no data downloads needed)
 
 ```sh
@@ -48,11 +68,11 @@ For pixel validation and tests:
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
+GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/<candidate>-zeros.tif
 .venv/bin/pytest -q
 ```
 
-Full feature stack restored via `scripts/fetch_data.py` (pinned mirrors); registry 751 blobs via `scripts/fetch_registry.py`. GPU not needed; format validator cannot prove geothermal discovery.
+Full feature stack restored via `scripts/fetch_data.py` (pinned mirrors); registry index v2 (942 grid rasters) via `scripts/refresh_registry_v2.py`. GPU not needed; format validator cannot prove geothermal discovery.
 
 ## Standing project brief — read at the beginning of every session
 
