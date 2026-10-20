@@ -9,7 +9,7 @@
 <nav><div class="wrap"><a href="docs/index.html" class="active">Home</a><a href="docs/executive-summary.html" class="">Executive Summary</a><a href="docs/why-h33-scored.html" class="">Why H33 Scored</a><a href="docs/hypotheses.html" class="">Hypotheses</a><a href="docs/method.html" class="">Method</a><a href="docs/results.html" class="">Experiments</a><a href="docs/sources.html" class="">Sources</a><a href="docs/irregularities.html" class="">Irregularities</a><a href="docs/run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="banner bad"><b>&#10060; NOT OK TO SUBMIT &mdash; DO NOT SUBMIT.</b> registry lane-drift gate not met (84.1% of dots within 3 px of one registry raster; limit 70%). No submission file is offered for a scored slot. The negative result is logged in <code>evidence/</code>.</div>
+<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. H69-E (2026-10-20) is an additional logged negative: the holdout beat the no-prior control, but 84.1% of its dots fall within 3 px of one registry raster (protocol rule 1). The earlier radiometric TIFF is also archived and not offered. No competition slot was used.</p><ul><li>No explicit same-evaluator evidence of beating the current holdout best.</li><li>Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.</li><li>Registry scan is incomplete or contains errors.</li><li>Holdout comparison is missing or not bound to the current artifact hash.</li><li>Reproducible method source manifest is missing, stale, or not artifact-bound.</li><li>Artifact-bound feature-alone leakage canaries are missing or flagged.</li><li>Hash-bound validator receipt is missing or failed.</li><li>surface uniqueness phase is missing or not bound to the current artifact.</li><li>surface uniqueness phase failed or is incomplete.</li><li>dots uniqueness phase is missing or not bound to the current artifact.</li><li>dots uniqueness phase failed or is incomplete.</li></ul></div>
 
 <div class="card" id="how-to-submit">
 <h2>No file is offered for a scored slot</h2>
@@ -17,10 +17,10 @@
 </div>
 
 <div class="card">
-<h2>Current evidence at a glance</h2>
+<h2>Archived evidence at a glance — not independently reproduced</h2>
 <table>
 <tr><th>Measurement</th><th>Value</th><th>Evidence class</th></tr>
-<tr><td>Corridor arm pooled DTI</td><td>0.0064 &plusmn; 0.0017</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, 8 cells, 22641 withheld positives)</td></tr>
+<tr><td>Corridor arm archived mean DTI</td><td>0.0064 &plusmn; 0.0017</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, 8 cells, 22641 withheld positives)</td></tr>
 <tr><td>No-prior control arm</td><td>0.0025 &plusmn; 0.0007</td><td>HOLDOUT-DTI, same folds</td></tr>
 <tr><td>Paired &Delta; (corridor &minus; control)</td><td>+0.0038 &plusmn; 0.0014</td><td>HOLDOUT-DTI</td></tr>
 <tr><td>Registry scan: worst surface |Spearman| / dot-like dot overlap</td>

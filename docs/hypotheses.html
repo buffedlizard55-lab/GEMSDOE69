@@ -10,25 +10,34 @@
 <main class="wrap">
 
 <div class="card">
-<h2>Five candidate hypotheses for future sessions (ranked)</h2>
-<p>Ranked before the 2026-10-20 holdout look. H69-E is the idea under test. Full write-up:
-<code>docs/research/hypotheses_2026-10-20.md</code>. Expected gains are priors, not measurements.</p>
+<h2>H69-E measured 2026-10-20 — logged negative, not offered</h2>
+<p>Ranked before the holdout look in <code>docs/research/hypotheses_2026-10-20.md</code>.
+H69-E was the experiment. HOLDOUT-DTI beat the no-prior control. Protocol rule 1 then stopped it:
+84.1% of dots within 3 px of one registry raster. Do not submit. Expected gains below were priors, not scores.</p>
 <table>
-<tr><th>#</th><th>Hypothesis</th><th>Layers</th><th>Signature (transform)</th><th>Why it catches catalogue-missing faults</th><th>Novelty vs family</th><th>Cost / data</th></tr>
-<tr><td>1 (this session)</td><td><b>H69-E width-stratified corridors + straight steps + K/ThK</b></td><td>cond_surf, depth_to_base_surf, GeoDAWN K and Th/K, plus grav/mag/lidar</td><td>structure-tensor coherence &times; gradient; K low vs 2 km background; high Th/K, inside width-stratified tip-graph corridors</td><td>Linking faults under alluvium leave a straight conductivity or basement step and an alteration halo, and they are not all 2.8 km wide</td><td>The 2026-10-12 cap used only W=2.8 km and had no straightness or radiometric channel. Not a GEMSDOE46 scarp-fusion blend.</td><td>Running; data already pinned (DOI 10.5066/P93LGLVQ)</td></tr>
-<tr><td>2</td><td><b>H69-D radiometric K/Th depletion halos inside corridors</b></td><td>geodawn_rad_u8 (K, Th, TC)</td><td>robust-low z of K and Th within corridor masks (hydrothermal leaching/deposition contrast)</td><td>Alteration halos mark permeable damage zones even where no scarp or edge survives; radiometrics see chemistry, not geometry</td><td>Family used radiometrics only in scarp-fusion blends (GEMSDOE46); never as a corridor-interior primary channel</td><td>Data already hash-pinned here; cheap</td></tr>
-<tr><td>3</td><td><b>H69-B knickpoint-&chi; chains at step-over mouths</b></td><td>det_elev, det_elev_slope</td><td>&chi;-integral anomalies of bedrock streams crossing corridor axes; collinearity vote of knickpoints</td><td>Blind faults with no surface scarp still knick stream profiles; a chain of collinear knickpoints across drainages is structure a scarp map cannot see</td><td>All family DEM channels are local (curvature/ridge); nothing integrates along-stream profiles</td><td>CPU-only; no new data</td></tr>
-<tr><td>4</td><td><b>H69-C straight conductivity/basement steps under cover</b></td><td>cond_surf, depth_to_base_surf</td><td>gradient magnitude &times; 3&times;3 directional coherence of gradient orientation (straight boundary test)</td><td>MT conductivity and basement depth image the subsurface: a straight conductivity step locates a fault under alluvium where surface mapping has nothing to record</td><td>These bands enter family stacks only as scalars/plain gradients</td><td>CPU-only; no new data</td></tr>
-<tr><td>5</td><td><b>H69-E instrumental seismicity lineaments + nodal planes</b></td><td>would replace ieq/deq bands with the raw event catalogue</td><td>epicentre lineament density + focal-mechanism nodal-plane strikes</td><td>Active blind, low-slip faults light up seismically while leaving no scarp</td><td>Family uses pre-binned density bands only</td><td><b>DATA-BLOCKED in-sandbox</b>: needs USGS ComCat/ANSS catalogue (free, official; not reachable from this sandbox)</td></tr>
+<tr><th>#</th><th>Hypothesis</th><th>Layers</th><th>Signature</th><th>Status</th></tr>
+<tr><td>1</td><td><b>H69-E width-stratified corridors + straight steps + K/ThK</b></td><td>cond_surf, basement depth, GeoDAWN K and Th/K, grav/mag/lidar</td><td>structure-tensor coherence times gradient; K low vs 2 km background; high Th/K, inside width-stratified tip-graph corridors</td><td>Measured. Negative. Not slot-eligible.</td></tr>
+<tr><td>2</td><td>H69-B knickpoint-chi chains at step-over mouths</td><td>det_elev, det_elev_slope</td><td>chi-integral anomalies of streams crossing corridor axes</td><td>Not tested. Not slot-eligible.</td></tr>
+<tr><td>3</td><td>H69-H instrumental seismicity lineaments</td><td>would replace binned ieq/deq with the raw catalogue</td><td>epicentre lineament density plus nodal-plane strikes</td><td>Data-blocked (USGS ComCat not reachable here). Not slot-eligible.</td></tr>
 </table>
 </div>
 <div class="card">
-<h2>Leakage canaries (this session)</h2>
-<p class="small">Protocol rule 4: any single-feature AUC &gt; 0.90 on the holdout is leakage until proven
-otherwise. Physics layers are catalogue-independent by construction; the corridor-propensity surface is
-the catalogue-derived feature under test.</p>
+<h2>Leakage canaries (H69-E)</h2>
+<p class="small">Protocol rule 4: a single-feature AUC above 0.90 on the holdout is leakage until proven otherwise.</p>
 <table><tr><th>Feature</th><th>AUC (withheld truth vs active negatives)</th></tr><tr><td>grav_hg_s1</td><td>0.5305418979556492</td></tr><tr><td>mag_hg_s1</td><td>0.5376840831238601</td></tr><tr><td>grav_hg_s2</td><td>0.5305355347954177</td></tr><tr><td>mag_hg_s2</td><td>0.5389047017061042</td></tr><tr><td>grav_hg_s4</td><td>0.529309748848189</td></tr><tr><td>mag_hg_s4</td><td>0.5378066802300789</td></tr><tr><td>grav_tilt_s2</td><td>0.5062428593765597</td></tr><tr><td>mag_tilt_s2</td><td>0.5148141127382865</td></tr><tr><td>grav_hg_prov</td><td>0.49734889203039406</td></tr><tr><td>grav_vg_prov</td><td>0.5224056920392296</td></tr><tr><td>geod_2ndinv</td><td>0.5530383954762326</td></tr><tr><td>mag_hg_prov</td><td>0.5364947113005831</td></tr><tr><td>mag_vg_prov</td><td>0.48237893134829474</td></tr><tr><td>tc_prov</td><td>0.43950500574306417</td></tr><tr><td>mag_low_tmi</td><td>0.4963676795811981</td></tr><tr><td>mag_low_rtp</td><td>0.48283129749072273</td></tr><tr><td>lidar_scarp</td><td>0.572205257428365</td></tr><tr><td>cond_straight</td><td>0.5145157048506803</td></tr><tr><td>base_straight</td><td>0.5428712113447606</td></tr><tr><td>rad_k_depl</td><td>0.5821535536313837</td></tr><tr><td>rad_thk</td><td>0.4728964609471638</td></tr><tr><td>corridor_propensity</td><td>0.6792975452818519</td></tr></table>
 </div>
+<div class="card"><h2>Still queued — not authorized by the H69-E stop</h2>
+<p>Qualitative ranking only. No numerical DTI improvement is predicted. These joint signatures were not the H69-E scorer. All remain untested and not slot-eligible.</p>
+<table><tr><th>Rank / hypothesis</th><th>Layers and physical signature</th><th>Missing-fault argument / difference / mimic / cost</th></tr>
+<tr><td>1. Convergent relay-link edge phase</td><td>Gravity and magnetics: HG ridge directions and tilt-zero crossings on opposite corridor margins at several scales.</td>
+<td>Could locate a buried bridge between visible tips. Unlike independent maximum layer scores, requires a shared connector phase. Lithologic contacts mimic it. Moderate cost; uncertain benefit.</td></tr>
+<tr><td>2. Releasing-basin margin asymmetry</td><td>Gravity curvature and paired HG flanks plus magnetic low, restricted to tip-derived pull-apart rhombs.</td>
+<td>Could find buried basin-bounding splays. Sediment-filled paleochannels mimic it. Slip sense must be verified, not inferred from overlap alone.</td></tr>
+<tr><td>3. En echelon scarp phase coherence</td><td>LiDAR-scarp channel: staggered oriented ridges aligned across a proposed connector.</td>
+<td>Could recover short linking strands. Pluvial shorelines and road cuts mimic it. Moderate-to-high cost; uncertain benefit.</td></tr>
+<tr><td>4. Corridor-confined radiometric contrast reversal</td><td>Radiometric K/Th local contrast relative to matched corridor flanks, conditional on magnetic depletion.</td>
+<td>Signed within-unit contrast, not depletion-only. Sediment sorting mimics it. Defer pending provenance.</td></tr></table>
+<p>Do not relax the literal overlap rule. A new experiment must place dots off the dense-trace neighbourhood that stopped H69-E, and must pass the hash-bound release gate before any download.</p></div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

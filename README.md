@@ -1,13 +1,67 @@
-# GEMSDOE69 — STANDING PROMPT (READ FIRST AT THE START OF EVERY SESSION)
+# GEMSDOE69 — relay-ramp and pull-apart corridor generator
 
-Session of 2026-10-20. Read [PROMPT.md](PROMPT.md) before changing code. The assigned lane is still the relay-ramp and pull-apart corridor generator. A download is offered only if the holdout gate, the uniqueness scan, and `validate_submission.py` all pass. Otherwise the site must say **NOT OK TO SUBMIT** and the negative result is the deliverable.
+## NOT OK TO SUBMIT — DO NOT SUBMIT
 
-User-cited competition high this session: **0.3195** (USER-REPORTED-NOT-ORGANIZER-CONFIRMED). The 2026-10-12 public-leaderboard snapshot in this repo shows 0.4275 at rank 1 and 0.3195 at rank 9. Neither number is a score this lane has earned. Core values: Maximize P(Win); Own the Outcome.
+**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json).
 
-# GEMSDOE69 — STANDING PROMPT (session of 2026-10-12, still in force)
+Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
 
-# Standing prompt (verbatim, session of 2026-10-12) — read at the start of every session
+The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
+A valid file is not necessarily a unique or scientifically validated submission. The literal overlap gate cannot be replaced by a stratified diagnostic.
 
+- No explicit same-evaluator evidence of beating the current holdout best.
+- Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.
+- Registry scan is incomplete or contains errors.
+- Holdout comparison is missing or not bound to the current artifact hash.
+- Reproducible method source manifest is missing, stale, or not artifact-bound.
+- Artifact-bound feature-alone leakage canaries are missing or flagged.
+- Hash-bound validator receipt is missing or failed.
+- surface uniqueness phase is missing or not bound to the current artifact.
+- surface uniqueness phase failed or is incomplete.
+- dots uniqueness phase is missing or not bound to the current artifact.
+- dots uniqueness phase failed or is incomplete.
+
+## Latest review — 2026-10-20
+
+**Read the canonical project brief in `PROMPT.md` at the beginning of every session.** It is appended to this README when the README is rebuilt.
+
+Read the [H69-E three-pass review](reports/review-passes-2026-10-20.md), [current-session audit](reports/review-2026-10-20-current-session.md), [prior repository audit](reports/review-2026-10-20.md), [follow-up audit](reports/followup-2026-10-20.md), and [checkout review](reports/checkout-audit-2026-10-20.md) before continuing. After the main merge, `pytest` reported 95 passed and 1 expected failure. That is not clearance to submit.
+
+**Status remains NOT OK TO SUBMIT.** H69-E (2026-10-20) generated an additional TIFF. Its holdout beat the no-prior control, but 84.1% of dots fall within 3 px of one registry raster, so protocol rule 1 stops it. It is committed under `submissions/` for audit only and is not offered. The earlier radiometric TIFF remains an archived negative as well: its registry scan triggers the literal dot-overlap duplicate stop, and it does not have current-artifact-bound phase receipts. No download is offered. A passing file-format validator is not clearance to submit.
+
+## Reproduce the publication audit (no data downloads needed)
+
+```sh
+python scripts/release_gate.py
+python scripts/build_site69.py
+python scripts/build_readme.py
+```
+
+For pixel validation and tests:
+
+```sh
+python -m venv .venv
+.venv/bin/pip install -r requirements.txt pytest scikit-learn
+GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif
+.venv/bin/pytest -q
+```
+
+The full feature stack and registry corpus are not restored in this checkout. Existing fetch scripts use integrity-pinned owner mirrors, not organizer-authenticated sources.
+CPU validation works; GPU training is not required for this geometry lane. A format validator cannot prove geothermal discovery or hidden-fault accuracy.
+
+## Standing project brief — read at the beginning of every session
+
+The following is the retained project brief, not a verbatim transcript of every user message. The active request additionally requires strict duplicate-and-stop enforcement, three review passes, and a PR merged to main. Never infer authorization to submit to DrivenData.
+
+# Standing prompt — read at the start of every session
+
+Session of 2026-10-20 addendum (user instruction, not a score): the user cites **0.3195** as the current competition high and asks for a unique submission that could beat it. That figure is USER-REPORTED-NOT-ORGANIZER-CONFIRMED. The in-repo official public-leaderboard snapshot (`registry/leaderboard_snapshot_2026-10-12.json`, retrieved 2026-10-12 from the public leaderboard page) shows rank 1 at 0.4275 and 0.3195 at rank 9. drivendata.org is not reachable from this sandbox, so the live board was not re-fetched. Do not write either number as a projection of this lane.
+
+Core values to apply on every decision: Maximize P(Win); Own the Outcome.
+
+The lane paragraph below is unchanged and is the only method this session may implement.
+
+# Standing prompt (verbatim, session of 2026-10-12, still in force)
 > Review the repo.
 >
 > THE FOLLOWING IS THE HIGHEST URGENCY AND MUST BE FOLLOWED!
@@ -43,90 +97,14 @@ User-cited competition high this session: **0.3195** (USER-REPORTED-NOT-ORGANIZE
 >
 > Core values (Arena): Maximize P(Win) — weigh tradeoffs, assess risk, choose the path that maximizes the probability of winning. Own the Outcome — own results end to end, treat failure as a signal, stay accountable to the final outcome.
 
----
-## Repo summary (this file)
+## Active request refresh — 2026-10-20 follow-up
 
-Lane rules (from the standing prompt above): pair acceptance uses spacing W of 0.1&ndash;15 km and
-along-strike separation ≤3.5W (compact form of "≤ 3.5 W"); "same dip" is proxied by sub-parallel
-terminal strikes because the raster catalogue carries no dip polarity (disclosed limitation IR-69-DIP-01).
-
-# GEMSDOE69 — Relay-ramp & pull-apart corridor lane (DOE GEMS Prize, DrivenData #306)
-
-**Lane method:** propose hidden faults from **catalogue geometry** (tip graph of
-mapped fault polylines → relay-ramp / pull-apart corridors). For each
-same-dip, overlapping or underlapping tip pair with spacing W of 0.1–15 km and
-along-strike separation ≤3.5W, emit candidate corridors (an oblique connector
-plus en échelon strands); add pull-apart and transfer-zone corridors at
-dextral releasing steps and terminations. Score corridors by multi-scale
-horizontal-gradient and tilt evidence in gravity and magnetics (including
-magnetic lows), the 1 m lidar-scarp channel, and orientation consistency with
-WNW extension — then **calibrated greedy marginal-DTI dot placement** inside
-the top corridors. Standing prompt: [PROMPT.md](PROMPT.md) (read it at the
-start of every session).
-
-## Site
-
-GitHub Pages (this repo, `docs/`): **index → executive summary → submission
-download → why-h33-scored → hypotheses → method → experiments → sources →
-irregularities → run card**. The submission TIF and its OK/DO-NOT-SUBMIT
-banner are always at the very top of `docs/index.html`.
-
-## Quick start
-
-```bash
-python3 -m venv .venv && .venv/bin/pip install -r requirements.txt
-python3 scripts/fetch_data.py        # sha256-pinned family mirrors -> .cache/gems_data (git-ignored)
-python3 scripts/fetch_registry.py    # 751 prior-raster blobs -> .cache/registry (git-ignored)
-PYTHONPATH=vendor/template66:src .venv/bin/python scripts/run_lane69.py verify
-PYTHONPATH=vendor/template66:src .venv/bin/python scripts/run_lane69.py e1    # canaries + hard-link recovery
-PYTHONPATH=vendor/template66:src .venv/bin/python scripts/run_lane69.py e2    # holdout gate vs no-prior control
-PYTHONPATH=vendor/template66:src .venv/bin/python scripts/run_lane69.py e3    # final emission + submission write
-PYTHONPATH=vendor/template66:src .venv/bin/python scripts/run_lane69.py unique # registry lane-drift scan
-.venv/bin/python scripts/build_site69.py                                      # rebuild docs/
-```
-
-## Layout
-
-| path | contents |
-| --- | --- |
-| `vendor/template66/` | byte-pinned shared template (`TEMPLATE_SHA256.txt` verified); `gems57` = official DTI arithmetic, hide-and-recover holdout, greedy allocator, submission writer; `gems` = validator |
-| `src/gems69/` | lane code: `tips.py` (strands), `corridors.py` (tip graph, step-over geometry), `physics.py` (windowed HG/tilt evidence), `scoring.py`, `holdout69.py` |
-| `data/bridge/` | sha256-pinned grid files: `labels.tif`, `sample_submission.tif`, `existing_faults.tif` (see irregularity IR-69-DATA-01) |
-| `registry/` | `prior_rasters.json` (751-blob family census), `data_manifest_gemsdoe32.json` (mirror manifest) |
-| `evidence/` | every measurement, one JSON per step, evidence-class labelled |
-| `submissions/` | validated TIF + receipt (never promoted automatically) |
-| `docs/` | GitHub Pages site |
-| `tests/` | unit tests for the tip-graph arithmetic |
-
-## Evidence classes (protocol rule 3)
-
-* **HOLDOUT-DTI** — hide-and-recover pooled DTI (alpha 0.2, beta 0.8, 300 m
-  triangular kernel, evaluator `gems57` pooled hide v2 family). Always reported
-  with withheld-positive count and 95% CI. A screen, never a leaderboard
-  projection (cross-family Spearman vs live ≈ 0.51, p≈0.09; GEMSDOE32
-  instrument-calibration evidence).
-* **ORGANIZER-CONFIRMED** — only values copied from a DrivenData submission
-  receipt. None exist in this repo yet (no DrivenData auth in-sandbox).
-* **USER-REPORTED-NOT-ORGANIZER-CONFIRMED** — leaderboard values quoted in the
-  standing prompt (0.2778, 0.3774, 0.3195, …).
-
-## Limitations (carried from prior sessions, still true)
-
-1. **No DrivenData auth** → organizer bytes cannot be downloaded here; the
-   sha256-pinned family mirrors (themselves mirrored from earlier sessions'
-   downloads of the official files) are used and are NOT organizer-authenticated.
-2. **Sandbox network** is restricted to github.com / pypi.org — drivendata.org,
-   USGS, Dropbox and github.io pages are not reachable from the runner; all
-   external facts cited in docs were verified in earlier sessions or are quoted
-   from the standing prompt with their source named.
-3. `existing_faults.tif` is byte-identical to `labels.tif` in every family
-   mirror (IR-69-DATA-01). The public labels raster *is* the mapped catalogue;
-   the scored truth (≈12,691 px, receipt-derived estimate from GEMSDOE32
-   evidence) is unpublished.
-4. CPU-only box (2 cores / 3 GB RAM): the pipeline is windowed and memory-lean
-   by design; no GPU training is attempted in this lane.
-
-## Core values
-
-Maximize P(Win). Own the Outcome — end to end, failure is a signal, negative
-results are deliverables.
+Read the full standing brief above on every session. Continue the handoff before
+starting new experiments. The user again requests an autonomous three-pass
+review, a unique gated TIFF, an obvious download/submission status, ranked
+in-lane hypotheses, source-linked scientific reasoning, and a PR merged to main.
+The additional user-reported leaderboard high of 0.4413 is not organizer-confirmed;
+it conflicts with other highs in the prompt and must not be called current fact.
+Core values remain Maximize P(Win) and Own the Outcome. No leaderboard improvement,
+source verification, data access, or completed submission may be invented.
+The duplicate-and-stop rule remains binding even when it prevents a new TIFF.

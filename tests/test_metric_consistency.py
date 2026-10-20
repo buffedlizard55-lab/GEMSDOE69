@@ -27,8 +27,8 @@ def test_metrics_agree_on_synthetic():
     for (y, x) in dots:
         pred[y, x] = 1.0
 
-    tp_r, fp_r, fn_r = m_ref.tversky_terms(pred, gt)
-    dti_r = m_ref.dti_from_terms(tp_r, fp_r, fn_r)
+    tp_r, fp_r, fn_r, _ = m_ref.components(pred, gt)
+    dti_r = m_ref.dti_from_components(tp_r, fp_r, fn_r)
 
     # gems57 exact evaluator over the full domain (all cells active, nothing known)
     from gems57 import metric as _m
@@ -52,7 +52,7 @@ def test_marginal_bar_identity():
     pred[10, 12] = 1.0            # d = 200 m -> k = 1/3
     base = m_ref.dti(pred, gt)
     assert base > 0.0
-    cand = m_ref.marginal_credit_bar(base)
+    cand = m_ref.ALPHA * base
     assert 0 < cand < 1
     # a second dot far from truth must lower DTI (its p=0 credit is below the bar)
     worse = pred.copy()

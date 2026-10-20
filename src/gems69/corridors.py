@@ -425,3 +425,112 @@ def build_corridors(catalogue: np.ndarray, strands: list[Strand],
             if selection == "stratified" else c.rationale.get("source", "")
         )
     return corridors, uniq
+
+
+def dilation_tendency(az: float) -> float:
+    """Dilation tendency peaks for N-NE strike (~22.5 deg) under WNW extension (112.5 deg)."""
+    return float(np.cos(np.radians(az - 22.5)) ** 2)
+
+
+@dataclass
+class Line:
+    kind: str
+    a: np.ndarray
+    b: np.ndarray
+    W: float = 0.0
+    meta: dict = field(default_factory=dict)
+
+
+def _pair_ok(ta, tb) -> tuple[bool, str]:
+    """Test geometric admissibility of tip pair (ta, tb)."""
+    # Dip polarity check
+    if hasattr(ta, "dip_vec") and hasattr(tb, "dip_vec"):
+        if ta.dip_vec is not None and tb.dip_vec is not None:
+            if float(np.dot(ta.dip_vec, tb.dip_vec)) < 0:
+                return False, "rejected_dip"
+
+    pa = np.asarray(ta.pos, float)
+    pb = np.asarray(tb.pos, float)
+    d = pb - pa
+
+    out_a = np.asarray(ta.out, float)
+    norm_out = float(np.linalg.norm(out_a))
+    if norm_out > 1e-9:
+        out_a = out_a / norm_out
+    else:
+        out_a = np.array([0.0, 1.0])
+
+    right_a = np.array([out_a[1], -out_a[0]])
+    cross_step = float(np.dot(d, right_a))
+    along_step = float(np.dot(d, out_a))
+    w_px = abs(cross_step)
+
+    # Spacing W in [1, 150] px (0.1 to 15 km)
+    if w_px < 1.0 or w_px > 150.0:
+        return False, "rejected_geometry"
+
+    # Along-strike separation <= 3.5 W
+    if along_step > 3.5 * w_px:
+        return False, "rejected_geometry"
+
+    # Strike-slip step sense
+    sense_a = getattr(ta, "sense", "N")
+    if sense_a == "RL":
+        if cross_step < 0:
+            return False, "rejected_step_sense"
+    elif sense_a == "LL":
+        if cross_step > 0:
+            return False, "rejected_step_sense"
+
+    return True, "ok"
+
+
+def generate(tips: list, polys: list, include_cut: bool = False) -> tuple[list[Line], dict]:
+    """Generate corridor lines from tips and polylines."""
+    lines: list[Line] = []
+    counts = {"relay_pairs": 0, "pull_apart": 0}
+
+    if len(tips) >= 2:
+        for i in range(len(tips)):
+            for j in range(i + 1, len(tips)):
+                ta, tb = tips[i], tips[j]
+                ok, _ = _pair_ok(ta, tb)
+                if ok:
+                    counts["relay_pairs"] += 1
+                    pa = np.asarray(ta.pos, float)
+                    pb = np.asarray(tb.pos, float)
+                    d = pb - pa
+                    out_a = np.asarray(ta.out, float)
+                    norm_out = float(np.linalg.norm(out_a))
+                    if norm_out > 1e-9:
+                        out_a = out_a / norm_out
+                    right_a = np.array([out_a[1], -out_a[0]])
+                    w = abs(float(np.dot(d, right_a)))
+                    along = float(np.dot(d, out_a))
+                    is_overlap = along < 0
+
+                    lines.append(Line("relay_connector", pa, pb, W=w, meta={"overlap": is_overlap}))
+                    lines.append(Line("relay_breach", pa, pb, W=w, meta={"overlap": is_overlap}))
+                    lines.append(Line("relay_enechelon", pa, pb, W=w, meta={"overlap": is_overlap}))
+
+    if len(tips) == 1:
+        t = tips[0]
+        sense = getattr(t, "sense", "N")
+        if sense in ("RL", "LL"):
+            pos = np.asarray(t.pos, float)
+            out = np.asarray(t.out, float)
+            norm = float(np.linalg.norm(out))
+            if norm > 1e-9:
+                out = out / norm
+            right = np.array([out[1], -out[0]])
+            if sense == "RL":
+                splay1 = pos + 15.0 * (out + 0.5 * right)
+                splay2 = pos + 15.0 * (out + 1.0 * right)
+            else:
+                splay1 = pos + 15.0 * (out - 0.5 * right)
+                splay2 = pos + 15.0 * (out - 1.0 * right)
+            lines.append(Line("termination_splay", pos, splay1))
+            lines.append(Line("termination_splay", pos, splay2))
+
+    return lines, counts
+

@@ -1,38 +1,19 @@
 {
-  "generated_utc": "2026-10-12T01:48:52Z",
-  "official_data": {
-    "training_features.tif": {
-      "present": false,
-      "bytes": null,
-      "provenance": "missing"
-    },
-    "labels.tif": {
-      "present": false,
-      "bytes": null,
-      "provenance": "missing"
-    },
-    "existing_faults.tif": {
-      "present": false,
-      "bytes": null,
-      "provenance": "missing"
-    },
-    "sample_submission.tif": {
-      "present": false,
-      "bytes": null,
-      "provenance": "missing"
-    },
-    "1m_DEM_links.csv": {
-      "present": false,
-      "bytes": null,
-      "provenance": "missing"
-    }
-  },
-  "all_official_files_present": false,
-  "gate": {
-    "status": "BLOCKED",
-    "download_enabled": false,
-    "reason": "no holdout receipt: gate not evaluated"
-  },
+  "verdict": "negative",
   "download_enabled": false,
-  "candidate_submission": null
+  "reasons": [
+    "No explicit same-evaluator evidence of beating the current holdout best.",
+    "Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.",
+    "Registry scan is incomplete or contains errors.",
+    "Holdout comparison is missing or not bound to the current artifact hash.",
+    "Reproducible method source manifest is missing, stale, or not artifact-bound.",
+    "Artifact-bound feature-alone leakage canaries are missing or flagged.",
+    "Hash-bound validator receipt is missing or failed.",
+    "surface uniqueness phase is missing or not bound to the current artifact.",
+    "surface uniqueness phase failed or is incomplete.",
+    "dots uniqueness phase is missing or not bound to the current artifact.",
+    "dots uniqueness phase failed or is incomplete."
+  ],
+  "artifact_sha256": "ad03bd333dacc28ebaf474599f3fc7aabf65d181373a2afd52f5adf8fdc15045",
+  "validator_report": {}
 }
