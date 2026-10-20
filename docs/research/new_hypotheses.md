@@ -8,12 +8,13 @@ spend a submission slot on an idea that has not beaten the current holdout best)
 
 Current holdout best for reference (evidence/e2_gate.json, HOLDOUT-DTI, gems57 pooled hide-and-recover,
 alpha 0.2 beta 0.8, 300 m triangular kernel, draws 20/21):
-- corridor arm: 0.0060 +/- 0.0014; control arm: 0.0021 +/- 0.0006; paired delta +0.0038 +/- 0.0015;
+- corridor arm: 0.006216 +/- 0.0014; control arm: 0.002148 +/- 0.0006; paired delta +0.004068 +/- 0.0015;
   gate PASSED but the absolute DTI is tiny — a screen, not a leaderboard projection (calibration
-  rho~0.51, p~0.09, not significant; evidence/e0_champion_ladder_measured.json).
-- Registry scan: worst |Spearman| 0.2574 (pass), dotlike dot-overlap 0.9215 vs archived GEMSDOE51
-  (FAIL > 70% limit; logged as near-duplicate lane-drift per protocol rule 1).
-- Verdict: NEGATIVE — no submission slot spent on this build (evidence/run_card.json).
+  rho~0.51, p~0.09, not significant).
+- Registry scan (2026-10-20 emission): worst |Spearman| 0.313 (pass), dotlike dot-overlap 0.8285 vs
+  registry blob 23ff31cf... (FAIL > 70% limit; logged as duplicate-and-stop per protocol rule 1).
+- Hard-link recovery 0.941 within 300 m (16/17); leakage canary worst AUC 0.689 (<0.90).
+- Verdict: NEGATIVE — no submission slot spent (evidence/run_card.json); site banner DO-NOT-SUBMIT.
 
 Source of truth for all leaderboard numbers: they are USER-REPORTED-NOT-ORGANIZER-CONFIRMED; the
 official public leaderboard snapshot (registry/leaderboard_snapshot_2026-10-12.json, rendered 2026-10-12)
@@ -55,7 +56,7 @@ logged; do not spend a submission slot until a candidate beats the holdout best 
 1. Fetch pinned data (scripts/fetch_data.py) for F1–F3; confirm sha256 pins.
 2. Add the candidate as a holdout arm (same folds, same allocator, same flank rule as e2) and run
    `scripts/run_lane69.py e2`; record HOLDOUT-DTI + 95% CI vs the no-prior control (current best
-   corridor 0.0060 +/- 0.0014).
+   corridor 0.006216 +/- 0.0014).
 3. Run leakage canary (AUC > 0.90 = leakage), registry lane-drift scan (rho < 0.90, dot-overlap < 0.70),
    format validation (validate_submission.py), then assemble the run card. Only a gate pass may spend a
    submission slot; promotion remains a selector decision (rule 6).

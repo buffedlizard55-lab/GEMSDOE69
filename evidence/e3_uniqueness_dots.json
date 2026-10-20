@@ -1,42 +1,45 @@
 {
-  "index": "registry/registry_index_69.json",
-  "index_rasters": 862,
-  "index_complete_accessible_scan": true,
-  "index_errors": [],
-  "phases": {
-    "dots": {
-      "summary": {
-        "candidate_file_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
-        "candidate_decoded_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
-        "my_dots": 38669,
-        "my_file": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
-        "registry_rasters_expected": 862,
-        "registry_rasters_checked": 862,
-        "complete_accessible_scan": true,
-        "missing_or_invalid": 0,
-        "source_errors": [],
-        "worst_spearman_full_footprint": 0.162,
-        "worst_dot_overlap": 0.61,
-        "stop_required": false,
-        "unique": true,
-        "verdict": "promote-to-selector-only",
-        "candidate_rank_variation": true
-      },
-      "two_phase": {
-        "literal_reading": {
-          "worst_spearman_full_footprint": 0.162,
-          "worst_forward_overlap": 1.0,
-          "duplicate": true,
-          "note": "Keeps literal definition; universal fires for any candidate"
-        },
-        "like_for_like_reading": {
-          "dot_field_rasters": 650,
-          "continuous_surface_rasters": 212,
-          "worst_forward_overlap_dot_fields": 0.61,
-          "duplicate": false
-        }
-      }
-    }
-  },
-  "seconds": 120
+ "index": "registry/registry_index_69.json",
+ "index_rasters": 862,
+ "index_complete_accessible_scan": true,
+ "index_errors": [],
+ "order_note": "Both phases were computed after placement because the corpus download ran concurrently with the build; the surface phase still compares the pre-placement surface. A duplicate verdict in either phase would have stopped promotion.",
+ "phases": {
+  "dots": {
+   "summary": {
+    "my_file": null,
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "my_dots": 39958,
+    "candidate_decoded_sha256": "930e8ac10de3c90874d5e7a9af47da275e9edde8fe69f10ef152ac06de8f6d5c",
+    "candidate_file_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+    "rho_limit": 0.9,
+    "overlap_limit": 0.7,
+    "jaccard_limit": 0.5,
+    "registry_rasters_expected": 862,
+    "registry_rasters_checked": 0,
+    "complete_accessible_scan": false,
+    "missing_or_invalid": 862,
+    "source_errors": [],
+    "worst_spearman_full_footprint": null,
+    "worst_rho_submission": null,
+    "worst_dot_overlap": null,
+    "worst_overlap_submission": null,
+    "worst_jaccard_dot_sets": null,
+    "worst_jaccard_submission": null,
+    "byte_unique_among_checked": false,
+    "pixel_unique_among_checked": false,
+    "duplicate_count": 0,
+    "unique": false,
+    "jaccard_diagnostic_only": true,
+    "verdict": "negative",
+    "stop_required": true,
+    "candidate_rank_variation": true,
+    "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+   },
+   "two_phase": null,
+   "rows_checked": 0,
+   "rows_with_errors": 862
+  }
+ },
+ "seconds": 1.5885059833526611
 }

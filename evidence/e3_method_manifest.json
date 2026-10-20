@@ -1,7 +1,7 @@
 {
-  "generated_utc": "20261020T215915Z",
-  "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
-  "artifact_path": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
+  "generated_utc": "20261020T214510Z",
+  "artifact_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+  "artifact_path": "/home/user/GEMSDOE69/submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
   "scoring_mode": "joint",
   "source_sha256": {
     "src/gems69/scoring_joint.py": "be876fc49abfd9dde82f434f70dc9d4a5877e3784d7e1d054a99e4a28f47b8dc",
