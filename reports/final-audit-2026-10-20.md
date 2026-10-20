@@ -11,8 +11,8 @@ artifact binding, or organizer confirmation.
 This report supersedes the pre-merge local final-audit wording where it described
 H69-J as the run-card artifact. After reconciling current `main`,
 `evidence/run_card.json` correctly remains the archived **H69-H2 transfer-only**
-record; the generic release policy still evaluates legacy H69-J aggregate
-receipts and stays fail-closed.
+record; the generic release policy separately evaluates H69-J aggregate receipts
+and stays fail-closed because their literal overlap is 1.0.
 
 ## Pass 1 — implementation and evidence audit
 
@@ -43,7 +43,9 @@ receipts and stays fail-closed.
   summary.
 - Added a second guard in `write_card()`: it refuses to rewrite
   `evidence/run_card.json` unless E2's holdout hash matches the E3 receipt
-  artifact hash. A regression test covers this H69-J/H69-H2 failure mode.
+  artifact hash, and it refuses by default to replace a card that identifies
+  different bytes. A regression test covers both H69-J/H69-H2 failure modes;
+  a future fully bound replacement must opt in explicitly.
 - Rebuilt the README and Pages status from the strict policy. The banner says
   **NOT OK TO SUBMIT — DO NOT SUBMIT**, offers no download, and explicitly
   forbids uploading audit artifacts from `submissions/`.
@@ -68,14 +70,14 @@ receipts and stays fail-closed.
 
 | Command | Result |
 | --- | --- |
-| `PYTHONPATH=vendor/template66:src .venv/bin/python scripts/release_gate.py` | **negative**, `download_enabled=false`; literal dot-overlap failure, unbound holdout, and stale method-source manifest are reported for the legacy aggregate artifact. |
+| `PYTHONPATH=vendor/template66:src .venv/bin/python scripts/release_gate.py` | **negative**, `download_enabled=false`; H69-J now has locally rebound aggregate receipts, but literal dot-overlap failure alone is sufficient and is reported. |
 | `GEMS_DATA=$PWD/data/bridge ... scripts/validate_submission.py` on H69-J zeros TIFF | **PASS**: SHA-256 `981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6`; float32, EPSG:32611, 3730×3292, range [0,1], no NaN inside footprint, 38,669 positives. Receipt: `evidence/final_audit_validator_h69j_2026-10-20.json`. |
 | Same validator on H69-H2 transfer-only zeros TIFF | **PASS**: SHA-256 `b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1`; float32, EPSG:32611, 3730×3292, range [0,1], no NaN inside footprint, 36,325 positives. Receipt: `evidence/final_audit_validator_transfer_2026-10-20.json`. |
 | `.venv/bin/python scripts/audit_workspace.py` | **blocked** for a fresh root-data run: `training_features`, `labels`, `existing_faults`, `1m_DEM_links`, and `sample_submission` are absent from expected full-data paths. Receipt: `evidence/final_audit_workspace_2026-10-20.json`. |
-| `PYTHONPATH=vendor/template66:src .venv/bin/python -m pytest -q` | **105 passed**; 18 upstream Rasterio `PendingDeprecationWarning`s only. |
+| `PYTHONPATH=vendor/template66:src .venv/bin/python -m pytest -q` | **106 passed**; 18 upstream Rasterio `PendingDeprecationWarning`s only. |
 | `git diff --check` | **PASS**. |
 | Generated-site/no-binary assertions | **PASS**: status is negative; current run card stays H69-H2 (`b44d16ce…`); root/index/executive banners say NOT OK/DO NOT SUBMIT; `docs/downloads/` contains no `.tif`, `.tiff`, or `.zip` artifact. |
-| Run-card overwrite guard | **PASS**: `scripts/make_run_card.py` exited 2 with an explicit unbound-holdout refusal; SHA-256 of the H69-H2 run card was unchanged. |
+| Run-card overwrite guard | **PASS**: `scripts/make_run_card.py` exited 2 because the existing H69-H2 card names different bytes; SHA-256 of that card was unchanged. |
 
 The two format passes deliberately are not promotion evidence. They prove only
 that archived bytes satisfy the local validator. The H69-H2 run card remains

@@ -80,12 +80,12 @@ The governing lane rule is literal: if any registry raster has rank correlation 
 
 {release_reasons}
 
-`release_gate.py` is intentionally fail-closed and controls publication. Its legacy aggregate evidence is not a substitute for the H69-H2 run card, and a negative run card never authorizes a download. The historical H69-J joint artifact is separately stale after the tip-graph repair and also fails literal overlap. No competition slot was used.
+`release_gate.py` is intentionally fail-closed and controls publication. Its H69-J aggregate evidence is not a substitute for the H69-H2 run card, and a negative run card never authorizes a download. H69-J's local aggregate receipts are now hash-bound, but its literal all-registry overlap still fails and therefore it also cannot be published. No competition slot was used.
 
 ## What was learned without submitting
 
 - H69-H2 transfer-only is a formatted archived artifact with a recorded HOLDOUT-DTI screen, but its literal all-registry overlap is 1.0 (and the dotlike diagnostic is also above the 0.70 stop limit). It is not offered for download.
-- H69-J is a distinct archived joint-corridor artifact. Its format receipt establishes byte-level format only; its holdout/source bindings are stale on this checkout and it is not a current promotion.
+- H69-J is a distinct joint-corridor artifact with locally hash-bound aggregate receipts. Its format and local holdout records establish neither uniqueness nor an organizer score: literal overlap remains 1.0, so it is not a promotion.
 - No new TIFF is generated in this review: emitting another candidate after a duplicate-and-stop result would violate the parallel-run protocol and would not make it submission-ready.
 
 ## H33 result review — correction to the premise

@@ -95,7 +95,12 @@ def evaluate(root=ROOT):
                 reasons=reasons, artifact_sha256=sha, validator_report=report)
 
 
-def write_card(root=ROOT):
+def write_card(root=ROOT, *, replace: bool = False):
+    """Write a run card only for an explicitly bound, non-cross-candidate run.
+
+    ``replace`` is intentionally opt-in: callers conducting a genuinely new,
+    fully artifact-bound E2/E3 run must make the replacement decision explicit.
+    """
     root = Path(root)
     card = read(root, 'run_card.json')
     decision = evaluate(root)
@@ -103,13 +108,19 @@ def write_card(root=ROOT):
     uniq = read(root, 'e3_uniqueness.json')
     receipt = read(root, 'e3_receipt.json')
     # A card generator must never silently replace one candidate's narrative
-    # with another candidate's aggregate holdout.  This was the historic
-    # H69-J/H69-H2 merge failure: card generation is permitted only once the
-    # E2 holdout explicitly binds to the receipt's exact raster bytes.
+    # with another candidate's aggregate holdout. This was the historic
+    # H69-J/H69-H2 merge failure. First bind E2 to the receipt bytes; then,
+    # if an existing card names other bytes, require an explicit replacement.
     sha = decision.get('artifact_sha256')
     if sha is None or gate.get('artifact_sha256') != sha:
         raise ValueError(
             'Refusing to rewrite run_card.json: holdout is not bound to the receipt artifact SHA-256.'
+        )
+    existing_sha = card.get('raster', {}).get('zeros', {}).get('sha256')
+    if existing_sha and existing_sha != sha and not replace:
+        raise ValueError(
+            'Refusing to rewrite run_card.json: existing run card identifies a different artifact; '
+            'use an explicit artifact-bound replacement procedure.'
         )
     card.update(generated_utc=datetime.now(timezone.utc).isoformat(),
                 verdict=decision['verdict'], banner='ok' if decision['download_enabled'] else 'stop',

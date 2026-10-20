@@ -56,6 +56,8 @@ def test_stale_phase_blocks(cleared, phase):
 
 @pytest.mark.parametrize('dot_overlap', [None, 0.0, 0.61, 0.70])
 def test_stratified_gate_cannot_override_literal_failure(cleared, dot_overlap):
+    # The written protocol applies to ANY registry raster. A diagnostic stratum
+    # can explain a failure but cannot make a literal failure publishable.
     u = policy.read(cleared, 'e3_uniqueness.json')
     u['literal_gate']['overlap_ok'] = False
     u['stratified_gate'] = {'dotlike_overlap_ok': True}
@@ -64,6 +66,7 @@ def test_stratified_gate_cannot_override_literal_failure(cleared, dot_overlap):
     put(cleared, 'e3_uniqueness.json', u)
     result = policy.evaluate(cleared)
     assert result['verdict'] == 'negative'
+    assert not result['download_enabled']
     assert any('Literal registry dot-overlap gate' in reason for reason in result['reasons'])
 
 
@@ -86,16 +89,14 @@ def test_other_blockers(cleared, change):
     assert not policy.evaluate(cleared)['download_enabled']
 
 
-def test_current_repo_fails_closed_until_h69j_rebound():
-    # H69-J was promoted on a parallel branch, then the relayfix session's
-    # R1/R2 corridor repairs landed and changed the generator sources, so
-    # H69-J's hash-bound method manifest is stale on this tree. The gate
-    # must fail closed (negative, manifest reason) until H69-J is re-run
-    # and re-bound; this does not overturn its archived science results.
+def test_current_repo_fails_closed_on_literal_overlap():
+    # A parallel branch rebound H69-J's holdout/source evidence, but its
+    # literal all-registry overlap remains 1.0. A passing dotlike diagnostic
+    # cannot turn that written duplicate-stop result into a promotion.
     result = policy.evaluate()
     assert result['verdict'] == 'negative'
     assert result['download_enabled'] is False
-    assert any('method source manifest' in reason for reason in result['reasons'])
+    assert any('Literal registry dot-overlap gate' in reason for reason in result['reasons'])
 
 
 def test_builder_revokes_stale_downloads(tmp_path, monkeypatch):
@@ -149,3 +150,13 @@ def test_write_card_refuses_to_overwrite_an_unbound_candidate(cleared):
     with pytest.raises(ValueError, match='holdout is not bound'):
         policy.write_card(cleared)
     assert not (cleared / 'evidence' / 'run_card.json').exists()
+
+
+def test_write_card_refuses_cross_candidate_replacement_without_opt_in(cleared):
+    put(cleared, 'run_card.json', {'raster': {'zeros': {'sha256': 'other-artifact'}}})
+    with pytest.raises(ValueError, match='existing run card identifies a different artifact'):
+        policy.write_card(cleared)
+    card = policy.read(cleared, 'run_card.json')
+    assert card['raster']['zeros']['sha256'] == 'other-artifact'
+    replaced = policy.write_card(cleared, replace=True)
+    assert replaced['raster']['zeros']['sha256'] != 'other-artifact'

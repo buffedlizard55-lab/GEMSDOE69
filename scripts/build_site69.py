@@ -96,7 +96,7 @@ def build_index():
 <tr><td>Current archived no-prior comparator</td><td>{holdout.get('comparator_dti', float('nan')):.4f}</td><td>HOLDOUT-DTI, same recorded H69-H2 evaluation</td></tr>
 <tr><td>Current archived paired &Delta;</td><td>{holdout.get('paired_delta', float('nan')):+.4f}</td><td>HOLDOUT-DTI; never a release override</td></tr>"""
     if gate:
-        rows += f"""<tr><td>Historical H69-J corridor mean DTI</td><td>{gate.get('corridor_mean_dti', float('nan')):.4f} &plusmn; {gate.get('corridor_ci95_half', float('nan')):.4f}</td><td>ARCHIVED HOLDOUT-DTI; stale/unbound to the current repaired source tree</td></tr>"""
+        rows += f"""<tr><td>Separate H69-J corridor mean DTI</td><td>{gate.get('corridor_mean_dti', float('nan')):.4f} &plusmn; {gate.get('corridor_ci95_half', float('nan')):.4f}</td><td>HOLDOUT-DTI for distinct H69-J bytes; local evidence binding does not override its literal 1.0 overlap failure</td></tr>"""
     card_registry = card.get("correlation_overlap_vs_registry", {})
     current_overlap = (card_registry.get("worst_dot_overlap_all") or {}).get("dot_overlap_3px", "n/a")
     current_rho = card_registry.get("worst_abs_spearman", "n/a")
@@ -308,7 +308,7 @@ against comparator {current_holdout.get('comparator_dti', float('nan')):.4f}; {c
 </table>
 <table><tr><th>W (px)</th><th>linking px</th><th>recovery within 3 px</th><th>subtype</th></tr>{ramp_rows}</table>
 </div>
-<div class="card"><h2>Historical H69-J E2 &mdash; archived holdout screen (not bound to the current repaired source tree)</h2>
+<div class="card"><h2>Separate H69-J E2 &mdash; local holdout screen (literal duplicate-stop still blocks publication)</h2>
 <table><tr><th>Arm</th><th>Pooled DTI</th><th>95% CI half</th><th>Cells</th></tr>
 <tr><td>Corridor prior</td><td>{gate.get('corridor_mean_dti', float('nan')):.4f}</td><td>{gate.get('corridor_ci95_half', float('nan')):.4f}</td><td rowspan=2>{gate.get('n_cells','?')} ({gate.get('withheld_positive_px_total','?')} withheld positives)</td></tr>
 <tr><td>No-prior control</td><td>{gate.get('control_mean_dti', float('nan')):.4f}</td><td>{gate.get('control_ci95_half', float('nan')):.4f}</td></tr>
