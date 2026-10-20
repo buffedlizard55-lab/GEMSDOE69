@@ -1,34 +1,44 @@
 # GEMSDOE69 — relay-ramp and pull-apart corridor generator
 
-## NOT OK TO SUBMIT — DO NOT SUBMIT
+## NOT OK TO SUBMIT — DO NOT SUBMIT (negative result, logged)
 
 **Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json).
 
+**No submission download is published and no competition slot was spent.** The 2026-10-20 corridor emission was fully generated, validated, and bound, but the literal registry lane-drift gate failed: more than 70% of its dots fall within 3 px of registry raster blob `23ff31cf...` (dotlike overlap 0.8285 > 0.70 limit; worst |Spearman| 0.313 < 0.90). Per the parallel-run protocol rule 1 (duplicate-and-stop), this emission is logged as a duplicate/negative and is **not** offered for download. The download banner on the site reads DO-NOT-SUBMIT.
+
 Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
 
-The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
-A valid file is not necessarily a unique or scientifically validated submission.
-- Holdout comparison is missing or not bound to the current artifact hash.
-- Reproducible method source manifest is missing, stale, or not artifact-bound.
+## Latest — 2026-10-20 joint-corridor candidate (2026-10-20T21:45Z)
 
-## Latest — 2026-10-20 joint-corridor candidate
+Hypothesis H69-J (H1): convergent multi-scale HG+tilt edge phase across relay connectors — joint grav+mag HG/tilt coincidence targets buried relay linkage separating basement blocks. Emission `h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2` (39,958 unit dots, float32 EPSG:32611 3730×3292 100 m, NaN only outside footprint; sha256 `287372cb...`).
 
-Hypothesis H69-J (H1): convergent multi-scale HG+tilt edge phase across relay connectors — joint grav+mag HG/tilt coincidence (min(E_grav,E_mag) 0.35 weight) targets buried relay linkage separating basement blocks. Corridor arm 0.0059±0.0012 vs control 0.0021±0.0006 (paired Δ+0.0038±0.0015, 8 folds 22641 withheld px, gate PASSED). Registry worst |rho| 0.162 <0.90, dot-field overlap 0.61 <0.70 (literal 1.0 from universal continuous_surface is non-discriminating per DENSE_SUPPORT_FRACTION=0.20; see evidence/e3_uniqueness.json diagnostic). Leakage canary worst AUC 0.69 <0.90. Validator PASS for both variants (float32 EPSG:32611 3730×3292 [0,1]). Promotion to selector step required; no organizer score claimed.
+Measurements (all HOLDOUT-DTI unless labelled, bound to artifact sha256 `287372cb...`):
+- Holdout gate (gems57 pooled hide-and-recover, α0.2 β0.8, 300 m triangular kernel, seeds 20/21, 8 cells, 22,641 withheld positives): corridor arm 0.006216 ± 0.0014 vs no-prior control 0.002148 ± 0.0006, paired Δ +0.004068 ± 0.0015 → **gate PASSED**.
+- Leakage canary (feature-alone AUC vs withheld truth): worst = corridor_propensity 0.689 < 0.90 → no leakage.
+- Hard-linked ramp recovery: mean 0.941 within 300 m (16 of 17 tested ramps ≥70%).
+- Format validation (scripts/validate_submission.py): PASS for both `-zeros` and `-nan` variants (single band, float32, EPSG:32611, transform/bounds match sample_submission.tif, values in [0,1], no NaN inside footprint).
+- Registry lane-drift scan (751 pinned blobs; 750 compared, 1 error): worst |rho| 0.313 < 0.90 ✓, but dotlike 3-px dot overlap 0.8285 > 0.70 ✗ → **duplicate-and-stop**. No download offered.
+- Method source manifest + feature canaries + holdout + validator all hash-bound to the artifact (reproducible audit).
+
+Verdict: **negative**. No submission slot spent. Promotion to a selector step is a separate decision; no organizer score claimed.
 
 ## Reproduce the publication audit (no data downloads needed)
 
 ```sh
-python scripts/release_gate.py
-python scripts/build_site69.py
-python scripts/build_readme.py
+python scripts/release_gate.py          # fail-closed gate; reports negative + reasons
+python scripts/build_site69.py          # rebuilds docs/ with DO-NOT-SUBMIT banner (no download)
 ```
+
+The archived candidate `submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif`
+is format-valid (validate_submission.py PASS) but is **not** offered for download because the
+registry lane-drift gate failed (duplicate-and-stop). Do not upload it to DrivenData.
 
 For pixel validation and tests:
 
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
+GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-nan.tif
 .venv/bin/pytest -q
 ```
 

@@ -82,15 +82,15 @@ def test_other_blockers(cleared, change):
 
 
 def test_current_repo_fails_closed_until_h69j_rebound():
-    # H69-J was promoted on a parallel branch, then the relayfix session's
-    # R1/R2 corridor repairs landed and changed the generator sources, so
-    # H69-J's hash-bound method manifest is stale on this tree. The gate
-    # must fail closed (negative, manifest reason) until H69-J is re-run
-    # and re-bound; this does not overturn its archived science results.
+    # The 2026-10-20 joint-corridor emission (39,958 dots) was fully bound:
+    # holdout, canaries, manifest and validator all reference its sha256.  The
+    # gate still fails closed because the registry lane-drift scan returned a
+    # dotlike 3-px overlap of 0.8285 (> 0.70 limit) against registry blob
+    # 23ff31cf..., i.e. duplicate-and-stop binds, so no download is offered.
     result = policy.evaluate()
     assert result['verdict'] == 'negative'
     assert result['download_enabled'] is False
-    assert any('method source manifest' in reason for reason in result['reasons'])
+    assert any('uniqueness' in reason or 'duplicate-and-stop' in reason for reason in result['reasons'])
 
 
 def test_builder_revokes_stale_downloads(tmp_path, monkeypatch):

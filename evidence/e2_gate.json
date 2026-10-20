@@ -1,91 +1,92 @@
 {
-  "evidence_class": "HOLDOUT-DTI",
-  "evaluator": "vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20,21] modes=[all])",
+ "evidence_class": "HOLDOUT-DTI",
+ "evaluator": "vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20, 21] modes=['all'])",
+ "n_cells": 8,
+ "corridor_mean_dti": 0.006216010186707036,
+ "corridor_ci95_half": 0.0012971640607610101,
+ "control_mean_dti": 0.0021479253641536293,
+ "control_ci95_half": 0.0005776711996184226,
+ "paired_delta_mean": 0.004068084822553408,
+ "paired_delta_ci95_half": 0.0014172223607699218,
+ "gate_passed": true,
+ "withheld_positive_px_total": 22641,
+ "corridor": {
+  "mean_dti": 0.006216010186707036,
+  "std_dti": 0.0018719051095420186,
+  "ci95_half": 0.0012971640607610101,
   "n_cells": 8,
-  "corridor_mean_dti": 0.00591266418023039,
-  "corridor_ci95_half": 0.0012459703208248392,
-  "control_mean_dti": 0.0021479253641536293,
-  "control_ci95_half": 0.0005776711996184226,
-  "paired_delta_mean": 0.0037647388160767605,
-  "paired_delta_ci95_half": 0.001483693286951157,
-  "gate_passed": true,
-  "withheld_positive_px_total": 22641,
-  "corridor": {
-    "mean_dti": 0.00591266418023039,
-    "std_dti": 0.0017980287000253514,
-    "ci95_half": 0.0012459703208248392,
-    "n_cells": 8,
-    "per_cell": {
-      "draw20_foldNE_all": 0.006794160705981623,
-      "draw20_foldNW_all": 0.004986495810322074,
-      "draw20_foldSE_all": 0.005398109155322787,
-      "draw20_foldSW_all": 0.006794644208035207,
-      "draw21_foldNE_all": 0.0048745147175890055,
-      "draw21_foldNW_all": 0.0041943691679115795,
-      "draw21_foldSE_all": 0.004583812285811366,
-      "draw21_foldSW_all": 0.009675207390869477
-    },
-    "dots": [
-      37189,
-      39676,
-      37611,
-      39781,
-      37249,
-      39747,
-      39522,
-      37875
-    ],
-    "n_truth": [
-      2360,
-      1925,
-      3253,
-      3780,
-      2365,
-      1919,
-      3253,
-      3786
-    ]
+  "per_cell": {
+   "draw20_foldNE_all": 0.007389397027313903,
+   "draw20_foldNW_all": 0.004549889989563837,
+   "draw20_foldSE_all": 0.007931031382957612,
+   "draw20_foldSW_all": 0.006319287148350904,
+   "draw21_foldNE_all": 0.005352914453131453,
+   "draw21_foldNW_all": 0.002935751785444319,
+   "draw21_foldSE_all": 0.006637877406471817,
+   "draw21_foldSW_all": 0.00861193230042245
   },
-  "control": {
-    "mean_dti": 0.0021479253641536293,
-    "std_dti": 0.0008336229031558253,
-    "ci95_half": 0.0005776711996184226,
-    "n_cells": 8,
-    "per_cell": {
-      "draw20_foldNE_all": 0.0008460821063652749,
-      "draw20_foldNW_all": 0.002839389945325117,
-      "draw20_foldSE_all": 0.0034959848881212932,
-      "draw20_foldSW_all": 0.0027568260843450344,
-      "draw21_foldNE_all": 0.0017016831084029581,
-      "draw21_foldNW_all": 0.0018278190837102218,
-      "draw21_foldSE_all": 0.0019874447687677995,
-      "draw21_foldSW_all": 0.0017281729281913346
-    },
-    "dots": [
-      30736,
-      29208,
-      29317,
-      29219,
-      30736,
-      29208,
-      29317,
-      29219
-    ],
-    "n_truth": [
-      2360,
-      1925,
-      3253,
-      3780,
-      2365,
-      1919,
-      3253,
-      3786
-    ]
+  "dots": [
+   39629,
+   39714,
+   34601,
+   37318,
+   39526,
+   39847,
+   38542,
+   39620
+  ],
+  "n_truth": [
+   2360,
+   1925,
+   3253,
+   3780,
+   2365,
+   1919,
+   3253,
+   3786
+  ]
+ },
+ "control": {
+  "mean_dti": 0.0021479253641536293,
+  "std_dti": 0.0008336229031558253,
+  "ci95_half": 0.0005776711996184226,
+  "n_cells": 8,
+  "per_cell": {
+   "draw20_foldNE_all": 0.0008460821063652749,
+   "draw20_foldNW_all": 0.002839389945325117,
+   "draw20_foldSE_all": 0.0034959848881212932,
+   "draw20_foldSW_all": 0.0027568260843450344,
+   "draw21_foldNE_all": 0.0017016831084029581,
+   "draw21_foldNW_all": 0.0018278190837102218,
+   "draw21_foldSE_all": 0.0019874447687677995,
+   "draw21_foldSW_all": 0.0017281729281913346
   },
-  "seconds": 0,
-  "generated_utc": "20261020T202337Z",
-  "scoring_mode": "joint",
-  "note": "gate: corridor arm must beat no-prior control (paired over folds); holdout DTI is SCREEN not projection",
-  "current_best_beaten": true,
-  "current_best_note": "Control arm 0.00214 beaten by corridor 0.00591; previous corridor best 0.005975 within CI, considered comparable (non-significant holdout calibration rho 0.51)"
+  "dots": [
+   30736,
+   29208,
+   29317,
+   29219,
+   30736,
+   29208,
+   29317,
+   29219
+  ],
+  "n_truth": [
+   2360,
+   1925,
+   3253,
+   3780,
+   2365,
+   1919,
+   3253,
+   3786
+  ]
+ },
+ "seconds": 945.6,
+ "generated_utc": "20261020T221138Z",
+ "note": "gate: corridor arm must beat the same pipeline without corridor priors (paired over folds); holdout DTI is a SCREEN, not a leaderboard projection (GEMSDOE32 instrument-calibration evidence: cross-family Spearman rho=0.51, p~0.09)",
+ "artifact_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+ "artifact_path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
+ "current_best_beaten": true,
+ "current_best_note": "corridor 0.006216 > previous same-evaluator corridor best 0.005975; gate is improvement over no-prior control 0.002148 (paired, CI > 0)"
 }

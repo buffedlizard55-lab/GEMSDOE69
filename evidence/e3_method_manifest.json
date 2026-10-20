@@ -1,14 +1,14 @@
 {
-  "generated_utc": "20261020T201504Z",
-  "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
-  "artifact_path": "/home/user/GEMSDOE69/submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
+  "generated_utc": "20261020T214510Z",
+  "artifact_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+  "artifact_path": "/home/user/GEMSDOE69/submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
   "scoring_mode": "joint",
   "source_sha256": {
     "src/gems69/scoring_joint.py": "be876fc49abfd9dde82f434f70dc9d4a5877e3784d7e1d054a99e4a28f47b8dc",
-    "src/gems69/scoring.py": "47976561bee65b931571f23a0638faaa1091cc35f70fb01f91656f336ffe1ba9",
-    "src/gems69/corridors.py": "3c7d1d844c6c414218b2c520fd5ce03d870133bb6803a4457d29458cd5560dbb",
-    "src/gems69/physics.py": "70ec0c2aaa7692f5422284932e01df8286e8c266cd4ce693e2989a809e8e2774",
-    "src/gems69/holdout69.py": "effddba656037cfc04801e278ea934ba9c27980e902a080740fd8c2d59b35a85"
+    "src/gems69/scoring.py": "fcec41129c4214ad1f4e570abe49122584a9ab3a5735910ace4287c395eec7bf",
+    "src/gems69/corridors.py": "2e7677a20e23943b40cd53459da371da9623ef7668d370e19ce5dd368cfb9f56",
+    "src/gems69/physics.py": "725b0f48b6483dbc88e3f32640312f674552bd5d062cd709beb95a1f7fa9417a",
+    "src/gems69/holdout69.py": "1eb442f5a16866df82a1b9c0dd0c52934ec1dce486a6dc8bad97287208822fe7"
   },
   "feature_names": [
     "grav_hg_s1",
