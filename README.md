@@ -21,10 +21,11 @@ A valid file is not necessarily a unique or scientifically validated submission.
 
 ## Latest review — 2026-10-20
 
-Read [three-pass audit and next steps](reports/review-2026-10-20.md) before continuing.
-The archived HOLDOUT-DTI result is not an organizer score and was not rerun in this review.
-Both current TIFF variants were revalidated on the pinned bridge grid; see [fresh validator output](evidence/review_validator_2026-10-20.json).
-The latest radiometric method is not reproducible from the checked-in scoring code. Do not claim a leaderboard improvement.
+**Read the canonical project brief in `PROMPT.md` at the beginning of every session.** It is appended to this README when the README is rebuilt.
+
+Read the [current-session three-pass review](reports/review-2026-10-20-current-session.md) and the [prior repository audit](reports/review-2026-10-20.md) before continuing. The current-session review ran the test suite (89 passed, 1 expected failure) and revalidated the archived all-finite TIFF against `data/bridge`.
+
+**Status remains NOT OK TO SUBMIT.** The locally format-valid TIFF is an archived negative result: its registry scan triggers the literal dot-overlap duplicate stop, is incomplete, and does not have current-artifact-bound pre-placement and final-dot phase receipts. The radiometric method is not reproducible from the checked-in scoring code. No new TIFF was generated and no download is offered. A passing file-format validator is not clearance to submit.
 
 ## Reproduce the publication audit (no data downloads needed)
 
