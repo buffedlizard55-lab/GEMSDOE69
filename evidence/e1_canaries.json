@@ -172,5 +172,6 @@
     "corridors_built": 2900,
     "catalogue_used": "visible_only (existing_faults & ~hidden_draw20)"
   },
-  "artifact_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f"
+  "artifact_sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
+  "measurement_origin": "computed_holdout"
 }

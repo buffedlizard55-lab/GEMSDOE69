@@ -39,5 +39,6 @@
         ]
       }
     }
-  }
+  },
+  "completed_before_placement": true
 }

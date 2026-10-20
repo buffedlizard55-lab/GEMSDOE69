@@ -1,0 +1,68 @@
+{
+  "evidence_class": "HOLDOUT-DTI",
+  "evaluator": "vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=['all']; POOLED from summed TP/FP/FN)",
+  "n_cells": 8,
+  "withheld_positive_px_total": 22641,
+  "corridor_mean_dti": 0.007737531380405138,
+  "corridor_ci95_half": 0.0020058776500923386,
+  "control_mean_dti": 0.0021479253641536293,
+  "control_ci95_half": 0.0005776711996184226,
+  "paired_delta_mean": 0.006315458104571136,
+  "paired_delta_ci95_half": 0.0017183360696589353,
+  "gate_passed": true,
+  "current_best_beaten": true,
+  "pooled_dti": {
+    "transfer": 0.008469830499045719,
+    "corridor_v1": 0.006354865025014204,
+    "control_noprior": 0.0021543723944745835
+  },
+  "paired_cell_bootstrap": {
+    "transfer_minus_control": {
+      "mean": 0.006235073945143612,
+      "ci95": [
+        0.0044373728488070535,
+        0.007874044988124924
+      ]
+    },
+    "transfer_minus_v1": {
+      "mean": 0.0020419548295652025,
+      "ci95": [
+        0.0008402106830173246,
+        0.003013982730174917
+      ]
+    }
+  },
+  "corridor": {
+    "per_cell": {
+      "draw20_foldNE_all": 0.00587784731063,
+      "draw20_foldNW_all": 0.0055608188362341335,
+      "draw20_foldSE_all": 0.01051644831603549,
+      "draw20_foldSW_all": 0.008740153886740085,
+      "draw21_foldNE_all": 0.002988666532088509,
+      "draw21_foldNW_all": 0.007415125662570768,
+      "draw21_foldSE_all": 0.008837162021039416,
+      "draw21_foldSW_all": 0.011964028477902698
+    }
+  },
+  "control": {
+    "per_cell": {
+      "draw20_foldNE_all": 0.0008460821063652749,
+      "draw20_foldNW_all": 0.002839389945325117,
+      "draw20_foldSE_all": 0.0034959848881212932,
+      "draw20_foldSW_all": 0.0027568260843450344,
+      "draw21_foldNE_all": 0.0017016831084029581,
+      "draw21_foldNW_all": 0.0018278190837102218,
+      "draw21_foldSE_all": 0.0019874447687677995,
+      "draw21_foldSW_all": 0.0017281729281913346
+    }
+  },
+  "exp1_pooled_dti": {
+    "control_noprior": 0.0021543723944745835,
+    "corridor_v1": 0.006354865025014204,
+    "corridor_v2": 0.00690647440703662,
+    "corridor_v3": 0.006710646269799994
+  },
+  "generated_utc": "20261020T204429Z",
+  "note": "Candidate arm = H69-H2 transfer-only. Primary statistic is POOLED DTI; mean fields retained for site compatibility.",
+  "artifact_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1"
+}

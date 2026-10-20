@@ -87,9 +87,13 @@ def test_full_751_registry_scan_zero_errors_and_only_overlap_blocks():
     decision = release_gate.evaluate(ROOT)
     assert decision["verdict"] == "negative"
     assert decision["download_enabled"] is False
-    # Prove ZERO non-uniqueness errors exist (canaries, validator, hashes, holdout ALL clean!)
+    assert decision["paired_ci_control_passed"] is True
+    assert decision["paired_ci_current_best_passed"] is True
+    assert decision["holdout_protocol_compliant"] is True
+    assert decision["validator_report"]["all_checks_passed"] is True
+    # Prove ZERO non-uniqueness/quarantine errors exist (canaries, validator, hashes, holdout ALL clean!)
     for r in decision["reasons"]:
-        assert "uniqueness" in r.lower()
+        assert any(tok in r.lower() for tok in ("uniqueness", "overlap", "duplicate-and-stop", "quarantined")), r
 
     dl = ROOT / "docs" / "downloads"
     if dl.exists():

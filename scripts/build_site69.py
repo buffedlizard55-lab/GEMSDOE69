@@ -14,6 +14,7 @@ EV = ROOT / "evidence"
 NAV = [
     ("index.html", "Home"),
     ("executive-summary.html", "Executive Summary"),
+    ("family-audit.html", "Family Audit"),
     ("why-h33-scored.html", "Why H33 Scored"),
     ("hypotheses.html", "Hypotheses"),
     ("method.html", "Method"),
@@ -57,19 +58,22 @@ def page(title: str, active: str, body: str) -> str:
 
 def submission_banner():
     """Publish ONLY the exact hash-bound artifact cleared by the literal policy."""
-    from release_gate import evaluate
+    try:
+        from .release_gate import evaluate
+    except ImportError:
+        from release_gate import evaluate
 
     decision = evaluate(ROOT)
     downloads = DOCS / "downloads"
-    if downloads.exists():
-        for artifact in downloads.iterdir():
-            if artifact.suffix.lower() in (".tif", ".tiff", ".zip"):
+    if DOCS.exists():
+        for artifact in list(DOCS.rglob("*")):
+            if artifact.is_file() and artifact.suffix.lower() in (".tif", ".tiff", ".zip"):
                 artifact.unlink()
     if not decision["download_enabled"]:
         reasons = "".join(f"<li>{esc(r)}</li>" for r in decision["reasons"])
         return (
             '<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b>'
-            "<p>No submission download is offered. All scientific, holdout, canary, hard-link, and "
+            "<p>No TIFF or ZIP is published for submission. All scientific, holdout, canary, hard-link, and "
             "format checks PASS (<code>H69-EFG HOLDOUT-DTI = 0.0727</code> vs <code>0.0472</code> "
             "control, <code>+53.9%</code>, <code>p = 1.0000</code>), <b>HOWEVER</b> the cross-family "
             "751-blob 3-px forward overlap check trips Rule 1 against prior family rasters. "
@@ -362,7 +366,10 @@ def main() -> int:
         '<a href="docs/executive-summary.html">Executive Summary</a></p></main></body></html>'
     )
     (DOCS / "run-card.json").write_text(json.dumps(load("run_card.json"), indent=2) + "\n")
-    from release_gate import evaluate
+    try:
+        from .release_gate import evaluate
+    except ImportError:
+        from release_gate import evaluate
 
     (DOCS / "status.json").write_text(json.dumps(evaluate(ROOT), indent=2) + "\n")
     for name, html_text in pages.items():

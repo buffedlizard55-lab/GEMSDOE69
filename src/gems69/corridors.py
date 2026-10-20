@@ -713,3 +713,35 @@ def generate(tips: list, polys: list, include_cut: bool = False) -> tuple[list[L
             lines.append(Line("termination_splay", pos, splay2, setting="transfer", meta={"sense": sense}))
 
     return lines, counts
+
+
+def select_stratified(
+    pairs: list[TipPair],
+    max_corridors: int = 80,
+    dilat_fraction: float = 0.7,
+) -> list[TipPair]:
+    """Stratified width-bin x regime selector across [1, 10, 30, 60, 150] px."""
+    bins = [(1.0, 10.0), (10.0, 30.0), (30.0, 60.0), (60.0, 150.0001)]
+    per_bin = max(1, max_corridors // len(bins))
+    chosen: list[TipPair] = []
+    seen: set[int] = set()
+    for lo, hi in bins:
+        in_bin = [i for i, p in enumerate(pairs) if lo <= p.w_px < hi]
+        dil = [i for i in in_bin if pairs[i].dilatational]
+        nondil = [i for i in in_bin if not pairs[i].dilatational]
+        n_dil = min(len(dil), int(round(per_bin * dilat_fraction)))
+        n_non = min(len(nondil), per_bin - n_dil)
+        take = dil[:n_dil] + nondil[:n_non]
+        if len(take) < per_bin:
+            extra = [i for i in dil[n_dil:] + nondil[n_non:] if i not in take]
+            take.extend(extra[: per_bin - len(take)])
+        for idx in take:
+            seen.add(idx)
+            chosen.append(pairs[idx])
+    if len(chosen) < max_corridors:
+        for i, p in enumerate(pairs):
+            if i not in seen:
+                chosen.append(p)
+                if len(chosen) >= max_corridors:
+                    break
+    return chosen[:max_corridors]

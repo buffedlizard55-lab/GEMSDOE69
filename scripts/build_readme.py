@@ -90,7 +90,10 @@ python -m venv .venv
 ## Standing Project Brief — Read at the Beginning of Every Session
 
 """
-    (ROOT / "README.md").write_text(head + (ROOT / "PROMPT.md").read_text())
+    req_text = (ROOT / "PROJECT_REQUEST.md").read_text() if (ROOT / "PROJECT_REQUEST.md").exists() else ""
+    (ROOT / "README.md").write_text(
+        head + (ROOT / "PROMPT.md").read_text() + ("\n\n---\n\n## Full Original Request & Family Registry Census\n\n" + req_text if req_text else "")
+    )
 
 
 if __name__ == "__main__":

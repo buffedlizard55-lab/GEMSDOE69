@@ -29,7 +29,7 @@
     "all_files_passed": true,
     "reports": [
       {
-        "file": "/home/user/GEMSDOE69/submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
+        "file": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
         "bytes": 196948,
         "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
         "meta": {
@@ -70,6 +70,7 @@
           "crs_epsg_32611": true,
           "shape_3730x3292": true,
           "transform_and_bounds_match_sample_submission": true,
+          "mask_shapes_match_raster": true,
           "footprint_all_finite": true,
           "footprint_values_in_0_1": true,
           "no_infinite_values": true,
@@ -107,7 +108,7 @@
         "all_checks_passed": true
       },
       {
-        "file": "/home/user/GEMSDOE69/submissions/h69-efg-kinematic-geodesic-29027-nan.tif",
+        "file": "submissions/h69-efg-kinematic-geodesic-29027-nan.tif",
         "bytes": 243565,
         "sha256": "6ddf37fc9dbe5f66c8000857ee54825f3269cc7d1b37318862a0960fd3e4dd93",
         "meta": {
@@ -148,6 +149,7 @@
           "crs_epsg_32611": true,
           "shape_3730x3292": true,
           "transform_and_bounds_match_sample_submission": true,
+          "mask_shapes_match_raster": true,
           "footprint_all_finite": true,
           "footprint_values_in_0_1": true,
           "no_infinite_values": true,
@@ -162,5 +164,6 @@
         "all_checks_passed": true
       }
     ]
-  }
+  },
+  "evidence_class": "SUBMISSION-RECEIPT"
 }

@@ -1,0 +1,21 @@
+{
+  "schema": 1,
+  "repository": "buffedlizard55-lab/GEMSDOE69",
+  "lane": "Relay-ramp and pull-apart corridor generator",
+  "frozen_utc": "2026-10-20T20:50:00Z",
+  "status": "Supersedes aborted Exp2-balanced (failed its preregistered distinctness precheck: 0.7633 dot-overlap vs archived H69 Oct12, threshold 0.70; no holdout was run for Exp2-balanced). Frozen BEFORE any Exp2b holdout look. Still experiment 2 of 3.",
+  "hypothesis": {
+    "id": "H69-H2-transfer-only",
+    "statement": "Transfer-overlap corridors alone (non-dilatational pairs, overlap > 0.5W, oblique-connector geometry from repaired tip graph; 3,151 deduped pairs available full-catalogue, cap 1200 by _priority) rank withheld faults above the no-prior control, because overlapping hard-linked relays host breaching faults; and their dot field is spatially distinct from all prior dilatational-only lane emissions.",
+    "non_fault_mimic": "Restraining-overlap pressure ridges and pluvial shoreline scarps in contractional step-overs mimic breaching-fault lineaments.",
+    "selector": "Repaired build_tip_pairs -> dedup (_pair_key) in _priority order -> keep ONLY dilatational==False -> first 1200 -> corridor_from_pair. Scoring v1, S0=0.75, identical evidence/allocator/flank/active rules as Exp1."
+  },
+  "holdout": "Identical instrument/cells to Exp1; comparators from evidence/relayfix_gate.json per-cell receipts (control pooled 0.0021543723944745835, corridor_v1 pooled 0.006354865025014204, HOLDOUT-DTI). Paired cell-bootstrap 2000 seed 20261022. Per-cell canary for transfer propensity (AUC>0.90 disqualifies).",
+  "gates": {
+    "distinctness_precheck": "Full-catalogue transfer dots <0.70 overlap (3px) vs BOTH archived H69 lane rasters before holdout; abort if failed.",
+    "prompt_gate": "transfer pooled DTI > control with bootstrap 95% CI lower bound > 0.",
+    "promotion_gate": "transfer pooled DTI > corridor_v1 with CI lower bound > 0 AND complete literal uniqueness/format/canary/manifest via scripts/release_gate.py; else negative, no download, no slot.",
+    "emission": "Transfer arm full-catalogue dots are the session unique audit TIF (Exp3 step) if precheck passes, whatever the promotion verdict; banner follows release_gate."
+  },
+  "budget": {"experiments_used_after_this": 2, "submission_slots_authorized": 0}
+}

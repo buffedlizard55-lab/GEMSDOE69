@@ -8,6 +8,16 @@ import numpy as np
 from .corridors import Corridor
 from .physics import TRANSFORM_NAMES
 
+# Pre-registered H69-E modal weights (registry/preregistration_h69e.json)
+W_GRAV = 0.14
+W_MAG = 0.14
+W_MAGLOW = 0.12
+W_LIDAR = 0.10
+W_STRAIGHT = 0.16
+W_RAD = 0.12
+W_ORIENT = 0.10
+W_GEOM = 0.12
+
 GRAV_LAYERS = [
     "grav_upward_edge", "grav_hg_s1", "grav_hg_s2", "grav_hg_s4",
     "grav_tilt_s2", "grav_hg_prov", "grav_vg_prov",

@@ -1,0 +1,80 @@
+{
+  "schema": 1,
+  "reviewed_utc": "2026-10-20T22:00:00Z",
+  "base_commit": "04b46c116677fc76965b06c32acb148cc9078a1a",
+  "status": "quarantined",
+  "artifact_sha256": [
+    "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+    "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+    "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f"
+  ],
+  "scope": "Current H69-J publication evidence; older archived claims remain archived, not newly certified. The 2026-10-20 lane-69 joint-corridor artifact (39,958 dots) failed the literal registry dot-overlap gate (0.8285 > 0.70) and is likewise quarantined; no download, no slot. The 2026-10-20 H69-EFG artifact (29,027 dots) cleared all scientific, holdout (+53.9%, p=1.0000), canary, and validator checks but failed literal Rule 1 3-px forward registry overlap (> 0.70) and remains quarantined.",
+  "resolution_rule": "Cannot clear by copying an old measurement or changing a raster hash. Literal stop must first be resolved without an unauthorized density exemption, then real independent measurement and provenance review are required.",
+  "findings": [
+    {
+      "id": "IR-69-INT-01",
+      "severity": "blocking",
+      "finding": "The legacy generator synthesized missing single-feature AUCs, reused an earlier holdout, and hard-coded validator success after subprocess failures. The current archived numbers are not thereby proven fabricated, but their measured provenance cannot be certified.",
+      "source": "scripts/generate_unique_submission.py at base commit 04b46c116677fc76965b06c32acb148cc9078a1a, lines 93-150 and 175-190",
+      "disposition": "Unsafe generator retired; original bytes/evidence preserved for forensic audit. No fabricated replacement measurements."
+    },
+    {
+      "id": "IR-69-INT-02",
+      "severity": "blocking",
+      "finding": "Archived surface and dot summaries both use the TIFF file SHA as the decoded-array SHA, assert unique=true, but their literal_reading duplicate flag is true with overlap 1.0. Summary pass flags are not valid literal clearance.",
+      "source": "evidence/e3_uniqueness_surface.json and evidence/e3_uniqueness_dots.json",
+      "disposition": "Release gate checks literal numeric evidence and contradictory phase flags; negative."
+    },
+    {
+      "id": "IR-69-INT-03",
+      "severity": "blocking",
+      "finding": "The previous release policy allowed a dotlike stratum pass to override failed literal overlap. Existing regression omitted the numeric dotlike row and therefore missed the bypass.",
+      "source": "scripts/release_gate.py at base commit 04b46c1, lines 35-52; tests/test_release_gate.py",
+      "disposition": "Removed bypass; added realistic regression and numeric cross-checks."
+    },
+    {
+      "id": "IR-69-HOLD-01",
+      "severity": "blocking",
+      "finding": "The archived joint arm mean is below the earlier corridor mean; current_best_beaten treats overlapping uncertainty as a win. This is not positive evidence of improvement over the current best. Mean-of-cells is also not pooled TP/FP/FN.",
+      "source": "evidence/e2_gate.json, current_best_note; evidence/e2_gate_archived_20261012.json",
+      "disposition": "Require measured pooled statistics and positive spatial-block paired confidence intervals, not pass flags."
+    },
+    {
+      "id": "IR-69-HOLD-02",
+      "severity": "blocking",
+      "finding": "Lane holdout call sites derive a >2px flank exclusion from the full catalogue, including hidden targets, instead of the visible catalogue. This violates the requested visible-only derivation even if it conservatively depresses recovery. In addition, the older leakage_canary computes corridor propensity from ctx.grid.catalogue (the full catalogue), not each cell's visible subset; an AUC below 0.90 does not exonerate that direct violation.",
+      "source": "src/gems69/holdout69.py; scripts/run_relayfix_20261020.py; scripts/run_exp2b_transfer.py",
+      "disposition": "No current holdout certified. No silent post-stop scientific fix or rerun; visible-only mask repair must precede a new preregistered experiment."
+    },
+    {
+      "id": "IR-69-GEO-02",
+      "severity": "blocking",
+      "finding": "Production H69-J uses raster-skeleton tips and subparallel strike/overlap proxies, not same-dip, measured-slip source-polyline pairs. Downloadable mirror qfault_attributes.csv does contain DIPDIRECT and SLIPSENSE: the problem is unintegrated/authentication-limited attributes, not that no attributes exist anywhere.",
+      "source": "src/gems69/tips.py, src/gems69/corridors.py; mirror qfault_attributes.csv sha256 3b8745f0086a57b8255f6679afa1bf1168c10b5573491666c75cf53217029507",
+      "disposition": "Record official GDR v2 and USGS Siler metadata; require provenance-preserving visible-segment attribute joins."
+    },
+    {
+      "id": "IR-69-PHYS-01",
+      "severity": "review",
+      "finding": "The implementation uses a Gaussian difference divided by a horizontal gradient and takes abs(sin(tilt)). Gaussian smoothing is not upward continuation, and this unsigned proxy does not test signed tilt-zero crossings or opposing transverse edge phase. Lithologic contacts can produce both gravity and magnetic gradients.",
+      "source": "src/gems69/physics.py:tilt_edge; src/gems69/scoring_joint.py",
+      "disposition": "Correct active site descriptions; retain model source unchanged after the duplicate stop."
+    },
+    {
+      "id": "IR-69-PORTAL-01",
+      "severity": "review",
+      "finding": "The rejected user file and portal internals are unavailable. Out-of-range values and sentinels are local failure conditions; attributing the actual rejection to NaN or promising that zeros prevents rejection is unsupported.",
+      "source": "User prompt; scripts/validate_submission.py; official problem page 967",
+      "disposition": "Format checks labelled local/mirror-based, never organizer acceptance."
+    },
+    {
+      "id": "IR-69-HOLD-03",
+      "severity": "blocking",
+      "finding": "The archived run_lane69/relayfix/transfer callers use shared build_holdout, which chunks branches at MAX_SEG_PX=12 and withholds without a feature-context collar. Quadrant-boundary erosion does not implement whole-fault-segment hiding with a buffer.",
+      "source": "vendor/template66/gems57/holdout.py::MAX_SEG_PX/build_holdout; scripts/run_lane69.py:122,146; scripts/run_relayfix_20261020.py:126; inherited evidence/relayfix_holdout_protocol_audit.json",
+      "disposition": "Retain main's hash-bound whole-segment protocol gate and imported transfer-runner guards. No private evaluator fork; a future authorized runner must use the existing shared buffered instrument. No rerun after the stop."
+    }
+  ],
+  "submission_slots_used": 0,
+  "new_scientific_experiments": 0
+}

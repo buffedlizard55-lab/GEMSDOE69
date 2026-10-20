@@ -1,0 +1,93 @@
+{
+ "evidence_class": "REGISTRY-MEASUREMENT",
+ "generated_utc": "20261020T195438Z",
+ "my_file": "/home/user/GEMSDOE69/submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-zeros.tif",
+ "my_dots": 33199,
+ "my_sha256": "ad03bd333dacc28ebaf474599f3fc7aabf65d181373a2afd52f5adf8fdc15045",
+ "registry_scope": "registry/prior_rasters.json (751 unique blobs, 2026-10-11 family census)",
+ "rho_limit": 0.9,
+ "overlap_limit": 0.7,
+ "n_registry_blobs": 751,
+ "n_compared": 750,
+ "n_errors": 1,
+ "worst_abs_spearman": 0.2274,
+ "worst_rho_entry": {
+  "blob": "157813953405ef61d7f8e98cadd48bf3df2c5900",
+  "stratum": "dotlike",
+  "their_dots": 37654,
+  "rho": 0.2274,
+  "dot_overlap_3px": 0.3161,
+  "pixel_agreement": 0.99555
+ },
+ "worst_dot_overlap_all": {
+  "blob": "e6433f57238b38a142192af9a531a8c7934ed111",
+  "stratum": "universal",
+  "their_dots": 5167373,
+  "rho": 0.079,
+  "dot_overlap_3px": 1.0,
+  "pixel_agreement": 0.57922
+ },
+ "worst_dot_overlap_dotlike": {
+  "blob": "98cbfc84a0e808733e9c5c3aad9ef07c7678a3fe",
+  "stratum": "dotlike",
+  "their_dots": 103347,
+  "rho": 0.0233,
+  "dot_overlap_3px": 0.8414,
+  "pixel_agreement": 0.98921
+ },
+ "n_exact_pixel_agreement_9999": 0,
+ "literal_gate": {
+  "rho_ok": true,
+  "overlap_ok": false
+ },
+ "stratified_gate": {
+  "dotlike_overlap_ok": false,
+  "note": "universal soft surfaces and dense rasters overlap ANY sparse dot field by construction; family precedent GEMSDOE63/64 treats them as a registry-structure condition, reported separately from the dotlike lane-drift gate"
+ },
+ "local_prior_overlap": {
+  "n_scanned": 4,
+  "worst": {
+   "path": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif",
+   "their_dots": 31994,
+   "dot_overlap_3px": 0.483
+  },
+  "also": [
+   {
+    "path": "submissions/h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-zeros.tif",
+    "dot_overlap_3px": 0.4734
+   },
+   {
+    "path": "docs/downloads/gems69-relay-pullapart-corridors-33680-20261012T015854Z-zeros.tif",
+    "dot_overlap_3px": 0.164
+   }
+  ],
+  "ok": true,
+  "note": "Corrected after the scan: the raw worst was this emission's own -nan twin (overlap 1.0), which is not a prior submission. Corrected worst vs earlier GEMSDOE69 zeros files is 0.483, under the 0.70 limit. Scanner code now skips the twin."
+ },
+ "errors": [
+  {
+   "blob": "a97c7b2a513225c9f9f2b35736afe5abf4d2a491",
+   "err": "shape 32x48"
+  }
+ ],
+ "seconds": 1059.5,
+ "local_prior_overlap_raw_including_own_twin": {
+  "n_scanned": 11,
+  "worst": {
+   "path": "submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-nan.tif",
+   "their_dots": 33199,
+   "dot_overlap_3px": 1.0
+  },
+  "ok": false,
+  "note": "overlap of this emission's dots with earlier GEMSDOE69 submissions (not in the 2026-10-11 registry)"
+ },
+ "duplicate_stop": {
+  "rule": "protocol rule 1: >70% of dots within 3 px of one registry raster = lane drift; log and stop",
+  "blob": "98cbfc84a0e808733e9c5c3aad9ef07c7678a3fe",
+  "alias": "buffedlizard55-lab/12GEMSDOE docs/downloads/12GEMSDOE_r5-nms3-trace_055e9aac96b8.tif",
+  "their_dots": 103347,
+  "dot_overlap_3px": 0.8414,
+  "spearman_rho": 0.0233,
+  "not_a_byte_copy": "pixel agreement 0.98921 and rho 0.0233; the overlap is spatial proximity to a dense trace field, not an identical raster. The rule still fails closed."
+ }
+}

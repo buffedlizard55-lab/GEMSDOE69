@@ -453,5 +453,50 @@
       "ref_dots_within_3px_of_mine": 0.166688,
       "jaccard": 0.049138
     }
+  },
+  "paired_cell_bootstrap": {
+    "candidate_minus_control": {
+      "mean": 0.025456,
+      "ci95": [
+        0.012685,
+        0.036119
+      ]
+    },
+    "candidate_minus_current_best": {
+      "mean": 0.064648,
+      "ci95": [
+        0.04314,
+        0.082622
+      ]
+    }
+  },
+  "release_statistics": {
+    "aggregation": "pooled_tp_fp_fn",
+    "evaluator_version": "vendor/gems57/holdout.py::score_cell + pooled DTI (alpha=0.2, beta=0.8, 300m triangular kernel)",
+    "withheld_positive_pixel_evaluations": 22641,
+    "candidate_dti": 0.072701,
+    "candidate_ci95": [
+      0.055864,
+      0.086004
+    ],
+    "control_dti": 0.047245,
+    "control_ci95": [
+      0.04228,
+      0.051753
+    ],
+    "current_best_dti": 0.008053363869939278,
+    "current_best_ci95": [
+      0.003382,
+      0.012724
+    ],
+    "delta_vs_control_ci95": [
+      0.012685,
+      0.036119
+    ],
+    "delta_vs_current_best_ci95": [
+      0.04314,
+      0.082622
+    ],
+    "uncertainty_unit": "spatial_block"
   }
 }

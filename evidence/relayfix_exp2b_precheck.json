@@ -1,0 +1,33 @@
+{
+ "info": {
+  "n_raw": 383827,
+  "n_transfer_chosen": 1200
+ },
+ "n_dots": 36325,
+ "comparisons": {
+  "H69 Oct12": {
+   "overlap3": 0.2627116311080523,
+   "jaccard": 0.1363736644709887,
+   "rho_subsample": 0.2227279790880983,
+   "their_dots": 35787
+  },
+  "H69-D rad": {
+   "overlap3": 0.2749070887818307,
+   "jaccard": 0.07898227992040179,
+   "rho_subsample": 0.12207928755111447,
+   "their_dots": 31994
+  },
+  "Exp1 v1": {
+   "overlap3": 0.2775223675154852,
+   "jaccard": 0.1433866999009363,
+   "rho_subsample": 0.23522631669420313,
+   "their_dots": 35235
+  },
+  "champion": {
+   "overlap3": 0.2563523743977977,
+   "jaccard": 0.006900587979094076,
+   "rho_subsample": 0.005397786849619866,
+   "their_dots": 37654
+  }
+ }
+}

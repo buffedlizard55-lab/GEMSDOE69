@@ -518,3 +518,33 @@ def corridor_evidence(corridor, stats: dict[str, LayerStats], pad: int = 4,
         z = z[np.isfinite(z)]
         out[name] = float(z.mean()) if z.size else 0.0
     return out
+
+
+def straight_step(field: np.ndarray, sigma: float = 1.5, coh_sigma: float = 2.0) -> np.ndarray:
+    """Structure-tensor coherence weighted step magnitude (NaN-preserving outside finite support)."""
+    from .data import fill_nearest
+
+    nan_mask = ~np.isfinite(field)
+    filled = fill_nearest(field.astype(np.float32))
+    sm = ndi.gaussian_filter(filled, sigma=sigma)
+    gy, gx = np.gradient(sm)
+    mag = np.hypot(gx, gy)
+    jxx = ndi.gaussian_filter(gx * gx, sigma=coh_sigma)
+    jyy = ndi.gaussian_filter(gy * gy, sigma=coh_sigma)
+    jxy = ndi.gaussian_filter(gx * gy, sigma=coh_sigma)
+    trace = jxx + jyy + 1e-12
+    coh = np.sqrt(np.maximum((jxx - jyy) ** 2 + 4.0 * jxy * jxy, 0.0)) / trace
+    out = (mag * coh).astype(np.float32)
+    out[nan_mask] = np.nan
+    return out
+
+
+def local_depletion(field: np.ndarray, sigma_local: float = 1.0, sigma_bg: float = 4.0) -> np.ndarray:
+    """Positive where local smooth field falls below broader background (NaN-preserving)."""
+    from .data import fill_nearest
+
+    nan_mask = ~np.isfinite(field)
+    filled = fill_nearest(field.astype(np.float32))
+    out = (ndi.gaussian_filter(filled, sigma=sigma_bg) - ndi.gaussian_filter(filled, sigma=sigma_local)).astype(np.float32)
+    out[nan_mask] = np.nan
+    return out

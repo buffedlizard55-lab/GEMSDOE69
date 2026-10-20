@@ -543,5 +543,10 @@
       "duplicate_by_overlap": true,
       "gemsdoe66_flagged": true
     }
-  ]
+  ],
+  "worst_abs_spearman": 0.446873,
+  "worst_dot_overlap_all": {
+    "dot_overlap_3px": 1.0,
+    "repo_path": "GEMSDOE2:submissions/gemsdoe2-turbo-simple-20260929T000000Z-zeros.tif"
+  }
 }
