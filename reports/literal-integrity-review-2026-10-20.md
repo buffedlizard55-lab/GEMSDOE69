@@ -51,3 +51,11 @@ Re-audited **14 other local TIFFs**, including the inherited 39,958-dot pair; wo
 ## Delivery links
 
 [PR #29](https://github.com/buffedlizard55-lab/GEMSDOE69/pull/29) carries this review; its initial two GitHub verify jobs passed. Follow its latest-head checks and actual merge state. [Pages/source-feed Actions](https://github.com/buffedlizard55-lab/GEMSDOE69/actions/workflows/pages.yml) is the deployment/source-refresh authority, and [the site](https://buffedlizard55-lab.github.io/GEMSDOE69/) is the intended public endpoint. The settings API denied the Arena app's Pages source change; the workflow uses its explicit pages-write token, with failure visible if that permission is denied as well. No credential or manual score receipt is invented.
+
+## Verified merge/live-site outcome and publishing limit
+
+PR29 merged at 2026-10-20T22:30:36Z as `308f4115fc5743b247ca5c4aa6844b6a4316958e`; latest-head PR checks and main CI succeeded. The public site was independently fetched after merge and contains the new negative banner, blocked download, 72/72 family source count and both overlap blockers. It is live through the existing legacy Pages source.
+
+The first source-feed workflow built/tested successfully with explicit partial source-read errors but failed at Pages configuration; no Actions deployment occurred. The Arena app's settings write was permission-denied, and redirected log downloads were host-blocked. A follow-up retains the audited daily artifacts/caches before optional publication and skips deployment with a visible warning for legacy/unknown Pages source. It does not retry denied settings writes or bypass permissions. Direct daily publication requires the repository owner to choose GitHub Actions as Pages source. The site is a committed dated snapshot until then, not an automatically refreshed live feed.
+
+The bounded publishing fallback is tracked by [PR30](https://github.com/buffedlizard55-lab/GEMSDOE69/pull/30): preserve daily artifacts/caches, expose actual source-read counts, and skip deployment for legacy/unknown mode without retrying denied settings writes. The app also lacks workflow-dispatch permission; verify push-triggered runs in Actions. No model or format gate changed.
