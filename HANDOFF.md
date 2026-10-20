@@ -57,3 +57,24 @@ the H33 attribution available in this checkout: owner materials label H33-2-B2
 `UNSCORED`, call 0.274673... a projection, and provide no organizer receipt. The
 user-supplied 0.2778 is therefore not attributed to those bytes or called
 organizer-confirmed. H33 remains learning-only.
+
+## Strict release-gate continuation — 2026-10-20
+
+The release gate now also fails closed unless HOLDOUT-DTI has a versioned
+evaluator, a positive paired 95% bootstrap CI against both the no-prior control
+and current lane-best, and a SHA-bound protocol audit confirming whole-fault
+withholding without chunking, at least 3 px of withheld-context buffer,
+visible-only catalogue features, pixel-exact masking, and pooled DTI
+(α=0.2, β=0.8, 300 m triangular kernel). The TIFF receipt must be explicitly
+classified `SUBMISSION-RECEIPT`; that is a local artifact receipt, not an
+organizer score. A passing result is `eligible_for_selector`, not a promotion
+or a slot decision.
+
+The current H69-J receipt has a local `SUBMISSION-RECEIPT` and a HOLDOUT-DTI
+record, but no paired bootstrap intervals or artifact-bound protocol audit;
+its literal registry dot overlap also fails. The H69-H2 transfer runner's
+separate code review (`evidence/relayfix_holdout_protocol_audit.json`) found
+chunked segments and no withheld-context buffer. Its legacy `cmd_gate` and
+`cmd_emit` are now deliberately blocked. Neither candidate is downloadable;
+no experiment or slot was used in this continuation. See
+`reports/release-gate-followup-2026-10-20.md` for tests and review notes.

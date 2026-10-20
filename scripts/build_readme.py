@@ -60,7 +60,7 @@ def main() -> None:
 
 ## {status}
 
-**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [publication audit](reports/publication-audit-2026-10-20.md) · [final audit](reports/final-audit-2026-10-20.md).
+**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [publication audit](reports/publication-audit-2026-10-20.md) · [release-gate follow-up](reports/release-gate-followup-2026-10-20.md) · [final audit](reports/final-audit-2026-10-20.md).
 
 **Submission status:** {artifact_status}
 
@@ -74,7 +74,7 @@ The governing lane rule is literal: if any registry raster has rank correlation 
 
 - Submission name: `{name}`; zeros TIFF SHA-256: `{sha}`.
 - **HOLDOUT-DTI**: {fmt(holdout.get('dti'), 6)}, 95% CI {ci_text}; evaluator `{holdout.get('evaluator_version', 'not recorded')}`; {holdout.get('withheld_positive_pixels', 'not recorded')} withheld positives across {holdout.get('n_cells', 'not recorded')} cells; comparator {fmt(holdout.get('comparator_dti'), 6)}. This is a local screen, **not** an organizer score or leaderboard projection.
-- **REGISTRY-MEASUREMENT**: {registry.get('n_compared', 'not recorded')}/{registry.get('n_registry_blobs', 'not recorded')} accessible hash-verified entries, worst literal 3-pixel overlap {fmt(overlap, 4)} (limit 0.7000), literal rho pass={literal.get('rho_ok', 'not recorded')}, literal overlap pass={literal.get('overlap_ok', 'not recorded')}. The recorded transfer candidate is therefore a duplicate-and-stop negative result even though its local holdout screen and local format receipt exist.
+- **REGISTRY-MEASUREMENT**: {registry.get('n_compared', 'not recorded')}/{registry.get('n_registry_blobs', 'not recorded')} accessible hash-verified entries, worst literal 3-pixel overlap {fmt(overlap, 4)} (limit 0.7000), literal rho pass={literal.get('rho_ok', 'not recorded')}, literal overlap pass={literal.get('overlap_ok', 'not recorded')}. The recorded transfer candidate is a duplicate-and-stop negative result; its historical holdout also used the chunked, unbuffered legacy runner documented in `evidence/relayfix_holdout_protocol_audit.json` and is not protocol-qualified, despite its local format receipt.
 
 ### Why download is locked
 

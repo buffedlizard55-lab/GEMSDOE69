@@ -27,7 +27,10 @@
   DrivenData files; integrity-pinned, NOT organizer-authenticated.
 * Registry rasters restored by `scripts/fetch_registry.py` from
   `registry/prior_rasters.json` (751 unique git blobs, family census
-  2026-10-11); every blob verified content-addressed (git blob sha1).
+  2026-10-11); every blob verified content-addressed (git blob sha1). The
+  current 2026-10-20 literal scan also includes owner-head indexed rasters
+  (862 accessible entries); neither inventory is guaranteed to be the complete
+  organizer registry.
 
 ## Reproduce
 
@@ -47,3 +50,19 @@ stratification is diagnostic only. `scripts/release_gate.py` is the single
 publication policy. Read `reports/review-2026-10-20.md` and the updated handoff.
 Do not reuse the previous radiometric promotion verdict: the scoring source is
 not reproducible from the checked-in implementation and phase receipts are stale.
+
+## Holdout and selector gates (2026-10-20 continuation)
+
+A release-eligible artifact requires a versioned HOLDOUT-DTI evaluator, a positive
+paired 95% bootstrap CI against both the no-prior control and current lane-best,
+and a SHA-bound protocol audit proving whole-segment withholding, no chunking,
+≥3 px withheld-context buffer, visible-only catalogue features, pixel-exact
+visible-fault masking, and pooled DTI (α=0.2, β=0.8, 300 m triangular kernel).
+The artifact receipt must be classified `SUBMISSION-RECEIPT` and bind the exact
+TIFF bytes. Passing these gates only makes a candidate eligible for the separate
+selector; it does not select a submission or spend a slot.
+
+The historical `scripts/run_exp2b_transfer.py` gate and emitter are deliberately
+blocked: they use chunked, unbuffered `build_holdout()` and cannot qualify or
+emit a new TIFF. Keep the guard until a newly authorized runner uses the shared
+buffered evaluator and both literal uniqueness phases pass.

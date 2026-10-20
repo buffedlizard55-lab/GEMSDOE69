@@ -75,7 +75,9 @@ class ProjectContractTests(unittest.TestCase):
         index = (ROOT / "index.html").read_text(encoding="utf-8")
         guide = (ROOT / "docs/executive-summary.html").read_text(encoding="utf-8")
         card = json.loads((ROOT / "evidence/run_card.json").read_text(encoding="utf-8"))
-        ok_verdicts = {"promote", "promote-candidate"}
+        # The release gate only admits a candidate to the separate selector;
+        # it never makes the promotion/slot decision itself.
+        ok_verdicts = {"eligible_for_selector"}
         if card["verdict"] not in ok_verdicts:
             self.assertIn("NOT OK TO SUBMIT", index)
             self.assertIn("DO NOT SUBMIT", index)

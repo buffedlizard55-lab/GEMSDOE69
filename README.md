@@ -2,7 +2,7 @@
 
 ## NOT OK TO SUBMIT — DO NOT SUBMIT
 
-**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [publication audit](reports/publication-audit-2026-10-20.md) · [final audit](reports/final-audit-2026-10-20.md).
+**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [publication audit](reports/publication-audit-2026-10-20.md) · [release-gate follow-up](reports/release-gate-followup-2026-10-20.md) · [final audit](reports/final-audit-2026-10-20.md).
 
 **Submission status:** No TIFF or ZIP is published for submission. Files in `submissions/` are audit artifacts only.
 
@@ -16,11 +16,14 @@ The governing lane rule is literal: if any registry raster has rank correlation 
 
 - Submission name: `h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros`; zeros TIFF SHA-256: `b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1`.
 - **HOLDOUT-DTI**: 0.007738, 95% CI [0.005732, 0.009743]; evaluator `vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=['all']; POOLED from summed TP/FP/FN)`; 22641 withheld positives across 8 cells; comparator 0.002148. This is a local screen, **not** an organizer score or leaderboard projection.
-- **REGISTRY-MEASUREMENT**: 862/862 accessible hash-verified entries, worst literal 3-pixel overlap 1.0000 (limit 0.7000), literal rho pass=True, literal overlap pass=False. The recorded transfer candidate is therefore a duplicate-and-stop negative result even though its local holdout screen and local format receipt exist.
+- **REGISTRY-MEASUREMENT**: 862/862 accessible hash-verified entries, worst literal 3-pixel overlap 1.0000 (limit 0.7000), literal rho pass=True, literal overlap pass=False. The recorded transfer candidate is a duplicate-and-stop negative result; its historical holdout also used the chunked, unbuffered legacy runner documented in `evidence/relayfix_holdout_protocol_audit.json` and is not protocol-qualified, despite its local format receipt.
 
 ### Why download is locked
 
+- No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.
+- No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.
 - Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified/dotlike diagnostics cannot override the literal protocol.
+- A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed.
 
 `release_gate.py` is intentionally fail-closed and controls publication. Its H69-J aggregate evidence is not a substitute for the H69-H2 run card, and a negative run card never authorizes a download. H69-J's local aggregate receipts are now hash-bound, but its literal all-registry overlap still fails and therefore it also cannot be published. No competition slot was used.
 
@@ -118,3 +121,17 @@ it conflicts with other highs in the prompt and must not be called current fact.
 Core values remain Maximize P(Win) and Own the Outcome. No leaderboard improvement,
 source verification, data access, or completed submission may be invented.
 The duplicate-and-stop rule remains binding even when it prevents a new TIFF.
+
+## Fail-closed continuation note — 2026-10-20
+
+A downloadable candidate now additionally requires an artifact-bound HOLDOUT-DTI
+record, positive paired 95% bootstrap CIs against both the no-prior control and
+current lane-best, and an audited whole-segment protocol (no chunking, at least
+3 px withheld-context buffer, visible-only catalogue features, pixel-exact
+visible-fault masking, pooled DTI with α=0.2, β=0.8, 300 m triangular kernel).
+The TIFF receipt must be classified `SUBMISSION-RECEIPT`; this local artifact
+receipt is not an organizer score or organizer confirmation. A passing gate
+only makes a candidate eligible for the separate selector and never spends a
+slot. The historical `scripts/run_exp2b_transfer.py` gate/emitter is disabled
+because it used chunked, unbuffered holdouts; do not remove its guard without a
+new authorized shared-tool runner and both literal uniqueness phases passing.

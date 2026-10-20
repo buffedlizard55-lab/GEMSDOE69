@@ -171,7 +171,7 @@ def build_executive_summary():
 <ol>
 <li><b>Preregister and generate:</b> restore the exact integrity-pinned inputs and use the shared template's cached feature stack, holdout evaluator, and submission writer. A TIFF written during development is not automatically publishable.</li>
 <li><b>Validate exact bytes:</b> re-read the artifact with the shared validator. It must be a single-band float32 GeoTIFF in EPSG:32611, 3730&times;3292, with transform (100, 0, 243350, 0, &minus;100, 4508550), finite footprint values in [0,1], and the required outside-footprint behavior.</li>
-<li><b>Science gate:</b> on untouched spatially blocked hide-and-recover data, beat the identical no-corridor-prior pipeline; bind the holdout receipt to the artifact SHA-256; run a feature-alone leakage canary for every named feature.</li>
+<li><b>Science gate:</b> use untouched spatially blocked hide-and-recover data; withhold whole fault segments (not chunks) with at least a 3 px feature-context buffer; derive catalogue features only from visible faults and mask visible faults pixel-exactly. Score pooled DTI with &alpha;=0.2, &beta;=0.8, and the 300 m triangular kernel. Require positive paired 95% bootstrap CIs against both the no-prior control and current lane-best; bind the holdout and protocol audit to the exact artifact SHA-256; run a feature-alone leakage canary for every named feature.</li>
 <li><b>Literal registry gate:</b> compare the pre-placement surface and final dots against every available registry raster. Any rank correlation above 0.90 or any &gt;70% 3-pixel dot overlap is duplicate-and-stop. Dense-support strata are diagnostics, not exemptions.</li>
 <li><b>Publish and submit:</b> only if the banner becomes green, download the exact linked <code>.tif</code>, open DrivenData competition 306 &rarr; <i>New submission</i>, select it (or a ZIP with exactly one GeoTIFF), and paste the receipt note of at most 140 characters. A selector still decides whether to spend a weekly slot.</li>
 </ol>
@@ -296,6 +296,7 @@ def build_results():
 <p><b>Negative: duplicate-and-stop.</b> The run card records HOLDOUT-DTI
 {current_holdout.get('dti', float('nan')):.4f}, 95% CI {((current_holdout.get('ci95') or [float('nan')])[0]):.4f} to {((current_holdout.get('ci95') or [float('nan'), float('nan')])[1]):.4f},
 against comparator {current_holdout.get('comparator_dti', float('nan')):.4f}; {current_holdout.get('withheld_positive_pixels', '?')} withheld positives and {current_holdout.get('n_cells', '?')} cells. These are local HOLDOUT-DTI measurements, not an organizer score. Its literal all-registry overlap is {(current_registry.get('worst_dot_overlap_all') or {}).get('dot_overlap_3px', 'pending')} (limit 0.70), so no TIFF is downloadable.</p>
+<p>The historical H69-H2 holdout used the legacy chunked, unbuffered path; its code-review findings are in <code>evidence/relayfix_holdout_protocol_audit.json</code>. It is not a protocol-qualified positive. The old runner is blocked from further experiments or TIFF emission.</p>
 </div>
 <div class="card"><h2>E1 &mdash; census, hard-link recovery, canaries</h2>
 <table>
@@ -316,7 +317,7 @@ against comparator {current_holdout.get('comparator_dti', float('nan')):.4f}; {c
 </table>
 <table><tr><th>Cell</th><th>Corridor DTI</th><th>Control DTI</th></tr>{rows}</table>
 <p class="small">Evaluator: vendor/template66 gems57 pooled hide-and-recover (&alpha;=0.2, &beta;=0.8,
-300 m triangular kernel). Evidence class HOLDOUT-DTI.</p>
+300 m triangular kernel). Evidence class HOLDOUT-DTI. The archived half-width is a repeated-cell normal approximation, not the required paired-cell-bootstrap CI against both no-prior control and current lane-best; a protocol-compliance audit is also missing.</p>
 </div>
 <div class="card"><h2>E3 &mdash; archived emission, registry scan, and validator</h2>
 <table><tr><th>Check</th><th>Result</th></tr>
@@ -382,6 +383,7 @@ explicitly); gems/ taken from upstream GEMSDOE66 (the template owner) and the dr
 condition is proxied by sub-parallel terminal strikes (&le;30&deg;).</td><td>Disclosed in the method; sensitivity
 check queued for a future session.</td></tr>
 <tr><td>IR-69-REG-01</td><td>The literal protocol overlap gate fails closed against any sparse dot field because the registry contains universal/support-dense surfaces. Dotlike strata are diagnostic only; a literal failure is duplicate-and-stop.</td><td>Publication remains blocked until the protocol owner resolves registry-support semantics. No local exception is allowed.</td></tr>
+<tr><td>IR-69-HOLDOUT-01</td><td>The archived H69-J E2 record has no positive paired bootstrap 95% CI against both control and current lane-best, and no artifact-bound protocol audit. H69-H2 used a legacy chunked, unbuffered holdout.</td><td>Release gate now requires explicit paired intervals and a source-hash-bound whole-segment protocol audit; the H69-H2 legacy runner is blocked. No archived result is promoted.</td></tr>
 <tr><td>IR-69-SCORE-01</td><td>Leaderboard values supplied in the standing prompt are USER-REPORTED-NOT-ORGANIZER-CONFIRMED unless a submission-page receipt binds a value to exact bytes.</td><td>Labels applied everywhere; projections are never reported as scores.</td></tr>
 <tr><td>IR-69-H33-01</td><td>The current public owner source for H33-2-B2 says UNSCORED, labels 0.2747 a projection, and provides no organizer receipt. This conflicts with the user-supplied 0.2778 association.</td><td>Logged in <code>reports/h33-owner-source-audit-2026-10-20.md</code>; H33 artifacts are learning-only and are not reused in this lane.</td></tr>
 </table>
