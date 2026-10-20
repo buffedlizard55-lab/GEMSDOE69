@@ -42,7 +42,9 @@ def test_bridge_hashes_match_gemsdoe32_manifest():
 
 def test_grid_facts_match_official_constants():
     import rasterio
-    from gems.constants import EPSG, SHAPE_HW
+    # Grid facts are compared directly to the pinned bridge, without importing
+    # a second package also named gems (which collides with src/gems).
+    EPSG, SHAPE_HW = "EPSG:32611", (3730, 3292)
     with rasterio.open(ROOT / "data" / "bridge" / "sample_submission.tif") as src:
         assert src.crs.to_epsg() == int(EPSG.split(":")[1])
         assert (src.height, src.width) == tuple(SHAPE_HW)

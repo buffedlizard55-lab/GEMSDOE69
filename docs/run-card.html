@@ -9,50 +9,269 @@
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="active">Run Card</a></div></nav>
 <main class="wrap">
 <div class="card"><h2>Run card (JSON)</h2><pre>{
- &quot;generated_utc&quot;: &quot;20261020T182700Z&quot;,
+ &quot;generated_utc&quot;: &quot;2026-10-20T19:04:20.700515+00:00&quot;,
  &quot;lane&quot;: &quot;GEMSDOE69 relay-ramp &amp; pull-apart corridor generator&quot;,
- &quot;hypothesis&quot;: &quot;H69-D radiometric K/Th depletion halos inside corridors: hydrothermal alteration destroys magnetite and leaches K/Th, producing depletion halos that mark permeable damage zones even where no scarp survives; scoring corridors by depletion concentrates dots in pull-apart basins away from dense structural trends, reducing registry overlap.&quot;,
- &quot;mechanism&quot;: &quot;Tip-graph step-over pairing (W 0.1-15 km, along &lt;=3.5W, sub-parallel strikes) -&gt; oblique connector + en echelon strands + pull-apart rhomb -&gt; multi-scale HG/tilt grav+mag (incl. magnetic lows) + lidar scarp + radiometric K/Th low + WNW-extension orientation -&gt; greedy marginal-DTI dot placement &gt;=200m off catalogue.&quot;,
- &quot;non_fault_mimic&quot;: &quot;Lithologic contacts, buried channel margins, terrace edges in detrended elevation, and survey-line artifacts can produce corridor-consistent HG/tilt; felsic intrusives can deplete K/Th without faulting; hydrothermally altered but unfaulted volcanics produce magnetic lows.&quot;,
+ &quot;hypothesis&quot;: &quot;H69-D: radiometric depletion inside catalogue-tip relay/pull-apart corridors; previously generated candidate, audited here without another experiment.&quot;,
+ &quot;mechanism&quot;: &quot;Tip-graph corridor proposals scored using gravity/magnetic HG and tilt, magnetic lows, lidar scarps, orientation, and K/Th depletion; greedy marginal-DTI placement.&quot;,
+ &quot;non_fault_mimic&quot;: &quot;Alluvial sediment composition and lithologic contacts can alter radiometric ratios; pluvial shorelines can mimic scarps. K depletion is not a universal alteration signature.&quot;,
  &quot;holdout&quot;: {
-  &quot;instrument&quot;: &quot;vendor/template66 gems57 pooled hide-and-recover (alpha 0.2, beta 0.8, 300m triangular kernel); seeds/modes/cells as recorded&quot;,
-  &quot;corridor_mean_dti&quot;: 0.005975197860273526,
-  &quot;corridor_ci95_half&quot;: 0.0014413577610952733,
-  &quot;control_mean_dti&quot;: 0.0021479253641536293,
-  &quot;paired_delta&quot;: 0.003827272496119896,
-  &quot;withheld_positive_px_total&quot;: 22641,
-  &quot;n_cells&quot;: 8,
-  &quot;gate_passed&quot;: true,
   &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
-  &quot;hardlinked_recovery_within_300m_mean&quot;: 0.8636363636363636,
-  &quot;hardlinked_n_tested&quot;: 22
+  &quot;evaluator_version&quot;: &quot;vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20, 21] modes=[&#x27;all&#x27;])&quot;,
+  &quot;dti&quot;: 0.005975197860273526,
+  &quot;ci95&quot;: [
+   0.004533840099178252,
+   0.007416555621368799
+  ],
+  &quot;withheld_positive_pixels&quot;: 22641,
+  &quot;n_cells&quot;: 8,
+  &quot;comparator_dti&quot;: 0.0021479253641536293,
+  &quot;paired_delta&quot;: 0.003827272496119896,
+  &quot;uncertainty_note&quot;: &quot;Archived normal-approximation interval across repeated cells; not an independent block bootstrap. Not rerun this session.&quot;
  },
  &quot;correlation_overlap_vs_registry&quot;: {
+  &quot;evidence_class&quot;: &quot;REGISTRY-MEASUREMENT&quot;,
+  &quot;generated_utc&quot;: &quot;20261020T183408Z&quot;,
+  &quot;my_file&quot;: &quot;submissions/h69-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif&quot;,
+  &quot;my_dots&quot;: 31994,
+  &quot;my_sha256&quot;: &quot;be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7&quot;,
+  &quot;registry_scope&quot;: &quot;registry/prior_rasters.json (751 unique blobs, 2026-10-11 family census)&quot;,
+  &quot;rho_limit&quot;: 0.9,
+  &quot;overlap_limit&quot;: 0.7,
+  &quot;n_registry_blobs&quot;: 751,
+  &quot;n_compared&quot;: 750,
+  &quot;n_errors&quot;: 1,
   &quot;worst_abs_spearman&quot;: 0.15442722757041327,
-  &quot;worst_dot_overlap_dotlike&quot;: 0.6194286428705382,
+  &quot;worst_rho_entry&quot;: {
+   &quot;blob&quot;: &quot;157813953405ef61d7f8e98cadd48bf3df2c5900&quot;,
+   &quot;stratum&quot;: &quot;dotlike&quot;,
+   &quot;their_dots&quot;: 37654,
+   &quot;rho&quot;: 0.15442722757041327,
+   &quot;dot_overlap_3px&quot;: 0.23204350815777958,
+   &quot;pixel_agreement&quot;: 0.9952330615449265
+  },
+  &quot;worst_dot_overlap_all&quot;: {
+   &quot;blob&quot;: &quot;e6433f57238b38a142192af9a531a8c7934ed111&quot;,
+   &quot;stratum&quot;: &quot;universal&quot;,
+   &quot;their_dots&quot;: 5167373,
+   &quot;rho&quot;: 0.04675895600273334,
+   &quot;dot_overlap_3px&quot;: 1.0,
+   &quot;pixel_agreement&quot;: 0.5792421468569511
+  },
+  &quot;worst_dot_overlap_dotlike&quot;: {
+   &quot;blob&quot;: &quot;dd5dffe559c70eca07cd8498cd6c237691af83b3&quot;,
+   &quot;stratum&quot;: &quot;dotlike&quot;,
+   &quot;their_dots&quot;: 103347,
+   &quot;rho&quot;: 0.013024738662811371,
+   &quot;dot_overlap_3px&quot;: 0.6194286428705382,
+   &quot;pixel_agreement&quot;: 0.9892026001778623
+  },
+  &quot;n_exact_pixel_agreement_9999&quot;: 0,
   &quot;literal_gate&quot;: {
    &quot;rho_ok&quot;: true,
    &quot;overlap_ok&quot;: false
   },
-  &quot;stratified_gate_ok&quot;: true,
-  &quot;n_compared&quot;: 750,
-  &quot;n_registry_blobs&quot;: 751
+  &quot;stratified_gate&quot;: {
+   &quot;dotlike_overlap_ok&quot;: true,
+   &quot;note&quot;: &quot;universal soft surfaces and dense rasters overlap ANY sparse dot field by construction; family precedent GEMSDOE63/64 treats them as a registry-structure condition, reported separately from the dotlike lane-drift gate&quot;
+  },
+  &quot;errors&quot;: [
+   {
+    &quot;blob&quot;: &quot;a97c7b2a513225c9f9f2b35736afe5abf4d2a491&quot;,
+    &quot;err&quot;: &quot;shape 32x48&quot;,
+    &quot;stratum&quot;: &quot;error&quot;
+   }
+  ],
+  &quot;seconds&quot;: 401.4
  },
  &quot;raster&quot;: {
-  &quot;zeros_sha256&quot;: &quot;be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7&quot;,
-  &quot;zeros_path&quot;: &quot;submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif&quot;,
-  &quot;nan_sha256&quot;: &quot;6ceceb6bd47817a3241d56a4f2d9730ca9010fc70b37a5cf146d01272cad3ec0&quot;,
-  &quot;nan_path&quot;: &quot;submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-nan.tif&quot;,
-  &quot;n_dots&quot;: 31994,
-  &quot;format_compliance_nan_ok&quot;: true,
-  &quot;format_compliance_zeros_ok&quot;: true,
-  &quot;validator_output&quot;: &quot;no NaN inside the footprint (nan variant finite mask == sample_submission), values in [0,1], CRS EPSG:32611, shape 3730x3292, transform exact (see evidence/e3_receipt.json format_compliance)&quot;
+  &quot;zeros&quot;: {
+   &quot;path&quot;: &quot;submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif&quot;,
+   &quot;sha256&quot;: &quot;be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7&quot;,
+   &quot;bytes&quot;: 228607
+  },
+  &quot;nan&quot;: {
+   &quot;path&quot;: &quot;submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-nan.tif&quot;,
+   &quot;sha256&quot;: &quot;6ceceb6bd47817a3241d56a4f2d9730ca9010fc70b37a5cf146d01272cad3ec0&quot;,
+   &quot;bytes&quot;: 281136
+  }
  },
  &quot;submission_name&quot;: &quot;h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros&quot;,
- &quot;submission_note&quot;: &quot;H69-D radiometric halo; relay/pull-apart corridors; HG+tilt grav/mag + lidar scarp + K/Th depletion; 32k dots&quot;,
- &quot;verdict&quot;: &quot;promote&quot;,
- &quot;banner&quot;: &quot;ok&quot;,
- &quot;note&quot;: &quot;verdict &#x27;promote&#x27; means the holdout gate + registry scan + validator all passed; promotion to a scored slot is a separate selector step (protocol rule 6)&quot;
+ &quot;submission_note&quot;: &quot;H69-D radiometric halo; relay/pull-apart corridors; K-Th depletion + HG/tilt&quot;,
+ &quot;verdict&quot;: &quot;negative&quot;,
+ &quot;banner&quot;: &quot;stop&quot;,
+ &quot;note&quot;: &quot;Literal protocol enforced. No submission slot used. Archived measurements are not organizer scores.&quot;,
+ &quot;release_policy&quot;: {
+  &quot;verdict&quot;: &quot;negative&quot;,
+  &quot;download_enabled&quot;: false,
+  &quot;reasons&quot;: [
+   &quot;No explicit same-evaluator evidence of beating the current holdout best.&quot;,
+   &quot;Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.&quot;,
+   &quot;Registry scan is incomplete or contains errors.&quot;,
+   &quot;Reproducible method source manifest is missing, stale, or not artifact-bound.&quot;,
+   &quot;Artifact-bound feature-alone leakage canaries are missing or flagged.&quot;,
+   &quot;surface uniqueness phase is missing or not bound to the current artifact.&quot;,
+   &quot;surface uniqueness phase failed or is incomplete.&quot;,
+   &quot;dots uniqueness phase is missing or not bound to the current artifact.&quot;,
+   &quot;dots uniqueness phase failed or is incomplete.&quot;
+  ],
+  &quot;artifact_sha256&quot;: &quot;be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7&quot;,
+  &quot;validator_report&quot;: {
+   &quot;file&quot;: &quot;submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif&quot;,
+   &quot;bytes&quot;: 228607,
+   &quot;sha256&quot;: &quot;be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7&quot;,
+   &quot;meta&quot;: {
+    &quot;count&quot;: 1,
+    &quot;dtype&quot;: &quot;float32&quot;,
+    &quot;crs&quot;: &quot;EPSG:32611&quot;,
+    &quot;shape&quot;: [
+     3730,
+     3292
+    ],
+    &quot;transform&quot;: [
+     100.0,
+     0.0,
+     243350.0,
+     0.0,
+     -100.0,
+     4508550.0
+    ],
+    &quot;nodata&quot;: null,
+    &quot;bounds&quot;: [
+     243350.0,
+     4135550.0,
+     572550.0,
+     4508550.0
+    ]
+   },
+   &quot;n_nan&quot;: 0,
+   &quot;n_nan_inside_footprint&quot;: 0,
+   &quot;min&quot;: 0.0,
+   &quot;max&quot;: 1.0,
+   &quot;positive_pixels&quot;: 31994,
+   &quot;distinct_positive_values&quot;: [
+    1.0
+   ],
+   &quot;checks&quot;: {
+    &quot;single_band&quot;: true,
+    &quot;dtype_float32&quot;: true,
+    &quot;crs_epsg_32611&quot;: true,
+    &quot;shape_3730x3292&quot;: true,
+    &quot;transform_and_bounds_match_sample_submission&quot;: true,
+    &quot;footprint_all_finite&quot;: true,
+    &quot;footprint_values_in_0_1&quot;: true,
+    &quot;no_infinite_values&quot;: true,
+    &quot;nan_only_outside_footprint&quot;: true,
+    &quot;no_sentinel_values&quot;: true,
+    &quot;all_finite_values_in_0_1&quot;: true,
+    &quot;no_positive_outside_footprint&quot;: true,
+    &quot;zero_positive_on_mapped_catalogue&quot;: true,
+    &quot;template_validator_passed&quot;: true
+   },
+   &quot;template_validator&quot;: {
+    &quot;all_checks_passed&quot;: true,
+    &quot;checks&quot;: {
+     &quot;single_band&quot;: true,
+     &quot;dtype_float32&quot;: true,
+     &quot;dimensions_3730x3292&quot;: true,
+     &quot;crs_epsg_32611&quot;: true,
+     &quot;transform_matches_sample_submission&quot;: true,
+     &quot;no_nan_anywhere&quot;: true,
+     &quot;no_inf_anywhere&quot;: true,
+     &quot;no_sentinel_values&quot;: true,
+     &quot;range_0_1_guaranteed&quot;: true,
+     &quot;min_ge_0&quot;: true,
+     &quot;max_le_1&quot;: true,
+     &quot;in_footprint_all_finite&quot;: true,
+     &quot;in_footprint_range_0_1&quot;: true,
+     &quot;outside_footprint_zero&quot;: true,
+     &quot;zero_dots_on_mapped_catalogue&quot;: true
+    }
+   },
+   &quot;template_format_report&quot;: {
+    &quot;ok&quot;: true,
+    &quot;problems&quot;: []
+   },
+   &quot;all_checks_passed&quot;: true
+  }
+ },
+ &quot;validator_output&quot;: {
+  &quot;file&quot;: &quot;submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif&quot;,
+  &quot;bytes&quot;: 228607,
+  &quot;sha256&quot;: &quot;be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7&quot;,
+  &quot;meta&quot;: {
+   &quot;count&quot;: 1,
+   &quot;dtype&quot;: &quot;float32&quot;,
+   &quot;crs&quot;: &quot;EPSG:32611&quot;,
+   &quot;shape&quot;: [
+    3730,
+    3292
+   ],
+   &quot;transform&quot;: [
+    100.0,
+    0.0,
+    243350.0,
+    0.0,
+    -100.0,
+    4508550.0
+   ],
+   &quot;nodata&quot;: null,
+   &quot;bounds&quot;: [
+    243350.0,
+    4135550.0,
+    572550.0,
+    4508550.0
+   ]
+  },
+  &quot;n_nan&quot;: 0,
+  &quot;n_nan_inside_footprint&quot;: 0,
+  &quot;min&quot;: 0.0,
+  &quot;max&quot;: 1.0,
+  &quot;positive_pixels&quot;: 31994,
+  &quot;distinct_positive_values&quot;: [
+   1.0
+  ],
+  &quot;checks&quot;: {
+   &quot;single_band&quot;: true,
+   &quot;dtype_float32&quot;: true,
+   &quot;crs_epsg_32611&quot;: true,
+   &quot;shape_3730x3292&quot;: true,
+   &quot;transform_and_bounds_match_sample_submission&quot;: true,
+   &quot;footprint_all_finite&quot;: true,
+   &quot;footprint_values_in_0_1&quot;: true,
+   &quot;no_infinite_values&quot;: true,
+   &quot;nan_only_outside_footprint&quot;: true,
+   &quot;no_sentinel_values&quot;: true,
+   &quot;all_finite_values_in_0_1&quot;: true,
+   &quot;no_positive_outside_footprint&quot;: true,
+   &quot;zero_positive_on_mapped_catalogue&quot;: true,
+   &quot;template_validator_passed&quot;: true
+  },
+  &quot;template_validator&quot;: {
+   &quot;all_checks_passed&quot;: true,
+   &quot;checks&quot;: {
+    &quot;single_band&quot;: true,
+    &quot;dtype_float32&quot;: true,
+    &quot;dimensions_3730x3292&quot;: true,
+    &quot;crs_epsg_32611&quot;: true,
+    &quot;transform_matches_sample_submission&quot;: true,
+    &quot;no_nan_anywhere&quot;: true,
+    &quot;no_inf_anywhere&quot;: true,
+    &quot;no_sentinel_values&quot;: true,
+    &quot;range_0_1_guaranteed&quot;: true,
+    &quot;min_ge_0&quot;: true,
+    &quot;max_le_1&quot;: true,
+    &quot;in_footprint_all_finite&quot;: true,
+    &quot;in_footprint_range_0_1&quot;: true,
+    &quot;outside_footprint_zero&quot;: true,
+    &quot;zero_dots_on_mapped_catalogue&quot;: true
+   }
+  },
+  &quot;template_format_report&quot;: {
+   &quot;ok&quot;: true,
+   &quot;problems&quot;: []
+  },
+  &quot;all_checks_passed&quot;: true
+ }
 }</pre></div>
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

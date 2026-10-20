@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Why H33 Scored · GEMSDOE69</title>
+<title>H33 evidence review · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
@@ -9,44 +9,27 @@
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="active">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card">
-<h2>PhD analysis: why h33-h33-2-b2 scored 0.2778 (USER-REPORTED-NOT-ORGANIZER-CONFIRMED), and what would beat it</h2>
-<h3>1. The metric arithmetic</h3>
-<p>The competition metric is the distance-weighted Tversky index:
-<code>DTI = TP<sub>w</sub> / (TP<sub>w</sub> + 0.2&middot;FP<sub>w</sub> + 0.8&middot;FN<sub>w</sub> + &epsilon;)</code> with a 300&nbsp;m triangular kernel
-(official problem page; transcribed in <code>vendor/template66/gems/metric.py</code>). False negatives cost
-<b>4&times;</b> as much as false positives. Adding one dot with hit probability <i>p</i> near previously uncovered
-truth raises DTI iff <code>p &gt; &alpha;&middot;DTI</code>; at DTI = 0.2778 the break-even is
-<b>p &gt; 0.0556</b>. Any dot better than ~5.6% likely to touch a hidden fault within 300&nbsp;m is score-positive.
-Sparse, single-basin submissions (1&ndash;2k dots) therefore cap near 0.02&ndash;0.10: they pay the FN penalty on the
-other 99% of the basin.</p>
-<h3>2. What h33-2-b2 actually is (GEMSDOE32 audit bytes)</h3>
-<ul>
-<li><b>37,654 unit dots</b> (value 1.0), basin-wide, on the d28/h19-5 multi-physics lineament propensity
-(&ldquo;0.2708 base&rdquo;), zeros mode, all-finite [0,1] &mdash; format-safe.</li>
-<li><b>Catalogue flank prune B = 2 px (200 m)</b>: every dot within 200&nbsp;m of a mapped fault deleted. Known
-faults are masked out of scoring, so such dots earn zero TP credit while risking FP mass; excising them
-is a pure gain (audit: 0 dots within 100&nbsp;m or 200&nbsp;m of the catalogue after the prune).</li>
-<li>Live-mirror instrument: +0.00487 DTI in 4/4 folds vs the pre-prune base (HOLDOUT-DTI class in the
-GEMSDOE32 audit; the live receipt value quoted on that site is 0.2778).</li>
-</ul>
-<h3>3. Why it beat the other 37k-dot submissions</h3>
-<p>Within the family, three decisions separate 0.26&ndash;0.2708 from 0.2778: (a) dot spacing calibrated near
-the 300&nbsp;m kernel (the d2.8-px thinning beat d1.5 at equal physics: 0.2600 vs 0.2477 on receipts quoted in
-the prompt); (b) basin-wide coverage at the marginal bar above, rather than concentrated bets;
-(c) the 200&nbsp;m flank prune, worth the residual +0.007. The emission's <i>shape</i> &mdash; dots on multi-physics
-lineaments, off catalogue &mdash; matches the DTI optimum for a field of thin hidden faults.</p>
-<h3>4. Can we score higher than 0.2778? &mdash; the honest answer</h3>
-<p><b>Mechanism, yes</b>: the marginal-bar argument says any propensity improvement that puts more dots above
-the p &gt; 0.2&middot;DTI line raises the score; corridor geometry is exactly such an improvement <i>if</i> hidden faults
-preferentially occupy step-over corridors (the physical claim this lane tests). <b>Calibration, honestly
-uncertain</b>: the family's own instrument ranked live scores with cross-family Spearman &rho;&asymp;0.51 (p&asymp;0.09)
-only (GEMSDOE32 instrument-calibration evidence), and the user-cited leaderboard highs (0.3774, 0.3195 &mdash;
-USER-REPORTED) sit +0.04&ndash;+0.10 above the family ceiling, implying signal the family instrument has not
-captured. This lane therefore: validate on the spatially-blocked holdout, pass the gate, publish the TIF
-with an explicit OK/DO-NOT-SUBMIT banner, and treat promotion to a scored slot as a separate selector
-decision. No projection is ever written as a score.</p>
-</div>
+<div class="card"><h2>Why the reported H33 result is plausible — not proven</h2>
+<p>The value <b>0.2778 is USER-REPORTED, NOT ORGANIZER-CONFIRMED for this file</b>.
+No submission-page receipt binding that value to the H33 hash is available here. The user gives
+conflicting leaderboard highs; the archived leaderboard snapshot is not a current feed.</p>
+<p>The local family audit (<code>evidence/e0_champion_ladder_measured.json</code>) records
+progressively sparser dot fields. Under the implemented DTI, redundant dots can add false-positive
+mass without increasing the maximum coverage of a truth pixel. Thinning can therefore improve
+precision while retaining recovery within the distance kernel. This is a plausible explanation
+of the reported family trend, not a causal experiment on organizer hidden truth.</p>
+<p>Removing catalogue-adjacent dots is <b>not automatically a pure gain</b>: an adjacent dot may cover
+an unmasked hidden fault. For a new unit dot with marginal truth coverage dT and self-credit m,
+the exact improvement condition is <code>dT &gt; 0.2 DTI (dT + 1 - m)</code> for the stated weights.
+The simplified threshold <code>m &gt; 0.2 DTI</code> only follows when dT=m. It is not a universal
+5.6% fault-probability rule. There is no justified fixed score ceiling for sparse submissions.</p>
+<p>Can we beat H33? Possibly, but <b>not demonstrated</b>. That requires a reproducible,
+leakage-safe comparison and ultimately an organizer receipt. Our current literal uniqueness gate
+fails, so the correct action is a negative result, not a projected leaderboard score.</p>
+<p>Manual review: <a href="https://github.com/drivendataorg/gems-prize-reference-solution">organizer reference repository</a>,
+<a href="https://www.drivendata.org/competitions/306/competition-doe-gems/page/967/">official problem description</a>,
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE32/blob/main/docs/index.html">family H33 page source</a>.
+Only the GitHub sources were accessible for this review; the competition page was not independently refreshed.</p></div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

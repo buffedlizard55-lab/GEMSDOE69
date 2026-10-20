@@ -385,103 +385,10 @@ def cmd_unique() -> int:
 
 
 def cmd_card() -> int:
-    """Assemble the single JSON run card (protocol rule 5)."""
-    gate = json.loads((EVIDENCE / "e2_gate.json").read_text()) if (EVIDENCE / "e2_gate.json").exists() else {}
-    uniq = json.loads((EVIDENCE / "e3_uniqueness.json").read_text()) if (EVIDENCE / "e3_uniqueness.json").exists() else {}
-    receipt = json.loads((EVIDENCE / "e3_receipt.json").read_text()) if (EVIDENCE / "e3_receipt.json").exists() else {}
-    rec_hl = json.loads((EVIDENCE / "e1_hardlinked_recovery.json").read_text()) if (EVIDENCE / "e1_hardlinked_recovery.json").exists() else {}
-    gate_ok = bool(gate.get("gate_passed"))
-    lit = uniq.get("literal_gate", {})
-    strat = uniq.get("stratified_gate", {})
-    rho_ok = bool(lit.get("rho_ok")) if lit else False
-    dotlike_overlap_ok = bool(strat.get("dotlike_overlap_ok")) if strat else False
-    uniq_ok = rho_ok and dotlike_overlap_ok if uniq else False
-    fc = receipt.get("format_compliance", {})
-    nan_ok = bool(fc.get("nan")) and all(bool(v) for k, v in fc.get("nan", {}).items()
-                                         if k not in ("dots", "policy"))
-    zeros_ok = bool(fc.get("zeros")) and all(bool(v) for k, v in fc.get("zeros", {}).items()
-                                             if k not in ("dots", "policy"))
-    val_ok = nan_ok or zeros_ok
-    # PARALLEL-RUN PROTOCOL rule 1: rank-correlation > 0.90 vs any registry raster,
-    # or > 70% of dots within 3 px of one registry raster's dots = lane drift:
-    # log it as a duplicate and stop. Never auto-promote through a failed literal gate.
-    literal_gate_ok = rho_ok and dotlike_overlap_ok
-    if not literal_gate_ok:
-        verdict = "negative"
-        banner = "stop"
-    elif gate_ok and uniq_ok and val_ok:
-        verdict = "promote-candidate"
-        banner = "ok"
-    elif gate_ok and rho_ok and val_ok:
-        verdict = "promote-flagged-review"
-        banner = "review"
-    else:
-        verdict = "negative"
-        banner = "stop"
-    card = dict(
-        generated_utc=utcnow(),
-        lane="GEMSDOE69 relay-ramp & pull-apart corridor generator",
-        hypothesis=("Hidden faults occupy relay-ramp / pull-apart corridors between step-over tips of mapped "
-                    "faults; multi-physics edge evidence inside those corridors localizes them better than "
-                    "pixel statistics alone."),
-        mechanism=("Tip-graph step-over pairing (W 0.1-15 km, along <= 3.5W, sub-parallel strikes) -> "
-                    "oblique connector + en echelon strands + pull-apart rhomb -> multi-scale HG/tilt grav+mag "
-                    "(incl. magnetic lows) + lidar scarp + WNW-extension orientation score -> greedy "
-                    "marginal-DTI dot placement >= 200 m off catalogue."),
-        non_fault_mimic=("Linear geophysical edges that are NOT faults: lithologic/dike contacts, buried "
-                         "channel margins and terrace edges in detrended elevation, and survey-line artifacts "
-                         "in the airborne grids can all produce corridor-consistent HG/tilt responses."),
-        holdout=({
-            "instrument": ("vendor/template66 gems57 pooled hide-and-recover (alpha 0.2, beta 0.8, 300 m "
-                            "triangular kernel); seeds/modes/cells as recorded"),
-            "corridor_mean_dti": gate.get("corridor_mean_dti"),
-            "corridor_ci95_half": gate.get("corridor_ci95_half"),
-            "control_mean_dti": gate.get("control_mean_dti"),
-            "paired_delta": gate.get("paired_delta_mean"),
-            "withheld_positive_px_total": gate.get("withheld_positive_px_total"),
-            "n_cells": gate.get("n_cells"),
-            "gate_passed": gate_ok,
-            "evidence_class": "HOLDOUT-DTI",
-            "hardlinked_recovery_within_300m_mean": rec_hl.get("mean_recovery_within_300m"),
-            "hardlinked_n_tested": rec_hl.get("n_tested"),
-        } if gate else "pending"),
-        correlation_overlap_vs_registry=({
-            "worst_abs_spearman": uniq.get("worst_abs_spearman"),
-            "worst_dot_overlap_dotlike": (uniq.get("worst_dot_overlap_dotlike") or {}).get("dot_overlap_3px"),
-            "literal_gate": lit, "stratified_gate_ok": strat.get("dotlike_overlap_ok"),
-            "n_compared": uniq.get("n_compared"),
-            "protocol_rule_1_duplicate_log": (
-                "literal registry dot-overlap gate failed: %.2f%% of dots fall within 3 px of one "
-                "archived GEMSDOE51 raster (> 70%% limit); logged as near-duplicate lane-drift per "
-                "protocol rule 1; do not spend a submission slot; negative result is the deliverable" % (
-                    100.0 * (uniq.get("worst_dot_overlap_dotlike") or {}).get("dot_overlap_3px", 0.0))
-                if uniq and not literal_gate_ok else None
-            ),
-        } if uniq else "pending"),
-        raster=({
-            "zeros_sha256": receipt.get("raster", {}).get("zeros", {}).get("sha256"),
-            "zeros_path": receipt.get("raster", {}).get("zeros", {}).get("path"),
-            "nan_sha256": receipt.get("raster", {}).get("nan", {}).get("sha256"),
-            "nan_path": receipt.get("raster", {}).get("nan", {}).get("path"),
-            "n_dots": receipt.get("n_dots"),
-            "format_compliance_nan_ok": nan_ok,
-            "format_compliance_zeros_ok": zeros_ok,
-            "validator_output": "no NaN inside the footprint (nan variant finite mask == sample_submission), "
-                                "values in [0,1], CRS EPSG:32611, shape 3730x3292, transform exact "
-                                "(see evidence/e3_receipt.json format_compliance)",
-        } if receipt else "pending"),
-        submission_name=receipt.get("raster", {}).get("zeros", {}).get("path", "").split("/")[-1].replace(".tif", ""),
-        submission_note=receipt.get("note", "")[:140],
-        verdict=verdict,
-        banner=("ok" if verdict == "promote-candidate"
-                else ("review" if verdict == "promote-flagged-review" else "stop")),
-        note=("verdict 'promote-candidate' means the holdout gate + registry scan + validator all passed; "
-              "'promote-flagged-review' means every gate passed except the literal 70% dot-overlap rule "
-              "(one archived dense raster, surface rho ~ 0.04) and needs selector review; "
-              "promotion to a scored slot is a separate selector step (protocol rule 6)"),
-    )
-    dump("run_card.json", card)
-    print(json.dumps({"verdict": verdict, "gate_passed": gate_ok}, indent=1))
+    """Apply the single strict publication policy; never weaken the literal gate."""
+    from release_gate import write_card
+    card = write_card()
+    print(json.dumps(card["release_policy"], indent=2))
     return 0
 
 

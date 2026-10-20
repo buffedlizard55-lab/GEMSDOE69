@@ -39,3 +39,11 @@
     PYTHONPATH=vendor/template66:src .venv/bin/python scripts/run_lane69.py e3
     PYTHONPATH=vendor/template66:src .venv/bin/python scripts/run_lane69.py unique
     .venv/bin/python scripts/build_site69.py
+
+## 2026-10-20 correction — overrides earlier stratified-gate guidance
+
+The literal protocol is mandatory. A failed overlap check is duplicate-and-stop;
+stratification is diagnostic only. `scripts/release_gate.py` is the single
+publication policy. Read `reports/review-2026-10-20.md` and the updated handoff.
+Do not reuse the previous radiometric promotion verdict: the scoring source is
+not reproducible from the checked-in implementation and phase receipts are stale.
