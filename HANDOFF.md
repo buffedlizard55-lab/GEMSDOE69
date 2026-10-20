@@ -1,39 +1,30 @@
-# Handoff — 2026-10-20 (relay-fix session)
+# Handoff — 2026-10-20 (post-merge of parallel sessions)
 
 Read README.md and PROMPT.md first, then reports/relayfix-2026-10-20.md.
 
-## State
+## State: NEGATIVE — DO NOT SUBMIT (fail-closed)
 
-**NEGATIVE. DO NOT SUBMIT.** New candidate
-`submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif`
-(sha256 b44d16ce…) passes format validation and both preregistered science
-gates (HOLDOUT-DTI pooled 0.00847 vs v1 0.00635 vs control 0.00215), but
-fails the literal registry-overlap gate (1.0 vs universal surfaces; 0.8497
-worst dotlike; rho ≤0.28). No download is published and no slot was spent.
-Exp1's v1 emission is a logged duplicate of the Oct-12 lane raster.
-H69-F subsurface and H69-G radiometric arms were not established (CIs
-include 0). All numbers are HOLDOUT-DTI screens, never organizer scores.
+Two candidates exist in `submissions/`; neither is currently downloadable:
 
-## Publication commands
+1. **H69-J joint** (38,669 dots) — promoted by a parallel session on main
+   under a stratified dotlike-overlap policy (0.61). After this session's
+   R1/R2 tip-graph repairs landed, its hash-bound method manifest and
+   holdout binding are stale on this tree, so `release_gate.py` fails
+   closed and the site builder revoked its download. To restore: re-run
+   `scripts/generate_unique_submission.py` under the repaired geometry,
+   re-run holdout + both uniqueness phases on untouched blocks, rebind
+   evidence, then `release_gate.py` + builders.
+2. **Transfer-only** (36,325 dots, this session) — passes science gates
+   (HOLDOUT-DTI pooled 0.00847 vs v1 0.00635 vs control 0.00215) and format
+   validation, fails the literal registry-overlap gate (1.0 universal;
+   0.8497 worst dotlike; rho <=0.28). Negative; evidence in
+   `evidence/relayfix_*` and `evidence/*_relayfix_20261020.json`.
 
-    python scripts/release_gate.py
-    python scripts/build_site69.py
-    python scripts/build_readme.py
+## Needed upstream
 
-## Next work, in order
-
-1. Upstream selector: resolve the registry support definition (literal
-   overlap cannot pass while whole-footprint soft surfaces are registry
-   "dots"). Do not relax locally.
-2. New preregistration on untouched blocks before any further holdout
-   (seeds 20/21 seen). Join per-strand dip/slip from restored qfault
-   traces/attributes; decide overlap-cap and outer-tip dedup semantics
-   in the preregistration, not mid-run.
-3. Science queue: connector-axis HG/tilt phase coincidence, releasing-
-   basin asymmetry, scarp strike-coherence (register in
-   docs/research/hypotheses-2026-10-20.md).
-4. Refresh registry index past 2026-10-12 before any promotion attempt;
-   rerun both uniqueness phases on exact final bytes.
-
-Tests: 94 passed. Template pins verified unchanged. No DrivenData slot
-is authorized. Negative results are deliverables.
+One selector ruling on overlap policy: literal (this session) vs
+stratified dotlike (H69-J session). Until then both stay unsubmitted.
+Exp1 findings stand: H69-F subsurface and H69-G radiometric arms not
+established; Exp1 v1 emission is a logged duplicate. Tip-graph R1/R2
+repairs + 100 tests are on the tree. No slot was spent by this session.
+Negative results are deliverables.

@@ -38,20 +38,50 @@ def load_template_grid():
 
 def corridor_pipeline(catalogue: np.ndarray, shape: tuple[int, int], stats: dict,
                       max_corridors: int = 1200, zstack: dict | None = None,
-                      version: str = "v1"):
-    """Vectorize -> tip pairs -> corridors -> scored rationale -> propensity."""
+                      version: str = "v1",
+                      scoring_mode: str = "base",
+                      zstack_rad: dict | None = None,
+                      rad_stats: dict | None = None):
+    """Vectorize -> tip pairs -> corridors -> scored rationale -> propensity.
+
+    ``version`` selects relayfix evidence arms (v1/v2/v3, scoring.py).
+    ``scoring_mode`` supports the merged H69-J generators ("joint", "rad",
+    "joint_rad") via scoring_joint/scoring_rad; default "base" preserves
+    the relayfix behaviour executed 2026-10-20.
+    """
     if zstack is None:
         zstack = build_z_stack(_footprint_from_shape(shape), stats)
+    if scoring_mode in ("rad", "joint_rad") and zstack_rad is None:
+        from .radiometric import build_stats as build_rad_stats, build_z_stack as build_rad_z
+        g = load_template_grid()
+        zstack_rad = build_rad_z(g.footprint, build_rad_stats(g.footprint))
     strands = vectorize(catalogue)
     corridors, pairs = build_corridors(catalogue, strands, shape,
                                        max_corridors=max_corridors)
     t0 = time.time()
     for c in corridors:
         ev = corridor_evidence_from_z(zstack, c)
-        score_corridor(c, ev, version=version)
-    p = build_propensity(corridors, shape)
+        if zstack_rad is not None:
+            ev.update(corridor_evidence_from_z(zstack_rad, c))
+        if scoring_mode == "joint":
+            from .scoring_joint import score_corridor_joint
+            score_corridor_joint(c, ev)
+        elif scoring_mode in ("rad", "joint_rad"):
+            from .scoring_rad import score_corridor_rad
+            score_corridor_rad(c, ev)
+        else:
+            score_corridor(c, ev, version=version)
+    if scoring_mode == "joint":
+        from .scoring_joint import build_propensity_joint
+        p = build_propensity_joint(corridors, shape)
+    elif scoring_mode in ("rad", "joint_rad"):
+        from .scoring_rad import build_propensity_rad
+        p = build_propensity_rad(corridors, shape)
+    else:
+        p = build_propensity(corridors, shape)
     return dict(strands=len(strands), pairs=len(pairs), corridors=len(corridors),
                 propensity=p, corridors_obj=corridors, version=version,
+                scoring_mode=scoring_mode,
                 score_seconds=round(time.time() - t0, 1))
 
 

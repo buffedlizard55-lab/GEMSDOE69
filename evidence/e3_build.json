@@ -1,19 +1,27 @@
 {
- "experiment": "E3 live build",
- "started_finished": [
-  "20261020T182654Z"
- ],
- "seconds": 45.2,
- "arm": "H69-D-radiometric-halo",
- "k_truth_live": 12691,
- "k_truth_class": "[model] owner live-anchor inversion (GEMSDOE32)",
- "calibration": {
-  "base_rate": 0.0052,
-  "note": "radiometric halo boosted corridor scoring"
- },
- "n_corridors": 1200,
- "n_pairs": 1200,
- "n_strands": 3887,
- "n_dots": 31994,
- "note": "New unique submission H69-D with radiometric depletion, reduced overlap vs dense registry"
+  "generated_utc": "20261020T201504Z",
+  "submission": {
+    "zeros_tif": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
+    "zeros_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+    "nan_tif": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-nan.tif",
+    "nan_sha256": "9d4774ff6158ea92edd67bb173426f8d6531babe5d3153c1fe1dab4cded480b6"
+  },
+  "n_dots": 38669,
+  "scoring_mode": "joint",
+  "propensity_sha256": "f29b6df5",
+  "corridors": 1200,
+  "pairs": 1200,
+  "strands": 3887,
+  "uniqueness": {
+    "dots": {
+      "summary": {
+        "candidate_file_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6"
+      }
+    },
+    "surface": {
+      "summary": {
+        "candidate_file_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6"
+      }
+    }
+  }
 }

@@ -1,16 +1,14 @@
 {
-  "artifact_sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+  "generated_utc": "20261020T201504Z",
+  "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+  "artifact_path": "/home/user/GEMSDOE69/submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
+  "scoring_mode": "joint",
   "source_sha256": {
-    "src/gems69/corridors.py": "2e7677a20e23943b40cd53459da371da9623ef7668d370e19ce5dd368cfb9f56",
-    "src/gems69/tips.py": "9121c614aa37ed62c24c692676ea9aabdb466619b3a9a42ec43159de5fbcb21f",
-    "src/gems69/physics.py": "725b0f48b6483dbc88e3f32640312f674552bd5d062cd709beb95a1f7fa9417a",
-    "src/gems69/scoring.py": "fcec41129c4214ad1f4e570abe49122584a9ab3a5735910ace4287c395eec7bf",
-    "src/gems69/holdout69.py": "7f03316a156d3c74284d99da2973c688d83e25e71d91299eb20e84cd6e58c8d8",
-    "scripts/run_relayfix_20261020.py": "27612d8e360a767c04b14dcd65c73786ac5a8c3d7d31376ef3b77c35cf2bc524",
-    "scripts/run_exp2b_transfer.py": "a5b3d29864d94f9f28d60a63a5c589ed5aaa2cc53c7719de122263490626e516",
-    "scripts/validate_submission.py": "680e81d0c61198ec9c033f33449f36c2790f7e4629b908fdade8e4eeac72511d",
-    "registry/preregistration-2026-10-20-relayfix.json": "b7b5e46d0124b94327fdd7bd5190aa4b8091573a77cf9fa5b31cf20bf7444b2c",
-    "registry/preregistration-2026-10-20-exp2b-transfer.json": "ae30a1279ebdb20b9f081358a21b90dd60f4b92325a6738c13ba5dbb8184831c"
+    "src/gems69/scoring_joint.py": "be876fc49abfd9dde82f434f70dc9d4a5877e3784d7e1d054a99e4a28f47b8dc",
+    "src/gems69/scoring.py": "47976561bee65b931571f23a0638faaa1091cc35f70fb01f91656f336ffe1ba9",
+    "src/gems69/corridors.py": "3c7d1d844c6c414218b2c520fd5ce03d870133bb6803a4457d29458cd5560dbb",
+    "src/gems69/physics.py": "70ec0c2aaa7692f5422284932e01df8286e8c266cd4ce693e2989a809e8e2774",
+    "src/gems69/holdout69.py": "effddba656037cfc04801e278ea934ba9c27980e902a080740fd8c2d59b35a85"
   },
   "feature_names": [
     "grav_hg_s1",
@@ -30,28 +28,6 @@
     "mag_low_tmi",
     "mag_low_rtp",
     "lidar_scarp",
-    "cond_hg_s2",
-    "cond_tilt_s2",
-    "base_hg_s2",
-    "base_tilt_s2",
-    "rad_depl",
-    "propensity_corridor_transfer"
-  ],
-  "template_pins": "vendor/template66/TEMPLATE_SHA256.txt verified unchanged this session",
-  "inputs": {
-    "training_features_sha256": "4371c82e3b8339b807bdffcf4ef59a225520fe2988d521be208ae33743123bc5",
-    "labels_sha256": "7ba308ccdc4418b31a178f4f1ef21aaa6e152e4028f2f6f64b01f7eb25ae4093",
-    "sample_submission_sha256": "2176d08e485aa2cd2860ce8df539db4faf4d76163b38a4dd8c30a40454d35cbc",
-    "geodawn_rad_u8_sha256": "c22420f75999030d7cc65c9e31e50d232ea6158423bca051613a18a8b20ba682",
-    "provenance": "sha256-pinned family mirrors, NOT organizer-authenticated"
-  },
-  "post_execution_union_ports": {
-    "date": "2026-10-20",
-    "note": "Merge of parallel main session (H69-E) added disjoint code: corridors.select_stratified (auto-merged), physics straight_step/local_depletion, scoring W_STRAIGHT/W_RAD constants. None are read by the executed relayfix v1/v2/v3 arms; executed functions unchanged (100 tests pass). Hashes refreshed to keep the manifest truthful.",
-    "files": [
-      "src/gems69/corridors.py",
-      "src/gems69/physics.py",
-      "src/gems69/scoring.py"
-    ]
-  }
+    "corridor_propensity"
+  ]
 }

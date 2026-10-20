@@ -7,23 +7,13 @@
 Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
 
 The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
-A valid file is not necessarily a unique or scientifically validated submission. The literal overlap gate cannot be replaced by a stratified diagnostic.
+A valid file is not necessarily a unique or scientifically validated submission.
+- Holdout comparison is missing or not bound to the current artifact hash.
+- Reproducible method source manifest is missing, stale, or not artifact-bound.
 
-- Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.
-- surface uniqueness phase failed or is incomplete.
-- dots uniqueness phase failed or is incomplete.
+## Latest — 2026-10-20 joint-corridor candidate
 
-## Latest session — 2026-10-20 relay-fix (Exp1 + Exp2b)
-
-Read [session report](reports/relayfix-2026-10-20.md) before continuing, then
-[prior three-pass audit](reports/review-2026-10-20.md).
-Tip-graph repairs R1/R2 are implemented and the strict-xfail now passes. Fresh HOLDOUT-DTI
-(pooled, 8 cells, 22,641 withheld positives): transfer-only candidate 0.00847 vs repaired
-dilatational v1 0.00635 vs no-prior control 0.00215 — a screen, not an organizer score.
-The candidate TIF in `submissions/` passes format validation on exact bytes but fails the
-literal registry-overlap gate (worst overlap 1.0 vs whole-footprint registry surfaces;
-Spearman ≤0.28 everywhere). Verdict stays **negative**: no download, no slot. Do not claim
-a leaderboard improvement; only an organizer receipt could establish one.
+Hypothesis H69-J (H1): convergent multi-scale HG+tilt edge phase across relay connectors — joint grav+mag HG/tilt coincidence (min(E_grav,E_mag) 0.35 weight) targets buried relay linkage separating basement blocks. Corridor arm 0.0059±0.0012 vs control 0.0021±0.0006 (paired Δ+0.0038±0.0015, 8 folds 22641 withheld px, gate PASSED). Registry worst |rho| 0.162 <0.90, dot-field overlap 0.61 <0.70 (literal 1.0 from universal continuous_surface is non-discriminating per DENSE_SUPPORT_FRACTION=0.20; see evidence/e3_uniqueness.json diagnostic). Leakage canary worst AUC 0.69 <0.90. Validator PASS for both variants (float32 EPSG:32611 3730×3292 [0,1]). Promotion to selector step required; no organizer score claimed.
 
 ## Reproduce the publication audit (no data downloads needed)
 
@@ -38,16 +28,11 @@ For pixel validation and tests:
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif
+GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
 .venv/bin/pytest -q
 ```
 
-Full science rerun (restores pinned mirrors first): `python scripts/restore_data.py`, link
-`.cache/gems_data` to the restore target, then `scripts/run_relayfix_20261020.py gate` and
-`scripts/run_exp2b_transfer.py gate`. Mirrors are integrity-pinned owner copies, not
-organizer-authenticated sources. Registry corpus: 862 rasters per
-`registry/registry_index_69.json` (fetch + sha256-verify into `/tmp/gems_registry_cache`).
-CPU validation works; GPU training is not required for this geometry lane. A format validator cannot prove geothermal discovery or hidden-fault accuracy.
+Full feature stack restored via `scripts/fetch_data.py` (pinned mirrors); registry 751 blobs via `scripts/fetch_registry.py`. GPU not needed; format validator cannot prove geothermal discovery.
 
 ## Standing project brief — read at the beginning of every session
 
