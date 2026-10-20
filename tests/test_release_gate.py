@@ -62,7 +62,9 @@ def test_stratified_gate_cannot_override_literal_failure(cleared, dot_overlap):
     if dot_overlap is not None:
         u['worst_dot_overlap_dotlike'] = {'dot_overlap_3px': dot_overlap}
     put(cleared, 'e3_uniqueness.json', u)
-    assert policy.evaluate(cleared)['verdict'] == 'negative'
+    result = policy.evaluate(cleared)
+    assert result['verdict'] == 'negative'
+    assert any('Literal registry dot-overlap gate' in reason for reason in result['reasons'])
 
 
 @pytest.mark.parametrize('change', ['missing', 'modified', 'validator', 'registry_error', 'holdout'])

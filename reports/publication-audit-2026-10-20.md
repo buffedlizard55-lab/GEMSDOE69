@@ -118,3 +118,10 @@ This lane is CPU-capable; a GPU is not the blocker. Organizer-authenticated data
 submission receipts, unrestricted official-source access, and resolution of the
 literal uniqueness rule are unavailable here. Pinned GitHub mirrors offer
 integrity checking, not organizer authentication. Never request credentials in chat.
+
+## Merge reconciliation
+
+A parallel review landed on main while this audit PR was open. It independently
+fixed the same literal-overlap loophole. Preserved its separate rho/overlap
+reasons and review report, combined the diagnostic-value regression coverage,
+and regenerated publication outputs after merging main into this session branch.

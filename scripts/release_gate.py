@@ -33,11 +33,15 @@ def evaluate(root=ROOT):
     if gate.get('current_best_beaten') is not True:
         reasons.append('No explicit same-evaluator evidence of beating the current holdout best.')
     literal = uniq.get('literal_gate', {})
-    # Stratified summaries are diagnostic only. A universal-support registry
-    # raster may make this rule impossible to pass, but changing the protocol
-    # requires an upstream decision, not a local publication-policy exception.
-    if literal.get('rho_ok') is not True or literal.get('overlap_ok') is not True:
-        reasons.append('Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.')
+    # The standing protocol says a literal rho OR dot-overlap threshold firing
+    # means duplicate-and-stop. Stratified/dotlike diagnostics are useful for
+    # explaining a firing, but are not authorized to override it.
+    rho_ok = literal.get('rho_ok') is True
+    overlap_ok = literal.get('overlap_ok') is True
+    if not rho_ok:
+        reasons.append('Registry rank-correlation gate failed (rho >0.90); duplicate-and-stop applies.')
+    if not overlap_ok:
+        reasons.append('Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies.')
     if not uniq.get('n_registry_blobs') or uniq.get('n_compared') != uniq.get('n_registry_blobs') or uniq.get('n_errors') != 0:
         reasons.append('Registry scan is incomplete or contains errors.')
     raster = receipt.get('raster', {}).get('zeros', {})
