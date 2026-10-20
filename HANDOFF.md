@@ -1,81 +1,66 @@
-# Handoff — 2026-10-20 (post-merge of parallel sessions)
+# Handoff — literal integrity review, 2026-10-20
 
-Read README.md and PROMPT.md first, then reports/relayfix-2026-10-20.md.
+## Read before every session
 
-## State: NEGATIVE — DO NOT SUBMIT (fail-closed)
+Read README.md, PROJECT_REQUEST.md (full current user request), and AGENTS.md. This checkout is tied to `arena/d7c9058c-gemsdoe69`; do not switch or rename the session branch. Historical reports are archival observations, not current clearance.
 
-Three candidate TIFFs now exist in `submissions/`; none is currently downloadable:
+## Current state: NEGATIVE — DO NOT SUBMIT
 
-1. **H69-J joint** (38,669 dots) — a parallel session later rebound its local
-   holdout and method-source receipts, but this does **not** permit publication:
-   literal all-registry 3-pixel overlap is 1.0 (limit 0.70). Earlier
-   stratified-dotlike promotion language is superseded by the standing literal
-   duplicate-stop rule. Its local format and HOLDOUT-DTI records remain audit
-   evidence only; no download is permitted.
-2. **H69-H2 transfer-only** (36,325 dots) — the current run card records
-   HOLDOUT-DTI pooled 0.007738, 95% CI [0.005732, 0.009743], versus control
-   0.002148 and a format-valid zeros TIFF. A separate relay-fix screen records
-   0.00847 versus v1 0.00635; do not collapse the distinct archived receipts.
-   Both are local screens only. The candidate fails the literal registry-overlap
-   gate (1.0 universal; 0.8497 worst dotlike; rho <=0.28). Negative; evidence
-   in `evidence/relayfix_*`, `evidence/*_relayfix_20261020.json`, and the run card.
-3. **H69-J joint repair** (39,958 dots; SHA-256 `287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4`) — added to `submissions/` by merged PR #26. Its TIFF passes the local format validator, but the current receipt, method manifest, holdout, and uniqueness evidence are still bound to the separate 38,669-dot SHA `981beb...`; the 39,958-dot artifact has no artifact-bound receipts or literal two-phase scan. PR #26's body reported 751 registry-fetch errors for it. Audit-only; not downloadable.
+No new model experiment, TIFF emission, competition slot selection, or upload was performed in this review. Validators, source research, synthetic unit tests, browser checks and archival raster comparisons are not model experiments.
 
-## Needed upstream
+- **Literal universal-prior failure freshly reproduced:** the pinned 17GEMSDOE raster is positive at all 5,167,373 mirrored footprint pixels. Archived H69-J's 38,669 dots have forward 3-pixel overlap **1.0**; full-footprint Spearman against that one raster is **0.10344425936824049**. This is a protocol/representation conflict, not proof of identical geology. No density exemption is authorized. One counterexample stops a candidate; it does not constitute exhaustive registry clearance.
+- **Independent sparse-prior failure:** H69-J's forward overlap with a local sparse archived field is **0.8023481341643177**, also over 0.70. Excluding the universal prior would not rescue the archived candidate. Fresh integration audit includes all **14 other local TIFFs**, including the newly inherited 39,958-dot pair. Read `evidence/local-prior-audit.json`; this local check still is not an exhaustive external registry scan.
+- **Scientific evidence quarantined:** whole-catalogue flank masks and the older full-catalogue canary violate visible-only hide-and-recover; dip/slip/source-polyline requirements are not certified; mean-of-cell intervals and repeated-cell bootstrap do not establish the required pooled spatial-block comparison to the current best. Existing DTI numbers are archival, not newly certified HOLDOUT-DTI or organizer scores.
+- **Format only:** both archived H69-J variants pass `scripts/validate_submission.py`; NaNs in the twin are outside the footprint only. This does not explain an unavailable portal rejection or prove portal acceptance.
+- **Unsafe generator retired:** the old command could insert placeholder AUCs, borrow an earlier holdout and mark failed validators successful. Do not restore or rerun it. Generation, holdout and legacy evidence-finalization CLIs stop at preflight. No `--force` or dotlike-only override exists.
 
-The standing user protocol now makes the literal all-registry rule controlling:
-there is **no local stratified/dotlike exemption**. A protocol owner may clarify
-how universal-support registry rasters should be scoped, but both artifacts stay
-unsubmitted unless the written rule is explicitly changed and re-applied from
-pinned bytes. Exp1 findings stand: H69-F subsurface and H69-G radiometric arms
-are not established; Exp1 v1 emission is a logged duplicate. Tip-graph R1/R2
-repairs are on the tree. No slot was spent; negative results are deliverables.
+The shared template evaluator/writer bytes were not edited. No private scientific evaluator fork was created. `scripts/release_gate.py` is the publication policy; missing/malformed/contradictory measurements, stale source hashes and quarantine fail closed. Its CLI is audit-only. Card replacement requires matching E2/receipt bytes; crossing candidates needs explicit intent and archives the complete previous card before replacement. A new hash or rebinding old numbers is not new evidence.
 
-## Latest publication audit (same date, after inherited state)
+## Reproduce safely
 
-Read `reports/publication-audit-2026-10-20.md`. Repaired a merge regression that
-allowed dotlike-only diagnostics to override literal all-registry overlap.
-The former regression test never supplied a dotlike overlap value; expanded it.
-Current strict release reason is literal duplicate-and-stop. H69-J's later
-local evidence rebinding does not override the 1.0 literal overlap. Independently
-revalidated archived H69-J pixels; `evidence/publication_audit_validator_20261020.json`
-passes. No new experiment, TIFF, registry scan, or slot was used in this audit.
-The final merged verification now has 106 passing tests. Do not treat
-prior-session public-page fetch claims as independent verification this audit.
+```sh
+python -m venv .venv
+.venv/bin/pip install -r requirements-dev.txt
+.venv/bin/pytest -q
+.venv/bin/python scripts/validate_submission.py \
+  submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif \
+  submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-nan.tif
+python scripts/release_gate.py
+python scripts/build_site69.py
+python scripts/build_readme.py
+python scripts/check_site.py
+```
 
-## Final provenance reconciliation
+The registry/H33 reproduction additionally needs the two pinned bytes in ignored `.cache/review20261020/`; fetch them using the URLs/blob/hash recorded in the audit JSONs before running `scripts/audit_registry_blocker.py`. Do not restore the full feature cache merely to work around the stop. Large files stay out of Git.
 
-`evidence/run_card.json` remains the H69-H2 transfer-only record (its TIFF SHA-256
-starts `b44d16ce`), while `release_gate.py` remains the fail-closed publication
-policy for the separate H69-J aggregate receipts. The gate's CLI is audit-only
-and must not rewrite the run card. `write_card()` now refuses an E2/receipt hash
-mismatch and, by default, refuses to replace an existing card that identifies
-other bytes; an explicit artifact-bound replacement is required. This prevents
-the prior H69-J-over-H69-H2 overwrite failure.
+## Sources and research queue
 
-The GitHub-source audit in `reports/h33-owner-source-audit-2026-10-20.md` resolves
-the H33 attribution available in this checkout: owner materials label H33-2-B2
-`UNSCORED`, call 0.274673... a projection, and provide no organizer receipt. The
-user-supplied 0.2778 is therefore not attributed to those bytes or called
-organizer-confirmed. H33 remains learning-only.
+- All **72 unique user-listed family page sources** were read through GitHub and git-blob verified; **91 user-supplied artifact-score claims** remain unconfirmed. A name/decimal mention or download link is not a verified pairing, raster clearance or organizer receipt. Exact chains are in `docs/data/family-feed.json`.
+- H33's **0.2778 is user-reported, not organizer-confirmed for the pinned TIFF**. Fresh anatomy: 37,654 unit dots, zero on-catalogue positives. Official staff confirms known-fault pixels are masked in initial/final scoring, so zero on-catalogue dots alone does not explain an advantage. The official metric pools counts; it is not the mean of chunk scores.
+- Official problem/rules/literature/USGS/GDR pages were read with the research fetch tool and recorded claim by claim. Shell `--official` smoke test recorded **14 explicit TLS errors** under Arena's host restrictions. Do not call those shell checks successful. A later research-tool leaderboard read returned only Loading; the earlier dated public snapshot is not a live guarantee or artifact-bound receipt.
+- The qfault mirror has DIPDIRECT/SLIPSENSE and the trace CSV has record IDs/sense. Their pinned bytes were retrieved to ignored audit storage. Authentication of the official archive/joins and production integration remain missing; do not claim the attributes are absent or ready.
+- Four ranked, unimplemented in-lane hypotheses are in `registry/hypotheses_review_2026-10-20.json`: P1 nuisance-matched signed connector profiles; P2 dip/slip-aware releasing-vs-restraining counterfactual; P3 W-scaled localized magnetic-low neck; P4 scarp-relief taper (deferred until exact tiles verified). No numeric gain forecasts. No GPU is required.
 
-## Strict release-gate continuation — 2026-10-20
+## Site, automation and review status
 
-The release gate now also fails closed unless HOLDOUT-DTI has a versioned
-evaluator, a positive paired 95% bootstrap CI against both the no-prior control
-and current lane-best, and a SHA-bound protocol audit confirming whole-fault
-withholding without chunking, at least 3 px of withheld-context buffer,
-visible-only catalogue features, pixel-exact masking, and pooled DTI
-(α=0.2, β=0.8, 300 m triangular kernel). The TIFF receipt must be explicitly
-classified `SUBMISSION-RECEIPT`; that is a local artifact receipt, not an
-organizer score. A passing result is `eligible_for_selector`, not a promotion
-or a slot decision.
+The generated site has a negative status strip on every active page, a clear top-level NOT OK TO SUBMIT banner, no approved download, claim-level source/family tables, H33 metric explanation, methods audit, ranked queue, blockers and a single current audit card. Negative builds revoke TIFF/ZIP files anywhere under docs while preserving private scientific history. The Pages artifact is scoped to static files, not the repository's submission archive.
 
-The current H69-J receipt has a local `SUBMISSION-RECEIPT` and a HOLDOUT-DTI
-record, but no paired bootstrap intervals or artifact-bound protocol audit;
-its literal registry dot overlap also fails. The H69-H2 transfer runner's
-separate code review (`evidence/relayfix_holdout_protocol_audit.json`) found
-chunked segments and no withheld-context buffer. Its legacy `cmd_gate` and
-`cmd_emit` are now deliberately blocked. Neither candidate is downloadable;
-no experiment or slot was used in this continuation. See
-`reports/release-gate-followup-2026-10-20.md` for tests and review notes.
+Daily Actions source refresh is defined for best-effort 08:17 UTC. It retains a previous-observation cache, records byte changes only when two readable hashes exist, and exposes failures without changing science gates. It never trains, selects or submits. Publishing requires the repository Pages workflow setting and a verified Actions deployment; do not claim deployment from a local build alone.
+
+Three additive passes: (1) baseline audit/source and raster verification; (2) fail-closed policy/orchestration and malformed-input regression tests; (3) end-to-end static/browser/CI/deployment review. Latest post-integration local result: **201 passed, 24 existing rasterio deprecation warnings**; static links/policy **18 pages passed**; Chromium 153 browser smoke **20 active-page/viewport visits passed** at desktop 1440×1000 and mobile 390×844, root redirect works, no public raster links or horizontal body overflow. Screenshots/tool dependencies remain ignored.
+
+### Integration checkpoint — before this review's PR
+
+Main advanced while parallel reviews merged. Integrated `5c68edc` on the fixed session branch and retained the newer hash-bound whole-segment holdout/paired-CI requirements, receipt class checks, imported transfer-runner stops, CLI no-write behavior and explicit cross-candidate card guard. No template bytes changed. Older FLAGGED/research/report prose is now expressly historical and subordinate to the current integrity register.
+
+The inherited H69-H2 run card was preserved byte-for-byte in `evidence/run_card_archived_c332a322c3981c4d3015487119fc0525cedee8919f5f5d25e9902c20cc85442d.json` before an explicit `make_run_card.py --replace-artifact-bound-card` selected the **negative H69-J audit card**. Its certified DTI/CI remain null; no old H2 score was assigned to H69-J. The new 39,958-dot files came from another merged session, not this review's experiment budget.
+
+Delivery: [PR #29](https://github.com/buffedlizard55-lab/GEMSDOE69/pull/29). Its initial two `verify` jobs succeeded on GitHub; latest-head checks, actual merge state and deployment are authoritative in the PR and [Actions](https://github.com/buffedlizard55-lab/GEMSDOE69/actions/workflows/pages.yml), not inferred from this local checkpoint. The site target is https://buffedlizard55-lab.github.io/GEMSDOE69/.
+
+The Arena GitHub app could read Pages settings but was denied permission to change its legacy source via the settings API (403, Resource not accessible by integration). The workflow explicitly uses its repository-scoped `pages: write` token to select workflow publication. Verify its actual outcome in Actions; if GitHub denies that too, deployment is blocked pending a Pages permission/source-setting fix, not silently successful. Do not request personal credentials. Other concurrent PRs are separate; their score/promotion claims were not certified here.
+
+## Only legitimate path to another experiment
+
+Resolve the protocol conflict through an explicit written owner/selector decision; keep the literal stop until then. Authenticate input bytes, source polylines and record joins. Repair all hidden-target use in the lane caller, reserve untouched blocks, preregister one queued hypothesis, compute feature-alone canaries and pooled spatial-block contrasts against both control and current best. Only after a truly new candidate passes both correctly ordered exhaustive uniqueness phases and exact-byte format validation may the site offer a download. Slot selection/upload remains a separate selector step under the authenticated allowance.
+
+**Maximize P(Win):** preserve slots and falsify confounded hypotheses. **Own the Outcome:** publish defects, uncertainty and negative results without cosmetic promotion.

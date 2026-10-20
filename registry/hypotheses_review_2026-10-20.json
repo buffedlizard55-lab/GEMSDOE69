@@ -1,0 +1,78 @@
+{
+  "schema": 1,
+  "status": "research_only_not_slot_eligible",
+  "scope": "Four unimplemented refinements inside the catalogue-tip relay/pull-apart corridor lane. No new candidate location may be proposed from pixel statistics outside a legal tip-derived corridor.",
+  "ranking_basis": "Qualitative expected discrimination per implementation cost, not numerical DTI projections. None is validated, and the literal universal-registry stop prevents a lawful new experiment at present.",
+  "hypotheses": [
+    {
+      "rank": 1,
+      "id": "H69-P1-profile-null",
+      "name": "Connector-profile coherence against a matched lithologic null",
+      "layers": ["iso_grav_anom (band 13)", "tmi (band 14)", "rtp (band 2)", "lidar ex_max/step_max/downface_max with valid mask"],
+      "signature": "At fixed stations normal to a source-polyline connector, compare signed gravity/magnetic gradient directions and tilt-zero locations over several smoothing scales with translated, same-host flank profiles. Reward residual along-connector coherence, not the independent maximum amplitude of either field. Derivatives must be physically defined; the current Gaussian-difference proxy is not true upward continuation.",
+      "missing_fault_mechanism": "A buried breaching fault between genuinely compatible visible tips could produce a spatially continuous basement edge while the exposed flank faults have already been mapped. Matched flank profiles aim to reject a regional lithologic contact that merely crosses the corridor.",
+      "difference_from_repo": "scoring_joint.py takes min/max of scalar corridor-mean layer summaries. It has no transverse station profiles, gradient-vector transport or translated lithologic-null test. Earlier queued edge-phase ideas did not implement this nuisance-matched residual.",
+      "non_fault_mimic": "An intrusive contact or depositional basin margin can still have the same coherent gravity and magnetic profile. The null is a testable discrimination strategy, not a proof of faulting.",
+      "expected_dti_improvement": "Highest qualitative priority; benefit unknown until independent holdout. No projected score.",
+      "implementation_cost": "Medium; cached field derivatives/profile sampling plus matched controls, CPU only.",
+      "data_readiness": "Existing feature/LiDAR mirrors are pinned but the full stack is not restored in this checkout. Official GeoDAWN metadata was read; no new geophysical dataset is required. Source-polyline attribute integration and visible-only holdout repair remain prerequisite.",
+      "source_ids": ["giddens2025", "faulds2026", "geodawn", "gdr1391"],
+      "status": "queued_not_tested"
+    },
+    {
+      "rank": 2,
+      "id": "H69-P2-kinematic-counterfactual",
+      "name": "Releasing-step versus restraining-step counterfactual",
+      "layers": ["INGENIOUS v2 polylines with DIPDIRECT/SLIPSENSE", "iso_grav_anom and its horizontal gradients", "tmi/rtp magnetic lows", "lidar-scarp channel"],
+      "signature": "For verified dextral steps and same-dip normal relays, compare transverse gravity-low plus bounding-edge asymmetry in a releasing geometry against matched restraining geometry with similar W, strike and survey coverage. No classification of releasing steps from unsigned overlap alone.",
+      "missing_fault_mechanism": "Buried pull-apart margins and transfer splays can connect mapped dextral terminations without a continuous surface scarp. Kinematic compatibility supplies an independent reason to search a catalogue gap rather than replicate an existing trace.",
+      "difference_from_repo": "Current subtype/score uses an overlap<=0.5W dilation proxy and a flat pull-apart prior. It has no slip-sense-aware releasing/restraining counterfactual or source-record dip check. The transfer-only arm merely selected the non-dilatational proxy subset.",
+      "non_fault_mimic": "An inherited sedimentary basin or compaction margin can form a gravity low with asymmetric flanks without active strike-slip release.",
+      "expected_dti_improvement": "Potentially strong reduction of false geological labels; second priority because attribute linkage and kinematics cost more than reusing field profiles. No numerical gain claimed.",
+      "implementation_cost": "Medium-high; authenticate source polylines, preserve record IDs and attributes while withholding complete segments.",
+      "data_readiness": "Official GDR 1391 v2 archive and field-definitions listing is public and was checked. Mirror CSVs with DIPDIRECT and SLIPSENSE were retrieved and hash-verified in this review. The official ZIP payload and record_id-to-row join are not newly authenticated, so this is not yet implementation-ready.",
+      "source_ids": ["giddens2025", "faulds2026", "gdr1391", "slip_dilation_files"],
+      "status": "data_provenance_gated"
+    },
+    {
+      "rank": 3,
+      "id": "H69-P3-low-neck",
+      "name": "Magnetic-low neck versus broad basin fill",
+      "layers": ["tmi (band 14)", "rtp (band 2)", "iso_grav_anom (band 13)", "gravity horizontal-gradient products"],
+      "signature": "Inside an admissible connector only, fit a local cross-strike magnetic trough plus gravity edge and test whether the trough width and center track the corridor along strike after removal of broad basin-scale trends. Compare with corridor-flank nulls at the same W. Require coverage and scale compatibility with the actual flight-line spacing.",
+      "missing_fault_mechanism": "A narrow demagnetized or structurally juxtaposed zone might reveal a buried connector below thin cover, whereas broad basin fill generates a spatially diffuse low. Faulting is a possible cause, not a unique explanation, and magnetic lows are not universal alteration signatures.",
+      "difference_from_repo": "The baseline and joint scorers use negative TMI/RTP scalar magnitude. They do not fit trough width, centerline continuity or W-scaled residual localization. No radiometric-depletion or conductivity arm is reused.",
+      "non_fault_mimic": "A nonmagnetic dike, lithologic sliver or narrow paleochannel may produce a similarly localized magnetic low.",
+      "expected_dti_improvement": "Uncertain and likely restricted to magnetically contrasting host rocks; lower expected coverage than P1/P2, but useful as a specific falsifiable corridor rationale.",
+      "implementation_cost": "Medium; profile fitting and resolution/host-rock controls, no new dataset.",
+      "data_readiness": "Uses pinned competition field mirrors. Official GeoDAWN survey/terrain-clearance metadata was checked; resampling cannot recover 100 m independent information from 400 m flight lines.",
+      "source_ids": ["geodawn", "giddens2025"],
+      "status": "queued_not_tested"
+    },
+    {
+      "rank": 4,
+      "id": "H69-P4-termination-taper",
+      "name": "Tip-splay fan with along-strand scarp taper",
+      "layers": ["Visible source-polyline termination graph", "USGS 3DEP 1 m DEM and source coverage/quality metadata", "gravity/magnetic corridor evidence"],
+      "signature": "Within a termination/transfer corridor, require multiple short scarp strands whose measured transverse relief tapers toward subsidiary tips and whose strike fan is consistent with the parent fault. Reject constant-elevation shoreline arcs and road embankments; evaluate directional scarp polarity rather than channel amplitude alone.",
+      "missing_fault_mechanism": "Small transfer splays obscured by lacustrine/alluvial deposits or too short for regional mapping may retain subtle fault-tip relief, while mapped parent faults alone do not explain the fan geometry.",
+      "difference_from_repo": "Earlier en-echelon proposals sought staggered ridge phase. This requires a source-termination hierarchy and measured along-strand relief taper; the uint8 scarp maximum alone is insufficient and is not a measured displacement.",
+      "non_fault_mimic": "Alluvial distributary channels, road-cut fans and pluvial shoreline segments can imitate short tapering scarps.",
+      "expected_dti_improvement": "Unknown, possibly useful in a small subset of corridors; lowest priority because new high-resolution tile/quality checks would dominate cost.",
+      "implementation_cost": "High; terrain mosaicking, relief uncertainty and geomorphic negative controls.",
+      "data_readiness": "DEFERRED, not viable yet: the official competition page confirms 1m_DEM_links.csv exists, and USGS GeoDAWN confirms coordinated 3DEP acquisition. The competition link table requires login; exact free tile URLs, payloads, AOI intersection and coverage were not obtained in this review. No unverified tile is called obtainable.",
+      "source_ids": ["problem", "geodawn", "faulds2026"],
+      "status": "deferred_missing_verified_tiles"
+    }
+  ],
+  "validation_plan_after_blockers": [
+    "Resolve the literal universal-support registry conflict upstream without silently changing the specified threshold or support definition.",
+    "Authenticate available source records; remove hidden segments plus their buffers before every catalogue-derived feature, calibration, negative-control and allowed-pixel mask. Do not compute a flank mask or a canary propensity from the full catalogue.",
+    "Freeze the top hypothesis and all transforms/weights in a preregistration, with untouched spatial blocks and an explicit current-best comparator on exactly the same repaired evaluator.",
+    "Evaluate every single feature alone using the same visible-only folds. An AUC above 0.90 disqualifies it until leakage is explained; an AUC below that threshold is not proof of no leakage.",
+    "Use pooled TP/FP/FN DTI and paired spatial-block bootstrap confidence intervals. Seeds that repeat the same spatial blocks are not independent blocks. Record unique positive counts separately from repeated pixel evaluations.",
+    "Require positive lower confidence limits versus both identical no-prior control and the current best. Require a complete hash-bound surface scan before placement, then a complete final-dot registry/local-prior scan and format validation before any download. Stop at the first literal duplicate.",
+    "Preserve per-corridor layers, signed signature, source record IDs, nuisance explanation and uncertainty for geological review. A fault prediction is not a demonstrated geothermal vent or reservoir.",
+    "At most three experiments or two hours; no real weekly slot without a separate selector and actual authenticated allowance."
+  ]
+}

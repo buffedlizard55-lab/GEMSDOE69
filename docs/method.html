@@ -1,59 +1,28 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Method · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css"></head>
-<body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">H33 Source Audit</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="active">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
-<main class="wrap">
-
-<div class="card">
-<h2>Method</h2>
-<h3>Tip graph</h3>
-<p>The pinned catalogue mirror (labels &equiv; existing_faults, IR-69-DATA-01) is skeletonized
-(scikit-image), traced into 3,887 strands between endpoints/branch points, and every strand carries its
-two tips with terminal strikes (PCA of the tip-adjacent 12-px tail).</p>
-<h3>Pair acceptance (all lengths in 100 m px)</h3>
-<ul>
-<li>tips from different 8-connected components (same-component pairs are reserved for the hard-link test);</li>
-<li>terminal strikes sub-parallel, axial &Delta;&theta; &le; 30&deg; &mdash; the raster carries no dip polarity, so
-&ldquo;same dip&rdquo; is proxied by sub-parallel strike (disclosed limitation IR-69-DIP-01);</li>
-<li>cross-strike spacing W &isin; [1, 150] px (0.1&ndash;15 km);</li>
-<li>along-strike separation &le; 3.5W and overlap &le; 1.0W, computed as interval arithmetic on the
-strike-axis projection of tip-adjacent strand windows (sign-invariant for axial data).</li>
-</ul>
-<h3>Corridor emission</h3>
-<ul><li><b>Oblique connector</b>: tip-to-tip line, extended 0.35W along the local strikes, half-width
-clamp(W/6, 1, 6) px;</li>
-<li><b>En &eacute;chelon strands</b> (dilatational pairs): 2&ndash;8 strands of length clamp(1.5W, 4, 30) px at
-&plusmn;25&deg; to the connector, staggered along it;</li>
-<li><b>Pull-apart rhomb</b> (dilatational pairs): rotated ellipse, semi-axes 0.8/0.45 of the tip diagonal;
-Walker-Lane dextral prior applied through the dilation diagnostic (overlap &le; 0.5W &rArr; dilatational),
-because slip sense is unobservable from the raster (recorded per corridor);</li>
-<li>strongly overlapping steps emit the narrower <b>transfer-overlap</b> corridor.</li></ul>
-<h3>Corridor scoring</h3>
-<p>S = 0.20&middot;E<sub>grav</sub> + 0.20&middot;E<sub>mag</sub> + 0.18&middot;E<sub>maglow</sub> + 0.15&middot;E<sub>lidar</sub>
-+ 0.10&middot;W<sub>orient</sub> + 0.17&middot;W<sub>geom</sub> &mdash; weights pre-registered before any holdout look.
-E-terms are maxima of robust-z means (footprint median/MAD) over multi-scale horizontal gradients
-(&sigma; = 1, 2, 4 px), tilt-edge |sin(arctan2(VD, HG))| with VD the &sigma;/2&sigma; upward-continuation difference,
-the provided HG/VG/tilt products, and &minus;tmi/&minus;rtp magnetic lows; E<sub>lidar</sub> is the
-max(ex_max, step_max, downface_max) scarp channel; W<sub>orient</sub> scores the corridor axis against the
-N&ndash;NE axial family best oriented for dilation under WNW extension; W<sub>geom</sub> is the subtype prior
-(pull-apart 1.0, relay 0.9, transfer-overlap 0.6). Every corridor carries a rationale record
-(layers with z-values, signature, source) in <code>evidence/e3_receipt.json</code>.</p>
-<h3>Emission &amp; gate</h3>
-<p>Propensity P(x) = logistic(1.5(S &minus; S<sub>0</sub>)) &times; corridor membership weight; dots placed by the
-shared template's exact greedy marginal-DTI allocator with truth-size prior |G| = 12,691 px
-(GEMSDOE32 receipt-derived estimate, cited), restricted &ge;2 px from the mapped catalogue. Gate: the
-corridor arm must beat the identical pipeline with the corridor prior removed (per-pixel physics
-composite, same layer set, same allocator) on the shared template's spatially-blocked hide-and-recover
-holdout (seeds 20/21 &times; four quadrants), paired with 95% CIs. Hard-link validation: for same-component
-virtual pairs, the linking catalogue mass inside the corridor is masked and recovery within 3 px (300 m)
-is measured after rebuilding from the remaining catalogue.</p>
-</div>
-
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light"><title>Method audit · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css"></head><body>
+<a class="skip" href="#content">Skip to content</a>
+<div class="global-status bad" role="status"><div class="wrap"><strong>DO NOT SUBMIT · No eligible submission download</strong> · <a href="executive-summary.html">Read submission instructions</a></div></div>
+<header><div class="wrap"><p class="eyebrow">GEMS PRIZE · RESEARCH LANE 69</p><h1>Relay ramps. Pull-aparts. Evidence first.</h1>
+<p class="sub">Catalogue-geometry fault discovery · reproducible checks · no unsupported score promises</p></div></header>
+<nav aria-label="Main"><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="why-h33-scored.html">H33 analysis</a><a href="hypotheses.html">Research queue</a><a href="method.html" aria-current="page" class="active">Method audit</a><a href="results.html">Evidence</a><a href="family-audit.html">Family results</a><a href="sources.html">Verified sources</a><a href="irregularities.html">Blockers</a><a href="run-card.html">Run card</a></div></nav>
+<main class="wrap" id="content"><section class="card"><h2>Implemented method versus required method</h2>
+<p>This audit describes archived code, not a newly validated model. Shared evaluator/writer bytes remain pinned and unchanged.</p>
+<div class="table-scroll"><table><thead><tr><th>Requirement</th><th>What the archived production path does</th><th>Status</th></tr></thead><tbody>
+<tr><td>Catalogue-polyline tip graph</td><td>Skeletonizes the raster mirror and traces terminal windows; separate vector compatibility APIs exist but do not prove the candidate used source polylines.</td><td>Not certified</td></tr>
+<tr><td>Same dip; dextral releasing geometry</td><td>Uses subparallel terminal strike and an unsigned-overlap dilation proxy. Downloadable mirror attributes exist but are not integrated into this artifact.</td><td>Not satisfied by the proxy</td></tr>
+<tr><td>W 0.1–15 km; separation ≤3.5W</td><td>Repaired interval origin and search radius are covered by unit tests. Those source repairs make older manifests stale.</td><td>Geometry tests are not a rerun certificate</td></tr>
+<tr><td>Multi-scale HG/tilt evidence</td><td>HG of Gaussian-smoothed fields; an unsigned Gaussian-difference/gradient proxy; scalar corridor means and group maxima/minima. Not signed tilt-zero profile coincidence or physical upward continuation.</td><td>Description corrected; science not re-fit after stop</td></tr>
+<tr><td>Visible-only hide-and-recover</td><td>Corridor geometry is rebuilt from visible faults, but an allowed-pixel flank mask still uses the full catalogue. The older canary propensity also uses the full catalogue.</td><td>Blocking label-dependent input</td></tr>
+<tr><td>Whole-segment withholding with a buffer</td><td>The archived shared build_holdout caller chunks branches at MAX_SEG_PX=12 and leaves visible context unbuffered. Quadrant-boundary erosion is not a withheld-segment buffer.</td><td>Missing compliant, hash-bound protocol audit; legacy transfer functions also stop when imported</td></tr>
+<tr><td>Pooled HOLDOUT-DTI; spatial-block CI</td><td>Some archives contain mean-of-cell results; others pool counts but bootstrap repeated cells as independent. Repeated seeds share blocks.</td><td>Not a release certificate</td></tr>
+<tr><td>Surface uniqueness before placement</td><td>Some archived comparisons were made only after emission; some phase summaries contradict their literal readings.</td><td>Blocking; no post-hoc clearance</td></tr>
+<tr><td>Source/layer rationale</td><td>Archived rationale tables exist, but entries lack authenticated dip/slip provenance and are not proof of a geological link.</td><td>Geologist review still required</td></tr>
+</tbody></table></div></section>
+<section class="card"><h2>The intended scientific pipeline remains in-lane</h2>
+<p>Compatible visible source-polyline tips → legal relay/pull-apart/termination corridors → multi-layer, stress-consistent evidence → calibrated greedy marginal-DTI placement inside corridors → independent hide-and-recover and hard-link recovery → both literal uniqueness phases → exact-byte format validation → selector review.</p>
+<p>The current synthetic tests verify code behavior, not geothermal vents. Fixing bookkeeping does not validate a geological hypothesis. Read the research queue for a falsifiable next experiment once the stop is legitimately resolved.</p></section></main>
+<footer><div class="wrap">Maximize P(Win): protect scarce submission slots. Own the Outcome: publish negative results.<br>
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE69">Repository</a> · <a href="status.json">Release status JSON</a> · <a href="run-card.json">Run card JSON</a></div></footer>
 </body></html>

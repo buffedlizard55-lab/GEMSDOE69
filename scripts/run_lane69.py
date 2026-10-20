@@ -508,6 +508,9 @@ def main() -> int:
     cmd = sys.argv[1] if len(sys.argv) > 1 else "verify"
     if cmd == "verify":
         return cmd_verify()
+    if cmd in ("e1", "e2", "e3"):
+        from lane_preflight import require_open_lane
+        require_open_lane(ROOT)
     if cmd == "e1":
         return cmd_e1()
     if cmd == "e2":

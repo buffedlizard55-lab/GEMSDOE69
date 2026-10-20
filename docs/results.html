@@ -1,55 +1,31 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Experiments · GEMSDOE69</title>
-<link rel="stylesheet" href="assets/site.css"></head>
-<body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">H33 Source Audit</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="active">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
-<main class="wrap">
-
-<div class="card"><h2>Current archived candidate &mdash; H69-H2 transfer-only</h2>
-<p><b>Negative: duplicate-and-stop.</b> The run card records HOLDOUT-DTI
-0.0077, 95% CI 0.0057 to 0.0097,
-against comparator 0.0021; 22641 withheld positives and 8 cells. These are local HOLDOUT-DTI measurements, not an organizer score. Its literal all-registry overlap is 1.0 (limit 0.70), so no TIFF is downloadable.</p>
-<p>The historical H69-H2 holdout used the legacy chunked, unbuffered path; its code-review findings are in <code>evidence/relayfix_holdout_protocol_audit.json</code>. It is not a protocol-qualified positive. The old runner is blocked from further experiments or TIFF emission.</p>
-</div>
-<div class="card"><h2>E1 &mdash; census, hard-link recovery, canaries</h2>
-<table>
-<tr><th>Measurement</th><th>Value</th></tr>
-<tr><td>Strands vectorized from the pinned catalogue</td><td>3887</td></tr>
-<tr><td>Corridors emitted (cap 1200)</td><td>1200 (1200 pull-apart / 0 transfer-overlap)</td></tr>
-<tr><td>Hard-linked ramps found / tested</td><td>1896 / 22</td></tr>
-<tr><td>Mean recovery of masked linking faults within 300 m</td><td>0.864 (median 1.000)</td></tr>
-<tr><td>Ramps recovered &ge;70%</td><td>19</td></tr>
-</table>
-<table><tr><th>W (px)</th><th>linking px</th><th>recovery within 3 px</th><th>subtype</th></tr><tr><td>2</td><td>28</td><td>1.000</td><td>pull-apart</td></tr><tr><td>2</td><td>6</td><td>0.000</td><td>pull-apart</td></tr><tr><td>33</td><td>89</td><td>1.000</td><td>pull-apart</td></tr><tr><td>29</td><td>76</td><td>1.000</td><td>pull-apart</td></tr><tr><td>31</td><td>67</td><td>1.000</td><td>pull-apart</td></tr><tr><td>8</td><td>97</td><td>1.000</td><td>pull-apart</td></tr><tr><td>22</td><td>97</td><td>1.000</td><td>pull-apart</td></tr><tr><td>9</td><td>6</td><td>0.000</td><td>transfer-overlap</td></tr><tr><td>4</td><td>27</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>58</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>60</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>45</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>28</td><td>1.000</td><td>pull-apart</td></tr><tr><td>4</td><td>8</td><td>0.000</td><td>pull-apart</td></tr><tr><td>3</td><td>30</td><td>1.000</td><td>pull-apart</td></tr><tr><td>4</td><td>55</td><td>1.000</td><td>pull-apart</td></tr><tr><td>5</td><td>48</td><td>1.000</td><td>pull-apart</td></tr><tr><td>2</td><td>48</td><td>1.000</td><td>pull-apart</td></tr><tr><td>6</td><td>45</td><td>1.000</td><td>pull-apart</td></tr><tr><td>6</td><td>34</td><td>1.000</td><td>pull-apart</td></tr><tr><td>3</td><td>33</td><td>1.000</td><td>pull-apart</td></tr><tr><td>1</td><td>16</td><td>1.000</td><td>pull-apart</td></tr></table>
-</div>
-<div class="card"><h2>Separate H69-J E2 &mdash; local holdout screen (literal duplicate-stop still blocks publication)</h2>
-<table><tr><th>Arm</th><th>Pooled DTI</th><th>95% CI half</th><th>Cells</th></tr>
-<tr><td>Corridor prior</td><td>0.0059</td><td>0.0012</td><td rowspan=2>8 (22641 withheld positives)</td></tr>
-<tr><td>No-prior control</td><td>0.0021</td><td>0.0006</td></tr>
-<tr><td><b>Paired &Delta;</b></td><td><b>+0.0038</b></td><td>0.0015</td><td>gate_passed = True</td></tr>
-</table>
-<table><tr><th>Cell</th><th>Corridor DTI</th><th>Control DTI</th></tr><tr><td>draw20_foldNE_all</td><td>0.0068</td><td>0.0008</td></tr><tr><td>draw20_foldNW_all</td><td>0.0050</td><td>0.0028</td></tr><tr><td>draw20_foldSE_all</td><td>0.0054</td><td>0.0035</td></tr><tr><td>draw20_foldSW_all</td><td>0.0068</td><td>0.0028</td></tr><tr><td>draw21_foldNE_all</td><td>0.0049</td><td>0.0017</td></tr><tr><td>draw21_foldNW_all</td><td>0.0042</td><td>0.0018</td></tr><tr><td>draw21_foldSE_all</td><td>0.0046</td><td>0.0020</td></tr><tr><td>draw21_foldSW_all</td><td>0.0097</td><td>0.0017</td></tr></table>
-<p class="small">Evaluator: vendor/template66 gems57 pooled hide-and-recover (&alpha;=0.2, &beta;=0.8,
-300 m triangular kernel). Evidence class HOLDOUT-DTI. The archived half-width is a repeated-cell normal approximation, not the required paired-cell-bootstrap CI against both no-prior control and current lane-best; a protocol-compliance audit is also missing.</p>
-</div>
-<div class="card"><h2>E3 &mdash; archived emission, registry scan, and validator</h2>
-<table><tr><th>Check</th><th>Result</th></tr>
-<tr><td>Dots emitted (greedy marginal-DTI, |G| prior 12,691 px)</td><td>38669 (catalogue collisions: 0)</td></tr>
-<tr><td>Validator on exact bytes (scripts/validate_submission.py, both variants)</td><td>FAIL/pending — see evidence/relayfix_transfer_validator.json</td></tr>
-<tr><td>Portal file (-zeros): all-finite float32 in [0,1], EPSG:32611, 3730&times;3292</td><td>pending</td></tr>
-<tr><td>Diagnostic twin (-nan): NaN only outside footprint &mdash; DO NOT UPLOAD</td><td>archived for audit</td></tr>
-<tr><td>Registry scan compared / errors</td><td>751 / 0</td></tr>
-<tr><td>Worst |Spearman| surface</td><td>0.162</td></tr>
-<tr><td>Worst dot overlap (dotlike stratum; diagnostic only)</td><td>0.61</td></tr>
-<tr><td>Literal registry overlap gate (publication controlling)</td><td>False &mdash; false means duplicate-and-stop</td></tr>
-<tr><td>Exact pixel-agreement &ge;99.99% vs any prior raster</td><td>0</td></tr>
-</table>
-</div>
-
-</main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light"><title>Evidence · GEMSDOE69</title>
+<link rel="stylesheet" href="assets/site.css"></head><body>
+<a class="skip" href="#content">Skip to content</a>
+<div class="global-status bad" role="status"><div class="wrap"><strong>DO NOT SUBMIT · No eligible submission download</strong> · <a href="executive-summary.html">Read submission instructions</a></div></div>
+<header><div class="wrap"><p class="eyebrow">GEMS PRIZE · RESEARCH LANE 69</p><h1>Relay ramps. Pull-aparts. Evidence first.</h1>
+<p class="sub">Catalogue-geometry fault discovery · reproducible checks · no unsupported score promises</p></div></header>
+<nav aria-label="Main"><div class="wrap"><a href="index.html">Overview</a><a href="executive-summary.html">Submission guide</a><a href="why-h33-scored.html">H33 analysis</a><a href="hypotheses.html">Research queue</a><a href="method.html">Method audit</a><a href="results.html" aria-current="page" class="active">Evidence</a><a href="family-audit.html">Family results</a><a href="sources.html">Verified sources</a><a href="irregularities.html">Blockers</a><a href="run-card.html">Run card</a></div></nav>
+<main class="wrap" id="content"><section class="card"><h2>Fresh registry measurement — STOP</h2>
+<p>Evidence class: <b>REGISTRY-MEASUREMENT</b>. Checked 2026-10-20T22:21:07.243504+00:00. Shared pinned <code>gems57.uniqueness</code> comparator, exact full-footprint correlation, positive finite support, Euclidean radius 3 pixels.</p>
+<dl><dt>Pinned comparator</dt><dd>17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif</dd><dt>Candidate dots within 3 pixels</dt><dd>1.0 (literal maximum permitted: 0.70)</dd>
+<dt>Full-footprint Spearman, this one comparator</dt><dd>0.10344425936824049 (not a fresh full-registry maximum)</dd>
+<dt>Positive footprint cells in comparator</dt><dd>5167373 / 5167373</dd>
+<dt>Byte/pixel identity</dt><dd>Different bytes; footprint exact-value agreement 0.0. Neither fact overrides the literal overlap rule.</dd></dl>
+<p>A universal positive surface overlaps every nonempty in-footprint proposal under the inherited support definition. This is a measurable protocol/representation conflict, not evidence that all geology is identical. The rule cannot be relaxed here.</p>
+<p><b>Independent sparse-prior failure:</b> among the 14 other local archived TIFFs, the largest forward 3-pixel overlap is 0.8023481341643177. It also exceeds 0.70. Excluding a universal-support prior would not make this archived candidate unique.</p>
+<p><b>Scope:</b> one decisive counterexample freshly reproduced, plus all other local archived files. No fresh exhaustive registry clearance is claimed. No surface was generated or dots placed after the stop.</p>
+<a href="data/registry-blocker.json">Counterexample JSON</a> · <a href="data/local-prior-audit.json">Local hash/pixel/overlap audit</a></section>
+<section class="card"><h2>HOLDOUT-DTI: archived claim, not certified</h2>
+<p>Joint arm mean of cells: <b>0.0059127, archived 95% interval [0.0046667, 0.0071586]</b>; no-prior control mean 0.0021479253641536293.
+Evaluator label in the archive: <code>vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20,21] modes=[all])</code>. The archive reports 22641 withheld-positive <em>pixel evaluations</em> over 8 repeated cells, not that many unique independent positives.</p>
+<p>The organizer explicitly confirms a single pooled index, not the mean of per-chunk scores (<a href="https://community.drivendata.org/t/leaderboard-aggregation-pooled-over-public-test-pixels-or-mean-of-per-chunk-scores/11550/2">DrivenData Staff</a>). The interval here is a normal approximation over repeated cells, not an independent spatial-block CI; a field named “pooled” does not change its arithmetic. Hidden-target-dependent flank exclusion, the older full-catalogue canary and method lineage prevent certification.
+There is <b>no new HOLDOUT-DTI result or demonstrated current-best improvement</b> from this review.</p>
+<p>The transfer-only archive contains a larger pooled claim, but shares the full-catalogue flank-mask problem and fails literal uniqueness. It is not silently substituted for the joint candidate.</p></section>
+<section class="card"><h2>Fresh exact-byte format validation</h2><p>Evidence class: FORMAT-CHECK, not organizer acceptance or a score. Both variants are float32, EPSG:32611, 3730×3292, 100 m, with the pinned sample transform. No NaN inside the footprint; finite values in [0,1].</p>
+<div class="table-scroll"><table><thead><tr><th>Archived file</th><th>Local pass</th><th>NaN inside</th><th>Range</th><th>SHA-256</th></tr></thead><tbody><tr><td><code>h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif</code></td><td>True</td><td>0</td><td>[0.0, 1.0]</td><td><code>981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6</code></td></tr><tr><td><code>h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-nan.tif</code></td><td>True</td><td>0</td><td>[0.0, 1.0]</td><td><code>9d4774ff6158ea92edd67bb173426f8d6531babe5d3153c1fe1dab4cded480b6</code></td></tr></tbody></table></div>
+<a href="data/validator-audit.json">Full validator output</a></section></main>
+<footer><div class="wrap">Maximize P(Win): protect scarce submission slots. Own the Outcome: publish negative results.<br>
+<a href="https://github.com/buffedlizard55-lab/GEMSDOE69">Repository</a> · <a href="status.json">Release status JSON</a> · <a href="run-card.json">Run card JSON</a></div></footer>
 </body></html>

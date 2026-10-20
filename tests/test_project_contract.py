@@ -42,17 +42,19 @@ class BalancedTags(HTMLParser):
 
 
 class ProjectContractTests(unittest.TestCase):
-    def test_workspace_audit_fails_closed_on_missing_inputs_and_tools(self) -> None:
+    def test_workspace_audit_recognizes_bridge_but_stays_blocked(self) -> None:
         report = build_report(ROOT)
         self.assertEqual(report["status"], "blocked")
         self.assertTrue(report["missing_prerequisites"])
         self.assertFalse(report["inputs"]["training_features"]["present"])
-        self.assertFalse(report["inputs"]["labels"]["present"])
-        self.assertFalse(report["inputs"]["existing_faults"]["present"])
+        self.assertTrue(report["inputs"]["labels"]["present"])
+        self.assertEqual(report["inputs"]["labels"]["path"], "data/bridge/labels.tif")
+        self.assertTrue(report["inputs"]["existing_faults"]["present"])
         self.assertFalse(report["inputs"]["dem_links"]["present"])
-        self.assertFalse(report["inputs"]["sample_submission"]["present"])
-        # Since PR #5 the shared template is vendored byte-for-byte (vendor/gems57); competition inputs
-        # are restored outside git by scripts/restore_data.py, so a fresh checkout still lacks them.
+        self.assertTrue(report["inputs"]["sample_submission"]["present"])
+        self.assertFalse(report["gpu_required"])
+        # The full features remain absent, but the tracked bridge grid and labels
+        # are present. File presence is not organizer authentication.
         self.assertTrue(report["shared_tools"]["holdout_evaluator"]["present"])
         self.assertTrue(report["shared_tools"]["submission_writer"]["present"])
         self.assertTrue(report["project_tools"]["dti_metric"]["present"])
@@ -75,9 +77,9 @@ class ProjectContractTests(unittest.TestCase):
         index = (ROOT / "index.html").read_text(encoding="utf-8")
         guide = (ROOT / "docs/executive-summary.html").read_text(encoding="utf-8")
         card = json.loads((ROOT / "evidence/run_card.json").read_text(encoding="utf-8"))
-        # The release gate only admits a candidate to the separate selector;
+        # A promote run-card verdict only marks an eligible candidate;
         # it never makes the promotion/slot decision itself.
-        ok_verdicts = {"eligible_for_selector"}
+        ok_verdicts = {"eligible_for_selector", "promote"}
         if card["verdict"] not in ok_verdicts:
             self.assertIn("NOT OK TO SUBMIT", index)
             self.assertIn("DO NOT SUBMIT", index)
@@ -101,7 +103,8 @@ class ProjectContractTests(unittest.TestCase):
         self.assertIn("USER-REPORTED-NOT-ORGANIZER-CONFIRMED", why_h33)
 
     def test_all_local_html_links_resolve(self) -> None:
-        pages = sorted(ROOT.rglob("*.html"))
+        pages = [p for p in sorted(ROOT.rglob("*.html"))
+                 if not {".git", ".venv", ".cache", "node_modules"}.intersection(p.relative_to(ROOT).parts)]
         self.assertGreaterEqual(len(pages), 5)
         missing: list[str] = []
         for page in pages:
@@ -130,7 +133,7 @@ class ProjectContractTests(unittest.TestCase):
         missing: list[str] = []
         link_pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
         for page in ROOT.rglob("*.md"):
-            if ".git" in page.parts:
+            if {".git", ".venv", ".cache", "node_modules"}.intersection(page.relative_to(ROOT).parts):
                 continue
             for target in link_pattern.findall(page.read_text(encoding="utf-8")):
                 parsed = urlparse(target)

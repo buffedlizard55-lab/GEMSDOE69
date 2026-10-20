@@ -1,0 +1,81 @@
+name: Evidence site and public source feed
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+  schedule:
+    - cron: '17 8 * * *'
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+concurrency:
+  group: pages
+  cancel-in-progress: false
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+          cache: pip
+      - run: python -m pip install -r requirements-dev.txt
+      - name: Verify repository and scientific-tool pins
+        run: python -m pytest -q
+      - name: Restore previous source observation baseline
+        uses: actions/cache@v4
+        with:
+          path: .cache/source-baseline
+          key: source-feed-${{ github.run_id }}-${{ github.run_attempt }}
+          restore-keys: source-feed-
+      - name: Seed the next comparison from the last scheduled observation
+        run: |
+          for name in family-feed source-health; do
+            if [ -f ".cache/source-baseline/$name.json" ]; then
+              cp ".cache/source-baseline/$name.json" "docs/data/$name.json"
+            fi
+          done
+      - name: Refresh public pages (never train, generate, select, or submit)
+        id: sources
+        continue-on-error: true
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: python scripts/refresh_sources.py --all
+      - name: Report partial source failures without concealing the feed
+        if: steps.sources.outcome == 'failure'
+        run: echo '::warning::Some source reads failed. The source-health/family feed records explicit errors; no scientific gates were changed.'
+      - name: Build evidence-controlled site and inspect links/downloads
+        run: |
+          python scripts/build_site69.py
+          python scripts/check_site.py
+          mkdir -p .cache/pages/docs
+          cp index.html .nojekyll .cache/pages/
+          cp -r docs/. .cache/pages/docs/
+          mkdir -p .cache/source-baseline
+          cp docs/data/family-feed.json docs/data/source-health.json .cache/source-baseline/
+      - name: Select workflow-based Pages publication
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          source=$(gh api "repos/$GITHUB_REPOSITORY/pages" --jq .build_type)
+          if [ "$source" != "workflow" ]; then
+            gh api --method PUT "repos/$GITHUB_REPOSITORY/pages" -f build_type=workflow
+          fi
+      - uses: actions/configure-pages@v5
+      - uses: actions/upload-pages-artifact@v3
+        with:
+          path: .cache/pages
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - name: Deploy policy-generated static evidence site
+        id: deployment
+        uses: actions/deploy-pages@v4

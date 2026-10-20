@@ -1,3 +1,9 @@
+# Current integrity status — 2026-10-20
+
+**DO NOT SUBMIT.** The maintained current finding register is `evidence/integrity_review.json` and the literal policy is `scripts/release_gate.py`. All older numeric/pass claims below are archival, not newly certified; current findings supersede descriptions such as “science gates all pass”, fixed hard-link recovery, or wholly unavailable public-page access. Read HANDOFF.md and reports/literal-integrity-review-2026-10-20.md first.
+
+---
+
 # FLAGGED — irregularities needing human review
 
 | ID | Finding | Severity | Disposition |

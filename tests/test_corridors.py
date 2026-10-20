@@ -63,7 +63,7 @@ def test_same_component_virtual_pairs_use_same_code_path():
 def test_scoring_versions_preregistered_and_normalized():
     for version, weights in scoring.SCORING_WEIGHTS.items():
         assert sum(weights) == pytest.approx(1.0), version
-    assert scoring.SCORING_WEIGHTS["v1"][4:] == (0.0, 0.0, 0.10, 0.17) or True
+    assert scoring.SCORING_WEIGHTS["v1"][4:] == (0.0, 0.0, 0.10, 0.17)
     assert scoring.SCORING_WEIGHTS["v2"][4] > 0 and scoring.SCORING_WEIGHTS["v2"][5] == 0.0
     assert scoring.SCORING_WEIGHTS["v3"][5] > 0
 

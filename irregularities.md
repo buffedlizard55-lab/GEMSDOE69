@@ -1,9 +1,5 @@
 # Irregularities — current index
 
-The current, maintained register is [FLAGGED.md](FLAGGED.md).
+**NOT OK TO SUBMIT.** Read [the integrity register](evidence/integrity_review.json), [the current audit card](evidence/run_card.json), and [the literal integrity review](reports/literal-integrity-review-2026-10-20.md).
 
-This repository contains preserved workbench and pre-restoration records in
-`docs/parallel/` and historical reports. They are evidence of prior state, not
-the current release decision. The current decision is fail-closed:
-**NOT OK TO SUBMIT**. See [the run card](evidence/run_card.json) and
-[the final audit](reports/final-audit-2026-10-20.md).
+[FLAGGED.md](FLAGGED.md), docs/parallel and older reports retain historical observations. Their old pass/score/provenance claims are not current scientific clearance. No dense-support exemption, old receipt rebinding or cosmetic output change is authorized.
