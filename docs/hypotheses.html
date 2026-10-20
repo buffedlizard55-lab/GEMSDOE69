@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Queued hypotheses · GEMSDOE69</title>
+<title>Hypotheses · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
@@ -9,24 +9,35 @@
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="active">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card"><h2>Queued in-lane hypotheses — no experiment authorized after duplicate stop</h2>
-<p>Qualitative ranking by expected incremental recovery, then implementation cost; no numerical
-DTI improvement is predicted. These joint signatures are absent from the checked-in corridor scorer.
-All remain untested and not slot-eligible. Existing cached layers suffice in principle, but the
-full stack is not restored here. No new external dataset is represented as obtainable.</p>
+<div class="card">
+<h2>H69-E measured 2026-10-20 — logged negative, not offered</h2>
+<p>Ranked before the holdout look in <code>docs/research/hypotheses_2026-10-20.md</code>.
+H69-E was the experiment. HOLDOUT-DTI beat the no-prior control. Protocol rule 1 then stopped it:
+84.1% of dots within 3 px of one registry raster. Do not submit. Expected gains below were priors, not scores.</p>
+<table>
+<tr><th>#</th><th>Hypothesis</th><th>Layers</th><th>Signature</th><th>Status</th></tr>
+<tr><td>1</td><td><b>H69-E width-stratified corridors + straight steps + K/ThK</b></td><td>cond_surf, basement depth, GeoDAWN K and Th/K, grav/mag/lidar</td><td>structure-tensor coherence times gradient; K low vs 2 km background; high Th/K, inside width-stratified tip-graph corridors</td><td>Measured. Negative. Not slot-eligible.</td></tr>
+<tr><td>2</td><td>H69-B knickpoint-chi chains at step-over mouths</td><td>det_elev, det_elev_slope</td><td>chi-integral anomalies of streams crossing corridor axes</td><td>Not tested. Not slot-eligible.</td></tr>
+<tr><td>3</td><td>H69-H instrumental seismicity lineaments</td><td>would replace binned ieq/deq with the raw catalogue</td><td>epicentre lineament density plus nodal-plane strikes</td><td>Data-blocked (USGS ComCat not reachable here). Not slot-eligible.</td></tr>
+</table>
+</div>
+<div class="card">
+<h2>Leakage canaries (H69-E)</h2>
+<p class="small">Protocol rule 4: a single-feature AUC above 0.90 on the holdout is leakage until proven otherwise.</p>
+<table><tr><th>Feature</th><th>AUC (withheld truth vs active negatives)</th></tr><tr><td>grav_hg_s1</td><td>0.5305418979556492</td></tr><tr><td>mag_hg_s1</td><td>0.5376840831238601</td></tr><tr><td>grav_hg_s2</td><td>0.5305355347954177</td></tr><tr><td>mag_hg_s2</td><td>0.5389047017061042</td></tr><tr><td>grav_hg_s4</td><td>0.529309748848189</td></tr><tr><td>mag_hg_s4</td><td>0.5378066802300789</td></tr><tr><td>grav_tilt_s2</td><td>0.5062428593765597</td></tr><tr><td>mag_tilt_s2</td><td>0.5148141127382865</td></tr><tr><td>grav_hg_prov</td><td>0.49734889203039406</td></tr><tr><td>grav_vg_prov</td><td>0.5224056920392296</td></tr><tr><td>geod_2ndinv</td><td>0.5530383954762326</td></tr><tr><td>mag_hg_prov</td><td>0.5364947113005831</td></tr><tr><td>mag_vg_prov</td><td>0.48237893134829474</td></tr><tr><td>tc_prov</td><td>0.43950500574306417</td></tr><tr><td>mag_low_tmi</td><td>0.4963676795811981</td></tr><tr><td>mag_low_rtp</td><td>0.48283129749072273</td></tr><tr><td>lidar_scarp</td><td>0.572205257428365</td></tr><tr><td>cond_straight</td><td>0.5145157048506803</td></tr><tr><td>base_straight</td><td>0.5428712113447606</td></tr><tr><td>rad_k_depl</td><td>0.5821535536313837</td></tr><tr><td>rad_thk</td><td>0.4728964609471638</td></tr><tr><td>corridor_propensity</td><td>0.6792975452818519</td></tr></table>
+</div>
+<div class="card"><h2>Still queued — not authorized by the H69-E stop</h2>
+<p>Qualitative ranking only. No numerical DTI improvement is predicted. These joint signatures were not the H69-E scorer. All remain untested and not slot-eligible.</p>
 <table><tr><th>Rank / hypothesis</th><th>Layers and physical signature</th><th>Missing-fault argument / difference / mimic / cost</th></tr>
 <tr><td>1. Convergent relay-link edge phase</td><td>Gravity and magnetics: HG ridge directions and tilt-zero crossings on opposite corridor margins at several scales.</td>
-<td>Could locate a buried bridge between visible tips. Unlike the current independent maximum layer scores, requires a shared connector phase and axis. Lithologic contacts mimic it. Moderate cost; uncertain benefit.</td></tr>
+<td>Could locate a buried bridge between visible tips. Unlike independent maximum layer scores, requires a shared connector phase. Lithologic contacts mimic it. Moderate cost; uncertain benefit.</td></tr>
 <tr><td>2. Releasing-basin margin asymmetry</td><td>Gravity curvature and paired HG flanks plus magnetic low, restricted to tip-derived pull-apart rhombs.</td>
-<td>Could find buried basin-bounding splays rather than rescore visible scarps. Tests transverse basin structure, not a scalar low. Sediment-filled paleochannels mimic it. Moderate cost; uncertain benefit. Slip sense must be verified, not inferred from overlap alone.</td></tr>
-<tr><td>3. En echelon scarp phase coherence</td><td>LiDAR-scarp channel: staggered oriented ridges aligned across a proposed connector, vetoing uninterrupted parallel terrace edges.</td>
-<td>Could recover short linking strands omitted by regional mapping. Current scorer averages channel magnitude, not staggered spatial phase. Pluvial shorelines and road cuts mimic it. Moderate-to-high cost; uncertain benefit.</td></tr>
+<td>Could find buried basin-bounding splays. Sediment-filled paleochannels mimic it. Slip sense must be verified, not inferred from overlap alone.</td></tr>
+<tr><td>3. En echelon scarp phase coherence</td><td>LiDAR-scarp channel: staggered oriented ridges aligned across a proposed connector.</td>
+<td>Could recover short linking strands. Pluvial shorelines and road cuts mimic it. Moderate-to-high cost; uncertain benefit.</td></tr>
 <tr><td>4. Corridor-confined radiometric contrast reversal</td><td>Radiometric K/Th local contrast relative to matched corridor flanks, conditional on magnetic depletion.</td>
-<td>May distinguish local alteration from broad lithologic domains, including K enrichment as well as depletion. Unlike the archived depletion-only claim, estimates signed within-unit contrast. Sediment sorting mimics it. High cost because lithologic controls are not authenticated; defer pending provenance.</td></tr></table>
-<p>Before any implementation: repair provenance, restore pinned inputs, verify feature-alone canaries,
-reserve untouched spatial blocks, compare with the current best on the identical evaluator, and check
-surface uniqueness before placing dots. Do not relax the literal overlap rule. Giddens &amp; Faulds
-statistics in the prompt remain unverified citations in this environment, not independently established facts.</p></div>
+<td>Signed within-unit contrast, not depletion-only. Sediment sorting mimics it. Defer pending provenance.</td></tr></table>
+<p>Do not relax the literal overlap rule. A new experiment must place dots off the dense-trace neighbourhood that stopped H69-E, and must pass the hash-bound release gate before any download.</p></div>
 
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

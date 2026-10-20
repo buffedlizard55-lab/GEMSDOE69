@@ -31,6 +31,44 @@ sparse fields over 12.28 M cells), the pattern is consistent with shared structu
 family precedent: artifact offered behind a review banner; selector decision required; do not
 auto-promote, do not delete (negative-result logging would overstate the finding).
 
+## IR-69-DUP-01 — H69-E stopped as lane drift (2026-10-20)
+
+Holdout gate passed (HOLDOUT-DTI corridor 0.00637 ± 0.00171 vs control 0.00253 ± 0.00071,
+paired Δ +0.00385 ± 0.00138, gems57 pooled hide, 8 cells, 22,641 withheld positives).
+`scripts/validate_submission.py` passed on both twins. Surface Spearman worst |ρ| = 0.227
+(limit 0.90). Dot overlap with earlier GEMSDOE69 files is 0.483 (under 0.70).
+
+Protocol rule 1 still fails: 84.14% of the 33,199 dots fall within 3 px of
+`12GEMSDOE docs/downloads/12GEMSDOE_r5-nms3-trace_055e9aac96b8.tif`
+(blob `98cbfc84a0e808733e9c5c3aad9ef07c7678a3fe`, 103,347 dots, ρ = 0.0233).
+That is spatial proximity to a dense trace field, not a byte copy (pixel agreement 0.989
+is the sparse-zero baseline). The rule fails closed. No download is offered. No slot is spent.
+
+Overlap with the h33 champion blob `15781395` is 0.316 (ρ = 0.227), so this is not a copy of
+the 0.2778 file either.
+
+## IR-69-GATE-02 — H69-D radiometric label is not a validated result
+
+`submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif` was receipt-labelled
+H69-D, but the committed `src/gems69/physics.py` at that tree has no radiometric transform, and
+`evidence/e2_gate.json` (now copied to `evidence/e2_gate_20261012_prior.json`) is the 2026-10-12
+corridor run, not a radiometric holdout. Do not offer that file as a validated radiometric submission.
+The 2026-10-20 session re-implements radiometrics inside H69-E and re-runs the gate before any OK banner.
+
+## IR-69-LB-01 — user-cited 0.3195 disagrees with the in-repo public snapshot
+
+The user states 0.3195 is the current high score. `registry/leaderboard_snapshot_2026-10-12.json`
+(public leaderboard page, retrieved 2026-10-12) shows 0.4275 at rank 1 and 0.3195 at rank 9.
+drivendata.org is not reachable from this sandbox, so the live board was not re-fetched. Both figures
+are USER-REPORTED or snapshot-class, not organizer receipts, and neither is a score for this lane.
+
+## IR-69-CAP-01 — the 2026-10-12 corridor cap collapsed to W = 2.8 km
+
+`evidence/e1_tipgraph_census.json` records 1,200 corridors, all pull-aparts, and the stored widths
+are 2.8 km. Sorting by |W − 2.8 km| filled the cap at the published mean and never emitted the rest
+of the 0.1–15 km range the prompt requires. H69-E replaces that cap with four width bins. The old
+selector remains available as `selection="mean_width"`.
+
 ## IR-69-HIST-01 — prior session ran the same lane (negative verdict) and is merged on main
 
 Commits 1b5c36f/f3568dd/95220a6 (PR #5) contain a prior, different implementation of this lane:

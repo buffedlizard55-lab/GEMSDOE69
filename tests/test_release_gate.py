@@ -22,7 +22,8 @@ def cleared(tmp_path):
         'transform_and_bounds_match_sample_submission', 'footprint_all_finite',
         'footprint_values_in_0_1', 'nan_only_outside_footprint', 'no_infinite_values',
         'all_finite_values_in_0_1', 'template_validator_passed')}
-    put(tmp_path, 'e2_gate.json', {'gate_passed': True, 'current_best_beaten': True})
+    put(tmp_path, 'e2_gate.json', {'gate_passed': True, 'current_best_beaten': True,
+                                  'artifact_sha256': sha})
     put(tmp_path, 'e3_uniqueness.json', dict(literal_gate=dict(rho_ok=True, overlap_ok=True),
         n_registry_blobs=1, n_compared=1, n_errors=0, my_sha256=sha))
     put(tmp_path, 'e3_receipt.json', dict(raster=dict(zeros=dict(path='candidate.tif', sha256=sha)),
@@ -117,3 +118,17 @@ def test_invalid_or_flagged_canary_blocks(cleared, auc):
 def test_source_mutation_blocks(cleared):
     (cleared / 'model.py').write_text('# changed method')
     assert not policy.evaluate(cleared)['download_enabled']
+
+
+@pytest.mark.parametrize('binding', [None, '', 'another-candidate'])
+def test_stale_or_missing_holdout_binding_blocks(cleared, binding):
+    gate = policy.read(cleared, 'e2_gate.json')
+    if binding is None:
+        gate.pop('artifact_sha256')
+    else:
+        gate['artifact_sha256'] = binding
+    put(cleared, 'e2_gate.json', gate)
+    decision = policy.evaluate(cleared)
+    assert decision['verdict'] == 'negative'
+    assert not decision['download_enabled']
+    assert any('Holdout comparison' in reason for reason in decision['reasons'])
