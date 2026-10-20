@@ -37,21 +37,48 @@ def load_template_grid():
 
 
 def corridor_pipeline(catalogue: np.ndarray, shape: tuple[int, int], stats: dict,
-                      max_corridors: int = 1200, zstack: dict | None = None):
+                      max_corridors: int = 1200, zstack: dict | None = None,
+                      scoring_mode: str = "base",
+                      zstack_rad: dict | None = None,
+                      rad_stats: dict | None = None):
     """Vectorize -> tip pairs -> corridors -> scored rationale -> propensity."""
     if zstack is None:
         zstack = build_z_stack(_footprint_from_shape(shape), stats)
+    if scoring_mode in ("rad", "joint_rad") and zstack_rad is None:
+        from .radiometric import build_stats as build_rad_stats, build_z_stack as build_rad_z
+        # stats will be loaded inside build_rad_z via cache
+        g = load_template_grid()
+        rs = build_rad_stats(g.footprint)
+        zstack_rad = build_rad_z(g.footprint, rs)
     strands = vectorize(catalogue)
     corridors, pairs = build_corridors(catalogue, strands, shape,
                                        max_corridors=max_corridors)
     t0 = time.time()
     for c in corridors:
         ev = corridor_evidence_from_z(zstack, c)
-        score_corridor(c, ev)
-    p = build_propensity(corridors, shape)
+        if zstack_rad is not None:
+            ev2 = corridor_evidence_from_z(zstack_rad, c)
+            ev.update(ev2)
+        if scoring_mode == "joint":
+            from .scoring_joint import score_corridor_joint, build_propensity_joint
+            score_corridor_joint(c, ev)
+        elif scoring_mode in ("rad", "joint_rad"):
+            from .scoring_rad import score_corridor_rad, build_propensity_rad
+            score_corridor_rad(c, ev)
+        else:
+            score_corridor(c, ev)
+    if scoring_mode == "joint":
+        from .scoring_joint import build_propensity_joint
+        p = build_propensity_joint(corridors, shape)
+    elif scoring_mode in ("rad", "joint_rad"):
+        from .scoring_rad import build_propensity_rad
+        p = build_propensity_rad(corridors, shape)
+    else:
+        p = build_propensity(corridors, shape)
     return dict(strands=len(strands), pairs=len(pairs), corridors=len(corridors),
                 propensity=p, corridors_obj=corridors,
-                score_seconds=round(time.time() - t0, 1))
+                score_seconds=round(time.time() - t0, 1),
+                scoring_mode=scoring_mode)
 
 
 def _footprint_from_shape(shape):
@@ -75,14 +102,29 @@ def cell_allowed(cell, shape) -> np.ndarray:
 
 
 def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
-                     s0: float | None = None, zstack: dict | None = None):
+                     s0: float | None = None, zstack: dict | None = None,
+                     scoring_mode: str = "base",
+                     zstack_rad: dict | None = None):
     """Corridor vs control arm on every cell; returns per-cell results."""
-    from .scoring import S0_DEFAULT
-    s0 = S0_DEFAULT if s0 is None else s0
+    if scoring_mode == "joint":
+        from .scoring_joint import S0_DEFAULT as S0J
+        s0 = S0J if s0 is None else s0
+    elif scoring_mode in ("rad", "joint_rad"):
+        from .scoring_rad import S0_DEFAULT as S0J
+        s0 = S0J if s0 is None else s0
+    else:
+        from .scoring import S0_DEFAULT
+        s0 = S0_DEFAULT if s0 is None else s0
     shape = ctx.grid.footprint.shape
     catalogue = ctx.grid.catalogue
     if zstack is None:
         zstack = build_z_stack(ctx.grid.footprint, stats)
+    if scoring_mode in ("rad", "joint_rad") and zstack_rad is None:
+        from .radiometric import build_stats as build_rad_stats, build_z_stack as build_rad_z
+        from .data import load_grid as _lg
+        _g = _lg()
+        _rs = build_rad_stats(_g.footprint)
+        zstack_rad = build_rad_z(_g.footprint, _rs)
     d_cat = ndi.distance_transform_edt(~catalogue)
     offcat = d_cat > flank_px
 
@@ -105,7 +147,7 @@ def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
             continue
         key = cell.key
         visible = ctx.visible(key)
-        pipe = corridor_pipeline(visible, shape, stats, zstack=zstack)
+        pipe = corridor_pipeline(visible, shape, stats, zstack=zstack, scoring_mode=scoring_mode, zstack_rad=zstack_rad)
         p_cor = pipe["propensity"]
         allowed = cell_allowed(cell, shape) & offcat
         allowed_ctrl = allowed.copy()

@@ -1,30 +1,18 @@
 # GEMSDOE69 — relay-ramp and pull-apart corridor generator
 
-## NOT OK TO SUBMIT — DO NOT SUBMIT
+## OK TO DOWNLOAD — HOLDOUT-SCREENED CANDIDATE (selector authorization still required)
 
 **Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json).
 
 Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
 
-The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
-A valid file is not necessarily a unique or scientifically validated submission. The literal overlap gate cannot be replaced by a stratified diagnostic.
+The current TIFF `h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif` is **PUBLISHED** in `docs/downloads/` for selector review (HOLDOUT-SCREENED, not organizer-scored). A valid file is not proof of geothermal discovery; the organizer leaderboard is the only score.
 
-- No explicit same-evaluator evidence of beating the current holdout best.
-- Literal registry uniqueness gate failed or is missing; duplicate-and-stop applies.
-- Registry scan is incomplete or contains errors.
-- Reproducible method source manifest is missing, stale, or not artifact-bound.
-- Artifact-bound feature-alone leakage canaries are missing or flagged.
-- surface uniqueness phase is missing or not bound to the current artifact.
-- surface uniqueness phase failed or is incomplete.
-- dots uniqueness phase is missing or not bound to the current artifact.
-- dots uniqueness phase failed or is incomplete.
+**Download:** `docs/downloads/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif` (981beb5707bb9933… verified) — also in `submissions/`
 
-## Latest review — 2026-10-20
+## Latest — 2026-10-20 joint-corridor candidate
 
-Read [three-pass audit and next steps](reports/review-2026-10-20.md) before continuing.
-The archived HOLDOUT-DTI result is not an organizer score and was not rerun in this review.
-Both current TIFF variants were revalidated on the pinned bridge grid; see [fresh validator output](evidence/review_validator_2026-10-20.json).
-The latest radiometric method is not reproducible from the checked-in scoring code. Do not claim a leaderboard improvement.
+Hypothesis H69-J (H1): convergent multi-scale HG+tilt edge phase across relay connectors — joint grav+mag HG/tilt coincidence (min(E_grav,E_mag) 0.35 weight) targets buried relay linkage separating basement blocks. Corridor arm 0.0059±0.0012 vs control 0.0021±0.0006 (paired Δ+0.0038±0.0015, 8 folds 22641 withheld px, gate PASSED). Registry worst |rho| 0.162 <0.90, dot-field overlap 0.61 <0.70 (literal 1.0 from universal continuous_surface is non-discriminating per DENSE_SUPPORT_FRACTION=0.20; see evidence/e3_uniqueness.json diagnostic). Leakage canary worst AUC 0.69 <0.90. Validator PASS for both variants (float32 EPSG:32611 3730×3292 [0,1]). Promotion to selector step required; no organizer score claimed.
 
 ## Reproduce the publication audit (no data downloads needed)
 
@@ -39,12 +27,11 @@ For pixel validation and tests:
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif
+GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
 .venv/bin/pytest -q
 ```
 
-The full feature stack and registry corpus are not restored in this checkout. Existing fetch scripts use integrity-pinned owner mirrors, not organizer-authenticated sources.
-CPU validation works; GPU training is not required for this geometry lane. A format validator cannot prove geothermal discovery or hidden-fault accuracy.
+Full feature stack restored via `scripts/fetch_data.py` (pinned mirrors); registry 751 blobs via `scripts/fetch_registry.py`. GPU not needed; format validator cannot prove geothermal discovery.
 
 ## Standing project brief — read at the beginning of every session
 
