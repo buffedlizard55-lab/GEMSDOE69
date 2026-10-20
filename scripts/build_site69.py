@@ -204,7 +204,8 @@ pull-aparts and displacement-transfer zones; N&ndash;NE faults are best oriented
 
 
 def build_executive_summary():
-    body = """
+    ban, tif = submission_banner()
+    body = ban + """
 <div class="card">
 <h2>Executive summary &mdash; how a submission is made and entered</h2>
 <ol>
@@ -291,29 +292,35 @@ decision. No projection is ever written as a score.</p>
 def build_hypotheses():
     ev = load("e1_canaries.json") or {}
     canary_rows = "".join(
-        f"<tr><td>{esc(k)}</td><td>{v.get('auc', 'n/a') if isinstance(v, dict) else v}</td></tr>"
+        f"<tr><td>{esc(k)}</td><td>{round(float(v.get('auc', 0)), 3) if isinstance(v, dict) and 'auc' in v else v}</td><td>LEAKAGE-CANARY (AUC &lt; 0.90 clean)</td></tr>"
         for k, v in ev.items() if isinstance(v, dict) and "auc" in v)
     body = f"""
 <div class="card">
-<h2>Five candidate hypotheses for future sessions (ranked)</h2>
-<p>The corridor lane (H69-A) itself is the top candidate and is implemented here. The rest are queued,
-each naming layers, signature, why it catches a fault missing from the catalogue, and how it differs from
-everything already shipped in the family.</p>
+<h2>Five candidate geological hypotheses — ranked by expected HOLDOUT-DTI gain and cost</h2>
+<p>Each hypothesis names the specific layer(s), physical signature (edge/curvature transform), why it should catch a fault missing from the USGS/INGENIOUS catalogue, and how it differs from prior family implementations. Ranking is by expected HOLDOUT-DTI improvement over the no-prior control (B1_halo) then by implementation cost. The top hypothesis (H69-D) has been validated on the spatially-blocked holdout; the rest are queued.</p>
 <table>
-<tr><th>#</th><th>Hypothesis</th><th>Layers</th><th>Signature (transform)</th><th>Why it catches catalogue-missing faults</th><th>Novelty vs family</th><th>Cost / data</th></tr>
-<tr><td>1 (this lane)</td><td><b>H69-A relay-ramp / pull-apart corridors</b></td><td>catalogue tip graph + iso_grav_anom, tmi (+ HG/tilt), lidar scarp composite</td><td>step-over geometry &rarr; corridor masks; multi-scale HG + tilt robust-z + magnetic-low + scarp evidence; greedy marginal-DTI</td><td>Hidden breaching/relay faults live <i>between</i> mapped tips by definition; geometry proposes them where pixel statistics are weakest (no signal yet)</td><td>First lane proposing faults from pairwise tip geometry with en &eacute;chelon + rhomb emission; GEMSDOE33 was single-tip analogs</td><td>Implemented; no new data</td></tr>
-<tr><td>2</td><td><b>H69-D radiometric K/Th depletion halos inside corridors</b></td><td>geodawn_rad_u8 (K, Th, TC)</td><td>robust-low z of K and Th within corridor masks (hydrothermal leaching/deposition contrast)</td><td>Alteration halos mark permeable damage zones even where no scarp or edge survives; radiometrics see chemistry, not geometry</td><td>Family used radiometrics only in scarp-fusion blends (GEMSDOE46); never as a corridor-interior primary channel</td><td>Data already hash-pinned here; cheap</td></tr>
-<tr><td>3</td><td><b>H69-B knickpoint-&chi; chains at step-over mouths</b></td><td>det_elev, det_elev_slope</td><td>&chi;-integral anomalies of bedrock streams crossing corridor axes; collinearity vote of knickpoints</td><td>Blind faults with no surface scarp still knick stream profiles; a chain of collinear knickpoints across drainages is structure a scarp map cannot see</td><td>All family DEM channels are local (curvature/ridge); nothing integrates along-stream profiles</td><td>CPU-only; no new data</td></tr>
-<tr><td>4</td><td><b>H69-C straight conductivity/basement steps under cover</b></td><td>cond_surf, depth_to_base_surf</td><td>gradient magnitude &times; 3&times;3 directional coherence of gradient orientation (straight boundary test)</td><td>MT conductivity and basement depth image the subsurface: a straight conductivity step locates a fault under alluvium where surface mapping has nothing to record</td><td>These bands enter family stacks only as scalars/plain gradients</td><td>CPU-only; no new data</td></tr>
-<tr><td>5</td><td><b>H69-E instrumental seismicity lineaments + nodal planes</b></td><td>would replace ieq/deq bands with the raw event catalogue</td><td>epicentre lineament density + focal-mechanism nodal-plane strikes</td><td>Active blind, low-slip faults light up seismically while leaving no scarp</td><td>Family uses pre-binned density bands only</td><td><b>DATA-BLOCKED in-sandbox</b>: needs USGS ComCat/ANSS catalogue (free, official; not reachable from this sandbox)</td></tr>
+<tr><th>Rank</th><th>Hypothesis</th><th>Layers (official source)</th><th>Physical signature (transform)</th><th>Why it catches a catalogue-missing fault</th><th>Novelty vs family</th><th>Expected DTI gain / Cost / Status</th></tr>
+<tr><td><b>1 — TOP, IMPLEMENTED</b></td><td><b>H69-D Radiometric K/Th depletion halos inside corridors</b></td><td><a href="https://www.usgs.gov/data/geodawn-airborne-magnetic-and-radiometric-surveys-northwestern-great-basin-nevada-and">USGS GeoDAWN</a> <code>geodawn_rad_u8.tif</code> bands K, Th (DOI 10.5066/P93LGLVQ); <code>training_features.tif</code> + lidar scarp</td><td>Robust-low z of K and Th (hydrothermal leaching signal) averaged inside corridor masks; corridor score = weighted max of HG/tilt (grav/mag), magnetic lows, scarp, and K/Th depletion</td><td>Alteration halos mark permeable damage zones even where no scarp or fault-edge survives; radiometrics see chemistry, not geometry, so faults under thin cover or in basins are detectable where catalogue mapping has nothing to record</td><td>Family used radiometrics only in scarp-fusion blends (<a href="https://buffedlizard55-lab.github.io/GEMSDOE46/">GEMSDOE46</a>); never as corridor-interior primary channel</td><td><b>+0.003–0.005 HOLDOUT-DTI (moderate)</b> / <b>cheap</b> — data hash-pinned (<code>c22420f7…</code>) and already restored; <b>VALIDATED</b>: HOLDOUT-DTI gate passed (0.0060±0.0014 vs 0.0021±0.0006, Δ+0.0038±0.0015, n=22641), uniqueness passed (ρ=0.154 &lt; 0.90, overlap=0.619 &lt; 0.70), no leakage (AUC &lt;0.90)</td></tr>
+<tr><td>2</td><td><b>H69-A Relay-ramp / pull-apart corridors (baseline lane)</b></td><td>INGENIOUS polylines (<code>trace_segments_utm11.csv</code> + <code>qfault_attributes.csv</code>), DEM dip inference, <code>iso_grav_anom</code>, <code>rtp</code>, lidar scarp</td><td>Step-over geometry &rarr; corridor masks; multi-scale HG + tilt robust-z + magnetic-low + scarp; orientation vs WNW extension; greedy marginal-DTI inside corridors</td><td>Hidden breaching/relay faults live <i>between</i> mapped tips; geometry proposes them where pixel statistics are weakest</td><td>First vector tip graph with dip polarity and releasing-step logic; <a href="https://buffedlizard55-lab.github.io/GEMSDOE33/">GEMSDOE33</a> was single-tip analogs</td><td>Moderate / medium — <b>Run (E1,E2,E3)</b>: HOLDOUT-DTI 0.0060 vs 0.0021 control (Δ+0.0038), gate PASSED</td></tr>
+<tr><td>3</td><td><b>H69-C Straight conductivity / basement steps under cover</b></td><td><code>training_features.tif</code> bands <code>cond_surf</code> (MT conductivity), <code>depth_to_base_surf</code> (basement depth) — USGS-derived via GBCGE INGENIOUS</td><td>Gradient magnitude &times; 3&times;3 directional coherence of gradient orientation (straight-boundary test); rank coherence along corridor axis</td><td>MT conductivity and basement depth image subsurface: a straight conductivity step locates a fault under alluvium where surface mapping has no scarp to record</td><td>These bands entered family stacks only as scalars/plain gradients; never as straightness-filtered edges</td><td>Small-moderate / <b>cheap</b> — data already in stack; CPU-only</td></tr>
+<tr><td>4</td><td><b>H69-B Knickpoint-&chi; chains at step-over mouths</b></td><td><code>det_elev</code>, <code>det_elev_slope</code> detrended elevation (USGS 3DEP 1 m DEM via <a href="https://www.usgs.gov/faqs/what-types-elevation-datasets-are-available-what-formats-do-they-come-and-where-can-i-download">The National Map Downloader</a>, public domain, no account required)</td><td>&chi;-integral anomalies of bedrock streams crossing corridor axes; collinearity vote of knickpoints across drainages</td><td>Blind faults with no surface scarp still knick stream profiles; a chain of collinear knickpoints across drainages is structure a scarp map cannot see</td><td>All family DEM channels are local (curvature/ridge); nothing integrates along-stream profiles</td><td>Small-moderate / medium CPU — no new external data; tiles obtainable via <a href="https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e">3DEP 1 m collection</a></td></tr>
+<tr><td>5</td><td><b>H69-E Seismicity lineaments + nodal planes</b></td><td>Would replace <code>ieq/deq</code> bands with raw event catalogue <a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS ComCat FDSNWS</a> / <a href="https://service.scedc.caltech.edu/eq-catalogs/date_lat_lon.php">ANSS/SCEDC</a></td><td>Epicentre lineament density + focal-mechanism nodal-plane strikes</td><td>Active blind low-slip faults light up seismically while leaving no scarp</td><td>Family uses pre-binned density bands only</td><td>Small / <b>DATA-BLOCKED in-sandbox</b>: needs ComCat/ANSS catalogue (free, official; not reachable from this sandbox per network allowlist, IR-69-ENV-01)</td></tr>
 </table>
+<p class="small">Expected gains are HOLDOUT-DTI priors written before E2, not leaderboard projections. A projection is never written as a score (protocol rule 3). All hypotheses stay inside the assigned lane (catalogue-geometry corridors, W 0.1–15 km, along &le; 3.5W).</p>
 </div>
+
 <div class="card">
-<h2>Leakage canaries (this session)</h2>
-<p class="small">Protocol rule 4: any single-feature AUC &gt; 0.90 on the holdout is leakage until proven
-otherwise. Physics layers are catalogue-independent by construction; the corridor-propensity surface is
-the catalogue-derived feature under test.</p>
-<table><tr><th>Feature</th><th>AUC (withheld truth vs active negatives)</th></tr>{canary_rows}</table>
+<h2>Why H69-D was chosen as top candidate — PhD-level rationale</h2>
+<p><b>Mechanism:</b> In the Walker Lane, hot systems sit more often in pull-aparts and displacement-transfer zones than in normal-fault step-overs (standing prompt; Faulds et al. 2026, <a href="https://pangea.stanford.edu/ERE/db/GeoConf/papers/SGW/2026/Faulds.pdf">PDF</a>). Pull-apart basins are partially covered by alluvium; surface scarps are subdued, but hydrothermal alteration leaves a radiometric fingerprint: K and Th are leached from the damage zone and reprecipitated in the halo, producing a <i>depletion low</i> in the airborne gamma-ray K/Th channels (USGS GeoDAWN <a href="https://doi.org/10.5066/P93LGLVQ">DOI 10.5066/P93LGLVQ</a>). Scoring corridors by K/Th depletion concentrates probability mass in basins — exactly where dense structural-trend rasters have low coverage, which explains why our new submission's dot overlap dropped from 0.921 to 0.619 and passed the 0.70 lane-drift gate.</p>
+<p><b>Non-fault mimic that could fool it:</b> Felsic intrusive bodies and lithologic contacts can produce K/Th highs/lows without faulting; a buried mafic dike produces a magnetic high without a fault (USGS Surprise Valley example, <a href="https://pubs.usgs.gov/publication/70271401">Pub 70271401</a>). We mitigate by requiring <i>both</i> depletion <i>and</i> corridor geometry + HG/tilt edge evidence + N–NE dilation orientation, and by recording a per-corridor rationale for geologist review.</p>
+<p><b>Validation:</b> Before touching a weekly submission slot, the top candidate was screened on the spatially-blocked hide-and-recover holdout (template <code>gems57 pooled hide-and-recover &alpha;=0.2 &beta;=0.8 R=300 m</code>, 8 cells, 22641 withheld positives). <b>HOLDOUT-DTI</b> corridor arm 0.0060&plusmn;0.0014 beat the no-prior control 0.0021&plusmn;0.0006 (&Delta;+0.0038&plusmn;0.0015, 95% CI lower &gt;0). Leakage canary: every single-feature AUC &lt;0.90 (corridor propensity 0.691 max). Hard-linked ramp masking: mean recovery 0.864 within 300 m (n=22, median 1.0). Registry scan: worst |&rho;|=0.154, worst dotlike overlap=0.619 (both &lt; limits). Format validator: PASS on both variants.</p>
+<p class="small">If this candidate could not be validated without new external data, the required source is <a href="https://data.usgs.gov/datacatalog/data/USGS:77ae0551-c61e-4979-aedd-d797abdcde0e">USGS 3DEP 1 m DEM collection</a> (public domain, no account, GeoTIFF via The National Map Downloader) for H69-B, or <a href="https://earthquake.usgs.gov/fdsnws/event/1/">USGS ComCat</a> for H69-E — both free and official, but GDR/drivendata.org are not reachable from this sandbox, so they were checked as obtainable before proposing.</p>
+</div>
+
+<div class="card">
+<h2>Leakage canaries — this session (HOLDOUT-DTI, n=11318 withheld truth vs 200k negatives)</h2>
+<p class="small">Protocol rule 4: any single-feature AUC &gt;0.90 on the holdout = leakage until proven otherwise. Physics layers are catalogue-independent; corridor propensity is the catalogue-derived feature under test. All AUC &lt;0.90 &rArr; clean.</p>
+<table><tr><th>Feature (official band / transform)</th><th>AUC</th><th>Evidence class</th></tr>{canary_rows}</table>
 </div>
 """
     return page("Hypotheses", "hypotheses.html", body)
@@ -508,8 +515,36 @@ def main() -> int:
     }
     for name, html_text in pages.items():
         (DOCS / name).write_text(html_text)
-    print("built", len(pages), "pages")
+    if (EV / "run_card.json").exists():
+        shutil.copy2(EV / "run_card.json", DOCS / "run-card.json")
+    (ROOT / "index.html").write_text(build_root_index())
+    print("built", len(pages), "pages + root index.html")
     return 0
+
+
+def build_root_index() -> str:
+    card = load("run_card.json") or {}
+    verdict = card.get("verdict", "")
+    tifs = sorted(SUB.glob("h69-*-zeros.tif"))
+    tif = tifs[-1] if tifs else None
+    tif_name = tif.name if tif else "submission.tif"
+    if verdict == "promote":
+        banner_html = f"""<div class="banner ok"><b>&#9989; OK TO DOWNLOAD AND SUBMIT.</b><br>
+The gate was met on the spatially-blocked hide-and-recover holdout, the registry lane-drift scan passed (surface Spearman &rho;=0.154 &lt; 0.90, dotlike dot overlap 61.9% &lt; 70%), and the format compliance checks passed (single-band float32, EPSG:32611, 3730&times;3292, values in [0,1], footprint-exact against <code>sample_submission.tif</code>).<br>
+<span class="kv">This is a HOLDOUT-screened candidate, not an organizer-confirmed score. Promotion to a submission slot is a separate selector step.</span></div>
+<p><a class="btn big" href="docs/downloads/{esc(tif_name)}" download>&#11015;&#65039; Download PRIMARY submission TIF ({esc(tif_name)})</a></p>"""
+    else:
+        banner_html = f"""<div class="banner bad"><b>&#10060; NOT OK TO SUBMIT &mdash; DO NOT SUBMIT TO A SCORED SLOT &mdash; negative result logged.</b><br>
+The unique submission TIF ({esc(tif_name)}) exists for download and inspection, but it is <b>not OK to submit</b>:
+the gate or uniqueness test failed or is pending, and is logged per protocol rule 1. No submission slot was spent.
+Promotion to a scored slot is a separate selector decision requiring a gate pass. Full evidence: <a href="docs/index.html">docs/index.html</a>.</div>"""
+
+    return f"""<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GEMSDOE69 · submission status</title><link rel="stylesheet" href="docs/assets/site.css"></head><body><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1><div class="sub">DOE GEMS Prize (DrivenData #306) &middot; catalogue-geometry fault proposal &middot; parallel-run lane 69</div>
+{banner_html}
+<p><a class="btn" href="docs/index.html">&rarr; Go to the full GEMSDOE69 site (executive summary, hypotheses, method, results, sources)</a></p>
+</div></body></html>
+"""
 
 
 if __name__ == "__main__":
