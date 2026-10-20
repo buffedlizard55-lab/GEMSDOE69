@@ -9,50 +9,56 @@
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="active">Run Card</a></div></nav>
 <main class="wrap">
 <div class="card"><h2>Run card (JSON)</h2><pre>{
- &quot;generated_utc&quot;: &quot;20261020T182700Z&quot;,
+ &quot;generated_utc&quot;: &quot;20261020T195854Z&quot;,
  &quot;lane&quot;: &quot;GEMSDOE69 relay-ramp &amp; pull-apart corridor generator&quot;,
- &quot;hypothesis&quot;: &quot;H69-D radiometric K/Th depletion halos inside corridors: hydrothermal alteration destroys magnetite and leaches K/Th, producing depletion halos that mark permeable damage zones even where no scarp survives; scoring corridors by depletion concentrates dots in pull-apart basins away from dense structural trends, reducing registry overlap.&quot;,
- &quot;mechanism&quot;: &quot;Tip-graph step-over pairing (W 0.1-15 km, along &lt;=3.5W, sub-parallel strikes) -&gt; oblique connector + en echelon strands + pull-apart rhomb -&gt; multi-scale HG/tilt grav+mag (incl. magnetic lows) + lidar scarp + radiometric K/Th low + WNW-extension orientation -&gt; greedy marginal-DTI dot placement &gt;=200m off catalogue.&quot;,
- &quot;non_fault_mimic&quot;: &quot;Lithologic contacts, buried channel margins, terrace edges in detrended elevation, and survey-line artifacts can produce corridor-consistent HG/tilt; felsic intrusives can deplete K/Th without faulting; hydrothermally altered but unfaulted volcanics produce magnetic lows.&quot;,
+ &quot;hypothesis&quot;: &quot;H69-E: hidden linking faults occupy width-stratified relay-ramp and pull-apart corridors (not only the 2.8 km mode). Straight conductivity and basement-depth steps plus K depletion / elevated Th/K inside those corridors mark permeable damage under cover, where the catalogue has a gap.&quot;,
+ &quot;mechanism&quot;: &quot;Tip-graph step-over pairing (W 0.1-15 km, along &lt;= 3.5W, sub-parallel strikes), width-stratified quotas -&gt; oblique connector + en echelon strands + basin-interior disk -&gt; multi-scale HG/tilt grav+mag (incl. magnetic lows) + lidar scarp + structure-tensor straightness (cond_surf, basement depth) + radiometric K depletion and Th/K + WNW-extension orientation -&gt; drop bottom score quartile -&gt; greedy marginal-DTI dots &gt;= 200 m off catalogue.&quot;,
+ &quot;non_fault_mimic&quot;: &quot;Lithologic contacts (basalt against alluvium) produce straight conductivity and basement steps without faulting; felsic intrusions and soil moisture deplete K and raise Th/K; survey-line artifacts in the airborne grids mimic HG/tilt edges.&quot;,
  &quot;holdout&quot;: {
-  &quot;instrument&quot;: &quot;vendor/template66 gems57 pooled hide-and-recover (alpha 0.2, beta 0.8, 300m triangular kernel); seeds/modes/cells as recorded&quot;,
-  &quot;corridor_mean_dti&quot;: 0.005975197860273526,
-  &quot;corridor_ci95_half&quot;: 0.0014413577610952733,
-  &quot;control_mean_dti&quot;: 0.0021479253641536293,
-  &quot;paired_delta&quot;: 0.003827272496119896,
+  &quot;instrument&quot;: &quot;vendor/template66 gems57 pooled hide-and-recover (alpha 0.2, beta 0.8, 300 m triangular kernel); seeds/modes/cells as recorded&quot;,
+  &quot;corridor_mean_dti&quot;: 0.006373444106110174,
+  &quot;corridor_ci95_half&quot;: 0.0017078948021320769,
+  &quot;control_mean_dti&quot;: 0.0025267341867155494,
+  &quot;paired_delta&quot;: 0.003846709919394625,
   &quot;withheld_positive_px_total&quot;: 22641,
   &quot;n_cells&quot;: 8,
   &quot;gate_passed&quot;: true,
+  &quot;prior_holdout_best&quot;: 0.005975197860273526,
+  &quot;prior_holdout_best_source&quot;: &quot;evidence/e2_gate_20261012_prior.json corridor_mean_dti&quot;,
+  &quot;beats_prior_holdout_best&quot;: true,
+  &quot;beat_delta_vs_prior&quot;: 0.00039824624583664845,
+  &quot;beat_within_combined_ci&quot;: true,
+  &quot;script_validator&quot;: &quot;scripts/validate_submission.py PASS on both twins (evidence/e3_script_validator.json). Upstream gems.validate_submission with training_features band-1 footprint proxy FAILs the zeros twin for finite cells outside that proxy and the nan twin for 1540 proxy-disagreement cells (IR-69-VAL-01). Portal-safe file is the all-finite zeros twin.&quot;,
   &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
-  &quot;hardlinked_recovery_within_300m_mean&quot;: 0.8636363636363636,
-  &quot;hardlinked_n_tested&quot;: 22
+  &quot;hardlinked_recovery_within_300m_mean&quot;: 0.8695652173913043,
+  &quot;hardlinked_n_tested&quot;: 23
  },
  &quot;correlation_overlap_vs_registry&quot;: {
-  &quot;worst_abs_spearman&quot;: 0.15442722757041327,
-  &quot;worst_dot_overlap_dotlike&quot;: 0.6194286428705382,
+  &quot;worst_abs_spearman&quot;: 0.2274,
+  &quot;worst_dot_overlap_dotlike&quot;: 0.8414,
   &quot;literal_gate&quot;: {
    &quot;rho_ok&quot;: true,
    &quot;overlap_ok&quot;: false
   },
-  &quot;stratified_gate_ok&quot;: true,
+  &quot;stratified_gate_ok&quot;: false,
   &quot;n_compared&quot;: 750,
-  &quot;n_registry_blobs&quot;: 751
+  &quot;protocol_rule_1_duplicate_log&quot;: &quot;literal registry dot-overlap gate failed: 84.14% of dots fall within 3 px of blob 98cbfc84a0e808733e9c5c3aad9ef07c7678a3fe (103347 dots, rho=0.0233; &gt; 70% limit). Logged as lane-drift per protocol rule 1. Do not spend a submission slot. Negative result is the deliverable.&quot;
  },
  &quot;raster&quot;: {
-  &quot;zeros_sha256&quot;: &quot;be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7&quot;,
-  &quot;zeros_path&quot;: &quot;submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif&quot;,
-  &quot;nan_sha256&quot;: &quot;6ceceb6bd47817a3241d56a4f2d9730ca9010fc70b37a5cf146d01272cad3ec0&quot;,
-  &quot;nan_path&quot;: &quot;submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-nan.tif&quot;,
-  &quot;n_dots&quot;: 31994,
+  &quot;zeros_sha256&quot;: &quot;ad03bd333dacc28ebaf474599f3fc7aabf65d181373a2afd52f5adf8fdc15045&quot;,
+  &quot;zeros_path&quot;: &quot;/home/user/GEMSDOE69/submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-zeros.tif&quot;,
+  &quot;nan_sha256&quot;: &quot;db7915f3304edaefe3b74f925bd4c0dca57d2b93d656f46a5de5df7b13d528ab&quot;,
+  &quot;nan_path&quot;: &quot;/home/user/GEMSDOE69/submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-nan.tif&quot;,
+  &quot;n_dots&quot;: 33199,
   &quot;format_compliance_nan_ok&quot;: true,
   &quot;format_compliance_zeros_ok&quot;: true,
   &quot;validator_output&quot;: &quot;no NaN inside the footprint (nan variant finite mask == sample_submission), values in [0,1], CRS EPSG:32611, shape 3730x3292, transform exact (see evidence/e3_receipt.json format_compliance)&quot;
  },
- &quot;submission_name&quot;: &quot;h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros&quot;,
- &quot;submission_note&quot;: &quot;H69-D radiometric halo; relay/pull-apart corridors; HG+tilt grav/mag + lidar scarp + K/Th depletion; 32k dots&quot;,
- &quot;verdict&quot;: &quot;promote&quot;,
- &quot;banner&quot;: &quot;ok&quot;,
- &quot;note&quot;: &quot;verdict &#x27;promote&#x27; means the holdout gate + registry scan + validator all passed; promotion to a scored slot is a separate selector step (protocol rule 6)&quot;
+ &quot;submission_name&quot;: &quot;h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-zeros&quot;,
+ &quot;submission_note&quot;: &quot;H69-E width-stratified relay/pull-apart; cond+basement straight steps + K/ThK; HG+tilt+lidar; greedy DTI; 200m flank&quot;,
+ &quot;verdict&quot;: &quot;negative&quot;,
+ &quot;banner&quot;: &quot;stop&quot;,
+ &quot;note&quot;: &quot;verdict &#x27;promote-candidate&#x27; means the holdout gate + registry scan + validator all passed; &#x27;promote-flagged-review&#x27; means every gate passed except the literal 70% dot-overlap rule (one archived dense raster, surface rho ~ 0.04) and needs selector review; promotion to a scored slot is a separate selector step (protocol rule 6)&quot;
 }</pre></div>
 </main>
 <footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>

@@ -178,6 +178,68 @@ def cmd_e2(seeds=(20, 21), modes=("all",)) -> int:
     return 0
 
 
+def surface_precheck(propensity: np.ndarray, footprint: np.ndarray) -> dict:
+    """Rank-correlation of the pre-placement surface vs registry rasters.
+
+    Protocol rule 1: check the surface BEFORE placement. rho > 0.90 is a
+    duplicate; the caller must not emit dots.
+    """
+    import rasterio
+    from scipy.stats import spearmanr
+
+    man = json.loads((ROOT / "registry" / "prior_rasters.json").read_text())
+    reg_dir = ROOT / ".cache" / "registry"
+    # subsample mutually finite cells; rank correlation is stable at this N
+    rng = np.random.default_rng(69)
+    fy, fx = np.nonzero(footprint)
+    sel = rng.choice(len(fy), size=min(250_000, len(fy)), replace=False)
+    sy, sx = fy[sel], fx[sel]
+    mine = propensity[sy, sx].astype(np.float32)
+    worst = 0.0
+    worst_blob = None
+    n_compared = 0
+    errors = 0
+    t0 = time.time()
+    for e in man["rasters"]:
+        path = reg_dir / f"{e['git_blob_sha']}.tif"
+        if not path.exists():
+            errors += 1
+            continue
+        try:
+            with rasterio.open(path) as src:
+                if (src.height, src.width) != propensity.shape:
+                    errors += 1
+                    continue
+                # windowed point reads would be slower; one band is ~50 MB
+                theirs = src.read(1)
+            tv = theirs[sy, sx]
+            ok = np.isfinite(tv) & np.isfinite(mine)
+            if ok.sum() < 1000 or mine[ok].std() == 0 or np.nanstd(tv[ok]) == 0:
+                continue
+            rho = float(spearmanr(mine[ok], tv[ok]).statistic)
+            n_compared += 1
+            if abs(rho) > abs(worst):
+                worst = rho
+                worst_blob = e["git_blob_sha"]
+            del theirs
+        except Exception:  # noqa: BLE001
+            errors += 1
+    return dict(
+        evidence_class="REGISTRY-MEASUREMENT",
+        phase="surface-before-placement",
+        generated_utc=utcnow(),
+        subsample=int(len(sy)),
+        n_compared=n_compared,
+        n_errors=errors,
+        n_registry_blobs=len(man["rasters"]),
+        worst_abs_spearman=abs(worst),
+        worst_rho=worst,
+        worst_blob=worst_blob,
+        rho_ok=bool(abs(worst) <= 0.90),
+        seconds=round(time.time() - t0, 1),
+    )
+
+
 def cmd_e3(s0: float | None = None) -> int:
     from gems57 import grid as tgrid
     from gems57.emit import greedy_allocate
@@ -194,6 +256,14 @@ def cmd_e3(s0: float | None = None) -> int:
     pipe = corridor_pipeline(g.catalogue, g.footprint.shape, stats, max_corridors=1200,
                              zstack=zstack)
     p = pipe["propensity"]
+    del zstack
+    print(f"[e3] surface precheck corridors={pipe['corridors']} kept={pipe.get('corridors_kept')}", flush=True)
+    pre = surface_precheck(p, g.footprint)
+    dump("e3_surface_uniqueness.json", pre)
+    print("[e3] surface", json.dumps({k: pre[k] for k in ("worst_abs_spearman", "rho_ok", "n_compared", "seconds")}), flush=True)
+    if not pre["rho_ok"]:
+        print("[e3] DUPLICATE on the surface; stopping before placement", flush=True)
+        return 2
     flank = ndi.distance_transform_edt(~g.catalogue) > 2     # 200 m catalogue flank prune
     allowed = g.footprint & flank & (p > 0)
     K_TRUTH = 12691   # GEMSDOE32 emission_models_mc.json: receipt-derived prior (cited)
@@ -208,7 +278,7 @@ def cmd_e3(s0: float | None = None) -> int:
     values[dots] = 1.0
     stamp = dt.datetime.now(dt.timezone.utc).strftime("%Y%m%dT%H%M%SZ")
     h8 = hashlib.sha256(p.tobytes()).hexdigest()[:8]
-    base = f"h69-relayramp-pullapart-{n_dots}-{stamp}-{h8}"
+    base = f"h69e-strat-straight-rad-{n_dots}-{stamp}-{h8}"
     sub = ROOT / "submissions"
     sub.mkdir(exist_ok=True)
     rec_z = tgrid.write_submission(sub / f"{base}-zeros.tif", values, mode="zeros")
@@ -259,7 +329,7 @@ def cmd_e3(s0: float | None = None) -> int:
     rationale.sort(key=lambda r: -r["score_S"])
     receipt = dict(
         evidence_class="SUBMISSION-RECEIPT",
-        generated_utc=stamp, hypothesis_id="H69-relayramp-pullapart",
+        generated_utc=stamp, hypothesis_id="H69-E-stratified-straight-rad",
         s0_calibrated=s0, k_truth_prior=K_TRUTH,
         k_truth_source=("GEMSDOE32 evidence/emission_models_mc.json truth_px=12691, "
                         "source 'GEMSDOE25 H28 (owner-report-derived prior)'"),
@@ -277,8 +347,8 @@ def cmd_e3(s0: float | None = None) -> int:
                                     "portal contract = sample_submission finite mask (IR-69-VAL-01)"),
         propensity_sha256=h8,
         top_corridors=rationale[:25],
-        note=("relay-ramp/pull-apart corridors from tip graph; HG+tilt grav/mag + lidar scarp; "
-              "greedy marginal-DTI; 200m flank-pruned")[:140],
+        note=("H69-E width-stratified relay/pull-apart; cond+basement straight steps + K/ThK; "
+              "HG+tilt+lidar; greedy DTI; 200m flank")[:140],
     )
     dump("e3_receipt.json", receipt)
     dump("e3_validator.json", dict(zeros=vz, nan=vn, generated_utc=stamp))
@@ -295,7 +365,7 @@ def cmd_unique() -> int:
 
     man = json.loads((ROOT / "registry" / "prior_rasters.json").read_text())
     reg_dir = ROOT / ".cache" / "registry"
-    subs = sorted((ROOT / "submissions").glob("h69-*-zeros.tif"))
+    subs = sorted((ROOT / "submissions").glob("h69*-zeros.tif"))
     if not subs:
         print("no submission to scan; run e3 first")
         return 1
@@ -352,6 +422,38 @@ def cmd_unique() -> int:
     dotlike = [r for r in rows if r["stratum"] == "dotlike"]
     worst_overlap_dotlike = max(dotlike, key=lambda r: r["dot_overlap_3px"], default=None)
     exact = [r for r in rows if r["pixel_agreement"] >= 0.9999]
+    # Own prior emissions are not in the 2026-10-11 registry. The standing
+    # prompt forbids copying a previous submission, so they are scanned too.
+    local_rows = []
+    local_paths = list((ROOT / "submissions").glob("*.tif")) + list((ROOT / "docs" / "downloads").glob("*.tif"))
+    mine_stem = mine_path.name.replace("-zeros.tif", "").replace("-nan.tif", "")
+    for lp in local_paths:
+        if lp.resolve() == mine_path.resolve():
+            continue
+        # the diagnostic twin of this same emission is not a prior submission
+        if mine_stem and mine_stem in lp.name:
+            continue
+        if "zeros" not in lp.name and "nan" not in lp.name:
+            continue
+        try:
+            with rasterio.open(lp) as src:
+                if (src.height, src.width) != mine.shape:
+                    continue
+                theirs = src.read(1)
+            tpos = np.isfinite(theirs) & (theirs > 0)
+            if int(tpos.sum()) == 0 or n_my_dots == 0:
+                continue
+            yy, xx = np.mgrid[-3:4, -3:4]
+            disk = (yy * yy + xx * xx) <= 9
+            near = ndi.binary_dilation(tpos, structure=disk)
+            local_rows.append(dict(
+                path=str(lp.relative_to(ROOT)), their_dots=int(tpos.sum()),
+                dot_overlap_3px=round(float(near[mine_dots].mean()), 4),
+            ))
+        except Exception as exc:  # noqa: BLE001
+            local_rows.append(dict(path=str(lp), err=str(exc)[:160]))
+    worst_local = max((r for r in local_rows if "dot_overlap_3px" in r),
+                      key=lambda r: r["dot_overlap_3px"], default=None)
     out = dict(
         evidence_class="REGISTRY-MEASUREMENT",
         generated_utc=utcnow(), my_file=str(mine_path), my_dots=n_my_dots,
@@ -374,6 +476,12 @@ def cmd_unique() -> int:
             note=("universal soft surfaces and dense rasters overlap ANY sparse dot field by "
                   "construction; family precedent GEMSDOE63/64 treats them as a registry-"
                   "structure condition, reported separately from the dotlike lane-drift gate"),
+        ),
+        local_prior_overlap=dict(
+            n_scanned=len(local_rows),
+            worst=worst_local,
+            ok=bool(worst_local is None or worst_local["dot_overlap_3px"] <= 0.70),
+            note="overlap of this emission's dots with earlier GEMSDOE69 submissions (not in the 2026-10-11 registry)",
         ),
         errors=errors[:50], seconds=round(time.time() - t0, 1),
     )
@@ -405,14 +513,27 @@ def cmd_card() -> int:
     # PARALLEL-RUN PROTOCOL rule 1: rank-correlation > 0.90 vs any registry raster,
     # or > 70% of dots within 3 px of one registry raster's dots = lane drift:
     # log it as a duplicate and stop. Never auto-promote through a failed literal gate.
-    literal_gate_ok = rho_ok and dotlike_overlap_ok
+    local_ok = bool((uniq.get("local_prior_overlap") or {}).get("ok", False)) if uniq else False
+    # Current holdout best before this session: evidence/e2_gate_20261012_prior.json
+    # (HOLDOUT-DTI corridor mean 0.005975, gems57 pooled hide, 8 cells, 22641 withheld px).
+    PRIOR_BEST = 0.005975197860273526
+    beats_prior = bool(gate_ok and gate.get("corridor_mean_dti", 0) > PRIOR_BEST)
+    # The numerical beat can still sit inside the holdout CI. Record that
+    # separately so the site does not describe a noise-level difference as a
+    # confirmed improvement. It does not by itself flip a passed gate.
+    prior_ci = 0.0014413577610952733
+    new_ci = float(gate.get("corridor_ci95_half") or 0)
+    beat_delta = float(gate.get("corridor_mean_dti") or 0) - PRIOR_BEST
+    beat_within_ci = bool(beats_prior and beat_delta < max(new_ci, prior_ci))
+    literal_gate_ok = rho_ok and dotlike_overlap_ok and local_ok
+    registry_complete = bool(uniq.get("n_compared", 0) >= uniq.get("n_registry_blobs", 1) - 1) if uniq else False
     if not literal_gate_ok:
         verdict = "negative"
         banner = "stop"
-    elif gate_ok and uniq_ok and val_ok:
+    elif gate_ok and uniq_ok and local_ok and val_ok and beats_prior and registry_complete:
         verdict = "promote-candidate"
         banner = "ok"
-    elif gate_ok and rho_ok and val_ok:
+    elif gate_ok and rho_ok and val_ok and beats_prior:
         verdict = "promote-flagged-review"
         banner = "review"
     else:
@@ -421,16 +542,19 @@ def cmd_card() -> int:
     card = dict(
         generated_utc=utcnow(),
         lane="GEMSDOE69 relay-ramp & pull-apart corridor generator",
-        hypothesis=("Hidden faults occupy relay-ramp / pull-apart corridors between step-over tips of mapped "
-                    "faults; multi-physics edge evidence inside those corridors localizes them better than "
-                    "pixel statistics alone."),
-        mechanism=("Tip-graph step-over pairing (W 0.1-15 km, along <= 3.5W, sub-parallel strikes) -> "
-                    "oblique connector + en echelon strands + pull-apart rhomb -> multi-scale HG/tilt grav+mag "
-                    "(incl. magnetic lows) + lidar scarp + WNW-extension orientation score -> greedy "
-                    "marginal-DTI dot placement >= 200 m off catalogue."),
-        non_fault_mimic=("Linear geophysical edges that are NOT faults: lithologic/dike contacts, buried "
-                         "channel margins and terrace edges in detrended elevation, and survey-line artifacts "
-                         "in the airborne grids can all produce corridor-consistent HG/tilt responses."),
+        hypothesis=("H69-E: hidden linking faults occupy width-stratified relay-ramp and pull-apart "
+                    "corridors (not only the 2.8 km mode). Straight conductivity and basement-depth steps "
+                    "plus K depletion / elevated Th/K inside those corridors mark permeable damage under "
+                    "cover, where the catalogue has a gap."),
+        mechanism=("Tip-graph step-over pairing (W 0.1-15 km, along <= 3.5W, sub-parallel strikes), "
+                    "width-stratified quotas -> oblique connector + en echelon strands + basin-interior disk "
+                    "-> multi-scale HG/tilt grav+mag (incl. magnetic lows) + lidar scarp + structure-tensor "
+                    "straightness (cond_surf, basement depth) + radiometric K depletion and Th/K + "
+                    "WNW-extension orientation -> drop bottom score quartile -> greedy marginal-DTI dots "
+                    ">= 200 m off catalogue."),
+        non_fault_mimic=("Lithologic contacts (basalt against alluvium) produce straight conductivity and "
+                         "basement steps without faulting; felsic intrusions and soil moisture deplete K and "
+                         "raise Th/K; survey-line artifacts in the airborne grids mimic HG/tilt edges."),
         holdout=({
             "instrument": ("vendor/template66 gems57 pooled hide-and-recover (alpha 0.2, beta 0.8, 300 m "
                             "triangular kernel); seeds/modes/cells as recorded"),
@@ -441,6 +565,12 @@ def cmd_card() -> int:
             "withheld_positive_px_total": gate.get("withheld_positive_px_total"),
             "n_cells": gate.get("n_cells"),
             "gate_passed": gate_ok,
+            "prior_holdout_best": PRIOR_BEST,
+            "prior_holdout_best_source": "evidence/e2_gate_20261012_prior.json corridor_mean_dti",
+            "beats_prior_holdout_best": beats_prior,
+            "beat_delta_vs_prior": beat_delta,
+            "beat_within_combined_ci": beat_within_ci,
+            "script_validator": "scripts/validate_submission.py PASS on both twins (evidence/e3_script_validator.json). Upstream gems.validate_submission with training_features band-1 footprint proxy FAILs the zeros twin for finite cells outside that proxy and the nan twin for 1540 proxy-disagreement cells (IR-69-VAL-01). Portal-safe file is the all-finite zeros twin.",
             "evidence_class": "HOLDOUT-DTI",
             "hardlinked_recovery_within_300m_mean": rec_hl.get("mean_recovery_within_300m"),
             "hardlinked_n_tested": rec_hl.get("n_tested"),
@@ -451,10 +581,14 @@ def cmd_card() -> int:
             "literal_gate": lit, "stratified_gate_ok": strat.get("dotlike_overlap_ok"),
             "n_compared": uniq.get("n_compared"),
             "protocol_rule_1_duplicate_log": (
-                "literal registry dot-overlap gate failed: %.2f%% of dots fall within 3 px of one "
-                "archived GEMSDOE51 raster (> 70%% limit); logged as near-duplicate lane-drift per "
-                "protocol rule 1; do not spend a submission slot; negative result is the deliverable" % (
-                    100.0 * (uniq.get("worst_dot_overlap_dotlike") or {}).get("dot_overlap_3px", 0.0))
+                "literal registry dot-overlap gate failed: %.2f%% of dots fall within 3 px of blob %s "
+                "(%s dots, rho=%s; > 70%% limit). Logged as lane-drift per protocol rule 1. "
+                "Do not spend a submission slot. Negative result is the deliverable." % (
+                    100.0 * (uniq.get("worst_dot_overlap_dotlike") or {}).get("dot_overlap_3px", 0.0),
+                    (uniq.get("worst_dot_overlap_dotlike") or {}).get("blob"),
+                    (uniq.get("worst_dot_overlap_dotlike") or {}).get("their_dots"),
+                    (uniq.get("worst_dot_overlap_dotlike") or {}).get("rho"),
+                )
                 if uniq and not literal_gate_ok else None
             ),
         } if uniq else "pending"),

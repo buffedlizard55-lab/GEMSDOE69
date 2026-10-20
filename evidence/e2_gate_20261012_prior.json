@@ -1,0 +1,88 @@
+{
+ "evidence_class": "HOLDOUT-DTI",
+ "evaluator": "vendor/template66 gems57 pooled hide-and-recover (alpha=0.2 beta=0.8 R=300m triangular kernel; seeds=[20, 21] modes=['all'])",
+ "n_cells": 8,
+ "corridor_mean_dti": 0.005975197860273526,
+ "corridor_ci95_half": 0.0014413577610952733,
+ "control_mean_dti": 0.0021479253641536293,
+ "control_ci95_half": 0.0005776711996184226,
+ "paired_delta_mean": 0.003827272496119896,
+ "paired_delta_ci95_half": 0.0015001391776340205,
+ "gate_passed": true,
+ "withheld_positive_px_total": 22641,
+ "corridor": {
+  "mean_dti": 0.005975197860273526,
+  "std_dti": 0.0020799874428292396,
+  "ci95_half": 0.0014413577610952733,
+  "n_cells": 8,
+  "per_cell": {
+   "draw20_foldNE_all": 0.005977084081316553,
+   "draw20_foldNW_all": 0.004697028315028838,
+   "draw20_foldSE_all": 0.007250154623105283,
+   "draw20_foldSW_all": 0.006729379286247911,
+   "draw21_foldNE_all": 0.0041144898541310366,
+   "draw21_foldNW_all": 0.00396821061742391,
+   "draw21_foldSE_all": 0.004876016686576572,
+   "draw21_foldSW_all": 0.0101892194183581
+  },
+  "dots": [
+   37491,
+   39124,
+   39545,
+   39977,
+   39788,
+   37840,
+   39343,
+   39712
+  ],
+  "n_truth": [
+   2360,
+   1925,
+   3253,
+   3780,
+   2365,
+   1919,
+   3253,
+   3786
+  ]
+ },
+ "control": {
+  "mean_dti": 0.0021479253641536293,
+  "std_dti": 0.0008336229031558253,
+  "ci95_half": 0.0005776711996184226,
+  "n_cells": 8,
+  "per_cell": {
+   "draw20_foldNE_all": 0.0008460821063652749,
+   "draw20_foldNW_all": 0.002839389945325117,
+   "draw20_foldSE_all": 0.0034959848881212932,
+   "draw20_foldSW_all": 0.0027568260843450344,
+   "draw21_foldNE_all": 0.0017016831084029581,
+   "draw21_foldNW_all": 0.0018278190837102218,
+   "draw21_foldSE_all": 0.0019874447687677995,
+   "draw21_foldSW_all": 0.0017281729281913346
+  },
+  "dots": [
+   30736,
+   29208,
+   29317,
+   29219,
+   30736,
+   29208,
+   29317,
+   29219
+  ],
+  "n_truth": [
+   2360,
+   1925,
+   3253,
+   3780,
+   2365,
+   1919,
+   3253,
+   3786
+  ]
+ },
+ "seconds": 562.9,
+ "generated_utc": "20261012T022905Z",
+ "note": "gate: corridor arm must beat the same pipeline without corridor priors (paired over folds); holdout DTI is a SCREEN, not a leaderboard projection (GEMSDOE32 instrument-calibration evidence: cross-family Spearman rho=0.51, p~0.09)"
+}

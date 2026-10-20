@@ -24,8 +24,9 @@ from .corridors import build_corridors
 from .physics import (TRANSFORM_NAMES, build_layer_stats, build_z_stack,
                       compute_transform, corridor_evidence_from_z)
 from .scoring import (GRAV_LAYERS, LIDAR_LAYERS, MAGLOW_LAYERS, MAG_LAYERS,
-                      W_GRAV, W_GEOM, W_LIDAR, W_MAG, W_MAGLOW, W_ORIENT,
-                      build_propensity, propensity_from_score, score_corridor)
+                      RAD_LAYERS, SCORE_FLOOR_QUANTILE, STRAIGHT_LAYERS,
+                      W_GRAV, W_LIDAR, W_MAG, W_MAGLOW, W_RAD, W_STRAIGHT,
+                      build_propensity, score_corridor)
 from .tips import vectorize
 
 ROOT = Path(__file__).resolve().parents[2]
@@ -43,14 +44,22 @@ def corridor_pipeline(catalogue: np.ndarray, shape: tuple[int, int], stats: dict
         zstack = build_z_stack(_footprint_from_shape(shape), stats)
     strands = vectorize(catalogue)
     corridors, pairs = build_corridors(catalogue, strands, shape,
-                                       max_corridors=max_corridors)
+                                       max_corridors=max_corridors,
+                                       selection="stratified")
     t0 = time.time()
     for c in corridors:
         ev = corridor_evidence_from_z(zstack, c)
         score_corridor(c, ev)
-    p = build_propensity(corridors, shape)
+    if corridors:
+        scores = np.array([c.rationale.get("score_S", 0.0) for c in corridors])
+        thr = float(np.quantile(scores, SCORE_FLOOR_QUANTILE))
+        kept = [c for c in corridors if c.rationale.get("score_S", 0.0) >= thr]
+    else:
+        thr, kept = 0.0, corridors
+    p = build_propensity(kept, shape)
     return dict(strands=len(strands), pairs=len(pairs), corridors=len(corridors),
-                propensity=p, corridors_obj=corridors,
+                corridors_kept=len(kept), score_floor=thr,
+                propensity=p, corridors_obj=kept,
                 score_seconds=round(time.time() - t0, 1))
 
 
@@ -86,18 +95,28 @@ def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
     d_cat = ndi.distance_transform_edt(~catalogue)
     offcat = d_cat > flank_px
 
-    # ---- control propensity: same layers, no corridor prior (full grid) -----
-    ctrl_layers = ["grav_hg_s2", "grav_tilt_s2", "mag_hg_s2", "mag_tilt_s2",
-                   "mag_low_tmi", "mag_low_rtp", "lidar_scarp"]
-    C = np.zeros(shape, np.float32)
-    for name in ctrl_layers:
-        z = zstack[name].astype(np.float32)
-        z = np.where(np.isfinite(z), z, 0.0)
-        C += z
-        del z
-    C /= len(ctrl_layers)
+    # ---- control propensity: same evidence groups, NO corridor prior --------
+    # Orientation and geometry priors are corridor-only; they are omitted here
+    # and the evidence weights are renormalized so the control is not weaker
+    # just because it lacks a constant subtype bonus.
+    def _posmax(names):
+        m = None
+        for name in names:
+            if name not in zstack:
+                continue
+            z = np.nan_to_num(zstack[name].astype(np.float32), nan=0.0)
+            z = np.maximum(z, 0.0)
+            m = z if m is None else np.maximum(m, z)
+        return m if m is not None else np.zeros(shape, np.float32)
+
+    ev_w = W_GRAV + W_MAG + W_MAGLOW + W_LIDAR + W_STRAIGHT + W_RAD
+    C = (W_GRAV * _posmax(GRAV_LAYERS) + W_MAG * _posmax(MAG_LAYERS)
+         + W_MAGLOW * _posmax(MAGLOW_LAYERS) + W_LIDAR * _posmax(LIDAR_LAYERS)
+         + W_STRAIGHT * _posmax(STRAIGHT_LAYERS) + W_RAD * _posmax(RAD_LAYERS))
+    C = (C / ev_w).astype(np.float32)
     p_ctrl = (1.0 / (1.0 + np.exp(-1.5 * (C - s0)))).astype(np.float32)
     p_ctrl[~ctx.grid.footprint] = 0.0
+    del C
 
     results = {}
     for cell in ctx.cells:

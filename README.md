@@ -1,5 +1,11 @@
 # GEMSDOE69 — STANDING PROMPT (READ FIRST AT THE START OF EVERY SESSION)
 
+Session of 2026-10-20. Read [PROMPT.md](PROMPT.md) before changing code. The assigned lane is still the relay-ramp and pull-apart corridor generator. A download is offered only if the holdout gate, the uniqueness scan, and `validate_submission.py` all pass. Otherwise the site must say **NOT OK TO SUBMIT** and the negative result is the deliverable.
+
+User-cited competition high this session: **0.3195** (USER-REPORTED-NOT-ORGANIZER-CONFIRMED). The 2026-10-12 public-leaderboard snapshot in this repo shows 0.4275 at rank 1 and 0.3195 at rank 9. Neither number is a score this lane has earned. Core values: Maximize P(Win); Own the Outcome.
+
+# GEMSDOE69 — STANDING PROMPT (session of 2026-10-12, still in force)
+
 # Standing prompt (verbatim, session of 2026-10-12) — read at the start of every session
 
 > Review the repo.

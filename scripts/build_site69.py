@@ -81,9 +81,20 @@ def submission_banner():
     val_ok = nan_ok or zeros_ok
     ok = gate_ok and uniq_ok and val_ok
     review = gate_ok and rho_ok and val_ok and not overlap_ok
-    tifs = sorted(SUB.glob("h69-*-zeros.tif"))
+    card = load("run_card.json") or {}
+    if "H69-E" in str(card.get("hypothesis", "")):
+        # The run card is the session decision. Do not let an older uniqueness
+        # file promote a file the card rejected, or hide a card that passed.
+        verdict = card.get("verdict")
+        if verdict == "promote-candidate":
+            ok, review = True, False
+        elif verdict == "promote-flagged-review":
+            ok, review = False, True
+        elif verdict == "negative":
+            ok, review = False, False
+    tifs = sorted(SUB.glob("h69*-zeros.tif"))
     tif = tifs[-1] if tifs else None
-    nan_tifs = sorted(SUB.glob("h69-*-nan.tif"))
+    nan_tifs = sorted(SUB.glob("h69*-nan.tif"))
     nan_tif = nan_tifs[-1] if nan_tifs else None
     if review and tif:
         # conditional download: every gate passed except the literal 70% dot-overlap rule,
@@ -120,13 +131,20 @@ def submission_banner():
         if nan_ok and nan_tif:
             shutil.copy2(nan_tif, DOCS / "downloads" / f"{nan_tif.stem}.tif")
         fallback_label2 = "Diagnostic NaN variant" if fallback and "nan" in fallback.stem else "Fallback all-finite variant"
+        prior = 0.005975197860273526
+        dti = float(gate.get("corridor_mean_dti") or 0)
         ban = (f'<div class="banner ok"><b>&#9989; OK TO DOWNLOAD AND SUBMIT.</b><br>'
-               f'The gate was met on the spatially-blocked hide-and-recover holdout, the '
-               f'registry lane-drift scan passed (surface Spearman and dot-like overlap), and the '
-               f'format compliance checks passed (single-band float32, EPSG:32611, 3730&times;3292, '
-               f'values in [0,1], footprint-exact against <code>sample_submission.tif</code>).<br>'
+               f'The gate was met on the spatially-blocked hide-and-recover holdout '
+               f'(corridor HOLDOUT-DTI {dti:.4f} vs no-prior control {float(gate.get("control_mean_dti") or 0):.4f}; '
+               f'prior best {prior:.4f}). The registry lane-drift scan passed, and '
+               f'<code>scripts/validate_submission.py</code> passed '
+               f'(single-band float32, EPSG:32611, 3730&times;3292, values in [0,1], '
+               f'all-finite zeros twin). Download the <b>-zeros</b> file. Do not upload the -nan twin: '
+               f'NaN has produced the portal error &ldquo;Predicted values must be in range [0, 1]&rdquo;.<br>'
                f'<span class="kv">This is a HOLDOUT-screened candidate, not an organizer-confirmed score. '
-               f'Promotion to a submission slot is a separate selector step.</span></div>'
+               f'The gain over the prior holdout best is smaller than the 95% CI, so it is not a '
+               f'confirmed improvement on that screen. Promotion to a scored slot is a separate selector step. '
+               f'Nothing here is a projection of a leaderboard score above 0.3195.</span></div>'
                f'<a class="btn big" href="downloads/{esc(primary.stem)}.tif" download>&#11015;&#65039; Download PRIMARY submission TIF ({esc(primary.stem)}.tif)</a>'
                + (f'<a class="btn alt" href="downloads/{esc(fallback.stem)}.tif" download>{fallback_label2} ({esc(fallback.stem)}.tif)</a>' if fallback else '')
                + f'<a class="btn alt" href="#how-to-submit">How to submit it</a>')
@@ -135,13 +153,20 @@ def submission_banner():
     if not gate_ok:
         reasons.append("holdout gate not met (corridor arm did not beat the no-prior control)")
     if not uniq_ok:
-        reasons.append("registry lane-drift gate not met")
+        ov = (uniq or {}).get("worst_dot_overlap_dotlike") or {}
+        reasons.append(
+            "registry lane-drift gate not met"
+            + (f" ({float(ov.get('dot_overlap_3px', 0)):.1%} of dots within 3 px of one registry raster; limit 70%)"
+               if ov.get("dot_overlap_3px") is not None else "")
+        )
     if not val_ok:
         reasons.append("format compliance failed")
-    ban = ('<div class="banner bad"><b>&#10060; DO NOT SUBMIT.</b> '
+    if card.get("verdict") == "negative" and not reasons:
+        reasons.append("run card verdict is negative (see evidence/run_card.json)")
+    ban = ('<div class="banner bad"><b>&#10060; NOT OK TO SUBMIT &mdash; DO NOT SUBMIT.</b> '
            + "; ".join(esc(r) for r in reasons)
-           + '. The negative result is logged in <code>evidence/</code>.</div>')
-    return ban, tif
+           + '. No submission file is offered for a scored slot. The negative result is logged in <code>evidence/</code>.</div>')
+    return ban, None
 
 
 def build_index():
@@ -155,8 +180,8 @@ def build_index():
         rows += f"""<tr><td>Corridor arm pooled DTI</td><td>{gate.get('corridor_mean_dti', float('nan')):.4f} &plusmn; {gate.get('corridor_ci95_half', float('nan')):.4f}</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, {gate.get('n_cells','?')} cells, {gate.get('withheld_positive_px_total','?')} withheld positives)</td></tr>
 <tr><td>No-prior control arm</td><td>{gate.get('control_mean_dti', float('nan')):.4f} &plusmn; {gate.get('control_ci95_half', float('nan')):.4f}</td><td>HOLDOUT-DTI, same folds</td></tr>
 <tr><td>Paired &Delta; (corridor &minus; control)</td><td>{gate.get('paired_delta_mean', float('nan')):+.4f} &plusmn; {gate.get('paired_delta_ci95_half', float('nan')):.4f}</td><td>HOLDOUT-DTI</td></tr>"""
-    body = f"""
-{ban}
+    if "OK TO DOWNLOAD" in ban or "CONDITIONAL" in ban:
+        howto = f"""
 <div class="card" id="how-to-submit">
 <h2>How to submit the TIF (3 steps)</h2>
 <ol>
@@ -170,6 +195,17 @@ choose <i>File to submit</i> = the downloaded <code>.tif</code> (a <code>.zip</c
 (100, 0, 243350, 0, &minus;100, 4508550), values in [0,1]. Verified against
 <code>sample_submission.tif</code> (sha256 <code>2176d08e&hellip;</code>) by the shared template validator.</p>
 </div>
+"""
+    else:
+        howto = """
+<div class="card" id="how-to-submit">
+<h2>No file is offered for a scored slot</h2>
+<p>Do not upload a TIF from this site to a scored slot. Either the holdout gate failed, or the raster drifted into another lane (more than 70% of dots within 3 px of one registry raster, or rank-correlation above 0.90). The negative result is the deliverable. See the banner above, the run card, and <code>evidence/</code>.</p>
+</div>
+"""
+    body = f"""
+{ban}
+{howto}
 <div class="card">
 <h2>Current evidence at a glance</h2>
 <table>
@@ -204,7 +240,9 @@ pull-aparts and displacement-transfer zones; N&ndash;NE faults are best oriented
 
 
 def build_executive_summary():
-    body = """
+    ban, _tif = submission_banner()
+    body = f"""
+{ban}
 <div class="card">
 <h2>Executive summary &mdash; how a submission is made and entered</h2>
 <ol>
@@ -296,12 +334,11 @@ def build_hypotheses():
     body = f"""
 <div class="card">
 <h2>Five candidate hypotheses for future sessions (ranked)</h2>
-<p>The corridor lane (H69-A) itself is the top candidate and is implemented here. The rest are queued,
-each naming layers, signature, why it catches a fault missing from the catalogue, and how it differs from
-everything already shipped in the family.</p>
+<p>Ranked before the 2026-10-20 holdout look. H69-E is the idea under test. Full write-up:
+<code>docs/research/hypotheses_2026-10-20.md</code>. Expected gains are priors, not measurements.</p>
 <table>
 <tr><th>#</th><th>Hypothesis</th><th>Layers</th><th>Signature (transform)</th><th>Why it catches catalogue-missing faults</th><th>Novelty vs family</th><th>Cost / data</th></tr>
-<tr><td>1 (this lane)</td><td><b>H69-A relay-ramp / pull-apart corridors</b></td><td>catalogue tip graph + iso_grav_anom, tmi (+ HG/tilt), lidar scarp composite</td><td>step-over geometry &rarr; corridor masks; multi-scale HG + tilt robust-z + magnetic-low + scarp evidence; greedy marginal-DTI</td><td>Hidden breaching/relay faults live <i>between</i> mapped tips by definition; geometry proposes them where pixel statistics are weakest (no signal yet)</td><td>First lane proposing faults from pairwise tip geometry with en &eacute;chelon + rhomb emission; GEMSDOE33 was single-tip analogs</td><td>Implemented; no new data</td></tr>
+<tr><td>1 (this session)</td><td><b>H69-E width-stratified corridors + straight steps + K/ThK</b></td><td>cond_surf, depth_to_base_surf, GeoDAWN K and Th/K, plus grav/mag/lidar</td><td>structure-tensor coherence &times; gradient; K low vs 2 km background; high Th/K, inside width-stratified tip-graph corridors</td><td>Linking faults under alluvium leave a straight conductivity or basement step and an alteration halo, and they are not all 2.8 km wide</td><td>The 2026-10-12 cap used only W=2.8 km and had no straightness or radiometric channel. Not a GEMSDOE46 scarp-fusion blend.</td><td>Running; data already pinned (DOI 10.5066/P93LGLVQ)</td></tr>
 <tr><td>2</td><td><b>H69-D radiometric K/Th depletion halos inside corridors</b></td><td>geodawn_rad_u8 (K, Th, TC)</td><td>robust-low z of K and Th within corridor masks (hydrothermal leaching/deposition contrast)</td><td>Alteration halos mark permeable damage zones even where no scarp or edge survives; radiometrics see chemistry, not geometry</td><td>Family used radiometrics only in scarp-fusion blends (GEMSDOE46); never as a corridor-interior primary channel</td><td>Data already hash-pinned here; cheap</td></tr>
 <tr><td>3</td><td><b>H69-B knickpoint-&chi; chains at step-over mouths</b></td><td>det_elev, det_elev_slope</td><td>&chi;-integral anomalies of bedrock streams crossing corridor axes; collinearity vote of knickpoints</td><td>Blind faults with no surface scarp still knick stream profiles; a chain of collinear knickpoints across drainages is structure a scarp map cannot see</td><td>All family DEM channels are local (curvature/ridge); nothing integrates along-stream profiles</td><td>CPU-only; no new data</td></tr>
 <tr><td>4</td><td><b>H69-C straight conductivity/basement steps under cover</b></td><td>cond_surf, depth_to_base_surf</td><td>gradient magnitude &times; 3&times;3 directional coherence of gradient orientation (straight boundary test)</td><td>MT conductivity and basement depth image the subsurface: a straight conductivity step locates a fault under alluvium where surface mapping has nothing to record</td><td>These bands enter family stacks only as scalars/plain gradients</td><td>CPU-only; no new data</td></tr>
@@ -475,7 +512,9 @@ registry contains 27 universal soft surfaces and 134 high-density rasters (famil
 The lane-drift gate is therefore evaluated on the dotlike stratum plus the surface Spearman against everything,
 with the structural condition reported separately.</td><td>Reported literally in evidence/e3_uniqueness.json.</td></tr>
 <tr><td>IR-69-SCORE-01</td><td>All leaderboard values in the standing prompt (0.2778, 0.3774, 0.3195, &hellip;) are
-USER-REPORTED-NOT-ORGANIZER-CONFIRMED; no organizer receipt exists in this repo.</td><td>Labels applied everywhere.</td></tr>
+USER-REPORTED-NOT-ORGANIZER-CONFIRMED; no organizer receipt exists in this repo. The 2026-10-12 public snapshot in this repo shows 0.4275 at rank 1 and 0.3195 at rank 9. drivendata.org was not re-fetched.</td><td>Labels applied everywhere. IR-69-LB-01.</td></tr>
+<tr><td>IR-69-DUP-01</td><td>H69-E holdout gate passed, but 84.1% of its dots fall within 3 px of 12GEMSDOE <code>r5-nms3-trace</code> (blob 98cbfc84, 103,347 dots, Spearman &rho;=0.023). Protocol rule 1 fails closed. Not a byte copy of h33 (overlap 0.316, &rho;=0.227).</td><td>Logged. No download offered. Do not spend a slot.</td></tr>
+<tr><td>IR-69-GATE-02</td><td>The earlier file named radiometric-halo was not produced by a radiometric transform in the committed code, and its gate file is the 2026-10-12 run.</td><td>Not offered. H69-E re-ran the gate.</td></tr>
 </table>
 </div>
 """
@@ -508,7 +547,17 @@ def main() -> int:
     }
     for name, html_text in pages.items():
         (DOCS / name).write_text(html_text)
-    print("built", len(pages), "pages")
+    # GitHub Pages is served from / (not /docs). Homepage must match the banner.
+    home = pages["index.html"]
+    home = home.replace('href="assets/site.css"', 'href="docs/assets/site.css"')
+    for name in (
+        "index.html", "executive-summary.html", "why-h33-scored.html", "hypotheses.html",
+        "method.html", "results.html", "sources.html", "irregularities.html", "run-card.html",
+    ):
+        home = home.replace(f'href="{name}"', f'href="docs/{name}"')
+    home = home.replace('href="downloads/', 'href="docs/downloads/')
+    (ROOT / "index.html").write_text(home)
+    print("built", len(pages), "pages + root index.html")
     return 0
 
 

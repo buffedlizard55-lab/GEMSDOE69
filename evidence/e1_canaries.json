@@ -84,8 +84,28 @@
   "n_pos": 11318,
   "n_neg": 200000
  },
+ "cond_straight": {
+  "auc": 0.5145157048506803,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "base_straight": {
+  "auc": 0.5428712113447606,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "rad_k_depl": {
+  "auc": 0.5821535536313837,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
+ "rad_thk": {
+  "auc": 0.4728964609471638,
+  "n_pos": 11318,
+  "n_neg": 200000
+ },
  "corridor_propensity": {
-  "auc": 0.6908643307121399,
+  "auc": 0.6792975452818519,
   "n_pos": 11318,
   "n_neg": 200000
  },
@@ -93,6 +113,6 @@
  "_corridors": 1200,
  "evidence_class": "LEAKAGE-CANARY",
  "rule": "single-feature AUC > 0.90 on the holdout = leakage until proven otherwise",
- "generated_utc": "20261020T182515Z",
- "seconds": 20.1
+ "generated_utc": "20261020T192245Z",
+ "seconds": 29.5
 }

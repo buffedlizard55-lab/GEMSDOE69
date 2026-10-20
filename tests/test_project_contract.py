@@ -75,11 +75,16 @@ class ProjectContractTests(unittest.TestCase):
         index = (ROOT / "index.html").read_text(encoding="utf-8")
         guide = (ROOT / "docs/executive-summary.html").read_text(encoding="utf-8")
         card = json.loads((ROOT / "evidence/run_card.json").read_text(encoding="utf-8"))
-        if card["verdict"] != "promote":
+        ok_verdicts = {"promote", "promote-candidate"}
+        if card["verdict"] not in ok_verdicts:
             self.assertIn("NOT OK TO SUBMIT", index)
             self.assertIn("DO NOT SUBMIT", index)
             self.assertIn("NOT OK TO SUBMIT", guide)
             self.assertIn("do not submit", index.lower())
+        else:
+            self.assertIn("OK TO DOWNLOAD", index)
+            self.assertNotIn("NOT OK TO SUBMIT", index)
+            self.assertIn("OK TO DOWNLOAD", guide)
         legacy = (ROOT / "docs/parallel/executive-summary.html").read_text(encoding="utf-8")
         self.assertIn("No submission file is available", legacy)
 

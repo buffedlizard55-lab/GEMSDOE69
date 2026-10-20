@@ -1,8 +1,53 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><title>GEMSDOE69 · submission status</title><link rel="stylesheet" href="docs/assets/site.css"></head><body><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1><div class="sub">DOE GEMS Prize (DrivenData #306) &middot; catalogue-geometry fault proposal &middot; parallel-run lane 69</div><div class="banner bad"><b>&#10060; NOT OK TO SUBMIT &mdash; DO NOT SUBMIT TO A SCORED SLOT &mdash; negative result logged.</b><br>
-The unique submission TIF (<code>h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c</code>, sha256
-<code>55f6215c&hellip;/9c0bc4a5&hellip;</code>) exists for download and inspection, but it is <b>not OK to submit</b>:
-the registry literal dot-overlap gate failed (92.2% of dots within 3 px of one archived GEMSDOE51 raster;
-protocol limit 70%) and is logged per protocol rule 1. No submission slot was spent. Promotion to a scored
-slot is a separate selector decision requiring a gate pass. Full evidence: <a href="docs/index.html">docs/index.html</a>,
-<a href="docs/run-card.html">run card</a>, <a href="evidence/">evidence/</a>.</div><p><a class="btn" href="docs/index.html">&rarr; Go to the GEMSDOE69 site (downloads, executive summary, method, sources)</a></p></div></body></html>
+<html lang="en"><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Home · GEMSDOE69</title>
+<link rel="stylesheet" href="docs/assets/site.css"></head>
+<body>
+<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<nav><div class="wrap"><a href="docs/index.html" class="active">Home</a><a href="docs/executive-summary.html" class="">Executive Summary</a><a href="docs/why-h33-scored.html" class="">Why H33 Scored</a><a href="docs/hypotheses.html" class="">Hypotheses</a><a href="docs/method.html" class="">Method</a><a href="docs/results.html" class="">Experiments</a><a href="docs/sources.html" class="">Sources</a><a href="docs/irregularities.html" class="">Irregularities</a><a href="docs/run-card.html" class="">Run Card</a></div></nav>
+<main class="wrap">
+
+<div class="banner bad"><b>&#10060; NOT OK TO SUBMIT &mdash; DO NOT SUBMIT.</b> registry lane-drift gate not met (84.1% of dots within 3 px of one registry raster; limit 70%). No submission file is offered for a scored slot. The negative result is logged in <code>evidence/</code>.</div>
+
+<div class="card" id="how-to-submit">
+<h2>No file is offered for a scored slot</h2>
+<p>Do not upload a TIF from this site to a scored slot. Either the holdout gate failed, or the raster drifted into another lane (more than 70% of dots within 3 px of one registry raster, or rank-correlation above 0.90). The negative result is the deliverable. See the banner above, the run card, and <code>evidence/</code>.</p>
+</div>
+
+<div class="card">
+<h2>Current evidence at a glance</h2>
+<table>
+<tr><th>Measurement</th><th>Value</th><th>Evidence class</th></tr>
+<tr><td>Corridor arm pooled DTI</td><td>0.0064 &plusmn; 0.0017</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, 8 cells, 22641 withheld positives)</td></tr>
+<tr><td>No-prior control arm</td><td>0.0025 &plusmn; 0.0007</td><td>HOLDOUT-DTI, same folds</td></tr>
+<tr><td>Paired &Delta; (corridor &minus; control)</td><td>+0.0038 &plusmn; 0.0014</td><td>HOLDOUT-DTI</td></tr>
+<tr><td>Registry scan: worst surface |Spearman| / dot-like dot overlap</td>
+<td>0.227 / 0.8414</td>
+<td>REGISTRY-MEASUREMENT (limits 0.90 / 0.70)</td></tr>
+<tr><td>Family best download (h33-2-b2)</td><td>0.2778</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (receipt quoted on GEMSDOE32 site)</td></tr>
+<tr><td>Leaderboard high score cited in prompt</td><td>0.3774 / 0.3195</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</td></tr>
+</table>
+<p class="small">A holdout DTI is a <b>screen</b>, never a leaderboard projection: the family's own
+instrument calibration (GEMSDOE32) measured cross-family Spearman &rho;&asymp;0.51 (p&asymp;0.09) against live scores.</p>
+</div>
+<div class="card">
+<h2>What this lane is</h2>
+<p>Hidden faults are proposed from <b>catalogue geometry</b>, not pixel statistics: the tips of mapped
+fault strands form a graph; step-over tip pairs (spacing 0.1&ndash;15 km, along-strike separation &le; 3.5W,
+sub-parallel strikes) emit <b>relay-ramp corridors</b> &mdash; an oblique connector plus en&nbsp;&eacute;chelon strands
+&mdash; and, at dilatational steps under the Walker-Lane dextral prior, <b>pull-apart rhombs</b>. Corridors are
+scored by multi-scale horizontal-gradient and tilt evidence in gravity and magnetics (including magnetic
+lows), the 1&nbsp;m lidar-scarp channel, and orientation consistency with WNW extension. Dots are placed by
+dots placed by greedy marginal-DTI selection inside the top corridors (pre-registered propensity map
+S<sub>0</sub>=0.75; template allocator), &ge;200&nbsp;m from the mapped catalogue.</p>
+<p>Geometry priors as cited in the standing prompt: Giddens &amp; Faulds (2025, SGP-TR-229) inventoried
+&gt;450 step-overs; ramps are typically 3&ndash;3.5&times; longer than wide (widths 0.1&ndash;14.6 km, mean 2.8 km);
+~70% of higher-temperature step-overs are hard-linked; in the Walker Lane, hot systems sit more often in
+pull-aparts and displacement-transfer zones; N&ndash;NE faults are best oriented for dilation under WNW extension.</p>
+</div>
+
+</main>
+<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+</body></html>
