@@ -2,7 +2,10 @@
   "verdict": "negative",
   "download_enabled": false,
   "reasons": [
-    "Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified/dotlike diagnostics cannot override the literal protocol."
+    "No positive paired HOLDOUT-DTI 95% CI is recorded against the no-prior control.",
+    "No positive paired HOLDOUT-DTI 95% CI is recorded against the current lane-best candidate.",
+    "Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified/dotlike diagnostics cannot override the literal protocol.",
+    "A compliant, artifact-bound whole-segment holdout protocol audit is missing or failed."
   ],
   "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
   "validator_report": {
@@ -82,5 +85,9 @@
       "problems": []
     },
     "all_checks_passed": true
-  }
+  },
+  "paired_ci_control_passed": false,
+  "paired_ci_current_best_passed": false,
+  "holdout_protocol_compliant": false,
+  "receipt_evidence_class": "SUBMISSION-RECEIPT"
 }

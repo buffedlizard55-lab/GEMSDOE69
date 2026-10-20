@@ -22,11 +22,34 @@ def cleared(tmp_path):
         'transform_and_bounds_match_sample_submission', 'footprint_all_finite',
         'footprint_values_in_0_1', 'nan_only_outside_footprint', 'no_infinite_values',
         'all_finite_values_in_0_1', 'template_validator_passed')}
-    put(tmp_path, 'e2_gate.json', {'gate_passed': True, 'current_best_beaten': True,
-                                  'artifact_sha256': sha})
+    evaluator = ('vendor/template66 gems57 pooled hide-and-recover; alpha=0.2 beta=0.8; '
+                 '300m triangular kernel')
+    holdout_source = tmp_path / 'holdout.py'
+    holdout_source.write_text('# reviewed whole-segment buffered evaluator fixture')
+    holdout_source_sha = hashlib.sha256(holdout_source.read_bytes()).hexdigest()
+    put(tmp_path, 'e2_gate.json', {
+        'evidence_class': 'HOLDOUT-DTI', 'evaluator': evaluator,
+        'withheld_positive_px_total': 100, 'n_cells': 8,
+        'gate_passed': True, 'current_best_beaten': True, 'artifact_sha256': sha,
+        'paired_cell_bootstrap': {
+            'candidate_minus_control': {'mean': .02, 'ci95': [.01, .03]},
+            'candidate_minus_current_best': {'mean': .01, 'ci95': [.002, .018]},
+        },
+    })
+    put(tmp_path, 'e2_holdout_protocol_audit.json', {
+        'evidence_class': 'HOLDOUT-PROTOCOL-AUDIT', 'artifact_sha256': sha,
+        'evaluator': evaluator, 'compliant': True,
+        'whole_fault_segments_withheld': True, 'segment_chunking': False,
+        'withheld_context_buffer_px': 3,
+        'catalogue_features_from_visible_faults_only': True,
+        'visible_fault_mask_pixel_exact': True, 'pooled_dti': True,
+        'alpha': .2, 'beta': .8, 'kernel': 'triangular', 'radius_m': 300,
+        'source_sha256': {'holdout.py': holdout_source_sha},
+    })
     put(tmp_path, 'e3_uniqueness.json', dict(literal_gate=dict(rho_ok=True, overlap_ok=True),
         n_registry_blobs=1, n_compared=1, n_errors=0, my_sha256=sha))
-    put(tmp_path, 'e3_receipt.json', dict(raster=dict(zeros=dict(path='candidate.tif', sha256=sha)),
+    put(tmp_path, 'e3_receipt.json', dict(evidence_class='SUBMISSION-RECEIPT',
+        raster=dict(zeros=dict(path='candidate.tif', sha256=sha)),
         validator=dict(reports=[dict(sha256=sha, all_checks_passed=True, checks=checks)])))
     for phase in ('surface', 'dots'):
         put(tmp_path, f'e3_uniqueness_{phase}.json', {'phases': {phase: {'summary': dict(
@@ -40,11 +63,68 @@ def cleared(tmp_path):
 
 
 def test_complete_hash_bound_receipts_pass(cleared):
-    assert policy.evaluate(cleared)['download_enabled']
+    result = policy.evaluate(cleared)
+    assert result['download_enabled']
+    assert result['verdict'] == 'eligible_for_selector'
+    assert result['paired_ci_control_passed'] is True
+    assert result['paired_ci_current_best_passed'] is True
+    assert result['holdout_protocol_compliant'] is True
 
 
 def test_missing_evidence_fails_closed(tmp_path):
     assert policy.evaluate(tmp_path)['verdict'] == 'negative'
+
+
+@pytest.mark.parametrize('comparison', ['candidate_minus_control', 'candidate_minus_current_best'])
+def test_each_paired_holdout_ci_is_required_to_be_positive(cleared, comparison):
+    gate = policy.read(cleared, 'e2_gate.json')
+    gate['paired_cell_bootstrap'][comparison]['ci95'] = [0.0, 0.02]
+    put(cleared, 'e2_gate.json', gate)
+    result = policy.evaluate(cleared)
+    assert result['verdict'] == 'negative'
+    assert result['download_enabled'] is False
+    if comparison == 'candidate_minus_control':
+        assert result['paired_ci_control_passed'] is False
+        assert any('no-prior control' in reason for reason in result['reasons'])
+    else:
+        assert result['paired_ci_current_best_passed'] is False
+        assert any('current lane-best' in reason for reason in result['reasons'])
+
+
+@pytest.mark.parametrize(('field', 'value'), [
+    ('whole_fault_segments_withheld', False),
+    ('segment_chunking', True),
+    ('withheld_context_buffer_px', 2),
+    ('catalogue_features_from_visible_faults_only', False),
+    ('visible_fault_mask_pixel_exact', False),
+    ('alpha', 0.25),
+    ('beta', 0.75),
+    ('radius_m', 500),
+])
+def test_holdout_protocol_audit_must_match_the_required_protocol(cleared, field, value):
+    audit = policy.read(cleared, 'e2_holdout_protocol_audit.json')
+    audit[field] = value
+    put(cleared, 'e2_holdout_protocol_audit.json', audit)
+    result = policy.evaluate(cleared)
+    assert result['verdict'] == 'negative'
+    assert result['holdout_protocol_compliant'] is False
+    assert any('whole-segment holdout protocol audit' in reason for reason in result['reasons'])
+
+
+def test_holdout_protocol_source_hash_must_match(cleared):
+    (cleared / 'holdout.py').write_text('# mutated evaluator')
+    result = policy.evaluate(cleared)
+    assert result['holdout_protocol_compliant'] is False
+    assert not result['download_enabled']
+
+
+def test_receipt_evidence_class_is_required(cleared):
+    receipt = policy.read(cleared, 'e3_receipt.json')
+    receipt['evidence_class'] = 'ORGANIZER-CONFIRMED'
+    put(cleared, 'e3_receipt.json', receipt)
+    result = policy.evaluate(cleared)
+    assert not result['download_enabled']
+    assert any('correctly classified submission artifact receipt' in reason for reason in result['reasons'])
 
 
 @pytest.mark.parametrize('phase', ['surface', 'dots'])
@@ -87,6 +167,15 @@ def test_other_blockers(cleared, change):
     else:
         put(cleared, 'e2_gate.json', {'gate_passed': False})
     assert not policy.evaluate(cleared)['download_enabled']
+
+
+def test_archived_transfer_runner_refuses_legacy_holdout_and_emission():
+    from scripts import run_exp2b_transfer
+
+    with pytest.raises(SystemExit, match='legacy chunked, unbuffered'):
+        run_exp2b_transfer.cmd_gate()
+    with pytest.raises(SystemExit, match='no protocol-qualified'):
+        run_exp2b_transfer.cmd_emit()
 
 
 def test_current_repo_fails_closed_on_literal_overlap():

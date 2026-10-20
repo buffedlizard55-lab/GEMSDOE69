@@ -1,0 +1,23 @@
+{
+  "evidence_class": "CODE-REVIEW",
+  "reviewed_utc": "2026-10-20",
+  "runner": "scripts/run_exp2b_transfer.py::cmd_gate",
+  "template_source": "vendor/template66/gems57/holdout.py::build_holdout",
+  "design": {
+    "whole_fault_segments": false,
+    "withholding_unit": "network.segments() branches cut into chunks with max_len_px=12",
+    "feature_buffer_px": 0,
+    "domain_boundary_erosion_px": 12,
+    "domain_boundary_erosion_is_not_a_withheld-segment-buffer": true,
+    "features_from_visible_faults_only": true,
+    "visible_faults_pixel_exactly_masked": true
+  },
+  "compliant_with_user_protocol": false,
+  "notes": [
+    "The transfer runner calls shared build_holdout(); HoldoutContext.visible() returns catalogue & ~hidden and does not remove a feature-context collar around withheld pixels.",
+    "The shared legacy builder withholds short chunks (maximum 12 px), not whole connected fault segments.",
+    "Its 12 px erosion separates scored quadrants from their boundaries; it is not a buffer around withheld fault segments.",
+    "The required buffered whole-component API already exists in the shared template as buffered_component_draw(), and other repository runners use it. This archived transfer result was not evaluated with that protocol.",
+    "No experiment was rerun and no candidate TIFF was generated during this code review."
+  ]
+}
