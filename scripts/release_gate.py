@@ -125,4 +125,6 @@ def write_card(root=ROOT):
 
 
 if __name__ == '__main__':
-    print(json.dumps(write_card()['release_policy'], indent=2))
+    # Audit-only command: never rewrite the committed run card from legacy inputs.
+    # Rebuilding a card requires an explicit, artifact-bound evidence-generation run.
+    print(json.dumps(evaluate(ROOT), indent=2))

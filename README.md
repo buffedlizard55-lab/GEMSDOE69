@@ -7,29 +7,17 @@
 Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
 
 The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
-A valid file is not necessarily a unique or scientifically validated submission.
-- Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies.
-- Holdout comparison is missing or not bound to the current artifact hash.
-- Reproducible method source manifest is missing, stale, or not artifact-bound.
+A format-valid file is not necessarily unique or scientifically validated.
+- Literal registry dot-overlap gate failed (1.0 > 0.70); duplicate-and-stop applies.
+- The generic release CLI's legacy evidence inputs are not bound to the H69-H2 candidate; it remains fail-closed. See the run card and review report.
 
-## Latest — 2026-10-20 joint-corridor candidate
+## Latest reviewed candidate — 2026-10-20 transfer-only
 
-**NEGATIVE: duplicate-and-stop.** Archived H69-J measurements are not current
-release clearance. Its all-registry overlap is 1.0 (limit 0.70); the dotlike-only
-0.61 diagnostic cannot override the literal rule. Method-source and holdout
-hash bindings are stale. See [latest audit](reports/publication-audit-2026-10-20.md).
+**NEGATIVE: duplicate-and-stop.** Current archived candidate H69-H2 transfer-only is not cleared to submit. Registry scan of 862 hash-verified accessible rasters found literal 3-pixel dot overlap 1.0 (limit 0.70); the surface phase also fails. A lower Spearman value does not override the literal overlap rule. See [latest audit](reports/review-2026-10-20-agent-review.md) and [run card](evidence/run_card.json).
 
-Archived **HOLDOUT-DTI**, vendor/template66 gems57 pooled hide-and-recover,
-22,641 withheld positive pixels across 8 repeated cells: H69-J 0.005913
-(95% CI [0.004667, 0.007159]), comparator 0.002148. This archived interval
-uses a normal approximation, not an independent spatial-block bootstrap;
-the result is not rebound to current source and is not a leaderboard prediction.
-The TIFF's format can pass while the submission remains ineligible.
+HOLDOUT-DTI, vendor/template66/gems57 pooled hide-and-recover (alpha=0.2, beta=0.8, 300 m triangular kernel): H69-H2 pooled DTI 0.007738, 95% CI [0.005732, 0.009743], 22,641 withheld positive pixels across 8 cells; no-prior comparator 0.002148. The paired gate passed. These are local holdout measurements, not an organizer score or leaderboard projection. The TIFF format passes while the artifact remains ineligible.
 
-No new scientific experiment or competition submission was run in this audit.
-The existing queued hypotheses remain untested, not slot-eligible; their rank
-is qualitative, not an estimated DTI gain. A better score than the user-reported
-0.2778 has **not been demonstrated**. See [H33 analysis](docs/why-h33-scored.html).
+No competition slot was used and no organizer-confirmed score is claimed. A higher competition score than the user-reported 0.2778 has **not been demonstrated**. See [H33 analysis](docs/why-h33-scored.html).
 
 ## Reproduce the publication audit (no data downloads needed)
 
@@ -44,7 +32,7 @@ For pixel validation and tests:
 ```sh
 python -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif
+GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif
 .venv/bin/pytest -q
 ```
 
