@@ -54,13 +54,13 @@ def test_stale_phase_blocks(cleared, phase):
     assert not policy.evaluate(cleared)['download_enabled']
 
 
-def test_stratified_gate_cannot_override_literal_failure(cleared):
+@pytest.mark.parametrize('dot_overlap', [None, 0.0, 0.61, 0.70])
+def test_stratified_gate_cannot_override_literal_failure(cleared, dot_overlap):
     u = policy.read(cleared, 'e3_uniqueness.json')
     u['literal_gate']['overlap_ok'] = False
-    # Even a favorable diagnostic on like-for-like sparse rasters cannot
-    # override the literal protocol's duplicate-and-stop condition.
     u['stratified_gate'] = {'dotlike_overlap_ok': True}
-    u['worst_dot_overlap_dotlike'] = {'dot_overlap_3px': 0.10}
+    if dot_overlap is not None:
+        u['worst_dot_overlap_dotlike'] = {'dot_overlap_3px': dot_overlap}
     put(cleared, 'e3_uniqueness.json', u)
     result = policy.evaluate(cleared)
     assert result['verdict'] == 'negative'

@@ -108,7 +108,7 @@ def write_card(root=ROOT):
                 note='Literal protocol enforced. No submission slot used. Archived measurements are not organizer scores.')
     card['hypothesis'] = ('H69-J: convergent multi-scale HG+tilt edge phase across relay connectors (H1)')
     card['mechanism'] = ('Tip-graph corridor proposals scored by joint grav+mag HG and tilt coincidence (AND logic, min(E_grav,E_mag) 0.35), mag low gated by joint, lidar scarp, N-NE orientation, pull-apart prior; greedy marginal-DTI placement. Targets buried relay linkage between step-over tips separating basement blocks.')
-    card['non_fault_mimic'] = ('Lithologic intrusive contacts and basin edges produce single-physics HG without paired opposite-polarity tilt; alluvial composition alters radiometrics but not joint grav+mag edge coincidence. Pluvial shorelines mimic scarps but lack paired HG ridges.')
+    card['non_fault_mimic'] = ('Intrusive contacts and sedimentary basin margins can produce coincident gravity/magnetic edges without faulting; pluvial shorelines can mimic lidar scarps. Joint evidence does not rule out these processes.')
     mean, half = gate.get('corridor_mean_dti'), gate.get('corridor_ci95_half')
     card['holdout'] = dict(evidence_class='HOLDOUT-DTI', evaluator_version=gate.get('evaluator'),
         dti=mean, ci95=[mean-half, mean+half] if isinstance(mean, (int, float)) and isinstance(half, (int, float)) else None,
