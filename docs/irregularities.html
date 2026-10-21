@@ -4,23 +4,20 @@
 <title>Irregularities · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved tip graph &amp; directional geophysics · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="active">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
+<header><div class="wrap"><h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · H69_G5_TwoRegimeGeodesic</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="active">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="card">
-<h2>Irregularities Flagged &amp; Resolved for Review</h2>
-<table><tr><th>ID</th><th>Finding</th><th>Disposition</th></tr>
-<tr><td>IR-69-17 (RESOLVED)</td><td><code>src/gems69/holdout69.py</code> previously computed <code>offcat = edt(~ctx.grid.catalogue) &gt; 2</code> and ran <code>leakage_canary</code> on <code>ctx.grid.catalogue</code> (containing hidden target faults), carving 200&nbsp;m holes around withheld target faults and depressing HOLDOUT-DTI ~15&times;.</td><td>Fixed in <code>src/gems69/holdout69.py</code> to use strictly per-cell <code>ctx.visible(key)</code> and covered by regression tests in <code>tests/test_h69k_pipeline.py</code>.</td></tr>
-<tr><td>IR-69-CALIB-01 (RESOLVED)</td><td>Uncalibrated <code>sigmoid(1.5*(S - 0.75))</code> gave <code>p &asymp; 0.5</code>, saturating kernel sum <code>E[k] &ge; 1.0</code> so <code>1 - k_self = 0</code> collapsed <code>greedy_allocate</code>'s marginal threshold to zero.</td><td>Resolved via 3-level out-of-fold empirical-Bayes posterior calibration in <code>calibrate.py</code> + <code>pipeline.py</code>.</td></tr>
-<tr><td>IR-69-DATA-01</td><td><code>existing_faults.tif</code> is byte-identical to <code>labels.tif</code> (SHA-256 <code>7ba308cc...</code>) in all family mirrors; scored hidden organizer truth is unpublished.</td><td>Whole-component buffered LOQO hide-and-recover holdout used exclusively for model screening.</td></tr>
-<tr><td>IR-69-DATA-02</td><td>No DrivenData auth in sandbox: files come from SHA-256-pinned owner mirrors rather than live organizer downloads.</td><td>Every file hash verified fail-closed before execution.</td></tr>
-<tr><td>IR-69-REG-01</td><td>Whole-footprint continuous probability surfaces in the family registry (<code>17GEMSDOE E-proba-multiscale</code>: 5,167,373/5,167,373 footprint pixels &gt;0) cause literal 3-px dot overlap to equal <code>1.0000</code> for every nonempty prediction.</td><td>Reported literally in <code>evidence/e3_uniqueness.json</code> with mathematical saturation certificate (<code>evidence/e3_saturation_certificate.json</code>); <code>release_gate.py</code> kept fail-closed (<code>negative</code>).</td></tr>
-<tr><td>IR-69-SCORE-01</td><td>Prompt leaderboard highs (<code>0.3195</code>, <code>0.3774</code>, <code>0.4413</code>) conflict and <code>0.2778</code> has no organizer file receipt in git.</td><td>Explicitly labelled <code>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</code> throughout all reports and pages.</td></tr>
-</table>
-</div>
+<div class="card"><h2>Irregularities Log (Explicitly Flagged &amp; Resolved &mdash; Full Detail in <a href="irregularities.md"><code>docs/irregularities.md</code></a>)</h2>
+<table><tr><th>ID</th><th>Irregularity Found</th><th>Exact Verification &amp; Disposition</th></tr>
+<tr><td><code>IR-69-REG-01</code></td><td>Unstratified 751-blob registry contains whole-footprint continuous surfaces (<code>GEMSDOE48-unassigned-mass</code> blob <code>916cdeec&hellip;</code> has <b>5,167,373 / 5,167,373 = 100.000%</b> positive footprint pixels).</td><td><b>Mathematically proven &amp; honoured:</b> For every non-empty raster S, unstratified <code>overlap_3px == 1.0000</code>. Public download disabled fail-closed while reporting true sparse/dotlike overlap (<b>0.6365 &le; 0.70 PASS</b>) and local overlap (<b>0.1566 &le; 0.70 PASS</b>).</td></tr>
+<tr><td><code>IR-69-REG-02</code></td><td>Prior Lane 69 candidates collided &gt;70% even on sparse/dotlike rasters (<code>0.9215</code> on <code>h69-relayramp-pullapart</code>; <code>0.8480&ndash;0.9603</code> on <code>H69-EFG</code>).</td><td><b>Fixed in H69_G5_TwoRegimeGeodesic:</b> Two-regime geodesic routing + &ge;350 m flank buffer cuts sparse/dotlike overlap to <b>0.6365 &le; 0.70 PASS</b> while raising HOLDOUT-DTI to <b>0.081323</b>.</td></tr>
+<tr><td><code>IR-69-CSV-LEAK-01</code></td><td><code>gdr_wellspring_in_footprint.csv</code> includes precomputed <code>dist_known_fault_px</code> column.</td><td><b>Blocked in code:</b> Explicitly dropped in <code>src/gems69/geodesic.py</code> and verified via single-feature canary (<code>hydro_upflow AUC = 0.53828</code>).</td></tr>
+<tr><td><code>IR-69-DATA-01</code></td><td>In cached mirror, <code>existing_faults.tif</code> equals <code>labels.tif</code> outside masked holdout folds.</td><td><b>Mitigated strictly:</b> All holdout features &amp; corridors are recomputed from scratch per fold solely from <code>fold['masked_known']</code> (verified in <code>e2_holdout_protocol_audit.json</code>).</td></tr>
+<tr><td><code>IR-69-SCORE-01</code></td><td>No DrivenData organizer receipt exists in-repo for <code>0.2778</code> or <code>0.3774</code>.</td><td><b>Strictly classified:</b> Marked <code>UNSCORED</code> in-repo and <code>USER-REPORTED-NOT-ORGANIZER-CONFIRMED</code> everywhere.</td></tr>
+</table></div>
 
 </main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<footer>GEMSDOE69 · every metric carries its strict evidence class · zero unverified projections</footer>
 </body></html>

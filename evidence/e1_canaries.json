@@ -1,81 +1,83 @@
 {
-  "evidence_class": "LEAKAGE-CANARY",
-  "rule": "single-feature AUC > 0.90 on untouched holdout = leakage until proven otherwise",
-  "draws": [
-    22,
-    23
-  ],
-  "leakage_flags": [],
-  "generated_utc": "20261020T225534Z",
   "grav_edge": {
-    "auc": 0.542607929479587,
-    "n_pos": 22796,
-    "n_neg": 1200000
+    "auc": 0.5248,
+    "passes_rule4_le_0p90": true
   },
   "mag_edge": {
-    "auc": 0.5282377540833187,
-    "n_pos": 22796,
-    "n_neg": 1200000
+    "auc": 0.56735,
+    "passes_rule4_le_0p90": true
   },
   "mag_low": {
-    "auc": 0.5070922405612096,
-    "n_pos": 22796,
-    "n_neg": 1200000
+    "auc": 0.53066,
+    "passes_rule4_le_0p90": true
   },
-  "scarp": {
-    "auc": 0.5398884311026788,
-    "n_pos": 22796,
-    "n_neg": 1200000
+  "lidar_coh_scarp": {
+    "auc": 0.60794,
+    "passes_rule4_le_0p90": true
   },
-  "grav_ge_abs": {
-    "auc": 0.535712707017313,
-    "n_pos": 22796,
-    "n_neg": 1200000
+  "topo_ridge": {
+    "auc": 0.67089,
+    "passes_rule4_le_0p90": true
   },
-  "grav_gn_abs": {
-    "auc": 0.5001006004342867,
-    "n_pos": 22796,
-    "n_neg": 1200000
+  "rad_alteration": {
+    "auc": 0.53931,
+    "passes_rule4_le_0p90": true
   },
-  "mag_ge_abs": {
-    "auc": 0.5292048124305434,
-    "n_pos": 22796,
-    "n_neg": 1200000
+  "subsurface_step": {
+    "auc": 0.51661,
+    "passes_rule4_le_0p90": true
   },
-  "mag_gn_abs": {
-    "auc": 0.5175532992447506,
-    "n_pos": 22796,
-    "n_neg": 1200000
+  "hydro_upflow": {
+    "auc": 0.53828,
+    "passes_rule4_le_0p90": true
   },
-  "e_pix": {
-    "auc": 0.5623886337515354,
-    "n_pos": 22796,
-    "n_neg": 1200000
+  "sgmc_bedrock": {
+    "auc": 0.77813,
+    "passes_rule4_le_0p90": true
   },
-  "corridor_score_band": {
-    "auc": 0.674159638825525,
-    "n_pos": 22796,
-    "n_neg": 1200000
+  "f_corr_narrow": {
+    "auc": 0.75948,
+    "passes_rule4_le_0p90": true
   },
-  "neg_dist_corridor_trace": {
-    "auc": 0.697844390444961,
-    "n_pos": 22796,
-    "n_neg": 1200000
+  "f_corr_mid": {
+    "auc": 0.77044,
+    "passes_rule4_le_0p90": true
   },
-  "neg_dist_visible_tip": {
-    "auc": 0.7260617994019418,
-    "n_pos": 22796,
-    "n_neg": 1200000
+  "f_corr_broad": {
+    "auc": 0.77124,
+    "passes_rule4_le_0p90": true
   },
-  "neg_dist_visible_catalogue": {
-    "auc": 0.735306298053021,
-    "n_pos": 22796,
-    "n_neg": 1200000
+  "f_corr_rel": {
+    "auc": 0.70026,
+    "passes_rule4_le_0p90": true
   },
-  "oof_corridor_posterior": {
-    "auc": 0.7751249360633444,
-    "n_pos": 22796,
-    "n_neg": 1200000
+  "f_corr_tip": {
+    "auc": 0.54651,
+    "passes_rule4_le_0p90": true
   },
-  "artifact_sha256": "04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b"
+  "f_corr_mult": {
+    "auc": 0.73417,
+    "passes_rule4_le_0p90": true
+  },
+  "f_tip_near": {
+    "auc": 0.79653,
+    "passes_rule4_le_0p90": true
+  },
+  "f_tip_mid": {
+    "auc": 0.79653,
+    "passes_rule4_le_0p90": true
+  },
+  "_summary": {
+    "evaluator_fold": "gems57-pooled-hide-v2 seed=20 q0",
+    "n_withheld_positives_q0": 1923,
+    "n_eval_cells_q0": 1090262,
+    "max_single_feature_auc": 0.79653,
+    "all_canaries_clean": true,
+    "dropped_leaked_csv_columns": [
+      "dist_known_fault_px"
+    ],
+    "elapsed_seconds": 159.48
+  },
+  "artifact_sha256": "28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273",
+  "measurement_origin": "computed_holdout"
 }

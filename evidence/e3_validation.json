@@ -3,9 +3,9 @@
   "all_files_passed": true,
   "reports": [
     {
-      "file": "/home/user/GEMSDOE69/submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif",
-      "bytes": 156596,
-      "sha256": "04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b",
+      "file": "submissions/h69-efg-kinematic-geodesic-29027-zeros.tif",
+      "bytes": 196948,
+      "sha256": "25cdba0acab1c9eec96f48a78f72c7621a5d7abca49440176b606a955ea0e63f",
       "meta": {
         "count": 1,
         "dtype": "float32",
@@ -34,7 +34,7 @@
       "n_nan_inside_footprint": 0,
       "min": 0.0,
       "max": 1.0,
-      "positive_pixels": 54471,
+      "positive_pixels": 29027,
       "distinct_positive_values": [
         1.0
       ],
@@ -44,6 +44,7 @@
         "crs_epsg_32611": true,
         "shape_3730x3292": true,
         "transform_and_bounds_match_sample_submission": true,
+        "mask_shapes_match_raster": true,
         "footprint_all_finite": true,
         "footprint_values_in_0_1": true,
         "no_infinite_values": true,
@@ -81,9 +82,9 @@
       "all_checks_passed": true
     },
     {
-      "file": "/home/user/GEMSDOE69/submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-nan.tif",
-      "bytes": 351646,
-      "sha256": "609af5bce51d916fbba1fd383615323803591814823ac794d04b9a3374975b3f",
+      "file": "submissions/h69-efg-kinematic-geodesic-29027-nan.tif",
+      "bytes": 243565,
+      "sha256": "6ddf37fc9dbe5f66c8000857ee54825f3269cc7d1b37318862a0960fd3e4dd93",
       "meta": {
         "count": 1,
         "dtype": "float32",
@@ -112,7 +113,7 @@
       "n_nan_inside_footprint": 0,
       "min": 0.0,
       "max": 1.0,
-      "positive_pixels": 54471,
+      "positive_pixels": 29027,
       "distinct_positive_values": [
         1.0
       ],
@@ -122,6 +123,7 @@
         "crs_epsg_32611": true,
         "shape_3730x3292": true,
         "transform_and_bounds_match_sample_submission": true,
+        "mask_shapes_match_raster": true,
         "footprint_all_finite": true,
         "footprint_values_in_0_1": true,
         "no_infinite_values": true,

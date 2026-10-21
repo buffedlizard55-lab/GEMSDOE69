@@ -1,0 +1,205 @@
+{
+ "generated_utc": "2026-10-20T23:20:37.541996+00:00",
+ "experiments": [
+  {
+   "id": "H69-M",
+   "preregistration": "registry/preregistration-2026-10-20-h69m-evidence-first.json",
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator": "vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=[all,detached]; POOLED from summed TP/FP/FN)",
+   "candidate_arm": "h69m_evidence_first",
+   "results": {
+    "primary_detached": {
+     "cells": 8,
+     "withheld_positive_px": 22619,
+     "pooled_dti": {
+      "control_noprior": 0.01391860753853958,
+      "transfer_ref": 0.04873178632919641,
+      "joint_priority": 0.03018668120061089,
+      "h69m_evidence_first": 0.02863427071042197
+     },
+     "candidate_minus_control": {
+      "mean": 0.014104458725277774,
+      "ci95": [
+       0.004695012229512022,
+       0.023339391472335227
+      ]
+     },
+     "candidate_minus_transfer_ref": {
+      "mean": -0.02019478735393559,
+      "ci95": [
+       -0.024828072929573314,
+       -0.015951579951039453
+      ]
+     },
+     "transfer_ref_minus_control": {
+      "mean": 0.034299246079213364,
+      "ci95": [
+       0.02274725676878829,
+       0.04620310014611892
+      ]
+     }
+    },
+    "secondary_all": {
+     "cells": 8,
+     "withheld_positive_px": 22641,
+     "pooled_dti": {
+      "control_noprior": 0.012333087205902104,
+      "transfer_ref": 0.0530678609196943,
+      "joint_priority": 0.03260864620597437,
+      "h69m_evidence_first": 0.026358406000970842
+     },
+     "candidate_minus_control": {
+      "mean": 0.013423159944129594,
+      "ci95": [
+       0.0029427982318702595,
+       0.024439612825709653
+      ]
+     },
+     "candidate_minus_transfer_ref": {
+      "mean": -0.026631764751298078,
+      "ci95": [
+       -0.03507966543623636,
+       -0.01704230743221611
+      ]
+     },
+     "transfer_ref_minus_control": {
+      "mean": 0.04005492469542767,
+      "ci95": [
+       0.028087381307359605,
+       0.05069874520763074
+      ]
+     }
+    }
+   },
+   "prompt_gate_passed": true,
+   "current_best_beaten": false,
+   "canary_ok": true,
+   "canary_worst_auc_top5": [
+    [
+     "propensity_joint_priority",
+     0.6943091245440334
+    ],
+    [
+     "grav_hg_s2",
+     0.6090929518822588
+    ],
+    [
+     "grav_hg_s1",
+     0.6079446046511628
+    ],
+    [
+     "grav_hg_s4",
+     0.605965037810818
+    ],
+    [
+     "mag_hg_s4",
+     0.6027516048312399
+    ]
+   ],
+   "surface_uniqueness": {
+    "worst_spearman": 0.3405784991541637,
+    "worst_spearman_submission": "GEMSDOE69:submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-nan.tif",
+    "compared": 942,
+    "stop_required": false
+   },
+   "verdict": "negative"
+  },
+  {
+   "id": "H69-N",
+   "preregistration": "registry/preregistration-2026-10-20-h69n-evidence-quota.json",
+   "evidence_class": "HOLDOUT-DTI",
+   "evaluator": "vendor/template66 gems57.holdout.build_holdout+score_cell (alpha=0.2 beta=0.8 R=300m triangular; seeds=[20,21] modes=[all,detached]; POOLED from summed TP/FP/FN)",
+   "candidate_arm": "h69n_evidence_quota",
+   "results": {
+    "primary_detached": {
+     "cells": 8,
+     "withheld_positive_px": 22619,
+     "pooled_dti": {
+      "control_noprior": 0.01391860753853958,
+      "transfer_ref": 0.04873178632919641,
+      "h69n_evidence_quota": 0.030439547705971272
+     },
+     "candidate_minus_control": {
+      "mean": 0.016567551913077253,
+      "ci95": [
+       0.010780861561801443,
+       0.0221743919669932
+      ]
+     },
+     "candidate_minus_transfer_ref": {
+      "mean": -0.017731694166136108,
+      "ci95": [
+       -0.026387950054118876,
+       -0.008500346072118633
+      ]
+     },
+     "transfer_ref_minus_control": {
+      "mean": 0.034299246079213364,
+      "ci95": [
+       0.02274725676878829,
+       0.04620310014611892
+      ]
+     }
+    },
+    "secondary_all": {
+     "cells": 8,
+     "withheld_positive_px": 22641,
+     "pooled_dti": {
+      "control_noprior": 0.012333087205902104,
+      "transfer_ref": 0.0530678609196943,
+      "h69n_evidence_quota": 0.030160990062774486
+     },
+     "candidate_minus_control": {
+      "mean": 0.017872882852543005,
+      "ci95": [
+       0.013755960657163715,
+       0.021795504608957322
+      ]
+     },
+     "candidate_minus_transfer_ref": {
+      "mean": -0.02218204184288467,
+      "ci95": [
+       -0.03165435322148516,
+       -0.010605277334610868
+      ]
+     },
+     "transfer_ref_minus_control": {
+      "mean": 0.04005492469542767,
+      "ci95": [
+       0.028087381307359605,
+       0.05069874520763074
+      ]
+     }
+    }
+   },
+   "prompt_gate_passed": true,
+   "current_best_beaten": false,
+   "canary_ok": true,
+   "canary_worst_auc_top5": [
+    [
+     "propensity_h69n_evidence_quota",
+     0.646131243459526
+    ],
+    [
+     "grav_hg_s2",
+     0.6090576723250448
+    ],
+    [
+     "grav_hg_s1",
+     0.6077853354107251
+    ],
+    [
+     "grav_hg_s4",
+     0.605800805054174
+    ],
+    [
+     "mag_hg_s4",
+     0.6011732995744244
+    ]
+   ],
+   "surface_uniqueness": null,
+   "verdict": "negative"
+  }
+ ],
+ "note": "Numbers copied from the gate receipts. HOLDOUT-DTI on catalogue hide-and-recover cells is NOT comparable to live leaderboard values (different truth: withheld mapped segments vs expert-labelled new faults)."
+}

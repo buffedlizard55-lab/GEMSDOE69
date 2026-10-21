@@ -1,0 +1,44 @@
+{
+ "evidence_class": "REGISTRY-MEASUREMENT",
+ "phase": "surface",
+ "candidate": {
+  "kind": "pre-placement surface",
+  "decoded_sha256": "2a1db78b67fd51de54d50abb224aabc73ff10cb58958b1205451f65b8354bc59",
+  "frozen_utc": "20261020T215445Z"
+ },
+ "corpus": {
+  "index": "registry/registry_index_69_v2.json",
+  "registry_rasters": 942,
+  "own_repo_rasters_added": 0,
+  "compared": 942,
+  "errors": [],
+  "complete_accessible_scan": true
+ },
+ "my_dots": 286773,
+ "worst_spearman": 0.3405784991541637,
+ "worst_spearman_submission": "GEMSDOE69:submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-nan.tif",
+ "literal_worst_overlap": 1.0,
+ "literal_worst_overlap_submission": "17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif",
+ "literal_overlap_firings": 90,
+ "like_for_like": {
+  "dot_field_rasters": 877,
+  "continuous_surface_rasters": 65,
+  "worst_forward_overlap_dot_fields": 0.9961746747427408,
+  "worst_forward_overlap_dot_field_submission": "13GEMSDOE:docs/downloads/13gems_20261001_r13-lattice-s5_v2_nan-outside.tif",
+  "worst_reverse_overlap": 0.9310558845586904,
+  "worst_reverse_overlap_submission": "GEMSDOE69:submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-nan.tif",
+  "worst_jaccard": 0.1223647318087605,
+  "worst_jaccard_submission": "GEMSDOE69:submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-nan.tif",
+  "forward_overlap_firings": 30,
+  "duplicate": true,
+  "note": "Inherited thresholds, applied to dot fields only; rank correlation still applies to every raster including the continuous surfaces."
+ },
+ "rank_matched_topk_firings": 0,
+ "rank_matched_topk_worst": null,
+ "rho_firings": 0,
+ "identical": 0,
+ "dense_binary_no_rank": 0,
+ "stop_required": false,
+ "seconds": 583.9,
+ "policy": "rho<=0.90 vs every raster; identity none; dots phase: forward 3px overlap<=0.70 vs every dot field (template like-for-like) and vs rank-matched top-K of every non-binary continuous surface; literal all-positive-pixel reading reported (non-discriminating: a whole-footprint surface overlaps any dot set, template saturation_certificate)."
+}

@@ -1,606 +1,572 @@
 {
-  "evidence_class": "HOLDOUT-GEOMETRY",
-  "links_found": 349,
-  "relay_admissible": 69,
-  "n_hardlinked_found": 349,
-  "n_tested": 69,
-  "mean_recovery_within_300m": 1.0,
+  "n_hardlinked_found": 781,
+  "n_tested": 80,
+  "n_disconnected_tested": 80,
+  "n_still_connected_after_mask": 131,
+  "mean_recovery_within_300m": 0.9944,
   "median_recovery_within_300m": 1.0,
-  "mean_kernel_recall": 0.9650890051301148,
-  "mean_null_recall_300m": 0.9523593472168944,
-  "frac_links_recall_ge_0p7": 1.0,
-  "frac_links_beating_null_p95": 0.0,
-  "rows": [
+  "frac_ramps_above_70pct": 1.0,
+  "n_ramps_above_70pct": 80,
+  "ramps": [
     {
-      "link_poly": 0,
-      "link_record": 4,
-      "link_len_km": 0.826,
-      "A_record": 7,
-      "B_record": 7,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 30.85,
+      "linking_px": 97,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 156
     },
     {
-      "link_poly": 7,
-      "link_record": 4,
-      "link_len_km": 0.256,
-      "A_record": 4,
-      "B_record": 4,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 21.92,
+      "linking_px": 84,
+      "within_3px": 0.9881,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 143
     },
     {
-      "link_poly": 12,
-      "link_record": 5,
-      "link_len_km": 1.084,
-      "A_record": 7,
-      "B_record": 7,
-      "relay_admissible": false,
-      "reject_reason": "rejected_dip"
+      "w_px": 4.2,
+      "linking_px": 24,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 67
     },
     {
-      "link_poly": 19,
-      "link_record": 7,
-      "link_len_km": 1.78,
-      "A_record": 4,
-      "B_record": 5,
-      "relay_admissible": false,
-      "reject_reason": "rejected_dip"
+      "w_px": 3.71,
+      "linking_px": 13,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 138
     },
     {
-      "link_poly": 20,
-      "link_record": 7,
-      "link_len_km": 1.056,
-      "A_record": 5,
-      "B_record": 5,
-      "relay_admissible": false,
-      "reject_reason": "rejected_dip"
+      "w_px": 10.5,
+      "linking_px": 47,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 387
     },
     {
-      "link_poly": 88,
-      "link_record": 24,
-      "link_len_km": 2.67,
-      "A_record": 24,
-      "B_record": 24,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 6.85,
+      "linking_px": 19,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 261
     },
     {
-      "link_poly": 99,
-      "link_record": 28,
-      "link_len_km": 1.776,
-      "A_record": 1307,
-      "B_record": 29,
-      "relay_admissible": false,
-      "reject_reason": "rejected_strike"
+      "w_px": 2.98,
+      "linking_px": 17,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 386
     },
     {
-      "link_poly": 142,
-      "link_record": 31,
-      "link_len_km": 0.805,
-      "A_record": 31,
-      "B_record": 31,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 2.53,
+      "linking_px": 35,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 291
     },
     {
-      "link_poly": 184,
-      "link_record": 40,
-      "link_len_km": 0.702,
-      "A_record": 40,
-      "B_record": 43,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 3.47,
+      "linking_px": 15,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 458
     },
     {
-      "link_poly": 185,
-      "link_record": 40,
-      "link_len_km": 2.358,
-      "A_record": 40,
-      "B_record": 40,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 14.15,
+      "linking_px": 40,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 458
     },
     {
-      "link_poly": 208,
-      "link_record": 43,
-      "link_len_km": 2.163,
-      "A_record": 43,
-      "B_record": 36,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 4.16,
+      "linking_px": 24,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 456
     },
     {
-      "link_poly": 246,
-      "link_record": 59,
-      "link_len_km": 0.374,
-      "A_record": 59,
-      "B_record": 59,
-      "relay_admissible": false,
-      "reject_reason": "rejected_dip"
+      "w_px": 24.01,
+      "linking_px": 64,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 459
     },
     {
-      "link_poly": 247,
-      "link_record": 59,
-      "link_len_km": 0.728,
-      "A_record": 59,
-      "B_record": 59,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 18.97,
+      "linking_px": 27,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 455
     },
     {
-      "link_poly": 248,
-      "link_record": 59,
-      "link_len_km": 1.168,
-      "A_record": 59,
-      "B_record": 59,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 16.68,
+      "linking_px": 51,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 461
     },
     {
-      "link_poly": 451,
-      "link_record": 76,
-      "link_len_km": 0.29,
-      "A_record": 76,
-      "B_record": 76,
-      "relay_admissible": true,
-      "reject_reason": null,
-      "n_traces": 15,
-      "recall_300m": 1.0,
-      "kernel_recall": 1.0,
-      "null_recall_300m_mean": 1.0,
-      "null_recall_300m_p95": 1.0
+      "w_px": 16.87,
+      "linking_px": 50,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 459
     },
     {
-      "link_poly": 494,
-      "link_record": 77,
-      "link_len_km": 1.291,
-      "A_record": 77,
-      "B_record": 77,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 24.04,
+      "linking_px": 109,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 469
     },
     {
-      "link_poly": 719,
-      "link_record": 104,
-      "link_len_km": 1.532,
-      "A_record": 104,
-      "B_record": 104,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 1.59,
+      "linking_px": 22,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 454
     },
     {
-      "link_poly": 721,
-      "link_record": 104,
-      "link_len_km": 1.827,
-      "A_record": 104,
-      "B_record": 107,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 12.55,
+      "linking_px": 32,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 108
     },
     {
-      "link_poly": 723,
-      "link_record": 104,
-      "link_len_km": 0.704,
-      "A_record": 104,
-      "B_record": 104,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 6.2,
+      "linking_px": 34,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 471
     },
     {
-      "link_poly": 725,
-      "link_record": 104,
-      "link_len_km": 1.087,
-      "A_record": 104,
-      "B_record": 104,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 2.78,
+      "linking_px": 22,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 89
     },
     {
-      "link_poly": 875,
-      "link_record": 108,
-      "link_len_km": 1.396,
-      "A_record": 106,
-      "B_record": 106,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 3.7,
+      "linking_px": 30,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 100
     },
     {
-      "link_poly": 1027,
-      "link_record": 151,
-      "link_len_km": 0.477,
-      "A_record": 151,
-      "B_record": 152,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 16.09,
+      "linking_px": 35,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 454
     },
     {
-      "link_poly": 1029,
-      "link_record": 151,
-      "link_len_km": 4.166,
-      "A_record": 152,
-      "B_record": 151,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 3.65,
+      "linking_px": 29,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 101
     },
     {
-      "link_poly": 1032,
-      "link_record": 151,
-      "link_len_km": 0.305,
-      "A_record": 151,
-      "B_record": 152,
-      "relay_admissible": true,
-      "reject_reason": null,
-      "n_traces": 17,
-      "recall_300m": 1.0,
-      "kernel_recall": 1.0,
-      "null_recall_300m_mean": 1.0,
-      "null_recall_300m_p95": 1.0
+      "w_px": 2.24,
+      "linking_px": 26,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 106
     },
     {
-      "link_poly": 1037,
-      "link_record": 152,
-      "link_len_km": 1.063,
-      "A_record": 151,
-      "B_record": 152,
-      "relay_admissible": false,
-      "reject_reason": "rejected_strike"
+      "w_px": 25.08,
+      "linking_px": 72,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 376
     },
     {
-      "link_poly": 1040,
-      "link_record": 152,
-      "link_len_km": 0.468,
-      "A_record": 151,
-      "B_record": 151,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 3.62,
+      "linking_px": 26,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 452
     },
     {
-      "link_poly": 1049,
-      "link_record": 166,
-      "link_len_km": 2.64,
-      "A_record": 167,
-      "B_record": 167,
-      "relay_admissible": true,
-      "reject_reason": null,
-      "n_traces": 17,
-      "recall_300m": 1.0,
-      "kernel_recall": 1.0,
-      "null_recall_300m_mean": 0.8475675675675676,
-      "null_recall_300m_p95": 1.0
+      "w_px": 3.62,
+      "linking_px": 26,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 452
     },
     {
-      "link_poly": 1051,
-      "link_record": 167,
-      "link_len_km": 4.247,
-      "A_record": 166,
-      "B_record": 166,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 37.7,
+      "linking_px": 171,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 464
     },
     {
-      "link_poly": 1254,
-      "link_record": 189,
-      "link_len_km": 1.218,
-      "A_record": 189,
-      "B_record": 189,
-      "relay_admissible": true,
-      "reject_reason": null,
-      "n_traces": 16,
-      "recall_300m": 1.0,
-      "kernel_recall": 0.9607843137254903,
-      "null_recall_300m_mean": 0.9752941176470589,
-      "null_recall_300m_p95": 1.0
+      "w_px": 42.69,
+      "linking_px": 193,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 371
     },
     {
-      "link_poly": 1394,
-      "link_record": 190,
-      "link_len_km": 0.679,
-      "A_record": 190,
-      "B_record": 190,
-      "relay_admissible": true,
-      "reject_reason": null,
-      "n_traces": 17,
-      "recall_300m": 1.0,
-      "kernel_recall": 1.0,
-      "null_recall_300m_mean": 1.0,
-      "null_recall_300m_p95": 1.0
+      "w_px": 59.49,
+      "linking_px": 542,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 434
     },
     {
-      "link_poly": 1429,
-      "link_record": 190,
-      "link_len_km": 0.91,
-      "A_record": 190,
-      "B_record": 190,
-      "relay_admissible": true,
-      "reject_reason": null,
-      "n_traces": 19,
-      "recall_300m": 1.0,
-      "kernel_recall": 1.0,
-      "null_recall_300m_mean": 0.990909090909091,
-      "null_recall_300m_p95": 1.0
+      "w_px": 38.17,
+      "linking_px": 311,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 464
     },
     {
-      "link_poly": 1430,
-      "link_record": 190,
-      "link_len_km": 0.315,
-      "A_record": 190,
-      "B_record": 190,
-      "relay_admissible": false,
-      "reject_reason": "rejected_strike"
+      "w_px": 52.1,
+      "linking_px": 505,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 467
     },
     {
-      "link_poly": 1438,
-      "link_record": 191,
-      "link_len_km": 0.44,
-      "A_record": 189,
-      "B_record": 191,
-      "relay_admissible": true,
-      "reject_reason": null,
-      "n_traces": 18,
-      "recall_300m": 1.0,
-      "kernel_recall": 1.0,
-      "null_recall_300m_mean": 1.0,
-      "null_recall_300m_p95": 1.0
+      "w_px": 46.25,
+      "linking_px": 369,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 466
     },
     {
-      "link_poly": 1478,
-      "link_record": 191,
-      "link_len_km": 0.416,
-      "A_record": 189,
-      "B_record": 189,
-      "relay_admissible": true,
-      "reject_reason": null,
-      "n_traces": 15,
-      "recall_300m": 1.0,
-      "kernel_recall": 1.0,
-      "null_recall_300m_mean": 1.0,
-      "null_recall_300m_p95": 1.0
+      "w_px": 48.18,
+      "linking_px": 379,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 466
     },
     {
-      "link_poly": 1479,
-      "link_record": 191,
-      "link_len_km": 0.928,
-      "A_record": 191,
-      "B_record": 191,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 41.43,
+      "linking_px": 349,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 464
     },
     {
-      "link_poly": 1555,
-      "link_record": 205,
-      "link_len_km": 0.571,
-      "A_record": 205,
-      "B_record": 205,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 7.27,
+      "linking_px": 11,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 84
     },
     {
-      "link_poly": 1556,
-      "link_record": 205,
-      "link_len_km": 0.329,
-      "A_record": 205,
-      "B_record": 205,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 35.95,
+      "linking_px": 317,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 468
     },
     {
-      "link_poly": 1557,
-      "link_record": 205,
-      "link_len_km": 0.657,
-      "A_record": 205,
-      "B_record": 205,
-      "relay_admissible": false,
-      "reject_reason": "rejected_strike"
+      "w_px": 21.72,
+      "linking_px": 159,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 474
     },
     {
-      "link_poly": 1562,
-      "link_record": 205,
-      "link_len_km": 0.519,
-      "A_record": 205,
-      "B_record": 205,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 25.01,
+      "linking_px": 199,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 474
     },
     {
-      "link_poly": 1564,
-      "link_record": 205,
-      "link_len_km": 0.628,
-      "A_record": 205,
-      "B_record": 205,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 24.42,
+      "linking_px": 165,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 466
     },
     {
-      "link_poly": 1565,
-      "link_record": 205,
-      "link_len_km": 0.537,
-      "A_record": 205,
-      "B_record": 205,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 25.34,
+      "linking_px": 39,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 459
     },
     {
-      "link_poly": 1566,
-      "link_record": 205,
-      "link_len_km": 1.083,
-      "A_record": 205,
-      "B_record": 205,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 16.45,
+      "linking_px": 127,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 473
     },
     {
-      "link_poly": 1567,
-      "link_record": 205,
-      "link_len_km": 0.881,
-      "A_record": 205,
-      "B_record": 205,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 31.98,
+      "linking_px": 198,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 471
     },
     {
-      "link_poly": 1568,
-      "link_record": 205,
-      "link_len_km": 2.225,
-      "A_record": 205,
-      "B_record": 205,
-      "relay_admissible": false,
-      "reject_reason": "rejected_strike"
+      "w_px": 11.13,
+      "linking_px": 71,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 461
     },
     {
-      "link_poly": 1569,
-      "link_record": 205,
-      "link_len_km": 0.609,
-      "A_record": 205,
-      "B_record": 205,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 10.59,
+      "linking_px": 87,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 462
     },
     {
-      "link_poly": 2324,
-      "link_record": 265,
-      "link_len_km": 1.806,
-      "A_record": 266,
-      "B_record": 266,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 6.54,
+      "linking_px": 25,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 455
     },
     {
-      "link_poly": 2325,
-      "link_record": 265,
-      "link_len_km": 1.583,
-      "A_record": 266,
-      "B_record": 266,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 4.55,
+      "linking_px": 22,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 455
     },
     {
-      "link_poly": 2415,
-      "link_record": 282,
-      "link_len_km": 2.474,
-      "A_record": 282,
-      "B_record": 282,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 5.95,
+      "linking_px": 64,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 462
     },
     {
-      "link_poly": 2417,
-      "link_record": 282,
-      "link_len_km": 1.968,
-      "A_record": 282,
-      "B_record": 282,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 1.94,
+      "linking_px": 40,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 461
     },
     {
-      "link_poly": 2424,
-      "link_record": 282,
-      "link_len_km": 0.391,
-      "A_record": 282,
-      "B_record": 282,
-      "relay_admissible": true,
-      "reject_reason": null,
-      "n_traces": 18,
-      "recall_300m": 1.0,
-      "kernel_recall": 1.0,
-      "null_recall_300m_mean": 1.0,
-      "null_recall_300m_p95": 1.0
+      "w_px": 9.68,
+      "linking_px": 47,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 459
     },
     {
-      "link_poly": 2544,
-      "link_record": 321,
-      "link_len_km": 1.82,
-      "A_record": 321,
-      "B_record": 321,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 8.83,
+      "linking_px": 63,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 460
     },
     {
-      "link_poly": 2545,
-      "link_record": 321,
-      "link_len_km": 0.381,
-      "A_record": 321,
-      "B_record": 321,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 3.06,
+      "linking_px": 45,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 196
     },
     {
-      "link_poly": 2547,
-      "link_record": 321,
-      "link_len_km": 0.25,
-      "A_record": 321,
-      "B_record": 321,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 9.11,
+      "linking_px": 42,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 290
     },
     {
-      "link_poly": 2549,
-      "link_record": 321,
-      "link_len_km": 0.598,
-      "A_record": 321,
-      "B_record": 321,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 9.04,
+      "linking_px": 52,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 268
     },
     {
-      "link_poly": 2555,
-      "link_record": 323,
-      "link_len_km": 3.402,
-      "A_record": 323,
-      "B_record": 323,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 6.76,
+      "linking_px": 61,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 492
     },
     {
-      "link_poly": 2598,
-      "link_record": 342,
-      "link_len_km": 3.562,
-      "A_record": 342,
-      "B_record": 342,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 6.42,
+      "linking_px": 63,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 492
     },
     {
-      "link_poly": 2599,
-      "link_record": 342,
-      "link_len_km": 0.463,
-      "A_record": 342,
-      "B_record": 342,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 4.72,
+      "linking_px": 71,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 488
     },
     {
-      "link_poly": 2600,
-      "link_record": 342,
-      "link_len_km": 0.922,
-      "A_record": 342,
-      "B_record": 342,
-      "relay_admissible": true,
-      "reject_reason": null,
-      "n_traces": 17,
-      "recall_300m": 1.0,
-      "kernel_recall": 0.9444444444444445,
-      "null_recall_300m_mean": 0.9633333333333333,
-      "null_recall_300m_p95": 1.0
+      "w_px": 5.42,
+      "linking_px": 58,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 485
     },
     {
-      "link_poly": 2661,
-      "link_record": 349,
-      "link_len_km": 4.234,
-      "A_record": 347,
-      "B_record": 347,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 9.43,
+      "linking_px": 61,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 493
     },
     {
-      "link_poly": 2675,
-      "link_record": 366,
-      "link_len_km": 0.439,
-      "A_record": 366,
-      "B_record": 366,
-      "relay_admissible": false,
-      "reject_reason": "rejected_geometry"
+      "w_px": 8.73,
+      "linking_px": 67,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 488
+    },
+    {
+      "w_px": 2.94,
+      "linking_px": 62,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 492
+    },
+    {
+      "w_px": 2.2,
+      "linking_px": 36,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 321
+    },
+    {
+      "w_px": 1.58,
+      "linking_px": 20,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 460
+    },
+    {
+      "w_px": 2.94,
+      "linking_px": 30,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 295
+    },
+    {
+      "w_px": 6.08,
+      "linking_px": 28,
+      "within_3px": 1.0,
+      "subtype": "transfer-overlap",
+      "rebuilt_corridors": 96
+    },
+    {
+      "w_px": 3.43,
+      "linking_px": 22,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 390
+    },
+    {
+      "w_px": 3.62,
+      "linking_px": 32,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 428
+    },
+    {
+      "w_px": 9.3,
+      "linking_px": 80,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 480
+    },
+    {
+      "w_px": 4.39,
+      "linking_px": 45,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 470
+    },
+    {
+      "w_px": 5.26,
+      "linking_px": 66,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 478
+    },
+    {
+      "w_px": 5.48,
+      "linking_px": 55,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 480
+    },
+    {
+      "w_px": 13.41,
+      "linking_px": 111,
+      "within_3px": 0.7568,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 466
+    },
+    {
+      "w_px": 23.93,
+      "linking_px": 159,
+      "within_3px": 0.805,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 468
+    },
+    {
+      "w_px": 6.5,
+      "linking_px": 87,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 461
+    },
+    {
+      "w_px": 1.7,
+      "linking_px": 27,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 199
+    },
+    {
+      "w_px": 1.32,
+      "linking_px": 38,
+      "within_3px": 1.0,
+      "subtype": "pull-apart",
+      "rebuilt_corridors": 537
+    },
+    {
+      "w_px": 4.07,
+      "linking_px": 58,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 456
+    },
+    {
+      "w_px": 1.88,
+      "linking_px": 69,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 452
+    },
+    {
+      "w_px": 2.97,
+      "linking_px": 69,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 454
+    },
+    {
+      "w_px": 3.27,
+      "linking_px": 28,
+      "within_3px": 1.0,
+      "subtype": "relay-ramp",
+      "rebuilt_corridors": 467
     }
-  ],
-  "generated_utc": "20261020T223832Z"
+  ]
 }

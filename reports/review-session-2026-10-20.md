@@ -1,5 +1,11 @@
 # Repository review — 2026-10-20
 
+> **Historical-state note:** this session predates a later H69-J local-evidence
+> rebinding. That rebinding does not affect its literal 1.0 overlap failure;
+> for the reconciled current state, read
+> [`final-audit-2026-10-20.md`](final-audit-2026-10-20.md). No TIFF is currently
+> publishable.
+
 ## Decision
 
 **NEGATIVE — NOT OK TO DOWNLOAD OR SUBMIT.** No new TIFF, experiment, or competition upload was created. This is deliberate: the recorded literal registry overlap check fails, and the lane protocol requires duplicate-and-stop. Format validation of an archived file does not override the uniqueness or scientific-release gates.

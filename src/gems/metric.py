@@ -123,3 +123,20 @@ def dot_is_worth_adding(T: float, D: float, d_tp: float, m: float,
     Verified against full recomputation in tests/test_metric.py.
     """
     return d_tp * (D - (1.0 - beta) * T) > alpha * T * (1.0 - m)
+
+
+def tversky_terms(pred, gt, pixel_m: float = 100.0, range_m: float = R_METRES):
+    """Return (TP_w, FP_w, FN_w) matching vendor/template66/gems/metric.py."""
+    tp, fp, fn, _ = components(pred, gt, cell_m=pixel_m, radius=range_m)
+    return tp, fp, fn
+
+
+def dti_from_terms(tp: float, fp: float, fn: float, alpha: float = ALPHA,
+                   beta: float = BETA, eps: float = EPS) -> float:
+    return dti_from_components(tp, fp, fn, alpha=alpha, beta=beta, eps=eps)
+
+
+def marginal_credit_bar(dti_value: float, alpha: float = ALPHA) -> float:
+    """Break-even kernel credit for one isolated dot on uncovered truth: k > alpha * DTI."""
+    return alpha * dti_value
+

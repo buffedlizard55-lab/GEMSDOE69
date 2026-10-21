@@ -7,6 +7,10 @@ Emission (--emit) writes the TIF from the precheck-frozen full-catalogue
 surface/dots in /tmp/gems69_relayfix (surface_transfer.npy/dots_transfer.npy).
 """
 from __future__ import annotations
+
+if __name__ == "__main__":
+    from lane_preflight import require_open_lane
+    require_open_lane()
 import datetime as dt, hashlib, json, sys, time
 from pathlib import Path
 import numpy as np
@@ -45,6 +49,12 @@ def _auc(pos, neg):
     return float((r[:a.size].sum() - a.size*(a.size+1)/2) / (a.size*b.size))
 
 def cmd_gate() -> int:
+    raise SystemExit(
+        "BLOCKED: this archived runner uses legacy chunked, unbuffered build_holdout(). "
+        "Do not rerun it as a validation experiment. A future authorized run must use the shared "
+        "buffered_component_draw()/evaluate_holdout toolchain and must obey the literal registry stop."
+    )
+    # Historical implementation retained below for audit; intentionally unreachable.
     from scipy import ndimage as ndi
     from gems57 import holdout as thold
     from gems57.emit import greedy_allocate
@@ -109,6 +119,11 @@ def cmd_gate() -> int:
     return 0
 
 def cmd_emit() -> int:
+    raise SystemExit(
+        "BLOCKED: this archived emitter has no protocol-qualified, artifact-bound holdout or literal "
+        "uniqueness clearance. Do not write another TIFF or spend a submission slot."
+    )
+    # Historical implementation retained below for audit; intentionally unreachable.
     import pickle, csv as _csv
     from gems57 import grid as tgrid
     from gems69.holdout69 import load_template_grid

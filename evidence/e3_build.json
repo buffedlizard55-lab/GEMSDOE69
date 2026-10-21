@@ -1,27 +1,83 @@
 {
-  "generated_utc": "20261020T201504Z",
-  "submission": {
-    "zeros_tif": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
-    "zeros_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
-    "nan_tif": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-nan.tif",
-    "nan_sha256": "9d4774ff6158ea92edd67bb173426f8d6531babe5d3153c1fe1dab4cded480b6"
+ "generated_utc": "20261020T214510Z",
+ "submission": {
+  "zeros_tif": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-zeros.tif",
+  "zeros_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+  "nan_tif": "submissions/h69-joint-relayramp-pullapart-39958-20261020T214510Z-74c22ad2-nan.tif",
+  "nan_sha256": "e59602fa48fe15db6ab3627922810258bcbfe3ae776b82af7fe93a3c75b93bbd"
+ },
+ "n_dots": 39958,
+ "scoring_mode": "joint",
+ "propensity_sha256": "74c22ad2",
+ "corridors": 1200,
+ "pairs": 1200,
+ "strands": 3887,
+ "uniqueness": {
+  "surface": {
+   "summary": {
+    "my_file": null,
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "my_dots": 2257731,
+    "candidate_decoded_sha256": "96262ea9584bafedb8a9a22c470a87f93d30252f446f2a4ebcf1119ebcd3ebd4",
+    "candidate_file_sha256": null,
+    "rho_limit": 0.9,
+    "overlap_limit": 0.7,
+    "jaccard_limit": 0.5,
+    "registry_rasters_expected": 862,
+    "registry_rasters_checked": 0,
+    "complete_accessible_scan": false,
+    "missing_or_invalid": 862,
+    "source_errors": [],
+    "worst_spearman_full_footprint": null,
+    "worst_rho_submission": null,
+    "worst_dot_overlap": null,
+    "worst_overlap_submission": null,
+    "worst_jaccard_dot_sets": null,
+    "worst_jaccard_submission": null,
+    "byte_unique_among_checked": false,
+    "pixel_unique_among_checked": false,
+    "duplicate_count": 0,
+    "unique": false,
+    "jaccard_diagnostic_only": true,
+    "verdict": "negative",
+    "stop_required": true,
+    "candidate_rank_variation": true,
+    "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+   },
+   "two_phase": null
   },
-  "n_dots": 38669,
-  "scoring_mode": "joint",
-  "propensity_sha256": "f29b6df5",
-  "corridors": 1200,
-  "pairs": 1200,
-  "strands": 3887,
-  "uniqueness": {
-    "dots": {
-      "summary": {
-        "candidate_file_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6"
-      }
-    },
-    "surface": {
-      "summary": {
-        "candidate_file_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6"
-      }
-    }
+  "dots": {
+   "summary": {
+    "my_file": null,
+    "evidence_class": "REGISTRY-MEASUREMENT",
+    "my_dots": 39958,
+    "candidate_decoded_sha256": "930e8ac10de3c90874d5e7a9af47da275e9edde8fe69f10ef152ac06de8f6d5c",
+    "candidate_file_sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+    "rho_limit": 0.9,
+    "overlap_limit": 0.7,
+    "jaccard_limit": 0.5,
+    "registry_rasters_expected": 862,
+    "registry_rasters_checked": 0,
+    "complete_accessible_scan": false,
+    "missing_or_invalid": 862,
+    "source_errors": [],
+    "worst_spearman_full_footprint": null,
+    "worst_rho_submission": null,
+    "worst_dot_overlap": null,
+    "worst_overlap_submission": null,
+    "worst_jaccard_dot_sets": null,
+    "worst_jaccard_submission": null,
+    "byte_unique_among_checked": false,
+    "pixel_unique_among_checked": false,
+    "duplicate_count": 0,
+    "unique": false,
+    "jaccard_diagnostic_only": true,
+    "verdict": "negative",
+    "stop_required": true,
+    "candidate_rank_variation": true,
+    "scope": "All hash-verified accessible entries in the indexed public owner-repository inventory; not a complete organizer registry. External/private/unlinked/inaccessible files may be absent. Reverse overlap is diagnostic only."
+   },
+   "two_phase": null
   }
+ }
 }

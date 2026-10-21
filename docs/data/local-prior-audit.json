@@ -1,0 +1,123 @@
+{
+  "evidence_class": "REGISTRY-MEASUREMENT",
+  "candidate_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+  "scope": "All other local archived TIFFs, excluding this emission and its NaN twin. No other file was generated.",
+  "n_files_compared": 14,
+  "max_dot_overlap_3px": 0.8023481341643177,
+  "literal_overlap_failure": true,
+  "conclusion": "Independent sparse local-prior failures also block the archived candidate; excluding the universal-support prior would not clear it.",
+  "rows": [
+    {
+      "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T215915Z-74c22ad2-nan.tif",
+      "sha256": "e59602fa48fe15db6ab3627922810258bcbfe3ae776b82af7fe93a3c75b93bbd",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9947584585049308,
+      "dots_within_3px": 0.718766970958649
+    },
+    {
+      "path": "submissions/h69-joint-relayramp-pullapart-39958-20261020T215915Z-74c22ad2-zeros.tif",
+      "sha256": "287372cb3fc6d7b8bcdb6bffbf5632d92a8d1d2e0dee6c2fb884d74d10d923f4",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9947584585049308,
+      "dots_within_3px": 0.718766970958649
+    },
+    {
+      "path": "submissions/h69-relayfix-v1-35235-20261020T202813Z-a2917d46-nan.tif",
+      "sha256": "8bbf3fea17a370b85de1f9a737e4f6d48d4da184d779f2ca1610d2bb49008837",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9960641509718768,
+      "dots_within_3px": 0.7682898445783444
+    },
+    {
+      "path": "submissions/h69-relayfix-v1-35235-20261020T202813Z-a2917d46-zeros.tif",
+      "sha256": "13b3fe7bdda7690bd1b4306a6a068748b4ec78e44378aa3903a899956d94a9ce",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9960641509718768,
+      "dots_within_3px": 0.7682898445783444
+    },
+    {
+      "path": "submissions/h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-nan.tif",
+      "sha256": "9c0bc4a5d095b00ba3485dab22f67dfb255065f4c6e93a70cc02dc1744ab0f23",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9968208217212111,
+      "dots_within_3px": 0.8023481341643177
+    },
+    {
+      "path": "submissions/h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-zeros.tif",
+      "sha256": "55f6215c72990ec6a4184985d401c8adffa57673d678ebbc052045ceede3cce6",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9968208217212111,
+      "dots_within_3px": 0.8023481341643177
+    },
+    {
+      "path": "submissions/h69-relayramp-pullapart-35787-20261020T201246Z-0e22fe3c-nan.tif",
+      "sha256": "9c0bc4a5d095b00ba3485dab22f67dfb255065f4c6e93a70cc02dc1744ab0f23",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9968208217212111,
+      "dots_within_3px": 0.8023481341643177
+    },
+    {
+      "path": "submissions/h69-relayramp-pullapart-35787-20261020T201246Z-0e22fe3c-zeros.tif",
+      "sha256": "55f6215c72990ec6a4184985d401c8adffa57673d678ebbc052045ceede3cce6",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9968208217212111,
+      "dots_within_3px": 0.8023481341643177
+    },
+    {
+      "path": "submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-nan.tif",
+      "sha256": "9b15eef3bb3eb844527f784e201b900578fe4575fddf7c163512ee499d93b967",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9884881544258562,
+      "dots_within_3px": 0.3069125139000233
+    },
+    {
+      "path": "submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif",
+      "sha256": "b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9884881544258562,
+      "dots_within_3px": 0.3069125139000233
+    },
+    {
+      "path": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-nan.tif",
+      "sha256": "6ceceb6bd47817a3241d56a4f2d9730ca9010fc70b37a5cf146d01272cad3ec0",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9928263355480628,
+      "dots_within_3px": 0.8021671106053945
+    },
+    {
+      "path": "submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif",
+      "sha256": "be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9928263355480628,
+      "dots_within_3px": 0.8021671106053945
+    },
+    {
+      "path": "submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-nan.tif",
+      "sha256": "db7915f3304edaefe3b74f925bd4c0dca57d2b93d656f46a5de5df7b13d528ab",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9918426635739281,
+      "dots_within_3px": 0.46259277457394815
+    },
+    {
+      "path": "submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-zeros.tif",
+      "sha256": "ad03bd333dacc28ebaf474599f3fc7aabf65d181373a2afd52f5adf8fdc15045",
+      "exact_bytes_equal": false,
+      "exact_footprint_pixels_equal": false,
+      "footprint_pixel_agreement": 0.9918426635739281,
+      "dots_within_3px": 0.46259277457394815
+    }
+  ]
+}

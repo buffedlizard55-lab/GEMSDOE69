@@ -4,317 +4,82 @@
 <title>Run Card · GEMSDOE69</title>
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
-<header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved tip graph &amp; directional geophysics · parallel-run lane 69</div></div></header>
-<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="active">Run Card</a></div></nav>
+<header><div class="wrap"><h1>GEMSDOE69 · Two-Regime Geodesic Relay-Ramp &amp; Pull-Apart Corridor Lane</h1>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved geodesic fault corridor generator · H69_G5_TwoRegimeGeodesic</div></div></header>
+<nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="family-audit.html" class="">Family Audit</a><a href="why-h33-scored.html" class="">Why 0.2778 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="active">Run Card</a></div></nav>
 <main class="wrap">
-<div class="card"><h2>Run card (JSON)</h2><pre>{
-  &quot;generated_utc&quot;: &quot;2026-10-21T00:00:01.641147+00:00&quot;,
-  &quot;lane&quot;: &quot;GEMSDOE69 relay-ramp &amp; pull-apart corridor generator&quot;,
-  &quot;hypothesis&quot;: &quot;H69-K: Kinematics-resolved step-over, flank-relay &amp; tensile horsetail termination graph with cross-corridor directional potential-field gradient projection and empirical-Bayes posterior calibration&quot;,
-  &quot;mechanism&quot;: &quot;Builds a fault-tip graph from INGENIOUS Quaternary fault polylines joined to measured DIPDIRECT and slip sense (RL/LL/N) plus DEM hanging-wall polarity (90.27% validation agreement on 1,984 normal strands). Emits synthetic relay connectors, bounding rhomb sidewalls, cross-ramp breaches, en echelon strands, tip-to-flank overlapping synthetic relays, and tensile horsetail splays across W in [0.1, 15] km and |L| &lt;= 3.5W. Scores corridors via cross-axis gravity &amp; RTP directional gradients |grad F . n_c|, upward-continued tilt zero-crossings, 3 km RTP demagnetization lows, 1 m 3DEP scarp strength, and WNW dilation tendency; fits 3-level empirical-Bayes posterior rates out-of-fold and places 54,471 unit dots inside top corridors (score &gt;= p72) via shared template decimated greedy marginal-DTI allocation.&quot;,
-  &quot;non_fault_mimic&quot;: &quot;Sub-alluvial pluton margins, caldera ring contacts, and paleo-channel walls aligned with corridor azimuths produce cross-corridor gravity and RTP horizontal gradients without Quaternary slip; pluvial Lake Lahontan shorelines parallel to N-NE basin margins mimic low-relief lidar scarps inside step-overs.&quot;,
+<div class="card"><h2>Machine-Readable Run Card (<a href="run-card.json"><code>docs/run-card.json</code></a>)</h2><pre>{
+  &quot;generated_utc&quot;: &quot;2026-10-20T23:18:08.276732+00:00&quot;,
+  &quot;lane&quot;: &quot;GEMSDOE69 relay-ramp and pull-apart corridors&quot;,
+  &quot;hypothesis&quot;: &quot;H69_G5_TwoRegimeGeodesic&quot;,
+  &quot;mechanism&quot;: &quot;Archived H69-J uses min of independent corridor-mean gravity and magnetic evidence maxima, magnetic lows, scarp magnitude, orientation and geometry priors. It does not test paired transverse tilt-zero crossings.&quot;,
+  &quot;non_fault_mimic&quot;: &quot;Intrusive lithologic contacts and sedimentary basin margins can produce coincident gravity and magnetic edges; pluvial shorelines can mimic lidar scarps.&quot;,
   &quot;holdout&quot;: {
     &quot;evidence_class&quot;: &quot;HOLDOUT-DTI&quot;,
-    &quot;evaluator_version&quot;: &quot;vendor/template66 gems57-pooled-hide-v2 (alpha=0.2, beta=0.8, R=300m triangular kernel, buffered whole-component LOQO, paired spatial-block bootstrap CI)&quot;,
-    &quot;primary_untouched_draws&quot;: [
-      22,
-      23
-    ],
-    &quot;dti&quot;: 0.14390585788393095,
-    &quot;ci95&quot;: [
-      0.1322055682368836,
-      0.15550551512297994
-    ],
-    &quot;withheld_positive_pixels&quot;: 22796,
-    &quot;n_cells&quot;: 8,
-    &quot;comparator_dti&quot;: 0.14056048764638182,
-    &quot;paired_delta&quot;: 0.0033453702375491334,
-    &quot;untouched_paired_fold_test&quot;: {
-      &quot;wins&quot;: 7,
-      &quot;n_folds&quot;: 8,
-      &quot;delta_mean&quot;: 0.00417530416738018,
+    &quot;dti&quot;: null,
+    &quot;ci95&quot;: null,
+    &quot;evaluator_version&quot;: &quot;vendor/template66/gems57/evaluate_holdout.py (gems57-pooled-hide-v2)&quot;,
+    &quot;withheld_positive_pixel_evaluations&quot;: 22893,
+    &quot;unique_withheld_positive_pixels&quot;: null,
+    &quot;status&quot;: &quot;NOT CERTIFIED: archived measurements were not rerun; current-best and provenance claims are not sufficient&quot;,
+    &quot;archived_claim&quot;: {
+      &quot;mean_of_cells_dti&quot;: 0.081323,
       &quot;ci95&quot;: [
-        0.0007148157346695831,
-        0.007635792600090778
+        0.072192,
+        0.090454
       ],
-      &quot;note&quot;: &quot;Intra-draw 16-subblock bootstrap on [22,23] is [-0.00068, +0.00724] due to single fold seed23_SW (-0.0035); 7/8 untouched folds win.&quot;
-    },
-    &quot;benchmark_20_21_pooled&quot;: {
-      &quot;corridor_dti&quot;: 0.14918779825103218,
-      &quot;control_dti&quot;: 0.1420519652142162,
-      &quot;paired_delta&quot;: 0.007135833036815975,
-      &quot;paired_ci95&quot;: [
-        0.00304567108256662,
-        0.011222190025503538
-      ]
-    },
-    &quot;combined_4draw_summary&quot;: {
-      &quot;draws&quot;: [
-        22,
-        23,
-        20,
-        21
-      ],
-      &quot;n_folds&quot;: 16,
-      &quot;wins&quot;: 15,
-      &quot;withheld_positive_px_total&quot;: 45689,
-      &quot;corridor_pooled_dti&quot;: 0.14650141059277025,
-      &quot;control_pooled_dti&quot;: 0.14130572504419264,
-      &quot;paired_delta_pooled&quot;: 0.0051956855485776055,
-      &quot;fold_delta_mean&quot;: 0.005464280960156138,
-      &quot;fold_delta_ci95&quot;: [
-        0.0029573908078914706,
-        0.007971171112420804
-      ]
-    },
-    &quot;hardlink_300m_recovery&quot;: 1.0,
-    &quot;uncertainty_note&quot;: &quot;Pooled HOLDOUT-DTI via vendor/template66 gems57-pooled-hide-v2 on untouched whole-component draws [22, 23] (7/8 folds positive, paired fold CI [+0.0007, +0.0076]; intra-draw sub-block bootstrap [-0.0007, +0.0072]) and historical benchmark [20, 21] (8/8 folds positive, pooled 0.1492 vs 0.1421, paired spatial-block CI [+0.0030, +0.0112]); 15/16 total folds positive (sign-test p=0.00052). Holdout screen only, never a leaderboard projection.&quot;
+      &quot;control_mean_dti&quot;: 0.031868,
+      &quot;uncertainty&quot;: &quot;Normal approximation across repeated cells, not independent spatial-block uncertainty; not a pooled statistic&quot;
+    }
   },
   &quot;correlation_overlap_vs_registry&quot;: {
     &quot;evidence_class&quot;: &quot;REGISTRY-MEASUREMENT&quot;,
-    &quot;generated_utc&quot;: &quot;20261020T235226Z&quot;,
-    &quot;my_file&quot;: &quot;submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif&quot;,
-    &quot;my_dots&quot;: 54471,
-    &quot;my_sha256&quot;: &quot;04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b&quot;,
-    &quot;registry_scope&quot;: &quot;registry/registry_index_69.json (862 rasters) + live 2026-10-20 HEAD scan across GEMSDOE63..74 (62 new rasters) = 924 unique SHA-256 verified EPSG:32611 rasters&quot;,
-    &quot;rho_limit&quot;: 0.9,
-    &quot;overlap_limit&quot;: 0.7,
-    &quot;n_registry_blobs&quot;: 924,
-    &quot;n_compared&quot;: 924,
-    &quot;n_errors&quot;: 0,
-    &quot;worst_abs_spearman_surface&quot;: 0.30108488487865515,
-    &quot;worst_abs_spearman&quot;: 0.1148749150846659,
-    &quot;worst_rho_entry&quot;: {
-      &quot;submission&quot;: &quot;7GEMSDOE:downloads/gems7-halo15-gbt-v1-90fb7dc0fc1f.tif&quot;,
-      &quot;rho&quot;: 0.1148749150846659
-    },
-    &quot;worst_dot_overlap_all&quot;: {
-      &quot;submission&quot;: &quot;17GEMSDOE:docs/downloads/17GEMSDOE_E-proba-multiscale_20260930T044527Z.tif&quot;,
-      &quot;stratum&quot;: &quot;continuous_surface&quot;,
-      &quot;dot_overlap_3px&quot;: 1.0
-    },
-    &quot;worst_dot_overlap_dotlike&quot;: {
-      &quot;submission&quot;: &quot;GEMSDOE37:docs/downloads/gemsdoe37-h6-physics-dotted-80k-20261005T055000Z-0bef9211631c.tif&quot;,
-      &quot;stratum&quot;: &quot;dot_field_le_150k&quot;,
-      &quot;their_dots&quot;: 80000,
-      &quot;dot_overlap_3px&quot;: 0.686,
-      &quot;jaccard&quot;: 0.0187
-    },
-    &quot;worst_dot_overlap_comparable_80k&quot;: {
-      &quot;submission&quot;: &quot;GEMSDOE37:docs/downloads/gemsdoe37-h6-physics-dotted-80k-20261005T055000Z-0bef9211631c.tif&quot;,
-      &quot;stratum&quot;: &quot;dot_field_le_80k&quot;,
-      &quot;their_dots&quot;: 80000,
-      &quot;dot_overlap_3px&quot;: 0.686,
-      &quot;jaccard&quot;: 0.0187
-    },
-    &quot;vs_h33_champion&quot;: {
-      &quot;submission&quot;: &quot;GEMSDOE32:docs/downloads/gemsdoe32-h33-h33-2-b2-20261004T220000Z-e5eb6e7e-nan.tif&quot;,
-      &quot;their_dots&quot;: 37654,
-      &quot;dot_overlap_3px&quot;: 0.254,
-      &quot;spearman_rho&quot;: 0.00642,
-      &quot;jaccard&quot;: 0.00749
-    },
-    &quot;saturation_certificate&quot;: {
-      &quot;evidence_class&quot;: &quot;REGISTRY-MEASUREMENT&quot;,
-      &quot;witness_file&quot;: &quot;/tmp/gems_registry_cache/ab0a0a62eecf066a.tif&quot;,
-      &quot;witness_sha256&quot;: &quot;ab0a0a62eecf066a82713b09dd49f0f638a91fa3dd81f54cc34ae89afa3872be&quot;,
-      &quot;positive_pixels&quot;: 5167373,
-      &quot;allowed_pixels&quot;: 5106385,
-      &quot;uncovered_allowed_pixels&quot;: 0,
-      &quot;covered_allowed_fraction&quot;: 1.0,
-      &quot;universal_overlap_blocker&quot;: true,
-      &quot;overlap_limit&quot;: 0.7,
-      &quot;support_definition&quot;: &quot;finite prediction &gt; 0 (inherited literal support rule)&quot;,
-      &quot;implication&quot;: &quot;Every nonempty candidate dot set in the allowed domain has forward overlap 1.0 with this prior; therefore it cannot pass the 0.70 gate.&quot;
-    },
-    &quot;byte_unique_across_all_checked&quot;: true,
-    &quot;pixel_unique_across_all_checked&quot;: true,
+    &quot;scope&quot;: &quot;751 canonical blobs in registry/prior_rasters.json (+ 78 post-census org blobs audited)&quot;,
+    &quot;worst_abs_spearman&quot;: 0.6465,
+    &quot;worst_literal_overlap&quot;: 1.0,
     &quot;literal_gate&quot;: {
+      &quot;rho_limit&quot;: 0.9,
+      &quot;overlap_limit&quot;: 0.7,
+      &quot;rho_surface_ok&quot;: true,
+      &quot;rho_dots_ok&quot;: true,
       &quot;rho_ok&quot;: true,
-      &quot;overlap_ok&quot;: false
+      &quot;overlap_ok&quot;: false,
+      &quot;stop_reason&quot;: &quot;IR-69-REG-01: unstratified 3-px dot overlap across all 751 blobs hits 1.0000 on 916cdeec... (GEMSDOE48-unassigned-mass, 5,167,373/5,167,373 positive footprint cells = 100.0%). Stratified dotlike_le150k overlap is 0.6365 &lt;= 0.70 PASS and local-prior max overlap is 0.1566 &lt;= 0.70 PASS.&quot;
     },
-    &quot;stratified_gate&quot;: {
-      &quot;dotlike_overlap_ok&quot;: true,
-      &quot;comparable_80k_overlap_ok&quot;: true,
-      &quot;two_phase_like_for_like_duplicate&quot;: true,
-      &quot;two_phase_worst_dot_field_overlap&quot;: 0.9997,
-      &quot;note&quot;: &quot;Diagnostic only; does NOT override literal_gate in scripts/release_gate.py. 17GEMSDOE E-proba-multiscale is &gt;0 on all 5,167,373 footprint cells (0 uncovered allowed cells), making literal forward overlap identically 1.0 for every nonempty prediction.&quot;
+    &quot;archived_scope_warning&quot;: &quot;The summary statistics above are archival and not certified; use the fresh partial measurements below.&quot;,
+    &quot;fresh_counterexample&quot;: {
+      &quot;report&quot;: &quot;registry-blocker.json&quot;,
+      &quot;compared&quot;: 1,
+      &quot;registry_index_entries&quot;: 751,
+      &quot;exhaustive_scan&quot;: false,
+      &quot;spearman&quot;: 0.002205,
+      &quot;forward_overlap_3px&quot;: 1.0
     },
-    &quot;local_prior_overlap&quot;: {
-      &quot;n_scanned&quot;: 7,
-      &quot;worst&quot;: {
-        &quot;file&quot;: &quot;submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif&quot;,
-        &quot;sha256&quot;: &quot;be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7&quot;,
-        &quot;their_dots&quot;: 31994,
-        &quot;dot_overlap_3px&quot;: 0.075,
-        &quot;jaccard&quot;: 0.0127
-      },
-      &quot;ok&quot;: true,
-      &quot;rows&quot;: [
-        {
-          &quot;file&quot;: &quot;submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif&quot;,
-          &quot;sha256&quot;: &quot;981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6&quot;,
-          &quot;their_dots&quot;: 38669,
-          &quot;dot_overlap_3px&quot;: 0.041,
-          &quot;jaccard&quot;: 0.0209
-        },
-        {
-          &quot;file&quot;: &quot;submissions/h69-relayfix-v1-35235-20261020T202813Z-a2917d46-zeros.tif&quot;,
-          &quot;sha256&quot;: &quot;13b3fe7bdda7690bd1b4306a6a068748b4ec78e44378aa3903a899956d94a9ce&quot;,
-          &quot;their_dots&quot;: 35235,
-          &quot;dot_overlap_3px&quot;: 0.042,
-          &quot;jaccard&quot;: 0.0208
-        },
-        {
-          &quot;file&quot;: &quot;submissions/h69-relayramp-pullapart-35787-20261012T023411Z-0e22fe3c-zeros.tif&quot;,
-          &quot;sha256&quot;: &quot;55f6215c72990ec6a4184985d401c8adffa57673d678ebbc052045ceede3cce6&quot;,
-          &quot;their_dots&quot;: 35787,
-          &quot;dot_overlap_3px&quot;: 0.0395,
-          &quot;jaccard&quot;: 0.0197
-        },
-        {
-          &quot;file&quot;: &quot;submissions/h69-relayramp-pullapart-35787-20261020T201246Z-0e22fe3c-zeros.tif&quot;,
-          &quot;sha256&quot;: &quot;55f6215c72990ec6a4184985d401c8adffa57673d678ebbc052045ceede3cce6&quot;,
-          &quot;their_dots&quot;: 35787,
-          &quot;dot_overlap_3px&quot;: 0.0395,
-          &quot;jaccard&quot;: 0.0197
-        },
-        {
-          &quot;file&quot;: &quot;submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif&quot;,
-          &quot;sha256&quot;: &quot;b44d16ce3f9a456c2c5c1a0156a873fad89baf5f50716610886f6f5cb0ffb9c1&quot;,
-          &quot;their_dots&quot;: 36325,
-          &quot;dot_overlap_3px&quot;: 0.0675,
-          &quot;jaccard&quot;: 0.0232
-        },
-        {
-          &quot;file&quot;: &quot;submissions/h69-z-radiometric-halo-31994-20261020T182654Z-31913c0c-zeros.tif&quot;,
-          &quot;sha256&quot;: &quot;be84d6fa9efc3ec85f9532d5574e98a4e77c587db7be3d50a9392924917c78c7&quot;,
-          &quot;their_dots&quot;: 31994,
-          &quot;dot_overlap_3px&quot;: 0.075,
-          &quot;jaccard&quot;: 0.0127
-        },
-        {
-          &quot;file&quot;: &quot;submissions/h69e-strat-straight-rad-33199-20261020T193531Z-6a60ea28-zeros.tif&quot;,
-          &quot;sha256&quot;: &quot;ad03bd333dacc28ebaf474599f3fc7aabf65d181373a2afd52f5adf8fdc15045&quot;,
-          &quot;their_dots&quot;: 33199,
-          &quot;dot_overlap_3px&quot;: 0.0487,
-          &quot;jaccard&quot;: 0.0189
-        }
-      ]
-    },
-    &quot;errors&quot;: [],
-    &quot;seconds&quot;: 1214.2
+    &quot;local_prior_forward_overlap_max&quot;: 0.156562,
+    &quot;warning&quot;: &quot;Archived phase summaries contradict their own literal readings. No all-prior uniqueness clearance is claimed.&quot;
   },
   &quot;raster&quot;: {
     &quot;zeros&quot;: {
-      &quot;path&quot;: &quot;submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif&quot;,
-      &quot;sha256&quot;: &quot;04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b&quot;,
-      &quot;bytes&quot;: 156596
+      &quot;path&quot;: &quot;submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif&quot;,
+      &quot;sha256&quot;: &quot;28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273&quot;,
+      &quot;bytes&quot;: 88363
     },
     &quot;nan&quot;: {
-      &quot;path&quot;: &quot;submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-nan.tif&quot;,
-      &quot;sha256&quot;: &quot;609af5bce51d916fbba1fd383615323803591814823ac794d04b9a3374975b3f&quot;,
-      &quot;bytes&quot;: 351646
+      &quot;path&quot;: &quot;submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-nan.tif&quot;,
+      &quot;sha256&quot;: &quot;df8cca0266142725c3b4208596aca844a6037577c83aa3e8fb2371797124cca5&quot;,
+      &quot;bytes&quot;: 250609
+    },
+    &quot;zip&quot;: {
+      &quot;path&quot;: &quot;submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.zip&quot;,
+      &quot;sha256&quot;: &quot;e9c25db9535f325fcd12b2b37498c132b813c09ef3558a46b05b5916cb82ce5e&quot;,
+      &quot;bytes&quot;: 42797
     }
   },
-  &quot;submission_name&quot;: &quot;h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros&quot;,
-  &quot;submission_note&quot;: &quot;H69-K kinematic relay/pull-apart + horsetail corridors; cross-axis grav/RTP edge; EB-calibrated greedy DTI (54471 dots)&quot;,
-  &quot;verdict&quot;: &quot;negative&quot;,
-  &quot;banner&quot;: &quot;stop&quot;,
-  &quot;note&quot;: &quot;Literal protocol enforced. No submission slot used. All science, canary, source-manifest, and pixel-validator gates pass; literal all-registry dot-overlap fires at 1.0 against whole-footprint continuous surfaces (17GEMSDOE E-proba-multiscale covers 5,167,373/5,167,373 footprint pixels, leaving 0 uncovered allowed cells), while sparse dot-field overlap is 0.6860 &lt;= 0.70 across all &lt;=150k-dot family rasters and &lt;=0.0750 against prior GEMSDOE69 runs.&quot;,
-  &quot;release_policy&quot;: {
-    &quot;verdict&quot;: &quot;negative&quot;,
-    &quot;download_enabled&quot;: false,
-    &quot;reasons&quot;: [
-      &quot;Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies.&quot;,
-      &quot;surface uniqueness phase failed or is incomplete.&quot;,
-      &quot;dots uniqueness phase failed or is incomplete.&quot;
-    ],
-    &quot;artifact_sha256&quot;: &quot;04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b&quot;,
-    &quot;validator_report&quot;: {
-      &quot;file&quot;: &quot;/home/user/GEMSDOE69/submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif&quot;,
-      &quot;bytes&quot;: 156596,
-      &quot;sha256&quot;: &quot;04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b&quot;,
-      &quot;meta&quot;: {
-        &quot;count&quot;: 1,
-        &quot;dtype&quot;: &quot;float32&quot;,
-        &quot;crs&quot;: &quot;EPSG:32611&quot;,
-        &quot;shape&quot;: [
-          3730,
-          3292
-        ],
-        &quot;transform&quot;: [
-          100.0,
-          0.0,
-          243350.0,
-          0.0,
-          -100.0,
-          4508550.0
-        ],
-        &quot;nodata&quot;: null,
-        &quot;bounds&quot;: [
-          243350.0,
-          4135550.0,
-          572550.0,
-          4508550.0
-        ]
-      },
-      &quot;n_nan&quot;: 0,
-      &quot;n_nan_inside_footprint&quot;: 0,
-      &quot;min&quot;: 0.0,
-      &quot;max&quot;: 1.0,
-      &quot;positive_pixels&quot;: 54471,
-      &quot;distinct_positive_values&quot;: [
-        1.0
-      ],
-      &quot;checks&quot;: {
-        &quot;single_band&quot;: true,
-        &quot;dtype_float32&quot;: true,
-        &quot;crs_epsg_32611&quot;: true,
-        &quot;shape_3730x3292&quot;: true,
-        &quot;transform_and_bounds_match_sample_submission&quot;: true,
-        &quot;footprint_all_finite&quot;: true,
-        &quot;footprint_values_in_0_1&quot;: true,
-        &quot;no_infinite_values&quot;: true,
-        &quot;nan_only_outside_footprint&quot;: true,
-        &quot;no_sentinel_values&quot;: true,
-        &quot;all_finite_values_in_0_1&quot;: true,
-        &quot;no_positive_outside_footprint&quot;: true,
-        &quot;zero_positive_on_mapped_catalogue&quot;: true,
-        &quot;template_validator_passed&quot;: true
-      },
-      &quot;template_validator&quot;: {
-        &quot;all_checks_passed&quot;: true,
-        &quot;checks&quot;: {
-          &quot;single_band&quot;: true,
-          &quot;dtype_float32&quot;: true,
-          &quot;dimensions_3730x3292&quot;: true,
-          &quot;crs_epsg_32611&quot;: true,
-          &quot;transform_matches_sample_submission&quot;: true,
-          &quot;no_nan_anywhere&quot;: true,
-          &quot;no_inf_anywhere&quot;: true,
-          &quot;no_sentinel_values&quot;: true,
-          &quot;range_0_1_guaranteed&quot;: true,
-          &quot;min_ge_0&quot;: true,
-          &quot;max_le_1&quot;: true,
-          &quot;in_footprint_all_finite&quot;: true,
-          &quot;in_footprint_range_0_1&quot;: true,
-          &quot;outside_footprint_zero&quot;: true,
-          &quot;zero_dots_on_mapped_catalogue&quot;: true
-        }
-      },
-      &quot;template_format_report&quot;: {
-        &quot;ok&quot;: true,
-        &quot;problems&quot;: []
-      },
-      &quot;all_checks_passed&quot;: true
-    }
-  },
+  &quot;raster_sha256&quot;: &quot;28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273&quot;,
   &quot;validator_output&quot;: {
-    &quot;file&quot;: &quot;/home/user/GEMSDOE69/submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif&quot;,
-    &quot;bytes&quot;: 156596,
-    &quot;sha256&quot;: &quot;04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b&quot;,
+    &quot;file&quot;: &quot;/home/user/GEMSDOE69/submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif&quot;,
+    &quot;bytes&quot;: 88363,
+    &quot;sha256&quot;: &quot;28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273&quot;,
     &quot;meta&quot;: {
       &quot;count&quot;: 1,
       &quot;dtype&quot;: &quot;float32&quot;,
@@ -343,7 +108,7 @@
     &quot;n_nan_inside_footprint&quot;: 0,
     &quot;min&quot;: 0.0,
     &quot;max&quot;: 1.0,
-    &quot;positive_pixels&quot;: 54471,
+    &quot;positive_pixels&quot;: 32000,
     &quot;distinct_positive_values&quot;: [
       1.0
     ],
@@ -353,6 +118,7 @@
       &quot;crs_epsg_32611&quot;: true,
       &quot;shape_3730x3292&quot;: true,
       &quot;transform_and_bounds_match_sample_submission&quot;: true,
+      &quot;mask_shapes_match_raster&quot;: true,
       &quot;footprint_all_finite&quot;: true,
       &quot;footprint_values_in_0_1&quot;: true,
       &quot;no_infinite_values&quot;: true,
@@ -388,8 +154,114 @@
       &quot;problems&quot;: []
     },
     &quot;all_checks_passed&quot;: true
+  },
+  &quot;validator_output_source&quot;: &quot;evidence/validator-audit-2026-10-20.json&quot;,
+  &quot;submission_name&quot;: &quot;h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros&quot;,
+  &quot;submission_note&quot;: &quot;GEMSDOE69 H69-G5 two-regime geodesic relay/pull-apart corridors; 32000 greedy-DTI dots &gt;=350m off cat; HOLDOUT-DTI 0.0813&quot;,
+  &quot;verdict&quot;: &quot;negative&quot;,
+  &quot;banner&quot;: &quot;stop&quot;,
+  &quot;submission_slots_used&quot;: 0,
+  &quot;scientific_experiments_this_review&quot;: 0,
+  &quot;note&quot;: &quot;Negative audit delivery. No new TIFF, no portal upload, no score projection. Literal duplicate-and-stop is binding.&quot;,
+  &quot;release_policy&quot;: {
+    &quot;policy_version&quot;: &quot;gems69-literal-release-v4&quot;,
+    &quot;verdict&quot;: &quot;negative&quot;,
+    &quot;download_enabled&quot;: false,
+    &quot;reasons&quot;: [
+      &quot;Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies. Stratified diagnostics cannot clear it.&quot;,
+      &quot;Measured full-registry correlation/overlap is missing, non-finite, or exceeds the literal limits.&quot;,
+      &quot;surface uniqueness phase failed, contradicts its literal measurements, or is incomplete.&quot;,
+      &quot;dots uniqueness phase failed, contradicts its literal measurements, or is incomplete.&quot;,
+      &quot;Fresh pinned-prior measurement reproduces the literal duplicate-and-stop counterexample.&quot;,
+      &quot;Artifact evidence is quarantined by the integrity review; a new hash or rebinding old receipts cannot clear it.&quot;
+    ],
+    &quot;artifact_sha256&quot;: &quot;28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273&quot;,
+    &quot;validator_report&quot;: {
+      &quot;file&quot;: &quot;/home/user/GEMSDOE69/submissions/h69-tworegime-geodesic-corridor-32000-20261020T225640Z-f5cf7bb5-zeros.tif&quot;,
+      &quot;bytes&quot;: 88363,
+      &quot;sha256&quot;: &quot;28375c975487299e8c1245c36f416b3c7d03cfa661b956ba44ca127107a81273&quot;,
+      &quot;meta&quot;: {
+        &quot;count&quot;: 1,
+        &quot;dtype&quot;: &quot;float32&quot;,
+        &quot;crs&quot;: &quot;EPSG:32611&quot;,
+        &quot;shape&quot;: [
+          3730,
+          3292
+        ],
+        &quot;transform&quot;: [
+          100.0,
+          0.0,
+          243350.0,
+          0.0,
+          -100.0,
+          4508550.0
+        ],
+        &quot;nodata&quot;: null,
+        &quot;bounds&quot;: [
+          243350.0,
+          4135550.0,
+          572550.0,
+          4508550.0
+        ]
+      },
+      &quot;n_nan&quot;: 0,
+      &quot;n_nan_inside_footprint&quot;: 0,
+      &quot;min&quot;: 0.0,
+      &quot;max&quot;: 1.0,
+      &quot;positive_pixels&quot;: 32000,
+      &quot;distinct_positive_values&quot;: [
+        1.0
+      ],
+      &quot;checks&quot;: {
+        &quot;single_band&quot;: true,
+        &quot;dtype_float32&quot;: true,
+        &quot;crs_epsg_32611&quot;: true,
+        &quot;shape_3730x3292&quot;: true,
+        &quot;transform_and_bounds_match_sample_submission&quot;: true,
+        &quot;mask_shapes_match_raster&quot;: true,
+        &quot;footprint_all_finite&quot;: true,
+        &quot;footprint_values_in_0_1&quot;: true,
+        &quot;no_infinite_values&quot;: true,
+        &quot;nan_only_outside_footprint&quot;: true,
+        &quot;no_sentinel_values&quot;: true,
+        &quot;all_finite_values_in_0_1&quot;: true,
+        &quot;no_positive_outside_footprint&quot;: true,
+        &quot;zero_positive_on_mapped_catalogue&quot;: true,
+        &quot;template_validator_passed&quot;: true
+      },
+      &quot;template_validator&quot;: {
+        &quot;all_checks_passed&quot;: true,
+        &quot;checks&quot;: {
+          &quot;single_band&quot;: true,
+          &quot;dtype_float32&quot;: true,
+          &quot;dimensions_3730x3292&quot;: true,
+          &quot;crs_epsg_32611&quot;: true,
+          &quot;transform_matches_sample_submission&quot;: true,
+          &quot;no_nan_anywhere&quot;: true,
+          &quot;no_inf_anywhere&quot;: true,
+          &quot;no_sentinel_values&quot;: true,
+          &quot;range_0_1_guaranteed&quot;: true,
+          &quot;min_ge_0&quot;: true,
+          &quot;max_le_1&quot;: true,
+          &quot;in_footprint_all_finite&quot;: true,
+          &quot;in_footprint_range_0_1&quot;: true,
+          &quot;outside_footprint_zero&quot;: true,
+          &quot;zero_dots_on_mapped_catalogue&quot;: true
+        }
+      },
+      &quot;template_format_report&quot;: {
+        &quot;ok&quot;: true,
+        &quot;problems&quot;: []
+      },
+      &quot;all_checks_passed&quot;: true
+    },
+    &quot;paired_ci_control_passed&quot;: true,
+    &quot;paired_ci_current_best_passed&quot;: true,
+    &quot;holdout_protocol_compliant&quot;: true,
+    &quot;receipt_evidence_class&quot;: &quot;SUBMISSION-RECEIPT&quot;,
+    &quot;selector_authorization_required&quot;: true
   }
 }</pre></div>
 </main>
-<footer>GEMSDOE69 · negative results are deliverables · Maximize P(Win) · Own the Outcome</footer>
+<footer>GEMSDOE69 · every metric carries its strict evidence class · zero unverified projections</footer>
 </body></html>
