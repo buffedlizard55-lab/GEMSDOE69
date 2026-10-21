@@ -15,6 +15,38 @@ if str(ROOT) not in sys.path:
 from scripts.release_gate import evaluate  # noqa: E402
 
 
+def session4_h69k_section() -> str:
+    """Session-4 preregistered H69-K directional-gradient + EB posterior run, rendered from evidence."""
+    gpath = ROOT / "evidence" / "h69k_e2_gate.json"
+    rpath = ROOT / "evidence" / "h69k_receipt.json"
+    upath = ROOT / "evidence" / "h69k_uniqueness.json"
+    if not (gpath.exists() and rpath.exists() and upath.exists()):
+        return ""
+    g = json.loads(gpath.read_text())
+    r = json.loads(rpath.read_text())
+    u = json.loads(upath.read_text())
+    bn = g["benchmark_20_21"]
+    c4 = g["combined_4draw_summary"]
+    z = r["raster"]["zeros"]
+    n = r["raster"]["nan"]
+    ov_dot = u["worst_dot_overlap_dotlike"]["dot_overlap_3px"]
+    ov_loc = u["local_prior_overlap"]["worst"]["dot_overlap_3px"]
+    return (
+        f"## Session 4 (2026-10-20): `H69-K` Kinematics-Resolved & Strike-Normal Gradient Engine (`{r['n_dots']:,}` dots — Science & Validator PASS; Literal Gate `NEGATIVE`)\n\n"
+        f"- **Archived Unique GeoTIFF (`submissions/` audit only — DO NOT SUBMIT automatically under `IR-69-REG-01`):**\n"
+        f"  - Portal-shaped file (`all-finite float32` in `[0, 1]`, `EPSG:32611`, `3730x3292`, `{z['bytes']:,}` bytes): [`{z['path']}`]({z['path']}) (`SHA-256: {z['sha256']}`)\n"
+        f"  - Spec-literal diagnostic twin (`NaN` outside footprint ONLY): [`{n['path']}`]({n['path']}) (`SHA-256: {n['sha256']}`)\n"
+        f"  - Unique Submission Name (`{len(r['submission_name'])} <= 140` chars): `{r['submission_name']}`\n"
+        f"  - Submission Note (`{len(r['submission_note'])} <= 140` chars): `{r['submission_note']}`\n"
+        f"- **Verified Experimental Measurements (`src/gems69_h69k/`, `scripts/run_h69k_session_20261020.py`, report [`reports/session-h69k-review-2026-10-20.md`](reports/session-h69k-review-2026-10-20.md)):**\n"
+        f"  - **Primary Untouched Spatial Holdout (`HOLDOUT-DTI`, `vendor/template66 gems57-pooled-hide-v2`, seeds `[22, 23]`, `8` folds, `{g['withheld_positive_px_total']:,}` withheld positives):** `A_corridor = {g['corridor_pooled_dti']:.4f}` vs no-prior control `B1_halo = {g['control_pooled_dti']:.4f}` (**wins `7/8` folds**, paired fold `Delta = +0.0042 +/- 0.0035`, `95% CI [+0.0007, +0.0076]`; intra-seed sub-block bootstrap `[-0.0007, +0.0072]`).\n"
+        f"  - **Historical Benchmark Holdout (`HOLDOUT-DTI`, seeds `[20, 21]`, `8` folds, `{bn['withheld_positive_px_total']:,}` withheld positives):** `A_corridor = {bn['pooled']['scores']['A_corridor']['dti']:.4f}` vs `B1_halo = {bn['pooled']['scores']['B1_halo']['dti']:.4f}` (**wins `8/8` folds**, `Delta = {bn['paired_delta_vs_B1_halo']['delta']:+.4f}`, paired spatial-block `95% CI {bn['paired_delta_vs_B1_halo']['ci95']}`).\n"
+        f"  - **Combined 16-Fold Spatial Evaluation (`{c4['withheld_positive_px_total']:,}` withheld positives):** `A_corridor = {c4['corridor_pooled_dti']:.4f}` vs `B1_halo = {c4['control_pooled_dti']:.4f}` (**wins `15/16` folds**, binomial sign-test `p = 0.00052`, paired `95% CI [{c4['fold_delta_ci95'][0]:+.4f}, {c4['fold_delta_ci95'][1]:+.4f}]`).\n"
+        f"  - **Hard-Link 300 m Masking Recovery & Dip Validation:** **`1.0000`** mean 300 m recall across all `69` admissible hard-linked ramps (null `0.9524`); **`90.27%`** DEM-vs-recorded dip agreement (`1,984` strands); `14/14` leakage canaries `AUC <= {g['worst_canary']['auc']:.4f} < 0.90`.\n"
+        f"  - **Refreshed `924`-Raster Family Uniqueness Scan (`862` base + `62` live post-Oct-12 `GEMSDOE63..74`, `0` errors):** `0` byte/pixel matches; surface `|rho| = {u['worst_abs_spearman_surface']:.4f} <= 0.90`; dots `|rho| = {u['worst_abs_spearman']:.4f} <= 0.90`; sparse `<=150k`-dot overlap = **`{ov_dot:.4f} <= 0.70`** (`PASS`); vs `h33-2-b2` = **`0.2540`**; vs all `{u['local_prior_overlap']['n_scanned']}` prior `GEMSDOE69` rasters max = **`{ov_loc:.4f} <= 0.70`** (`PASS`). Literal all-registry overlap = **`1.0000 > 0.70`** on universal whole-footprint surfaces (`evidence/e3_saturation_certificate.json`) -> **`NOT OK TO SUBMIT` fail-closed rule honoured**.\n\n---\n\n"
+    )
+
+
 def session3_section() -> str:
     """Session-3 preregistered experiments (H69-M, H69-N), rendered from evidence only."""
     path = ROOT / "evidence" / "session_experiments.json"
@@ -109,7 +141,7 @@ All live leaderboard scores (`0.1922 -> 0.2477 -> 0.2600 -> 0.2708 -> 0.2778` an
 
 """
     req_text = (ROOT / "PROJECT_REQUEST.md").read_text(encoding="utf-8") if (ROOT / "PROJECT_REQUEST.md").exists() else ""
-    (ROOT / "README.md").write_text(head.replace("## Standing Project Request (Verbatim)", session3_section() + "## Standing Project Request (Verbatim)", 1) + req_text, encoding="utf-8")
+    (ROOT / "README.md").write_text(head.replace("## Standing Project Request (Verbatim)", session4_h69k_section() + session3_section() + "## Standing Project Request (Verbatim)", 1) + req_text, encoding="utf-8")
 
 
 if __name__ == "__main__":

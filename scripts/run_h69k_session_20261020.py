@@ -40,8 +40,8 @@ sys.path.insert(0, str(ROOT / "vendor"))
 
 from gems57 import emit, evaluate_holdout, holdout, submission_writer, uniqueness  # noqa: E402
 from gems57.grid import TRANSFORM  # noqa: E402
-from gems69 import calibrate, corridors, pipeline, traces  # noqa: E402
-from gems69.data import CACHE, DATA  # noqa: E402
+from gems69_h69k import calibrate, corridors, pipeline, traces  # noqa: E402
+from gems69_h69k.data import CACHE, DATA  # noqa: E402
 
 EVID = ROOT / "evidence"
 SUB = ROOT / "submissions"

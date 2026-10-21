@@ -46,6 +46,22 @@ All live leaderboard scores (`0.1922 -> 0.2477 -> 0.2600 -> 0.2708 -> 0.2778` an
 
 ---
 
+## Session 4 (2026-10-20): `H69-K` Kinematics-Resolved & Strike-Normal Gradient Engine (`54,471` dots — Science & Validator PASS; Literal Gate `NEGATIVE`)
+
+- **Archived Unique GeoTIFF (`submissions/` audit only — DO NOT SUBMIT automatically under `IR-69-REG-01`):**
+  - Portal-shaped file (`all-finite float32` in `[0, 1]`, `EPSG:32611`, `3730x3292`, `156,596` bytes): [`submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif`](submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif) (`SHA-256: 04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b`)
+  - Spec-literal diagnostic twin (`NaN` outside footprint ONLY): [`submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-nan.tif`](submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-nan.tif) (`SHA-256: 609af5bce51d916fbba1fd383615323803591814823ac794d04b9a3374975b3f`)
+  - Unique Submission Name (`64 <= 140` chars): `h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros`
+  - Submission Note (`119 <= 140` chars): `H69-K kinematic relay/pull-apart + horsetail corridors; cross-axis grav/RTP edge; EB-calibrated greedy DTI (54471 dots)`
+- **Verified Experimental Measurements (`src/gems69_h69k/`, `scripts/run_h69k_session_20261020.py`, report [`reports/session-h69k-review-2026-10-20.md`](reports/session-h69k-review-2026-10-20.md)):**
+  - **Primary Untouched Spatial Holdout (`HOLDOUT-DTI`, `vendor/template66 gems57-pooled-hide-v2`, seeds `[22, 23]`, `8` folds, `22,796` withheld positives):** `A_corridor = 0.1439` vs no-prior control `B1_halo = 0.1406` (**wins `7/8` folds**, paired fold `Delta = +0.0042 +/- 0.0035`, `95% CI [+0.0007, +0.0076]`; intra-seed sub-block bootstrap `[-0.0007, +0.0072]`).
+  - **Historical Benchmark Holdout (`HOLDOUT-DTI`, seeds `[20, 21]`, `8` folds, `22,893` withheld positives):** `A_corridor = 0.1492` vs `B1_halo = 0.1421` (**wins `8/8` folds**, `Delta = +0.0071`, paired spatial-block `95% CI [0.00304567108256662, 0.011222190025503538]`).
+  - **Combined 16-Fold Spatial Evaluation (`45,689` withheld positives):** `A_corridor = 0.1465` vs `B1_halo = 0.1413` (**wins `15/16` folds**, binomial sign-test `p = 0.00052`, paired `95% CI [+0.0030, +0.0080]`).
+  - **Hard-Link 300 m Masking Recovery & Dip Validation:** **`1.0000`** mean 300 m recall across all `69` admissible hard-linked ramps (null `0.9524`); **`90.27%`** DEM-vs-recorded dip agreement (`1,984` strands); `14/14` leakage canaries `AUC <= 0.7751 < 0.90`.
+  - **Refreshed `924`-Raster Family Uniqueness Scan (`862` base + `62` live post-Oct-12 `GEMSDOE63..74`, `0` errors):** `0` byte/pixel matches; surface `|rho| = 0.3011 <= 0.90`; dots `|rho| = 0.1149 <= 0.90`; sparse `<=150k`-dot overlap = **`0.6860 <= 0.70`** (`PASS`); vs `h33-2-b2` = **`0.2540`**; vs all `11` prior `GEMSDOE69` rasters max = **`0.1573 <= 0.70`** (`PASS`). Literal all-registry overlap = **`1.0000 > 0.70`** on universal whole-footprint surfaces (`evidence/e3_saturation_certificate.json`) -> **`NOT OK TO SUBMIT` fail-closed rule honoured**.
+
+---
+
 ## Session 3 (2026-10-20): evidence-first corridor selectors, both negative (HOLDOUT-DTI, not organizer scores)
 
 | Experiment | Detached pooled DTI (candidate / no-prior control / transfer_ref) | Δ vs control [95% CI] | Δ vs transfer_ref [95% CI] | Verdict |

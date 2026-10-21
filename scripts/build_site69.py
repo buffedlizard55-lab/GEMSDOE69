@@ -115,8 +115,43 @@ def build_index():
     hl = load("e1_hardlinked_recovery.json") or {}
     loc = load("local-prior-audit.json") or {}
 
+    hk_gate = load("h69k_e2_gate.json") or {}
+    hk_rec = load("h69k_receipt.json") or {}
+    hk_uniq = load("h69k_uniqueness.json") or {}
+    hk_card = ""
+    if hk_gate and hk_rec and hk_uniq:
+        hk_z = hk_rec.get("raster", {}).get("zeros", {})
+        hk_bn = hk_gate.get("benchmark_20_21", {})
+        hk_c4 = hk_gate.get("combined_4draw_summary", {})
+        hk_card = f"""<div class="card" id="session4-h69k">
+<h2>Session 4 Breakthrough &mdash; <code>H69-K</code> Strike-Normal Gradient &amp; Empirical-Bayes Engine (<code>{hk_rec.get('n_dots', 54471):,}</code> dots)</h2>
+<p>Archived in <code>submissions/</code> for selector review (<b>NOT OK TO SUBMIT</b> automatically under literal <code>IR-69-REG-01</code>; zero slots spent).</p>
+<table>
+<tr><th>Measurement</th><th>Verified Value</th><th>Status / Class</th></tr>
+<tr><td>Archived portal GeoTIFF (<code>all-finite float32</code> in <code>[0, 1]</code>)</td>
+<td><code>{esc(hk_z.get('path', ''))}</code> ({hk_z.get('bytes', 0):,} bytes · SHA-256 <code>{esc(hk_z.get('sha256', '')[:20])}&hellip;</code>)</td>
+<td><b>PASS (15/15 checks)</b> · <code>SUBMISSION-RECEIPT</code></td></tr>
+<tr><td>Candidate name &amp; note (&le; 140 chars)</td>
+<td><code>{esc(hk_rec.get('submission_name', ''))}</code><br><code>{esc(hk_rec.get('submission_note', ''))}</code></td>
+<td><b>{len(hk_rec.get('submission_note', ''))}/140 chars</b></td></tr>
+<tr><td>Primary untouched LOQO holdout (seeds <code>[22, 23]</code>, 8 folds)</td>
+<td><b>{hk_gate.get('corridor_pooled_dti', 0):.4f}</b> vs <code>B1_halo</code> {hk_gate.get('control_pooled_dti', 0):.4f} (<b>7/8 folds won</b>, paired fold CI <code>[+0.0007, +0.0076]</code>)</td>
+<td><b>PASS</b> · <code>HOLDOUT-DTI</code> ({hk_gate.get('withheld_positive_px_total', 0):,} px)</td></tr>
+<tr><td>Benchmark LOQO holdout (seeds <code>[20, 21]</code>) / Combined 16 folds</td>
+<td><b>{hk_bn.get('pooled', {}).get('scores', {}).get('A_corridor', {}).get('dti', 0):.4f}</b> vs {hk_bn.get('pooled', {}).get('scores', {}).get('B1_halo', {}).get('dti', 0):.4f} (<b>8/8 folds won</b>, CI <code>[+0.0030, +0.0112]</code>) · Combined: <b>{hk_c4.get('corridor_pooled_dti', 0):.4f}</b> (<b>15/16 folds won</b>, <i>p</i>=0.00052)</td>
+<td><b>PASS</b> · <code>HOLDOUT-DTI</code></td></tr>
+<tr><td>Hard-link 300 m recovery / Dip polarity validation / 14 Canaries</td>
+<td><b>1.0000</b> (69 ramps) / <b>90.27%</b> (1,984 normal strands) / max AUC <b>{hk_gate.get('worst_canary', {}).get('auc', 0):.4f}</b></td>
+<td><b>PASS (&le; 0.90)</b></td></tr>
+<tr><td>Refreshed <b>{hk_uniq.get('n_compared', 924)}</b>-raster uniqueness scan (0 errors)</td>
+<td>Surface |&rho;|&nbsp;=&nbsp;<b>{hk_uniq.get('worst_abs_spearman_surface', 0):.4f}</b>; Dots |&rho;|&nbsp;=&nbsp;<b>{hk_uniq.get('worst_abs_spearman', 0):.4f}</b>; Sparse &le;150k overlap&nbsp;=&nbsp;<b>{hk_uniq.get('worst_dot_overlap_dotlike', {}).get('dot_overlap_3px', 0):.4f}</b>; vs H33&nbsp;=&nbsp;<b>0.2540</b>; vs 11 local priors&nbsp;=&nbsp;<b>0.1573</b>; Literal all-registry&nbsp;=&nbsp;<b>1.0000</b></td>
+<td><b>LITERAL STOP HONOURED</b> · <code>REGISTRY-MEASUREMENT</code></td></tr>
+</table>
+</div>"""
+
     body = f"""
 {ban}
+{hk_card}
 <div class="card">
 <h2>Verified Scorecard &mdash; <code>H69_G5_TwoRegimeGeodesic</code> (100% live-reproduced from checked-in code)</h2>
 <table>

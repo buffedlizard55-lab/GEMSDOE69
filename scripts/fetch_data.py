@@ -21,6 +21,9 @@ DEST = ROOT / ".cache" / "gems_data"
 
 WANT = {
     "training_features",           # 19-band physics stack (5 parts, 419 MB)
+    "labels",
+    "existing_faults",
+    "sample_submission",
     "ext_lidar_scarp_features_u8",  # 1 m LiDAR scarp composite (u8 bands)
     "ext_geodawn_rad_u8",           # GeoDAWN radiometrics (K, Th, TC)
     "ext_geodawn_extensions_u8",    # GeoDAWN extension layers
