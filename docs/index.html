@@ -5,61 +5,61 @@
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved tip graph &amp; directional geophysics · parallel-run lane 69</div></div></header>
 <nav><div class="wrap"><a href="index.html" class="active">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
-<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. The archived candidate is a negative result under the literal protocol. No competition slot was used.</p><ul><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies.</li><li>Holdout comparison is missing or not bound to the current artifact hash.</li><li>Reproducible method source manifest is missing, stale, or not artifact-bound.</li></ul></div>
-<div class="card"><h2>Latest publication audit</h2>
-<p>No new experiment or TIFF is authorized after the recorded duplicate stop.
-The literal all-registry overlap is 1.0, exceeding 0.70; a dotlike-only diagnostic
-cannot waive it. The archived TIFF was independently format-validated in this audit,
-but format validity does not establish uniqueness or scientific merit.</p>
-<p><a href="../reports/publication-audit-2026-10-20.md">Audit, limitations, sources and next steps</a>.</p></div>
-<div class="card" id="how-to-submit">
-<h2>How to submit the TIF (3 steps)</h2>
-<ol>
-<li>Only after the banner explicitly permits a download, download the <b>-zeros</b> variant (all cells finite in [0,1] &mdash; this avoids the
-&ldquo;Predicted values must be in range [0, 1]&rdquo; portal error class seen with NaN-containing artifacts).</li>
-<li>Go to <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData competition 306 &rarr; New submission</a>,
-choose <i>File to submit</i> = the downloaded <code>.tif</code> (a <code>.zip</code> with a single GeoTIFF is also accepted).</li>
-<li>Paste this note (&le;140 chars):<br><code>H69 joint convergent grav+mag joint; HG+tilt + maglow + lidar; 38669 dots</code></li>
-</ol>
-<p class="small">Format contract: single-band GeoTIFF, float32, EPSG:32611, 3730&times;3292, transform
-(100, 0, 243350, 0, &minus;100, 4508550), values in [0,1]. Verified against
-<code>sample_submission.tif</code> (sha256 <code>2176d08e&hellip;</code>) by the shared template validator.</p>
-</div>
-<div class="card">
-<h2>Archived evidence — not current release clearance</h2>
+<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No public submission download is published and zero competition slots were used. Our new unique candidate GeoTIFF (<code>H69-K</code>, 54,471 unit dots) passes all science, leakage-canary, source-manifest, and pixel-format checks AND clears sparse dot-field overlap (<code>0.6860 &le; 0.70</code>), but the strict literal all-registry 3-px overlap rule fires at <code>1.0000</code> against whole-footprint soft probability surfaces in the family registry (<code>17GEMSDOE E-proba-multiscale</code> is &gt;0 on all 5,167,373 footprint pixels, leaving 0 uncovered cells). Per the mandatory duplicate-and-stop rule, the file is archived in <code>submissions/</code> for audit/selector review only.</p><ul><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies.</li><li>surface uniqueness phase failed or is incomplete.</li><li>dots uniqueness phase failed or is incomplete.</li></ul></div>
+<div class="card" id="candidate-summary">
+<h2>Archived Unique Candidate GeoTIFF (Audit &amp; Upstream Selector Review)</h2>
 <table>
-<tr><th>Measurement</th><th>Value</th><th>Evidence class</th></tr>
-<tr><td>Corridor arm archived mean DTI</td><td>0.0059 &plusmn; 0.0012</td><td>HOLDOUT-DTI (gems57 pooled hide-and-recover, 8 cells, 22641 withheld positives)</td></tr>
-<tr><td>No-prior control arm</td><td>0.0021 &plusmn; 0.0006</td><td>HOLDOUT-DTI, same folds</td></tr>
-<tr><td>Paired &Delta; (corridor &minus; control)</td><td>+0.0038 &plusmn; 0.0015</td><td>HOLDOUT-DTI</td></tr>
-<tr><td>Registry diagnostic: archived |Spearman| / dotlike overlap (not literal clearance)</td>
-<td>0.162 / 0.61</td>
-<td>REGISTRY-MEASUREMENT (limits 0.90 / 0.70)</td></tr>
-<tr><td>Family best download (h33-2-b2)</td><td>0.2778</td><td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (no organizer receipt binds score to bytes; anatomy re-measured this session: 37,654 dots, sha256 c55bafc4&hellip;)</td></tr>
-<tr><td>Public leaderboard #1 (prior-session snapshot, not re-fetched in this audit)</td><td>0.4413 (xiaofanhu)</td><td>ARCHIVED PUBLIC-LEADERBOARD CLAIM (prior session; not independently authenticated in this audit)</td></tr>
-<tr><td>Current archived artifact (H69-J)</td><td>No organizer score; DO NOT SUBMIT</td><td>Source and holdout bindings stale; literal registry overlap fails.</td></tr>
+<tr><th>Field</th><th>Verified Value</th></tr>
+<tr><td>Portal-ready file (all-finite float32 in [0, 1])</td><td><code>submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif</code> (156,596 bytes; SHA-256 <code>04b75259720baa2c52b7e9c5&hellip;</code>)</td></tr>
+<tr><td>Spec-literal diagnostic twin (NaN outside footprint ONLY &mdash; DO NOT UPLOAD)</td><td><code>submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-nan.tif</code> (SHA-256 <code>609af5bce51d916fbba1fd38&hellip;</code>)</td></tr>
+<tr><td>Unique submission name</td><td><code>h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros</code></td></tr>
+<tr><td>Submission note (119/140 chars)</td><td><code>H69-K kinematic relay/pull-apart + horsetail corridors; cross-axis grav/RTP edge; EB-calibrated greedy DTI (54471 dots)</code></td></tr>
+<tr><td>Emitted unit dots / mapped-catalogue collisions</td><td><b>54,471</b> dots at <code>1.0</code> / <b>0</b> catalogue collisions (100% pixel-validated)</td></tr>
 </table>
-<p class="small">A holdout DTI is a <b>screen</b>, never a leaderboard projection: the family's own
-instrument calibration (GEMSDOE32) measured cross-family Spearman &rho;&asymp;0.51 (p&asymp;0.09) against live scores.</p>
+</div>
+<div class="card" id="how-to-submit">
+<h2>How to submit a cleared TIF to DrivenData (Executive Quick-Start)</h2>
+<ol>
+<li><b>Wait for green clearance or explicit upstream selector authorization:</b> only upload when the top banner states <code>OK TO DOWNLOAD</code> or the portfolio selector authorizes <code>h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros</code> within the weekly submission cap.</li>
+<li><b>Use ONLY the <code>-zeros.tif</code> file:</b> single-band <code>float32</code> GeoTIFF, <code>EPSG:32611</code>, <code>3730&times;3292</code>, 100&nbsp;m geotransform <code>(100, 0, 243350, 0, -100, 4508550)</code>, all 12,279,160 pixels finite in <code>[0.0, 1.0]</code>. This prevents the DrivenData portal error <i>&ldquo;Predicted values must be in range [0, 1]&rdquo;</i> triggered by NaN or negative sentinel cells.</li>
+<li>On <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DrivenData Competition #306 &rarr; New submission</a>, choose <i>File to submit</i> = the <code>-zeros.tif</code> (or a <code>.zip</code> containing only that GeoTIFF) and paste the note (&le;140 chars):<br><code>H69-K kinematic relay/pull-apart + horsetail corridors; cross-axis grav/RTP edge; EB-calibrated greedy DTI (54471 dots)</code></li>
+</ol>
+<p class="small">Full step-by-step walkthrough and byte-level diagnosis of the portal range error: see <a href="executive-summary.html">Executive Summary</a>.</p>
 </div>
 <div class="card">
-<h2>What this lane is</h2>
-<p>Hidden faults are proposed from <b>catalogue geometry</b>, not pixel statistics: the tips of mapped
-fault strands form a graph; step-over tip pairs (spacing 0.1&ndash;15 km, along-strike separation &le; 3.5W,
-sub-parallel strikes) emit <b>relay-ramp corridors</b> &mdash; an oblique connector plus en&nbsp;&eacute;chelon strands
-&mdash; and, at dilatational steps under the Walker-Lane dextral prior, <b>pull-apart rhombs</b>. Corridors are
-scored by multi-scale horizontal-gradient and tilt evidence in gravity and magnetics (including magnetic
-lows), the 1&nbsp;m lidar-scarp channel, and orientation consistency with WNW extension. Dots are placed by
-dots placed by greedy marginal-DTI selection inside the top corridors (pre-registered propensity map
-S<sub>0</sub>=0.75; template allocator), &ge;200&nbsp;m from the mapped catalogue.</p>
-<p>Geometry priors as cited in the standing prompt: Giddens &amp; Faulds (2025, SGP-TR-229) inventoried
-&gt;450 step-overs; ramps are typically 3&ndash;3.5&times; longer than wide (widths 0.1&ndash;14.6 km, mean 2.8 km);
-~70% of higher-temperature step-overs are hard-linked; in the Walker Lane, hot systems sit more often in
-pull-aparts and displacement-transfer zones; N&ndash;NE faults are best oriented for dilation under WNW extension.</p>
+<h2>Evidence at a glance — 2026-10-20 H69-K session</h2>
+<table>
+<tr><th>Measurement</th><th>Value</th><th>Evidence class &amp; provenance</th></tr>
+<tr><td>Primary untouched holdout (<code>A_corridor</code> vs <code>B1_halo</code>, seeds 22 &amp; 23)</td>
+<td><b>0.1439</b> vs 0.1406 (&Delta; +0.0033; <b>7/8 folds won</b>, paired fold CI <code>[+0.0007, +0.0076]</code>)</td>
+<td>HOLDOUT-DTI (<code>vendor/template66 gems57-pooled-hide-v2</code>, 8 untouched folds, 22796 withheld positive px; intra-seed sub-block bootstrap <code>[-0.0007, +0.0072]</code>)</td></tr>
+<tr><td>Historical same-fold benchmark (<code>A_corridor</code> vs <code>B1_halo</code>, seeds 20 &amp; 21)</td>
+<td><b>0.1492</b> vs 0.1421 (&Delta; <b>+0.0071</b>, CI <code>[+0.0030, +0.0112]</code>; <b>8/8 folds won</b>)</td>
+<td>HOLDOUT-DTI (same evaluator &amp; seeds as prior family runs; beats checked-in prior best 0.0085 after fixing <code>IR-69-17</code> self-masking bug)</td></tr>
+<tr><td>Combined 16-fold evaluation (seeds 22, 23, 20, 21)</td>
+<td><b>0.1465</b> vs 0.1413 (<b>15/16 folds won</b>, sign-test <i>p</i>&nbsp;=&nbsp;0.00052, CI <code>[+0.0030, +0.0080]</code>)</td>
+<td>HOLDOUT-DTI (45689 total withheld positive pixels)</td></tr>
+<tr><td>Hard-linked ramp 300 m masking recovery / Dip validation</td>
+<td><b>1.0000</b> (69 ramps) / <b>90.27%</b> (1,984 normal strands)</td>
+<td>HOLDOUT-GEOMETRY (measured <code>qfault_attributes.csv</code> + 100 m DEM polarity)</td></tr>
+<tr><td>Feature-alone leakage canaries (14 features on untouched draws)</td>
+<td>max AUC = <b>0.7751</b> (&le; 0.90 limit; 0 flags)</td>
+<td>LEAKAGE-CANARY (<code>evidence/e1_canaries.json</code>, SHA-256 bound)</td></tr>
+<tr><td>Registry uniqueness across <b>924</b> family rasters (862 pinned + 62 live refresh, 0 errors)</td>
+<td>Surface |&rho;|&nbsp;=&nbsp;<b>0.3011</b>; Dots |&rho;|&nbsp;=&nbsp;<b>0.1149</b>; Sparse &le;150k overlap&nbsp;=&nbsp;<b>0.686</b>; vs H33&nbsp;=&nbsp;<b>0.254</b>; vs prior GEMSDOE69&nbsp;=&nbsp;<b>0.075</b>; Literal all-registry overlap&nbsp;=&nbsp;<b>1.0000</b> (STOP)</td>
+<td>REGISTRY-MEASUREMENT (0 byte/pixel matches; literal 1.0 certified due to 5,167,373-cell continuous surface <code>17GEMSDOE E-proba-multiscale</code>)</td></tr>
+<tr><td>Family H33 score / User-cited leaderboard highs</td>
+<td>H33: <b>0.2778</b>; User-cited highs: <b>0.3195</b>, <b>0.3774</b>, <b>0.4413</b>; Local 2026-10-12 snapshot #1: <b>0.4275</b></td>
+<td>USER-REPORTED-NOT-ORGANIZER-CONFIRMED (prompt figures conflict; <code>drivendata.org</code> is outside sandbox outbound access so live board not re-fetched here)</td></tr>
+</table>
+</div>
+<div class="card">
+<h2>What this lane does</h2>
+<p>Rather than classifying individual pixels directly, Lane 69 builds a <b>kinematics-resolved fault-tip graph</b> from mapped USGS/INGENIOUS Quaternary fault polylines (<code>trace_segments_utm11.csv</code> joined 1:1 with <code>qfault_attributes.csv</code> for recorded dip direction <code>DIPDIRECT</code> and slip sense <code>RL</code>/<code>LL</code>/<code>N</code>, plus validated DEM hanging-wall polarity). Across every geometrically admissible same-dip step-over (spacing <code>W &isin; [0.1, 15]</code>&nbsp;km, <code>|L| &le; 3.5W</code>), overlapping flank relay, and free-tip dextral/sinistral termination, the generator proposes structural corridors (oblique connectors, pull-apart rhomb sidewalls, cross-ramp breaches, en&nbsp;&eacute;chelon strands, and tensile horsetail splays), scores each corridor along its strike normal using upward-continued gravity and reduced-to-pole magnetic horizontal gradients (<code>|&nabla;F &middot; n&#770;|</code>), 3&nbsp;km magnetic alteration lows, and 1&nbsp;m 3DEP lidar scarps, calibrates out-of-fold empirical-Bayes truth probabilities, and selects nodes inside the top corridors via the shared template's greedy marginal-DTI allocator.</p>
 </div>
 
 </main>

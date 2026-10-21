@@ -114,9 +114,6 @@ def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
     catalogue = ctx.grid.catalogue
     if zstack is None:
         zstack = build_z_stack(ctx.grid.footprint, stats)
-    d_cat = ndi.distance_transform_edt(~catalogue)
-    offcat = d_cat > flank_px
-
     # ---- control propensity: same layers, no corridor prior (full grid) -----
     ctrl_layers = ["grav_hg_s2", "grav_tilt_s2", "mag_hg_s2", "mag_tilt_s2",
                    "mag_low_tmi", "mag_low_rtp", "lidar_scarp"]
@@ -136,9 +133,12 @@ def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
             continue
         key = cell.key
         visible = ctx.visible(key)
+        # Bug fix IR-69-17: flank exclusion must be computed strictly from
+        # fold-visible faults, NEVER ctx.grid.catalogue (which contains hidden truth).
+        offvis = ndi.distance_transform_edt(~visible) > flank_px
         pipe = corridor_pipeline(visible, shape, stats, zstack=zstack)
         p_cor = pipe["propensity"]
-        allowed = cell_allowed(cell, shape) & offcat
+        allowed = cell_allowed(cell, shape) & offvis
         allowed_ctrl = allowed.copy()
 
         em_cor = emit_dots(p_cor, allowed & (p_cor > 0), cell.n_truth)
@@ -147,10 +147,12 @@ def run_holdout_arms(ctx, stats, modes=("all",), flank_px: int = FLANK_PX,
         r_ctrl = thold.score_cell(cell, em_ctrl)
         results[key] = dict(
             corridor=dict(dti=r_cor["dti"], coverage=r_cor["coverage"],
+                          tp=r_cor["tp"], fp=r_cor["fp"], fn=r_cor["fn"],
                           n_dots=int((em_cor & allowed).sum()),
                           n_corridors=pipe["corridors"], n_pairs=pipe["pairs"],
                           n_truth=cell.n_truth),
             control=dict(dti=r_ctrl["dti"], coverage=r_ctrl["coverage"],
+                         tp=r_ctrl["tp"], fp=r_ctrl["fp"], fn=r_ctrl["fn"],
                          n_dots=int((em_ctrl & allowed_ctrl).sum()),
                          n_truth=cell.n_truth),
         )
@@ -179,21 +181,29 @@ def leakage_canary(ctx, stats, max_neg: int = 200_000, seed: int = 69,
     if zstack is None:
         zstack = build_z_stack(ctx.grid.footprint, stats)
     cells = [c for c in ctx.cells if "draw20" in c.key and c.mode == "all"]
+    if not cells:
+        cells = [c for c in ctx.cells if c.mode == "all"][:4]
     truth = np.zeros(shape, bool)
     active = np.zeros(shape, bool)
+    p_cor = np.zeros(shape, np.float32)
+    total_corridors = 0
     for cell in cells:
         h = ctx.hidden_by_cell[cell.key]
         full_active = cell_allowed(cell, shape)
         truth |= h & full_active
         active |= full_active
+        # Bug fix IR-69-17: build corridor propensity strictly from fold-visible
+        # catalogue per cell so withheld faults never leak into the canary surface.
+        vis = ctx.visible(cell.key)
+        cpipe = corridor_pipeline(vis, shape, stats, zstack=zstack)
+        p_cor[full_active] = cpipe["propensity"][full_active]
+        total_corridors += cpipe["corridors"]
     neg_pool = np.nonzero(active & ~truth)
     rng = np.random.default_rng(seed)
     n_neg = min(max_neg, len(neg_pool[0]))
     sel = rng.choice(len(neg_pool[0]), size=n_neg, replace=False)
     ny, nx = neg_pool[0][sel], neg_pool[1][sel]
     ty, tx = np.nonzero(truth)
-    cor_pipe = corridor_pipeline(ctx.grid.catalogue, shape, stats, zstack=zstack)
-    p_cor = cor_pipe["propensity"]
 
     def auc(vals_t: np.ndarray, vals_n: np.ndarray) -> float | None:
         a = np.asarray(vals_t, np.float64)
@@ -230,7 +240,7 @@ def leakage_canary(ctx, stats, max_neg: int = 200_000, seed: int = 69,
                                      z[ny, nx].astype(np.float64)),
                              n_pos=int(len(ty)), n_neg=int(len(ny)))
     out["_truth_px"] = int(truth.sum())
-    out["_corridors"] = cor_pipe["corridors"]
+    out["_corridors"] = int(total_corridors)
     return out
 
 

@@ -5,53 +5,26 @@
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved tip graph &amp; directional geophysics · parallel-run lane 69</div></div></header>
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="active">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
 
 <div class="card">
-<h2>Method</h2>
-<h3>Tip graph</h3>
-<p>The pinned catalogue mirror (labels &equiv; existing_faults, IR-69-DATA-01) is skeletonized
-(scikit-image), traced into 3,887 strands between endpoints/branch points, and every strand carries its
-two tips with terminal strikes (PCA of the tip-adjacent 12-px tail).</p>
-<h3>Pair acceptance (all lengths in 100 m px)</h3>
+<h2>H69-K Method Architecture (Verified Line-by-Line in <code>src/gems69/</code>)</h2>
+<h3>1. Polyline Tip Graph &amp; Measured Kinematic Polarity (<code>traces.py</code>, <code>corridors.py</code>)</h3>
 <ul>
-<li>tips from different 8-connected components (same-component pairs are reserved for the hard-link test);</li>
-<li>terminal strikes sub-parallel, axial &Delta;&theta; &le; 30&deg; &mdash; the raster carries no dip polarity, so
-&ldquo;same dip&rdquo; is proxied by sub-parallel strike (disclosed limitation IR-69-DIP-01);</li>
-<li>cross-strike spacing W &isin; [1, 150] px (0.1&ndash;15 km);</li>
-<li>along-strike separation &le; 3.5W and overlap &le; 1.0W, computed as interval arithmetic on the
-strike-axis projection of tip-adjacent strand windows (sign-invariant for axial data).</li>
+<li>Loads 84,331 UTM Zone 11N segments from <code>external/trace_segments_utm11.csv</code> grouped into 13,953 continuous fault parts and joined 1:1 to <code>external/qfault_attributes.csv</code> (recorded <code>DIPDIRECT</code> and slip sense <code>RL</code>, <code>LL</code>, <code>N</code>).</li>
+<li>Where <code>DIPDIRECT</code> is unrecorded, infers hanging-wall polarity as the topographically lower side across 600&nbsp;m and 1.2&nbsp;km normal offsets on <code>geodawn_dem_a2_100m.tif</code> &mdash; validated against 1,984 recorded normal-fault strands at <b>90.27% agreement</b>.</li>
+<li>In every holdout fold, polylines are split strictly against the buffered visible mask (300&nbsp;m collar around withheld components) so zero hidden-fault geometry or attribute leaks into tip detection.</li>
+<li>Admissible step-overs enforce: sub-parallel terminal strikes (&le;35&deg;), compatible dip polarity (<code>dip_a &middot; dip_b &ge; 0</code>), spacing <code>W &isin; [0.1, 15.0]</code>&nbsp;km, <code>|L| &le; 3.5W</code>, and releasing strike-slip step sense (<code>RL</code> right step, <code>LL</code> left step).</li>
+<li>Emits: <code>relay_connector</code>, <code>relay_sidewall</code> (soft-linked rhomb margins), <code>relay_breach</code>, staggered <code>relay_enechelon</code> strands, overlapping <code>flank_relay</code> + <code>flank_breach</code> strands, and free-tip tensile horsetail <code>termination_splay</code> / <code>wing_splay</code> / <code>transfer_link</code> structures.</li>
 </ul>
-<h3>Corridor emission</h3>
-<ul><li><b>Oblique connector</b>: tip-to-tip line, extended 0.35W along the local strikes, half-width
-clamp(W/6, 1, 6) px;</li>
-<li><b>En &eacute;chelon strands</b> (dilatational pairs): 2&ndash;8 strands of length clamp(1.5W, 4, 30) px at
-&plusmn;25&deg; to the connector, staggered along it;</li>
-<li><b>Pull-apart rhomb</b> (dilatational pairs): rotated ellipse, semi-axes 0.8/0.45 of the tip diagonal;
-Walker-Lane dextral prior applied through the dilation diagnostic (overlap &le; 0.5W &rArr; dilatational),
-because slip sense is unobservable from the raster (recorded per corridor);</li>
-<li>strongly overlapping steps emit the narrower <b>transfer-overlap</b> corridor.</li></ul>
-<h3>Corridor scoring</h3>
-<p>S = 0.20&middot;E<sub>grav</sub> + 0.20&middot;E<sub>mag</sub> + 0.18&middot;E<sub>maglow</sub> + 0.15&middot;E<sub>lidar</sub>
-+ 0.10&middot;W<sub>orient</sub> + 0.17&middot;W<sub>geom</sub> &mdash; weights pre-registered before any holdout look.
-E-terms are maxima of robust-z means (footprint median/MAD) over multi-scale horizontal gradients
-(&sigma; = 1, 2, 4 px), tilt-edge |sin(arctan2(VD, HG))| with VD the &sigma;/2&sigma; upward-continuation difference,
-the provided HG/VG/tilt products, and &minus;tmi/&minus;rtp magnetic lows; E<sub>lidar</sub> is the
-max(ex_max, step_max, downface_max) scarp channel; W<sub>orient</sub> scores the corridor axis against the
-N&ndash;NE axial family best oriented for dilation under WNW extension; W<sub>geom</sub> is the subtype prior
-(pull-apart 1.0, relay 0.9, transfer-overlap 0.6). Every corridor carries a rationale record
-(layers with z-values, signature, source) in <code>evidence/e3_receipt.json</code>.</p>
-<h3>Emission &amp; gate</h3>
-<p>Propensity P(x) = logistic(1.5(S &minus; S<sub>0</sub>)) &times; corridor membership weight; dots placed by the
-shared template's exact greedy marginal-DTI allocator with truth-size prior |G| = 12,691 px
-(GEMSDOE32 receipt-derived estimate, cited), restricted &ge;2 px from the mapped catalogue. Gate: the
-corridor arm must beat the identical pipeline with the corridor prior removed (per-pixel physics
-composite, same layer set, same allocator) on the shared template's spatially-blocked hide-and-recover
-holdout (seeds 20/21 &times; four quadrants), paired with 95% CIs. Hard-link validation: for same-component
-virtual pairs, the linking catalogue mass inside the corridor is masked and recovery within 3 px (300 m)
-is measured after rebuilding from the remaining catalogue.</p>
+<h3>2. Strike-Normal Potential-Field &amp; Scarp Scoring (<code>evidence.py</code>, <code>corridors.py</code>)</h3>
+<p>Pre-registered weights summing to 1.00 (<code>registry/preregistration-2026-10-20-h69k.json</code>):<br>
+<code>S = 0.22&middot;grav_perp + 0.20&middot;mag_perp + 0.16&middot;min(grav_perp, mag_perp) + 0.14&middot;mag_low + 0.14&middot;scarp + 0.08&middot;cos&sup2;(&theta; - 22.5&deg;) + 0.06&middot;W_kinematic</code>,<br>
+where <code>grav_perp</code> and <code>mag_perp</code> combine upward-continued (200/600/1800&nbsp;m) THDR&times;tilt zero-crossing edges with <code>|&nabla;F<sub>300m</sub> &middot; n&#770;<sub>corridor</sub>|</code> normal projection.</p>
+<h3>3. Out-of-Fold Empirical-Bayes Calibration &amp; Greedy Marginal-DTI Selection (<code>calibrate.py</code>, <code>pipeline.py</code>)</h3>
+<p>Three-level hierarchical shrinkage estimates <code>P(truth | d_vis, d_line, d_tip, s_band)</code> strictly on training quadrants, preventing the uncalibrated <code>k_self = 1</code> saturation failure. Live emission selects top corridors (<code>score &ge; p72</code>, 34,518 corridors covering 15.34% of footprint) and allocates <b>54,471 unit dots</b> via <code>gems57.emit.emit_decimated(tile_px=3)</code> + <code>gems57.emit.greedy_allocate</code>. All per-corridor geologist rationales are archived in <code>evidence/e3_corridor_rationale.csv</code>.</p>
 </div>
 
 </main>

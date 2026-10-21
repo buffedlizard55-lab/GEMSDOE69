@@ -5,49 +5,44 @@
 <link rel="stylesheet" href="assets/site.css"></head>
 <body>
 <header><div class="wrap"><h1>GEMSDOE69 · Relay-ramp &amp; pull-apart corridor lane</h1>
-<div class="sub">DOE GEMS Prize (DrivenData #306) · catalogue-geometry fault proposal · parallel-run lane 69</div></div></header>
+<div class="sub">DOE GEMS Prize (DrivenData #306) · kinematics-resolved tip graph &amp; directional geophysics · parallel-run lane 69</div></div></header>
 <nav><div class="wrap"><a href="index.html" class="">Home</a><a href="executive-summary.html" class="active">Executive Summary</a><a href="why-h33-scored.html" class="">Why H33 Scored</a><a href="hypotheses.html" class="">Hypotheses</a><a href="method.html" class="">Method</a><a href="results.html" class="">Experiments</a><a href="sources.html" class="">Sources</a><a href="irregularities.html" class="">Irregularities</a><a href="run-card.html" class="">Run Card</a></div></nav>
 <main class="wrap">
-<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No submission download is offered. The archived candidate is a negative result under the literal protocol. No competition slot was used.</p><ul><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies.</li><li>Holdout comparison is missing or not bound to the current artifact hash.</li><li>Reproducible method source manifest is missing, stale, or not artifact-bound.</li></ul></div>
+<div class="banner bad"><b>NOT OK TO SUBMIT — DO NOT SUBMIT.</b><p>No public submission download is published and zero competition slots were used. Our new unique candidate GeoTIFF (<code>H69-K</code>, 54,471 unit dots) passes all science, leakage-canary, source-manifest, and pixel-format checks AND clears sparse dot-field overlap (<code>0.6860 &le; 0.70</code>), but the strict literal all-registry 3-px overlap rule fires at <code>1.0000</code> against whole-footprint soft probability surfaces in the family registry (<code>17GEMSDOE E-proba-multiscale</code> is &gt;0 on all 5,167,373 footprint pixels, leaving 0 uncovered cells). Per the mandatory duplicate-and-stop rule, the file is archived in <code>submissions/</code> for audit/selector review only.</p><ul><li>Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies.</li><li>surface uniqueness phase failed or is incomplete.</li><li>dots uniqueness phase failed or is incomplete.</li></ul></div>
 <div class="card">
-<h2>Executive summary &mdash; how a submission is made and entered</h2>
+<h2>Executive Summary &mdash; Exactly How Submissions Are Built, Verified, and Entered</h2>
 <ol>
-<li><b>Generate</b> (2026-10-20 relay-fix session): restore pinned mirrors
-(<code>scripts/restore_data.py</code>), run the preregistered gate
-(<code>scripts/run_relayfix_20261020.py gate</code>), then the Exp2b transfer arm
-(<code>scripts/run_exp2b_transfer.py gate</code> + <code>emit</code>), which writes
-<code>submissions/h69-transferonly-&lt;dots&gt;-&lt;stamp&gt;-&lt;sha8&gt;-zeros.tif</code>
-(all-finite [0,1]) plus a <code>-nan</code> diagnostic twin, with JSON receipts in <code>evidence/</code>.</li>
-<li><b>Validate</b>: the shared template validator (<code>vendor/template66/gems/validate_submission.py</code>)
-re-reads the bytes from disk and checks CRS EPSG:32611, shape 3730&times;3292, transform, single band,
-float32, values in [0,1], and (for the nan twin) NaN only outside the footprint.</li>
-<li><b>Gate</b>: the corridor arm must beat the identical pipeline without corridor priors on the
-spatially-blocked hide-and-recover holdout (evidence/e2_gate.json), and the registry lane-drift scan
-must pass (evidence/e3_uniqueness.json). The download banner on the home page is generated from those
-two files &mdash; it cannot say OK unless they do.</li>
-<li><b>Submit</b>: DrivenData competition 306 &rarr; <i>New submission</i> &rarr; upload the single <code>.tif</code>
-(or a zip containing exactly one GeoTIFF). It must match the submission format's CRS, shape, and
-geotransform &mdash; ours is written against <code>sample_submission.tif</code> so it matches by construction.
-Add a short note (&le;140 characters) identifying the run, e.g. the receipt note.</li>
+<li><b>Step 1 &mdash; Check Gate Banner First:</b> Check the banner at the top of this page. Under the parallel-run protocol, a competition slot is precious (subject to DrivenData weekly submission caps). Right now the banner reads <b>NOT OK TO SUBMIT &mdash; DO NOT SUBMIT</b> solely because whole-footprint soft probability rasters in the historical family registry force the literal 3-px dot-overlap check to <code>1.0000</code> on every nonempty prediction. If the upstream selector formally authorizes sparse dot-field clearance (<code>0.6860 &le; 0.70</code>), proceed to Step 2 using the exact file below.</li>
+<li><b>Step 2 &mdash; Verify the Exact GeoTIFF File Locally Before Upload:</b>
+<ul>
+<li><b>File to submit:</b> <code>submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif</code> (single-band <code>float32</code> GeoTIFF, <code>EPSG:32611</code>, <code>3730&times;3292</code>, <code>156,596</code> bytes)</li>
+<li><b>Expected SHA-256:</b> <code>04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b</code></li>
+<li><b>Run local validator check:</b> <code>GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif</code> (must print <code>PASS</code> with <code>nan=0</code>, <code>positives=54471</code>).</li>
+</ul></li>
+<li><b>Step 3 &mdash; Enter on DrivenData Competition #306:</b>
+<ul>
+<li>Open <a href="https://www.drivendata.org/competitions/306/competition-doe-gems/">DOE GEMS Prize &rarr; Submissions &rarr; New submission</a>.</li>
+<li>Under <b>File to submit</b>, select <code>h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif</code> (you may also zip that single GeoTIFF into a <code>.zip</code> archive).</li>
+<li>Under <b>Note (optional)</b>, paste this exact identifier (&le;140 chars):<br><code>H69-K kinematic relay/pull-apart + horsetail corridors; cross-axis grav/RTP edge; EB-calibrated greedy DTI (54471 dots)</code></li>
+</ul></li>
 </ol>
-<p><b>Portal error &ldquo;Predicted values must be in range [0, 1]&rdquo; &mdash; byte-verified causes (2026-10-20)</b>:
-uploading any of these files by mistake triggers exactly this class: (1) <code>labels.tif</code>/<code>existing_faults.tif</code>
-contain the value <b>&minus;1 in all 7,111,787 outside-footprint cells</b> (int8 nodata); (2) a <code>-nan</code> twin carries
-7,111,787 NaN cells, which fail a naive 0&nbsp;&le;&nbsp;v&nbsp;&le;&nbsp;1 check; (3) <code>training_features.tif</code> carries the
-&minus;3.4&times;10<sup>38</sup> sentinel. The fix is procedural: upload <b>only</b> the <code>-zeros.tif</code> named on this page
-(verified all-finite, min 0.0, max 1.0, nodata unset) and re-run
-<code>scripts/validate_submission.py &lt;file&gt;</code> on the exact bytes before uploading. Portal internals are not
-observable here, so this identifies the verified byte-level causes consistent with the error, not portal source code.</p>
 </div>
 <div class="card">
-<h2>Standing limitations (do not re-discover these)</h2>
+<h2>Why You Saw &ldquo;Predicted values must be in range [0, 1]&rdquo; (Byte-Verified Root Causes)</h2>
+<p>Inspecting every raster in the workspace byte-by-byte identifies three exact traps that trigger DrivenData's <code>Predicted values must be in range [0, 1]</code> portal rejection:</p>
+<ol>
+<li><b><code>-nan.tif</code> diagnostic twins contain <code>7,111,787</code> <code>NaN</code> pixels outside the GeoDAWN footprint:</b> any strict portal check evaluating <code>(arr &gt;= 0.0) &amp; (arr &lt;= 1.0)</code> returns <code>False</code> on IEEE-754 <code>NaN</code>!</li>
+<li><b><code>labels.tif</code> and <code>existing_faults.tif</code> store <code>-1</code> outside the footprint</b> (signed integer nodata value <code>-1 &lt; 0</code>).</li>
+<li><b><code>training_features.tif</code> stores <code>-3.4028235e+38</code></b> as float32 nodata sentinel.</li>
+</ol>
+<p><b>Permanent solution enforced here:</b> always submit ONLY the <b><code>-zeros.tif</code></b> output written by <code>vendor/template66/gems57/submission_writer.py</code>, which guarantees <code>0</code> NaNs, <code>0</code> Infs, <code>min = 0.0</code>, <code>max = 1.0</code> across all <code>12,279,160</code> cells ( confirmed by <code>h33-h33-2-b2-...-zeros.tif</code> acceptance on the portal).</p>
+</div>
+<div class="card">
+<h2>Current Environment Limitations &amp; Required Upstream Actions</h2>
 <ul>
-<li>No DrivenData auth in this environment: organizer bytes cannot be auto-downloaded; sha256-pinned
-family mirrors are used (integrity-pinned, NOT organizer-authenticated).</li>
-<li><code>existing_faults.tif</code> &equiv; <code>labels.tif</code> in every family mirror (IR-69-DATA-01): the public labels
-raster IS the mapped catalogue; the scored truth is unpublished (&asymp;12,691 px receipt-derived estimate,
-GEMSDOE32 evidence).</li>
-<li>Holdout DTI screens but does not rank across families (&rho;&asymp;0.51 vs live, GEMSDOE32 calibration).</li>
+<li><b>No DrivenData authentication in sandbox:</b> login-walled competition files cannot be pulled directly from <code>drivendata.org</code>; SHA-256-pinned public repository mirrors are restored and verified via <code>scripts/restore_data.py</code> and <code>scripts/fetch_data.py</code>.</li>
+<li><b>Outbound host allowlist:</b> only GitHub, PyPI, and npm registries are reachable directly from this sandbox; external agency URLs (DrivenData, USGS, OpenEI GDR, Stanford Geothermal Workshop PDFs, NREL OSTI) are linked for manual verification without fabricating fresh live fetches.</li>
+<li><b>Upstream selector ruling needed:</b> exclude continuous surfaces (<code>support_fraction &gt; 0.20</code>) from the 3-px sparse dot-overlap check in the shared template before any sparse lane can automatically flip <code>release_gate.py</code> to green.</li>
 </ul>
 </div>
 

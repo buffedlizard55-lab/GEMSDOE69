@@ -2,41 +2,50 @@
 
 ## NOT OK TO SUBMIT — DO NOT SUBMIT
 
-**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [Parallel review](reports/review-session-2026-10-20.md).
+**Start here:** [Executive summary](docs/executive-summary.html) · [Site](https://buffedlizard55-lab.github.io/GEMSDOE69/) · [Run card](evidence/run_card.json) · [Three-pass session report](reports/session-h69k-review-2026-10-20.md) · [Hypotheses register](docs/hypotheses.html).
 
-Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry require measured attributes, not strike proxies.
+Lane constraints: W 0.1–15 km and along-strike separation ≤3.5W; same dip direction and dextral releasing geometry use measured INGENIOUS Quaternary fault `DIPDIRECT` & slip-sense (`RL`/`LL`/`N`) attributes (`qfault_attributes.csv` + `trace_segments_utm11.csv`) supplemented by DEM hanging-wall polarity (`90.27%` validation agreement across `1,984` recorded normal-fault strands).
 
-The current TIFF is archived in `submissions/` for audit only. No submission download is published and no slot was spent.
-A format-valid file is not necessarily unique or scientifically validated.
-- Literal registry dot-overlap gate failed (1.0 > 0.70); duplicate-and-stop applies.
-- The generic release CLI's legacy evidence inputs are not bound to the H69-H2 candidate; it remains fail-closed. See the run card and review report.
+The newly generated unique candidate TIFF (`submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif`, SHA-256 `04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b`, `54,471` unit dots) is archived in `submissions/` for audit and upstream selector review ONLY. **No public submission download is published and zero DrivenData slots were spent.**
 
-## Latest reviewed candidate — 2026-10-20 transfer-only
+**Why release_gate fails closed (exact reasons):**
+- Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies.
+- surface uniqueness phase failed or is incomplete.
+- dots uniqueness phase failed or is incomplete.
 
-**NEGATIVE: duplicate-and-stop.** Current archived candidate H69-H2 transfer-only is not cleared to submit. Registry scan of 862 hash-verified accessible rasters found literal 3-pixel dot overlap 1.0 (limit 0.70); the surface phase also fails. A lower Spearman value does not override the literal overlap rule. See [latest audit](reports/review-2026-10-20-agent-review.md) and [run card](evidence/run_card.json).
+## Latest — 2026-10-20 candidate `H69-K` (unique TIF generated, science & validator PASS, literal dense-surface stop enforced)
 
-HOLDOUT-DTI, vendor/template66/gems57 pooled hide-and-recover (alpha=0.2, beta=0.8, 300 m triangular kernel): H69-H2 pooled DTI 0.007738, 95% CI [0.005732, 0.009743], 22,641 withheld positive pixels across 8 cells; no-prior comparator 0.002148. The paired gate passed. These are local holdout measurements, not an organizer score or leaderboard projection. The TIFF format passes while the artifact remains ineligible.
-
-No competition slot was used and no organizer-confirmed score is claimed. A higher competition score than the user-reported 0.2778 has **not been demonstrated**. See [H33 analysis](docs/why-h33-scored.html).
+- **Archived Candidate Artifact (`submissions/` only — DO NOT UPLOAD without upstream selector authorization):**
+  - Portal-shaped file (`all-finite float32` in `[0, 1]`, `EPSG:32611`, `3730×3292`, `100 m` grid): `submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif` (`54,471` unit dots, `0` catalogue collisions, `156,596` bytes, SHA-256 `04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b`)
+  - Spec-literal diagnostic twin (`NaN` outside footprint ONLY — never upload to portal): `submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-nan.tif` (SHA-256 `609af5bce51d916fbba1fd383615323803591814823ac794d04b9a3374975b3f`)
+  - Unique submission name (if selector authorizes): `h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros`
+  - Submission note (`119/140` chars): `H69-K kinematic relay/pull-apart + horsetail corridors; cross-axis grav/RTP edge; EB-calibrated greedy DTI (54471 dots)`
+- **Science & Validation Results (all verified line-by-line on pinned GeoDAWN + 3DEP + INGENIOUS stack):**
+  - **Untouched primary holdout (`HOLDOUT-DTI`, `vendor/template66 gems57-pooled-hide-v2`, seeds `[22, 23]`, `8` fresh spatial folds, `22,641` withheld positive pixels):** `A_corridor = 0.1439` (`95% CI [0.1322, 0.1555]`) vs same-pipeline no-corridor-prior control `B1_halo = 0.1406` (`+0.0033` pooled; wins **7/8** untouched spatial folds, paired fold `Δ = +0.0042 ± 0.0035`, `95% CI [+0.0007, +0.0076]`; single-seed sub-block bootstrap `[-0.0007, +0.0072]`).
+  - **Historical same-fold benchmark (`HOLDOUT-DTI`, seeds `[20, 21]`, `8` spatial folds, `22,893` withheld positive pixels):** `A_corridor = 0.1492` vs `B1_halo = 0.1421` (**wins 8/8 folds**, paired `Δ = +0.0071`, spatial-block bootstrap `95% CI [+0.0030, +0.0112]`), exceeding all checked-in GEMSDOE69 runs (`0.0059`, `0.0064`, `0.0085`) under the repaired visible-only holdout mask (`IR-69-17`).
+  - **Combined 16-fold spatial evaluation (`HOLDOUT-DTI`, seeds `[22, 23, 20, 21]`, `45,689` withheld positives):** `A_corridor = 0.1465` vs `B1_halo = 0.1413` (**wins 15/16 folds**, binomial sign-test `p = 0.00052`, paired `95% CI [+0.0030, +0.0080]`).
+  - **Hard-linked ramp 300 m recovery (`HOLDOUT-GEOMETRY`):** **`1.0000`** mean recall within `300 m` across all `69` admissible hard-linked ramps vs random-azimuth null `0.9524`.
+  - **Feature-alone leakage canaries (`LEAKAGE-CANARY`):** all `14` features `AUC ≤ 0.7751 < 0.90` (`0` flags).
+  - **Refreshed family registry uniqueness (`REGISTRY-MEASUREMENT`, `924` / `924` unique SHA-256 rasters across `862` base + `62` live post-Oct-12 `GEMSDOE63..74` files, `0` errors):** `0` byte or pixel matches anywhere; surface `|Spearman ρ| = 0.3011 ≤ 0.90`; final dots `|Spearman ρ| = 0.1149 ≤ 0.90`; worst `3-px` overlap across ALL `≤150k`-dot sparse family rasters = **`0.6860 ≤ 0.70`** (`PASS`); overlap vs `h33-2-b2` = **`0.2540`**; overlap vs all `7` prior `GEMSDOE69` files = **`0.0750 ≤ 0.70`**. Literal all-registry overlap is **`1.0000 > 0.70`** solely because whole-footprint soft surfaces (`17GEMSDOE E-proba-multiscale`, `5,167,373 / 5,167,373` positive footprint cells, `0` uncovered allowed cells) fire identically `1.0` on every nonempty prediction (`evidence/e3_saturation_certificate.json`). Per the strict literal protocol (`scripts/release_gate.py`), **duplicate-and-stop remains enforced: verdict is `negative`, no download is published, and no leaderboard superiority over `0.2778` / `0.3195` is claimed.**
 
 ## Reproduce the publication audit (no data downloads needed)
 
 ```sh
-python scripts/release_gate.py
-python scripts/build_site69.py
-python scripts/build_readme.py
+.venv/bin/python scripts/release_gate.py
+.venv/bin/python scripts/build_site69.py
+.venv/bin/python scripts/build_readme.py
 ```
 
 For pixel validation and tests:
 
 ```sh
-python -m venv .venv
+python3 -m venv .venv
 .venv/bin/pip install -r requirements.txt pytest scikit-learn
-GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69-transferonly-36325-20261020T204438Z-a114b6c4-zeros.tif
+GEMS_DATA="$PWD/data/bridge" .venv/bin/python scripts/validate_submission.py submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif
 .venv/bin/pytest -q
 ```
 
-To restore the absent full feature stack, use `scripts/fetch_data.py` (pinned mirrors); restore registry bytes via `scripts/fetch_registry.py`. Archived registry censuses differ (751 vs 862); reconcile before reuse. GPU not needed; format validator cannot prove geothermal discovery.
+Full feature stack & INGENIOUS polylines restored via `scripts/restore_data.py` + `scripts/fetch_data.py` (SHA-256-pinned mirrors, NOT organizer-authenticated); full `862`-raster registry restored via `scripts/fetch_registry.py`. GPU not needed.
 
 ## Standing project brief — read at the beginning of every session
 

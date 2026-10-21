@@ -1,0 +1,80 @@
+{
+  "evidence_class": "LEAKAGE-CANARY",
+  "rule": "single-feature AUC > 0.90 on untouched holdout = leakage until proven otherwise",
+  "draws": [
+    22,
+    23
+  ],
+  "leakage_flags": [],
+  "generated_utc": "20261020T225534Z",
+  "grav_edge": {
+    "auc": 0.542607929479587,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "mag_edge": {
+    "auc": 0.5282377540833187,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "mag_low": {
+    "auc": 0.5070922405612096,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "scarp": {
+    "auc": 0.5398884311026788,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "grav_ge_abs": {
+    "auc": 0.535712707017313,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "grav_gn_abs": {
+    "auc": 0.5001006004342867,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "mag_ge_abs": {
+    "auc": 0.5292048124305434,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "mag_gn_abs": {
+    "auc": 0.5175532992447506,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "e_pix": {
+    "auc": 0.5623886337515354,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "corridor_score_band": {
+    "auc": 0.674159638825525,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "neg_dist_corridor_trace": {
+    "auc": 0.697844390444961,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "neg_dist_visible_tip": {
+    "auc": 0.7260617994019418,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "neg_dist_visible_catalogue": {
+    "auc": 0.735306298053021,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  },
+  "oof_corridor_posterior": {
+    "auc": 0.7751249360633444,
+    "n_pos": 22796,
+    "n_neg": 1200000
+  }
+}

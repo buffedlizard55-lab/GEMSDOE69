@@ -1,95 +1,81 @@
 {
-  "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
-  "generated_utc": "20261020T201504Z",
-  "scoring_mode": "joint",
-  "grav_hg_s1": {
-    "auc": 0.5305418979556492,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "evidence_class": "LEAKAGE-CANARY",
+  "rule": "single-feature AUC > 0.90 on untouched holdout = leakage until proven otherwise",
+  "draws": [
+    22,
+    23
+  ],
+  "leakage_flags": [],
+  "generated_utc": "20261020T225534Z",
+  "grav_edge": {
+    "auc": 0.542607929479587,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "mag_hg_s1": {
-    "auc": 0.5376840831238601,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "mag_edge": {
+    "auc": 0.5282377540833187,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "grav_hg_s2": {
-    "auc": 0.5305355347954177,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "mag_low": {
+    "auc": 0.5070922405612096,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "mag_hg_s2": {
-    "auc": 0.5389047017061042,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "scarp": {
+    "auc": 0.5398884311026788,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "grav_hg_s4": {
-    "auc": 0.529309748848189,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "grav_ge_abs": {
+    "auc": 0.535712707017313,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "mag_hg_s4": {
-    "auc": 0.5378066802300789,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "grav_gn_abs": {
+    "auc": 0.5001006004342867,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "grav_tilt_s2": {
-    "auc": 0.5062428593765597,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "mag_ge_abs": {
+    "auc": 0.5292048124305434,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "mag_tilt_s2": {
-    "auc": 0.5148141127382865,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "mag_gn_abs": {
+    "auc": 0.5175532992447506,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "grav_hg_prov": {
-    "auc": 0.49734889203039406,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "e_pix": {
+    "auc": 0.5623886337515354,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "grav_vg_prov": {
-    "auc": 0.5224056920392296,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "corridor_score_band": {
+    "auc": 0.674159638825525,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "geod_2ndinv": {
-    "auc": 0.5530383954762326,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "neg_dist_corridor_trace": {
+    "auc": 0.697844390444961,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "mag_hg_prov": {
-    "auc": 0.5364947113005831,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "neg_dist_visible_tip": {
+    "auc": 0.7260617994019418,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "mag_vg_prov": {
-    "auc": 0.48237893134829474,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "neg_dist_visible_catalogue": {
+    "auc": 0.735306298053021,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "tc_prov": {
-    "auc": 0.43950500574306417,
-    "n_pos": 11318,
-    "n_neg": 200000
+  "oof_corridor_posterior": {
+    "auc": 0.7751249360633444,
+    "n_pos": 22796,
+    "n_neg": 1200000
   },
-  "mag_low_tmi": {
-    "auc": 0.4963676795811981,
-    "n_pos": 11318,
-    "n_neg": 200000
-  },
-  "mag_low_rtp": {
-    "auc": 0.48283129749072273,
-    "n_pos": 11318,
-    "n_neg": 200000
-  },
-  "lidar_scarp": {
-    "auc": 0.572205257428365,
-    "n_pos": 11318,
-    "n_neg": 200000
-  },
-  "corridor_propensity": {
-    "auc": 0.6908643307121399,
-    "n_pos": 11318,
-    "n_neg": 200000
-  }
+  "artifact_sha256": "04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b"
 }

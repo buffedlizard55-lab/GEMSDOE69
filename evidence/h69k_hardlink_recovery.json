@@ -1,0 +1,3503 @@
+{
+  "summary": {
+    "evidence_class": "HOLDOUT-GEOMETRY",
+    "links_found": 349,
+    "relay_admissible": 69,
+    "n_hardlinked_found": 349,
+    "n_tested": 69,
+    "mean_recovery_within_300m": 1.0,
+    "median_recovery_within_300m": 1.0,
+    "mean_kernel_recall": 0.9650890051301148,
+    "mean_null_recall_300m": 0.9523593472168944,
+    "frac_links_recall_ge_0p7": 1.0,
+    "frac_links_beating_null_p95": 0.0
+  },
+  "rows": [
+    {
+      "link_poly": 0,
+      "link_record": 4,
+      "link_len_km": 0.826,
+      "A_record": 7,
+      "B_record": 7,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7,
+      "link_record": 4,
+      "link_len_km": 0.256,
+      "A_record": 4,
+      "B_record": 4,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 12,
+      "link_record": 5,
+      "link_len_km": 1.084,
+      "A_record": 7,
+      "B_record": 7,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 19,
+      "link_record": 7,
+      "link_len_km": 1.78,
+      "A_record": 4,
+      "B_record": 5,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 20,
+      "link_record": 7,
+      "link_len_km": 1.056,
+      "A_record": 5,
+      "B_record": 5,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 88,
+      "link_record": 24,
+      "link_len_km": 2.67,
+      "A_record": 24,
+      "B_record": 24,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 99,
+      "link_record": 28,
+      "link_len_km": 1.776,
+      "A_record": 1307,
+      "B_record": 29,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 142,
+      "link_record": 31,
+      "link_len_km": 0.805,
+      "A_record": 31,
+      "B_record": 31,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 184,
+      "link_record": 40,
+      "link_len_km": 0.702,
+      "A_record": 40,
+      "B_record": 43,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 185,
+      "link_record": 40,
+      "link_len_km": 2.358,
+      "A_record": 40,
+      "B_record": 40,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 208,
+      "link_record": 43,
+      "link_len_km": 2.163,
+      "A_record": 43,
+      "B_record": 36,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 246,
+      "link_record": 59,
+      "link_len_km": 0.374,
+      "A_record": 59,
+      "B_record": 59,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 247,
+      "link_record": 59,
+      "link_len_km": 0.728,
+      "A_record": 59,
+      "B_record": 59,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 248,
+      "link_record": 59,
+      "link_len_km": 1.168,
+      "A_record": 59,
+      "B_record": 59,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 451,
+      "link_record": 76,
+      "link_len_km": 0.29,
+      "A_record": 76,
+      "B_record": 76,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 15,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 494,
+      "link_record": 77,
+      "link_len_km": 1.291,
+      "A_record": 77,
+      "B_record": 77,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 719,
+      "link_record": 104,
+      "link_len_km": 1.532,
+      "A_record": 104,
+      "B_record": 104,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 721,
+      "link_record": 104,
+      "link_len_km": 1.827,
+      "A_record": 104,
+      "B_record": 107,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 723,
+      "link_record": 104,
+      "link_len_km": 0.704,
+      "A_record": 104,
+      "B_record": 104,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 725,
+      "link_record": 104,
+      "link_len_km": 1.087,
+      "A_record": 104,
+      "B_record": 104,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 875,
+      "link_record": 108,
+      "link_len_km": 1.396,
+      "A_record": 106,
+      "B_record": 106,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1027,
+      "link_record": 151,
+      "link_len_km": 0.477,
+      "A_record": 151,
+      "B_record": 152,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1029,
+      "link_record": 151,
+      "link_len_km": 4.166,
+      "A_record": 152,
+      "B_record": 151,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1032,
+      "link_record": 151,
+      "link_len_km": 0.305,
+      "A_record": 151,
+      "B_record": 152,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 1037,
+      "link_record": 152,
+      "link_len_km": 1.063,
+      "A_record": 151,
+      "B_record": 152,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 1040,
+      "link_record": 152,
+      "link_len_km": 0.468,
+      "A_record": 151,
+      "B_record": 151,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1049,
+      "link_record": 166,
+      "link_len_km": 2.64,
+      "A_record": 167,
+      "B_record": 167,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.8475675675675676,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 1051,
+      "link_record": 167,
+      "link_len_km": 4.247,
+      "A_record": 166,
+      "B_record": 166,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1254,
+      "link_record": 189,
+      "link_len_km": 1.218,
+      "A_record": 189,
+      "B_record": 189,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9607843137254903,
+      "null_recall_300m_mean": 0.9752941176470589,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 1394,
+      "link_record": 190,
+      "link_len_km": 0.679,
+      "A_record": 190,
+      "B_record": 190,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 1429,
+      "link_record": 190,
+      "link_len_km": 0.91,
+      "A_record": 190,
+      "B_record": 190,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 19,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.990909090909091,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 1430,
+      "link_record": 190,
+      "link_len_km": 0.315,
+      "A_record": 190,
+      "B_record": 190,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 1438,
+      "link_record": 191,
+      "link_len_km": 0.44,
+      "A_record": 189,
+      "B_record": 191,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 1478,
+      "link_record": 191,
+      "link_len_km": 0.416,
+      "A_record": 189,
+      "B_record": 189,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 15,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 1479,
+      "link_record": 191,
+      "link_len_km": 0.928,
+      "A_record": 191,
+      "B_record": 191,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1555,
+      "link_record": 205,
+      "link_len_km": 0.571,
+      "A_record": 205,
+      "B_record": 205,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1556,
+      "link_record": 205,
+      "link_len_km": 0.329,
+      "A_record": 205,
+      "B_record": 205,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1557,
+      "link_record": 205,
+      "link_len_km": 0.657,
+      "A_record": 205,
+      "B_record": 205,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 1562,
+      "link_record": 205,
+      "link_len_km": 0.519,
+      "A_record": 205,
+      "B_record": 205,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1564,
+      "link_record": 205,
+      "link_len_km": 0.628,
+      "A_record": 205,
+      "B_record": 205,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1565,
+      "link_record": 205,
+      "link_len_km": 0.537,
+      "A_record": 205,
+      "B_record": 205,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1566,
+      "link_record": 205,
+      "link_len_km": 1.083,
+      "A_record": 205,
+      "B_record": 205,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1567,
+      "link_record": 205,
+      "link_len_km": 0.881,
+      "A_record": 205,
+      "B_record": 205,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 1568,
+      "link_record": 205,
+      "link_len_km": 2.225,
+      "A_record": 205,
+      "B_record": 205,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 1569,
+      "link_record": 205,
+      "link_len_km": 0.609,
+      "A_record": 205,
+      "B_record": 205,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2324,
+      "link_record": 265,
+      "link_len_km": 1.806,
+      "A_record": 266,
+      "B_record": 266,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2325,
+      "link_record": 265,
+      "link_len_km": 1.583,
+      "A_record": 266,
+      "B_record": 266,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2415,
+      "link_record": 282,
+      "link_len_km": 2.474,
+      "A_record": 282,
+      "B_record": 282,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2417,
+      "link_record": 282,
+      "link_len_km": 1.968,
+      "A_record": 282,
+      "B_record": 282,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2424,
+      "link_record": 282,
+      "link_len_km": 0.391,
+      "A_record": 282,
+      "B_record": 282,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 2544,
+      "link_record": 321,
+      "link_len_km": 1.82,
+      "A_record": 321,
+      "B_record": 321,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2545,
+      "link_record": 321,
+      "link_len_km": 0.381,
+      "A_record": 321,
+      "B_record": 321,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2547,
+      "link_record": 321,
+      "link_len_km": 0.25,
+      "A_record": 321,
+      "B_record": 321,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2549,
+      "link_record": 321,
+      "link_len_km": 0.598,
+      "A_record": 321,
+      "B_record": 321,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2555,
+      "link_record": 323,
+      "link_len_km": 3.402,
+      "A_record": 323,
+      "B_record": 323,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2598,
+      "link_record": 342,
+      "link_len_km": 3.562,
+      "A_record": 342,
+      "B_record": 342,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2599,
+      "link_record": 342,
+      "link_len_km": 0.463,
+      "A_record": 342,
+      "B_record": 342,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2600,
+      "link_record": 342,
+      "link_len_km": 0.922,
+      "A_record": 342,
+      "B_record": 342,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9444444444444445,
+      "null_recall_300m_mean": 0.9633333333333333,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 2661,
+      "link_record": 349,
+      "link_len_km": 4.234,
+      "A_record": 347,
+      "B_record": 347,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2675,
+      "link_record": 366,
+      "link_len_km": 0.439,
+      "A_record": 366,
+      "B_record": 366,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2679,
+      "link_record": 366,
+      "link_len_km": 0.576,
+      "A_record": 366,
+      "B_record": 367,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 2689,
+      "link_record": 367,
+      "link_len_km": 0.805,
+      "A_record": 367,
+      "B_record": 367,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2690,
+      "link_record": 367,
+      "link_len_km": 0.614,
+      "A_record": 367,
+      "B_record": 367,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 15,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 2699,
+      "link_record": 367,
+      "link_len_km": 0.495,
+      "A_record": 367,
+      "B_record": 367,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2700,
+      "link_record": 367,
+      "link_len_km": 0.595,
+      "A_record": 367,
+      "B_record": 367,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 14,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.9942857142857143,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 2702,
+      "link_record": 367,
+      "link_len_km": 0.392,
+      "A_record": 367,
+      "B_record": 367,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2703,
+      "link_record": 367,
+      "link_len_km": 0.403,
+      "A_record": 367,
+      "B_record": 367,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2708,
+      "link_record": 368,
+      "link_len_km": 0.883,
+      "A_record": 1658,
+      "B_record": 368,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 2734,
+      "link_record": 371,
+      "link_len_km": 1.121,
+      "A_record": 370,
+      "B_record": 371,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 2805,
+      "link_record": 399,
+      "link_len_km": 0.56,
+      "A_record": 399,
+      "B_record": 399,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2822,
+      "link_record": 399,
+      "link_len_km": 0.667,
+      "A_record": 399,
+      "B_record": 399,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2823,
+      "link_record": 399,
+      "link_len_km": 0.412,
+      "A_record": 399,
+      "B_record": 399,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2826,
+      "link_record": 399,
+      "link_len_km": 1.054,
+      "A_record": 399,
+      "B_record": 399,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2831,
+      "link_record": 399,
+      "link_len_km": 1.619,
+      "A_record": 399,
+      "B_record": 399,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2832,
+      "link_record": 399,
+      "link_len_km": 0.498,
+      "A_record": 399,
+      "B_record": 399,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2833,
+      "link_record": 399,
+      "link_len_km": 0.571,
+      "A_record": 399,
+      "B_record": 399,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 2847,
+      "link_record": 399,
+      "link_len_km": 0.3,
+      "A_record": 399,
+      "B_record": 399,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2851,
+      "link_record": 399,
+      "link_len_km": 0.735,
+      "A_record": 399,
+      "B_record": 399,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2863,
+      "link_record": 400,
+      "link_len_km": 0.326,
+      "A_record": 400,
+      "B_record": 400,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2880,
+      "link_record": 400,
+      "link_len_km": 1.229,
+      "A_record": 400,
+      "B_record": 400,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 2920,
+      "link_record": 405,
+      "link_len_km": 1.03,
+      "A_record": 405,
+      "B_record": 405,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2947,
+      "link_record": 409,
+      "link_len_km": 0.597,
+      "A_record": 409,
+      "B_record": 411,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2962,
+      "link_record": 410,
+      "link_len_km": 1.138,
+      "A_record": 410,
+      "B_record": 412,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2967,
+      "link_record": 410,
+      "link_len_km": 3.332,
+      "A_record": 410,
+      "B_record": 410,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 2984,
+      "link_record": 412,
+      "link_len_km": 1.986,
+      "A_record": 410,
+      "B_record": 410,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 3078,
+      "link_record": 443,
+      "link_len_km": 1.047,
+      "A_record": 443,
+      "B_record": 443,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 3082,
+      "link_record": 443,
+      "link_len_km": 0.678,
+      "A_record": 443,
+      "B_record": 443,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 3108,
+      "link_record": 443,
+      "link_len_km": 1.444,
+      "A_record": 443,
+      "B_record": 443,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 3122,
+      "link_record": 445,
+      "link_len_km": 0.488,
+      "A_record": 445,
+      "B_record": 445,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 3157,
+      "link_record": 463,
+      "link_len_km": 1.683,
+      "A_record": 464,
+      "B_record": 464,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 3260,
+      "link_record": 491,
+      "link_len_km": 0.454,
+      "A_record": 491,
+      "B_record": 491,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 3261,
+      "link_record": 491,
+      "link_len_km": 0.448,
+      "A_record": 491,
+      "B_record": 491,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 3473,
+      "link_record": 519,
+      "link_len_km": 0.361,
+      "A_record": 519,
+      "B_record": 519,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 3500,
+      "link_record": 519,
+      "link_len_km": 1.587,
+      "A_record": 519,
+      "B_record": 519,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 3633,
+      "link_record": 540,
+      "link_len_km": 0.661,
+      "A_record": 538,
+      "B_record": 540,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 3637,
+      "link_record": 540,
+      "link_len_km": 0.401,
+      "A_record": 540,
+      "B_record": 540,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 19,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9523809523809524,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 3646,
+      "link_record": 542,
+      "link_len_km": 2.066,
+      "A_record": 537,
+      "B_record": 538,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 3799,
+      "link_record": 599,
+      "link_len_km": 0.33,
+      "A_record": 604,
+      "B_record": 604,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 3807,
+      "link_record": 601,
+      "link_len_km": 0.264,
+      "A_record": 601,
+      "B_record": 601,
+      "relay_admissible": false,
+      "reject_reason": "rejected_step_sense"
+    },
+    {
+      "link_poly": 3821,
+      "link_record": 602,
+      "link_len_km": 0.459,
+      "A_record": 604,
+      "B_record": 602,
+      "relay_admissible": false,
+      "reject_reason": "rejected_step_sense"
+    },
+    {
+      "link_poly": 3835,
+      "link_record": 604,
+      "link_len_km": 0.849,
+      "A_record": 599,
+      "B_record": 604,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 3866,
+      "link_record": 604,
+      "link_len_km": 0.705,
+      "A_record": 603,
+      "B_record": 599,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 3883,
+      "link_record": 604,
+      "link_len_km": 1.081,
+      "A_record": 599,
+      "B_record": 598,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 4425,
+      "link_record": 630,
+      "link_len_km": 0.352,
+      "A_record": 630,
+      "B_record": 630,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4426,
+      "link_record": 630,
+      "link_len_km": 1.452,
+      "A_record": 630,
+      "B_record": 630,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4427,
+      "link_record": 630,
+      "link_len_km": 0.988,
+      "A_record": 630,
+      "B_record": 630,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4428,
+      "link_record": 630,
+      "link_len_km": 0.898,
+      "A_record": 630,
+      "B_record": 630,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4432,
+      "link_record": 630,
+      "link_len_km": 1.305,
+      "A_record": 630,
+      "B_record": 630,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4433,
+      "link_record": 630,
+      "link_len_km": 1.021,
+      "A_record": 630,
+      "B_record": 630,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4434,
+      "link_record": 630,
+      "link_len_km": 0.472,
+      "A_record": 630,
+      "B_record": 630,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4435,
+      "link_record": 630,
+      "link_len_km": 0.43,
+      "A_record": 630,
+      "B_record": 630,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4436,
+      "link_record": 630,
+      "link_len_km": 0.791,
+      "A_record": 630,
+      "B_record": 630,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 14,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.978,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 4442,
+      "link_record": 630,
+      "link_len_km": 0.388,
+      "A_record": 630,
+      "B_record": 630,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4443,
+      "link_record": 630,
+      "link_len_km": 1.215,
+      "A_record": 630,
+      "B_record": 630,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4444,
+      "link_record": 630,
+      "link_len_km": 1.157,
+      "A_record": 630,
+      "B_record": 631,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4609,
+      "link_record": 677,
+      "link_len_km": 1.271,
+      "A_record": 677,
+      "B_record": 676,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.97,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 4692,
+      "link_record": 713,
+      "link_len_km": 3.429,
+      "A_record": 712,
+      "B_record": 712,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9333333333333333,
+      "null_recall_300m_mean": 0.7150000000000002,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 4697,
+      "link_record": 713,
+      "link_len_km": 0.503,
+      "A_record": 713,
+      "B_record": 713,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4718,
+      "link_record": 719,
+      "link_len_km": 0.893,
+      "A_record": 719,
+      "B_record": 719,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4720,
+      "link_record": 719,
+      "link_len_km": 1.145,
+      "A_record": 719,
+      "B_record": 719,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4723,
+      "link_record": 719,
+      "link_len_km": 0.723,
+      "A_record": 719,
+      "B_record": 719,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4726,
+      "link_record": 719,
+      "link_len_km": 0.755,
+      "A_record": 719,
+      "B_record": 719,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4728,
+      "link_record": 719,
+      "link_len_km": 1.65,
+      "A_record": 719,
+      "B_record": 719,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4779,
+      "link_record": 729,
+      "link_len_km": 0.762,
+      "A_record": 729,
+      "B_record": 729,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 4782,
+      "link_record": 729,
+      "link_len_km": 1.797,
+      "A_record": 729,
+      "B_record": 729,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4786,
+      "link_record": 729,
+      "link_len_km": 1.217,
+      "A_record": 729,
+      "B_record": 729,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.7692307692307693,
+      "null_recall_300m_mean": 0.9892307692307694,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 4883,
+      "link_record": 749,
+      "link_len_km": 1.282,
+      "A_record": 749,
+      "B_record": 749,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4909,
+      "link_record": 749,
+      "link_len_km": 0.568,
+      "A_record": 749,
+      "B_record": 749,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 4916,
+      "link_record": 749,
+      "link_len_km": 0.451,
+      "A_record": 749,
+      "B_record": 749,
+      "relay_admissible": false,
+      "reject_reason": "rejected_step_sense"
+    },
+    {
+      "link_poly": 4944,
+      "link_record": 750,
+      "link_len_km": 0.392,
+      "A_record": 750,
+      "B_record": 750,
+      "relay_admissible": false,
+      "reject_reason": "rejected_step_sense"
+    },
+    {
+      "link_poly": 5005,
+      "link_record": 774,
+      "link_len_km": 0.363,
+      "A_record": 774,
+      "B_record": 774,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 5044,
+      "link_record": 774,
+      "link_len_km": 0.4,
+      "A_record": 774,
+      "B_record": 774,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 11,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 5050,
+      "link_record": 774,
+      "link_len_km": 0.339,
+      "A_record": 774,
+      "B_record": 774,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 5156,
+      "link_record": 774,
+      "link_len_km": 0.827,
+      "A_record": 775,
+      "B_record": 774,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5157,
+      "link_record": 774,
+      "link_len_km": 0.703,
+      "A_record": 774,
+      "B_record": 775,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 5173,
+      "link_record": 774,
+      "link_len_km": 0.424,
+      "A_record": 774,
+      "B_record": 774,
+      "relay_admissible": false,
+      "reject_reason": "rejected_step_sense"
+    },
+    {
+      "link_poly": 5179,
+      "link_record": 774,
+      "link_len_km": 1.036,
+      "A_record": 774,
+      "B_record": 774,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5213,
+      "link_record": 775,
+      "link_len_km": 0.547,
+      "A_record": 774,
+      "B_record": 774,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 5227,
+      "link_record": 777,
+      "link_len_km": 1.626,
+      "A_record": 775,
+      "B_record": 775,
+      "relay_admissible": false,
+      "reject_reason": "rejected_step_sense"
+    },
+    {
+      "link_poly": 5337,
+      "link_record": 801,
+      "link_len_km": 0.312,
+      "A_record": 801,
+      "B_record": 801,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5339,
+      "link_record": 801,
+      "link_len_km": 0.394,
+      "A_record": 801,
+      "B_record": 801,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5340,
+      "link_record": 801,
+      "link_len_km": 0.323,
+      "A_record": 801,
+      "B_record": 801,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5341,
+      "link_record": 801,
+      "link_len_km": 0.361,
+      "A_record": 801,
+      "B_record": 801,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5375,
+      "link_record": 802,
+      "link_len_km": 0.363,
+      "A_record": 802,
+      "B_record": 802,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5405,
+      "link_record": 802,
+      "link_len_km": 0.416,
+      "A_record": 802,
+      "B_record": 802,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5446,
+      "link_record": 807,
+      "link_len_km": 0.753,
+      "A_record": 809,
+      "B_record": 807,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5447,
+      "link_record": 807,
+      "link_len_km": 1.385,
+      "A_record": 807,
+      "B_record": 807,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5451,
+      "link_record": 807,
+      "link_len_km": 1.004,
+      "A_record": 807,
+      "B_record": 807,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5452,
+      "link_record": 807,
+      "link_len_km": 0.595,
+      "A_record": 807,
+      "B_record": 807,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5453,
+      "link_record": 807,
+      "link_len_km": 0.874,
+      "A_record": 807,
+      "B_record": 809,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.9745454545454545,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 5459,
+      "link_record": 808,
+      "link_len_km": 0.713,
+      "A_record": 808,
+      "B_record": 808,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.9977777777777778,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 5460,
+      "link_record": 808,
+      "link_len_km": 0.589,
+      "A_record": 808,
+      "B_record": 808,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5462,
+      "link_record": 808,
+      "link_len_km": 0.775,
+      "A_record": 808,
+      "B_record": 808,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5479,
+      "link_record": 809,
+      "link_len_km": 2.258,
+      "A_record": 809,
+      "B_record": 807,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5488,
+      "link_record": 810,
+      "link_len_km": 1.042,
+      "A_record": 810,
+      "B_record": 810,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 15,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.9266666666666667,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 5492,
+      "link_record": 810,
+      "link_len_km": 0.297,
+      "A_record": 810,
+      "B_record": 2665,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5496,
+      "link_record": 810,
+      "link_len_km": 1.573,
+      "A_record": 810,
+      "B_record": 810,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.8518518518518519,
+      "null_recall_300m_mean": 0.8355555555555556,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 5497,
+      "link_record": 810,
+      "link_len_km": 1.524,
+      "A_record": 810,
+      "B_record": 810,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5498,
+      "link_record": 810,
+      "link_len_km": 1.474,
+      "A_record": 810,
+      "B_record": 810,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5499,
+      "link_record": 810,
+      "link_len_km": 0.416,
+      "A_record": 2665,
+      "B_record": 810,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5513,
+      "link_record": 813,
+      "link_len_km": 1.398,
+      "A_record": 2665,
+      "B_record": 2665,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 14,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9074074074074076,
+      "null_recall_300m_mean": 0.8766666666666667,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 5526,
+      "link_record": 855,
+      "link_len_km": 0.484,
+      "A_record": 855,
+      "B_record": 855,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5527,
+      "link_record": 855,
+      "link_len_km": 0.741,
+      "A_record": 855,
+      "B_record": 855,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 5528,
+      "link_record": 855,
+      "link_len_km": 0.889,
+      "A_record": 855,
+      "B_record": 855,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5535,
+      "link_record": 855,
+      "link_len_km": 0.314,
+      "A_record": 855,
+      "B_record": 855,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5537,
+      "link_record": 855,
+      "link_len_km": 1.128,
+      "A_record": 855,
+      "B_record": 855,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5538,
+      "link_record": 855,
+      "link_len_km": 1.809,
+      "A_record": 855,
+      "B_record": 855,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5541,
+      "link_record": 855,
+      "link_len_km": 0.678,
+      "A_record": 855,
+      "B_record": 855,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5544,
+      "link_record": 856,
+      "link_len_km": 0.38,
+      "A_record": 856,
+      "B_record": 856,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5545,
+      "link_record": 856,
+      "link_len_km": 0.425,
+      "A_record": 856,
+      "B_record": 856,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5546,
+      "link_record": 856,
+      "link_len_km": 0.401,
+      "A_record": 856,
+      "B_record": 856,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5547,
+      "link_record": 856,
+      "link_len_km": 1.06,
+      "A_record": 856,
+      "B_record": 856,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 13,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9743589743589745,
+      "null_recall_300m_mean": 0.9723076923076924,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 5548,
+      "link_record": 856,
+      "link_len_km": 0.973,
+      "A_record": 856,
+      "B_record": 856,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5549,
+      "link_record": 856,
+      "link_len_km": 0.382,
+      "A_record": 856,
+      "B_record": 856,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5550,
+      "link_record": 856,
+      "link_len_km": 0.373,
+      "A_record": 856,
+      "B_record": 856,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5556,
+      "link_record": 856,
+      "link_len_km": 1.479,
+      "A_record": 856,
+      "B_record": 856,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5559,
+      "link_record": 856,
+      "link_len_km": 1.092,
+      "A_record": 856,
+      "B_record": 856,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5607,
+      "link_record": 859,
+      "link_len_km": 0.343,
+      "A_record": 859,
+      "B_record": 859,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 5621,
+      "link_record": 862,
+      "link_len_km": 0.661,
+      "A_record": 862,
+      "B_record": 862,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 5643,
+      "link_record": 862,
+      "link_len_km": 0.899,
+      "A_record": 862,
+      "B_record": 862,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 20,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.8974358974358974,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 5662,
+      "link_record": 862,
+      "link_len_km": 0.333,
+      "A_record": 862,
+      "B_record": 862,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 5764,
+      "link_record": 863,
+      "link_len_km": 0.328,
+      "A_record": 863,
+      "B_record": 863,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 19,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 6032,
+      "link_record": 907,
+      "link_len_km": 0.227,
+      "A_record": 907,
+      "B_record": 907,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6199,
+      "link_record": 967,
+      "link_len_km": 0.702,
+      "A_record": 968,
+      "B_record": 967,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 6215,
+      "link_record": 968,
+      "link_len_km": 1.907,
+      "A_record": 967,
+      "B_record": 967,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6216,
+      "link_record": 968,
+      "link_len_km": 1.399,
+      "A_record": 967,
+      "B_record": 967,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 6220,
+      "link_record": 974,
+      "link_len_km": 1.918,
+      "A_record": 974,
+      "B_record": 974,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6229,
+      "link_record": 974,
+      "link_len_km": 0.236,
+      "A_record": 974,
+      "B_record": 974,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6235,
+      "link_record": 974,
+      "link_len_km": 1.467,
+      "A_record": 974,
+      "B_record": 974,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6238,
+      "link_record": 974,
+      "link_len_km": 2.185,
+      "A_record": 974,
+      "B_record": 974,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 6526,
+      "link_record": 1070,
+      "link_len_km": 0.965,
+      "A_record": 1070,
+      "B_record": 1070,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6529,
+      "link_record": 1070,
+      "link_len_km": 0.5,
+      "A_record": 1070,
+      "B_record": 1070,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6530,
+      "link_record": 1070,
+      "link_len_km": 0.968,
+      "A_record": 1070,
+      "B_record": 1070,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6556,
+      "link_record": 1122,
+      "link_len_km": 2.731,
+      "A_record": 1123,
+      "B_record": 1122,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 6559,
+      "link_record": 1123,
+      "link_len_km": 2.129,
+      "A_record": 1122,
+      "B_record": 1122,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6561,
+      "link_record": 1142,
+      "link_len_km": 3.295,
+      "A_record": 2640,
+      "B_record": 2640,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6567,
+      "link_record": 1143,
+      "link_len_km": 1.3,
+      "A_record": 1143,
+      "B_record": 1143,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6568,
+      "link_record": 1143,
+      "link_len_km": 1.625,
+      "A_record": 1143,
+      "B_record": 1143,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9696969696969698,
+      "null_recall_300m_mean": 0.9009090909090911,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 6574,
+      "link_record": 1148,
+      "link_len_km": 1.173,
+      "A_record": 1148,
+      "B_record": 1148,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 6580,
+      "link_record": 1148,
+      "link_len_km": 3.39,
+      "A_record": 1149,
+      "B_record": 1148,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 6583,
+      "link_record": 1148,
+      "link_len_km": 1.315,
+      "A_record": 1148,
+      "B_record": 1148,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.9329411764705882,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 6585,
+      "link_record": 1148,
+      "link_len_km": 1.334,
+      "A_record": 1148,
+      "B_record": 1148,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 14,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.9021052631578946,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 6587,
+      "link_record": 1148,
+      "link_len_km": 0.303,
+      "A_record": 1148,
+      "B_record": 1148,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 15,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9444444444444445,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 6588,
+      "link_record": 1148,
+      "link_len_km": 0.311,
+      "A_record": 1148,
+      "B_record": 1148,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6589,
+      "link_record": 1148,
+      "link_len_km": 0.943,
+      "A_record": 1148,
+      "B_record": 1148,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6590,
+      "link_record": 1148,
+      "link_len_km": 1.004,
+      "A_record": 1148,
+      "B_record": 1148,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6593,
+      "link_record": 1148,
+      "link_len_km": 1.41,
+      "A_record": 1148,
+      "B_record": 1147,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 14,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9019607843137255,
+      "null_recall_300m_mean": 0.8764705882352942,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 6757,
+      "link_record": 1169,
+      "link_len_km": 1.487,
+      "A_record": 1171,
+      "B_record": 1169,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6768,
+      "link_record": 1169,
+      "link_len_km": 0.707,
+      "A_record": 1169,
+      "B_record": 1169,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6769,
+      "link_record": 1169,
+      "link_len_km": 0.635,
+      "A_record": 1169,
+      "B_record": 1169,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6770,
+      "link_record": 1169,
+      "link_len_km": 0.984,
+      "A_record": 1171,
+      "B_record": 1169,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 15,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.97,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 6785,
+      "link_record": 1171,
+      "link_len_km": 1.929,
+      "A_record": 1169,
+      "B_record": 1169,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 6980,
+      "link_record": 1196,
+      "link_len_km": 1.963,
+      "A_record": 1198,
+      "B_record": 1198,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 7040,
+      "link_record": 1201,
+      "link_len_km": 0.509,
+      "A_record": 1201,
+      "B_record": 1201,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7041,
+      "link_record": 1201,
+      "link_len_km": 2.72,
+      "A_record": 1201,
+      "B_record": 1201,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 7133,
+      "link_record": 1225,
+      "link_len_km": 0.559,
+      "A_record": 1225,
+      "B_record": 1225,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7136,
+      "link_record": 1225,
+      "link_len_km": 0.997,
+      "A_record": 1225,
+      "B_record": 1225,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7138,
+      "link_record": 1225,
+      "link_len_km": 0.863,
+      "A_record": 1225,
+      "B_record": 1225,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.9981818181818182,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 7171,
+      "link_record": 1229,
+      "link_len_km": 3.034,
+      "A_record": 1229,
+      "B_record": 1229,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 7172,
+      "link_record": 1229,
+      "link_len_km": 2.382,
+      "A_record": 1229,
+      "B_record": 1229,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7173,
+      "link_record": 1229,
+      "link_len_km": 1.693,
+      "A_record": 1229,
+      "B_record": 1229,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7177,
+      "link_record": 1229,
+      "link_len_km": 0.883,
+      "A_record": 1229,
+      "B_record": 1229,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7178,
+      "link_record": 1229,
+      "link_len_km": 1.226,
+      "A_record": 1229,
+      "B_record": 1230,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7181,
+      "link_record": 1230,
+      "link_len_km": 2.39,
+      "A_record": 1229,
+      "B_record": 1229,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7215,
+      "link_record": 1233,
+      "link_len_km": 1.297,
+      "A_record": 1233,
+      "B_record": 1233,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 7241,
+      "link_record": 1241,
+      "link_len_km": 0.758,
+      "A_record": 1241,
+      "B_record": 1241,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7253,
+      "link_record": 1242,
+      "link_len_km": 1.347,
+      "A_record": 1243,
+      "B_record": 1243,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7261,
+      "link_record": 1243,
+      "link_len_km": 0.548,
+      "A_record": 1243,
+      "B_record": 1243,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7262,
+      "link_record": 1243,
+      "link_len_km": 1.609,
+      "A_record": 1243,
+      "B_record": 1244,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7269,
+      "link_record": 1243,
+      "link_len_km": 0.711,
+      "A_record": 1243,
+      "B_record": 1243,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7270,
+      "link_record": 1243,
+      "link_len_km": 0.403,
+      "A_record": 1243,
+      "B_record": 1243,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7271,
+      "link_record": 1243,
+      "link_len_km": 0.929,
+      "A_record": 1243,
+      "B_record": 1243,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7273,
+      "link_record": 1243,
+      "link_len_km": 0.528,
+      "A_record": 1243,
+      "B_record": 1243,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 7276,
+      "link_record": 1243,
+      "link_len_km": 1.384,
+      "A_record": 1243,
+      "B_record": 1242,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9629629629629631,
+      "null_recall_300m_mean": 0.91,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 7302,
+      "link_record": 1246,
+      "link_len_km": 0.612,
+      "A_record": 1246,
+      "B_record": 1246,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.8365106088009965,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 7304,
+      "link_record": 1246,
+      "link_len_km": 1.11,
+      "A_record": 1247,
+      "B_record": 1246,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7305,
+      "link_record": 1246,
+      "link_len_km": 0.461,
+      "A_record": 1246,
+      "B_record": 1247,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 7350,
+      "link_record": 1253,
+      "link_len_km": 1.527,
+      "A_record": 1252,
+      "B_record": 1252,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7351,
+      "link_record": 1253,
+      "link_len_km": 0.702,
+      "A_record": 1253,
+      "B_record": 1252,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7441,
+      "link_record": 1282,
+      "link_len_km": 3.653,
+      "A_record": 1286,
+      "B_record": 1282,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 7449,
+      "link_record": 1282,
+      "link_len_km": 0.411,
+      "A_record": 1282,
+      "B_record": 1282,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 11,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9333333333333333,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 7452,
+      "link_record": 1282,
+      "link_len_km": 0.392,
+      "A_record": 1282,
+      "B_record": 1282,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 7517,
+      "link_record": 1298,
+      "link_len_km": 1.066,
+      "A_record": 1301,
+      "B_record": 1301,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7525,
+      "link_record": 1299,
+      "link_len_km": 0.395,
+      "A_record": 1299,
+      "B_record": 1299,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 7531,
+      "link_record": 1299,
+      "link_len_km": 1.217,
+      "A_record": 1299,
+      "B_record": 774,
+      "relay_admissible": false,
+      "reject_reason": "rejected_step_sense"
+    },
+    {
+      "link_poly": 7533,
+      "link_record": 1299,
+      "link_len_km": 0.459,
+      "A_record": 1299,
+      "B_record": 1299,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 7553,
+      "link_record": 1299,
+      "link_len_km": 0.881,
+      "A_record": 1299,
+      "B_record": 1299,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7563,
+      "link_record": 1301,
+      "link_len_km": 1.222,
+      "A_record": 1298,
+      "B_record": 1299,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7564,
+      "link_record": 1301,
+      "link_len_km": 0.642,
+      "A_record": 1298,
+      "B_record": 1298,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7574,
+      "link_record": 1302,
+      "link_len_km": 0.572,
+      "A_record": 1302,
+      "B_record": 1302,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9523809523809524,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 7589,
+      "link_record": 1302,
+      "link_len_km": 0.201,
+      "A_record": 1302,
+      "B_record": 1302,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7591,
+      "link_record": 1302,
+      "link_len_km": 0.483,
+      "A_record": 1305,
+      "B_record": 1302,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 15,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 7599,
+      "link_record": 1304,
+      "link_len_km": 0.622,
+      "A_record": 1304,
+      "B_record": 1304,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 14,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 7761,
+      "link_record": 1364,
+      "link_len_km": 2.481,
+      "A_record": 1365,
+      "B_record": 1365,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7763,
+      "link_record": 1364,
+      "link_len_km": 1.006,
+      "A_record": 1365,
+      "B_record": 1365,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7774,
+      "link_record": 1365,
+      "link_len_km": 0.891,
+      "A_record": 1365,
+      "B_record": 1365,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.9933333333333334,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 7775,
+      "link_record": 1365,
+      "link_len_km": 1.361,
+      "A_record": 1364,
+      "B_record": 1365,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7779,
+      "link_record": 1365,
+      "link_len_km": 1.316,
+      "A_record": 1364,
+      "B_record": 1364,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 7899,
+      "link_record": 1379,
+      "link_len_km": 1.258,
+      "A_record": 1379,
+      "B_record": 1379,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8118,
+      "link_record": 1412,
+      "link_len_km": 0.221,
+      "A_record": 1412,
+      "B_record": 1412,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8129,
+      "link_record": 1412,
+      "link_len_km": 0.515,
+      "A_record": 1412,
+      "B_record": 1412,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8153,
+      "link_record": 1421,
+      "link_len_km": 1.074,
+      "A_record": 1677,
+      "B_record": 1677,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 8162,
+      "link_record": 1422,
+      "link_len_km": 0.424,
+      "A_record": 1422,
+      "B_record": 1422,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8166,
+      "link_record": 1423,
+      "link_len_km": 2.803,
+      "A_record": 1423,
+      "B_record": 1423,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8167,
+      "link_record": 1423,
+      "link_len_km": 1.672,
+      "A_record": 1423,
+      "B_record": 1423,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8168,
+      "link_record": 1423,
+      "link_len_km": 1.305,
+      "A_record": 1423,
+      "B_record": 1423,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8202,
+      "link_record": 1445,
+      "link_len_km": 0.718,
+      "A_record": 1445,
+      "B_record": 1445,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8203,
+      "link_record": 1445,
+      "link_len_km": 1.272,
+      "A_record": 1445,
+      "B_record": 1445,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9791666666666667,
+      "null_recall_300m_mean": 0.9825,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 8217,
+      "link_record": 1445,
+      "link_len_km": 0.357,
+      "A_record": 1445,
+      "B_record": 1445,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8219,
+      "link_record": 1445,
+      "link_len_km": 0.46,
+      "A_record": 1445,
+      "B_record": 1446,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8226,
+      "link_record": 1446,
+      "link_len_km": 1.431,
+      "A_record": 1445,
+      "B_record": 1445,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8377,
+      "link_record": 1514,
+      "link_len_km": 0.777,
+      "A_record": 1514,
+      "B_record": 1514,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8395,
+      "link_record": 1514,
+      "link_len_km": 0.956,
+      "A_record": 1514,
+      "B_record": 1514,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8419,
+      "link_record": 1516,
+      "link_len_km": 0.518,
+      "A_record": 1516,
+      "B_record": 1516,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8420,
+      "link_record": 1516,
+      "link_len_km": 0.484,
+      "A_record": 1516,
+      "B_record": 1516,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8630,
+      "link_record": 1540,
+      "link_len_km": 1.637,
+      "A_record": 1540,
+      "B_record": 1540,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8640,
+      "link_record": 1540,
+      "link_len_km": 1.024,
+      "A_record": 1541,
+      "B_record": 1540,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 8676,
+      "link_record": 1552,
+      "link_len_km": 1.68,
+      "A_record": 1567,
+      "B_record": 1552,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 8677,
+      "link_record": 1552,
+      "link_len_km": 1.231,
+      "A_record": 1552,
+      "B_record": 1567,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9803921568627452,
+      "null_recall_300m_mean": 0.9694117647058823,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 8724,
+      "link_record": 1555,
+      "link_len_km": 0.468,
+      "A_record": 1567,
+      "B_record": 1555,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 8725,
+      "link_record": 1555,
+      "link_len_km": 0.74,
+      "A_record": 1555,
+      "B_record": 1552,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 8728,
+      "link_record": 1555,
+      "link_len_km": 0.788,
+      "A_record": 1555,
+      "B_record": 1555,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8791,
+      "link_record": 1563,
+      "link_len_km": 0.916,
+      "A_record": 1565,
+      "B_record": 1565,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8794,
+      "link_record": 1565,
+      "link_len_km": 1.783,
+      "A_record": 1565,
+      "B_record": 1563,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8801,
+      "link_record": 1565,
+      "link_len_km": 1.206,
+      "A_record": 1565,
+      "B_record": 1565,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 19,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.98875,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 8837,
+      "link_record": 1567,
+      "link_len_km": 3.442,
+      "A_record": 1560,
+      "B_record": 1552,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 8838,
+      "link_record": 1567,
+      "link_len_km": 2.883,
+      "A_record": 1552,
+      "B_record": 1555,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 8851,
+      "link_record": 1570,
+      "link_len_km": 3.956,
+      "A_record": 1570,
+      "B_record": 2672,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9057894538406988,
+      "null_recall_300m_mean": 0.6588235294117646,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 8897,
+      "link_record": 1581,
+      "link_len_km": 0.328,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9333333333333333,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 8898,
+      "link_record": 1581,
+      "link_len_km": 0.439,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 8899,
+      "link_record": 1581,
+      "link_len_km": 2.287,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 19,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.6778065587219608,
+      "null_recall_300m_mean": 0.6825806451612902,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 8902,
+      "link_record": 1581,
+      "link_len_km": 0.827,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8903,
+      "link_record": 1581,
+      "link_len_km": 2.537,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 17,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.7383889400342256,
+      "null_recall_300m_mean": 0.6096969696969697,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 8907,
+      "link_record": 1581,
+      "link_len_km": 0.315,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8924,
+      "link_record": 1581,
+      "link_len_km": 0.258,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8926,
+      "link_record": 1581,
+      "link_len_km": 0.723,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 18,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 8934,
+      "link_record": 1581,
+      "link_len_km": 0.683,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8937,
+      "link_record": 1581,
+      "link_len_km": 1.369,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.915,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 8945,
+      "link_record": 1581,
+      "link_len_km": 0.37,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8953,
+      "link_record": 1581,
+      "link_len_km": 0.883,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8964,
+      "link_record": 1581,
+      "link_len_km": 2.755,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 8965,
+      "link_record": 1581,
+      "link_len_km": 2.415,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 19,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.956989247311828,
+      "null_recall_300m_mean": 0.852258064516129,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 8966,
+      "link_record": 1581,
+      "link_len_km": 1.033,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8967,
+      "link_record": 1581,
+      "link_len_km": 1.867,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 8968,
+      "link_record": 1581,
+      "link_len_km": 1.046,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 8972,
+      "link_record": 1581,
+      "link_len_km": 2.314,
+      "A_record": 1581,
+      "B_record": 1581,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.789435059782015,
+      "null_recall_300m_mean": 0.6933333333333335,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 8979,
+      "link_record": 1581,
+      "link_len_km": 1.227,
+      "A_record": 1581,
+      "B_record": 1582,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 8995,
+      "link_record": 1582,
+      "link_len_km": 1.45,
+      "A_record": 1581,
+      "B_record": 1582,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 9097,
+      "link_record": 1609,
+      "link_len_km": 1.684,
+      "A_record": 1609,
+      "B_record": 1609,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 9117,
+      "link_record": 1609,
+      "link_len_km": 0.417,
+      "A_record": 1609,
+      "B_record": 1609,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 9119,
+      "link_record": 1609,
+      "link_len_km": 0.379,
+      "A_record": 1609,
+      "B_record": 1609,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 9123,
+      "link_record": 1609,
+      "link_len_km": 0.345,
+      "A_record": 1609,
+      "B_record": 1609,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 9217,
+      "link_record": 1657,
+      "link_len_km": 2.11,
+      "A_record": 1659,
+      "B_record": 1659,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 9264,
+      "link_record": 1659,
+      "link_len_km": 1.283,
+      "A_record": 1657,
+      "B_record": 1657,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 11485,
+      "link_record": 1929,
+      "link_len_km": 0.758,
+      "A_record": 1929,
+      "B_record": 1929,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 13,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 11523,
+      "link_record": 1929,
+      "link_len_km": 0.425,
+      "A_record": 1929,
+      "B_record": 1929,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 11524,
+      "link_record": 1929,
+      "link_len_km": 0.658,
+      "A_record": 1929,
+      "B_record": 1929,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 13,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9629629629629629,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 11604,
+      "link_record": 1934,
+      "link_len_km": 0.493,
+      "A_record": 1934,
+      "B_record": 1929,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 11605,
+      "link_record": 1934,
+      "link_len_km": 1.055,
+      "A_record": 1934,
+      "B_record": 1934,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 12,
+      "recall_300m": 1.0,
+      "kernel_recall": 0.9743589743589745,
+      "null_recall_300m_mean": 0.9276923076923077,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 11832,
+      "link_record": 1939,
+      "link_len_km": 0.299,
+      "A_record": 1939,
+      "B_record": 1939,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 19,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 11847,
+      "link_record": 1939,
+      "link_len_km": 2.392,
+      "A_record": 1939,
+      "B_record": 1939,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 11873,
+      "link_record": 1939,
+      "link_len_km": 0.233,
+      "A_record": 1939,
+      "B_record": 1939,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 19,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 13664,
+      "link_record": 2637,
+      "link_len_km": 0.362,
+      "A_record": 2637,
+      "B_record": 2637,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13666,
+      "link_record": 2637,
+      "link_len_km": 0.233,
+      "A_record": 2637,
+      "B_record": 2637,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13676,
+      "link_record": 2640,
+      "link_len_km": 0.539,
+      "A_record": 2640,
+      "B_record": 2640,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 14,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 13677,
+      "link_record": 2640,
+      "link_len_km": 1.713,
+      "A_record": 2640,
+      "B_record": 2640,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13678,
+      "link_record": 2640,
+      "link_len_km": 1.252,
+      "A_record": 2640,
+      "B_record": 1142,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13683,
+      "link_record": 2641,
+      "link_len_km": 0.781,
+      "A_record": 2641,
+      "B_record": 2641,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13691,
+      "link_record": 2642,
+      "link_len_km": 1.494,
+      "A_record": 2642,
+      "B_record": 2642,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13701,
+      "link_record": 2646,
+      "link_len_km": 0.67,
+      "A_record": 2647,
+      "B_record": 2645,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13704,
+      "link_record": 2648,
+      "link_len_km": 0.845,
+      "A_record": 2648,
+      "B_record": 2648,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13705,
+      "link_record": 2648,
+      "link_len_km": 0.588,
+      "A_record": 2648,
+      "B_record": 2648,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13708,
+      "link_record": 2648,
+      "link_len_km": 0.873,
+      "A_record": 2648,
+      "B_record": 2648,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13711,
+      "link_record": 2649,
+      "link_len_km": 0.564,
+      "A_record": 2649,
+      "B_record": 2649,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13755,
+      "link_record": 2665,
+      "link_len_km": 1.141,
+      "A_record": 2665,
+      "B_record": 2665,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13756,
+      "link_record": 2665,
+      "link_len_km": 1.133,
+      "A_record": 2665,
+      "B_record": 2665,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 13757,
+      "link_record": 2665,
+      "link_len_km": 0.98,
+      "A_record": 2665,
+      "B_record": 2665,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 16,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.975,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 13758,
+      "link_record": 2665,
+      "link_len_km": 0.316,
+      "A_record": 2665,
+      "B_record": 2665,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 13759,
+      "link_record": 2665,
+      "link_len_km": 0.905,
+      "A_record": 2665,
+      "B_record": 2665,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13772,
+      "link_record": 2665,
+      "link_len_km": 0.484,
+      "A_record": 2665,
+      "B_record": 2665,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 13777,
+      "link_record": 2665,
+      "link_len_km": 1.096,
+      "A_record": 813,
+      "B_record": 2665,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 14,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 0.9666666666666666,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 13778,
+      "link_record": 2665,
+      "link_len_km": 0.66,
+      "A_record": 2665,
+      "B_record": 813,
+      "relay_admissible": false,
+      "reject_reason": "rejected_strike"
+    },
+    {
+      "link_poly": 13780,
+      "link_record": 2665,
+      "link_len_km": 0.604,
+      "A_record": 2665,
+      "B_record": 810,
+      "relay_admissible": true,
+      "reject_reason": null,
+      "n_traces": 14,
+      "recall_300m": 1.0,
+      "kernel_recall": 1.0,
+      "null_recall_300m_mean": 1.0,
+      "null_recall_300m_p95": 1.0
+    },
+    {
+      "link_poly": 13785,
+      "link_record": 2666,
+      "link_len_km": 0.958,
+      "A_record": 2666,
+      "B_record": 2666,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13789,
+      "link_record": 2666,
+      "link_len_km": 0.851,
+      "A_record": 2666,
+      "B_record": 813,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13790,
+      "link_record": 2666,
+      "link_len_km": 0.815,
+      "A_record": 2666,
+      "B_record": 2666,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13849,
+      "link_record": 2669,
+      "link_len_km": 0.425,
+      "A_record": 2669,
+      "B_record": 2669,
+      "relay_admissible": false,
+      "reject_reason": "rejected_dip"
+    },
+    {
+      "link_poly": 13854,
+      "link_record": 2669,
+      "link_len_km": 1.317,
+      "A_record": 2669,
+      "B_record": 2669,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    },
+    {
+      "link_poly": 13916,
+      "link_record": 2670,
+      "link_len_km": 1.922,
+      "A_record": 2670,
+      "B_record": 2669,
+      "relay_admissible": false,
+      "reject_reason": "rejected_geometry"
+    }
+  ]
+}

@@ -1,0 +1,50 @@
+{
+  "schema_version": 1,
+  "preregistered_utc": "2026-10-20T21:50:00Z",
+  "hypothesis_id": "H69-K",
+  "title": "Kinematics-resolved step-over & tensile horsetail termination graph with strike-normal potential-field gradient projection and out-of-fold empirical-Bayes posterior calibration",
+  "lane": "GEMSDOE69 — relay-ramp and pull-apart corridor generator",
+  "frozen_before_holdout": true,
+  "untouched_primary_holdout_draws": [22, 23],
+  "historical_benchmark_draws": [20, 21],
+  "holdout_instrument": {
+    "split": "vendor/template66 gems57.holdout.buffered_component_draw (whole 8-connected components, hide_frac=0.20, feature_buffer_px=3 [300 m], boundary_buffer_px=12 [1.2 km], 4 quadrants NW/NE/SW/SE per draw)",
+    "evaluator": "vendor/template66 gems57.evaluate_holdout (gems57-pooled-hide-v2; alpha=0.2, beta=0.8, R=300 m triangular kernel; pixel-exact known-fault masking; paired spatial-block bootstrap CI)",
+    "secondary_screen": "repaired src/gems69/holdout69.py (with IR-69-17 fixed: offvis computed strictly from cell visible catalogue, never full catalogue)"
+  },
+  "geometry_specification": {
+    "polylines": "INGENIOUS Quaternary fault segments (external/trace_segments_utm11.csv) joined 1:1 by record_id to external/qfault_attributes.csv (recorded DIPDIRECT and slip sense RL/LL/N) plus DEM hanging-wall polarity fallback (external/geodawn_dem_a2_100m.tif at 600 m and 1.2 km offsets) validated on recorded normal faults; clipped strictly to visible traces in every holdout fold",
+    "stepover_spacing_W_px": [1.0, 150.0],
+    "along_strike_ratio_limit": 3.5,
+    "overlap_ratio_limit": -1.5,
+    "max_strike_divergence_deg": 35.0,
+    "max_partners_per_tip": 4,
+    "dip_rule": "reject normal-fault pairs with opposite hanging-wall dip vectors (dot(dip_vec_a, dip_vec_b) < 0)",
+    "slip_sense_rule": "reject restraining steps on recorded strike-slip strands (RL with cross_step < 0; LL with cross_step > 0); classify releasing strike-slip steps and NW transtensional right steps as pullapart, synthetic normal steps as relay",
+    "terminations_and_transfers": "emit tensile horsetail splays at free strike-slip terminations (26.5 deg and 45 deg into extensional quadrant), tensile tip continuations and WNW-dilatational wing splays at free normal tips, and displacement-transfer connectors to nearby oblique strands (<=4.0 km)",
+    "corridor_band_max_dist_px": 6.0
+  },
+  "scoring_specification": {
+    "formula": "S = 0.22*grav_perp + 0.20*mag_perp + 0.16*min(grav_perp, mag_perp) + 0.14*mag_low + 0.14*scarp + 0.08*dilation_tendency + 0.06*kinematic_prior",
+    "weights_sum": 1.0,
+    "grav_perp": "0.55 * rank01(|grad_300m(iso_grav_anom) . n_corridor|) + 0.45 * grav_edge (upward-continued 200m/600m/1800m THDR x tilt zero-crossing)",
+    "mag_perp": "0.55 * rank01(|grad_300m(rtp) . n_corridor|) + 0.45 * mag_edge (upward-continued 200m/600m/1800m THDR x tilt zero-crossing)",
+    "joint_conv": "min(grav_perp, mag_perp) — convergent density + magnetization step across corridor normal",
+    "mag_low": "rank01(-(RTP - Gaussian_3km(RTP))) — hydrothermal magnetite destruction along permeable damage zones",
+    "scarp": "rank01(0.45*ex_max + 0.35*step_max + 0.20*downface_max) on valid 1 m 3DEP cells",
+    "dilation_tendency": "cos^2(azimuth_deg - 22.5 deg) under Walker Lane WNW (112.5 deg) extension",
+    "kinematic_prior": {"pullapart": 1.0, "relay": 0.9, "transfer": 0.8}
+  },
+  "calibration_and_allocation": {
+    "calibration": "3-level hierarchical empirical-Bayes shrinkage fitted strictly out-of-fold on visible training quadrants: base rate p0 -> distance-to-visible rate r1(d_vis) [m_v=100] -> geometry rate r2(d_vis, d_line, d_tip) [m_g=250] -> full physics+score rate r3(d_vis, d_line, d_tip, s_band, e_pix) [m_f=350]",
+    "flank_exclusion_px": 2.0,
+    "allocator": "3x3 kernel-spacing tile decimation (gems57.emit.emit_decimated, tile_px=3) + exact greedy marginal-DTI bar selection (gems57.emit.greedy_allocate, k_truth=12226 live / K_TRUTH_RATIO*visible holdout)"
+  },
+  "gates": {
+    "leakage_canary": "every single feature and out-of-fold corridor feature AUC <= 0.90 on untouched holdout",
+    "hardlink_recovery": "mask linking fault in hard-linked catalogue ramps; require 300 m recall > null p95",
+    "science_gate": "pooled HOLDOUT-DTI(A_corridor) > pooled HOLDOUT-DTI(B1_halo) with paired spatial-block 95% CI lower bound > 0 on untouched draws (22, 23)",
+    "current_best_gate": "pooled HOLDOUT-DTI(A_corridor) beats all prior checked-in GEMSDOE69 holdout arms on identical shared evaluator",
+    "uniqueness_gate": "strict literal release_gate.py enforced without modification: |Spearman rho| <= 0.90 AND literal all-registry 3-px dot overlap <= 0.70 required for public download; if literal overlap fires on whole-footprint soft surfaces, archive candidate TIF as negative result with DO NOT SUBMIT banner and zero slot used"
+  }
+}

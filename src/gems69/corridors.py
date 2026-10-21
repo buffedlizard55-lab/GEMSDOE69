@@ -463,6 +463,46 @@ def dilation_tendency(az: float) -> float:
     return float(np.cos(np.radians(az - 22.5)) ** 2)
 
 
+CORRIDOR_BAND_PX = 10.0
+KINEMATIC_PRIOR = {"pullapart": 1.0, "relay": 0.9, "transfer": 0.8}
+
+
+def _unit(v: np.ndarray) -> np.ndarray:
+    a = np.asarray(v, float)
+    n = float(np.hypot(a[0], a[1]))
+    return a / n if n > 1e-9 else np.array([0.0, 1.0], dtype=float)
+
+
+class PolyIndex:
+    """Spatial KD-tree index over sampled visible polylines (map pixel units)."""
+
+    def __init__(self, polys: list, step: float = 0.5):
+        from . import traces
+        pts, own, tang, dips = [], [], [], []
+        for i, q in enumerate(polys):
+            s = traces.sample_polyline(q.verts, step)
+            d = traces._local_dirs(s)
+            pts.append(s)
+            own.append(np.full(len(s), i, dtype=np.int32))
+            tang.append(d.astype(np.float32))
+            if q.part.dip_side != 0:
+                rn = np.stack([d[:, 1], -d[:, 0]], axis=1) * float(q.part.dip_side)
+                dips.append(rn.astype(np.float32))
+            else:
+                dips.append(np.zeros_like(d, dtype=np.float32))
+        if pts:
+            self.pts = np.vstack(pts)
+            self.owner = np.concatenate(own)
+            self.tang = np.vstack(tang)
+            self.dip_vec = np.vstack(dips)
+        else:
+            self.pts = np.zeros((0, 2), dtype=float)
+            self.owner = np.zeros(0, dtype=np.int32)
+            self.tang = np.zeros((0, 2), dtype=np.float32)
+            self.dip_vec = np.zeros((0, 2), dtype=np.float32)
+        self.tree = cKDTree(self.pts) if len(self.pts) else None
+
+
 @dataclass
 class Line:
     kind: str
@@ -470,11 +510,35 @@ class Line:
     b: np.ndarray
     W: float = 0.0
     meta: dict = field(default_factory=dict)
+    setting: str = "relay"
+    score: float = 0.0
+    terms: dict = field(default_factory=dict)
+    rr: np.ndarray | None = field(default=None, repr=False)
+    cc: np.ndarray | None = field(default=None, repr=False)
+
+    @property
+    def azimuth(self) -> float:
+        d = np.asarray(self.b, float) - np.asarray(self.a, float)
+        return axial_deg(float(d[0]), float(d[1]))
+
+    @property
+    def normal(self) -> np.ndarray:
+        t = _unit(np.asarray(self.b, float) - np.asarray(self.a, float))
+        return np.array([t[1], -t[0]], dtype=float)
 
 
 def _pair_ok(ta, tb) -> tuple[bool, str]:
-    """Test geometric admissibility of tip pair (ta, tb)."""
-    # Dip polarity check
+    """Test geometric and measured kinematic admissibility of tip pair (ta, tb)."""
+    if getattr(ta, "poly", -1) == getattr(tb, "poly", -2):
+        return False, "rejected_same_poly"
+
+    out_a = _unit(np.asarray(ta.out, float))
+    out_b = _unit(np.asarray(tb.out, float))
+    # Sub-parallel terminal strikes (<= 35 deg axial divergence)
+    if abs(float(np.dot(out_a, out_b))) < np.cos(np.radians(35.0)):
+        return False, "rejected_strike"
+
+    # Dip polarity check (recorded INGENIOUS DIPDIRECT + DEM hanging-wall polarity)
     if hasattr(ta, "dip_vec") and hasattr(tb, "dip_vec"):
         if ta.dip_vec is not None and tb.dip_vec is not None:
             if float(np.dot(ta.dip_vec, tb.dip_vec)) < 0:
@@ -483,13 +547,6 @@ def _pair_ok(ta, tb) -> tuple[bool, str]:
     pa = np.asarray(ta.pos, float)
     pb = np.asarray(tb.pos, float)
     d = pb - pa
-
-    out_a = np.asarray(ta.out, float)
-    norm_out = float(np.linalg.norm(out_a))
-    if norm_out > 1e-9:
-        out_a = out_a / norm_out
-    else:
-        out_a = np.array([0.0, 1.0])
 
     right_a = np.array([out_a[1], -out_a[0]])
     cross_step = float(np.dot(d, right_a))
@@ -500,68 +557,341 @@ def _pair_ok(ta, tb) -> tuple[bool, str]:
     if w_px < 1.0 or w_px > 150.0:
         return False, "rejected_geometry"
 
-    # Along-strike separation <= 3.5 W
-    if along_step > 3.5 * w_px:
+    # Along-strike separation / overlap within [-3.5 W, +3.5 W]
+    if abs(along_step) > 3.5 * w_px:
         return False, "rejected_geometry"
 
-    # Strike-slip step sense
+    # Strike-slip releasing step sense check (measured RL / LL where recorded)
     sense_a = getattr(ta, "sense", "N")
+    sense_b = getattr(tb, "sense", "N")
     if sense_a == "RL":
         if cross_step < 0:
             return False, "rejected_step_sense"
     elif sense_a == "LL":
         if cross_step > 0:
             return False, "rejected_step_sense"
+    elif sense_b in ("RL", "LL"):
+        right_b = np.array([out_b[1], -out_b[0]])
+        cross_b = float(np.dot(-d, right_b))
+        if sense_b == "RL" and cross_b < 0:
+            return False, "rejected_step_sense"
+        if sense_b == "LL" and cross_b > 0:
+            return False, "rejected_step_sense"
 
     return True, "ok"
 
 
-def generate(tips: list, polys: list, include_cut: bool = False) -> tuple[list[Line], dict]:
-    """Generate corridor lines from tips and polylines."""
+def generate(tips: list, polys: list, include_cut: bool = False,
+             max_partners: int = 4, include_splays: bool = True) -> tuple[list[Line], dict]:
+    """Generate kinematics-resolved relay, pull-apart, and termination/transfer corridors."""
+    active_tips = [t for t in tips if include_cut or not getattr(t, "cut", False)]
     lines: list[Line] = []
-    counts = {"relay_pairs": 0, "pull_apart": 0}
+    counts = {"relay_pairs": 0, "pull_apart": 0, "terminations": 0, "transfer_links": 0}
+    if not active_tips:
+        return lines, counts
 
-    if len(tips) >= 2:
-        for i in range(len(tips)):
-            for j in range(i + 1, len(tips)):
-                ta, tb = tips[i], tips[j]
-                ok, _ = _pair_ok(ta, tb)
+    pts = np.array([np.asarray(t.pos, float) for t in active_tips], dtype=float)
+    tip_tree = cKDTree(pts)
+    pidx = PolyIndex(polys) if (polys and include_splays) else None
+
+    if len(active_tips) >= 2:
+        rad = search_radius_px(W_MAX_PX)
+        candidates_by_tip: dict[int, list[tuple[float, int]]] = {}
+        for i, ta in enumerate(active_tips):
+            for j in tip_tree.query_ball_point(pts[i], r=rad):
+                if j == i:
+                    continue
+                ok, _ = _pair_ok(ta, active_tips[j])
                 if ok:
+                    dist = float(np.hypot(*(pts[j] - pts[i])))
+                    candidates_by_tip.setdefault(i, []).append((dist, j))
+        emitted_pairs: set[tuple[int, int]] = set()
+        for i, cands in candidates_by_tip.items():
+            cands.sort(key=lambda x: x[0])
+            for _, j in cands[:max_partners]:
+                pkey = (min(i, j), max(i, j))
+                if pkey in emitted_pairs:
+                    continue
+                ta, tb = active_tips[i], active_tips[j]
+                ok, _ = _pair_ok(ta, tb)
+                if not ok:
+                    continue
+                emitted_pairs.add(pkey)
+                pa = np.asarray(ta.pos, float)
+                pb = np.asarray(tb.pos, float)
+                d = pb - pa
+                out_a = _unit(np.asarray(ta.out, float))
+                out_b = _unit(np.asarray(tb.out, float))
+                right_a = np.array([out_a[1], -out_a[0]])
+                cross = float(np.dot(d, right_a))
+                w = abs(cross)
+                along = float(np.dot(d, out_a))
+                is_overlap = along < 0
+                sa = getattr(ta, "sense", "N")
+                sb = getattr(tb, "sense", "N")
+                mean_az = axial_deg(out_a[0], out_a[1])
+                is_pullapart = (
+                    sa in ("RL", "LL")
+                    or sb in ("RL", "LL")
+                    or (135.0 <= mean_az <= 175.0 and cross > 0)
+                )
+                setting = "pullapart" if is_pullapart else "relay"
+                if is_pullapart:
+                    counts["pull_apart"] += 1
+                else:
                     counts["relay_pairs"] += 1
-                    pa = np.asarray(ta.pos, float)
-                    pb = np.asarray(tb.pos, float)
-                    d = pb - pa
-                    out_a = np.asarray(ta.out, float)
-                    norm_out = float(np.linalg.norm(out_a))
-                    if norm_out > 1e-9:
-                        out_a = out_a / norm_out
-                    right_a = np.array([out_a[1], -out_a[0]])
-                    w = abs(float(np.dot(d, right_a)))
-                    along = float(np.dot(d, out_a))
-                    is_overlap = along < 0
+                meta = {
+                    "overlap": is_overlap,
+                    "W_km": round(w / 10.0, 3),
+                    "L_km": round(abs(along) / 10.0, 3),
+                    "sense": sa if sa in ("RL", "LL", "N") else sb,
+                    "dip_source": f"{getattr(ta, 'dip_source', 'unk')}/{getattr(tb, 'dip_source', 'unk')}",
+                    "records": (getattr(ta, "record", None), getattr(tb, "record", None)),
+                }
+                lines.append(Line("relay_connector", pa.copy(), pb.copy(), W=w, meta=meta, setting=setting))
+                # Pull-apart / relay-ramp bounding sidewall continuations (soft-linked propagation)
+                L_side_a = float(np.clip(abs(along) if along > 0 else 0.75 * w, 4.0, 45.0))
+                along_b = float(np.dot(-d, out_b))
+                L_side_b = float(np.clip(abs(along_b) if along_b > 0 else 0.75 * w, 4.0, 45.0))
+                lines.append(Line("relay_sidewall", pa.copy(), pa + L_side_a * out_a, W=w, meta=meta, setting=setting))
+                lines.append(Line("relay_sidewall", pb.copy(), pb + L_side_b * out_b, W=w, meta=meta, setting=setting))
+                # Diagonal ramp breach / cross-basin fault between inner flank shoulders
+                back = min(0.45 * w, 0.35 * getattr(ta, "part_len", w), 10.0)
+                ba = pa - back * out_a
+                bb = pb - min(0.45 * w, 0.35 * getattr(tb, "part_len", w), 10.0) * out_b
+                lines.append(Line("relay_breach", ba, bb, W=w, meta=meta, setting=setting))
+                # Staggered en echelon strands across the step-over interior
+                n_ech = min(4, max(1, int(round(np.hypot(w, along) / 8.0))))
+                span = np.clip(0.55 * w, 2.5, 16.0)
+                ech_az = np.radians(mean_az + (22.0 if cross >= 0 else -22.0))
+                ech_dir = np.array([np.sin(ech_az), np.cos(ech_az)], dtype=float)
+                for k in range(n_ech):
+                    frac = (k + 0.5) / n_ech
+                    mid = pa + frac * d
+                    lines.append(Line("relay_enechelon", mid - 0.5 * span * ech_dir,
+                                      mid + 0.5 * span * ech_dir, W=w, meta=meta, setting=setting))
 
-                    lines.append(Line("relay_connector", pa, pb, W=w, meta={"overlap": is_overlap}))
-                    lines.append(Line("relay_breach", pa, pb, W=w, meta={"overlap": is_overlap}))
-                    lines.append(Line("relay_enechelon", pa, pb, W=w, meta={"overlap": is_overlap}))
-
-    if len(tips) == 1:
-        t = tips[0]
-        sense = getattr(t, "sense", "N")
-        if sense in ("RL", "LL"):
+    if include_splays:
+        counts["flank_relays"] = 0
+        nne_u = np.array([np.sin(np.radians(22.5)), np.cos(np.radians(22.5))], dtype=float)
+        cos35 = float(np.cos(np.radians(35.0)))
+        for t in active_tips:
             pos = np.asarray(t.pos, float)
-            out = np.asarray(t.out, float)
-            norm = float(np.linalg.norm(out))
-            if norm > 1e-9:
-                out = out / norm
-            right = np.array([out[1], -out[0]])
-            if sense == "RL":
-                splay1 = pos + 15.0 * (out + 0.5 * right)
-                splay2 = pos + 15.0 * (out + 1.0 * right)
+            out = _unit(np.asarray(t.out, float))
+            right = np.array([out[1], -out[0]], dtype=float)
+            sense = getattr(t, "sense", "N")
+            L_tip = float(np.clip(0.50 * getattr(t, "part_len", 30.0), 10.0, 30.0))
+            tmeta = {
+                "sense": sense,
+                "dip_source": getattr(t, "dip_source", "unk"),
+                "records": (getattr(t, "record", None),),
+                "W_km": round(L_tip / 10.0, 3),
+                "L_km": round(L_tip / 10.0, 3),
+            }
+            if sense in ("RL", "LL"):
+                sgn = 1.0 if sense == "RL" else -1.0
+                splay1 = pos + 15.0 * (out + 0.5 * sgn * right)
+                splay2 = pos + 15.0 * (out + 1.0 * sgn * right)
+                lines.append(Line("termination_splay", pos.copy(), splay1, W=L_tip, meta=tmeta, setting="transfer"))
+                lines.append(Line("termination_splay", pos.copy(), splay2, W=L_tip, meta=tmeta, setting="transfer"))
+                counts["terminations"] += 2
             else:
-                splay1 = pos + 15.0 * (out - 0.5 * right)
-                splay2 = pos + 15.0 * (out - 1.0 * right)
-            lines.append(Line("termination_splay", pos, splay1))
-            lines.append(Line("termination_splay", pos, splay2))
+                lines.append(Line("tip_continuation", pos.copy(), pos + L_tip * out,
+                                  W=L_tip, meta=tmeta, setting="transfer"))
+                # Conjugate tensile wing splays (hanging-wall / WNW-extension quadrants)
+                for sgn_w in (-1.0, 1.0):
+                    wdir = _unit(out + 0.36 * sgn_w * right)
+                    lines.append(Line("wing_splay", pos.copy(), pos + 0.70 * L_tip * wdir,
+                                      W=L_tip, meta=tmeta, setting="transfer"))
+                counts["terminations"] += 3
+
+            # Overlapping tip-to-flank synthetic relays + oblique transfer links
+            if pidx is not None and pidx.tree is not None:
+                near_idx = pidx.tree.query_ball_point(pos, r=85.0)
+                if near_idx:
+                    idx_arr = np.asarray(near_idx, dtype=np.int64)
+                    owners = pidx.owner[idx_arr]
+                    mask_other = owners != getattr(t, "poly", -1)
+                    if mask_other.any():
+                        idx_arr = idx_arr[mask_other]
+                        owners = owners[mask_other]
+                        deltas = pidx.pts[idx_arr] - pos[None, :]
+                        dists = np.hypot(deltas[:, 0], deltas[:, 1])
+                        # Group by owner polyline (up to 3 closest flank strands)
+                        seen_poly = set()
+                        order_d = np.argsort(dists)
+                        for oi in order_d:
+                            p_own = int(owners[oi])
+                            if p_own in seen_poly:
+                                continue
+                            seen_poly.add(p_own)
+                            kpt = int(idx_arr[oi])
+                            fpt = pidx.pts[kpt]
+                            ftang = pidx.tang[kpt]
+                            fdip = pidx.dip_vec[kpt]
+                            dvec = deltas[oi]
+                            cross_f = float(np.dot(dvec, right))
+                            w_f = abs(cross_f)
+                            along_f = float(np.dot(dvec, out))
+                            target_poly = polys[p_own]
+                            rmeta = dict(tmeta, W_km=round(w_f / 10.0, 3),
+                                         L_km=round(float(dists[oi]) / 10.0, 3),
+                                         target_record=getattr(target_poly.part, "record", None),
+                                         records=(getattr(t, "record", None), getattr(target_poly.part, "record", None)))
+                            sub_parallel = abs(float(np.dot(out, ftang))) >= cos35
+                            same_dip = True
+                            if getattr(t, "dip_vec", None) is not None and np.hypot(fdip[0], fdip[1]) > 0.5:
+                                same_dip = float(np.dot(t.dip_vec, fdip)) >= 0.0
+                            step_ok = True
+                            if sense == "RL" and cross_f < 0:
+                                step_ok = False
+                            elif sense == "LL" and cross_f > 0:
+                                step_ok = False
+
+                            if sub_parallel and same_dip and step_ok and 2.5 <= w_f <= 80.0 and abs(along_f) <= 2.5 * w_f + 15.0:
+                                f_set = "pullapart" if sense in ("RL", "LL") else "relay"
+                                # Oblique synthetic ramp connector from tip across ramp forward along flank
+                                target_oblique = fpt + min(1.2 * w_f, 20.0) * out
+                                lines.append(Line("flank_relay", pos.copy(), target_oblique,
+                                                  W=w_f, meta=rmeta, setting=f_set))
+                                # Mid-ramp synthetic breach strand parallel to strike
+                                mid_f = 0.5 * (pos + fpt)
+                                span_f = min(1.0 * w_f, 18.0)
+                                lines.append(Line("flank_breach", mid_f - 0.5 * span_f * out,
+                                                  mid_f + 1.1 * span_f * out,
+                                                  W=w_f, meta=rmeta, setting=f_set))
+                                counts["flank_relays"] += 1
+                            elif along_f > 2.0 and float(dists[oi]) <= 45.0:
+                                lines.append(Line("transfer_link", pos.copy(), fpt.copy(),
+                                                  W=float(dists[oi]), meta=rmeta, setting="transfer"))
+                                counts["transfer_links"] += 1
+                            if len(seen_poly) >= 3:
+                                break
 
     return lines, counts
 
+
+def rasterize_lines(lines: list[Line], footprint: np.ndarray, visible: np.ndarray | None = None) -> None:
+    """Sample every candidate corridor trace to grid pixels, stopping at known visible traces."""
+    from . import traces
+    H, W = footprint.shape
+    is_splay = {"termination_splay", "tip_continuation", "wing_splay"}
+    for ln in lines:
+        seg = traces.sample_polyline(np.vstack([ln.a, ln.b]), step=0.5)
+        r, c = traces.rc_of(seg)
+        inside = (r >= 0) & (r < H) & (c >= 0) & (c < W)
+        if ln.kind in is_splay and visible is not None and len(r) > 4:
+            # Truncate free-tip splays if they run into another visible fault after leaving tip
+            hit_vis = np.zeros(len(r), bool)
+            hit_vis[inside] = visible[r[inside], c[inside]]
+            hit_vis[:4] = False
+            stops = np.flatnonzero(hit_vis)
+            if stops.size:
+                cut = int(stops[0])
+                r, c, inside = r[:cut], c[:cut], inside[:cut]
+        r, c = r[inside], c[inside]
+        if r.size == 0:
+            ln.rr = np.zeros(0, dtype=np.int32)
+            ln.cc = np.zeros(0, dtype=np.int32)
+            continue
+        ok = footprint[r, c]
+        if visible is not None:
+            ok = ok & ~visible[r, c]
+        r, c = r[ok], c[ok]
+        if r.size > 1:
+            packed = r * np.int64(W) + c
+            _, uniq_idx = np.unique(packed, return_index=True)
+            uniq_idx.sort()
+            r, c = r[uniq_idx], c[uniq_idx]
+        ln.rr = r.astype(np.int32)
+        ln.cc = c.astype(np.int32)
+
+
+def score_lines(lines: list[Line], layers: dict[str, np.ndarray]) -> None:
+    """Score candidate corridors with H69-K cross-corridor directional gradient + physics."""
+    g_edge = layers["grav_edge"]
+    m_edge = layers["mag_edge"]
+    m_low = layers["mag_low"]
+    scarp = layers["scarp"]
+    g_ge = layers.get("grav_ge")
+    g_gn = layers.get("grav_gn")
+    m_ge = layers.get("mag_ge")
+    m_gn = layers.get("mag_gn")
+    has_dir = all(x is not None for x in (g_ge, g_gn, m_ge, m_gn))
+
+    for ln in lines:
+        td = dilation_tendency(ln.azimuth)
+        w_kin = KINEMATIC_PRIOR.get(ln.setting, 0.8)
+        if ln.rr is None or ln.rr.size == 0:
+            ln.score = float(0.08 * td + 0.06 * w_kin)
+            ln.terms = {"grav_edge": 0.0, "mag_edge": 0.0, "grav_perp": 0.0,
+                        "mag_perp": 0.0, "joint_conv": 0.0, "mag_low": 0.0,
+                        "scarp": 0.0, "td": td, "kinematic": w_kin}
+            continue
+        rr, cc = ln.rr, ln.cc
+        ge_val = float(g_edge[rr, cc].mean())
+        me_val = float(m_edge[rr, cc].mean())
+        ml_val = float(m_low[rr, cc].mean())
+        sc_val = float(scarp[rr, cc].mean())
+        if has_dir:
+            n_e, n_n = float(ln.normal[0]), float(ln.normal[1])
+            gp_dir = float(np.abs(g_ge[rr, cc] * n_e + g_gn[rr, cc] * n_n).mean())
+            mp_dir = float(np.abs(m_ge[rr, cc] * n_e + m_gn[rr, cc] * n_n).mean())
+            grav_perp = 0.55 * gp_dir + 0.45 * ge_val
+            mag_perp = 0.55 * mp_dir + 0.45 * me_val
+        else:
+            grav_perp = ge_val
+            mag_perp = me_val
+        joint_conv = min(grav_perp, mag_perp)
+        # Pre-registered H69-K score (weights sum to 1.00)
+        s = (
+            0.22 * grav_perp
+            + 0.20 * mag_perp
+            + 0.16 * joint_conv
+            + 0.14 * ml_val
+            + 0.14 * sc_val
+            + 0.08 * td
+            + 0.06 * w_kin
+        )
+        ln.score = float(s)
+        ln.terms = {
+            "grav_edge": ge_val,
+            "mag_edge": me_val,
+            "grav_perp": grav_perp,
+            "mag_perp": mag_perp,
+            "joint_conv": joint_conv,
+            "mag_low": ml_val,
+            "scarp": sc_val,
+            "td": td,
+            "kinematic": w_kin,
+        }
+
+
+def line_id_raster(lines: list[Line], shape: tuple[int, int]) -> np.ndarray:
+    """Paint corridor trace indices onto ``shape`` (-1 off trace; highest score wins)."""
+    lid = np.full(shape, -1, dtype=np.int32)
+    order = sorted(range(len(lines)), key=lambda k: lines[k].score)
+    for k in order:
+        ln = lines[k]
+        if ln.rr is not None and ln.rr.size:
+            lid[ln.rr, ln.cc] = k
+    return lid
+
+
+def corridor_fields(lines: list[Line], shape: tuple[int, int],
+                    max_dist_px: float = CORRIDOR_BAND_PX) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    """Compute corridor score field ``s_band``, trace distance ``dline``, and trace mask ``on``."""
+    lid = line_id_raster(lines, shape)
+    on = lid >= 0
+    if not on.any():
+        return (np.zeros(shape, np.float32),
+                np.full(shape, np.inf, np.float32),
+                on)
+    dline, (iy, ix) = ndi.distance_transform_edt(~on, return_indices=True)
+    dline = dline.astype(np.float32)
+    scores = np.array([ln.score for ln in lines], dtype=np.float32)
+    nearest_id = lid[iy, ix]
+    s_band = np.where((dline <= max_dist_px) & (nearest_id >= 0),
+                      scores[np.maximum(nearest_id, 0)],
+                      np.float32(0.0)).astype(np.float32)
+    return s_band, dline, on

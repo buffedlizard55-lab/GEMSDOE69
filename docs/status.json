@@ -3,14 +3,14 @@
   "download_enabled": false,
   "reasons": [
     "Literal registry dot-overlap gate failed or is missing; duplicate-and-stop applies.",
-    "Holdout comparison is missing or not bound to the current artifact hash.",
-    "Reproducible method source manifest is missing, stale, or not artifact-bound."
+    "surface uniqueness phase failed or is incomplete.",
+    "dots uniqueness phase failed or is incomplete."
   ],
-  "artifact_sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+  "artifact_sha256": "04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b",
   "validator_report": {
-    "file": "submissions/h69-joint-relayramp-pullapart-38669-20261020T201504Z-f29b6df5-zeros.tif",
-    "bytes": 780354,
-    "sha256": "981beb5707bb9933a2cf24a615eed373dc7e7cab451954207097e1641f32eaa6",
+    "file": "/home/user/GEMSDOE69/submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif",
+    "bytes": 156596,
+    "sha256": "04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b",
     "meta": {
       "count": 1,
       "dtype": "float32",
@@ -39,7 +39,7 @@
     "n_nan_inside_footprint": 0,
     "min": 0.0,
     "max": 1.0,
-    "positive_pixels": 38669,
+    "positive_pixels": 54471,
     "distinct_positive_values": [
       1.0
     ],
