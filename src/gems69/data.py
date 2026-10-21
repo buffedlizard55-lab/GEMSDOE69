@@ -24,7 +24,7 @@ def _default_data_dir() -> Path:
     if "GEMS_DATA" in os.environ:
         return Path(os.environ["GEMS_DATA"])
     cand = ROOT / ".cache" / "gems_data"
-    if (cand / "training_features.tif").is_file():
+    if (cand / "training_features.tif").is_file() and (cand / "existing_faults.tif").is_file():
         return cand
     bridge = ROOT / "data" / "bridge"
     if (bridge / "sample_submission.tif").is_file() and (bridge / "labels.tif").is_file():

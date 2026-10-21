@@ -1,0 +1,33 @@
+{
+  "evidence_class": "METHOD-MANIFEST",
+  "hypothesis_id": "H69-K",
+  "artifact_sha256": "04b75259720baa2c52b7e9c56a2b3bccc471e3500a6112e782d95422419ae67b",
+  "artifact_path": "submissions/h69k-kinematic-directional-54471-20261020T234210Z-2e7341e9-zeros.tif",
+  "feature_names": [
+    "grav_edge",
+    "mag_edge",
+    "mag_low",
+    "scarp",
+    "grav_ge_abs",
+    "grav_gn_abs",
+    "mag_ge_abs",
+    "mag_gn_abs",
+    "e_pix",
+    "corridor_score_band",
+    "neg_dist_corridor_trace",
+    "neg_dist_visible_tip",
+    "neg_dist_visible_catalogue",
+    "oof_corridor_posterior"
+  ],
+  "source_sha256": {
+    "src/gems69_h69k/__init__.py": "03bf4f6237c7289360f6fd2466366fca738ce91385716636ae61d2bb98465163",
+    "src/gems69_h69k/traces.py": "886f2229104c56e305fb8240ab21161587ccec43af0a6607520ddec0aebe6e25",
+    "src/gems69_h69k/tips.py": "9121c614aa37ed62c24c692676ea9aabdb466619b3a9a42ec43159de5fbcb21f",
+    "src/gems69_h69k/evidence.py": "486594d48c12114dce8f778312d91fdf513a6b09d8d2198f312315bc5906bc38",
+    "src/gems69_h69k/corridors.py": "d08452a932b15175bcff589982049e0e0032450c6d4718c2af3c2bf52d8811c1",
+    "src/gems69_h69k/calibrate.py": "471b98889a043f539ddf10d9570c0e7c136db08f453a8c4afdf35a2c76c1edc0",
+    "src/gems69_h69k/pipeline.py": "c4829cc6f63e460b465dd7ba97a60b25a15a5232f83208174f85b0c337e4e838",
+    "scripts/run_h69k_session_20261020.py": "b4d7e33e33c9198616c0df872539837cc94d578ed8af3c5ecbe315b2d75aa8b2",
+    "registry/preregistration-2026-10-20-h69k.json": "ee452715d68233c797b88a6e67469710d8ba8b2438d7fdce0592d422ae59b723"
+  }
+}
